@@ -1,0 +1,79 @@
+
+buildscript {
+
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:${dokka_version}"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.junit.platform:junit-platform-gradle-plugin:$junit_platform_version"
+    }
+
+}
+
+group 'org.barlom'
+version '1.0-SNAPSHOT'
+
+buildDir = "$buildRoot/KatyDOM-JVM"
+
+apply plugin: 'kotlin'
+apply plugin: 'org.junit.platform.gradle.plugin'
+apply plugin: 'org.jetbrains.dokka'
+
+sourceCompatibility = 1.8
+
+dependencies {
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+    testCompile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+    testCompile "org.junit.jupiter:junit-jupiter-api:$junit_version"
+    testCompile "org.junit.platform:junit-platform-runner:$junit_platform_version"
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_version"
+
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit_version"
+
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+junitPlatform {
+    details 'tree'
+}
+
+dokka {
+
+    includes = [
+        'src/main/kotlin/module.md',
+        'src/main/kotlin/jvm/org/katydom/infrastructure/package.md',
+        'src/main/kotlin/jvm/org/katydom/kdom/package.md',
+        'src/main/kotlin/o/org/katydom/abstractnodes/package.md',
+        'src/main/kotlin/o/org/katydom/api/package.md',
+        'src/main/kotlin/o/org/katydom/builders/package.md',
+        'src/main/kotlin/o/org/katydom/types/package.md',
+        'src/main/kotlin/x/org/katydom/dom/package.md',
+        'src/main/kotlin/x/org/katydom/dom/events/package.md'
+    ]
+
+    moduleName = 'KatyDOM-JVM'
+    outputFormat = 'html'
+    outputDirectory = "$buildDir/documentation"
+
+    linkMapping {
+        dir = "src/main/kotlin"
+        url = "https://github.com/martin-nordberg/Barlom/tree/master/KatyDOM-JVM/src/main/kotlin"
+        suffix = "#L"
+    }
+
+}

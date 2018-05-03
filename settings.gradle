@@ -1,0 +1,6 @@
+
+rootProject.name = 'KatyDOM'
+
+include 'KatyDOM-JVM'
+include 'KatyDOM-JS'
+

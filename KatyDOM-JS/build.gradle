@@ -1,0 +1,32 @@
+
+buildscript {
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+
+}
+
+group 'org.barlom'
+version '1.0-SNAPSHOT'
+
+buildDir = "$buildRoot/KatyDOM-JS"
+
+apply plugin: 'kotlin2js'
+
+compileKotlin2Js {
+    kotlinOptions.sourceMap = true
+    kotlinOptions.sourceMapEmbedSources = 'always'
+}
+
+dependencies {
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
+
+    testCompile "org.jetbrains.kotlin:kotlin-test-js:$kotlin_version"
+
+}
