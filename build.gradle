@@ -4,6 +4,8 @@ version '1.0-SNAPSHOT'
 
 subprojects {
 
+    ext.buildRoot = "../../KatyDOM/build"
+
     ext.dokka_version = '0.9.16'
 
     ext.junit_version = '5.1.0'
