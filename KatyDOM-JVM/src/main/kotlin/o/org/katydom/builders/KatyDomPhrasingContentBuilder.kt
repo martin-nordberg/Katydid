@@ -1128,7 +1128,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
      * @param tabindex the tab index for the element.
      * @param title a tool tip for the element.
      * @param translate whether to translate text within this element.
-     * @param the value for this field.
+     * @param value the value for this field.
      * @param defineAttributes a DSL-style lambda that adds any nonstandard attributes to the new element.
      */
     fun inputMonth(
