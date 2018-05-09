@@ -484,7 +484,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         tabindex: Int? = null,
         title: String? = null,
         translate: Boolean? = null,
-        defineContent: KatyDomOptionContentBuilder<Msg>.() -> Unit
+        defineContent: KatyDomOptGroupContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
             KatyDomDataList(this, selector, key, accesskey, contenteditable, dir,
@@ -2001,11 +2001,11 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     }
 
     /**
-     * Creates a new option content builder for the given child [element] that has the same restrictions
+     * Creates a new option group builder for the given child [element] that has the same restrictions
      * as this builder.
      */
-    internal fun optionContent(element: KatyDomHtmlElement<Msg>): KatyDomOptionContentBuilder<Msg> {
-        return KatyDomOptionContentBuilder(element, contentRestrictions, dispatchMessages)
+    internal fun optGroupContent(element: KatyDomDataList<Msg>): KatyDomOptGroupContentBuilder<Msg> {
+        return KatyDomOptGroupContentBuilder(element, contentRestrictions, dispatchMessages)
     }
 
     /**
@@ -2243,13 +2243,21 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         value: String? = null,
-        defineContent: KatyDomOptionContentBuilder<Msg>.() -> Unit
+        defineContent: KatyDomSelectContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
             KatyDomSelect(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir, disabled, form,
                           hidden, lang, multiple, name, required, size, spellcheck, style,
                           tabindex, title, translate, value, defineContent)
         )
+    }
+
+    /**
+     * Creates a new select builder for the given child [element] that has the same restrictions
+     * as this builder.
+     */
+    internal fun selectContent(element: KatyDomSelect<Msg>): KatyDomSelectContentBuilder<Msg> {
+        return KatyDomSelectContentBuilder(element, contentRestrictions, dispatchMessages)
     }
 
     /**

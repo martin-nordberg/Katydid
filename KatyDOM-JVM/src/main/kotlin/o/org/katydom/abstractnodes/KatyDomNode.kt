@@ -149,7 +149,7 @@ abstract class KatyDomNode<Msg>(
         }
 
         require(!childNodesByKey.containsKey(childNode.key)) {
-            "Duplicate key: " + childNode.key + " in element of type " + this.javaClass
+            "Duplicate key: " + childNode.key + " in parent element with key " + this.key
         }
 
         if (firstChildNode == null) {

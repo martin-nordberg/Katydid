@@ -21,7 +21,6 @@ class KatyDomContentRestrictions(
     private var legendProhibited: Boolean,
     private val mainAllowed: Boolean,
     private val meterAllowed: Boolean,
-    private val optionGroupAllowed: Boolean,
     private val progressAllowed: Boolean,
     private val tableAllowed: Boolean
 ) {
@@ -31,7 +30,6 @@ class KatyDomContentRestrictions(
      */
     constructor()
         : this(
-        true,
         true,
         true,
         true,
@@ -62,7 +60,6 @@ class KatyDomContentRestrictions(
         legendProhibited: Boolean = false,
         mainAllowed: Boolean = true,
         meterAllowed: Boolean = true,
-        optionGroupAllowed: Boolean = true,
         progressAllowed: Boolean = true,
         tableAllowed: Boolean = true
     ) : this(
@@ -76,7 +73,6 @@ class KatyDomContentRestrictions(
         original.legendProhibited && legendProhibited,
         original.mainAllowed && mainAllowed,
         original.meterAllowed && meterAllowed,
-        original.optionGroupAllowed && optionGroupAllowed,
         original.progressAllowed && progressAllowed,
         original.tableAllowed && tableAllowed
     )
@@ -166,15 +162,6 @@ class KatyDomContentRestrictions(
      */
     fun confirmMeterAllowed() {
         check(mainAllowed) { "Element type <meter> not allowed here." }
-    }
-
-    /**
-     * Checks that an `<optgroup>` element is allowed in the content, i.e. the content of a `<select>` element is
-     * being built.
-     * @throws IllegalStateException if `<optgroup>` is not allowed.
-     */
-    fun confirmOptionGroupAllowed() {
-        check(optionGroupAllowed) { "Element type <optgroup> not allowed here." }
     }
 
     /**
@@ -273,13 +260,6 @@ class KatyDomContentRestrictions(
      */
     fun withMeterNotAllowed(): KatyDomContentRestrictions {
         return KatyDomContentRestrictions(this, meterAllowed = false)
-    }
-
-    /**
-     * Clones this content restriction object but with `<optgroup>` elements disallowed.
-     */
-    fun withOptionGroupNotAllowed(): KatyDomContentRestrictions {
-        return KatyDomContentRestrictions(this, optionGroupAllowed = false)
     }
 
     /**

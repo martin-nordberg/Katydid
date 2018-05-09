@@ -6,16 +6,17 @@
 package o.org.katydom.concretenodes.forms
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.KatyDomOptionContentBuilder
+import o.org.katydom.builders.KatyDomOptGroupContentBuilder
+import o.org.katydom.builders.KatyDomSelectContentBuilder
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Virtual node for an optgroup element.
+ * Virtual node for an `<optgroup>` element.
  */
-internal class KatyDomOptionGroup<Msg>(
-    optionContent: KatyDomOptionContentBuilder<Msg>,
+internal class KatyDomOptGroup<Msg>(
+    selectContent: KatyDomSelectContentBuilder<Msg>,
     selector: String?,
     key: Any?,
     accesskey: String?,
@@ -23,7 +24,7 @@ internal class KatyDomOptionGroup<Msg>(
     dir: EDirection?,
     disabled: Boolean?,
     hidden: Boolean?,
-    label: String?,
+    label: String,
     lang: String?,
     name: String?,
     spellcheck: Boolean?,
@@ -31,19 +32,17 @@ internal class KatyDomOptionGroup<Msg>(
     tabindex: Int?,
     title: String?,
     translate: Boolean?,
-    defineContent: KatyDomOptionContentBuilder<Msg>.() -> Unit
+    defineContent: KatyDomOptGroupContentBuilder<Msg>.() -> Unit
 ) : KatyDomHtmlElement<Msg>(selector, key ?: name, accesskey, contenteditable, dir,
                             hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {
-        optionContent.contentRestrictions.confirmOptionGroupAllowed()
-
-        require(label == null || !label.isEmpty()) { "Attribute label may not be an empty string." }
+        require(!label.isEmpty()) { "Attribute label may not be an empty string." }
 
         setBooleanAttribute("disabled", disabled)
         setAttribute("label", label)
 
-        optionContent.withOptionGroupNotAllowed(this).defineContent()
+        selectContent.optGroupContent(this).defineContent()
         this.freeze()
     }
 

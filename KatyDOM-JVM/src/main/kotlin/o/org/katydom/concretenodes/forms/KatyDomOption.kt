@@ -7,7 +7,7 @@ package o.org.katydom.concretenodes.forms
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomAttributesContentBuilder
-import o.org.katydom.builders.KatyDomOptionContentBuilder
+import o.org.katydom.builders.KatyDomOptGroupContentBuilder
 import o.org.katydom.builders.KatyDomTextContentBuilder
 import o.org.katydom.types.EDirection
 
@@ -19,7 +19,7 @@ import o.org.katydom.types.EDirection
 internal class KatyDomOption<Msg> : KatyDomHtmlElement<Msg> {
 
     constructor(
-        optionContent: KatyDomOptionContentBuilder<Msg>,
+        optionContent: KatyDomOptGroupContentBuilder<Msg>,
         selector: String?,
         key: Any?,
         accesskey: String?,
@@ -27,7 +27,7 @@ internal class KatyDomOption<Msg> : KatyDomHtmlElement<Msg> {
         dir: EDirection?,
         disabled: Boolean?,
         hidden: Boolean?,
-        label: String?,
+        label: String,
         lang: String?,
         name: String?,
         selected: Boolean?,
@@ -49,7 +49,7 @@ internal class KatyDomOption<Msg> : KatyDomHtmlElement<Msg> {
     }
 
     constructor(
-        optionContent: KatyDomOptionContentBuilder<Msg>,
+        optionContent: KatyDomOptGroupContentBuilder<Msg>,
         selector: String?,
         key: Any?,
         accesskey: String?,

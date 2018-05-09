@@ -6,7 +6,7 @@
 package o.org.katydom.concretenodes.forms
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.KatyDomOptionContentBuilder
+import o.org.katydom.builders.KatyDomOptGroupContentBuilder
 import o.org.katydom.builders.KatyDomPhrasingContentBuilder
 import o.org.katydom.types.EDirection
 
@@ -16,7 +16,7 @@ import o.org.katydom.types.EDirection
  * Virtual node for a <datalist> element.
  */
 internal class KatyDomDataList<Msg>(
-    flowContent: KatyDomPhrasingContentBuilder<Msg>,
+    phrasingContent: KatyDomPhrasingContentBuilder<Msg>,
     selector: String?,
     key: Any?,
     accesskey: String?,
@@ -29,12 +29,12 @@ internal class KatyDomDataList<Msg>(
     tabindex: Int?,
     title: String?,
     translate: Boolean?,
-    defineContent: KatyDomOptionContentBuilder<Msg>.() -> Unit
+    defineContent: KatyDomOptGroupContentBuilder<Msg>.() -> Unit
 ) : KatyDomHtmlElement<Msg>(selector, key, accesskey, contenteditable, dir,
                             hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {
-        flowContent.optionContent(this).defineContent()
+        phrasingContent.optGroupContent(this).defineContent()
         this.freeze()
     }
 

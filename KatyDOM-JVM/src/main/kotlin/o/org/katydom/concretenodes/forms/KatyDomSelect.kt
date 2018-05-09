@@ -6,7 +6,7 @@
 package o.org.katydom.concretenodes.forms
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.KatyDomOptionContentBuilder
+import o.org.katydom.builders.KatyDomSelectContentBuilder
 import o.org.katydom.builders.KatyDomPhrasingContentBuilder
 import o.org.katydom.types.EDirection
 
@@ -38,7 +38,7 @@ internal class KatyDomSelect<Msg>(
     title: String?,
     translate: Boolean?,
     value: String?,
-    defineContent: KatyDomOptionContentBuilder<Msg>.() -> Unit
+    defineContent: KatyDomSelectContentBuilder<Msg>.() -> Unit
 ) : KatyDomHtmlElement<Msg>(selector, key ?: name, accesskey, contenteditable, dir,
                             hidden, lang, spellcheck, style, tabindex, title, translate) {
 
@@ -57,7 +57,7 @@ internal class KatyDomSelect<Msg>(
         setNumberAttribute("size", size)
         setAttribute("value", value)
 
-        phrasingContent.optionContent(this).defineContent()
+        phrasingContent.selectContent(this).defineContent()
         this.freeze()
     }
 
