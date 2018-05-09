@@ -6,48 +6,44 @@
 package o.org.katydom.concretenodes.tabular
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.KatyDomFlowContentBuilder
-import o.org.katydom.builders.KatyDomTableContentBuilder
+import o.org.katydom.builders.KatyDomAttributesContentBuilder
+import o.org.katydom.builders.KatyDomColGroupContentBuilder
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Virtual node for a `<table>` element.
+ * Virtual node for a table `<col>` element.
  */
-internal class KatyDomTable<Msg>(
-    flowContent: KatyDomFlowContentBuilder<Msg>,
+internal class KatyDomCol<Msg>(
+    colGroupContent: KatyDomColGroupContentBuilder<Msg>,
     selector: String?,
     key: Any?,
     accesskey: String?,
-    border: Boolean?,
     contenteditable: Boolean?,
     dir: EDirection?,
     hidden: Boolean?,
     lang: String?,
+    span: Int?,
     spellcheck: Boolean?,
     style: String?,
     tabindex: Int?,
     title: String?,
     translate: Boolean?,
-    defineContent: KatyDomTableContentBuilder<Msg>.() -> Unit
+    defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
 ) : KatyDomHtmlElement<Msg>(selector, key, accesskey, contenteditable, dir,
                             hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {
-        flowContent.contentRestrictions.confirmTableAllowed()
+        this.setNumberAttribute("span", span)
 
-        if (border != null) {
-            setAttribute("border", if (border) "1" else "")
-        }
-
-        flowContent.tableContent(this).defineContent()
+        colGroupContent.attributesContent(this).defineAttributes()
         this.freeze()
     }
 
     ////
 
-    override val nodeName = "TABLE"
+    override val nodeName = "COL"
 
 }
 

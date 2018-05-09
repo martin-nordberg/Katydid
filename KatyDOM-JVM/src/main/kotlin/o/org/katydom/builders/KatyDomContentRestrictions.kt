@@ -22,7 +22,8 @@ class KatyDomContentRestrictions(
     private val mainAllowed: Boolean,
     private val meterAllowed: Boolean,
     private val optionGroupAllowed: Boolean,
-    private val progressAllowed: Boolean
+    private val progressAllowed: Boolean,
+    private val tableAllowed: Boolean
 ) {
 
     /**
@@ -41,11 +42,12 @@ class KatyDomContentRestrictions(
         true,
         true,
         true,
+        true,
         true
     )
 
     /**
-     * Clones a given [original] content restriction object with the oppotunity to override specific restrictions
+     * Clones a given [original] content restriction object with the opportunity to override specific restrictions
      * to make the result more restricted than the original.
      */
     constructor(
@@ -61,7 +63,8 @@ class KatyDomContentRestrictions(
         mainAllowed: Boolean = true,
         meterAllowed: Boolean = true,
         optionGroupAllowed: Boolean = true,
-        progressAllowed: Boolean = true
+        progressAllowed: Boolean = true,
+        tableAllowed: Boolean = true
     ) : this(
         original.anchorAllowed && anchorAllowed,
         original.figCaptionProhibited && figCaptionProhibited,
@@ -74,7 +77,8 @@ class KatyDomContentRestrictions(
         original.mainAllowed && mainAllowed,
         original.meterAllowed && meterAllowed,
         original.optionGroupAllowed && optionGroupAllowed,
-        original.progressAllowed && progressAllowed
+        original.progressAllowed && progressAllowed,
+        original.tableAllowed && tableAllowed
     )
 
     ////
@@ -182,6 +186,14 @@ class KatyDomContentRestrictions(
     }
 
     /**
+     * Checks that a `<table>` element is allowed in the content.
+     * @throws IllegalStateException if `<table>` is not allowed.
+     */
+    fun confirmTableAllowed() {
+        check(tableAllowed) { "Element type <table> not allowed here." }
+    }
+
+    /**
      * Clones this content restriction object but with `<a>` elements and interactive content disallowed.
      */
     fun withAnchorInteractiveContentNotAllowed(): KatyDomContentRestrictions {
@@ -275,6 +287,13 @@ class KatyDomContentRestrictions(
      */
     fun withProgressNotAllowed(): KatyDomContentRestrictions {
         return KatyDomContentRestrictions(this, progressAllowed = false)
+    }
+
+    /**
+     * Clones this content restriction object but with `<table>` elements disallowed.
+     */
+    fun withTableNotAllowed(): KatyDomContentRestrictions {
+        return KatyDomContentRestrictions(this, tableAllowed = false)
     }
 
 }

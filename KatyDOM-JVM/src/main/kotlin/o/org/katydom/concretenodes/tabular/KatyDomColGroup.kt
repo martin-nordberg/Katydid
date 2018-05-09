@@ -6,19 +6,19 @@
 package o.org.katydom.concretenodes.tabular
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.KatyDomTableBodyContentBuilder
+import o.org.katydom.builders.KatyDomAttributesContentBuilder
+import o.org.katydom.builders.KatyDomColGroupContentBuilder
 import o.org.katydom.builders.KatyDomTableContentBuilder
-import o.org.katydom.builders.KatyDomTableRowContentBuilder
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Virtual node for a `<tr>` element.
+ * Virtual node for a table `<colgroup>` element.
  */
-internal class KatyDomTr<Msg> : KatyDomHtmlElement<Msg> {
+internal class KatyDomColGroup<Msg> : KatyDomHtmlElement<Msg> {
 
-    internal constructor(
+    internal constructor (
         tableContent: KatyDomTableContentBuilder<Msg>,
         selector: String?,
         key: Any?,
@@ -32,18 +32,18 @@ internal class KatyDomTr<Msg> : KatyDomHtmlElement<Msg> {
         tabindex: Int?,
         title: String?,
         translate: Boolean?,
-        defineContent: KatyDomTableRowContentBuilder<Msg>.() -> Unit
+        defineContent: KatyDomColGroupContentBuilder<Msg>.() -> Unit
     ) : super(selector, key, accesskey, contenteditable, dir,
               hidden, lang, spellcheck, style, tabindex, title, translate) {
 
-        tableContent.tableContentRestrictions.confirmTrAllowed()
+        tableContent.tableContentRestrictions.confirmColGroupAllowed()
 
-        tableContent.tableRowContent(this).defineContent()
+        tableContent.colGroupContent(this).defineContent()
         this.freeze()
     }
 
-    internal constructor(
-        tableBodyContent: KatyDomTableBodyContentBuilder<Msg>,
+    internal constructor (
+        tableContent: KatyDomTableContentBuilder<Msg>,
         selector: String?,
         key: Any?,
         accesskey: String?,
@@ -51,22 +51,27 @@ internal class KatyDomTr<Msg> : KatyDomHtmlElement<Msg> {
         dir: EDirection?,
         hidden: Boolean?,
         lang: String?,
+        span: Int?,
         spellcheck: Boolean?,
         style: String?,
         tabindex: Int?,
         title: String?,
         translate: Boolean?,
-        defineContent: KatyDomTableRowContentBuilder<Msg>.() -> Unit
+        defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
     ) : super(selector, key, accesskey, contenteditable, dir,
               hidden, lang, spellcheck, style, tabindex, title, translate) {
 
-        tableBodyContent.tableRowContent(this).defineContent()
+        tableContent.tableContentRestrictions.confirmColGroupAllowed()
+
+        this.setNumberAttribute("span", span)
+
+        tableContent.attributesContent(this).defineAttributes()
         this.freeze()
     }
 
     ////
 
-    override val nodeName = "TR"
+    override val nodeName = "COLGROUP"
 
 }
 
