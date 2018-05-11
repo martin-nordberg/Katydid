@@ -7,7 +7,7 @@ package o.org.katydom.concretenodes.grouping
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomFlowContentBuilder
-import o.org.katydom.builders.KatyDomListItemContentBuilder
+import o.org.katydom.builders.KatyDomUnorderedListContentBuilder
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -29,12 +29,12 @@ internal class KatyDomUl<Msg>(
     tabindex: Int?,
     title: String?,
     translate: Boolean?,
-    defineContent: KatyDomListItemContentBuilder<Msg>.() -> Unit
+    defineContent: KatyDomUnorderedListContentBuilder<Msg>.() -> Unit
 ) : KatyDomHtmlElement<Msg>(selector, key, accesskey, contenteditable, dir,
                             hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {
-        flowContent.listItemContent(this).defineContent()
+        flowContent.listContent(this).defineContent()
         this.freeze()
     }
 

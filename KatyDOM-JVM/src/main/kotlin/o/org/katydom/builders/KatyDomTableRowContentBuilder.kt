@@ -9,6 +9,7 @@ import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.concretenodes.tabular.KatyDomTd
 import o.org.katydom.concretenodes.tabular.KatyDomTh
 import o.org.katydom.concretenodes.tabular.KatyDomTr
+import o.org.katydom.concretenodes.text.KatyDomComment
 import o.org.katydom.types.EDirection
 import o.org.katydom.types.EHeadingScope
 
@@ -27,6 +28,16 @@ class KatyDomTableRowContentBuilder<Msg> internal constructor(
     internal val contentRestrictions: KatyDomContentRestrictions = KatyDomContentRestrictions(),
     dispatchMessages: (messages: Iterable<Msg>) -> Unit
 ) : KatyDomAttributesContentBuilder<Msg>(element, dispatchMessages) {
+
+    /**
+     * Adds a comment node as the next child of the element under construction.
+     * @param nodeValue the text within the node.
+     * @param key unique key for this comment within its parent node.
+     */
+    fun comment(nodeValue: String,
+                key: Any? = null) {
+        element.addChildNode(KatyDomComment(nodeValue, key))
+    }
 
     /**
      * Creates a new flow content builder for the given child [element] that has the same restrictions

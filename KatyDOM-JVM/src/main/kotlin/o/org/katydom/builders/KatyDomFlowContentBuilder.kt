@@ -729,26 +729,24 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     }
 
     /**
-     * Creates a new phrasing content builder for the given child [element] that has the same restrictions
+     * Creates a new list content builder for the given child [element] that has the same restrictions
      * as this builder. The list items to be produced are ordered.
      */
-    internal fun listItemContent(element: KatyDomOl<Msg>): KatyDomListItemContentBuilder<Msg> {
-        return KatyDomListItemContentBuilder(
+    internal fun listContent(element: KatyDomOl<Msg>): KatyDomOrderedListContentBuilder<Msg> {
+        return KatyDomOrderedListContentBuilder(
             this,
-            true,
             element,
             dispatchMessages
         )
     }
 
     /**
-     * Creates a new phrasing content builder for the given child [element] that has the same restrictions
+     * Creates a new list content builder for the given child [element] that has the same restrictions
      * as this builder. The list items to be produced are unordered.
      */
-    internal fun listItemContent(element: KatyDomUl<Msg>): KatyDomListItemContentBuilder<Msg> {
-        return KatyDomListItemContentBuilder(
+    internal fun listContent(element: KatyDomUl<Msg>): KatyDomUnorderedListContentBuilder<Msg> {
+        return KatyDomUnorderedListContentBuilder(
             this,
-            false,
             element,
             dispatchMessages
         )
@@ -864,7 +862,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         type: EOrderedListType? = null,
-        defineContent: KatyDomListItemContentBuilder<Msg>.() -> Unit
+        defineContent: KatyDomOrderedListContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
             KatyDomOl(this, selector, key, accesskey, contenteditable, dir, hidden, lang, reversed, spellcheck,
@@ -1076,7 +1074,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
         tabindex: Int? = null,
         title: String? = null,
         translate: Boolean? = null,
-        defineContent: KatyDomListItemContentBuilder<Msg>.() -> Unit
+        defineContent: KatyDomUnorderedListContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
             KatyDomUl(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,

@@ -7,6 +7,7 @@ package o.org.katydom.builders
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.concretenodes.tabular.*
+import o.org.katydom.concretenodes.text.KatyDomComment
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -160,6 +161,16 @@ class KatyDomTableContentBuilder<Msg> internal constructor(
             element,
             dispatchMessages
         )
+    }
+
+    /**
+     * Adds a comment node as the next child of the element under construction.
+     * @param nodeValue the text within the node.
+     * @param key unique key for this comment within its parent node.
+     */
+    fun comment(nodeValue: String,
+                key: Any? = null) {
+        element.addChildNode(KatyDomComment(nodeValue, key))
     }
 
     /**

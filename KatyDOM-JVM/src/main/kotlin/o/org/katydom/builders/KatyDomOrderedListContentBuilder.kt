@@ -5,27 +5,25 @@
 
 package o.org.katydom.builders
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.concretenodes.grouping.KatyDomLi
+import o.org.katydom.concretenodes.grouping.KatyDomOl
 import o.org.katydom.concretenodes.text.KatyDomComment
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Builder DSL to create the contents of a list (a `<ul>` or `<ol>` element).
+ * Builder DSL to create the contents of an ordered list (an `<ol>` element).
  *
  * @constructor Constructs a new builder for the contents of an ordered or unordered list.
  * @param flowContent The parent flow content with restrictions that can be resumed for the content inside each
  *                    `<li>` element produced by this builder.
- * @param isOrdered Whether the parent element is an ordered list.
  * @param element the element whose content is being built.
  * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
-class KatyDomListItemContentBuilder<Msg> internal constructor(
+class KatyDomOrderedListContentBuilder<Msg> internal constructor(
     internal val flowContent: KatyDomFlowContentBuilder<Msg>,
-    internal val isOrdered: Boolean,
-    element: KatyDomHtmlElement<Msg>,
+    element: KatyDomOl<Msg>,
     dispatchMessages: (messages: Iterable<Msg>) -> Unit
 ) : KatyDomAttributesContentBuilder<Msg>(element, dispatchMessages) {
 

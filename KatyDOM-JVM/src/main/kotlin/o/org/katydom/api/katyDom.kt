@@ -7,8 +7,9 @@ package o.org.katydom.api
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomFlowContentBuilder
-import o.org.katydom.builders.KatyDomListItemContentBuilder
+import o.org.katydom.builders.KatyDomOrderedListContentBuilder
 import o.org.katydom.builders.KatyDomPhrasingContentBuilder
+import o.org.katydom.builders.KatyDomUnorderedListContentBuilder
 import o.org.katydom.concretenodes.application.KatyDomAppPseudoNode
 import o.org.katydom.lifecycle.KatyDomLifecycleImpl
 
@@ -49,13 +50,26 @@ fun <Msg> katyDomComponent(builder: KatyDomFlowContentBuilder<Msg>,
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Helper function for defining a component consisting of one or more list item elements.
+ * Helper function for defining a component consisting of one or more list item elements inside an `<ol>` element.
  * @param builder the list item builder that will provide the context for new content within the component.
  * @param defineContent the function defining one or more <li> elements.
  * @return a function that builds the nodes as part of a larger tree.
  */
-fun <Msg> katyDomListItemComponent(builder: KatyDomListItemContentBuilder<Msg>,
-                                   defineContent: KatyDomListItemContentBuilder<Msg>.() -> Unit) {
+fun <Msg> katyDomListItemsComponent(builder: KatyDomOrderedListContentBuilder<Msg>,
+                                    defineContent: KatyDomOrderedListContentBuilder<Msg>.() -> Unit) {
+    return defineContent(builder)
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+
+/**
+ * Helper function for defining a component consisting of one or more list item elements inside a `<ul>` element.
+ * @param builder the list item builder that will provide the context for new content within the component.
+ * @param defineContent the function defining one or more <li> elements.
+ * @return a function that builds the nodes as part of a larger tree.
+ */
+fun <Msg> katyDomListItemsComponent(builder: KatyDomUnorderedListContentBuilder<Msg>,
+                                    defineContent: KatyDomUnorderedListContentBuilder<Msg>.() -> Unit) {
     return defineContent(builder)
 }
 
