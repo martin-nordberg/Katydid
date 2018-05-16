@@ -8,12 +8,15 @@ package o.org.katydom.types
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Enumeration of DOM event types.
+ * Enumeration of DOM keyboard event types.
  */
-enum class EEventType {
+enum class EKeyboardEventType {
 
-    /** A "change" event. */
-    CHANGE;
+    /** Keyboard event type "keydown". */
+    KEY_DOWN,
+
+    /** Keyboard event type "keyup". */
+    KEY_UP;
 
     /**
      * The name of the event in the DOM.
@@ -21,7 +24,8 @@ enum class EEventType {
     val domName: String
         get() {
             return when (this) {
-                CHANGE -> "change"
+                KEY_DOWN  -> "keydown"
+                KEY_UP    -> "keyup"
             }
         }
 

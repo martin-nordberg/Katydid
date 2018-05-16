@@ -41,7 +41,6 @@ internal class KatyDomInputCheckbox<Msg>(
                             spellcheck, style, tabindex, title, translate) {
 
     init {
-
         phrasingContent.contentRestrictions.confirmInteractiveContentAllowed()
 
         setBooleanAttribute("autofocus", autofocus)

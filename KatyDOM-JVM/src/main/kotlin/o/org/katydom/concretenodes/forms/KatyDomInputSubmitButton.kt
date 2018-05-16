@@ -45,6 +45,8 @@ internal class KatyDomInputSubmitButton<Msg>(
                             spellcheck, style, tabindex, title, translate) {
 
     init {
+        phrasingContent.contentRestrictions.confirmInteractiveContentAllowed()
+
         setBooleanAttribute("disabled", disabled)
         setAttribute("form", form)
         setAttribute("formaction", formaction)

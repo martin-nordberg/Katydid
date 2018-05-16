@@ -5,15 +5,11 @@
 
 package o.org.katydom.abstractnodes
 
-import o.org.katydom.api.EventCancellationException
-import o.org.katydom.api.EventHandler
-import o.org.katydom.api.MouseEventHandler
-import o.org.katydom.types.EEventType
-import o.org.katydom.types.EMouseEventType
+import o.org.katydom.api.*
+import o.org.katydom.types.*
 import x.org.katydom.dom.Document
 import x.org.katydom.dom.Node
-import x.org.katydom.dom.events.Event
-import x.org.katydom.dom.events.MouseEvent
+import x.org.katydom.dom.events.*
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -183,10 +179,107 @@ abstract class KatyDomNode<Msg>(
             check(isAddingEventHandlers) { "KatyDOM node's event handlers must be defined before its child nodes." }
         }
 
+        check(!eventHandlers.containsKey(eventType.domName)) {
+            "Only one '${eventType.domName}' handler can be defined per element."
+        }
+
         eventHandlers[eventType.domName] =
             { event: Event ->
                 try {
                     handler(event)
+                }
+                catch (exception: EventCancellationException) {
+                    event.preventDefault()
+                }
+            }
+
+    }
+
+    /**
+     * Adds a focus event handler for the given type of focus event.
+     * @param eventType the kind of event
+     * @param handler the callback when the event occurs
+     */
+    internal fun addFocusEventHandler(eventType: EFocusEventType, handler: FocusEventHandler) {
+
+        if (isAddingAttributes) {
+            freezeAttributes()
+            state = EState.ADDING_CHILD_NODES
+        }
+        else {
+            check(isAddingEventHandlers) { "KatyDOM node's event handlers must be defined before its child nodes." }
+        }
+
+        check(!eventHandlers.containsKey(eventType.domName)) {
+            "Only one '${eventType.domName}' handler can be defined per element."
+        }
+
+        eventHandlers[eventType.domName] =
+            { event: Event ->
+                try {
+                    handler(event as FocusEvent)
+                }
+                catch (exception: EventCancellationException) {
+                    event.preventDefault()
+                }
+            }
+
+    }
+
+    /**
+     * Adds an input event handler for the given type of input event.
+     * @param eventType the kind of event
+     * @param handler the callback when the event occurs
+     */
+    internal fun addInputEventHandler(eventType: EInputEventType, handler: InputEventHandler) {
+
+        if (isAddingAttributes) {
+            freezeAttributes()
+            state = EState.ADDING_CHILD_NODES
+        }
+        else {
+            check(isAddingEventHandlers) { "KatyDOM node's event handlers must be defined before its child nodes." }
+        }
+
+        check(!eventHandlers.containsKey(eventType.domName)) {
+            "Only one '${eventType.domName}' handler can be defined per element."
+        }
+
+        eventHandlers[eventType.domName] =
+            { event: Event ->
+                try {
+                    handler(event as InputEvent)
+                }
+                catch (exception: EventCancellationException) {
+                    event.preventDefault()
+                }
+            }
+
+    }
+
+    /**
+     * Adds a keyboard event handler for the given type of mouse event.
+     * @param eventType the kind of event
+     * @param handler the callback when the event occurs
+     */
+    internal fun addKeyboardEventHandler(eventType: EKeyboardEventType, handler: KeyboardEventHandler) {
+
+        if (isAddingAttributes) {
+            freezeAttributes()
+            state = EState.ADDING_CHILD_NODES
+        }
+        else {
+            check(isAddingEventHandlers) { "KatyDOM node's event handlers must be defined before its child nodes." }
+        }
+
+        check(!eventHandlers.containsKey(eventType.domName)) {
+            "Only one '${eventType.domName}' handler can be defined per element."
+        }
+
+        eventHandlers[eventType.domName] =
+            { event: Event ->
+                try {
+                    handler(event as KeyboardEvent)
                 }
                 catch (exception: EventCancellationException) {
                     event.preventDefault()
@@ -208,6 +301,10 @@ abstract class KatyDomNode<Msg>(
         }
         else {
             check(isAddingEventHandlers) { "KatyDOM node's event handlers must be defined before its child nodes." }
+        }
+
+        check(!eventHandlers.containsKey(eventType.domName)) {
+            "Only one '${eventType.domName}' handler can be defined per element."
         }
 
         eventHandlers[eventType.domName] =

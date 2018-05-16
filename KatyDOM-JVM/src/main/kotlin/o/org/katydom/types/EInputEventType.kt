@@ -1,5 +1,5 @@
 //
-// (C) Copyright 2017-2018 Martin E. Nordberg III
+// (C) Copyright 2018 Martin E. Nordberg III
 // Apache 2.0 License
 //
 
@@ -8,12 +8,15 @@ package o.org.katydom.types
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Enumeration of DOM event types.
+ * Enumeration of DOM input event types.
  */
-enum class EEventType {
+enum class EInputEventType {
 
-    /** A "change" event. */
-    CHANGE;
+    /** A "beforeinput" event. */
+    BEFORE_INPUT,
+
+    /** An "input" event. */
+    INPUT;
 
     /**
      * The name of the event in the DOM.
@@ -21,7 +24,8 @@ enum class EEventType {
     val domName: String
         get() {
             return when (this) {
-                CHANGE -> "change"
+                BEFORE_INPUT -> "beforeinput"
+                INPUT        -> "input"
             }
         }
 

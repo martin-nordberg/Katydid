@@ -7,8 +7,8 @@ package /*jvm*/x.org.katydom.dom.events
 
 //---------------------------------------------------------------------------------------------------------------------
 
-/** Interface to a mouse event from the DOM. */
-interface MouseEvent : UIEvent
+/** Interface to a focus event from the DOM. */
+interface FocusEvent : UIEvent
 
 //---------------------------------------------------------------------------------------------------------------------
 

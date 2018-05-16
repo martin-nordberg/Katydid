@@ -7,17 +7,23 @@ package o.org.katydom.builders
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.api.Event2Message
+import o.org.katydom.api.FocusEvent2Message
+import o.org.katydom.api.InputEvent2Message
 import o.org.katydom.api.MouseEvent2Message
 import o.org.katydom.types.EEventType
+import o.org.katydom.types.EFocusEventType
+import o.org.katydom.types.EInputEventType
 import o.org.katydom.types.EMouseEventType
 import x.org.katydom.dom.events.Event
+import x.org.katydom.dom.events.FocusEvent
+import x.org.katydom.dom.events.InputEvent
 import x.org.katydom.dom.events.MouseEvent
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * KatyDOM content builder for attributes and event handlers available to all nodes. Serves as a base class for more
- * specialized content builders that also add child nodes of the right types for given context.
+ * KatyDOM content builder for attributes and event handlers available to all HTML elements. Serves as a base class
+ * for more specialized content builders that also add child nodes of the right types for given context.
  *
  * @constructor Constructs a new attribute content builder for the given element.
  * @param element the element whose content is being built.
@@ -96,17 +102,27 @@ open class KatyDomAttributesContentBuilder<Msg> internal constructor(
     }
 
     /**
-     * Adds an event handler for blur events.
-     * @param handler the callback that listens to blur events.
+     * Adds an event handler for "beforeinput" events.
+     * @param handler the callback that listens to beforeinput events.
      */
-    fun onblur(handler: Event2Message<Msg>) {
-        element.addEventHandler(EEventType.BLUR) { e: Event ->
+    fun onbeforeinput(handler: InputEvent2Message<Msg>) {
+        element.addInputEventHandler(EInputEventType.BEFORE_INPUT) { e: InputEvent ->
             dispatchMessages(handler(e))
         }
     }
 
     /**
-     * Adds an event handler for change events.
+     * Adds an event handler for "blur" events.
+     * @param handler the callback that listens to blur events.
+     */
+    fun onblur(handler: FocusEvent2Message<Msg>) {
+        element.addFocusEventHandler(EFocusEventType.BLUR) { e: FocusEvent ->
+            dispatchMessages(handler(e))
+        }
+    }
+
+    /**
+     * Adds an event handler for "change" events.
      * @param handler the callback that listens to change events.
      */
     fun onchange(handler: Event2Message<Msg>) {
@@ -116,11 +132,31 @@ open class KatyDomAttributesContentBuilder<Msg> internal constructor(
     }
 
     /**
-     * Adds an event handler for mouse clicks.
-     * @param handler the callback that listens to mouse clicks.
+     * Adds an event handler for "click" events.
+     * @param handler the callback that listens to click events.
      */
     fun onclick(handler: MouseEvent2Message<Msg>) {
         element.addMouseEventHandler(EMouseEventType.CLICK) { e: MouseEvent ->
+            dispatchMessages(handler(e))
+        }
+    }
+
+    /**
+     * Adds an event handler for "focus" events.
+     * @param handler the callback that listens to focus events.
+     */
+    fun onfocus(handler: FocusEvent2Message<Msg>) {
+        element.addFocusEventHandler(EFocusEventType.FOCUS) { e: FocusEvent ->
+            dispatchMessages(handler(e))
+        }
+    }
+
+    /**
+     * Adds an event handler for "input" events.
+     * @param handler the callback that listens to input events.
+     */
+    fun oninput(handler: InputEvent2Message<Msg>) {
+        element.addInputEventHandler(EInputEventType.INPUT) { e: InputEvent ->
             dispatchMessages(handler(e))
         }
     }

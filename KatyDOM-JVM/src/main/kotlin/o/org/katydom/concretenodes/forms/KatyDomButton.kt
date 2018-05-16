@@ -47,6 +47,8 @@ internal class KatyDomButton<Msg>(
                             hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {
+        phrasingContent.contentRestrictions.confirmInteractiveContentAllowed()
+
         setBooleanAttribute("autofocus", autofocus)
         setBooleanAttribute("disabled", disabled)
         setAttribute("form", form)

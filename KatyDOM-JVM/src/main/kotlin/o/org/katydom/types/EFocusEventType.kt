@@ -8,12 +8,15 @@ package o.org.katydom.types
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Enumeration of DOM event types.
+ * Enumeration of DOM focus event types.
  */
-enum class EEventType {
+enum class EFocusEventType {
 
-    /** A "change" event. */
-    CHANGE;
+    /** A "blur" event. */
+    BLUR,
+
+    /** A "focus" event. */
+    FOCUS;
 
     /**
      * The name of the event in the DOM.
@@ -21,7 +24,8 @@ enum class EEventType {
     val domName: String
         get() {
             return when (this) {
-                CHANGE -> "change"
+                BLUR      -> "blur"
+                FOCUS     -> "focus"
             }
         }
 

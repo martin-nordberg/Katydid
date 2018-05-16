@@ -46,7 +46,6 @@ internal class KatyDomInputMonth<Msg>(
                             hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {
-
         phrasingContent.contentRestrictions.confirmInteractiveContentAllowed()
 
         setAttribute("autocomplete", autocomplete)
