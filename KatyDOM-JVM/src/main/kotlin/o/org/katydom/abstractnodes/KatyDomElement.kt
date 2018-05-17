@@ -7,9 +7,7 @@ package o.org.katydom.abstractnodes
 
 import o.org.katydom.infrastructure.UnusedMap
 import o.org.katydom.infrastructure.UnusedSet
-import x.org.katydom.dom.Element
-import x.org.katydom.dom.Node
-import x.org.katydom.dom.setAttributeAndProperty
+import x.org.katydom.dom.*
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -69,6 +67,9 @@ abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
     /** The attributes of this element, mapped from name to value. */
     private val attributes: MutableMap<String, String> = mutableMapOf()
 
+    /** The boolean attributes of this element (true if present). */
+    private val booleanAttributes: MutableSet<String> = mutableSetOf()
+
     /** A list of classes for this element. */
     private var classList: MutableSet<String> = mutableSetOf()
 
@@ -115,9 +116,14 @@ abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
 
         if (domElement !is Element) throw IllegalArgumentException("DOM node expected to be an element.")
 
-        // Establish other attributes.
+        // Establish regular attributes.
         for ((key, value) in attributes) {
             domElement.setAttribute(key, value)
+        }
+
+        // Establish boolean attributes.
+        for (key in booleanAttributes) {
+            domElement.setAttribute(key, "")
         }
 
         if (false /*TODO: ...isInstrumented*/) {
@@ -126,7 +132,6 @@ abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
             domElement.setAttribute("data-debug", debugAttr)
             nodeCount += 1
         }
-
 
     }
 
@@ -155,7 +160,7 @@ abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
         if (domElement !is Element) throw IllegalArgumentException("DOM node expected to be an element.")
         if (priorElement !is KatyDomElement) throw IllegalArgumentException("KatyDOM node expected to be element.")
 
-        // Patch other attributes.
+        // Patch regular attributes.
         for ((key, newValue) in attributes) {
             if (newValue != priorElement.attributes[key]) {
                 domElement.setAttributeAndProperty(key, newValue)
@@ -163,7 +168,19 @@ abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
         }
         for ((key, _) in priorElement.attributes) {
             if (!attributes.contains(key)) {
-                domElement.removeAttribute(key)
+                domElement.removeAttributeAndProperty(key)
+            }
+        }
+
+        // Patch boolean attributes.
+        for (key in booleanAttributes) {
+            if (!priorElement.booleanAttributes.contains(key)) {
+                domElement.setBooleanAttributeAndProperty(key)
+            }
+        }
+        for (key in priorElement.booleanAttributes) {
+            if (!booleanAttributes.contains(key)) {
+                domElement.removeAttributeAndProperty(key)
             }
         }
 
@@ -190,7 +207,7 @@ abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
     }
 
     /**
-     * Sets multiple attributes provided as a mpa from name to value.
+     * Sets multiple attributes provided as a map from name to value.
      * @param attributes the attribute name/value pairs to set.
      */
     internal fun setAttributes(attributes: Map<String, String>) {
@@ -217,10 +234,10 @@ abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
         }
 
         if (value != null && value) {
-            attributes[name] = ""
+            booleanAttributes.add(name)
         }
         else {
-            attributes.remove(name)
+            booleanAttributes.remove(name)
         }
 
     }
@@ -321,7 +338,7 @@ abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
     }
 
     /**
-     * Sets one yes/no attribute by name and value. A boolean attribute has the value "yes" or "no".
+     * Sets one yes/no attribute by name and value. A yes/no attribute has the value "yes" or "no".
      * @param name the name of the attribute to set.
      * @param value the value of the attribute.
      */
@@ -353,6 +370,9 @@ abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
         var result = "<" + nodeName.toLowerCase()
         attributes.forEach { entry ->
             result += " " + entry.key + "=\"" + entry.value + "\""
+        }
+        booleanAttributes.forEach { entry ->
+            result += " " + entry
         }
         return "$result>"
     }

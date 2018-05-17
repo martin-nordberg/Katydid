@@ -105,6 +105,9 @@ abstract class KatyDomNode<Msg>(
     val key: Any
         get() = _key ?: nodeName
 
+    /** The name of this node (usually the HTML tag name, otherwise a pseudo tag name like "#text"). */
+    abstract val nodeName: String
+
     /** The first and only child node in this node. (Exception if there is none or more than one.) */
     val soleChildNode: KatyDomNode<Msg>
         get() {
@@ -115,9 +118,6 @@ abstract class KatyDomNode<Msg>(
             return firstChildNode!!
 
         }
-
-    /** The name of this node (usually the HTML tag name, otherwise a pseudo tag name like "#text"). */
-    abstract val nodeName: String
 
     ////
 
