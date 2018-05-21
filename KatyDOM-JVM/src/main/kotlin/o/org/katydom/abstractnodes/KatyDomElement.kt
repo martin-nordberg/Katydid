@@ -8,6 +8,8 @@ package o.org.katydom.abstractnodes
 import o.org.katydom.infrastructure.UnusedMap
 import o.org.katydom.infrastructure.UnusedSet
 import x.org.katydom.dom.*
+import x.org.katydom.types.KatyDomDateTime
+import x.org.katydom.types.formatHtmlDateTime
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -240,6 +242,25 @@ abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
             booleanAttributes.remove(name)
         }
 
+    }
+
+    /**
+     * Sets one date/time attribute by name and value. Output includes the time even if 0:00.
+     * @param name the name of the attribute to set.
+     * @param value the value of the attribute.
+     */
+    internal fun setDateTimeAttribute(name: String, value: KatyDomDateTime?) {
+
+        check(isAddingAttributes) {
+            "Cannot modify KatyDOM attributes after beginning to add event handlers or child nodes."
+        }
+
+        if (value == null) {
+            attributes.remove(name)
+        }
+        else {
+            attributes[name] = formatHtmlDateTime(value)
+        }
     }
 
     /**
