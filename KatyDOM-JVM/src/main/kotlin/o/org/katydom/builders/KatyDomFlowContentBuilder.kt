@@ -53,7 +53,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     fun article(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -90,7 +90,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     fun aside(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -127,7 +127,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     fun blockquote(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         cite: String? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
@@ -166,7 +166,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     fun div(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -206,7 +206,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     fun fieldset(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         disabled: Boolean? = null,
@@ -248,7 +248,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     fun figCaption(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -285,7 +285,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     fun figure(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -322,7 +322,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     fun footer(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -368,7 +368,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
         selector: String? = null,
         key: Any? = null,
         acceptCharset: String? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         action: String? = null,
         autocomplete: String? = null,
         contenteditable: Boolean? = null,
@@ -413,7 +413,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     fun h1(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -450,7 +450,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     fun h2(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -487,7 +487,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     fun h3(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -524,7 +524,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     fun h4(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -561,7 +561,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     fun h5(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -598,7 +598,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     fun h6(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -635,7 +635,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     fun header(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -672,7 +672,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     fun hr(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -709,7 +709,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     fun legend(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -771,7 +771,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     fun main(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -808,7 +808,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     fun nav(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -849,7 +849,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     fun ol(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -889,7 +889,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     fun p(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -938,7 +938,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     fun pre(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -975,7 +975,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     fun section(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -1013,7 +1013,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     fun table(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         border: Boolean? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
@@ -1028,7 +1028,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     ) {
         element.addChildNode(
             KatyDomTable(this, selector, key, accesskey, border, contenteditable, dir, hidden, lang, spellcheck, style,
-                           tabindex, title, translate, defineContent)
+                         tabindex, title, translate, defineContent)
         )
     }
 
@@ -1064,7 +1064,7 @@ class KatyDomFlowContentBuilder<Msg> internal constructor(
     fun ul(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,

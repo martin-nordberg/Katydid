@@ -5,7 +5,6 @@
 
 package o.org.katydom.builders
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.concretenodes.forms.KatyDomOptGroup
 import o.org.katydom.concretenodes.forms.KatyDomSelect
 import o.org.katydom.types.EDirection
@@ -48,7 +47,7 @@ class KatyDomSelectContentBuilder<Msg> internal constructor(
     fun optGroup(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         disabled: Boolean? = null,

@@ -6,8 +6,8 @@
 package o.org.katydom.concretenodes.forms
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.KatyDomSelectContentBuilder
 import o.org.katydom.builders.KatyDomPhrasingContentBuilder
+import o.org.katydom.builders.KatyDomSelectContentBuilder
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ internal class KatyDomSelect<Msg>(
     phrasingContent: KatyDomPhrasingContentBuilder<Msg>,
     selector: String?,
     key: Any?,
-    accesskey: String?,
+    accesskey: Char?,
     autocomplete: String?,
     autofocus: Boolean?,
     contenteditable: Boolean?,

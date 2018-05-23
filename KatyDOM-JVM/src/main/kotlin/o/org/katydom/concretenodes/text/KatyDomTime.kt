@@ -9,6 +9,7 @@ import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomPhrasingContentBuilder
 import o.org.katydom.builders.KatyDomTextContentBuilder
 import o.org.katydom.types.EDirection
+import x.org.katydom.types.KatyDateTime
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -21,7 +22,7 @@ internal class KatyDomTime<Msg> : KatyDomHtmlElement<Msg> {
         phrasingContent: KatyDomPhrasingContentBuilder<Msg>,
         selector: String?,
         key: Any?,
-        accesskey: String?,
+        accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
         hidden: Boolean?,
@@ -44,9 +45,9 @@ internal class KatyDomTime<Msg> : KatyDomHtmlElement<Msg> {
         phrasingContent: KatyDomPhrasingContentBuilder<Msg>,
         selector: String?,
         key: Any?,
-        accesskey: String?,
+        accesskey: Char?,
         contenteditable: Boolean?,
-        datetime: String,
+        datetime: KatyDateTime,
         dir: EDirection?,
         hidden: Boolean?,
         lang: String?,
@@ -59,7 +60,8 @@ internal class KatyDomTime<Msg> : KatyDomHtmlElement<Msg> {
     ) : super(selector, key, accesskey, contenteditable, dir,
               hidden, lang, spellcheck, style, tabindex, title, translate) {
 
-        setAttribute("datetime", datetime)
+        setDateTimeAttribute("datetime", datetime)
+
         phrasingContent.withNoAddedRestrictions(this).defineContent()
         this.freeze()
 

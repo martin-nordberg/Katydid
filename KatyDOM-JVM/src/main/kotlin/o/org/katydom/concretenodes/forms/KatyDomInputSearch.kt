@@ -9,7 +9,6 @@ import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomAttributesContentBuilder
 import o.org.katydom.builders.KatyDomPhrasingContentBuilder
 import o.org.katydom.types.EDirection
-import o.org.katydom.types.EInputMode
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -20,7 +19,7 @@ internal class KatyDomInputSearch<Msg>(
     phrasingContent: KatyDomPhrasingContentBuilder<Msg>,
     selector: String?,
     key: Any?,
-    accesskey: String?,
+    accesskey: Char?,
     autocomplete: String?,
     autofocus: Boolean?,
     contenteditable: Boolean?,
@@ -29,7 +28,6 @@ internal class KatyDomInputSearch<Msg>(
     disabled: Boolean?,
     form: String?,
     hidden: Boolean?,
-    inputmode: EInputMode?,
     lang: String?,
     list: String?,
     maxlength: Int?,
@@ -62,7 +60,6 @@ internal class KatyDomInputSearch<Msg>(
         setAttribute("dirname", dirname)
         setBooleanAttribute("disabled", disabled)
         setAttribute("form", form)
-        setAttribute("inputmode", inputmode?.toHtmlString())
         setAttribute("list", list)
         setNumberAttribute("maxlength", maxlength)
         setNumberAttribute("minlength", minlength)

@@ -22,7 +22,7 @@ internal class KatyDomLi<Msg> : KatyDomHtmlElement<Msg> {
         listContent: KatyDomOrderedListContentBuilder<Msg>,
         selector: String?,
         key: Any?,
-        accesskey: String?,
+        accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
         hidden: Boolean?,
@@ -35,7 +35,7 @@ internal class KatyDomLi<Msg> : KatyDomHtmlElement<Msg> {
         value: Int?,
         defineContent: KatyDomFlowContentBuilder<Msg>.() -> Unit
     ) : super(selector, key, accesskey, contenteditable, dir,
-                            hidden, lang, spellcheck, style, tabindex, title, translate) {
+              hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         setNumberAttribute("value", value)
 
@@ -48,7 +48,7 @@ internal class KatyDomLi<Msg> : KatyDomHtmlElement<Msg> {
         listContent: KatyDomUnorderedListContentBuilder<Msg>,
         selector: String?,
         key: Any?,
-        accesskey: String?,
+        accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
         hidden: Boolean?,
@@ -60,7 +60,7 @@ internal class KatyDomLi<Msg> : KatyDomHtmlElement<Msg> {
         translate: Boolean?,
         defineContent: KatyDomFlowContentBuilder<Msg>.() -> Unit
     ) : super(selector, key, accesskey, contenteditable, dir,
-                            hidden, lang, spellcheck, style, tabindex, title, translate) {
+              hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         listContent.flowContent.withNoAddedRestrictions(this).defineContent()
         this.freeze()

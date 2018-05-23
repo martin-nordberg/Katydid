@@ -19,7 +19,7 @@ internal class KatyDomInputCheckbox<Msg>(
     phrasingContent: KatyDomPhrasingContentBuilder<Msg>,
     selector: String?,
     key: Any?,
-    accesskey: String?,
+    accesskey: Char?,
     autofocus: Boolean?,
     checked: Boolean?,
     contenteditable: Boolean?,

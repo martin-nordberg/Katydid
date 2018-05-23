@@ -34,7 +34,7 @@ import x.org.katydom.dom.Node
 abstract class KatyDomHtmlElement<Msg>(
     selector: String?,
     key: Any?,
-    accesskey: String? = null,
+    accesskey: Char? = null,
     contenteditable: Boolean? = null,
     dir: EDirection? = null,
     hidden: Boolean? = null,
@@ -47,7 +47,8 @@ abstract class KatyDomHtmlElement<Msg>(
 ) : KatyDomElement<Msg>(selector, key, style, tabindex) {
 
     init {
-        setAttribute("accesskey", accesskey)
+        // TODO: need to output a string with Unicode escapes for non-ASCII characters
+        setAttribute("accesskey", accesskey?.toString())
         setTrueFalseAttribute("contenteditable", contenteditable)
         setAttribute("dir", dir?.toHtmlString())
         setBooleanAttribute("hidden", hidden)

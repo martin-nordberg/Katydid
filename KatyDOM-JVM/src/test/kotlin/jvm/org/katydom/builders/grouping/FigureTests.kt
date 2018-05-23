@@ -3,7 +3,7 @@
 // Apache 2.0 License
 //
 
-package jvm.org.katydom.builders
+package jvm.org.katydom.builders.grouping
 
 import jvm.org.katydom.api.checkBuild
 import o.org.katydom.api.katyDom
@@ -18,14 +18,14 @@ class FigureTests {
 
         val vdomNode = katyDom<Unit> {
 
-            figure( "#notmuch2it") {
+            figure("#notmuch2it") {
 
                 pre {
-                    text( "Some preformatted code\n    covering two lines")
+                    text("Some preformatted code\n    covering two lines")
                 }
 
                 figCaption {
-                    text( "This is a figure" )
+                    text("This is a figure")
                 }
 
             }
@@ -137,10 +137,10 @@ class FigureTests {
 
             figure {
 
-                figCaption { text( "Outer" ) }
+                figCaption { text("Outer") }
 
                 figure {
-                    figCaption { text( "Inner") }
+                    figCaption { text("Inner") }
                 }
 
             }

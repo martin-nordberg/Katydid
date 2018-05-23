@@ -9,7 +9,6 @@ import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomAttributesContentBuilder
 import o.org.katydom.builders.KatyDomPhrasingContentBuilder
 import o.org.katydom.types.EDirection
-import o.org.katydom.types.EInputMode
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -20,7 +19,7 @@ internal class KatyDomInputPassword<Msg>(
     phrasingContent: KatyDomPhrasingContentBuilder<Msg>,
     selector: String?,
     key: Any?,
-    accesskey: String?,
+    accesskey: Char?,
     autocomplete: String?,
     autofocus: Boolean?,
     contenteditable: Boolean?,
@@ -28,7 +27,6 @@ internal class KatyDomInputPassword<Msg>(
     disabled: Boolean?,
     form: String?,
     hidden: Boolean?,
-    inputmode: EInputMode?,
     lang: String?,
     maxlength: Int?,
     minlength: Int?,
@@ -59,7 +57,6 @@ internal class KatyDomInputPassword<Msg>(
         setBooleanAttribute("autofocus", autofocus)
         setBooleanAttribute("disabled", disabled)
         setAttribute("form", form)
-        setAttribute("inputmode", inputmode?.toHtmlString())
         setNumberAttribute("maxlength", maxlength)
         setNumberAttribute("minlength", minlength)
         setAttribute("name", name)

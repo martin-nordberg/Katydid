@@ -3,7 +3,7 @@
 // Apache 2.0 License
 //
 
-package jvm.org.katydom.builders
+package jvm.org.katydom.builders.sections
 
 import jvm.org.katydom.api.checkBuild
 import o.org.katydom.api.katyDom
@@ -11,58 +11,42 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 @Suppress("RemoveRedundantBackticks")
-class FooterTests {
+class HeaderTests {
 
     @Test
-    fun `A footer element produces correct HTML`() {
+    fun `A header element produces correct HTML`() {
 
         val vdomNode = katyDom<Unit> {
 
-            footer {
+            header {
 
                 span {
-                    text( "My Foot" )
+                    text("My Head")
                 }
 
             }
 
         }
 
-        val html = """<footer>
+        val html = """<header>
                      |  <span>
-                     |    My Foot
+                     |    My Head
                      |  </span>
-                     |</footer>""".trimMargin()
+                     |</header>""".trimMargin()
 
         checkBuild(html, vdomNode)
 
     }
 
     @Test
-    fun `A footer element may not be nested`() {
+    fun `A header element may not be nested`() {
 
         assertThrows<IllegalStateException> {
 
             katyDom<Unit> {
 
-                footer {
-                    footer {}
-                }
-
-            }
-
-        }
-
-        assertThrows<IllegalStateException> {
-
-            katyDom<Unit> {
-
-                footer {
-
-                    div {
-                        footer {}
-                    }
-
+                header {
+                    header {}
                 }
 
             }
@@ -76,7 +60,23 @@ class FooterTests {
                 header {
 
                     div {
-                        footer {}
+                        header {}
+                    }
+
+                }
+
+            }
+
+        }
+
+        assertThrows<IllegalStateException> {
+
+            katyDom<Unit> {
+
+                footer {
+
+                    div {
+                        header {}
                     }
 
                 }

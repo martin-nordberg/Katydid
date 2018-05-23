@@ -19,7 +19,7 @@ internal class KatyDomTable<Msg>(
     flowContent: KatyDomFlowContentBuilder<Msg>,
     selector: String?,
     key: Any?,
-    accesskey: String?,
+    accesskey: Char?,
     border: Boolean?,
     contenteditable: Boolean?,
     dir: EDirection?,

@@ -21,7 +21,7 @@ internal class KatyDomTh<Msg>(
     selector: String?,
     key: Any?,
     abbr: String?,
-    accesskey: String?,
+    accesskey: Char?,
     colspan: Int?,
     contenteditable: Boolean?,
     dir: EDirection?,
@@ -44,7 +44,7 @@ internal class KatyDomTh<Msg>(
         setNumberAttribute("colspan", colspan)
         setAttribute("headers", headers)
         setNumberAttribute("rowspan", rowspan)
-        setAttribute("scope", scope?.toHtmlString() )
+        setAttribute("scope", scope?.toHtmlString())
 
         tableRowContent.flowContent(this).defineContent()
         this.freeze()

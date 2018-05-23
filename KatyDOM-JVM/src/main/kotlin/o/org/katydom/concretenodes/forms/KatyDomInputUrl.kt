@@ -19,7 +19,7 @@ internal class KatyDomInputUrl<Msg>(
     phrasingContent: KatyDomPhrasingContentBuilder<Msg>,
     selector: String?,
     key: Any?,
-    accesskey: String?,
+    accesskey: Char?,
     autocomplete: String?,
     autofocus: Boolean?,
     contenteditable: Boolean?,

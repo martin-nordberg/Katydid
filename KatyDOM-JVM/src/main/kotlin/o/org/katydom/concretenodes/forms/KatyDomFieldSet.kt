@@ -18,7 +18,7 @@ internal class KatyDomFieldSet<Msg>(
     flowContent: KatyDomFlowContentBuilder<Msg>,
     selector: String?,
     key: Any?,
-    accesskey: String?,
+    accesskey: Char?,
     contenteditable: Boolean?,
     dir: EDirection?,
     disabled: Boolean?,

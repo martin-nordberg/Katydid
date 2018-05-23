@@ -57,7 +57,7 @@ class KatyDomTableContentBuilder<Msg> internal constructor(
     fun caption(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -95,7 +95,7 @@ class KatyDomTableContentBuilder<Msg> internal constructor(
     fun colgroup(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -134,7 +134,7 @@ class KatyDomTableContentBuilder<Msg> internal constructor(
     fun colgroup(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -216,7 +216,7 @@ class KatyDomTableContentBuilder<Msg> internal constructor(
     fun tbody(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -253,7 +253,7 @@ class KatyDomTableContentBuilder<Msg> internal constructor(
     fun tfoot(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -290,7 +290,7 @@ class KatyDomTableContentBuilder<Msg> internal constructor(
     fun thead(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -327,7 +327,7 @@ class KatyDomTableContentBuilder<Msg> internal constructor(
     fun tr(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,

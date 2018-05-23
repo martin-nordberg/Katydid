@@ -8,7 +8,7 @@ package o.org.katydom.concretenodes.edits
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomPhrasingContentBuilder
 import o.org.katydom.types.EDirection
-import x.org.katydom.types.KatyDomDateTime
+import x.org.katydom.types.KatyDateTime
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -19,10 +19,10 @@ internal class KatyDomDel<Msg>(
     phrasingContent: KatyDomPhrasingContentBuilder<Msg>,
     selector: String?,
     key: Any?,
-    accesskey: String?,
+    accesskey: Char?,
     cite: String?,
     contenteditable: Boolean?,
-    datetime: KatyDomDateTime?,
+    datetime: KatyDateTime?,
     dir: EDirection?,
     hidden: Boolean?,
     lang: String?,
@@ -36,8 +36,8 @@ internal class KatyDomDel<Msg>(
                             hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {
-        setAttribute( "cite", cite )
-        setDateTimeAttribute( "datetime", datetime )
+        setAttribute("cite", cite)
+        setDateTimeAttribute("datetime", datetime)
 
         // TODO: need to consider what else is needed for "transparent" content
         phrasingContent.withNoAddedRestrictions(this).defineContent()

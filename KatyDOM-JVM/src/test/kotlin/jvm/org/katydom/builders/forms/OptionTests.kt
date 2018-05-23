@@ -3,7 +3,7 @@
 // Apache 2.0 License
 //
 
-package jvm.org.katydom.builders
+package jvm.org.katydom.builders.forms
 
 import jvm.org.katydom.api.checkBuild
 import o.org.katydom.api.katyDom
@@ -105,8 +105,8 @@ class OptionTests {
 
                 datalist {
 
-                    option( label="" ) {
-                        text( "Nonsense" )
+                    option(label = "") {
+                        text("Nonsense")
                     }
 
                 }

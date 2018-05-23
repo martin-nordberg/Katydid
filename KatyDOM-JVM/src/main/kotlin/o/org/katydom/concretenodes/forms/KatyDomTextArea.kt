@@ -9,7 +9,6 @@ import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomPhrasingContentBuilder
 import o.org.katydom.builders.KatyDomTextContentBuilder
 import o.org.katydom.types.EDirection
-import o.org.katydom.types.EInputMode
 import o.org.katydom.types.EWrapType
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -21,7 +20,7 @@ internal class KatyDomTextArea<Msg>(
     phrasingContent: KatyDomPhrasingContentBuilder<Msg>,
     selector: String?,
     key: Any?,
-    accesskey: String?,
+    accesskey: Char?,
     autocomplete: String?,
     autofocus: Boolean?,
     cols: Int?,
@@ -31,7 +30,6 @@ internal class KatyDomTextArea<Msg>(
     disabled: Boolean?,
     form: String?,
     hidden: Boolean?,
-    inputmode: EInputMode?,
     lang: String?,
     maxlength: Int?,
     minlength: Int?,
@@ -64,7 +62,6 @@ internal class KatyDomTextArea<Msg>(
         setAttribute("dirname", dirname)
         setBooleanAttribute("disabled", disabled)
         setAttribute("form", form)
-        setAttribute("inputmode", inputmode?.toHtmlString())
         setNumberAttribute("maxlength", maxlength)
         setNumberAttribute("minlength", minlength)
         setAttribute("name", name)

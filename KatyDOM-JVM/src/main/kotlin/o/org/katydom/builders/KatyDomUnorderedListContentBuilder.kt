@@ -56,7 +56,7 @@ class KatyDomUnorderedListContentBuilder<Msg> internal constructor(
     fun li(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,

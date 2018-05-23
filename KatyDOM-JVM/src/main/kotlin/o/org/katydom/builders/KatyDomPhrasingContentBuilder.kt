@@ -11,7 +11,8 @@ import o.org.katydom.concretenodes.edits.KatyDomIns
 import o.org.katydom.concretenodes.forms.*
 import o.org.katydom.concretenodes.text.*
 import o.org.katydom.types.*
-import x.org.katydom.types.KatyDomDateTime
+import x.org.katydom.types.KatyDateTime
+import x.org.katydom.types.KatyTime
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -56,7 +57,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun a(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         download: String? = null,
@@ -100,7 +101,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun abbr(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -144,7 +145,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun b(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -181,7 +182,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun bdi(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -218,7 +219,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun bdo(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection,
         hidden: Boolean? = null,
@@ -255,7 +256,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun br(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -304,7 +305,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun button(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         autofocus: Boolean? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
@@ -353,7 +354,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun cite(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -390,7 +391,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun code(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -438,7 +439,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun data(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -477,7 +478,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun datalist(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -517,10 +518,10 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun del(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         cite: String? = null,
         contenteditable: Boolean? = null,
-        datetime: KatyDomDateTime? = null,
+        datetime: KatyDateTime? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
         lang: String? = null,
@@ -556,7 +557,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun dfn(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -593,7 +594,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun em(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -630,7 +631,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun i(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -671,7 +672,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun inputButton(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         disabled: Boolean? = null,
@@ -719,7 +720,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun inputCheckbox(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         autofocus: Boolean? = null,
         checked: Boolean? = null,
         contenteditable: Boolean? = null,
@@ -772,7 +773,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun inputColor(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         autocomplete: String? = null,
         autofocus: Boolean? = null,
         contenteditable: Boolean? = null,
@@ -830,7 +831,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun inputDate(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         autocomplete: String? = null,
         autofocus: Boolean? = null,
         contenteditable: Boolean? = null,
@@ -893,7 +894,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun inputDateTimeLocal(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         autocomplete: String? = null,
         autofocus: Boolean? = null,
         contenteditable: Boolean? = null,
@@ -949,7 +950,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun inputEmail(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         autocomplete: String? = null,
         autofocus: Boolean? = null,
         contenteditable: Boolean? = null,
@@ -1012,7 +1013,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         selector: String? = null,
         key: Any? = null,
         accept: String? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         autofocus: Boolean? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
@@ -1040,7 +1041,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     }
 
     /**
-     * Adds an input type="hidden" element with given attributes as the next child of the element under construction.
+     * Adds an `<input type="hidden">` element with given attributes as the next child of the element under construction.
      * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
      * @param key a non-DOM key for this KatyDOM element that is unique among all the siblings of this element.
      * @param accesskey a string specifying the HTML accesskey value.
@@ -1062,7 +1063,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun inputHidden(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         disabled: Boolean? = null,
@@ -1114,7 +1115,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun inputImageButton(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         alt: String? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
@@ -1178,7 +1179,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun inputMonth(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         autocomplete: String? = null,
         autofocus: Boolean? = null,
         contenteditable: Boolean? = null,
@@ -1242,7 +1243,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun <T : Number> inputNumber(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         autocomplete: String? = null,
         autofocus: Boolean? = null,
         contenteditable: Boolean? = null,
@@ -1287,7 +1288,6 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
      * @param disabled whether this field is disabled for user interaction.
      * @param form the ID of the form this field is part of.
      * @param hidden true if the element is to be hidden.
-     * @param inputmode the input mode for the password entry. See [EInputMode].
      * @param lang the language of text within this element.
      * @param maxlength the maximum length of text that may be entered for the form to validate.
      * @param minlength the minimum length of text that must be entered for the form to validate.
@@ -1308,7 +1308,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun inputPassword(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         autocomplete: String? = null,
         autofocus: Boolean? = null,
         contenteditable: Boolean? = null,
@@ -1316,7 +1316,6 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         disabled: Boolean? = null,
         form: String? = null,
         hidden: Boolean? = null,
-        inputmode: EInputMode? = null,
         lang: String? = null,
         maxlength: Int? = null,
         minlength: Int? = null,
@@ -1336,18 +1335,19 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     ) {
         element.addChildNode(
             KatyDomInputPassword(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                                 disabled, form, hidden, inputmode, lang, maxlength, minlength, name, pattern,
+                                 disabled, form, hidden, lang, maxlength, minlength, name, pattern,
                                  placeholder, readonly, required, size, spellcheck, style, tabindex, title, translate,
                                  value, defineAttributes)
         )
     }
 
     /**
-     * Adds an input type="radio" element with given attributes as the next child of the element under construction.
+     * Adds an `<input type="radio">` element with given attributes as the next child of the element under construction.
      * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
      * @param key a non-DOM key for this KatyDOM element that is unique among all the siblings of this element.
      * @param accesskey a string specifying the HTML accesskey value.
      * @param autofocus true if the field is to automatically receive keyboard focus.
+     * @param checked whether the button is checked.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
      * @param disabled whether this field is disabled for user interaction.
@@ -1355,6 +1355,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param name the name of this field for form submissions.
+     * @param required true if the radio button group must have one button checked for valid form submission.
      * @param spellcheck whether the element is subject to spell checking.
      * @param style a string containing CSS for this element.
      * @param tabindex the tab index for the element.
@@ -1365,7 +1366,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun inputRadioButton(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         autofocus: Boolean? = null,
         checked: Boolean? = null,
         contenteditable: Boolean? = null,
@@ -1377,7 +1378,6 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         name: String? = null,
         required: Boolean? = null,
         spellcheck: Boolean? = null,
-        step: String? = null,
         style: String? = null,
         tabindex: Int? = null,
         title: String? = null,
@@ -1388,13 +1388,13 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         element.addChildNode(
             KatyDomInputRadioButton(this, selector, key, accesskey, autofocus, checked, contenteditable, dir,
                                     disabled, form, hidden, lang, name, required,
-                                    spellcheck, step, style, tabindex, title, translate,
+                                    spellcheck, style, tabindex, title, translate,
                                     value, defineAttributes)
         )
     }
 
     /**
-     * Adds an input type="range" element with given attributes as the next child of the element under construction.
+     * Adds an `<input type="range">` element with given attributes as the next child of the element under construction.
      * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
      * @param key a non-DOM key for this KatyDOM element that is unique among all the siblings of this element.
      * @param accesskey a string specifying the HTML accesskey value.
@@ -1406,18 +1406,23 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
      * @param form the ID of the form this field is part of.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
+     * @param list a list of labeled values for the range.
+     * @param max the maximum value for the range.
+     * @param min the minimum value for the range.
      * @param name the name of this field for form submissions.
      * @param spellcheck whether the element is subject to spell checking.
+     * @param step the increment for stepping the ranged value.
      * @param style a string containing CSS for this element.
      * @param tabindex the tab index for the element.
      * @param title a tool tip for the element.
      * @param translate whether to translate text within this element.
+     * @param the current value for the range field.
      * @param defineAttributes a DSL-style lambda that adds any nonstandard attributes to the new element.
      */
     fun <T : Number> inputRange(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         autocomplete: String? = null,
         autofocus: Boolean? = null,
         contenteditable: Boolean? = null,
@@ -1448,7 +1453,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     }
 
     /**
-     * Adds an input type="reset" element with given attributes as the next child of the element under construction.
+     * Adds an `<input type="reset">` element with given attributes as the next child of the element under construction.
      * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
      * @param key a non-DOM key for this KatyDOM element that is unique among all the siblings of this element.
      * @param accesskey a string specifying the HTML accesskey value.
@@ -1464,12 +1469,13 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
      * @param tabindex the tab index for the element.
      * @param title a tool tip for the element.
      * @param translate whether to translate text within this element.
+     * @param value the label to show on the button.
      * @param defineAttributes a DSL-style lambda that adds any nonstandard attributes to the new element.
      */
     fun inputResetButton(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         disabled: Boolean? = null,
@@ -1492,7 +1498,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     }
 
     /**
-     * Adds an input type="search" element with given attributes as the next child of the element under construction.
+     * Adds an `<input type="search">` element with given attributes as the next child of the element under construction.
      * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
      * @param key a non-DOM key for this KatyDOM element that is unique among all the siblings of this element.
      * @param accesskey a string specifying the HTML accesskey value.
@@ -1500,22 +1506,32 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
      * @param autofocus true if the field is to automatically receive keyboard focus.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param dirname the name of a parameter holding the directionality when submitting the form.
      * @param disabled whether this field is disabled for user interaction.
      * @param form the ID of the form this field is part of.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
+     * @param list a list of labeled values for the search field.
+     * @param maxlength the maximum length of text that may be entered for the form to validate.
+     * @param minlength the minimum length of text that must be entered for the form to validate.
      * @param name the name of this field for form submissions.
+     * @param pattern a regular expression for validating this field.
+     * @param placeholder text to display in the field when its value is empty.
+     * @param readonly true if the field is displayed but may not be edited by a user.
+     * @param required true if the filed must have a value for the form to validate.
+     * @param size the number of visible characters in the field.
      * @param spellcheck whether the element is subject to spell checking.
      * @param style a string containing CSS for this element.
      * @param tabindex the tab index for the element.
      * @param title a tool tip for the element.
      * @param translate whether to translate text within this element.
+     * @param value the value of the field.
      * @param defineAttributes a DSL-style lambda that adds any nonstandard attributes to the new element.
      */
     fun inputSearch(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         autocomplete: String? = null,
         autofocus: Boolean? = null,
         contenteditable: Boolean? = null,
@@ -1524,7 +1540,6 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         disabled: Boolean? = null,
         form: String? = null,
         hidden: Boolean? = null,
-        inputmode: EInputMode? = null,
         lang: String? = null,
         list: String? = null,
         maxlength: Int? = null,
@@ -1545,14 +1560,14 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     ) {
         element.addChildNode(
             KatyDomInputSearch(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir, dirname,
-                               disabled, form, hidden, inputmode, lang, list, maxlength, minlength, name, pattern,
+                               disabled, form, hidden, lang, list, maxlength, minlength, name, pattern,
                                placeholder, readonly, required, size, spellcheck, style, tabindex, title, translate,
                                value, defineAttributes)
         )
     }
 
     /**
-     * Adds an input type="submit" element with given attributes as the next child of the element under construction.
+     * Adds an `<input type="submit">` element with given attributes as the next child of the element under construction.
      * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
      * @param key a non-DOM key for this KatyDOM element that is unique among all the siblings of this element.
      * @param accesskey a string specifying the HTML accesskey value.
@@ -1560,6 +1575,11 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
      * @param dir the left-to-right direction of text inside this element.
      * @param disabled whether this field is disabled for user interaction.
      * @param form the ID of the form this field is part of.
+     * @param formaction the form action to be triggered by the button.
+     * @param formenctype the encoding type to be used for form data submitted by this button.
+     * @param formmethod the choice of GET or POST for submitting the form's data.
+     * @param formnovalidate true to skip form field validation when this button is clicked.
+     * @param formtarget the target window (browser context) for form submission
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param name the name of this field for form submissions.
@@ -1568,12 +1588,13 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
      * @param tabindex the tab index for the element.
      * @param title a tool tip for the element.
      * @param translate whether to translate text within this element.
+     * @param value the value of the field corresponding to the button when  the form is submitted.
      * @param defineAttributes a DSL-style lambda that adds any nonstandard attributes to the new element.
      */
     fun inputSubmitButton(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         disabled: Boolean? = null,
@@ -1602,7 +1623,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     }
 
     /**
-     * Adds an input type="tel" element with given attributes as the next child of the element under construction.
+     * Adds an `<input type="tel">` element with given attributes as the next child of the element under construction.
      * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
      * @param key a non-DOM key for this KatyDOM element that is unique among all the siblings of this element.
      * @param accesskey a string specifying the HTML accesskey value.
@@ -1614,18 +1635,27 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
      * @param form the ID of the form this field is part of.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
+     * @param list a list of labeled values for the field.
+     * @param maxlength the maximum length of text that may be entered for the form to validate.
+     * @param minlength the minimum length of text that must be entered for the form to validate.
      * @param name the name of this field for form submissions.
+     * @param pattern a regular expression for validating this field.
+     * @param placeholder text to display in the field when its value is empty.
+     * @param readonly true if the field is displayed but may not be edited by a user.
+     * @param required true if the filed must have a value for the form to validate.
+     * @param size the number of visible characters in the field.
      * @param spellcheck whether the element is subject to spell checking.
      * @param style a string containing CSS for this element.
      * @param tabindex the tab index for the element.
      * @param title a tool tip for the element.
      * @param translate whether to translate text within this element.
+     * @param the value of this field.
      * @param defineAttributes a DSL-style lambda that adds any nonstandard attributes to the new element.
      */
     fun inputTelephone(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         autocomplete: String? = null,
         autofocus: Boolean? = null,
         contenteditable: Boolean? = null,
@@ -1660,7 +1690,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     }
 
     /**
-     * Adds an input type="text" element with given attributes as the next child of the element under construction.
+     * Adds an `<input type="text"> element with given attributes as the next child of the element under construction.
      * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
      * @param key a non-DOM key for this KatyDOM element that is unique among all the siblings of this element.
      * @param accesskey a string specifying the HTML accesskey value.
@@ -1668,22 +1698,32 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
      * @param autofocus true if the field is to automatically receive keyboard focus.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param dirname the name of a parameter holding the directionality when submitting the form.
      * @param disabled whether this field is disabled for user interaction.
      * @param form the ID of the form this field is part of.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
+     * @param list a list of labeled values for the field.
+     * @param maxlength the maximum length of text that may be entered for the form to validate.
+     * @param minlength the minimum length of text that must be entered for the form to validate.
      * @param name the name of this field for form submissions.
+     * @param pattern a regular expression for validating this field.
+     * @param placeholder text to display in the field when its value is empty.
+     * @param readonly true if the field is displayed but may not be edited by a user.
+     * @param required true if the filed must have a value for the form to validate.
+     * @param size the number of visible characters in the field.
      * @param spellcheck whether the element is subject to spell checking.
      * @param style a string containing CSS for this element.
      * @param tabindex the tab index for the element.
      * @param title a tool tip for the element.
      * @param translate whether to translate text within this element.
+     * @param value the current value of the field.
      * @param defineAttributes a DSL-style lambda that adds any nonstandard attributes to the new element.
      */
     fun inputText(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         autocomplete: String? = null,
         autofocus: Boolean? = null,
         contenteditable: Boolean? = null,
@@ -1692,7 +1732,6 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         disabled: Boolean? = null,
         form: String? = null,
         hidden: Boolean? = null,
-        inputmode: EInputMode? = null,
         lang: String? = null,
         list: String? = null,
         maxlength: Int? = null,
@@ -1713,7 +1752,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     ) {
         element.addChildNode(
             KatyDomInputText(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir, dirname,
-                             disabled, form, hidden, inputmode, lang, list, maxlength, minlength, name, pattern,
+                             disabled, form, hidden, lang, list, maxlength, minlength, name, pattern,
                              placeholder, readonly, required, size, spellcheck, style, tabindex, title, translate,
                              value, defineAttributes)
         )
@@ -1732,18 +1771,25 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
      * @param form the ID of the form this field is part of.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
+     * @param list a list of labeled values for the field.
+     * @param max the maximum value for the field.
+     * @param min the minimum value for the field.
      * @param name the name of this field for form submissions.
+     * @param pattern a regular expression for validating this field.
+     * @param readonly true if the field is displayed but may not be edited by a user.
+     * @param required true if the filed must have a value for the form to validate.
      * @param spellcheck whether the element is subject to spell checking.
      * @param style a string containing CSS for this element.
      * @param tabindex the tab index for the element.
      * @param title a tool tip for the element.
      * @param translate whether to translate text within this element.
+     * @param value the current value of the field.
      * @param defineAttributes a DSL-style lambda that adds any nonstandard attributes to the new element.
      */
     fun inputTime(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         autocomplete: String? = null,
         autofocus: Boolean? = null,
         contenteditable: Boolean? = null,
@@ -1764,7 +1810,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         tabindex: Int? = null,
         title: String? = null,
         translate: Boolean? = null,
-        value: String? = null,
+        value: KatyTime? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
@@ -1799,7 +1845,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun inputUrl(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         autocomplete: String? = null,
         autofocus: Boolean? = null,
         contenteditable: Boolean? = null,
@@ -1857,7 +1903,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun inputWeek(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         autocomplete: String? = null,
         autofocus: Boolean? = null,
         contenteditable: Boolean? = null,
@@ -1910,10 +1956,10 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun ins(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         cite: String? = null,
         contenteditable: Boolean? = null,
-        datetime: KatyDomDateTime? = null,
+        datetime: KatyDateTime? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
         lang: String? = null,
@@ -1949,7 +1995,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun kbd(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -1986,7 +2032,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun label(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         `for`: String? = null,
@@ -2024,7 +2070,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun mark(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -2061,7 +2107,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun meter(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -2113,7 +2159,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun output(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         disabled: Boolean? = null,
@@ -2156,7 +2202,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun progress(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -2195,7 +2241,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun q(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -2232,7 +2278,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun s(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -2269,7 +2315,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun samp(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -2309,7 +2355,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun select(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         autocomplete: String? = null,
         autofocus: Boolean? = null,
         contenteditable: Boolean? = null,
@@ -2364,7 +2410,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun small(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -2401,7 +2447,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun span(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -2438,7 +2484,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun strong(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -2475,7 +2521,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun sub(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -2512,7 +2558,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun sup(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -2560,7 +2606,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun textarea(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         autocomplete: String? = null,
         autofocus: Boolean? = null,
         cols: Int? = null,
@@ -2570,7 +2616,6 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         disabled: Boolean? = null,
         form: String? = null,
         hidden: Boolean? = null,
-        inputmode: EInputMode? = null,
         lang: String? = null,
         maxlength: Int? = null,
         minlength: Int? = null,
@@ -2590,7 +2635,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         element.addChildNode(
             KatyDomTextArea(this, selector, key, accesskey, autocomplete, autofocus, cols, contenteditable, dir,
                             dirname,
-                            disabled, form, hidden, inputmode, lang, maxlength, minlength, name,
+                            disabled, form, hidden, lang, maxlength, minlength, name,
                             placeholder, readonly, required, rows, spellcheck, style, tabindex, title, translate,
                             wrap, defineContent)
         )
@@ -2604,7 +2649,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     }
 
     /**
-     * Adds a time element with text content as the next child of the element under construction.
+     * Adds a `<time>` element with text content as the next child of the element under construction.
      * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
      * @param key a non-DOM key for this KatyDOM element that is unique among all the siblings of this element.
      * @param accesskey a string specifying the HTML accesskey value.
@@ -2622,7 +2667,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun time(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -2641,7 +2686,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     }
 
     /**
-     * Adds a time element with datetime attribute as the next child of the element under construction.
+     * Adds a `<time>` element with datetime attribute as the next child of the element under construction.
      * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
      * @param key a non-DOM key for this KatyDOM element that is unique among all the siblings of this element.
      * @param accesskey a string specifying the HTML accesskey value.
@@ -2659,9 +2704,9 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun time(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
-        datetime: String,
+        datetime: KatyDateTime,
         dir: EDirection? = null,
         hidden: Boolean? = null,
         lang: String? = null,
@@ -2679,7 +2724,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     }
 
     /**
-     * Adds a u element with its attributes as the next child of the element under construction.
+     * Adds a `<u>` element with its attributes as the next child of the element under construction.
      * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
      * @param key a non-DOM key for this KatyDOM element that is unique among all the siblings of this element.
      * @param accesskey a string specifying the HTML accesskey value.
@@ -2697,7 +2742,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun u(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -2734,7 +2779,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun `var`(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
@@ -2771,7 +2816,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     fun wbr(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,

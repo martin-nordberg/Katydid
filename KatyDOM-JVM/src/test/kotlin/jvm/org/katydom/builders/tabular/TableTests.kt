@@ -3,7 +3,7 @@
 // Apache 2.0 License
 //
 
-package jvm.org.katydom.builders
+package jvm.org.katydom.builders.tabular
 
 import jvm.org.katydom.api.checkBuild
 import o.org.katydom.api.katyDom

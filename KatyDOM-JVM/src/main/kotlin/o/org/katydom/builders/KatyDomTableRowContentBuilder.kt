@@ -73,7 +73,7 @@ class KatyDomTableRowContentBuilder<Msg> internal constructor(
     fun td(
         selector: String? = null,
         key: Any? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         colspan: Int? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
@@ -119,7 +119,7 @@ class KatyDomTableRowContentBuilder<Msg> internal constructor(
         selector: String? = null,
         key: Any? = null,
         abbr: String? = null,
-        accesskey: String? = null,
+        accesskey: Char? = null,
         colspan: Int? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,

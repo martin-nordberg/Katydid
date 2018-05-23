@@ -20,7 +20,7 @@ internal class KatyDomOl<Msg>(
     flowContent: KatyDomFlowContentBuilder<Msg>,
     selector: String?,
     key: Any?,
-    accesskey: String?,
+    accesskey: Char?,
     contenteditable: Boolean?,
     dir: EDirection?,
     hidden: Boolean?,

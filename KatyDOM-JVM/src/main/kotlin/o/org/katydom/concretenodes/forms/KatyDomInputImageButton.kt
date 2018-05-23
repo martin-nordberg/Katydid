@@ -21,7 +21,7 @@ internal class KatyDomInputImageButton<Msg>(
     phrasingContent: KatyDomPhrasingContentBuilder<Msg>,
     selector: String?,
     key: Any?,
-    accesskey: String?,
+    accesskey: Char?,
     alt: String?,
     contenteditable: Boolean?,
     dir: EDirection?,

@@ -21,7 +21,7 @@ internal class KatyDomForm<Msg>(
     selector: String?,
     key: Any?,
     acceptCharset: String?,
-    accesskey: String?,
+    accesskey: Char?,
     action: String?,
     autocomplete: String?,
     contenteditable: Boolean?,

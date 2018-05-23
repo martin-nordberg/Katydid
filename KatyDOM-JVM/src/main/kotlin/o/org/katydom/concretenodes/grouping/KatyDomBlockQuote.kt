@@ -18,7 +18,7 @@ internal class KatyDomBlockQuote<Msg>(
     flowContent: KatyDomFlowContentBuilder<Msg>,
     selector: String?,
     key: Any?,
-    accesskey: String?,
+    accesskey: Char?,
     cite: String?,
     contenteditable: Boolean?,
     dir: EDirection?,

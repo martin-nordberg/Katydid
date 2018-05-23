@@ -8,8 +8,10 @@ package o.org.katydom.abstractnodes
 import o.org.katydom.infrastructure.UnusedMap
 import o.org.katydom.infrastructure.UnusedSet
 import x.org.katydom.dom.*
-import x.org.katydom.types.KatyDomDateTime
+import x.org.katydom.types.KatyDateTime
+import x.org.katydom.types.KatyTime
 import x.org.katydom.types.formatHtmlDateTime
+import x.org.katydom.types.formatHtmlTime
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -249,7 +251,7 @@ abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
      * @param name the name of the attribute to set.
      * @param value the value of the attribute.
      */
-    internal fun setDateTimeAttribute(name: String, value: KatyDomDateTime?) {
+    internal fun setDateTimeAttribute(name: String, value: KatyDateTime?) {
 
         check(isAddingAttributes) {
             "Cannot modify KatyDOM attributes after beginning to add event handlers or child nodes."
@@ -260,6 +262,25 @@ abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
         }
         else {
             attributes[name] = formatHtmlDateTime(value)
+        }
+    }
+
+    /**
+     * Sets one time attribute by name and value.
+     * @param name the name of the attribute to set.
+     * @param value the value of the attribute.
+     */
+    internal fun setTimeAttribute(name: String, value: KatyTime?) {
+
+        check(isAddingAttributes) {
+            "Cannot modify KatyDOM attributes after beginning to add event handlers or child nodes."
+        }
+
+        if (value == null) {
+            attributes.remove(name)
+        }
+        else {
+            attributes[name] = formatHtmlTime(value)
         }
     }
 

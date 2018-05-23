@@ -19,7 +19,7 @@ internal class KatyDomInputRadioButton<Msg>(
     phrasingContent: KatyDomPhrasingContentBuilder<Msg>,
     selector: String?,
     key: Any?,
-    accesskey: String?,
+    accesskey: Char?,
     autofocus: Boolean?,
     checked: Boolean?,
     contenteditable: Boolean?,
@@ -31,7 +31,6 @@ internal class KatyDomInputRadioButton<Msg>(
     name: String?,
     required: Boolean?,
     spellcheck: Boolean?,
-    step: String?,
     style: String?,
     tabindex: Int?,
     title: String?,
@@ -50,7 +49,6 @@ internal class KatyDomInputRadioButton<Msg>(
         setAttribute("form", form)
         setAttribute("name", name)
         setBooleanAttribute("required", required)
-        setAttribute("step", step)
         setAttribute("value", value)
 
         setAttribute("type", "radio")

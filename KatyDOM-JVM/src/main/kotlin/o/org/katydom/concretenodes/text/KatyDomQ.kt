@@ -18,7 +18,7 @@ internal class KatyDomQ<Msg>(
     phrasingContent: KatyDomPhrasingContentBuilder<Msg>,
     selector: String?,
     key: Any?,
-    accesskey: String?,
+    accesskey: Char?,
     contenteditable: Boolean?,
     dir: EDirection?,
     hidden: Boolean?,

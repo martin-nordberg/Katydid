@@ -19,7 +19,7 @@ internal class KatyDomTd<Msg>(
     tableRowContent: KatyDomTableRowContentBuilder<Msg>,
     selector: String?,
     key: Any?,
-    accesskey: String?,
+    accesskey: Char?,
     colspan: Int?,
     contenteditable: Boolean?,
     dir: EDirection?,

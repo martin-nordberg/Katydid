@@ -19,7 +19,7 @@ internal class KatyDomOptGroup<Msg>(
     selectContent: KatyDomSelectContentBuilder<Msg>,
     selector: String?,
     key: Any?,
-    accesskey: String?,
+    accesskey: Char?,
     contenteditable: Boolean?,
     dir: EDirection?,
     disabled: Boolean?,

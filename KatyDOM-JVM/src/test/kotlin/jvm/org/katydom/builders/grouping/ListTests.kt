@@ -3,12 +3,11 @@
 // Apache 2.0 License
 //
 
-package jvm.org.katydom.builders
+package jvm.org.katydom.builders.grouping
 
 import jvm.org.katydom.api.checkBuild
 import o.org.katydom.api.katyDom
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 
 @Suppress("RemoveRedundantBackticks")
 class ListTests {
@@ -18,13 +17,13 @@ class ListTests {
 
         val vdomNode = katyDom<Unit> {
 
-            ol( "#alist") {
+            ol("#alist") {
 
-                li(key=3,value = 3) {
+                li(key = 3, value = 3) {
                     text("Three")
                 }
 
-                li(key=4) {
+                li(key = 4) {
                     text("Four")
                 }
 
@@ -50,13 +49,13 @@ class ListTests {
 
         val vdomNode = katyDom<Unit> {
 
-            ul( "#anotherlist") {
+            ul("#anotherlist") {
 
-                li(key="a") {
+                li(key = "a") {
                     text("Aaaa")
                 }
 
-                li(key="b") {
+                li(key = "b") {
                     text("Bee")
                 }
 

@@ -20,7 +20,7 @@ internal class KatyDomInputFile<Msg>(
     selector: String?,
     key: Any?,
     accept: String?,
-    accesskey: String?,
+    accesskey: Char?,
     autofocus: Boolean?,
     contenteditable: Boolean?,
     dir: EDirection?,

@@ -21,7 +21,7 @@ internal class KatyDomButton<Msg>(
     phrasingContent: KatyDomPhrasingContentBuilder<Msg>,
     selector: String?,
     key: Any?,
-    accesskey: String?,
+    accesskey: Char?,
     autofocus: Boolean?,
     contenteditable: Boolean?,
     dir: EDirection?,
