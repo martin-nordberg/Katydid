@@ -63,7 +63,8 @@ dokka {
         'src/main/kotlin/o/org/katydom/builders/package.md',
         'src/main/kotlin/o/org/katydom/types/package.md',
         'src/main/kotlin/x/org/katydom/dom/package.md',
-        'src/main/kotlin/x/org/katydom/dom/events/package.md'
+        'src/main/kotlin/x/org/katydom/dom/events/package.md',
+        'src/main/kotlin/x/org/katydom/types/package.md'
     ]
 
     moduleName = 'KatyDOM-JVM'
