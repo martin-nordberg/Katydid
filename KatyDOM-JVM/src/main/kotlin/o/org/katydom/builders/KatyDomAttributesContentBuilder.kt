@@ -56,9 +56,9 @@ open class KatyDomAttributesContentBuilder<Msg> internal constructor(
      * Adds multiple attributes to the content being built.
      * @param pairs a list of the names (first) and values (second) for the attributes to add.
      */
-    fun attributes(vararg pairs: Pair<String, String>) {
+    fun attributes(vararg pairs: Pair<String, Any>) {
         pairs.forEach { pair ->
-            attribute(pair.first, pair.second)
+            attribute(pair.first, pair.second.toString())
         }
     }
 

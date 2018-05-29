@@ -14,39 +14,110 @@ import o.org.katydom.types.EDirection
 /**
  * Virtual node for a meter element.
  */
-internal class KatyDomMeter<Msg>(
-    phrasingContent: KatyDomPhrasingContentBuilder<Msg>,
-    selector: String?,
-    key: Any?,
-    accesskey: Char?,
-    contenteditable: Boolean?,
-    dir: EDirection?,
-    hidden: Boolean?,
-    high: String?,
-    lang: String?,
-    low: String?,
-    max: String?,
-    min: String?,
-    optimum: String?,
-    spellcheck: Boolean?,
-    style: String?,
-    tabindex: Int?,
-    title: String?,
-    translate: Boolean?,
-    value: String?,
-    defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-) : KatyDomHtmlElement<Msg>(selector, key, accesskey, contenteditable, dir,
-                            hidden, lang, spellcheck, style, tabindex, title, translate) {
+internal class KatyDomMeter<Msg> : KatyDomHtmlElement<Msg> {
 
-    init {
+    constructor(
+        phrasingContent: KatyDomPhrasingContentBuilder<Msg>,
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        contenteditable: Boolean?,
+        dir: EDirection?,
+        hidden: Boolean?,
+        high: Double?,
+        lang: String?,
+        low: Double?,
+        max: Double?,
+        min: Double?,
+        optimum: Double?,
+        spellcheck: Boolean?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        value: Double,
+        defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
+    ) : super(selector, key, accesskey, contenteditable, dir,
+              hidden, lang, spellcheck, style, tabindex, title, translate) {
+
         phrasingContent.contentRestrictions.confirmMeterAllowed()
 
-        setAttribute("high", high)
-        setAttribute("low", low)
-        setAttribute("max", max)
-        setAttribute("min", min)
-        setAttribute("optimum", optimum)
-        setAttribute("value", value)
+        val maximum = max ?: 1.0
+        val minimum = min ?: 0.0
+
+        check( minimum < maximum ) { "Meter max must be greater than min." }
+
+        fun checkInRange(value:Double?, attributeName:String) {
+            if ( value != null ) {
+                check(minimum <= value) { "Meter $attributeName is smaller than minimum." }
+                check(value <= maximum) { "Meter $attributeName is greater than maximum." }
+            }
+        }
+
+        checkInRange(value,"value")
+        checkInRange(low,"low")
+        checkInRange(high,"high")
+        checkInRange(optimum,"optimum")
+
+        setNumberAttribute("high", high)
+        setNumberAttribute("low", low)
+        setNumberAttribute("max", max)
+        setNumberAttribute("min", min)
+        setNumberAttribute("optimum", optimum)
+        setNumberAttribute("value", value)
+
+        phrasingContent.withMeterNotAllowed(this).defineContent()
+        this.freeze()
+    }
+
+    constructor(
+        phrasingContent: KatyDomPhrasingContentBuilder<Msg>,
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        contenteditable: Boolean?,
+        dir: EDirection?,
+        hidden: Boolean?,
+        high: Int?,
+        lang: String?,
+        low: Int?,
+        max: Int,
+        min: Int?,
+        optimum: Int?,
+        spellcheck: Boolean?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        value: Int,
+        defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
+    ) : super(selector, key, accesskey, contenteditable, dir,
+              hidden, lang, spellcheck, style, tabindex, title, translate) {
+
+        phrasingContent.contentRestrictions.confirmMeterAllowed()
+
+        val minimum = min ?: 0
+
+        check( minimum < max ) { "Meter max must be greater than min." }
+
+        fun checkInRange(value:Int?, attributeName:String) {
+            if ( value != null ) {
+                check(minimum <= value) { "Meter $attributeName is smaller than minimum." }
+                check(value <= max) { "Meter $attributeName is greater than maximum." }
+            }
+        }
+
+        checkInRange(value,"value")
+        checkInRange(low,"low")
+        checkInRange(high,"high")
+        checkInRange(optimum,"optimum")
+
+        setNumberAttribute("high", high)
+        setNumberAttribute("low", low)
+        setNumberAttribute("max", max)
+        setNumberAttribute("min", min)
+        setNumberAttribute("optimum", optimum)
+        setNumberAttribute("value", value)
 
         phrasingContent.withMeterNotAllowed(this).defineContent()
         this.freeze()

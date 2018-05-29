@@ -161,7 +161,7 @@ class KatyDomContentRestrictions(
      * @throws IllegalStateException if `<meter>` is not allowed.
      */
     fun confirmMeterAllowed() {
-        check(mainAllowed) { "Element type <meter> not allowed here." }
+        check(meterAllowed) { "Element type <meter> not allowed here." }
     }
 
     /**

@@ -285,7 +285,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
      * @param dir the left-to-right direction of text inside this element.
      * @param disabled true to make the element disabled in the browser display.
      * @param form the form acted upon by this button.
-     * @param formaction the form action to be triggered by the button.
+     * @param formaction the URL to use for form submission.
      * @param formenctype the encoding type to be used for form data submitted by this button.
      * @param formmethod the choice of GET or POST for submitting the form's data.
      * @param formnovalidate true to skip form field validation when this button is clicked.
@@ -699,7 +699,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
      * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
      * @param key a non-DOM key for this KatyDOM element that is unique among all the siblings of this element.
      * @param accesskey a string specifying the HTML accesskey value.
-     * @param autofocus true if the field is to automtically receive the keyboard focus.
+     * @param autofocus true if the field is to automatically receive the keyboard focus.
      * @param checked true if the checkbox is checked.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
@@ -1095,7 +1095,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
      * @param dir the left-to-right direction of text inside this element.
      * @param disabled whether this field is disabled for user interaction.
      * @param form the ID of the form this field is part of.
-     * @param formaction the form action to be triggered by the button.
+     * @param formaction the URL to use for form submission.
      * @param formenctype the encoding type to be used for form data submitted by this button.
      * @param formmethod the choice of GET or POST for submitting the form's data.
      * @param formnovalidate true to skip form field validation when this button is clicked.
@@ -1416,7 +1416,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
      * @param tabindex the tab index for the element.
      * @param title a tool tip for the element.
      * @param translate whether to translate text within this element.
-     * @param the current value for the range field.
+     * @param value the current value for the range field.
      * @param defineAttributes a DSL-style lambda that adds any nonstandard attributes to the new element.
      */
     fun <T : Number> inputRange(
@@ -1575,7 +1575,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
      * @param dir the left-to-right direction of text inside this element.
      * @param disabled whether this field is disabled for user interaction.
      * @param form the ID of the form this field is part of.
-     * @param formaction the form action to be triggered by the button.
+     * @param formaction the URL to use for form submission.
      * @param formenctype the encoding type to be used for form data submitted by this button.
      * @param formmethod the choice of GET or POST for submitting the form's data.
      * @param formnovalidate true to skip form field validation when this button is clicked.
@@ -1649,7 +1649,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
      * @param tabindex the tab index for the element.
      * @param title a tool tip for the element.
      * @param translate whether to translate text within this element.
-     * @param the value of this field.
+     * @param value the value of this field.
      * @param defineAttributes a DSL-style lambda that adds any nonstandard attributes to the new element.
      */
     fun inputTelephone(
@@ -1775,10 +1775,10 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
      * @param max the maximum value for the field.
      * @param min the minimum value for the field.
      * @param name the name of this field for form submissions.
-     * @param pattern a regular expression for validating this field.
      * @param readonly true if the field is displayed but may not be edited by a user.
      * @param required true if the filed must have a value for the form to validate.
      * @param spellcheck whether the element is subject to spell checking.
+     * @param step the number of seconds to increment or decrement the time with a stepping UI.
      * @param style a string containing CSS for this element.
      * @param tabindex the tab index for the element.
      * @param title a tool tip for the element.
@@ -2089,19 +2089,26 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     }
 
     /**
-     * Adds a meter element with its attributes as the next child of the element under construction.
+     * Adds a meter element with its attributes as the next child of the element under construction. Meter readings
+     * are floating point numbers
      * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
      * @param key a non-DOM key for this KatyDOM element that is unique among all the siblings of this element.
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
      * @param hidden true if the element is to be hidden.
+     * @param high the highest recorded reading for the meter.
      * @param lang the language of text within this element.
+     * @param low the lowest recorded reading for the meter.
+     * @param max the maximum of the meter's range.
+     * @param min the minimum of the meter's range.
+     * @param optimum the optimum reading for the measured value.
      * @param spellcheck whether the element is subject to spell checking.
      * @param style a string containing CSS for this element.
      * @param tabindex the tab index for the element.
      * @param title a tool tip for the element.
      * @param translate whether to translate text within this element.
+     * @param value the current value of the meter.
      * @param defineContent a DSL-style lambda that builds the child nodes of the new element.
      */
     fun meter(
@@ -2111,18 +2118,68 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         hidden: Boolean? = null,
-        high: String? = null,
+        high: Double? = null,
         lang: String? = null,
-        low: String? = null,
-        max: String? = null,
-        min: String? = null,
-        optimum: String? = null,
+        low: Double? = null,
+        max: Double? = null,
+        min: Double? = null,
+        optimum: Double? = null,
         spellcheck: Boolean? = null,
         style: String? = null,
         tabindex: Int? = null,
         title: String? = null,
         translate: Boolean? = null,
-        value: String? = null,
+        value: Double,
+        defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatyDomMeter(this, selector, key, accesskey, contenteditable, dir, hidden, high, lang,
+                         low, max, min, optimum, spellcheck, style, tabindex, title, translate, value, defineContent)
+        )
+    }
+
+    /**
+     * Adds a meter element with its attributes as the next child of the element under construction. Meter readings
+     * are integers.
+     * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
+     * @param key a non-DOM key for this KatyDOM element that is unique among all the siblings of this element.
+     * @param accesskey a string specifying the HTML accesskey value.
+     * @param contenteditable whether the element has editable content.
+     * @param dir the left-to-right direction of text inside this element.
+     * @param hidden true if the element is to be hidden.
+     * @param high the highest recorded reading for the meter.
+     * @param lang the language of text within this element.
+     * @param low the lowest recorded reading for the meter.
+     * @param max the maximum of the meter's range.
+     * @param min the minimum of the meter's range.
+     * @param optimum the optimum reading for the measured value.
+     * @param spellcheck whether the element is subject to spell checking.
+     * @param style a string containing CSS for this element.
+     * @param tabindex the tab index for the element.
+     * @param title a tool tip for the element.
+     * @param translate whether to translate text within this element.
+     * @param value the current value of the meter.
+     * @param defineContent a DSL-style lambda that builds the child nodes of the new element.
+     */
+    fun meter(
+        selector: String? = null,
+        key: Any? = null,
+        accesskey: Char? = null,
+        contenteditable: Boolean? = null,
+        dir: EDirection? = null,
+        hidden: Boolean? = null,
+        high: Int? = null,
+        lang: String? = null,
+        low: Int? = null,
+        max: Int,
+        min: Int? = null,
+        optimum: Int? = null,
+        spellcheck: Boolean? = null,
+        style: String? = null,
+        tabindex: Int? = null,
+        title: String? = null,
+        translate: Boolean? = null,
+        value: Int,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
