@@ -10,7 +10,7 @@ package o.org.katydom.builders
 /**
  * Set of restrictions on content. E.g. a header cannot contain a header or footer; a form cannot be nested.
  */
-class KatyDomContentRestrictions(
+internal class KatyDomContentRestrictions(
     private val anchorAllowed: Boolean,
     private var figCaptionProhibited: Boolean,
     private val footerAllowed: Boolean,

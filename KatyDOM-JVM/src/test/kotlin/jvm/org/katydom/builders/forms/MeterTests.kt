@@ -14,7 +14,7 @@ import org.junit.jupiter.api.assertThrows
 class MeterTests {
 
     @Test
-    fun `A meter with floating point numbers element produces correct HTML`() {
+    fun `A meter element with floating point attributes produces correct HTML`() {
 
         val vdomNode = katyDom<Unit> {
 
@@ -42,7 +42,7 @@ class MeterTests {
     }
 
     @Test
-    fun `A meter with integers element produces correct HTML`() {
+    fun `A meter element with integer attributes produces correct HTML`() {
 
         val vdomNode = katyDom<Unit> {
 
@@ -77,9 +77,7 @@ class MeterTests {
             katyDom<Unit> {
 
                 meter(value = 0.5) {
-
                     meter(value = 0.2) {}
-
                 }
 
             }
@@ -91,22 +89,18 @@ class MeterTests {
     @Test
     fun `A meter's range must be well-defined`() {
 
-        assertThrows<IllegalStateException> {
+        assertThrows<IllegalArgumentException> {
 
             katyDom<Unit> {
-
                 meter(value = 5, min = 10, max = 0) {}
-
             }
 
         }
 
-        assertThrows<IllegalStateException> {
+        assertThrows<IllegalArgumentException> {
 
             katyDom<Unit> {
-
                 meter(value = 0.5, min = 1.0, max = 0.0) {}
-
             }
 
         }
@@ -116,42 +110,34 @@ class MeterTests {
     @Test
     fun `A meter's attributes must be in its default range`() {
 
-        assertThrows<IllegalStateException> {
+        assertThrows<IllegalArgumentException> {
 
             katyDom<Unit> {
-
                 meter(value = 1.1) {}
-
             }
 
         }
 
-        assertThrows<IllegalStateException> {
+        assertThrows<IllegalArgumentException> {
 
             katyDom<Unit> {
-
                 meter(high = 1.1, value = 0.5) {}
-
             }
 
         }
 
-        assertThrows<IllegalStateException> {
+        assertThrows<IllegalArgumentException> {
 
             katyDom<Unit> {
-
                 meter(low = -0.1, value = 0.5) {}
-
             }
 
         }
 
-        assertThrows<IllegalStateException> {
+        assertThrows<IllegalArgumentException> {
 
             katyDom<Unit> {
-
                 meter(optimum = 1.1, value = 0.5) {}
-
             }
 
         }
@@ -161,42 +147,34 @@ class MeterTests {
     @Test
     fun `A meter's attributes must be in range`() {
 
-        assertThrows<IllegalStateException> {
+        assertThrows<IllegalArgumentException> {
 
             katyDom<Unit> {
-
                 meter(min = 0, max = 100, value = 110) {}
-
             }
 
         }
 
-        assertThrows<IllegalStateException> {
+        assertThrows<IllegalArgumentException> {
 
             katyDom<Unit> {
-
                 meter(min = 0, max = 100, high = 110, value = 50) {}
-
             }
 
         }
 
-        assertThrows<IllegalStateException> {
+        assertThrows<IllegalArgumentException> {
 
             katyDom<Unit> {
-
                 meter(min = 0, max = 100, low = -10, value = 50) {}
-
             }
 
         }
 
-        assertThrows<IllegalStateException> {
+        assertThrows<IllegalArgumentException> {
 
             katyDom<Unit> {
-
                 meter(min = 0, max = 100, optimum = 110, value = 50) {}
-
             }
 
         }

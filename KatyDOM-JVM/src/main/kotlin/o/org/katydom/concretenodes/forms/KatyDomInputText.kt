@@ -51,9 +51,10 @@ internal class KatyDomInputText<Msg>(
     init {
         phrasingContent.contentRestrictions.confirmInteractiveContentAllowed()
 
-        require(maxlength == null || maxlength >= 0) { "Attribute maxlength must be non-negative." }
-        require(minlength == null || minlength >= 0) { "Attribute minlength must be non-negative." }
-        require(size == null || size >= 0) { "Attribute size must be non-negative." }
+        require(maxlength == null || maxlength >= 0) { "Input attribute maxlength must be non-negative." }
+        require(minlength == null || minlength >= 0) { "Input attribute minlength must be non-negative." }
+        require(minlength == null || maxlength == null || minlength <= maxlength) { "Input attribute minlength must be less than maxlength." }
+        require(size == null || size >= 0) { "Input attribute size must be non-negative." }
 
         setAttribute("autocomplete", autocomplete)
         setBooleanAttribute("autofocus", autofocus)

@@ -45,12 +45,12 @@ internal class KatyDomMeter<Msg> : KatyDomHtmlElement<Msg> {
         val maximum = max ?: 1.0
         val minimum = min ?: 0.0
 
-        check( minimum < maximum ) { "Meter max must be greater than min." }
+        require( minimum < maximum ) { "Meter max must be greater than min." }
 
         fun checkInRange(value:Double?, attributeName:String) {
             if ( value != null ) {
-                check(minimum <= value) { "Meter $attributeName is smaller than minimum." }
-                check(value <= maximum) { "Meter $attributeName is greater than maximum." }
+                require(minimum <= value) { "Meter $attributeName is smaller than minimum." }
+                require(value <= maximum) { "Meter $attributeName is greater than maximum." }
             }
         }
 
@@ -98,12 +98,12 @@ internal class KatyDomMeter<Msg> : KatyDomHtmlElement<Msg> {
 
         val minimum = min ?: 0
 
-        check( minimum < max ) { "Meter max must be greater than min." }
+        require( minimum < max ) { "Meter max must be greater than min." }
 
         fun checkInRange(value:Int?, attributeName:String) {
             if ( value != null ) {
-                check(minimum <= value) { "Meter $attributeName is smaller than minimum." }
-                check(value <= max) { "Meter $attributeName is greater than maximum." }
+                require(minimum <= value) { "Meter $attributeName is smaller than minimum." }
+                require(value <= max) { "Meter $attributeName is greater than maximum." }
             }
         }
 

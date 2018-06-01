@@ -1240,7 +1240,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
      * @param value the value of the field.
      * @param defineAttributes a DSL-style lambda that adds any nonstandard attributes to the new element.
      */
-    fun <T : Number> inputNumber(
+    fun inputNumber(
         selector: String? = null,
         key: Any? = null,
         accesskey: Char? = null,
@@ -1253,19 +1253,19 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         hidden: Boolean? = null,
         lang: String? = null,
         list: String? = null,
-        max: T? = null,
-        min: T? = null,
+        max: Double? = null,
+        min: Double? = null,
         name: String? = null,
         placeholder: String? = null,
         readonly: Boolean? = null,
         required: Boolean? = null,
         spellcheck: Boolean? = null,
-        step: String? = null,
+        step: Double? = null,
         style: String? = null,
         tabindex: Int? = null,
         title: String? = null,
         translate: Boolean? = null,
-        value: T? = null,
+        value: Double? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
@@ -1274,6 +1274,73 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
                                readonly, required, spellcheck, step, style, tabindex, title, translate,
                                value, defineAttributes)
         )
+
+    }
+
+    /**
+     * Adds an `<input type="number">` element with given attributes as the next child of the element under construction.
+     * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
+     * @param key a non-DOM key for this KatyDOM element that is unique among all the siblings of this element.
+     * @param accesskey a string specifying the HTML accesskey value.
+     * @param autocomplete a hint describing the value that can be prefilled into this field by a browser.
+     * @param autofocus true if the field is to automatically receive keyboard focus.
+     * @param contenteditable whether the element has editable content.
+     * @param dir the left-to-right direction of text inside this element.
+     * @param disabled whether this field is disabled for user interaction.
+     * @param form the ID of the form this field is part of.
+     * @param hidden true if the element is to be hidden.
+     * @param lang the language of text within this element.
+     * @param list a list of values to pick from.
+     * @param max the largest number allowed to be chosen.
+     * @param min the smallest number allowed to be chosen.
+     * @param name the name of this field for form submissions.
+     * @param placeholder text to show in the field when it has no user-entered value.
+     * @param readonly true if the field is displayed but not editable by the user.
+     * @param required true if the field may not be left blank in a valid form submission.
+     * @param spellcheck whether the element is subject to spell checking.
+     * @param step the increment or decrement to apply to the value when editing it in steps.
+     * @param style a string containing CSS for this element.
+     * @param tabindex the tab index for the element.
+     * @param title a tool tip for the element.
+     * @param translate whether to translate text within this element.
+     * @param value the value of the field.
+     * @param defineAttributes a DSL-style lambda that adds any nonstandard attributes to the new element.
+     */
+    fun inputNumber(
+        selector: String? = null,
+        key: Any? = null,
+        accesskey: Char? = null,
+        autocomplete: String? = null,
+        autofocus: Boolean? = null,
+        contenteditable: Boolean? = null,
+        dir: EDirection? = null,
+        disabled: Boolean? = null,
+        form: String? = null,
+        hidden: Boolean? = null,
+        lang: String? = null,
+        list: String? = null,
+        max: Int? = null,
+        min: Int? = null,
+        name: String? = null,
+        placeholder: String? = null,
+        readonly: Boolean? = null,
+        required: Boolean? = null,
+        spellcheck: Boolean? = null,
+        step: Int? = null,
+        style: String? = null,
+        tabindex: Int? = null,
+        title: String? = null,
+        translate: Boolean? = null,
+        value: Int? = null,
+        defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatyDomInputNumber(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
+                               disabled, form, hidden, lang, list, max, min, name, placeholder,
+                               readonly, required, spellcheck, step, style, tabindex, title, translate,
+                               value, defineAttributes)
+        )
+
     }
 
     /**
@@ -2264,13 +2331,54 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         dir: EDirection? = null,
         hidden: Boolean? = null,
         lang: String? = null,
-        max: String? = null,
+        max: Double? = null,
         spellcheck: Boolean? = null,
         style: String? = null,
         tabindex: Int? = null,
         title: String? = null,
         translate: Boolean? = null,
-        value: String? = null,
+        value: Double? = null,
+        defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatyDomProgress(this, selector, key, accesskey, contenteditable, dir, hidden, lang, max,
+                            spellcheck, style, tabindex, title, translate, value, defineContent)
+        )
+    }
+
+    /**
+     * Adds a `<progress>` element with its attributes as the next child of the element under construction.
+     * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
+     * @param key a non-DOM key for this KatyDOM element that is unique among all the siblings of this element.
+     * @param accesskey a string specifying the HTML accesskey value.
+     * @param contenteditable whether the element has editable content.
+     * @param dir the left-to-right direction of text inside this element.
+     * @param hidden true if the element is to be hidden.
+     * @param lang the language of text within this element.
+     * @param max the upper limit for the progress value.
+     * @param spellcheck whether the element is subject to spell checking.
+     * @param style a string containing CSS for this element.
+     * @param tabindex the tab index for the element.
+     * @param title a tool tip for the element.
+     * @param translate whether to translate text within this element.
+     * @param value the current degree of progress.
+     * @param defineContent a DSL-style lambda that builds the child nodes of the new element.
+     */
+    fun progress(
+        selector: String? = null,
+        key: Any? = null,
+        accesskey: Char? = null,
+        contenteditable: Boolean? = null,
+        dir: EDirection? = null,
+        hidden: Boolean? = null,
+        lang: String? = null,
+        max: Int,
+        spellcheck: Boolean? = null,
+        style: String? = null,
+        tabindex: Int? = null,
+        title: String? = null,
+        translate: Boolean? = null,
+        value: Int? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(

@@ -14,31 +14,75 @@ import o.org.katydom.types.EDirection
 /**
  * Virtual node for a progress element.
  */
-internal class KatyDomProgress<Msg>(
-    phrasingContent: KatyDomPhrasingContentBuilder<Msg>,
-    selector: String?,
-    key: Any?,
-    accesskey: Char?,
-    contenteditable: Boolean?,
-    dir: EDirection?,
-    hidden: Boolean?,
-    lang: String?,
-    max: String?,
-    spellcheck: Boolean?,
-    style: String?,
-    tabindex: Int?,
-    title: String?,
-    translate: Boolean?,
-    value: String?,
-    defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-) : KatyDomHtmlElement<Msg>(selector, key, accesskey, contenteditable, dir,
-                            hidden, lang, spellcheck, style, tabindex, title, translate) {
+internal class KatyDomProgress<Msg> : KatyDomHtmlElement<Msg> {
 
-    init {
+    constructor(
+        phrasingContent: KatyDomPhrasingContentBuilder<Msg>,
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        contenteditable: Boolean?,
+        dir: EDirection?,
+        hidden: Boolean?,
+        lang: String?,
+        max: Double?,
+        spellcheck: Boolean?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        value: Double?,
+        defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
+    ) : super(selector, key, accesskey, contenteditable, dir,
+              hidden, lang, spellcheck, style, tabindex, title, translate) {
+
         phrasingContent.contentRestrictions.confirmProgressAllowed()
 
-        setAttribute("max", max)
-        setAttribute("value", value)
+        val maximum = max ?: 1.0
+
+        require( maximum > 0 ) { "Progress max must be greater than zero." }
+        if ( value != null ) {
+            require(0 <= value) { "Progress value is smaller than zero." }
+            require(value <= maximum) { "Progress value is greater than maximum." }
+        }
+
+        setNumberAttribute("max", max)
+        setNumberAttribute("value", value)
+
+        phrasingContent.withProgressNotAllowed(this).defineContent()
+        this.freeze()
+    }
+
+    constructor(
+        phrasingContent: KatyDomPhrasingContentBuilder<Msg>,
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        contenteditable: Boolean?,
+        dir: EDirection?,
+        hidden: Boolean?,
+        lang: String?,
+        max: Int,
+        spellcheck: Boolean?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        value: Int?,
+        defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
+    ) : super(selector, key, accesskey, contenteditable, dir,
+              hidden, lang, spellcheck, style, tabindex, title, translate) {
+
+        phrasingContent.contentRestrictions.confirmProgressAllowed()
+
+        require( max > 0 ) { "Progress max must be greater than zero." }
+        if ( value != null ) {
+            require(0 <= value) { "Progress value is smaller than zero." }
+            require(value <= max) { "Progress value is greater than maximum." }
+        }
+
+        setNumberAttribute("max", max)
+        setNumberAttribute("value", value)
 
         phrasingContent.withProgressNotAllowed(this).defineContent()
         this.freeze()
