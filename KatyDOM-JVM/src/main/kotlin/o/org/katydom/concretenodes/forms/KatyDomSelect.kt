@@ -45,7 +45,7 @@ internal class KatyDomSelect<Msg>(
     init {
         phrasingContent.contentRestrictions.confirmInteractiveContentAllowed()
 
-        require(size == null || size >= 0) { "Attribute size must be non-negative." }
+        require(size == null || size > 0) { "Attribute size must be greater than zero." }
 
         setAttribute("autocomplete", autocomplete)
         setBooleanAttribute("autofocus", autofocus)

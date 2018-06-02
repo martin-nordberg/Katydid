@@ -54,6 +54,7 @@ internal class KatyDomTextArea<Msg>(
         require(cols == null || cols > 0) { "Attribute cols must be greater than zero." }
         require(maxlength == null || maxlength >= 0) { "Attribute maxlength must be non-negative." }
         require(minlength == null || minlength >= 0) { "Attribute minlength must be non-negative." }
+        require(minlength == null || maxlength == null || minlength <= maxlength) { "Input attribute minlength must be less than maxlength." }
         require(rows == null || rows > 0) { "Attribute rows must be greater than zero." }
 
         setAttribute("autocomplete", autocomplete)
