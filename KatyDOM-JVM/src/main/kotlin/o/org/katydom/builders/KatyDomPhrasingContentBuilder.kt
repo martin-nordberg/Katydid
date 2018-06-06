@@ -6,6 +6,9 @@
 package o.org.katydom.builders
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
+import o.org.katydom.builders.details.KatyDomOptGroupContentBuilder
+import o.org.katydom.builders.details.KatyDomSelectContentBuilder
+import o.org.katydom.builders.details.KatyDomTextContentBuilder
 import o.org.katydom.concretenodes.edits.KatyDomDel
 import o.org.katydom.concretenodes.edits.KatyDomIns
 import o.org.katydom.concretenodes.forms.*

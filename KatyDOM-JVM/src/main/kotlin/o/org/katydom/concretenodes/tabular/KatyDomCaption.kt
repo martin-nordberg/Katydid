@@ -7,7 +7,7 @@ package o.org.katydom.concretenodes.tabular
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomFlowContentBuilder
-import o.org.katydom.builders.KatyDomTableContentBuilder
+import o.org.katydom.builders.details.KatyDomTableContentBuilder
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------

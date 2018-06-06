@@ -3,9 +3,12 @@
 // Apache 2.0 License
 //
 
-package o.org.katydom.builders
+package o.org.katydom.builders.details
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
+import o.org.katydom.builders.KatyDomAttributesContentBuilder
+import o.org.katydom.builders.KatyDomContentRestrictions
+import o.org.katydom.builders.KatyDomFlowContentBuilder
 import o.org.katydom.concretenodes.tabular.*
 import o.org.katydom.concretenodes.text.KatyDomComment
 import o.org.katydom.types.EDirection

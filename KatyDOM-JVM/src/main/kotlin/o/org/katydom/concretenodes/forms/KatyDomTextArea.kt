@@ -7,7 +7,7 @@ package o.org.katydom.concretenodes.forms
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomPhrasingContentBuilder
-import o.org.katydom.builders.KatyDomTextContentBuilder
+import o.org.katydom.builders.details.KatyDomTextContentBuilder
 import o.org.katydom.types.EDirection
 import o.org.katydom.types.EWrapType
 

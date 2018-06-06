@@ -7,7 +7,7 @@ package o.org.katydom.concretenodes.grouping
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomFlowContentBuilder
-import o.org.katydom.builders.KatyDomOrderedListContentBuilder
+import o.org.katydom.builders.details.KatyDomOrderedListContentBuilder
 import o.org.katydom.types.EDirection
 import o.org.katydom.types.EOrderedListType
 

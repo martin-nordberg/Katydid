@@ -6,8 +6,8 @@
 package o.org.katydom.concretenodes.forms
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.KatyDomOptGroupContentBuilder
-import o.org.katydom.builders.KatyDomSelectContentBuilder
+import o.org.katydom.builders.details.KatyDomOptGroupContentBuilder
+import o.org.katydom.builders.details.KatyDomSelectContentBuilder
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------

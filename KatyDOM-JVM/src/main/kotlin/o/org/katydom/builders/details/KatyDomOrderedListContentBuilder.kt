@@ -3,17 +3,19 @@
 // Apache 2.0 License
 //
 
-package o.org.katydom.builders
+package o.org.katydom.builders.details
 
+import o.org.katydom.builders.KatyDomAttributesContentBuilder
+import o.org.katydom.builders.KatyDomFlowContentBuilder
 import o.org.katydom.concretenodes.grouping.KatyDomLi
-import o.org.katydom.concretenodes.grouping.KatyDomUl
+import o.org.katydom.concretenodes.grouping.KatyDomOl
 import o.org.katydom.concretenodes.text.KatyDomComment
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Builder DSL to create the contents of an unordered list (an `<ol>` element).
+ * Builder DSL to create the contents of an ordered list (an `<ol>` element).
  *
  * @constructor Constructs a new builder for the contents of an ordered or unordered list.
  * @param flowContent The parent flow content with restrictions that can be resumed for the content inside each
@@ -21,9 +23,9 @@ import o.org.katydom.types.EDirection
  * @param element the element whose content is being built.
  * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
-class KatyDomUnorderedListContentBuilder<Msg> internal constructor(
+class KatyDomOrderedListContentBuilder<Msg> internal constructor(
     internal val flowContent: KatyDomFlowContentBuilder<Msg>,
-    element: KatyDomUl<Msg>,
+    element: KatyDomOl<Msg>,
     dispatchMessages: (messages: Iterable<Msg>) -> Unit
 ) : KatyDomAttributesContentBuilder<Msg>(element, dispatchMessages) {
 
@@ -51,6 +53,7 @@ class KatyDomUnorderedListContentBuilder<Msg> internal constructor(
      * @param tabindex the tab index for the element.
      * @param title a tool tip for the element.
      * @param translate whether to translate text within this element.
+     * @param value the value attribute for the list item (its ordinal number in the list).
      * @param defineContent a DSL-style lambda that builds the child nodes of the new element.
      */
     fun li(
@@ -66,11 +69,12 @@ class KatyDomUnorderedListContentBuilder<Msg> internal constructor(
         tabindex: Int? = null,
         title: String? = null,
         translate: Boolean? = null,
+        value: Int? = null,
         defineContent: KatyDomFlowContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
             KatyDomLi(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                      tabindex, title, translate, defineContent)
+                      tabindex, title, translate, value, defineContent)
         )
     }
 

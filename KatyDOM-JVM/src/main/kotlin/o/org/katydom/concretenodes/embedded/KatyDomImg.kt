@@ -8,7 +8,6 @@ package o.org.katydom.concretenodes.embedded
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomAttributesContentBuilder
 import o.org.katydom.builders.KatyDomEmbeddedContentBuilder
-import o.org.katydom.builders.KatyDomFlowContentBuilder
 import o.org.katydom.types.ECorsSetting
 import o.org.katydom.types.EDirection
 import o.org.katydom.types.EReferrerPolicy
