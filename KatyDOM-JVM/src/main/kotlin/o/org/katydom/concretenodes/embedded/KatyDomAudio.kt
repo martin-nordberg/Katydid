@@ -1,0 +1,68 @@
+//
+// (C) Copyright 2017-2018 Martin E. Nordberg III
+// Apache 2.0 License
+//
+
+package o.org.katydom.concretenodes.embedded
+
+import o.org.katydom.abstractnodes.KatyDomHtmlElement
+import o.org.katydom.builders.KatyDomAttributesContentBuilder
+import o.org.katydom.builders.KatyDomEmbeddedContentBuilder
+import o.org.katydom.types.ECorsSetting
+import o.org.katydom.types.EDirection
+import o.org.katydom.types.EPreloadHint
+
+//---------------------------------------------------------------------------------------------------------------------
+
+/**
+ * Virtual node for an `<audio>` element.
+ */
+internal class KatyDomAudio<Msg>(
+    embeddedContent: KatyDomEmbeddedContentBuilder<Msg>,
+    selector: String?,
+    key: Any?,
+    accesskey: Char?,
+    autoplay: Boolean?,
+    contenteditable: Boolean?,
+    controls: Boolean?,
+    crossorigin: ECorsSetting?,
+    dir: EDirection?,
+    hidden: Boolean?,
+    lang: String?,
+    loop: Boolean?,
+    muted: Boolean?,
+    preload: EPreloadHint?,
+    spellcheck: Boolean?,
+    src: String?,
+    style: String?,
+    tabindex: Int?,
+    title: String?,
+    translate: Boolean?,
+    defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
+) : KatyDomHtmlElement<Msg>(selector, key, accesskey, contenteditable, dir,
+                            hidden, lang, spellcheck, style, tabindex, title, translate) {
+
+    init {
+
+        setBooleanAttribute( "autoplay", autoplay )
+        setBooleanAttribute( "controls", controls )
+        setAttribute("crossorigin", crossorigin?.toHtmlString())
+        setBooleanAttribute( "loop", loop )
+        setBooleanAttribute( "muted", muted )
+        setAttribute("preload", preload?.toHtmlString())
+        setAttribute("src", src)
+
+        // TODO: <source> then <track> then transparent w/o media
+        embeddedContent.attributesContent(this).defineAttributes()
+        this.freeze()
+    }
+
+    ////
+
+    override val nodeName = "AUDIO"
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+
+
