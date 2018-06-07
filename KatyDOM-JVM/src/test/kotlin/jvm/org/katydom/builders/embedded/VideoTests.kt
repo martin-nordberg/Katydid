@@ -9,7 +9,10 @@ import jvm.org.katydom.api.checkBuild
 import o.org.katydom.api.katyDom
 import o.org.katydom.types.ECorsSetting
 import o.org.katydom.types.EPreloadHint
+import o.org.katydom.types.ETrackKind
+import o.org.katydom.types.MimeType
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 @Suppress("RemoveRedundantBackticks")
 class VideoTests {
@@ -38,6 +41,100 @@ class VideoTests {
         val html = """<video autoplay="" class="annoying" controls="" crossorigin="anonymous" height="120" id="myvideo" loop="" muted="" poster="http://poster/path" preload="auto" src="http://someurl/path" width="99"></video>"""
 
         checkBuild(html, vdomNode)
+
+    }
+
+    @Test
+    fun `A video element with nested elements produces correct HTML`() {
+
+        val vdomNode = katyDom<Unit> {
+
+            video {
+
+                source(
+                    media = "mediastuff",
+                    sizes = "some sizes",
+                    src = "http://somewhere/audiopath",
+                    srcset = "sources",
+                    type = MimeType("video", "jpeg")
+                ) {}
+
+                track(
+                    default = true,
+                    kind = ETrackKind.SUBTITLES,
+                    label = "My Track",
+                    src = "http://somewhere/videotrack",
+                    srclang = "EN"
+                ) {}
+
+            }
+
+        }
+
+        val html = """<video>
+                     |  <source media="mediastuff" sizes="some sizes" src="http://somewhere/audiopath" srcset="sources" type="video/jpeg">
+                     |  <track default="" kind="subtitles" label="My Track" src="http://somewhere/videotrack" srclang="EN">
+                     |</video>""".trimMargin()
+
+        checkBuild(html, vdomNode)
+
+    }
+
+    @Test
+    fun `A media element may not be nested inside a video element`() {
+
+        assertThrows<IllegalStateException> {
+
+            katyDom<Unit> {
+                video {
+                    audio {}
+                }
+            }
+
+        }
+
+        assertThrows<IllegalStateException> {
+
+            katyDom<Unit> {
+                video {
+                    video {}
+                }
+            }
+
+        }
+
+    }
+
+    @Test
+    fun `A video element with src attribute may not contain source elements`() {
+
+        assertThrows<IllegalStateException> {
+
+            katyDom<Unit> {
+                video(src = "http://url") {
+                    source(src = "http://url2") {}
+                }
+            }
+
+        }
+
+    }
+
+    @Test
+    fun `A video element must have its source elements before any track elements`() {
+
+        assertThrows<IllegalStateException> {
+
+            katyDom<Unit> {
+
+                video(src = "http://url") {
+                    track(src="http://trackurl") {}
+                    source(src = "http://url2") {}
+                }
+
+            }
+
+        }
 
     }
 

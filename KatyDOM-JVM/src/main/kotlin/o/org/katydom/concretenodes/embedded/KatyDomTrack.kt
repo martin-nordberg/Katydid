@@ -6,60 +6,55 @@
 package o.org.katydom.concretenodes.embedded
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.KatyDomEmbeddedContentBuilder
+import o.org.katydom.builders.KatyDomAttributesContentBuilder
 import o.org.katydom.builders.media.KatyDomMediaFlowContentBuilder
-import o.org.katydom.types.ECorsSetting
 import o.org.katydom.types.EDirection
-import o.org.katydom.types.EPreloadHint
+import o.org.katydom.types.ETrackKind
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Virtual node for an `<audio>` element.
+ * Virtual node for a `<track>` element.
  */
-internal class KatyDomAudio<Msg>(
-    embeddedContent: KatyDomEmbeddedContentBuilder<Msg>,
+internal class KatyDomTrack<Msg>(
+    mediaContent: KatyDomMediaFlowContentBuilder<Msg>,
     selector: String?,
     key: Any?,
     accesskey: Char?,
-    autoplay: Boolean?,
     contenteditable: Boolean?,
-    controls: Boolean?,
-    crossorigin: ECorsSetting?,
+    default: Boolean?,
     dir: EDirection?,
     hidden: Boolean?,
+    kind: ETrackKind?,
+    label: String?,
     lang: String?,
-    loop: Boolean?,
-    muted: Boolean?,
-    preload: EPreloadHint?,
     spellcheck: Boolean?,
-    src: String?,
+    src: String,
+    srclang: String?,
     style: String?,
     tabindex: Int?,
     title: String?,
     translate: Boolean?,
-    defineContent: KatyDomMediaFlowContentBuilder<Msg>.() -> Unit
+    defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
 ) : KatyDomHtmlElement<Msg>(selector, key, accesskey, contenteditable, dir,
                             hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {
-        embeddedContent.contentRestrictions.confirmMediaElementAllowed()
+        mediaContent.mediaContentRestrictions.confirmTrackAllowed()
 
-        setBooleanAttribute( "autoplay", autoplay )
-        setBooleanAttribute( "controls", controls )
-        setAttribute("crossorigin", crossorigin?.toHtmlString())
-        setBooleanAttribute( "loop", loop )
-        setBooleanAttribute( "muted", muted )
-        setAttribute("preload", preload?.toHtmlString())
+        setBooleanAttribute("default", default)
+        setAttribute("kind", kind?.toHtmlString())
+        setAttribute("label", label)
         setAttribute("src", src)
+        setAttribute("srclang", srclang)
 
-        embeddedContent.mediaFlowContent(this, src==null).defineContent()
+        mediaContent.attributesContent(this).defineAttributes()
         this.freeze()
     }
 
     ////
 
-    override val nodeName = "AUDIO"
+    override val nodeName = "TRACK"
 
 }
 

@@ -8,7 +8,7 @@ package o.org.katydom.builders.details
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Set of restrictions on content. E.g. a header cannot contain a header or footer; a form cannot be nested.
+ * Set of restrictions on table content. Enforces the sub-elements of a `<table>` to occur in the correct order.
  */
 class KatyDomTableContentRestrictions internal constructor(
 ) {

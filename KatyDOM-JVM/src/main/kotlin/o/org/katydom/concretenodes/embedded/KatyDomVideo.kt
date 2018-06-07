@@ -6,8 +6,8 @@
 package o.org.katydom.concretenodes.embedded
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.KatyDomAttributesContentBuilder
 import o.org.katydom.builders.KatyDomEmbeddedContentBuilder
+import o.org.katydom.builders.media.KatyDomMediaFlowContentBuilder
 import o.org.katydom.types.ECorsSetting
 import o.org.katydom.types.EDirection
 import o.org.katydom.types.EPreloadHint
@@ -41,11 +41,12 @@ internal class KatyDomVideo<Msg>(
     title: String?,
     translate: Boolean?,
     width: Int?,
-    defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
+    defineContent: KatyDomMediaFlowContentBuilder<Msg>.() -> Unit
 ) : KatyDomHtmlElement<Msg>(selector, key, accesskey, contenteditable, dir,
                             hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {
+        embeddedContent.contentRestrictions.confirmMediaElementAllowed()
 
         setBooleanAttribute( "autoplay", autoplay )
         setBooleanAttribute( "controls", controls )
@@ -58,8 +59,7 @@ internal class KatyDomVideo<Msg>(
         setAttribute("src", src)
         setNumberAttribute("width", width)
 
-        // TODO: <source> then <track> then transparent w/o media
-        embeddedContent.attributesContent(this).defineAttributes()
+        embeddedContent.mediaFlowContent(this, src==null).defineContent()
         this.freeze()
     }
 

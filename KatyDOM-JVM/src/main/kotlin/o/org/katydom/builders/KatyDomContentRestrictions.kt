@@ -20,6 +20,7 @@ internal class KatyDomContentRestrictions(
     private val labelAllowed: Boolean,
     private var legendProhibited: Boolean,
     private val mainAllowed: Boolean,
+    private val mediaElementAllowed: Boolean,
     private val meterAllowed: Boolean,
     private val progressAllowed: Boolean,
     private val tableAllowed: Boolean
@@ -30,6 +31,7 @@ internal class KatyDomContentRestrictions(
      */
     constructor()
         : this(
+        true,
         true,
         true,
         true,
@@ -59,6 +61,7 @@ internal class KatyDomContentRestrictions(
         labelAllowed: Boolean = true,
         legendProhibited: Boolean = false,
         mainAllowed: Boolean = true,
+        mediaElementAllowed: Boolean = true,
         meterAllowed: Boolean = true,
         progressAllowed: Boolean = true,
         tableAllowed: Boolean = true
@@ -72,6 +75,7 @@ internal class KatyDomContentRestrictions(
         original.labelAllowed && labelAllowed,
         original.legendProhibited && legendProhibited,
         original.mainAllowed && mainAllowed,
+        original.mediaElementAllowed && mediaElementAllowed,
         original.meterAllowed && meterAllowed,
         original.progressAllowed && progressAllowed,
         original.tableAllowed && tableAllowed
@@ -154,6 +158,14 @@ internal class KatyDomContentRestrictions(
      */
     fun confirmMainAllowed() {
         check(mainAllowed) { "Element type <main> not allowed here." }
+    }
+
+    /**
+     * Checks that an `<audio>` or `<video>` element is allowed in the content.
+     * @throws IllegalStateException if media is not allowed.
+     */
+    fun confirmMediaElementAllowed() {
+        check(mediaElementAllowed) { "Media element not allowed here." }
     }
 
     /**
@@ -253,6 +265,13 @@ internal class KatyDomContentRestrictions(
      */
     fun withMainNotAllowed(): KatyDomContentRestrictions {
         return KatyDomContentRestrictions(this, mainAllowed = false)
+    }
+
+    /**
+     * Clones this content restriction object but with `<audio>` and `<video>` elements disallowed.
+     */
+    fun withMediaElementNotAllowed(): KatyDomContentRestrictions {
+        return KatyDomContentRestrictions(this, mediaElementAllowed = false)
     }
 
     /**

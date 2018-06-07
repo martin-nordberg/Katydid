@@ -30,9 +30,9 @@ import x.org.katydom.types.KatyTime
 @Suppress("unused")
 open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     element: KatyDomHtmlElement<Msg>,
-    internal val contentRestrictions: KatyDomContentRestrictions,
+    contentRestrictions: KatyDomContentRestrictions,
     dispatchMessages: (messages: Iterable<Msg>) -> Unit
-) : KatyDomEmbeddedContentBuilder<Msg>(element, dispatchMessages) {
+) : KatyDomEmbeddedContentBuilder<Msg>(element, contentRestrictions, dispatchMessages) {
 
     /**
      * Adds an `<a>` element with its attributes as the next child of the element under construction.

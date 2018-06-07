@@ -6,6 +6,8 @@
 package o.org.katydom.builders
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
+import o.org.katydom.builders.media.KatyDomMediaContentRestrictions
+import o.org.katydom.builders.media.KatyDomMediaFlowContentBuilder
 import o.org.katydom.concretenodes.embedded.KatyDomAudio
 import o.org.katydom.concretenodes.embedded.KatyDomImg
 import o.org.katydom.concretenodes.embedded.KatyDomVideo
@@ -26,6 +28,7 @@ import o.org.katydom.types.EReferrerPolicy
 @Suppress("unused")
 open class KatyDomEmbeddedContentBuilder<Msg> internal constructor(
     element: KatyDomHtmlElement<Msg>,
+    internal val contentRestrictions: KatyDomContentRestrictions,
     dispatchMessages: (messages: Iterable<Msg>) -> Unit
 ) : KatyDomAttributesContentBuilder<Msg>(element, dispatchMessages) {
 
@@ -57,7 +60,7 @@ open class KatyDomEmbeddedContentBuilder<Msg> internal constructor(
      * @param tabindex the tab index for the element.
      * @param title a tool tip for the element.
      * @param translate whether to translate text within this element.
-     * @param defineAttributes a DSL-style lambda that builds any custom attributes of the new element.
+     * @param defineContent a DSL-style lambda that builds child elements of the new element.
      */
     fun audio(
         selector: String? = null,
@@ -79,12 +82,12 @@ open class KatyDomEmbeddedContentBuilder<Msg> internal constructor(
         tabindex: Int? = null,
         title: String? = null,
         translate: Boolean? = null,
-        defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
+        defineContent: KatyDomMediaFlowContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
             KatyDomAudio(this, selector, key, accesskey, autoplay, contenteditable, controls,
                          crossorigin, dir, hidden, lang, loop, muted, preload, spellcheck, src, style,
-                         tabindex, title, translate, defineAttributes)
+                         tabindex, title, translate, defineContent)
         )
     }
 
@@ -147,6 +150,18 @@ open class KatyDomEmbeddedContentBuilder<Msg> internal constructor(
     }
 
     /**
+     * Creates a new media content builder for the given child [element].
+     */
+    internal fun mediaFlowContent(element: KatyDomHtmlElement<Msg>, sourceAllowed: Boolean): KatyDomMediaFlowContentBuilder<Msg> {
+        return KatyDomMediaFlowContentBuilder(
+            element,
+            contentRestrictions.withMediaElementNotAllowed(),
+            KatyDomMediaContentRestrictions(sourceAllowed),
+            dispatchMessages
+        )
+    }
+
+    /**
      * Adds a `<video>` element with its attributes as the next child of the element under construction.
      * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
      * @param key a non-DOM key for this KatyDOM element that is unique among all the siblings of this element.
@@ -170,7 +185,7 @@ open class KatyDomEmbeddedContentBuilder<Msg> internal constructor(
      * @param title a tool tip for the element.
      * @param translate whether to translate text within this element.
      * @param width horizontal dimension.
-     * @param defineAttributes a DSL-style lambda that builds any custom attributes of the new element.
+     * @param defineContent a DSL-style lambda that builds any custom attributes of the new element.
      */
     fun video(
         selector: String? = null,
@@ -195,12 +210,12 @@ open class KatyDomEmbeddedContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         width: Int? = null,
-        defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
+        defineContent: KatyDomMediaFlowContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
             KatyDomVideo(this, selector, key, accesskey, autoplay, contenteditable, controls,
                          crossorigin, dir, height, hidden, lang, loop, muted, poster, preload, spellcheck, src, style,
-                         tabindex, title, translate, width, defineAttributes)
+                         tabindex, title, translate, width, defineContent)
         )
     }
 

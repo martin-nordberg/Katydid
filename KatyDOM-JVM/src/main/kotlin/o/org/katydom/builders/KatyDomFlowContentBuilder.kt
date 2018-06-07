@@ -31,7 +31,7 @@ import o.org.katydom.types.EOrderedListType
  * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
 @Suppress("unused")
-class KatyDomFlowContentBuilder<Msg> internal constructor(
+open class KatyDomFlowContentBuilder<Msg> internal constructor(
     element: KatyDomHtmlElement<Msg>,
     contentRestrictions: KatyDomContentRestrictions,
     dispatchMessages: (messages: Iterable<Msg>) -> Unit
