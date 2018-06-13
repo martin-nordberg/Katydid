@@ -8,8 +8,11 @@ package o.org.katydom.builders
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.builders.media.KatyDomMediaContentRestrictions
 import o.org.katydom.builders.media.KatyDomMediaFlowContentBuilder
+import o.org.katydom.builders.media.KatyDomPictureContentBuilder
+import o.org.katydom.builders.media.KatyDomPictureContentRestrictions
 import o.org.katydom.concretenodes.embedded.KatyDomAudio
 import o.org.katydom.concretenodes.embedded.KatyDomImg
+import o.org.katydom.concretenodes.embedded.KatyDomPicture
 import o.org.katydom.concretenodes.embedded.KatyDomVideo
 import o.org.katydom.types.ECorsSetting
 import o.org.katydom.types.EDirection
@@ -158,6 +161,55 @@ open class KatyDomEmbeddedContentBuilder<Msg> internal constructor(
             contentRestrictions.withMediaElementNotAllowed(),
             KatyDomMediaContentRestrictions(sourceAllowed),
             dispatchMessages
+        )
+    }
+
+    /**
+     * Creates a new media content builder for the given child [element].
+     */
+    internal fun pictureContent(element: KatyDomPicture<Msg>): KatyDomPictureContentBuilder<Msg> {
+        return KatyDomPictureContentBuilder(
+            element,
+            KatyDomPictureContentRestrictions(),
+            dispatchMessages
+        )
+    }
+
+    /**
+     * Adds a `<picture>` element with its attributes as the next child of the element under construction.
+     * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
+     * @param key a non-DOM key for this KatyDOM element that is unique among all the siblings of this element.
+     * @param accesskey a string specifying the HTML accesskey value.
+     * @param contenteditable whether the element has editable content.
+     * @param dir the left-to-right direction of text inside this element.
+     * @param hidden true if the element is to be hidden.
+     * @param lang the language of text within this element.
+     * @param spellcheck whether the element is subject to spell checking.
+     * @param style a string containing CSS for this element.
+     * @param tabindex the tab index for the element.
+     * @param title a tool tip for the element.
+     * @param translate whether to translate text within this element.
+     * @param defineContent a DSL-style lambda that builds any custom attributes of the new element.
+     */
+    fun picture(
+        selector: String? = null,
+        key: Any? = null,
+        accesskey: Char? = null,
+        contenteditable: Boolean? = null,
+        dir: EDirection? = null,
+        hidden: Boolean? = null,
+        lang: String? = null,
+        spellcheck: Boolean? = null,
+        style: String? = null,
+        tabindex: Int? = null,
+        title: String? = null,
+        translate: Boolean? = null,
+        defineContent: KatyDomPictureContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatyDomPicture(this, selector, key, accesskey, contenteditable,
+                         dir, hidden, lang, spellcheck, style,
+                         tabindex, title, translate, defineContent)
         )
     }
 

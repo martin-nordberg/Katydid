@@ -6,9 +6,9 @@
 package o.org.katydom.concretenodes.tabular
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.details.KatyDomTableBodyContentBuilder
-import o.org.katydom.builders.details.KatyDomTableContentBuilder
-import o.org.katydom.builders.details.KatyDomTableRowContentBuilder
+import o.org.katydom.builders.tables.KatyDomTableBodyContentBuilder
+import o.org.katydom.builders.tables.KatyDomTableContentBuilder
+import o.org.katydom.builders.tables.KatyDomTableRowContentBuilder
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------

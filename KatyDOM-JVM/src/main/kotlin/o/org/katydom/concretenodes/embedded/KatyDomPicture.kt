@@ -3,21 +3,23 @@
 // Apache 2.0 License
 //
 
-package o.org.katydom.concretenodes.grouping
+package o.org.katydom.concretenodes.embedded
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.KatyDomFlowContentBuilder
-import o.org.katydom.builders.lists.KatyDomOrderedListContentBuilder
+import o.org.katydom.builders.KatyDomEmbeddedContentBuilder
+import o.org.katydom.builders.media.KatyDomMediaFlowContentBuilder
+import o.org.katydom.builders.media.KatyDomPictureContentBuilder
+import o.org.katydom.types.ECorsSetting
 import o.org.katydom.types.EDirection
-import o.org.katydom.types.EOrderedListType
+import o.org.katydom.types.EPreloadHint
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Virtual node for an ordered list <ol> element.
+ * Virtual node for a `<picture>` element.
  */
-internal class KatyDomOl<Msg>(
-    flowContent: KatyDomFlowContentBuilder<Msg>,
+internal class KatyDomPicture<Msg>(
+    embeddedContent: KatyDomEmbeddedContentBuilder<Msg>,
     selector: String?,
     key: Any?,
     accesskey: Char?,
@@ -25,32 +27,28 @@ internal class KatyDomOl<Msg>(
     dir: EDirection?,
     hidden: Boolean?,
     lang: String?,
-    reversed: Boolean?,
     spellcheck: Boolean?,
-    start: Int?,
     style: String?,
     tabindex: Int?,
     title: String?,
     translate: Boolean?,
-    type: EOrderedListType?,
-    defineContent: KatyDomOrderedListContentBuilder<Msg>.() -> Unit
+    defineContent: KatyDomPictureContentBuilder<Msg>.() -> Unit
 ) : KatyDomHtmlElement<Msg>(selector, key, accesskey, contenteditable, dir,
                             hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {
-        setBooleanAttribute("reversed", reversed)
-        setNumberAttribute("start", start)
-        setAttribute("type", type?.toHtmlString())
+        embeddedContent.contentRestrictions.confirmMediaElementAllowed()
 
-        flowContent.listContent(this).defineContent()
+        embeddedContent.pictureContent(this).defineContent()
         this.freeze()
     }
 
     ////
 
-    override val nodeName = "OL"
+    override val nodeName = "PICTURE"
 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+
 

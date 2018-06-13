@@ -1,31 +1,30 @@
 //
-// (C) Copyright 2017-2018 Martin E. Nordberg III
+// (C) Copyright 2018 Martin E. Nordberg III
 // Apache 2.0 License
 //
 
-package o.org.katydom.builders.details
+package o.org.katydom.builders.tables
 
+import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomAttributesContentBuilder
-import o.org.katydom.builders.KatyDomFlowContentBuilder
-import o.org.katydom.concretenodes.grouping.KatyDomLi
-import o.org.katydom.concretenodes.grouping.KatyDomOl
+import o.org.katydom.builders.KatyDomContentRestrictions
+import o.org.katydom.concretenodes.tabular.KatyDomTr
 import o.org.katydom.concretenodes.text.KatyDomComment
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Builder DSL to create the contents of an ordered list (an `<ol>` element).
+ * Builder DSL to create the contents of a table's thead, tbody, or tfoot element.
  *
- * @constructor Constructs a new builder for the contents of an ordered or unordered list.
- * @param flowContent The parent flow content with restrictions that can be resumed for the content inside each
- *                    `<li>` element produced by this builder.
+ * @constructor Constructs a new builder for the contents of a `<thead>`, `<tbody>`, or `<tfoot>` element.
  * @param element the element whose content is being built.
+ * @param contentRestrictions restrictions on content enforced at run time.
  * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
-class KatyDomOrderedListContentBuilder<Msg> internal constructor(
-    internal val flowContent: KatyDomFlowContentBuilder<Msg>,
-    element: KatyDomOl<Msg>,
+class KatyDomTableBodyContentBuilder<Msg> internal constructor(
+    element: KatyDomHtmlElement<Msg>,
+    internal val contentRestrictions: KatyDomContentRestrictions = KatyDomContentRestrictions(),
     dispatchMessages: (messages: Iterable<Msg>) -> Unit
 ) : KatyDomAttributesContentBuilder<Msg>(element, dispatchMessages) {
 
@@ -40,7 +39,19 @@ class KatyDomOrderedListContentBuilder<Msg> internal constructor(
     }
 
     /**
-     * Adds an `<li>` element with given attributes as the next child of the element under construction.
+     * Creates a new table row content builder for the given child [element] that has the same restrictions
+     * as this builder.
+     */
+    internal fun tableRowContent(element: KatyDomTr<Msg>): KatyDomTableRowContentBuilder<Msg> {
+        return KatyDomTableRowContentBuilder(
+            element,
+            contentRestrictions,
+            dispatchMessages
+        )
+    }
+
+    /**
+     * Adds a `<tr>` element with given attributes as the next child of the element under construction.
      * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
      * @param key a non-DOM key for this KatyDOM element that is unique among all the siblings of this element.
      * @param accesskey a string specifying the HTML accesskey value.
@@ -53,10 +64,9 @@ class KatyDomOrderedListContentBuilder<Msg> internal constructor(
      * @param tabindex the tab index for the element.
      * @param title a tool tip for the element.
      * @param translate whether to translate text within this element.
-     * @param value the value attribute for the list item (its ordinal number in the list).
      * @param defineContent a DSL-style lambda that builds the child nodes of the new element.
      */
-    fun li(
+    fun tr(
         selector: String? = null,
         key: Any? = null,
         accesskey: Char? = null,
@@ -69,12 +79,11 @@ class KatyDomOrderedListContentBuilder<Msg> internal constructor(
         tabindex: Int? = null,
         title: String? = null,
         translate: Boolean? = null,
-        value: Int? = null,
-        defineContent: KatyDomFlowContentBuilder<Msg>.() -> Unit
+        defineContent: KatyDomTableRowContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatyDomLi(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                      tabindex, title, translate, value, defineContent)
+            KatyDomTr(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
+                      tabindex, title, translate, defineContent)
         )
     }
 

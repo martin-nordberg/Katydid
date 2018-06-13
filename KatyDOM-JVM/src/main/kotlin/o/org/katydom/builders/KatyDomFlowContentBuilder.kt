@@ -6,9 +6,9 @@
 package o.org.katydom.builders
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.details.KatyDomOrderedListContentBuilder
-import o.org.katydom.builders.details.KatyDomTableContentBuilder
-import o.org.katydom.builders.details.KatyDomUnorderedListContentBuilder
+import o.org.katydom.builders.lists.KatyDomOrderedListContentBuilder
+import o.org.katydom.builders.tables.KatyDomTableContentBuilder
+import o.org.katydom.builders.lists.KatyDomUnorderedListContentBuilder
 import o.org.katydom.concretenodes.forms.KatyDomFieldSet
 import o.org.katydom.concretenodes.forms.KatyDomForm
 import o.org.katydom.concretenodes.forms.KatyDomLegend
