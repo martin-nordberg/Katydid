@@ -7,45 +7,50 @@ package o.org.katydom.concretenodes.embedded
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomEmbeddedContentBuilder
-import o.org.katydom.builders.media.KatyDomMediaFlowContentBuilder
-import o.org.katydom.builders.media.KatyDomPictureContentBuilder
-import o.org.katydom.types.ECorsSetting
+import o.org.katydom.builders.details.KatyDomTextContentBuilder
 import o.org.katydom.types.EDirection
-import o.org.katydom.types.EPreloadHint
+import o.org.katydom.types.MimeType
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Virtual node for a `<picture>` element.
+ * Virtual node for an `<embed>` element.
  */
-internal class KatyDomPicture<Msg>(
+internal class KatyDomEmbed<Msg>(
     embeddedContent: KatyDomEmbeddedContentBuilder<Msg>,
     selector: String?,
     key: Any?,
     accesskey: Char?,
     contenteditable: Boolean?,
     dir: EDirection?,
+    height: Int?,
     hidden: Boolean?,
     lang: String?,
     spellcheck: Boolean?,
+    src: String,
     style: String?,
     tabindex: Int?,
     title: String?,
     translate: Boolean?,
-    defineContent: KatyDomPictureContentBuilder<Msg>.() -> Unit
-) : KatyDomHtmlElement<Msg>(selector, key, accesskey, contenteditable, dir,
-                            hidden, lang, spellcheck, style, tabindex, title, translate) {
+    type: MimeType?,
+    width: Int?,
+    defineContent: KatyDomTextContentBuilder<Msg>.() -> Unit
+) : KatyDomHtmlElement<Msg>(selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
+                            tabindex, title, translate) {
 
     init {
-        embeddedContent.contentRestrictions.confirmMediaElementAllowed()
+        setNumberAttribute("height", height)
+        setAttribute("src", src)
+        setAttribute("type", type?.toString())
+        setNumberAttribute("width", width)
 
-        embeddedContent.pictureContent(this).defineContent()
+        embeddedContent.textContent(this).defineContent()
         this.freeze()
     }
 
     ////
 
-    override val nodeName = "PICTURE"
+    override val nodeName = "EMBED"
 
 }
 

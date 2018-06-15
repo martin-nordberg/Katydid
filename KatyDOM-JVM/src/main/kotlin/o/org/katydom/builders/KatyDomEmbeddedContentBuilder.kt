@@ -90,6 +90,52 @@ open class KatyDomEmbeddedContentBuilder<Msg> internal constructor(
     }
 
     /**
+     * Adds an `<embed>` element with its attributes as the next child of the element under construction.
+     * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
+     * @param key a non-DOM key for this KatyDOM element that is unique among all the siblings of this element.
+     * @param accesskey a string specifying the HTML accesskey value.
+     * @param contenteditable whether the element has editable content.
+     * @param dir the left-to-right direction of text inside this element.
+     * @param height vertical dimension.
+     * @param hidden true if the element is to be hidden.
+     * @param lang the language of text within this element.
+     * @param spellcheck whether the element is subject to spell checking.
+     * @param src address of the resource.
+     * @param srcdoc text of a document to render in the iframe.
+     * @param style a string containing CSS for this element.
+     * @param tabindex the tab index for the element.
+     * @param title a tool tip for the element.
+     * @param translate whether to translate text within this element.
+     * @param type the MIME type of the embedded content.
+     * @param width horizontal dimension.
+     * @param defineContent a DSL-style lambda that builds any custom attributes or nested text of the new element.
+     */
+    fun embed(
+        selector: String? = null,
+        key: Any? = null,
+        accesskey: Char? = null,
+        contenteditable: Boolean? = null,
+        dir: EDirection? = null,
+        height: Int? = null,
+        hidden: Boolean? = null,
+        lang: String? = null,
+        spellcheck: Boolean? = null,
+        src: String,
+        style: String? = null,
+        tabindex: Int? = null,
+        title: String? = null,
+        translate: Boolean? = null,
+        type: MimeType? = null,
+        width: Int? = null,
+        defineContent: KatyDomTextContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatyDomEmbed(this, selector, key, accesskey, contenteditable, dir, height, hidden,
+                         lang, spellcheck, src, style, tabindex, title, translate, type, width, defineContent)
+        )
+    }
+
+    /**
      * Adds an `<iframe>` element with its attributes as the next child of the element under construction.
      * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
      * @param key a non-DOM key for this KatyDOM element that is unique among all the siblings of this element.
