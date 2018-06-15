@@ -34,8 +34,8 @@ enum class EReferrerPolicy {
     /** The "strict-origin-when-cross-origin" attribute value. */
     STRICT_ORIGIN_WHEN_CROSS_ORIGIN,
 
-    /** The "unsage_url" attribute value. */
-    UNSAGE_URL;
+    /** The "unsafe_url" attribute value. */
+    UNSAFE_URL;
 
     /** @return the HTML attribute text for this direction. */
     fun toHtmlString(): String {
@@ -47,7 +47,7 @@ enum class EReferrerPolicy {
             SAME_ORIGIN                     -> "same-origin"
             STRICT_ORIGIN                   -> "strict-origin"
             STRICT_ORIGIN_WHEN_CROSS_ORIGIN -> "strict-origin-when-cross-origin"
-            UNSAGE_URL                      -> "unsage-url"
+            UNSAFE_URL                      -> "unsafe-url"
         }
     }
 

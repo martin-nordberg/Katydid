@@ -6,18 +6,13 @@
 package o.org.katydom.builders
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
+import o.org.katydom.builders.details.KatyDomTextContentBuilder
 import o.org.katydom.builders.media.KatyDomMediaContentRestrictions
 import o.org.katydom.builders.media.KatyDomMediaFlowContentBuilder
 import o.org.katydom.builders.media.KatyDomPictureContentBuilder
 import o.org.katydom.builders.media.KatyDomPictureContentRestrictions
-import o.org.katydom.concretenodes.embedded.KatyDomAudio
-import o.org.katydom.concretenodes.embedded.KatyDomImg
-import o.org.katydom.concretenodes.embedded.KatyDomPicture
-import o.org.katydom.concretenodes.embedded.KatyDomVideo
-import o.org.katydom.types.ECorsSetting
-import o.org.katydom.types.EDirection
-import o.org.katydom.types.EPreloadHint
-import o.org.katydom.types.EReferrerPolicy
+import o.org.katydom.concretenodes.embedded.*
+import o.org.katydom.types.*
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -91,6 +86,61 @@ open class KatyDomEmbeddedContentBuilder<Msg> internal constructor(
             KatyDomAudio(this, selector, key, accesskey, autoplay, contenteditable, controls,
                          crossorigin, dir, hidden, lang, loop, muted, preload, spellcheck, src, style,
                          tabindex, title, translate, defineContent)
+        )
+    }
+
+    /**
+     * Adds an `<iframe>` element with its attributes as the next child of the element under construction.
+     * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
+     * @param key a non-DOM key for this KatyDOM element that is unique among all the siblings of this element.
+     * @param accesskey a string specifying the HTML accesskey value.
+     * @param allowfullscreen whether to allow requestFullscreen()
+     * @param allowpaymentrequest whether to allow the PaymentRequest interface.
+     * @param contenteditable whether the element has editable content.
+     * @param dir the left-to-right direction of text inside this element.
+     * @param height vertical dimension.
+     * @param hidden true if the element is to be hidden.
+     * @param lang the language of text within this element.
+     * @param referrerpolicy referrer policy for fetches initiated by the element.
+     * @param sandbox restricts on content within the iframe.
+     * @param spellcheck whether the element is subject to spell checking.
+     * @param src address of the resource.
+     * @param srcdoc text of a document to render in the iframe.
+     * @param style a string containing CSS for this element.
+     * @param tabindex the tab index for the element.
+     * @param title a tool tip for the element.
+     * @param translate whether to translate text within this element.
+     * @param width horizontal dimension.
+     * @param defineContent a DSL-style lambda that builds any custom attributes or nested text of the new element.
+     */
+    fun iframe(
+        selector: String? = null,
+        key: Any? = null,
+        accesskey: Char? = null,
+        allowfullscreen: Boolean? = null,
+        allowpaymentrequest: Boolean? = null,
+        contenteditable: Boolean? = null,
+        dir: EDirection? = null,
+        height: Int? = null,
+        hidden: Boolean? = null,
+        lang: String? = null,
+        name: String? = null,
+        referrerpolicy: EReferrerPolicy? = null,
+        sandbox: List<ESandboxOptions>? = null,
+        spellcheck: Boolean? = null,
+        src: String,
+        srcdoc: String? = null,
+        style: String? = null,
+        tabindex: Int? = null,
+        title: String? = null,
+        translate: Boolean? = null,
+        width: Int? = null,
+        defineContent: KatyDomTextContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatyDomIframe(this, selector, key, accesskey, allowfullscreen, allowpaymentrequest,
+                          contenteditable, dir, height, hidden, lang, name, referrerpolicy, sandbox, spellcheck,
+                          src, srcdoc, style, tabindex, title, translate, width, defineContent)
         )
     }
 
@@ -211,6 +261,13 @@ open class KatyDomEmbeddedContentBuilder<Msg> internal constructor(
                          dir, hidden, lang, spellcheck, style,
                          tabindex, title, translate, defineContent)
         )
+    }
+
+    /**
+     * Creates a new text content builder for the given child [element].
+     */
+    internal fun textContent(element: KatyDomHtmlElement<Msg>): KatyDomTextContentBuilder<Msg> {
+        return KatyDomTextContentBuilder(element, dispatchMessages)
     }
 
     /**

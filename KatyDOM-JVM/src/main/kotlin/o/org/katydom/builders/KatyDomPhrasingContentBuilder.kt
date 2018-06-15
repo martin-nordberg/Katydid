@@ -2803,13 +2803,6 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
     }
 
     /**
-     * Creates a new text content builder for the given child [element].
-     */
-    internal fun textContent(element: KatyDomHtmlElement<Msg>): KatyDomTextContentBuilder<Msg> {
-        return KatyDomTextContentBuilder(element, dispatchMessages)
-    }
-
-    /**
      * Adds a `<time>` element with text content as the next child of the element under construction.
      * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
      * @param key a non-DOM key for this KatyDOM element that is unique among all the siblings of this element.
