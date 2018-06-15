@@ -6,12 +6,14 @@
 package o.org.katydom.builders
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.details.KatyDomTextContentBuilder
+import o.org.katydom.builders.details.KatyDomDetailsFlowContentBuilder
+import o.org.katydom.builders.miscellaneous.KatyDomTextContentBuilder
 import o.org.katydom.builders.media.KatyDomMediaContentRestrictions
 import o.org.katydom.builders.media.KatyDomMediaFlowContentBuilder
 import o.org.katydom.builders.media.KatyDomPictureContentBuilder
 import o.org.katydom.builders.media.KatyDomPictureContentRestrictions
 import o.org.katydom.concretenodes.embedded.*
+import o.org.katydom.concretenodes.interactive.KatyDomDetails
 import o.org.katydom.types.*
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -86,6 +88,17 @@ open class KatyDomEmbeddedContentBuilder<Msg> internal constructor(
             KatyDomAudio(this, selector, key, accesskey, autoplay, contenteditable, controls,
                          crossorigin, dir, hidden, lang, loop, muted, preload, spellcheck, src, style,
                          tabindex, title, translate, defineContent)
+        )
+    }
+
+    /**
+     * Creates a new details content builder for the given child [element].
+     */
+    internal fun detailsFlowContent(element: KatyDomDetails<Msg>): KatyDomDetailsFlowContentBuilder<Msg> {
+        return KatyDomDetailsFlowContentBuilder(
+            element,
+            contentRestrictions,
+            dispatchMessages
         )
     }
 

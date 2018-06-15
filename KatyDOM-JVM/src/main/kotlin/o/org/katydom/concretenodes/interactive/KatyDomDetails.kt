@@ -3,20 +3,20 @@
 // Apache 2.0 License
 //
 
-package o.org.katydom.concretenodes.forms
+package o.org.katydom.concretenodes.interactive
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.miscellaneous.KatyDomOptGroupContentBuilder
-import o.org.katydom.builders.KatyDomPhrasingContentBuilder
+import o.org.katydom.builders.KatyDomFlowContentBuilder
+import o.org.katydom.builders.details.KatyDomDetailsFlowContentBuilder
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Virtual node for a <datalist> element.
+ * Virtual node for a <details> element.
  */
-internal class KatyDomDataList<Msg>(
-    phrasingContent: KatyDomPhrasingContentBuilder<Msg>,
+internal class KatyDomDetails<Msg>(
+    flowContent: KatyDomFlowContentBuilder<Msg>,
     selector: String?,
     key: Any?,
     accesskey: Char?,
@@ -24,23 +24,26 @@ internal class KatyDomDataList<Msg>(
     dir: EDirection?,
     hidden: Boolean?,
     lang: String?,
+    open: Boolean?,
     spellcheck: Boolean?,
     style: String?,
     tabindex: Int?,
     title: String?,
     translate: Boolean?,
-    defineContent: KatyDomOptGroupContentBuilder<Msg>.() -> Unit
+    defineContent: KatyDomDetailsFlowContentBuilder<Msg>.() -> Unit
 ) : KatyDomHtmlElement<Msg>(selector, key, accesskey, contenteditable, dir,
                             hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {
-        phrasingContent.optGroupContent(this).defineContent()
+        setBooleanAttribute( "open", open)
+
+        flowContent.detailsFlowContent(this).defineContent()
         this.freeze()
     }
 
     ////
 
-    override val nodeName = "DATALIST"
+    override val nodeName = "DETAILS"
 
 }
 

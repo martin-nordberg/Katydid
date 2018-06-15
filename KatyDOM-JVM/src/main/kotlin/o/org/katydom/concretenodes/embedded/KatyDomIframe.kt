@@ -7,7 +7,7 @@ package o.org.katydom.concretenodes.embedded
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomEmbeddedContentBuilder
-import o.org.katydom.builders.details.KatyDomTextContentBuilder
+import o.org.katydom.builders.miscellaneous.KatyDomTextContentBuilder
 import o.org.katydom.types.EDirection
 import o.org.katydom.types.EReferrerPolicy
 import o.org.katydom.types.ESandboxOptions

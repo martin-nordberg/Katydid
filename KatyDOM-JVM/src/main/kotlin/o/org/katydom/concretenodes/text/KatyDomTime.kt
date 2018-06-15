@@ -7,7 +7,7 @@ package o.org.katydom.concretenodes.text
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomPhrasingContentBuilder
-import o.org.katydom.builders.details.KatyDomTextContentBuilder
+import o.org.katydom.builders.miscellaneous.KatyDomTextContentBuilder
 import o.org.katydom.types.EDirection
 import x.org.katydom.types.KatyDateTime
 

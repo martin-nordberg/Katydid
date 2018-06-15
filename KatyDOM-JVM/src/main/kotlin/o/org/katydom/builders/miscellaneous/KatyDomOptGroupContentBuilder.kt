@@ -3,7 +3,7 @@
 // Apache 2.0 License
 //
 
-package o.org.katydom.builders.details
+package o.org.katydom.builders.miscellaneous
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomAttributesContentBuilder
