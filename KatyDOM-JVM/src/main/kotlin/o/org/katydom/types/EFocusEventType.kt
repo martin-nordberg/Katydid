@@ -24,8 +24,8 @@ enum class EFocusEventType {
     val domName: String
         get() {
             return when (this) {
-                BLUR      -> "blur"
-                FOCUS     -> "focus"
+                BLUR  -> "blur"
+                FOCUS -> "focus"
             }
         }
 

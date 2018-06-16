@@ -6,17 +6,17 @@
 package o.org.katydom.types
 
 class MimeType(
-    val type : String,
+    val type: String,
     val subtype: String,
-    val parameters: Map<String,String> = mapOf()
+    val parameters: Map<String, String> = mapOf()
 ) {
 
     /** Converts this MIME type to its string equivalent. */
-    override fun toString() : String {
+    override fun toString(): String {
 
         var result = "$type/$subtype"
 
-        for ( (key,value) in parameters ) {
+        for ((key, value) in parameters) {
             result += "; $key=$value"
         }
 
@@ -29,7 +29,7 @@ class MimeType(
         /**
          * Parses a string into a MIME type.
          */
-        fun fromString(mimeType:String) : MimeType {
+        fun fromString(mimeType: String): MimeType {
 
             val slashSplit = mimeType.split("/")
 

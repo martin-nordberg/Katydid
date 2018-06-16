@@ -24,8 +24,8 @@ enum class EKeyboardEventType {
     val domName: String
         get() {
             return when (this) {
-                KEY_DOWN  -> "keydown"
-                KEY_UP    -> "keyup"
+                KEY_DOWN -> "keydown"
+                KEY_UP   -> "keyup"
             }
         }
 

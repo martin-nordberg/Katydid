@@ -5,30 +5,16 @@
 
 package o.org.katydom.builders.details
 
-import o.org.katydom.builders.KatyDomContentRestrictions
 import o.org.katydom.builders.KatyDomFlowContentBuilder
 import o.org.katydom.builders.KatyDomPhrasingContentBuilder
-import o.org.katydom.concretenodes.interactive.KatyDomDetails
-import o.org.katydom.concretenodes.interactive.KatyDomSummary
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
  * Builder DSL to create the contents of a details element.
- *
- * @constructor Constructs a new builder for the contents of a `<details>` element.
- * @param element the element whose content is being built.
- * @param contentRestrictions restrictions on content enforced at run time.
- * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
-class KatyDomDetailsFlowContentBuilder<Msg> internal constructor(
-    element: KatyDomDetails<Msg>,
-    contentRestrictions: KatyDomContentRestrictions = KatyDomContentRestrictions(),
-    dispatchMessages: (messages: Iterable<Msg>) -> Unit
-) : KatyDomFlowContentBuilder<Msg>(element, contentRestrictions, dispatchMessages) {
-
-    internal val detailsContentRestrictions: KatyDomDetailsContentRestrictions = KatyDomDetailsContentRestrictions()
+interface KatyDomDetailsFlowContentBuilder<Msg> : KatyDomFlowContentBuilder<Msg> {
 
     /**
      * Adds a `<source>` element with its attributes as the next child of the element under construction.
@@ -60,13 +46,7 @@ class KatyDomDetailsFlowContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomSummary(this, selector, key, accesskey, contenteditable, dir,
-                           hidden, lang, spellcheck, style,
-                           tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
 }
 

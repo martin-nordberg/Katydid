@@ -6,30 +6,14 @@
 package o.org.katydom.builders.tables
 
 import o.org.katydom.builders.KatyDomAttributesContentBuilder
-import o.org.katydom.concretenodes.tabular.KatyDomCol
-import o.org.katydom.concretenodes.tabular.KatyDomColGroup
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
  * Builder DSL to create the contents of a column group.
- *
- * @constructor Constructs a new builder for the contents of a `<colgroup>` element.
- * @param element the element whose content is being built.
- * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
-class KatyDomColGroupContentBuilder<Msg> internal constructor(
-    element: KatyDomColGroup<Msg>,
-    dispatchMessages: (messages: Iterable<Msg>) -> Unit
-) : KatyDomAttributesContentBuilder<Msg>(element, dispatchMessages) {
-
-    /**
-     * Creates a new attributes content builder for the given child [element].
-     */
-    internal fun attributesContent(element: KatyDomCol<Msg>): KatyDomAttributesContentBuilder<Msg> {
-        return KatyDomAttributesContentBuilder(element, dispatchMessages)
-    }
+interface KatyDomColGroupContentBuilder<Msg> : KatyDomAttributesContentBuilder<Msg> {
 
     /**
      * Adds a `<col>` element with given attributes as the next child of the element under construction.
@@ -62,12 +46,7 @@ class KatyDomColGroupContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit = {}
-    ) {
-        element.addChildNode(
-            KatyDomCol(this, selector, key, accesskey, contenteditable, dir, hidden,
-                       lang, span, spellcheck, style, tabindex, title, translate, defineAttributes)
-        )
-    }
+    )
 
 }
 

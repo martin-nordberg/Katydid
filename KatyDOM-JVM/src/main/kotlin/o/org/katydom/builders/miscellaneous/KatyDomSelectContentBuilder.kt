@@ -5,26 +5,14 @@
 
 package o.org.katydom.builders.miscellaneous
 
-import o.org.katydom.builders.KatyDomContentRestrictions
-import o.org.katydom.concretenodes.forms.KatyDomOptGroup
-import o.org.katydom.concretenodes.forms.KatyDomSelect
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
  * Builder DSL to create the contents of a `<select>` element.
- *
- * @constructor Constructs a new option content builder.
- * @param element the element whose content is being built.
- * @param contentRestrictions restrictions on content enforced at run time.
- * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
-class KatyDomSelectContentBuilder<Msg> internal constructor(
-    element: KatyDomSelect<Msg>,
-    contentRestrictions: KatyDomContentRestrictions,
-    dispatchMessages: (messages: Iterable<Msg>) -> Unit
-) : KatyDomOptGroupContentBuilder<Msg>(element, contentRestrictions, dispatchMessages) {
+interface KatyDomSelectContentBuilder<Msg> : KatyDomOptGroupContentBuilder<Msg> {
 
     /**
      * Adds an `<optgroup>` element with any global attributes as the next child of the element under construction.
@@ -62,25 +50,7 @@ class KatyDomSelectContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomOptGroupContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomOptGroup(this, selector, key, accesskey, contenteditable, dir, disabled,
-                            hidden, label, lang, name, spellcheck, style,
-                            tabindex, title, translate, defineContent)
-        )
-    }
-
-    /**
-     * Creates a new content builder for the given child [element] that has the same restrictions
-     * as this builder.
-     */
-    internal fun optGroupContent(element: KatyDomOptGroup<Msg>): KatyDomOptGroupContentBuilder<Msg> {
-        return KatyDomOptGroupContentBuilder(
-            element,
-            contentRestrictions,
-            dispatchMessages
-        )
-    }
+    )
 
 }
 

@@ -5,39 +5,18 @@
 
 package o.org.katydom.builders
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.details.KatyDomDetailsFlowContentBuilder
-import o.org.katydom.builders.miscellaneous.KatyDomTextContentBuilder
-import o.org.katydom.builders.media.KatyDomMediaContentRestrictions
 import o.org.katydom.builders.media.KatyDomMediaFlowContentBuilder
 import o.org.katydom.builders.media.KatyDomPictureContentBuilder
-import o.org.katydom.builders.media.KatyDomPictureContentRestrictions
-import o.org.katydom.concretenodes.embedded.*
-import o.org.katydom.concretenodes.interactive.KatyDomDetails
+import o.org.katydom.builders.miscellaneous.KatyDomTextContentBuilder
 import o.org.katydom.types.*
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
  * Virtual DOM builder for the case of HTML "embedded content".
- *
- * @constructor Constructs a new embedded content builder for the given [element].
- * @param element the element whose content is being built.
- * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
 @Suppress("unused")
-open class KatyDomEmbeddedContentBuilder<Msg> internal constructor(
-    element: KatyDomHtmlElement<Msg>,
-    internal val contentRestrictions: KatyDomContentRestrictions,
-    dispatchMessages: (messages: Iterable<Msg>) -> Unit
-) : KatyDomAttributesContentBuilder<Msg>(element, dispatchMessages) {
-
-    /**
-     * Creates a new attributes content builder for the given child [element].
-     */
-    internal fun attributesContent(element: KatyDomHtmlElement<Msg>): KatyDomAttributesContentBuilder<Msg> {
-        return KatyDomAttributesContentBuilder(element, dispatchMessages)
-    }
+interface KatyDomEmbeddedContentBuilder<Msg> : KatyDomAttributesContentBuilder<Msg> {
 
     /**
      * Adds an `<audio>` element with its attributes as the next child of the element under construction.
@@ -83,24 +62,7 @@ open class KatyDomEmbeddedContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomMediaFlowContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomAudio(this, selector, key, accesskey, autoplay, contenteditable, controls,
-                         crossorigin, dir, hidden, lang, loop, muted, preload, spellcheck, src, style,
-                         tabindex, title, translate, defineContent)
-        )
-    }
-
-    /**
-     * Creates a new details content builder for the given child [element].
-     */
-    internal fun detailsFlowContent(element: KatyDomDetails<Msg>): KatyDomDetailsFlowContentBuilder<Msg> {
-        return KatyDomDetailsFlowContentBuilder(
-            element,
-            contentRestrictions,
-            dispatchMessages
-        )
-    }
+    )
 
     /**
      * Adds an `<embed>` element with its attributes as the next child of the element under construction.
@@ -114,7 +76,6 @@ open class KatyDomEmbeddedContentBuilder<Msg> internal constructor(
      * @param lang the language of text within this element.
      * @param spellcheck whether the element is subject to spell checking.
      * @param src address of the resource.
-     * @param srcdoc text of a document to render in the iframe.
      * @param style a string containing CSS for this element.
      * @param tabindex the tab index for the element.
      * @param title a tool tip for the element.
@@ -141,12 +102,7 @@ open class KatyDomEmbeddedContentBuilder<Msg> internal constructor(
         type: MimeType? = null,
         width: Int? = null,
         defineContent: KatyDomTextContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomEmbed(this, selector, key, accesskey, contenteditable, dir, height, hidden,
-                         lang, spellcheck, src, style, tabindex, title, translate, type, width, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds an `<iframe>` element with its attributes as the next child of the element under construction.
@@ -195,13 +151,7 @@ open class KatyDomEmbeddedContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         width: Int? = null,
         defineContent: KatyDomTextContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomIframe(this, selector, key, accesskey, allowfullscreen, allowpaymentrequest,
-                          contenteditable, dir, height, hidden, lang, name, referrerpolicy, sandbox, spellcheck,
-                          src, srcdoc, style, tabindex, title, translate, width, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds an `<img>` element with its attributes as the next child of the element under construction.
@@ -253,36 +203,7 @@ open class KatyDomEmbeddedContentBuilder<Msg> internal constructor(
         usemap: String? = null,
         width: Int? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomImg(this, selector, key, accesskey, alt, contenteditable, crossorigin, dir, height,
-                       hidden, ismap, lang, referrerpolicy, sizes, spellcheck, src, srcset, style,
-                       tabindex, title, translate, usemap, width, defineAttributes)
-        )
-    }
-
-    /**
-     * Creates a new media content builder for the given child [element].
-     */
-    internal fun mediaFlowContent(element: KatyDomHtmlElement<Msg>, sourceAllowed: Boolean): KatyDomMediaFlowContentBuilder<Msg> {
-        return KatyDomMediaFlowContentBuilder(
-            element,
-            contentRestrictions.withMediaElementNotAllowed(),
-            KatyDomMediaContentRestrictions(sourceAllowed),
-            dispatchMessages
-        )
-    }
-
-    /**
-     * Creates a new media content builder for the given child [element].
-     */
-    internal fun pictureContent(element: KatyDomPicture<Msg>): KatyDomPictureContentBuilder<Msg> {
-        return KatyDomPictureContentBuilder(
-            element,
-            KatyDomPictureContentRestrictions(),
-            dispatchMessages
-        )
-    }
+    )
 
     /**
      * Adds a `<picture>` element with its attributes as the next child of the element under construction.
@@ -314,20 +235,7 @@ open class KatyDomEmbeddedContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPictureContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomPicture(this, selector, key, accesskey, contenteditable,
-                         dir, hidden, lang, spellcheck, style,
-                         tabindex, title, translate, defineContent)
-        )
-    }
-
-    /**
-     * Creates a new text content builder for the given child [element].
-     */
-    internal fun textContent(element: KatyDomHtmlElement<Msg>): KatyDomTextContentBuilder<Msg> {
-        return KatyDomTextContentBuilder(element, dispatchMessages)
-    }
+    )
 
     /**
      * Adds a `<video>` element with its attributes as the next child of the element under construction.
@@ -379,13 +287,7 @@ open class KatyDomEmbeddedContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         width: Int? = null,
         defineContent: KatyDomMediaFlowContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomVideo(this, selector, key, accesskey, autoplay, contenteditable, controls,
-                         crossorigin, dir, height, hidden, lang, loop, muted, poster, preload, spellcheck, src, style,
-                         tabindex, title, translate, width, defineContent)
-        )
-    }
+    )
 
 }
 

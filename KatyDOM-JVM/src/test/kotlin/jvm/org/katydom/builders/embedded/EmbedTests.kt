@@ -7,8 +7,6 @@ package jvm.org.katydom.builders.embedded
 
 import jvm.org.katydom.api.checkBuild
 import o.org.katydom.api.katyDom
-import o.org.katydom.types.EReferrerPolicy
-import o.org.katydom.types.ESandboxOptions
 import o.org.katydom.types.MimeType
 import org.junit.jupiter.api.Test
 

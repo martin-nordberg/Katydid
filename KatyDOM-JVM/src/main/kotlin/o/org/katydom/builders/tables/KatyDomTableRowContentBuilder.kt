@@ -5,14 +5,8 @@
 
 package o.org.katydom.builders.tables
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomAttributesContentBuilder
-import o.org.katydom.builders.KatyDomContentRestrictions
 import o.org.katydom.builders.KatyDomFlowContentBuilder
-import o.org.katydom.concretenodes.tabular.KatyDomTd
-import o.org.katydom.concretenodes.tabular.KatyDomTh
-import o.org.katydom.concretenodes.tabular.KatyDomTr
-import o.org.katydom.concretenodes.text.KatyDomComment
 import o.org.katydom.types.EDirection
 import o.org.katydom.types.EHeadingScope
 
@@ -20,39 +14,18 @@ import o.org.katydom.types.EHeadingScope
 
 /**
  * Builder DSL to create the contents of a table row.
- *
- * @constructor Constructs a new builder for the contents of a `<tr>` element.
- * @param element the element whose content is being built.
- * @param contentRestrictions restrictions on content enforced at run time.
- * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
-class KatyDomTableRowContentBuilder<Msg> internal constructor(
-    element: KatyDomTr<Msg>,
-    internal val contentRestrictions: KatyDomContentRestrictions = KatyDomContentRestrictions(),
-    dispatchMessages: (messages: Iterable<Msg>) -> Unit
-) : KatyDomAttributesContentBuilder<Msg>(element, dispatchMessages) {
+interface KatyDomTableRowContentBuilder<Msg> : KatyDomAttributesContentBuilder<Msg> {
 
     /**
      * Adds a comment node as the next child of the element under construction.
      * @param nodeValue the text within the node.
      * @param key unique key for this comment within its parent node.
      */
-    fun comment(nodeValue: String,
-                key: Any? = null) {
-        element.addChildNode(KatyDomComment(nodeValue, key))
-    }
-
-    /**
-     * Creates a new flow content builder for the given child [element] that has the same restrictions
-     * as this builder.
-     */
-    fun flowContent(element: KatyDomHtmlElement<Msg>): KatyDomFlowContentBuilder<Msg> {
-        return KatyDomFlowContentBuilder(
-            element,
-            contentRestrictions,
-            dispatchMessages
-        )
-    }
+    fun comment(
+        nodeValue: String,
+        key: Any? = null
+    )
 
     /**
      * Adds a `<td>` (table cell) element with given attributes as the next child of the element under construction.
@@ -90,12 +63,7 @@ class KatyDomTableRowContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomFlowContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomTd(this, selector, key, accesskey, colspan, contenteditable, dir, headers, hidden,
-                      lang, rowspan, spellcheck, style, tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a `<th>` (table heading cell) element with given attributes as the next child of the element under construction.
@@ -137,12 +105,7 @@ class KatyDomTableRowContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomFlowContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomTh(this, selector, key, abbr, accesskey, colspan, contenteditable, dir, headers, hidden,
-                      lang, rowspan, scope, spellcheck, style, tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
 }
 

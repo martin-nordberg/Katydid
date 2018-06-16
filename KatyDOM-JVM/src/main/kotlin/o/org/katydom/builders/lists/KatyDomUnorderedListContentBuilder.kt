@@ -7,37 +7,24 @@ package o.org.katydom.builders.lists
 
 import o.org.katydom.builders.KatyDomAttributesContentBuilder
 import o.org.katydom.builders.KatyDomFlowContentBuilder
-import o.org.katydom.concretenodes.grouping.KatyDomLi
-import o.org.katydom.concretenodes.grouping.KatyDomUl
-import o.org.katydom.concretenodes.text.KatyDomComment
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
  * Builder DSL to create the contents of an unordered list (an `<ol>` element).
- *
- * @constructor Constructs a new builder for the contents of an ordered or unordered list.
- * @param flowContent The parent flow content with restrictions that can be resumed for the content inside each
- *                    `<li>` element produced by this builder.
- * @param element the element whose content is being built.
- * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
-class KatyDomUnorderedListContentBuilder<Msg> internal constructor(
-    internal val flowContent: KatyDomFlowContentBuilder<Msg>,
-    element: KatyDomUl<Msg>,
-    dispatchMessages: (messages: Iterable<Msg>) -> Unit
-) : KatyDomAttributesContentBuilder<Msg>(element, dispatchMessages) {
+interface KatyDomUnorderedListContentBuilder<Msg> : KatyDomAttributesContentBuilder<Msg> {
 
     /**
      * Adds a comment node as the next child of the element under construction.
      * @param nodeValue the text within the node.
      * @param key unique key for this comment within its parent node.
      */
-    fun comment(nodeValue: String,
-                key: Any? = null) {
-        element.addChildNode(KatyDomComment(nodeValue, key))
-    }
+    fun comment(
+        nodeValue: String,
+        key: Any? = null
+    )
 
     /**
      * Adds an `<li>` element with given attributes as the next child of the element under construction.
@@ -69,14 +56,8 @@ class KatyDomUnorderedListContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomFlowContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomLi(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                      tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-

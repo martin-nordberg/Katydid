@@ -5,45 +5,25 @@
 
 package o.org.katydom.builders.miscellaneous
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomAttributesContentBuilder
-import o.org.katydom.builders.KatyDomContentRestrictions
-import o.org.katydom.concretenodes.forms.KatyDomOption
-import o.org.katydom.concretenodes.text.KatyDomComment
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
  * Builder DSL to create the contents of a `<optgroup>` or `<datalist>` element.
- *
- * @constructor Constructs a new option content builder.
- * @param element the element whose content is being built.
- * @param contentRestrictions restrictions on content enforced at run time.
- * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
-open class KatyDomOptGroupContentBuilder<Msg> internal constructor(
-    element: KatyDomHtmlElement<Msg>,
-    internal val contentRestrictions: KatyDomContentRestrictions,
-    dispatchMessages: (messages: Iterable<Msg>) -> Unit
-) : KatyDomAttributesContentBuilder<Msg>(element, dispatchMessages) {
-
-    /**
-     * Creates a new attributes content builder for the given child [element].
-     */
-    internal fun attributesContent(element: KatyDomHtmlElement<Msg>): KatyDomAttributesContentBuilder<Msg> {
-        return KatyDomAttributesContentBuilder(element, dispatchMessages)
-    }
+interface KatyDomOptGroupContentBuilder<Msg> : KatyDomAttributesContentBuilder<Msg> {
 
     /**
      * Adds a comment node as the next child of the element under construction.
      * @param nodeValue the text within the node.
      * @param key unique key for this comment within its parent node.
      */
-    fun comment(nodeValue: String,
-                key: Any? = null) {
-        element.addChildNode(KatyDomComment(nodeValue, key))
-    }
+    fun comment(
+        nodeValue: String,
+        key: Any? = null
+    )
 
     /**
      * Adds an `<option>` element with its attributes as the next child of the element under construction.
@@ -86,13 +66,7 @@ open class KatyDomOptGroupContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: String,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomOption(this, selector, key, accesskey, contenteditable, dir, disabled,
-                          hidden, label, lang, name, selected, spellcheck, style,
-                          tabindex, title, translate, value, defineAttributes)
-        )
-    }
+    )
 
     /**
      * Adds an `<option>` element with its attributes as the next child of the element under construction.
@@ -133,21 +107,7 @@ open class KatyDomOptGroupContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomTextContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomOption(this, selector, key, accesskey, contenteditable, dir, disabled,
-                          hidden, label, lang, name, selected, spellcheck, style,
-                          tabindex, title, translate, defineContent)
-        )
-    }
-
-    /**
-     * Creates a new text content builder for the given child [element].
-     */
-    internal fun textContent(element: KatyDomOption<Msg>): KatyDomTextContentBuilder<Msg> {
-        return KatyDomTextContentBuilder(element, dispatchMessages)
-    }
-
+    )
 
 }
 

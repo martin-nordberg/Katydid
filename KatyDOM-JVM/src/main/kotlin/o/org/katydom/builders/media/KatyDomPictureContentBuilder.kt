@@ -5,37 +5,18 @@
 
 package o.org.katydom.builders.media
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomAttributesContentBuilder
-import o.org.katydom.builders.KatyDomContentRestrictions
-import o.org.katydom.builders.KatyDomFlowContentBuilder
-import o.org.katydom.concretenodes.embedded.KatyDomImg
-import o.org.katydom.concretenodes.embedded.KatyDomPicture
-import o.org.katydom.concretenodes.embedded.KatyDomSource
-import o.org.katydom.concretenodes.embedded.KatyDomTrack
-import o.org.katydom.types.*
+import o.org.katydom.types.ECorsSetting
+import o.org.katydom.types.EDirection
+import o.org.katydom.types.EReferrerPolicy
+import o.org.katydom.types.MimeType
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
  * Builder DSL to create the contents of a picture element.
- *
- * @constructor Constructs a new builder for the contents of a `<picture>` element.
- * @param element the element whose content is being built.
- * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
-class KatyDomPictureContentBuilder<Msg> internal constructor(
-    element: KatyDomPicture<Msg>,
-    internal val pictureContentRestrictions: KatyDomPictureContentRestrictions = KatyDomPictureContentRestrictions(),
-    dispatchMessages: (messages: Iterable<Msg>) -> Unit
-) : KatyDomAttributesContentBuilder<Msg>(element, dispatchMessages) {
-
-    /**
-     * Creates a new attributes content builder for the given child [element].
-     */
-    internal fun attributesContent(element: KatyDomHtmlElement<Msg>): KatyDomAttributesContentBuilder<Msg> {
-        return KatyDomAttributesContentBuilder(element, dispatchMessages)
-    }
+interface KatyDomPictureContentBuilder<Msg> : KatyDomAttributesContentBuilder<Msg> {
 
     /**
      * Adds an `<img>` element with its attributes as the next child of the element under construction.
@@ -87,13 +68,7 @@ class KatyDomPictureContentBuilder<Msg> internal constructor(
         usemap: String? = null,
         width: Int? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomImg(this, selector, key, accesskey, alt, contenteditable, crossorigin, dir, height,
-                       hidden, ismap, lang, referrerpolicy, sizes, spellcheck, src, srcset, style,
-                       tabindex, title, translate, usemap, width, defineAttributes)
-        )
-    }
+    )
 
     /**
      * Adds a `<source>` element with its attributes as the next child of the element under construction.
@@ -135,13 +110,7 @@ class KatyDomPictureContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         type: MimeType? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomSource(this, selector, key, accesskey, contenteditable, dir,
-                          hidden, lang, media, sizes, spellcheck, src, srcset, style,
-                          tabindex, title, translate, type, defineAttributes)
-        )
-    }
+    )
 
 }
 

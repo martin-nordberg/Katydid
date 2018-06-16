@@ -7,11 +7,11 @@ package o.org.katydom.api
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomFlowContentBuilder
-import o.org.katydom.builders.lists.KatyDomOrderedListContentBuilder
 import o.org.katydom.builders.KatyDomPhrasingContentBuilder
+import o.org.katydom.builders.lists.KatyDomOrderedListContentBuilder
 import o.org.katydom.builders.lists.KatyDomUnorderedListContentBuilder
-import o.org.katydom.concretenodes.application.KatyDomAppPseudoNode
-import o.org.katydom.lifecycle.KatyDomLifecycleImpl
+import o.org.katydom.internal.concretenodes.application.KatyDomAppPseudoNode
+import o.org.katydom.internal.lifecycle.KatyDomLifecycleImpl
 
 //---------------------------------------------------------------------------------------------------------------------
 

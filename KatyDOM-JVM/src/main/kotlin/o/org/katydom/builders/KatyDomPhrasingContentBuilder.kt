@@ -5,14 +5,9 @@
 
 package o.org.katydom.builders
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.builders.miscellaneous.KatyDomOptGroupContentBuilder
 import o.org.katydom.builders.miscellaneous.KatyDomSelectContentBuilder
 import o.org.katydom.builders.miscellaneous.KatyDomTextContentBuilder
-import o.org.katydom.concretenodes.edits.KatyDomDel
-import o.org.katydom.concretenodes.edits.KatyDomIns
-import o.org.katydom.concretenodes.forms.*
-import o.org.katydom.concretenodes.text.*
 import o.org.katydom.types.*
 import x.org.katydom.types.KatyDateTime
 import x.org.katydom.types.KatyTime
@@ -28,11 +23,7 @@ import x.org.katydom.types.KatyTime
  * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
 @Suppress("unused")
-open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
-    element: KatyDomHtmlElement<Msg>,
-    contentRestrictions: KatyDomContentRestrictions,
-    dispatchMessages: (messages: Iterable<Msg>) -> Unit
-) : KatyDomEmbeddedContentBuilder<Msg>(element, contentRestrictions, dispatchMessages) {
+interface KatyDomPhrasingContentBuilder<Msg> : KatyDomEmbeddedContentBuilder<Msg> {
 
     /**
      * Adds an `<a>` element with its attributes as the next child of the element under construction.
@@ -78,12 +69,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         type: String? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomA(this, selector, key, accesskey, contenteditable, dir, download, hidden, href, hreflang, lang,
-                     rel, rev, spellcheck, style, tabindex, target, title, translate, type, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds an `<abbr>` element with its attributes as the next child of the element under construction.
@@ -115,12 +101,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomAbbr(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                        tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a `<b>` element with its attributes as the next child of the element under construction.
@@ -152,12 +133,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomB(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                     tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a `<bdi>` element with its attributes as the next child of the element under construction.
@@ -189,12 +165,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomBdi(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                       tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a `<bdo>` element with its attributes as the next child of the element under construction.
@@ -226,12 +197,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomBdo(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                       tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a `<br>` (line break) element as the next child of the element under construction.
@@ -263,13 +229,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomBr(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                      tabindex, title, translate, defineAttributes)
-
-        )
-    }
+    )
 
     /**
      * Adds a `<button>` element with given attributes as the next child of the element under construction.
@@ -323,13 +283,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         type: EButtonType? = EButtonType.BUTTON,
         value: String? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomButton(this, selector, key, accesskey, autofocus, contenteditable, dir, disabled, form, formaction,
-                          formenctype, formmethod, formnovalidate, formtarget, hidden, lang,
-                          name, spellcheck, style, tabindex, title, translate, type, value, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a `<cite>` element with its attributes as the next child of the element under construction.
@@ -361,12 +315,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomCite(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                        tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a `<code>` element with its attributes as the next child of the element under construction.
@@ -398,22 +347,17 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomCode(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                        tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a comment node as the next child of the element under construction.
      * @param nodeValue the text within the comment.
      * @param key unique key for this comment within its parent node.
      */
-    fun comment(nodeValue: String,
-                key: Any? = null) {
-        element.addChildNode(KatyDomComment(nodeValue, key))
-    }
+    fun comment(
+        nodeValue: String,
+        key: Any? = null
+    )
 
     /**
      * Adds a `<data>` element with its attributes as the next child of the element under construction.
@@ -447,12 +391,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: String,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomData(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                        tabindex, title, translate, value, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a `<datalist>` element with its attributes as the next child of the element under construction.
@@ -485,13 +424,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomOptGroupContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomDataList(this, selector, key, accesskey, contenteditable, dir,
-                            hidden, lang, spellcheck, style,
-                            tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a `<del>` element with its attributes as the next child of the element under construction.
@@ -527,12 +460,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomDel(this, selector, key, accesskey, cite, contenteditable, datetime, dir, hidden,
-                       lang, spellcheck, style, tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a `<dfn>` element with its attributes as the next child of the element under construction.
@@ -564,12 +492,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomDfn(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                       tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds an `<em>` element with its attributes as the next child of the element under construction.
@@ -601,12 +524,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomEm(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                      tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds an `<i>` element with its attributes as the next child of the element under construction.
@@ -638,12 +556,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomI(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                     tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds an `<input type="button">` element with given attributes as the next child of the element under construction.
@@ -683,12 +596,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: String? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomInputButton(this, selector, key, accesskey, contenteditable, dir, disabled, form, hidden, lang,
-                               name, spellcheck, style, tabindex, title, translate, value, defineAttributes)
-        )
-    }
+    )
 
     /**
      * Adds an `<input type="checkbox">` element with given attributes as the next child of the element under construction.
@@ -734,14 +642,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: String? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomInputCheckbox(this, selector, key, accesskey, autofocus, checked, contenteditable, dir,
-                                 disabled, form, hidden, lang, name, required,
-                                 spellcheck, style, tabindex, title, translate,
-                                 value, defineAttributes)
-        )
-    }
+    )
 
     /**
      * Adds an `<input type="color">` element with given attributes as the next child of the element under construction.
@@ -787,14 +688,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: String? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomInputColor(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                              disabled, form, hidden, lang, list, name,
-                              spellcheck, style, tabindex, title, translate,
-                              value, defineAttributes)
-        )
-    }
+    )
 
     /**
      * Adds an `<input type="date">` element with given attributes as the next child of the element under construction.
@@ -850,14 +744,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: String? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomInputDate(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                             disabled, form, hidden, lang, list, max, min, name,
-                             readonly, required, spellcheck, step, style, tabindex, title, translate,
-                             value, defineAttributes)
-        )
-    }
+    )
 
     /**
      * Adds an `<input type="datetime-local">` element with given attributes as the next child of the element under construction.
@@ -913,14 +800,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: String? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomInputDateTimeLocal(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                                      disabled, form, hidden, lang, list, max, min, name,
-                                      readonly, required, spellcheck, step, style, tabindex, title, translate,
-                                      value, defineAttributes)
-        )
-    }
+    )
 
     /**
      * Adds an input type="email" element with given attributes as the next child of the element under construction.
@@ -972,14 +852,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: String? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomInputEmail(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                              disabled, form, hidden, lang, list, maxlength, minlength, multiple, name, pattern,
-                              placeholder, readonly, required, size, spellcheck, style, tabindex, title, translate,
-                              value, defineAttributes)
-        )
-    }
+    )
 
     /**
      * Adds an `<input type="file">` element with given attributes as the next child of the element under construction.
@@ -1027,14 +900,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: String? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomInputFile(this, selector, key, accept, accesskey, autofocus, contenteditable, dir, disabled,
-                             form, hidden, lang, multiple, name, required, spellcheck, style, tabindex, title,
-                             translate,
-                             value, defineAttributes)
-        )
-    }
+    )
 
     /**
      * Adds an `<input type="hidden">` element with given attributes as the next child of the element under construction.
@@ -1074,12 +940,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: String? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomInputHidden(this, selector, key, accesskey, contenteditable, dir, disabled, form, hidden, lang,
-                               name, spellcheck, style, tabindex, title, translate, value, defineAttributes)
-        )
-    }
+    )
 
     /**
      * Adds an `<input type="image">` element with given attributes as the next child of the element under construction.
@@ -1134,15 +995,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         width: Int? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomInputImageButton(this, selector, key, accesskey, alt, contenteditable, dir, disabled, form,
-                                    formaction,
-                                    formenctype, formmethod, formnovalidate, formtarget, height, hidden, lang,
-                                    name, spellcheck, src, style, tabindex, title, translate, width,
-                                    defineAttributes)
-        )
-    }
+    )
 
     /**
      * Adds an `<input type="month">` element with given attributes as the next child of the element under construction.
@@ -1198,14 +1051,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: String? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomInputMonth(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                              disabled, form, hidden, lang, list, max, min, name,
-                              readonly, required, spellcheck, step, style, tabindex, title, translate,
-                              value, defineAttributes)
-        )
-    }
+    )
 
     /**
      * Adds an `<input type="number">` element with given attributes as the next child of the element under construction.
@@ -1263,15 +1109,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: Double? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomInputNumber(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                               disabled, form, hidden, lang, list, max, min, name, placeholder,
-                               readonly, required, spellcheck, step, style, tabindex, title, translate,
-                               value, defineAttributes)
-        )
-
-    }
+    )
 
     /**
      * Adds an `<input type="number">` element with given attributes as the next child of the element under construction.
@@ -1329,15 +1167,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: Int? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomInputNumber(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                               disabled, form, hidden, lang, list, max, min, name, placeholder,
-                               readonly, required, spellcheck, step, style, tabindex, title, translate,
-                               value, defineAttributes)
-        )
-
-    }
+    )
 
     /**
      * Adds an `<input type="password">` element with given attributes as the next child of the element under construction.
@@ -1395,14 +1225,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: String? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomInputPassword(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                                 disabled, form, hidden, lang, maxlength, minlength, name, pattern,
-                                 placeholder, readonly, required, size, spellcheck, style, tabindex, title, translate,
-                                 value, defineAttributes)
-        )
-    }
+    )
 
     /**
      * Adds an `<input type="radio">` element with given attributes as the next child of the element under construction.
@@ -1447,14 +1270,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: String? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomInputRadioButton(this, selector, key, accesskey, autofocus, checked, contenteditable, dir,
-                                    disabled, form, hidden, lang, name, required,
-                                    spellcheck, style, tabindex, title, translate,
-                                    value, defineAttributes)
-        )
-    }
+    )
 
     /**
      * Adds an `<input type="range">` element with given attributes as the next child of the element under construction.
@@ -1506,14 +1322,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: T? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomInputRange(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                              disabled, form, hidden, lang, list, max, min, name,
-                              spellcheck, step, style, tabindex, title, translate,
-                              value, defineAttributes)
-        )
-    }
+    )
 
     /**
      * Adds an `<input type="reset">` element with given attributes as the next child of the element under construction.
@@ -1553,12 +1362,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: String? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomInputResetButton(this, selector, key, accesskey, contenteditable, dir, disabled, form, hidden, lang,
-                                    name, spellcheck, style, tabindex, title, translate, value, defineAttributes)
-        )
-    }
+    )
 
     /**
      * Adds an `<input type="search">` element with given attributes as the next child of the element under construction.
@@ -1620,14 +1424,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: String? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomInputSearch(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir, dirname,
-                               disabled, form, hidden, lang, list, maxlength, minlength, name, pattern,
-                               placeholder, readonly, required, size, spellcheck, style, tabindex, title, translate,
-                               value, defineAttributes)
-        )
-    }
+    )
 
     /**
      * Adds an `<input type="submit">` element with given attributes as the next child of the element under construction.
@@ -1677,13 +1474,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: String? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomInputSubmitButton(this, selector, key, accesskey, contenteditable, dir, disabled, form, formaction,
-                                     formenctype, formmethod, formnovalidate, formtarget, hidden, lang,
-                                     name, spellcheck, style, tabindex, title, translate, value, defineAttributes)
-        )
-    }
+    )
 
     /**
      * Adds an `<input type="tel">` element with given attributes as the next child of the element under construction.
@@ -1743,14 +1534,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: String? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomInputTelephone(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                                  disabled, form, hidden, lang, list, maxlength, minlength, name, pattern,
-                                  placeholder, readonly, required, size, spellcheck, style, tabindex, title, translate,
-                                  value, defineAttributes)
-        )
-    }
+    )
 
     /**
      * Adds an `<input type="text"> element with given attributes as the next child of the element under construction.
@@ -1812,14 +1596,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: String? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomInputText(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir, dirname,
-                             disabled, form, hidden, lang, list, maxlength, minlength, name, pattern,
-                             placeholder, readonly, required, size, spellcheck, style, tabindex, title, translate,
-                             value, defineAttributes)
-        )
-    }
+    )
 
     /**
      * Adds an input type="time" element with given attributes as the next child of the element under construction.
@@ -1875,14 +1652,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: KatyTime? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomInputTime(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                             disabled, form, hidden, lang, list, max, min, name,
-                             readonly, required, spellcheck, step, style, tabindex, title, translate,
-                             value, defineAttributes)
-        )
-    }
+    )
 
     /**
      * Adds an input type="url" element with given attributes as the next child of the element under construction.
@@ -1933,14 +1703,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: String? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomInputUrl(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                            disabled, form, hidden, lang, list, maxlength, minlength, name, pattern,
-                            placeholder, readonly, required, size, spellcheck, style, tabindex, title, translate,
-                            value, defineAttributes)
-        )
-    }
+    )
 
     /**
      * Adds an input type="week" element with given attributes as the next child of the element under construction.
@@ -1989,14 +1752,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: String? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomInputWeek(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                             disabled, form, hidden, lang, list, max, min, name,
-                             readonly, required, spellcheck, step, style, tabindex, title, translate,
-                             value, defineAttributes)
-        )
-    }
+    )
 
     /**
      * Adds an `<ins>` element with its attributes as the next child of the element under construction.
@@ -2032,12 +1788,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomIns(this, selector, key, accesskey, cite, contenteditable, datetime, dir, hidden,
-                       lang, spellcheck, style, tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a kbd element with its attributes as the next child of the element under construction.
@@ -2069,12 +1820,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomKbd(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                       tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a label element with its attributes as the next child of the element under construction.
@@ -2107,12 +1853,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomLabel(this, selector, key, accesskey, contenteditable, dir, `for`, hidden, lang, spellcheck,
-                         style, tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a mark element with its attributes as the next child of the element under construction.
@@ -2144,12 +1885,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomMark(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                        tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a meter element with its attributes as the next child of the element under construction. Meter readings
@@ -2194,12 +1930,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: Double,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomMeter(this, selector, key, accesskey, contenteditable, dir, hidden, high, lang,
-                         low, max, min, optimum, spellcheck, style, tabindex, title, translate, value, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a meter element with its attributes as the next child of the element under construction. Meter readings
@@ -2244,20 +1975,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: Int,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomMeter(this, selector, key, accesskey, contenteditable, dir, hidden, high, lang,
-                         low, max, min, optimum, spellcheck, style, tabindex, title, translate, value, defineContent)
-        )
-    }
-
-    /**
-     * Creates a new option group builder for the given child [element] that has the same restrictions
-     * as this builder.
-     */
-    internal fun optGroupContent(element: KatyDomDataList<Msg>): KatyDomOptGroupContentBuilder<Msg> {
-        return KatyDomOptGroupContentBuilder(element, contentRestrictions, dispatchMessages)
-    }
+    )
 
     /**
      * Adds an output element with given attributes as the next child of the element under construction.
@@ -2294,12 +2012,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomOutput(this, selector, key, accesskey, contenteditable, dir, disabled, `for`, form,
-                          hidden, lang, name, spellcheck, style, tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a `<progress>` element with its attributes as the next child of the element under construction.
@@ -2335,12 +2048,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: Double? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomProgress(this, selector, key, accesskey, contenteditable, dir, hidden, lang, max,
-                            spellcheck, style, tabindex, title, translate, value, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a `<progress>` element with its attributes as the next child of the element under construction.
@@ -2376,12 +2084,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: Int? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomProgress(this, selector, key, accesskey, contenteditable, dir, hidden, lang, max,
-                            spellcheck, style, tabindex, title, translate, value, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a q element with its attributes as the next child of the element under construction.
@@ -2413,12 +2116,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomQ(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                     tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds an s element with its attributes as the next child of the element under construction.
@@ -2450,12 +2148,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomS(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                     tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a samp element with its attributes as the next child of the element under construction.
@@ -2487,12 +2180,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomSamp(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                        tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a select element with its attributes as the next child of the element under construction.
@@ -2536,21 +2224,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         value: String? = null,
         defineContent: KatyDomSelectContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomSelect(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir, disabled, form,
-                          hidden, lang, multiple, name, required, size, spellcheck, style,
-                          tabindex, title, translate, value, defineContent)
-        )
-    }
-
-    /**
-     * Creates a new select builder for the given child [element] that has the same restrictions
-     * as this builder.
-     */
-    internal fun selectContent(element: KatyDomSelect<Msg>): KatyDomSelectContentBuilder<Msg> {
-        return KatyDomSelectContentBuilder(element, contentRestrictions, dispatchMessages)
-    }
+    )
 
     /**
      * Adds a small element with its attributes as the next child of the element under construction.
@@ -2582,12 +2256,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomSmall(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                         tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a span element with its attributes as the next child of the element under construction.
@@ -2619,12 +2288,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomSpan(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                        tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a strong element with its attributes as the next child of the element under construction.
@@ -2656,12 +2320,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomStrong(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                          tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a sub element with its attributes as the next child of the element under construction.
@@ -2693,12 +2352,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomSub(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                       tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a sup element with its attributes as the next child of the element under construction.
@@ -2730,20 +2384,15 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomSup(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                       tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a text node as the next child of the element under construction.
      * @param nodeValue the text within the node.
      */
-    fun text(nodeValue: String) {
-        element.addChildNode(KatyDomText(nodeValue))
-    }
+    fun text(
+        nodeValue: String
+    )
 
     /**
      * Adds a textarea element with given attributes as the next child of the element under construction.
@@ -2792,15 +2441,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         translate: Boolean? = null,
         wrap: EWrapType? = null,
         defineContent: KatyDomTextContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomTextArea(this, selector, key, accesskey, autocomplete, autofocus, cols, contenteditable, dir,
-                            dirname,
-                            disabled, form, hidden, lang, maxlength, minlength, name,
-                            placeholder, readonly, required, rows, spellcheck, style, tabindex, title, translate,
-                            wrap, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a `<time>` element with text content as the next child of the element under construction.
@@ -2832,12 +2473,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomTextContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomTime(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                        tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a `<time>` element with datetime attribute as the next child of the element under construction.
@@ -2870,12 +2506,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomTime(this, selector, key, accesskey, contenteditable, datetime, dir, hidden, lang,
-                        spellcheck, style, tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a `<u>` element with its attributes as the next child of the element under construction.
@@ -2907,12 +2538,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomU(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                     tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a var element with its attributes as the next child of the element under construction.
@@ -2944,12 +2570,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomVar(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                       tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
     /**
      * Adds a wbr element as the next child of the element under construction.
@@ -2981,88 +2602,7 @@ open class KatyDomPhrasingContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomBr(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                      tabindex, title, translate, defineAttributes)
-
-        )
-    }
-
-    /**
-     * Creates a new content builder for the given child [element] that has the same restrictions
-     * as this builder plus no anchor element or interactive content allowed.
-     */
-    internal fun withAnchorInteractiveContentNotAllowed(
-        element: KatyDomHtmlElement<Msg>): KatyDomPhrasingContentBuilder<Msg> {
-        return KatyDomPhrasingContentBuilder(
-            element,
-            contentRestrictions.withAnchorInteractiveContentNotAllowed(),
-            dispatchMessages
-        )
-    }
-
-    /**
-     * Creates a new content builder for the given child [element] that has the same restrictions
-     * as this builder plus no interactive content allowed.
-     */
-    internal fun withInteractiveContentNotAllowed(
-        element: KatyDomHtmlElement<Msg>): KatyDomPhrasingContentBuilder<Msg> {
-        return KatyDomPhrasingContentBuilder(
-            element,
-            contentRestrictions.withInteractiveContentNotAllowed(),
-            dispatchMessages
-        )
-    }
-
-    /**
-     * Creates a new content builder for the given child [element] that has the same restrictions
-     * as this builder plus no label element allowed.
-     */
-    internal fun withLabelNotAllowed(element: KatyDomHtmlElement<Msg>): KatyDomPhrasingContentBuilder<Msg> {
-        return KatyDomPhrasingContentBuilder(
-            element,
-            contentRestrictions.withLabelNotAllowed(),
-            dispatchMessages
-        )
-    }
-
-    /**
-     * Creates a new content builder for the given child [element] that has the same restrictions
-     * as this builder plus no meter element allowed.
-     */
-    internal fun withMeterNotAllowed(element: KatyDomHtmlElement<Msg>): KatyDomPhrasingContentBuilder<Msg> {
-        return KatyDomPhrasingContentBuilder(
-            element,
-            contentRestrictions.withMeterNotAllowed(),
-            dispatchMessages
-        )
-    }
-
-    /**
-     * Creates a new content builder for the given child [element] that has the same restrictions
-     * as this builder.
-     */
-    internal open fun withNoAddedRestrictions(
-        element: KatyDomHtmlElement<Msg>): KatyDomPhrasingContentBuilder<Msg> {
-        return KatyDomPhrasingContentBuilder(
-            element,
-            contentRestrictions,
-            dispatchMessages
-        )
-    }
-
-    /**
-     * Creates a new content builder for the given child [element] that has the same restrictions
-     * as this builder plus no progress element allowed.
-     */
-    internal fun withProgressNotAllowed(element: KatyDomHtmlElement<Msg>): KatyDomPhrasingContentBuilder<Msg> {
-        return KatyDomPhrasingContentBuilder(
-            element,
-            contentRestrictions.withProgressNotAllowed(),
-            dispatchMessages
-        )
-    }
+    )
 
 }
 

@@ -5,11 +5,7 @@
 
 package o.org.katydom.builders.tables
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomAttributesContentBuilder
-import o.org.katydom.builders.KatyDomContentRestrictions
-import o.org.katydom.concretenodes.tabular.KatyDomTr
-import o.org.katydom.concretenodes.text.KatyDomComment
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -22,33 +18,17 @@ import o.org.katydom.types.EDirection
  * @param contentRestrictions restrictions on content enforced at run time.
  * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
-class KatyDomTableBodyContentBuilder<Msg> internal constructor(
-    element: KatyDomHtmlElement<Msg>,
-    internal val contentRestrictions: KatyDomContentRestrictions = KatyDomContentRestrictions(),
-    dispatchMessages: (messages: Iterable<Msg>) -> Unit
-) : KatyDomAttributesContentBuilder<Msg>(element, dispatchMessages) {
+interface KatyDomTableBodyContentBuilder<Msg> : KatyDomAttributesContentBuilder<Msg> {
 
     /**
      * Adds a comment node as the next child of the element under construction.
      * @param nodeValue the text within the node.
      * @param key unique key for this comment within its parent node.
      */
-    fun comment(nodeValue: String,
-                key: Any? = null) {
-        element.addChildNode(KatyDomComment(nodeValue, key))
-    }
-
-    /**
-     * Creates a new table row content builder for the given child [element] that has the same restrictions
-     * as this builder.
-     */
-    internal fun tableRowContent(element: KatyDomTr<Msg>): KatyDomTableRowContentBuilder<Msg> {
-        return KatyDomTableRowContentBuilder(
-            element,
-            contentRestrictions,
-            dispatchMessages
-        )
-    }
+    fun comment(
+        nodeValue: String,
+        key: Any? = null
+    )
 
     /**
      * Adds a `<tr>` element with given attributes as the next child of the element under construction.
@@ -80,12 +60,7 @@ class KatyDomTableBodyContentBuilder<Msg> internal constructor(
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatyDomTableRowContentBuilder<Msg>.() -> Unit
-    ) {
-        element.addChildNode(
-            KatyDomTr(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                      tabindex, title, translate, defineContent)
-        )
-    }
+    )
 
 }
 
