@@ -39,7 +39,7 @@ import o.org.katydom.types.EOrderedListType
  * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
 @Suppress("unused")
-internal open class KatyDomFlowContentBuilderImpl<Msg> internal constructor(
+internal open class KatyDomFlowContentBuilderImpl<Msg>(
     element: KatyDomHtmlElement<Msg>,
     contentRestrictions: KatyDomContentRestrictions,
     dispatchMessages: (messages: Iterable<Msg>) -> Unit
@@ -467,7 +467,7 @@ internal open class KatyDomFlowContentBuilderImpl<Msg> internal constructor(
      * Creates a new list content builder for the given child [element] that has the same restrictions
      * as this builder. The list items to be produced are ordered.
      */
-    internal fun listContent(element: KatyDomOl<Msg>): KatyDomOrderedListContentBuilder<Msg> {
+    fun listContent(element: KatyDomOl<Msg>): KatyDomOrderedListContentBuilder<Msg> {
         return KatyDomOrderedListContentBuilderImpl(
             this,
             element,
@@ -479,7 +479,7 @@ internal open class KatyDomFlowContentBuilderImpl<Msg> internal constructor(
      * Creates a new list content builder for the given child [element] that has the same restrictions
      * as this builder. The list items to be produced are unordered.
      */
-    internal fun listContent(element: KatyDomUl<Msg>): KatyDomUnorderedListContentBuilder<Msg> {
+    fun listContent(element: KatyDomUl<Msg>): KatyDomUnorderedListContentBuilder<Msg> {
         return KatyDomUnorderedListContentBuilderImpl(
             this,
             element,
@@ -578,7 +578,7 @@ internal open class KatyDomFlowContentBuilderImpl<Msg> internal constructor(
      * Creates a new phrasing content builder for the given child [element] that has the same restrictions
      * as this builder.
      */
-    internal fun phrasingContent(element: KatyDomHtmlElement<Msg>): KatyDomPhrasingContentBuilderImpl<Msg> {
+    fun phrasingContent(element: KatyDomHtmlElement<Msg>): KatyDomPhrasingContentBuilderImpl<Msg> {
         return KatyDomPhrasingContentBuilderImpl(
             element,
             contentRestrictions,
@@ -654,7 +654,7 @@ internal open class KatyDomFlowContentBuilderImpl<Msg> internal constructor(
      * Creates a new table content builder for the given child [element] that has the same restrictions
      * as this builder.
      */
-    internal fun tableContent(element: KatyDomTable<Msg>): KatyDomTableContentBuilderImpl<Msg> {
+    fun tableContent(element: KatyDomTable<Msg>): KatyDomTableContentBuilderImpl<Msg> {
         return KatyDomTableContentBuilderImpl(
             element,
             contentRestrictions,
@@ -688,7 +688,7 @@ internal open class KatyDomFlowContentBuilderImpl<Msg> internal constructor(
      * Creates a new content builder for the given child [element] that has the same restrictions
      * as this builder but figcaption elements are allowed.
      */
-    internal fun withFigCaptionAllowed(
+    fun withFigCaptionAllowed(
         element: KatyDomHtmlElement<Msg>
     ): KatyDomFlowContentBuilderImpl<Msg> {
         return KatyDomFlowContentBuilderImpl(
@@ -702,7 +702,7 @@ internal open class KatyDomFlowContentBuilderImpl<Msg> internal constructor(
      * Creates a new content builder for the given child [element] that has the same restrictions
      * as this builder plus no footer, header or main elements allowed.
      */
-    internal fun withFooterHeaderMainNotAllowed(
+    fun withFooterHeaderMainNotAllowed(
         element: KatyDomHtmlElement<Msg>
     ): KatyDomFlowContentBuilderImpl<Msg> {
         return KatyDomFlowContentBuilderImpl(
@@ -716,7 +716,7 @@ internal open class KatyDomFlowContentBuilderImpl<Msg> internal constructor(
      * Creates a new content builder for the given child [element] that has the same restrictions
      * as this builder plus no form element allowed.
      */
-    internal fun withFormNotAllowed(element: KatyDomHtmlElement<Msg>): KatyDomFlowContentBuilderImpl<Msg> {
+    fun withFormNotAllowed(element: KatyDomHtmlElement<Msg>): KatyDomFlowContentBuilderImpl<Msg> {
         return KatyDomFlowContentBuilderImpl(
             element,
             contentRestrictions.withFormNotAllowed(),
@@ -728,7 +728,7 @@ internal open class KatyDomFlowContentBuilderImpl<Msg> internal constructor(
      * Creates a new content builder for the given child [element] that has the same restrictions
      * as this builder but allows one legend element.
      */
-    internal fun withLegendAllowed(element: KatyDomHtmlElement<Msg>): KatyDomFlowContentBuilderImpl<Msg> {
+    fun withLegendAllowed(element: KatyDomHtmlElement<Msg>): KatyDomFlowContentBuilderImpl<Msg> {
         return KatyDomFlowContentBuilderImpl(
             element,
             contentRestrictions.withLegendAllowed(),
@@ -740,7 +740,7 @@ internal open class KatyDomFlowContentBuilderImpl<Msg> internal constructor(
      * Creates a new content builder for the given child [element] that has the same restrictions
      * as this builder plus no main element allowed.
      */
-    internal fun withMainNotAllowed(element: KatyDomHtmlElement<Msg>): KatyDomFlowContentBuilderImpl<Msg> {
+    fun withMainNotAllowed(element: KatyDomHtmlElement<Msg>): KatyDomFlowContentBuilderImpl<Msg> {
         return KatyDomFlowContentBuilderImpl(
             element,
             contentRestrictions.withMainNotAllowed(),

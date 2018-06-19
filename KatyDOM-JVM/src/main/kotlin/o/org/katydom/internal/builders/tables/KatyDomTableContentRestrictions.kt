@@ -10,8 +10,7 @@ package o.org.katydom.internal.builders.tables
 /**
  * Set of restrictions on table content. Enforces the sub-elements of a `<table>` to occur in the correct order.
  */
-class KatyDomTableContentRestrictions internal constructor(
-) {
+internal class KatyDomTableContentRestrictions {
 
     private var captionAllowed = true
 

@@ -25,7 +25,7 @@ import o.org.katydom.types.EDirection
  * @param element the element whose content is being built.
  * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
-internal class KatyDomOrderedListContentBuilderImpl<Msg> internal constructor(
+internal class KatyDomOrderedListContentBuilderImpl<Msg>(
     internal val flowContent: KatyDomFlowContentBuilderImpl<Msg>,
     element: KatyDomOl<Msg>,
     dispatchMessages: (messages: Iterable<Msg>) -> Unit

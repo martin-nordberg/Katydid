@@ -21,7 +21,7 @@ import o.org.katydom.types.EDirection
  * @param element the element whose content is being built.
  * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
-internal class KatyDomColGroupContentBuilderImpl<Msg> internal constructor(
+internal class KatyDomColGroupContentBuilderImpl<Msg>(
     element: KatyDomColGroup<Msg>,
     dispatchMessages: (messages: Iterable<Msg>) -> Unit
 ) : KatyDomAttributesContentBuilderImpl<Msg>(element, dispatchMessages),

@@ -10,7 +10,7 @@ package o.org.katydom.internal.builders.details
 /**
  * Set of restrictions on content of a `<details>` element.
  */
-class KatyDomDetailsContentRestrictions internal constructor() {
+internal class KatyDomDetailsContentRestrictions {
 
     private var summaryAllowed = true
 

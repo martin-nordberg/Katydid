@@ -5,14 +5,7 @@
 
 package o.org.katydom.builders
 
-import o.org.katydom.builders.details.KatyDomDetailsFlowContentBuilder
-import o.org.katydom.builders.lists.KatyDomOrderedListContentBuilder
-import o.org.katydom.builders.lists.KatyDomUnorderedListContentBuilder
-import o.org.katydom.builders.tables.KatyDomTableContentBuilder
 import o.org.katydom.types.EDirection
-import o.org.katydom.types.EFormEncodingType
-import o.org.katydom.types.EFormSubmissionMethod
-import o.org.katydom.types.EOrderedListType
 
 //---------------------------------------------------------------------------------------------------------------------
 

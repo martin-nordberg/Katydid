@@ -10,7 +10,7 @@ package o.org.katydom.internal.builders.media
 /**
  * Set of restrictions on media content.
  */
-class KatyDomMediaContentRestrictions internal constructor(
+internal class KatyDomMediaContentRestrictions(
     private var sourceAllowed: Boolean = true
 ) {
 

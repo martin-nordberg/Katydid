@@ -28,10 +28,10 @@ import o.org.katydom.types.MimeType
  *
  * TODO: To support "transparent" content, we need embedded / phrased / flow media content builders or at least runtime checking.
  */
-internal class KatyDomMediaFlowContentBuilderImpl<Msg> internal constructor(
+internal class KatyDomMediaFlowContentBuilderImpl<Msg>(
     element: KatyDomHtmlElement<Msg>,
     contentRestrictions: KatyDomContentRestrictions = KatyDomContentRestrictions(),
-    internal val mediaContentRestrictions: KatyDomMediaContentRestrictions = KatyDomMediaContentRestrictions(),
+    val mediaContentRestrictions: KatyDomMediaContentRestrictions = KatyDomMediaContentRestrictions(),
     dispatchMessages: (messages: Iterable<Msg>) -> Unit
 ) : KatyDomFlowContentBuilderImpl<Msg>(element, contentRestrictions, dispatchMessages),
     KatyDomMediaFlowContentBuilder<Msg> {

@@ -35,7 +35,7 @@ import o.org.katydom.types.*
 @Suppress("unused")
 internal open class KatyDomEmbeddedContentBuilderImpl<Msg>(
     element: KatyDomHtmlElement<Msg>,
-    internal val contentRestrictions: KatyDomContentRestrictions,
+    val contentRestrictions: KatyDomContentRestrictions,
     dispatchMessages: (messages: Iterable<Msg>) -> Unit
 ) : KatyDomAttributesContentBuilderImpl<Msg>(element, dispatchMessages),
     KatyDomEmbeddedContentBuilder<Msg> {
@@ -43,7 +43,7 @@ internal open class KatyDomEmbeddedContentBuilderImpl<Msg>(
     /**
      * Creates a new attributes content builder for the given child [element].
      */
-    internal fun attributesContent(element: KatyDomHtmlElement<Msg>): KatyDomAttributesContentBuilderImpl<Msg> {
+    fun attributesContent(element: KatyDomHtmlElement<Msg>): KatyDomAttributesContentBuilderImpl<Msg> {
         return KatyDomAttributesContentBuilderImpl(element, dispatchMessages)
     }
 
@@ -84,7 +84,7 @@ internal open class KatyDomEmbeddedContentBuilderImpl<Msg>(
     /**
      * Creates a new details content builder for the given child [element].
      */
-    internal fun detailsFlowContent(element: KatyDomDetails<Msg>): KatyDomDetailsFlowContentBuilder<Msg> {
+    fun detailsFlowContent(element: KatyDomDetails<Msg>): KatyDomDetailsFlowContentBuilder<Msg> {
         return KatyDomDetailsFlowContentBuilderImpl(
             element,
             contentRestrictions,
@@ -183,7 +183,7 @@ internal open class KatyDomEmbeddedContentBuilderImpl<Msg>(
     /**
      * Creates a new media content builder for the given child [element].
      */
-    internal fun mediaFlowContent(element: KatyDomHtmlElement<Msg>,
+    fun mediaFlowContent(element: KatyDomHtmlElement<Msg>,
                                   sourceAllowed: Boolean): KatyDomMediaFlowContentBuilder<Msg> {
         return KatyDomMediaFlowContentBuilderImpl(
             element,
@@ -196,7 +196,7 @@ internal open class KatyDomEmbeddedContentBuilderImpl<Msg>(
     /**
      * Creates a new media content builder for the given child [element].
      */
-    internal fun pictureContent(element: KatyDomPicture<Msg>): KatyDomPictureContentBuilder<Msg> {
+    fun pictureContent(element: KatyDomPicture<Msg>): KatyDomPictureContentBuilder<Msg> {
         return KatyDomPictureContentBuilderImpl(
             element,
             KatyDomPictureContentRestrictions(),
@@ -229,7 +229,7 @@ internal open class KatyDomEmbeddedContentBuilderImpl<Msg>(
     /**
      * Creates a new text content builder for the given child [element].
      */
-    internal fun textContent(element: KatyDomHtmlElement<Msg>): KatyDomTextContentBuilder<Msg> {
+    fun textContent(element: KatyDomHtmlElement<Msg>): KatyDomTextContentBuilder<Msg> {
         return KatyDomTextContentBuilderImpl(element, dispatchMessages)
     }
 

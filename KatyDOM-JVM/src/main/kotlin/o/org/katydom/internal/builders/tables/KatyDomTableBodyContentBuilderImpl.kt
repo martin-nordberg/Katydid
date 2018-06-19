@@ -24,9 +24,9 @@ import o.org.katydom.types.EDirection
  * @param contentRestrictions restrictions on content enforced at run time.
  * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
-internal class KatyDomTableBodyContentBuilderImpl<Msg> internal constructor(
+internal class KatyDomTableBodyContentBuilderImpl<Msg>(
     element: KatyDomHtmlElement<Msg>,
-    internal val contentRestrictions: KatyDomContentRestrictions = KatyDomContentRestrictions(),
+    val contentRestrictions: KatyDomContentRestrictions = KatyDomContentRestrictions(),
     dispatchMessages: (messages: Iterable<Msg>) -> Unit
 ) : KatyDomAttributesContentBuilderImpl<Msg>(element, dispatchMessages),
     KatyDomTableBodyContentBuilder<Msg> {
@@ -40,7 +40,7 @@ internal class KatyDomTableBodyContentBuilderImpl<Msg> internal constructor(
      * Creates a new table row content builder for the given child [element] that has the same restrictions
      * as this builder.
      */
-    internal fun tableRowContent(element: KatyDomTr<Msg>): KatyDomTableRowContentBuilderImpl<Msg> {
+    fun tableRowContent(element: KatyDomTr<Msg>): KatyDomTableRowContentBuilderImpl<Msg> {
         return KatyDomTableRowContentBuilderImpl(
             element,
             contentRestrictions,

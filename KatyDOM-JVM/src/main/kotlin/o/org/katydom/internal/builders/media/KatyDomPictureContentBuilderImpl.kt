@@ -26,9 +26,9 @@ import o.org.katydom.types.MimeType
  * @param element the element whose content is being built.
  * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
-internal class KatyDomPictureContentBuilderImpl<Msg> internal constructor(
+internal class KatyDomPictureContentBuilderImpl<Msg>(
     element: KatyDomPicture<Msg>,
-    internal val pictureContentRestrictions: KatyDomPictureContentRestrictions = KatyDomPictureContentRestrictions(),
+    val pictureContentRestrictions: KatyDomPictureContentRestrictions = KatyDomPictureContentRestrictions(),
     dispatchMessages: (messages: Iterable<Msg>) -> Unit
 ) : KatyDomAttributesContentBuilderImpl<Msg>(element, dispatchMessages),
     KatyDomPictureContentBuilder<Msg> {
@@ -36,7 +36,7 @@ internal class KatyDomPictureContentBuilderImpl<Msg> internal constructor(
     /**
      * Creates a new attributes content builder for the given child [element].
      */
-    internal fun attributesContent(element: KatyDomHtmlElement<Msg>): KatyDomAttributesContentBuilder<Msg> {
+    fun attributesContent(element: KatyDomHtmlElement<Msg>): KatyDomAttributesContentBuilder<Msg> {
         return KatyDomAttributesContentBuilderImpl(element, dispatchMessages)
     }
 

@@ -23,14 +23,14 @@ import o.org.katydom.types.EDirection
  * @param contentRestrictions restrictions on content enforced at run time.
  * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
-internal class KatyDomDetailsFlowContentBuilderImpl<Msg> internal constructor(
+internal class KatyDomDetailsFlowContentBuilderImpl<Msg>(
     element: KatyDomDetails<Msg>,
     contentRestrictions: KatyDomContentRestrictions = KatyDomContentRestrictions(),
     dispatchMessages: (messages: Iterable<Msg>) -> Unit
 ) : KatyDomFlowContentBuilderImpl<Msg>(element, contentRestrictions, dispatchMessages),
     KatyDomDetailsFlowContentBuilder<Msg> {
 
-    internal val detailsContentRestrictions: KatyDomDetailsContentRestrictions = KatyDomDetailsContentRestrictions()
+    val detailsContentRestrictions: KatyDomDetailsContentRestrictions = KatyDomDetailsContentRestrictions()
 
     override fun summary(
         selector: String?,

@@ -22,7 +22,7 @@ import o.org.katydom.types.EDirection
  * @param contentRestrictions restrictions on content enforced at run time.
  * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
-internal class KatyDomSelectContentBuilderImpl<Msg> internal constructor(
+internal class KatyDomSelectContentBuilderImpl<Msg>(
     element: KatyDomSelect<Msg>,
     contentRestrictions: KatyDomContentRestrictions,
     dispatchMessages: (messages: Iterable<Msg>) -> Unit
@@ -58,7 +58,7 @@ internal class KatyDomSelectContentBuilderImpl<Msg> internal constructor(
      * Creates a new content builder for the given child [element] that has the same restrictions
      * as this builder.
      */
-    internal fun optGroupContent(element: KatyDomOptGroup<Msg>): KatyDomOptGroupContentBuilderImpl<Msg> {
+    fun optGroupContent(element: KatyDomOptGroup<Msg>): KatyDomOptGroupContentBuilderImpl<Msg> {
         return KatyDomOptGroupContentBuilderImpl(
             element,
             contentRestrictions,

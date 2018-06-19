@@ -29,22 +29,22 @@ import o.org.katydom.types.EDirection
  * @param contentRestrictions restrictions on content enforced at run time.
  * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
-internal class KatyDomTableContentBuilderImpl<Msg> internal constructor(
+internal class KatyDomTableContentBuilderImpl<Msg>(
     element: KatyDomTable<Msg>,
-    internal val contentRestrictions: KatyDomContentRestrictions = KatyDomContentRestrictions(),
+    val contentRestrictions: KatyDomContentRestrictions = KatyDomContentRestrictions(),
     dispatchMessages: (messages: Iterable<Msg>) -> Unit
 ) : KatyDomAttributesContentBuilderImpl<Msg>(element, dispatchMessages),
     KatyDomTableContentBuilder<Msg> {
 
     /** Restrictions enforcing the order of sub-elements within the table being built. */
-    internal val tableContentRestrictions = KatyDomTableContentRestrictions()
+    val tableContentRestrictions = KatyDomTableContentRestrictions()
 
     ////
 
     /**
      * Creates a new attributes content builder for the given child [element].
      */
-    internal fun attributesContent(element: KatyDomColGroup<Msg>): KatyDomAttributesContentBuilderImpl<Msg> {
+    fun attributesContent(element: KatyDomColGroup<Msg>): KatyDomAttributesContentBuilderImpl<Msg> {
         return KatyDomAttributesContentBuilderImpl(element, dispatchMessages)
     }
 
@@ -116,7 +116,7 @@ internal class KatyDomTableContentBuilderImpl<Msg> internal constructor(
      * Creates a new flow content builder for the given child [element] that has the same restrictions
      * as this builder plus a table is not allowed
      */
-    internal fun colGroupContent(element: KatyDomColGroup<Msg>): KatyDomColGroupContentBuilderImpl<Msg> {
+    fun colGroupContent(element: KatyDomColGroup<Msg>): KatyDomColGroupContentBuilderImpl<Msg> {
         return KatyDomColGroupContentBuilderImpl(
             element,
             dispatchMessages
@@ -132,7 +132,7 @@ internal class KatyDomTableContentBuilderImpl<Msg> internal constructor(
      * Creates a new flow content builder for the given child [element] that has the same restrictions
      * as this builder plus a table is not allowed
      */
-    internal fun flowContentWithTableNotAllowed(element: KatyDomCaption<Msg>): KatyDomFlowContentBuilderImpl<Msg> {
+    fun flowContentWithTableNotAllowed(element: KatyDomCaption<Msg>): KatyDomFlowContentBuilderImpl<Msg> {
         return KatyDomFlowContentBuilderImpl(
             element,
             contentRestrictions.withTableNotAllowed(),
@@ -144,7 +144,7 @@ internal class KatyDomTableContentBuilderImpl<Msg> internal constructor(
      * Creates a new table row content builder for the given child [element] that has the same restrictions
      * as this builder.
      */
-    internal fun tableRowContent(element: KatyDomTr<Msg>): KatyDomTableRowContentBuilderImpl<Msg> {
+    fun tableRowContent(element: KatyDomTr<Msg>): KatyDomTableRowContentBuilderImpl<Msg> {
         return KatyDomTableRowContentBuilderImpl(
             element,
             contentRestrictions,
@@ -240,7 +240,7 @@ internal class KatyDomTableContentBuilderImpl<Msg> internal constructor(
      * Creates a new table body content builder for the given child [element] that has the same restrictions
      * as this builder.
      */
-    internal fun tableBodyContent(element: KatyDomHtmlElement<Msg>): KatyDomTableBodyContentBuilderImpl<Msg> {
+    fun tableBodyContent(element: KatyDomHtmlElement<Msg>): KatyDomTableBodyContentBuilderImpl<Msg> {
         return KatyDomTableBodyContentBuilderImpl(
             element,
             contentRestrictions,

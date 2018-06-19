@@ -1,15 +1,32 @@
 //
-// (C) Copyright 2017-2018 Martin E. Nordberg III
+// (C) Copyright 2018 Martin E. Nordberg III
 // Apache 2.0 License
 //
 
 package o.org.katydom.types
 
+/**
+ * Structures a MIME type as a type and subtype with optional parameters.
+ *
+ * @constructor Constructs a MIME type with given [type] and [subtype] and optional [parameters].
+ */
 class MimeType(
+
+    /** The main type of the MIME type. */
     val type: String,
+
+    /** The secondary type of the MIME type. */
     val subtype: String,
+
+    /** Optional key/value parameters for the MIME type. */
     val parameters: Map<String, String> = mapOf()
+
 ) {
+
+    init {
+        require(!type.isEmpty()) { "MIME type cannot be empty." }
+        require(!subtype.isEmpty()) { "MIME subtype cannot be empty." }
+    }
 
     /** Converts this MIME type to its string equivalent. */
     override fun toString(): String {
@@ -37,23 +54,23 @@ class MimeType(
 
             val type = slashSplit[0]
 
+            require(!type.isEmpty()) { "Type cannot be empty in MIME type '$mimeType'." }
+
             val semicolonSplit = slashSplit[1].split(";")
 
             val subtype = semicolonSplit[0]
 
+            require(!subtype.isEmpty()) { "Subtype cannot be empty in MIME type '$mimeType'." }
+
             val parameters = mutableMapOf<String, String>()
 
-            var i = 1
-
-            while (i < semicolonSplit.size) {
+            for (i in 1 until semicolonSplit.size) {
 
                 val equalsSplit = semicolonSplit[i].split("=")
 
                 require(equalsSplit.size == 2) { "Expected one '=' in MIME type parameter '$mimeType'." }
 
                 parameters[equalsSplit[0]] = equalsSplit[1]
-
-                i += 1
 
             }
 

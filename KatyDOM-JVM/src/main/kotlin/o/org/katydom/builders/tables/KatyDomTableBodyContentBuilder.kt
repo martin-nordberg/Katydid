@@ -12,11 +12,6 @@ import o.org.katydom.types.EDirection
 
 /**
  * Builder DSL to create the contents of a table's thead, tbody, or tfoot element.
- *
- * @constructor Constructs a new builder for the contents of a `<thead>`, `<tbody>`, or `<tfoot>` element.
- * @param element the element whose content is being built.
- * @param contentRestrictions restrictions on content enforced at run time.
- * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
 interface KatyDomTableBodyContentBuilder<Msg> : KatyDomAttributesContentBuilder<Msg> {
 

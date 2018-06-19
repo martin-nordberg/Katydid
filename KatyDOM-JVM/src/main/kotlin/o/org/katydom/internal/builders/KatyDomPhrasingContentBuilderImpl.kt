@@ -32,7 +32,7 @@ import x.org.katydom.types.KatyTime
  * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
 @Suppress("unused")
-internal open class KatyDomPhrasingContentBuilderImpl<Msg> internal constructor(
+internal open class KatyDomPhrasingContentBuilderImpl<Msg>(
     element: KatyDomHtmlElement<Msg>,
     contentRestrictions: KatyDomContentRestrictions,
     dispatchMessages: (messages: Iterable<Msg>) -> Unit
@@ -1292,7 +1292,7 @@ internal open class KatyDomPhrasingContentBuilderImpl<Msg> internal constructor(
      * Creates a new option group builder for the given child [element] that has the same restrictions
      * as this builder.
      */
-    internal fun optGroupContent(element: KatyDomDataList<Msg>): KatyDomOptGroupContentBuilder<Msg> {
+    fun optGroupContent(element: KatyDomDataList<Msg>): KatyDomOptGroupContentBuilder<Msg> {
         return KatyDomOptGroupContentBuilderImpl(element, contentRestrictions, dispatchMessages)
     }
 
@@ -1465,7 +1465,7 @@ internal open class KatyDomPhrasingContentBuilderImpl<Msg> internal constructor(
      * Creates a new select builder for the given child [element] that has the same restrictions
      * as this builder.
      */
-    internal fun selectContent(element: KatyDomSelect<Msg>): KatyDomSelectContentBuilder<Msg> {
+    fun selectContent(element: KatyDomSelect<Msg>): KatyDomSelectContentBuilder<Msg> {
         return KatyDomSelectContentBuilderImpl(element, contentRestrictions, dispatchMessages)
     }
 
@@ -1727,7 +1727,7 @@ internal open class KatyDomPhrasingContentBuilderImpl<Msg> internal constructor(
      * Creates a new content builder for the given child [element] that has the same restrictions
      * as this builder plus no anchor element or interactive content allowed.
      */
-    internal fun withAnchorInteractiveContentNotAllowed(
+    fun withAnchorInteractiveContentNotAllowed(
         element: KatyDomHtmlElement<Msg>): KatyDomPhrasingContentBuilderImpl<Msg> {
         return KatyDomPhrasingContentBuilderImpl(
             element,
@@ -1740,7 +1740,7 @@ internal open class KatyDomPhrasingContentBuilderImpl<Msg> internal constructor(
      * Creates a new content builder for the given child [element] that has the same restrictions
      * as this builder plus no interactive content allowed.
      */
-    internal fun withInteractiveContentNotAllowed(
+    fun withInteractiveContentNotAllowed(
         element: KatyDomHtmlElement<Msg>): KatyDomPhrasingContentBuilderImpl<Msg> {
         return KatyDomPhrasingContentBuilderImpl(
             element,
@@ -1753,7 +1753,7 @@ internal open class KatyDomPhrasingContentBuilderImpl<Msg> internal constructor(
      * Creates a new content builder for the given child [element] that has the same restrictions
      * as this builder plus no label element allowed.
      */
-    internal fun withLabelNotAllowed(element: KatyDomHtmlElement<Msg>): KatyDomPhrasingContentBuilderImpl<Msg> {
+    fun withLabelNotAllowed(element: KatyDomHtmlElement<Msg>): KatyDomPhrasingContentBuilderImpl<Msg> {
         return KatyDomPhrasingContentBuilderImpl(
             element,
             contentRestrictions.withLabelNotAllowed(),
@@ -1765,7 +1765,7 @@ internal open class KatyDomPhrasingContentBuilderImpl<Msg> internal constructor(
      * Creates a new content builder for the given child [element] that has the same restrictions
      * as this builder plus no meter element allowed.
      */
-    internal fun withMeterNotAllowed(element: KatyDomHtmlElement<Msg>): KatyDomPhrasingContentBuilderImpl<Msg> {
+    fun withMeterNotAllowed(element: KatyDomHtmlElement<Msg>): KatyDomPhrasingContentBuilderImpl<Msg> {
         return KatyDomPhrasingContentBuilderImpl(
             element,
             contentRestrictions.withMeterNotAllowed(),
@@ -1777,7 +1777,7 @@ internal open class KatyDomPhrasingContentBuilderImpl<Msg> internal constructor(
      * Creates a new content builder for the given child [element] that has the same restrictions
      * as this builder.
      */
-    internal open fun withNoAddedRestrictions(
+    open fun withNoAddedRestrictions(
         element: KatyDomHtmlElement<Msg>): KatyDomPhrasingContentBuilderImpl<Msg> {
         return KatyDomPhrasingContentBuilderImpl(
             element,
@@ -1790,7 +1790,7 @@ internal open class KatyDomPhrasingContentBuilderImpl<Msg> internal constructor(
      * Creates a new content builder for the given child [element] that has the same restrictions
      * as this builder plus no progress element allowed.
      */
-    internal fun withProgressNotAllowed(element: KatyDomHtmlElement<Msg>): KatyDomPhrasingContentBuilderImpl<Msg> {
+    fun withProgressNotAllowed(element: KatyDomHtmlElement<Msg>): KatyDomPhrasingContentBuilderImpl<Msg> {
         return KatyDomPhrasingContentBuilderImpl(
             element,
             contentRestrictions.withProgressNotAllowed(),

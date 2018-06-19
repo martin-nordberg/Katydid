@@ -28,9 +28,9 @@ import o.org.katydom.types.EHeadingScope
  * @param contentRestrictions restrictions on content enforced at run time.
  * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
-internal class KatyDomTableRowContentBuilderImpl<Msg> internal constructor(
+internal class KatyDomTableRowContentBuilderImpl<Msg>(
     element: KatyDomTr<Msg>,
-    internal val contentRestrictions: KatyDomContentRestrictions = KatyDomContentRestrictions(),
+    val contentRestrictions: KatyDomContentRestrictions = KatyDomContentRestrictions(),
     dispatchMessages: (messages: Iterable<Msg>) -> Unit
 ) : KatyDomAttributesContentBuilderImpl<Msg>(element, dispatchMessages),
     KatyDomTableRowContentBuilder<Msg> {
