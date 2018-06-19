@@ -5,6 +5,7 @@
 
 package o.org.katydom.internal.builders.details
 
+import o.org.katydom.builders.KatyDomHeadingContentBuilder
 import o.org.katydom.builders.KatyDomPhrasingContentBuilder
 import o.org.katydom.builders.details.KatyDomDetailsFlowContentBuilder
 import o.org.katydom.internal.builders.KatyDomContentRestrictions
@@ -51,6 +52,28 @@ internal class KatyDomDetailsFlowContentBuilderImpl<Msg>(
             KatyDomSummary(this, selector, key, accesskey, contenteditable, dir,
                            hidden, lang, spellcheck, style,
                            tabindex, title, translate, defineContent)
+        )
+    }
+
+    override fun summaryHeading(
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        contenteditable: Boolean?,
+        dir: EDirection?,
+        hidden: Boolean?,
+        lang: String?,
+        spellcheck: Boolean?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        defineContent: KatyDomHeadingContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatyDomSummary(this, selector, key, accesskey, contenteditable, dir,
+                           hidden, lang, spellcheck, style,
+                           tabindex, title, translate, true, defineContent)
         )
     }
 

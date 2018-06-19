@@ -114,7 +114,7 @@ internal open class KatyDomPhrasingContentBuilderImpl<Msg>(
         key: Any?,
         accesskey: Char?,
         contenteditable: Boolean?,
-        dir: EDirection?,
+        dir: EDirection,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -1732,6 +1732,18 @@ internal open class KatyDomPhrasingContentBuilderImpl<Msg>(
         return KatyDomPhrasingContentBuilderImpl(
             element,
             contentRestrictions.withAnchorInteractiveContentNotAllowed(),
+            dispatchMessages
+        )
+    }
+
+    /**
+     * Creates a new content builder for the given child [element] that has the same restrictions
+     * as this builder plus no dfn element allowed.
+     */
+    fun withDfnNotAllowed(element: KatyDomHtmlElement<Msg>): KatyDomPhrasingContentBuilderImpl<Msg> {
+        return KatyDomPhrasingContentBuilderImpl(
+            element,
+            contentRestrictions.withDfnNotAllowed(),
             dispatchMessages
         )
     }

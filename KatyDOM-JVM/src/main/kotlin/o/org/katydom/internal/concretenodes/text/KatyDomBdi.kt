@@ -21,7 +21,7 @@ internal class KatyDomBdi<Msg>(
     key: Any?,
     accesskey: Char?,
     contenteditable: Boolean?,
-    dir: EDirection?,
+    dir: EDirection,
     hidden: Boolean?,
     lang: String?,
     spellcheck: Boolean?,

@@ -184,7 +184,7 @@ internal open class KatyDomEmbeddedContentBuilderImpl<Msg>(
      * Creates a new media content builder for the given child [element].
      */
     fun mediaFlowContent(element: KatyDomHtmlElement<Msg>,
-                                  sourceAllowed: Boolean): KatyDomMediaFlowContentBuilder<Msg> {
+                         sourceAllowed: Boolean): KatyDomMediaFlowContentBuilder<Msg> {
         return KatyDomMediaFlowContentBuilderImpl(
             element,
             contentRestrictions.withMediaElementNotAllowed(),

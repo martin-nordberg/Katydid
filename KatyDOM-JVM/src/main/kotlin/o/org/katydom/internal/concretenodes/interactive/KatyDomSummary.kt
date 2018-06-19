@@ -7,6 +7,7 @@ package o.org.katydom.internal.concretenodes.interactive
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomFlowContentBuilder
+import o.org.katydom.builders.KatyDomHeadingContentBuilder
 import o.org.katydom.internal.builders.details.KatyDomDetailsFlowContentBuilderImpl
 import o.org.katydom.types.EDirection
 
@@ -15,27 +16,56 @@ import o.org.katydom.types.EDirection
 /**
  * Virtual node for a <summary> element.
  */
-internal class KatyDomSummary<Msg>(
-    detailsContent: KatyDomDetailsFlowContentBuilderImpl<Msg>,
-    selector: String?,
-    key: Any?,
-    accesskey: Char?,
-    contenteditable: Boolean?,
-    dir: EDirection?,
-    hidden: Boolean?,
-    lang: String?,
-    spellcheck: Boolean?,
-    style: String?,
-    tabindex: Int?,
-    title: String?,
-    translate: Boolean?,
-    defineContent: KatyDomFlowContentBuilder<Msg>.() -> Unit
-) : KatyDomHtmlElement<Msg>(selector, key, accesskey, contenteditable, dir,
-                            hidden, lang, spellcheck, style, tabindex, title, translate) {
+internal class KatyDomSummary<Msg> : KatyDomHtmlElement<Msg> {
 
-    init {
+    constructor(
+        detailsContent: KatyDomDetailsFlowContentBuilderImpl<Msg>,
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        contenteditable: Boolean?,
+        dir: EDirection?,
+        hidden: Boolean?,
+        lang: String?,
+        spellcheck: Boolean?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        defineContent: KatyDomFlowContentBuilder<Msg>.() -> Unit
+    ) : super(selector, key, accesskey, contenteditable, dir,
+              hidden, lang, spellcheck, style, tabindex, title, translate) {
+
         detailsContent.detailsContentRestrictions.confirmSummaryAllowedThenDisallow()
 
+        detailsContent.withNoAddedRestrictions(this).defineContent()
+        this.freeze()
+    }
+
+    constructor(
+        detailsContent: KatyDomDetailsFlowContentBuilderImpl<Msg>,
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        contenteditable: Boolean?,
+        dir: EDirection?,
+        hidden: Boolean?,
+        lang: String?,
+        spellcheck: Boolean?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        withHeading: Boolean,
+        defineContent: KatyDomHeadingContentBuilder<Msg>.() -> Unit
+    ) : super(selector, key, accesskey, contenteditable, dir,
+              hidden, lang, spellcheck, style, tabindex, title, translate) {
+
+        require(withHeading) { "Artificial 'withHeading' parameter not set." }
+
+        detailsContent.detailsContentRestrictions.confirmSummaryAllowedThenDisallow()
+
+        // TODO: allow only one heading
         detailsContent.withNoAddedRestrictions(this).defineContent()
         this.freeze()
     }

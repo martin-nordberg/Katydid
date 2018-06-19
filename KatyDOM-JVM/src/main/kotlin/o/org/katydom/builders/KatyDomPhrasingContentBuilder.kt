@@ -151,7 +151,7 @@ interface KatyDomPhrasingContentBuilder<Msg> : KatyDomEmbeddedContentBuilder<Msg
         key: Any? = null,
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
-        dir: EDirection? = null,
+        dir: EDirection,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,

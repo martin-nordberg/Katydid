@@ -44,6 +44,36 @@ class DetailsTests {
     }
 
     @Test
+    fun `A details element with summary heading produces correct HTML`() {
+
+        val vdomNode = katyDom<Unit> {
+
+            details(
+                "#mydetails.openable",
+                open=true
+            ) {
+                summaryHeading {
+                    h1 { text("Stuff") }
+                }
+                text( "Details" )
+            }
+
+        }
+
+        val html = """<details class="openable" id="mydetails" open="">
+                     |  <summary>
+                     |    <h1>
+                     |      Stuff
+                     |    </h1>
+                     |  </summary>
+                     |  Details
+                     |</details>""".trimMargin()
+
+        checkBuild(html, vdomNode)
+
+    }
+
+    @Test
     fun `A details element can have only one summary`() {
 
         assertThrows<IllegalStateException> {
@@ -60,5 +90,7 @@ class DetailsTests {
         }
 
     }
+
+    // TODO: Disallow more than one heading inside a summaryHeading
 
 }

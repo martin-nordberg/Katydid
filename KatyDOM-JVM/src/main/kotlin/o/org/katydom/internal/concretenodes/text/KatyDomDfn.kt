@@ -34,7 +34,9 @@ internal class KatyDomDfn<Msg>(
                             hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {
-        phrasingContent.withNoAddedRestrictions(this).defineContent()
+        phrasingContent.contentRestrictions.confirmDfnAllowed()
+
+        phrasingContent.withDfnNotAllowed(this).defineContent()
         this.freeze()
     }
 

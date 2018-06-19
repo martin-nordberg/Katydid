@@ -12,6 +12,7 @@ package o.org.katydom.internal.builders
  */
 internal class KatyDomContentRestrictions(
     private val anchorAllowed: Boolean,
+    private val dfnAllowed: Boolean,
     private var figCaptionProhibited: Boolean,
     private val footerAllowed: Boolean,
     private val formAllowed: Boolean,
@@ -43,6 +44,7 @@ internal class KatyDomContentRestrictions(
         true,
         true,
         true,
+        true,
         true
     )
 
@@ -53,6 +55,7 @@ internal class KatyDomContentRestrictions(
     constructor(
         original: KatyDomContentRestrictions,
         anchorAllowed: Boolean = true,
+        dfnAllowed: Boolean = true,
         figCaptionProhibited: Boolean = true,
         footerAllowed: Boolean = true,
         formAllowed: Boolean = true,
@@ -67,6 +70,7 @@ internal class KatyDomContentRestrictions(
         tableAllowed: Boolean = true
     ) : this(
         original.anchorAllowed && anchorAllowed,
+        original.dfnAllowed && dfnAllowed,
         original.figCaptionProhibited && figCaptionProhibited,
         original.footerAllowed && footerAllowed,
         original.formAllowed && formAllowed,
@@ -89,6 +93,14 @@ internal class KatyDomContentRestrictions(
      */
     fun confirmAnchorAllowed() {
         check(anchorAllowed) { "Element type <a> not allowed here" }
+    }
+
+    /**
+     * Checks that a `<dfn>` element is allowed in the content.
+     * @throws IllegalStateException if `<footer>` is not allowed.
+     */
+    fun confirmDfnAllowed() {
+        check(dfnAllowed) { "Element type <dfn> not allowed here." }
     }
 
     /**
@@ -201,6 +213,13 @@ internal class KatyDomContentRestrictions(
             anchorAllowed = false,
             interactiveContentAllowed = false
         )
+    }
+
+    /**
+     * Clones this content restriction object but with `<dfn>` elements disallowed.
+     */
+    fun withDfnNotAllowed(): KatyDomContentRestrictions {
+        return KatyDomContentRestrictions(this, dfnAllowed = false)
     }
 
     /**
