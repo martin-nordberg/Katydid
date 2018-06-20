@@ -3,4 +3,5 @@ rootProject.name = 'KatyDOM'
 
 include 'KatyDOM-JVM'
 include 'KatyDOM-JS'
+include 'KatyDOM-Samples'
 

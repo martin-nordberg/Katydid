@@ -1,0 +1,64 @@
+
+buildscript {
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+
+}
+
+group 'org.barlom'
+version '1.0-SNAPSHOT'
+
+buildDir = "$buildRoot/KatyDOM-Samples"
+
+apply plugin: 'kotlin2js'
+
+compileKotlin2Js {
+    kotlinOptions.sourceMap = true
+    kotlinOptions.sourceMapEmbedSources = 'always'
+}
+
+dependencies {
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
+
+    compile project( ":KatyDOM-JS" )
+
+    testCompile "org.jetbrains.kotlin:kotlin-test-js:$kotlin_version"
+
+}
+
+task copyWebResources(type: Copy) {
+
+    from('../build/KatyDOM-Samples/resources/main/web')
+    include('**/*.*')
+
+    into('scripts') {
+        from('../build/KatyDOM-JS/classes/kotlin/main')
+        include('**/*.*')
+    }
+
+    into('scripts') {
+        from('../build/KatyDOM-Samples/classes/kotlin/main')
+        include('**/*.*')
+    }
+
+    into('../build/website')
+
+}
+
+task unzipKotlinJs(type: Copy) {
+
+    from zipTree('../lib/kotlin-stdlib-js.jar')
+
+    into('../build/website/scripts/lib')
+
+}
+
+build.dependsOn( copyWebResources )
+build.dependsOn( unzipKotlinJs )
