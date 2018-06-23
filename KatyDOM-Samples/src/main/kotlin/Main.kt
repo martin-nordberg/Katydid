@@ -1,13 +1,18 @@
+//
+// (C) Copyright 2018 Martin E. Nordberg III
+// Apache 2.0 License
+//
 
+import org.katydom.samples.greetme.greetMeMain
 import org.katydom.samples.helloworld.helloWorldMain
 import org.w3c.dom.get
 import kotlin.browser.window
 
-
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Main entry point for all the samples. It chooses which sample to run from a variable set in the open HTML file.
+ * Main entry point for all the samples. It chooses which sample to run using a variable set in the
+ * currently open HTML file.
  */
 @Suppress("unused", "UnsafeCastFromDynamic")
 fun main( args: Array<String> ) {
@@ -18,6 +23,9 @@ fun main( args: Array<String> ) {
 
     if (appName == "Hello World") {
         helloWorldMain(args)
+    }
+    else if (appName == "Greet Me") {
+        greetMeMain(args)
     }
     else {
         console.log("ERROR: Unknown application: ", appName)

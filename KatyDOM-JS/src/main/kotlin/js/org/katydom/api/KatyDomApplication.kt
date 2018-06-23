@@ -29,7 +29,7 @@ interface KatyDomApplication<AppState, Msg> {
     fun update(applicationState: AppState, message: Msg): AppState
 
     /**
-     * Constructs the KatyDOM virtual DOM tree for given input application state [appState].
+     * Constructs the KatyDOM virtual DOM tree for given input application state [applicationState].
      * @return the root of the application's virtual DOM tree for given application state.
      */
     fun view(applicationState: AppState): KatyDomFlowContentBuilder<Msg>.() -> Unit
@@ -63,7 +63,7 @@ fun <AppState, Msg> runApplication(
     val queuedMessages: MutableList<Msg> = mutableListOf()
 
     /**
-     * Dispatches a [message] triggered by an event in the latest edition of the view.
+     * Dispatches a sequence of [messages] triggered by an event in the latest edition of the view.
      */
     fun dispatch(messages: Iterable<Msg>) {
 

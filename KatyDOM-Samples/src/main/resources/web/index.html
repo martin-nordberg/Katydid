@@ -2,6 +2,17 @@
 <html>
 <head>
     <title>KatyDOM Sample Applications</title>
+
+    <style>
+        span.summary {
+            font-style: italic;
+        }
+        span.sample-link {
+            display: inline-block;
+            margin: 0.3em 0 0.3em 0;
+            width: 7em;
+        }
+    </style>
 </head>
 <body>
 
@@ -10,7 +21,21 @@
     <ol>
 
         <li>
-            <a href="helloworld.html">Hello World</a>
+            <span class="sample-link">
+                <a href="helloworld.html">Hello World</a>
+            </span>
+            <span class="summary">
+                The simplest possible KatyDOM usage; builds the virtual DOM only once.
+            </span>
+        </li>
+
+        <li>
+            <span class="sample-link">
+                <a href="greetme.html">Greet Me</a>
+            </span>
+            <span class="summary">
+                A bit more complicated, incorporating user events to change the greeting.
+            </span>
         </li>
 
         <!-- TODO: more samples -->

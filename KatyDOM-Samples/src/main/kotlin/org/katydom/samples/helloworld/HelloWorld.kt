@@ -1,3 +1,8 @@
+//
+// (C) Copyright 2018 Martin E. Nordberg III
+// Apache 2.0 License
+//
+
 package org.katydom.samples.helloworld
 
 import o.org.katydom.api.katyDom
@@ -10,7 +15,7 @@ import kotlin.browser.document
 /**
  * Top-level component to build the virtual DOM for the Hello World application.
  */
-val vdomNode = katyDom<Unit> {
+val helloWorldView = katyDom<Unit> {
 
     // This top level element replaces the "#app" div in helloworld.html.
     div("#hello-world-app") {
@@ -47,7 +52,7 @@ fun helloWorldMain(args: Array<String>) {
         // This is a minimal use of the KatyDOM lifecyle: build the virtual DOM and copy it to the real DOM just
         // once. See more advanced samples for the realistic scenario of updating the virtual and real DOMs in
         // response to user input.
-        lifecycle.build(appElement, vdomNode)
+        lifecycle.build(appElement, helloWorldView)
     }
     else {
         console.log("ERROR: Application element div#app not found.")
