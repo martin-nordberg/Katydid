@@ -5,6 +5,7 @@
 
 import org.katydom.samples.greetme.greetMeMain
 import org.katydom.samples.helloworld.helloWorldMain
+import org.katydom.samples.sudokusolver.sudokuSolverMain
 import org.w3c.dom.get
 import kotlin.browser.window
 
@@ -26,6 +27,9 @@ fun main( args: Array<String> ) {
     }
     else if (appName == "Greet Me") {
         greetMeMain(args)
+    }
+    else if (appName == "Sudoku Solver") {
+        sudokuSolverMain(args)
     }
     else {
         console.log("ERROR: Unknown application: ", appName)

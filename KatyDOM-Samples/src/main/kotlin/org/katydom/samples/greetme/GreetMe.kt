@@ -52,7 +52,7 @@ class GreetMeApplication : KatyDomApplication<GreetMeAppState, GreetMeMsg> {
         {
 
             // This top level element replaces the "#app" div in greetme.html.
-            div("#hello-world-app") {
+            div("#greet-me-app") {
 
                 h1 {
                     text("Greet Me")

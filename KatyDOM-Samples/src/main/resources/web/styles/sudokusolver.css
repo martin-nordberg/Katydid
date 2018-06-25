@@ -1,0 +1,30 @@
+
+body {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    padding: 0px;
+}
+
+table.block {
+    border: 2px solid black;
+}
+
+table.game {
+    border: 3px solid black;
+}
+
+td.cell {
+    border: 1px solid black;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 3em;
+    padding: 0.1em;
+    text-align: center;
+    width: 1em;
+}
+
+
