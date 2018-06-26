@@ -11,18 +11,12 @@ import o.org.katydom.builders.KatyDomFlowContentBuilder
 
 //---------------------------------------------------------------------------------------------------------------------
 
-/** Simple model for this application. */
-data class SudokuSolverAppState (
-    // TODO: blocks, cells, candidates
-    val myName : String
-)
-
-//---------------------------------------------------------------------------------------------------------------------
-
 /** Simple message for user events (clicked candidate). */
-data class SudokuSolverMsg (
-    // TODO: candidate clicked, ??
-    val newName : String
+data class SudokuSolverMsg(
+    // TODO: more than just click
+    val cell: Cell,
+    val action: String,
+    val newValue: Int
 )
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -36,14 +30,22 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
      * Initializes the application state for the first time.
      */
     override fun initialize(): SudokuSolverAppState {
-        return SudokuSolverAppState("KatyDOM User")
+        return SudokuSolverAppState()
     }
 
     /**
      * Creates a new application state modified from given [applicationState] by the given [message].
      */
     override fun update(applicationState: SudokuSolverAppState, message: SudokuSolverMsg): SudokuSolverAppState {
-        return SudokuSolverAppState(message.newName)
+
+        if ( message.action == "Set Cell Value") {
+            return applicationState.withCellValueSet(
+                message.cell.row.index, message.cell.column.index, message.newValue
+            )
+        }
+
+        throw IllegalArgumentException( "Unknown action: '${message.action}'.")
+
     }
 
     /**
@@ -77,39 +79,21 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
                             th(key = 9) { text("C9") }
                         }
 
-                        for (i in 1..3) {
+                        for (i in 0..2) {
 
-                            tr(key = 3*i-2) {
+                            tr(key = 3 * i + 1) {
 
                                 th {
-                                    text("R${3*i-2}" )
+                                    text("R${3 * i + 1}")
                                 }
 
-                                for (j in 1..3) {
+                                for (j in 0..2) {
 
-                                    td(".block", key = j, colspan = 3, rowspan=3) {
+                                    val cellGroup = applicationState.board.blocks[3 * i + j]
 
-                                        table(".block") {
+                                    td(".block", key = j, colspan = 3, rowspan = 3) {
 
-                                            for (k in 1..3) {
-
-                                                tr(key = k) {
-
-                                                    for (m in 1..3) {
-
-                                                        td(".cell", key = m) {
-
-                                                            text("1")
-
-                                                        }
-
-                                                    }
-
-                                                }
-
-                                            }
-
-                                        }
+                                        block(cellGroup)
 
                                     }
 
@@ -117,15 +101,15 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
 
                             }
 
-                            tr(key=3*i-1) {
+                            tr(key = 3 * i + 2) {
                                 th {
-                                    text("R${3*i-1}" )
+                                    text("R${3 * i + 2}")
                                 }
                             }
 
-                            tr(key=3*i) {
+                            tr(key = 3 * i + 3) {
                                 th {
-                                    text("R${3*i}" )
+                                    text("R${3 * i + 3}")
                                 }
                             }
 
@@ -138,6 +122,74 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
             }
 
         }
+
+    private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.block(cellGroup: CellGroup) {
+
+        table(".block") {
+
+            for (k in 0..2) {
+
+                tr(key = k) {
+
+                    for (m in 0..2) {
+
+                        td(".cell", key = m) {
+
+                            val cell = cellGroup.cells[3 * k + m]
+                            val v = cell.value
+
+                            classes( "placed-by-user" to (cell.placedByUser ?: false) )
+
+                            if (v != null) {
+                                text("${v+1}")
+                            }
+                            else {
+                                candidates(cell)
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+    private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.candidates(cell: Cell) {
+
+        table(".candidates") {
+
+            for (p in 0..2) {
+
+                tr(key = p) {
+
+                    for (q in 0..2) {
+
+                        val c = 3 * p + q
+
+                        td(".candidate", key = q) {
+
+                            onclick {
+                                listOf(SudokuSolverMsg( cell, "Set Cell Value", c ))
+                            }
+
+                            text(if (cell.candidates[c]) "${c + 1}" else "")
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
 
 }
 

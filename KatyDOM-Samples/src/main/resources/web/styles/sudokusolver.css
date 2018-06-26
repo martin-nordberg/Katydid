@@ -9,12 +9,12 @@ table {
     padding: 0px;
 }
 
-table.block {
-    border: 2px solid black;
-}
-
 table.game {
     border: 3px solid black;
+}
+
+table.block {
+    border: 2px solid black;
 }
 
 td.cell {
@@ -25,6 +25,17 @@ td.cell {
     padding: 0.1em;
     text-align: center;
     width: 1em;
+}
+
+td.candidate {
+    font-size: 0.33em;
+    width: 1em;
+}
+
+td.candidate:hover {
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 
