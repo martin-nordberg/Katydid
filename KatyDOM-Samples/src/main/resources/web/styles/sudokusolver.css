@@ -21,15 +21,21 @@ td.cell {
     border: 1px solid black;
     border-collapse: collapse;
     border-spacing: 0;
-    font-size: 3em;
-    padding: 0.1em;
+    font-size: 50px;
+    height: 66px;
+    padding: 3px;
     text-align: center;
-    width: 1em;
+    width: 66px;
 }
 
-td.candidate {
-    font-size: 0.33em;
-    width: 1em;
+td.cell.solved {
+    color: blue;
+}
+
+table.candidates td {
+    font-size: 12px;
+    height: 20px;
+    width: 20px;
 }
 
 td.candidate:hover {

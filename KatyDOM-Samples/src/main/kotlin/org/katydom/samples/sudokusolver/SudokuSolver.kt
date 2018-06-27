@@ -138,7 +138,7 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
                             val cell = cellGroup.cells[3 * k + m]
                             val v = cell.value
 
-                            classes( "placed-by-user" to (cell.placedByUser ?: false) )
+                            classes( "solved" to cell.solved )
 
                             if (v != null) {
                                 text("${v+1}")
@@ -171,13 +171,19 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
 
                         val c = 3 * p + q
 
-                        td(".candidate", key = q) {
+                        td(key = q) {
 
-                            onclick {
-                                listOf(SudokuSolverMsg( cell, "Set Cell Value", c ))
+                            if ( cell.candidates.contains(c) ) {
+
+                                classes( "candidate" to true )
+
+                                onclick {
+                                    listOf(SudokuSolverMsg( cell, "Set Cell Value", c ))
+                                }
+
+                                text("${c+1}")
+
                             }
-
-                            text(if (cell.candidates[c]) "${c + 1}" else "")
 
                         }
 
