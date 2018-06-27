@@ -11,16 +11,6 @@ import o.org.katydom.builders.KatyDomFlowContentBuilder
 
 //---------------------------------------------------------------------------------------------------------------------
 
-/** Simple message for user events (clicked candidate). */
-data class SudokuSolverMsg(
-    // TODO: more than just click
-    val cell: Cell,
-    val action: String,
-    val newValue: Int
-)
-
-//---------------------------------------------------------------------------------------------------------------------
-
 /**
  * KatyDOM application.
  */
@@ -38,7 +28,7 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
      */
     override fun update(applicationState: SudokuSolverAppState, message: SudokuSolverMsg): SudokuSolverAppState {
 
-        if ( message.action == "Set Cell Value") {
+        if ( message.action == SudokuSolverAction.PLACE_VALUE) {
             return applicationState.withCellValueSet(
                 message.cell.row.index, message.cell.column.index, message.newValue
             )
@@ -178,7 +168,7 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
                                 classes( "candidate" to true )
 
                                 onclick {
-                                    listOf(SudokuSolverMsg( cell, "Set Cell Value", c ))
+                                    listOf(SudokuSolverMsg(cell, SudokuSolverAction.PLACE_VALUE, c ))
                                 }
 
                                 text("${c+1}")
