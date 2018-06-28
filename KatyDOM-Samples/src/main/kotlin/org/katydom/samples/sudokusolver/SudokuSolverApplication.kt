@@ -30,7 +30,13 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
 
         if (message.action == SudokuSolverAction.PLACE_VALUE) {
             return applicationState.withCellValueSet(
-                message.cell.row.index, message.cell.column.index, message.newValue
+                message.rowIndex, message.columnIndex, message.newValue!!
+            )
+        }
+
+        if (message.action == SudokuSolverAction.REMOVE_VALUE) {
+            return applicationState.withCellValueRemoved(
+                message.rowIndex, message.columnIndex
             )
         }
 
@@ -54,7 +60,7 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
 
                 section(key="board") {
 
-                    table(".game") {
+                    table(".board") {
 
                         tr(key = "headings") {
                             th {}
@@ -170,6 +176,18 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
                             classes("solved" to cell.solved)
 
                             if (v != null) {
+
+                                if ( !cell.solved) {
+
+                                    classes("placed" to true)
+
+                                    onclick {
+                                        listOf(SudokuSolverMsg(SudokuSolverAction.REMOVE_VALUE, cell.row.index,
+                                                               cell.column.index, null))
+                                    }
+
+                                }
+
                                 text("${v + 1}")
                             }
                             else {
@@ -207,7 +225,7 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
                                 classes("candidate" to true)
 
                                 onclick {
-                                    listOf(SudokuSolverMsg(SudokuSolverAction.PLACE_VALUE, cell, c))
+                                    listOf(SudokuSolverMsg(SudokuSolverAction.PLACE_VALUE, cell.row.index, cell.column.index, c))
                                 }
 
                                 text("${c + 1}")

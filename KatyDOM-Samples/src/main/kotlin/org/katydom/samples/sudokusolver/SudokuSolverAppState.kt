@@ -256,6 +256,44 @@ class SudokuSolverAppState(
 
 ) {
 
+    fun withCellValueRemoved(rowIndex: Int, colIndex: Int): SudokuSolverAppState {
+
+        val newBoard = Board()
+        val newChanges = mutableListOf<BoardChange>()
+
+        for (i in 0..8) {
+
+            for (j in 0..8) {
+
+                val cell = board.rows[i].cells[j]
+
+                if (cell.row.index == rowIndex && cell.column.index == colIndex) {
+                    continue
+                }
+
+                val newCell = newBoard.rows[i].cells[j]
+
+                val oldValue = cell.value
+                lateinit var candidatesRemoved : List<String>
+                if (oldValue != null && !cell.solved) {
+                    candidatesRemoved = newCell.setValue(oldValue)
+                }
+                else {
+                    continue
+                }
+
+                newChanges.add( BoardChange( "Cell Value Set: ${newCell.name}", candidatesRemoved ) )
+
+            }
+
+        }
+
+        newChanges.addAll( solve(newBoard) )
+
+        return SudokuSolverAppState(newBoard, newChanges)
+
+    }
+
     fun withCellValueSet(rowIndex: Int, colIndex: Int, value: Int): SudokuSolverAppState {
 
         val newBoard = Board()

@@ -1,23 +1,28 @@
 
+/* BODY */
 body {
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
+
+/* TABLE */
 table {
     border-collapse: collapse;
     border-spacing: 0;
     padding: 0px;
 }
 
-table.game {
+
+table.board {
     border: 3px solid black;
 }
+
 
 table.block {
     border: 2px solid black;
 }
 
-td.cell {
+table.block td.cell {
     border: 1px solid black;
     border-collapse: collapse;
     border-spacing: 0;
@@ -28,9 +33,16 @@ td.cell {
     width: 66px;
 }
 
-td.cell.solved {
-    color: blue;
+table.block td.cell.solved {
+    color: green;
 }
+
+table.block td.cell.placed:hover {
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 
 table.candidates td {
     font-size: 12px;
@@ -38,25 +50,26 @@ table.candidates td {
     width: 20px;
 }
 
-td.candidate:hover {
+table.candidates td.candidate:hover {
     color: blue;
     cursor: pointer;
     text-decoration: underline;
 }
 
+
 table.changes tr:nth-child(even) {
     background-color: #f2f2f2
 }
 
-th.change-description,
-td.change-description {
+table.changes th.candidates-removed,
+table.changes td.candidates-removed {
+    text-align: left;
+    width: 450px;
+}
+
+table.changes th.change-description,
+table.changes td.change-description {
     text-align: left;
     vertical-align: top;
     width: 250px;
-}
-
-th.candidates-removed,
-td.candidates-removed {
-    text-align: left;
-    width: 450px;
 }

@@ -8,7 +8,8 @@ package org.katydom.samples.sudokusolver
 //---------------------------------------------------------------------------------------------------------------------
 
 enum class SudokuSolverAction {
-    PLACE_VALUE
+    PLACE_VALUE,
+    REMOVE_VALUE
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -16,8 +17,9 @@ enum class SudokuSolverAction {
 /** Simple message for user events (clicked candidate). */
 data class SudokuSolverMsg(
     val action: SudokuSolverAction,
-    val cell: Cell,
-    val newValue: Int
+    val rowIndex: Int,
+    val columnIndex: Int,
+    val newValue: Int?
 )
 
 //---------------------------------------------------------------------------------------------------------------------
