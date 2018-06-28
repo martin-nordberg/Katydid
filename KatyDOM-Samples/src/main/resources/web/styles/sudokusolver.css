@@ -44,4 +44,19 @@ td.candidate:hover {
     text-decoration: underline;
 }
 
+table.changes tr:nth-child(even) {
+    background-color: #f2f2f2
+}
 
+th.change-description,
+td.change-description {
+    text-align: left;
+    vertical-align: top;
+    width: 250px;
+}
+
+th.candidates-removed,
+td.candidates-removed {
+    text-align: left;
+    width: 450px;
+}

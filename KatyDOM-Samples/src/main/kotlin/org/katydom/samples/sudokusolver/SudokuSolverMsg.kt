@@ -15,8 +15,8 @@ enum class SudokuSolverAction {
 
 /** Simple message for user events (clicked candidate). */
 data class SudokuSolverMsg(
-    val cell: Cell,
     val action: SudokuSolverAction,
+    val cell: Cell,
     val newValue: Int
 )
 

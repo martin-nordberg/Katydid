@@ -8,6 +8,16 @@ package org.katydom.samples.sudokusolver
 
 //---------------------------------------------------------------------------------------------------------------------
 
+data class BoardChange(
+
+    val description: String,
+
+    val candidatesRemoved: List<String>
+
+)
+
+//---------------------------------------------------------------------------------------------------------------------
+
 class Cell {
 
     private lateinit var _block: CellGroup
@@ -43,9 +53,9 @@ class Cell {
         get() {
             val v = _value
             return if (v != null)
-                "R${row.index + 1}C${column.index + 1}#${v + 1}"
+                "${row.name}${column.name}#${v + 1}"
             else
-                "R${row.index + 1}C${column.index + 1}"
+                "${row.name}${column.name}"
         }
 
     var solved: Boolean
@@ -66,17 +76,20 @@ class Cell {
 
     ////
 
-    internal fun removeCandidate(candidate: Int) {
+    internal fun removeCandidate(candidate: Int) : Boolean {
 
         if ( _candidates.remove(candidate) ) {
             row.removeCellCandidate(this,candidate)
             column.removeCellCandidate(this,candidate)
             block.removeCellCandidate(this,candidate)
+            return true
         }
+
+        return false
 
     }
 
-    internal fun setValue(v: Int) {
+    internal fun setValue(v: Int) : List<String> {
 
         for ( c in candidates ) {
             removeCandidate(c)
@@ -84,17 +97,27 @@ class Cell {
 
         _value = v
 
+        val result = mutableListOf<String>()
+
         for ( cell in row.cells ) {
-            cell.removeCandidate(v)
+            if (cell.removeCandidate(v)) {
+                result.add("${cell.name}#${v + 1}")
+            }
         }
 
         for ( cell in column.cells ) {
-            cell.removeCandidate(v)
+            if ( cell.removeCandidate(v) ) {
+                result.add("${cell.name}#${v + 1}")
+            }
         }
 
         for ( cell in block.cells ) {
-            cell.removeCandidate(v)
+            if ( cell.removeCandidate(v) ) {
+                result.add("${cell.name}#${v + 1}")
+            }
         }
+
+        return result
 
     }
 }
@@ -104,6 +127,7 @@ class Cell {
 //---------------------------------------------------------------------------------------------------------------------
 
 class CellGroup(
+    val type: String,
     val index: Int,
     val cells: List<Cell>
 ) {
@@ -125,6 +149,9 @@ class CellGroup(
             cellsList.addAll(cells)
         }
     }
+
+    val name
+        get() = "$type${index+1}"
 
     internal fun removeCellCandidate(cell:Cell, candidate: Int) {
 
@@ -153,39 +180,45 @@ class Board {
     )
 
     val rows = listOf(
-        CellGroup(0, listOf(c[0][0], c[0][1], c[0][2], c[0][3], c[0][4], c[0][5], c[0][6], c[0][7], c[0][8])),
-        CellGroup(1, listOf(c[1][0], c[1][1], c[1][2], c[1][3], c[1][4], c[1][5], c[1][6], c[1][7], c[1][8])),
-        CellGroup(2, listOf(c[2][0], c[2][1], c[2][2], c[2][3], c[2][4], c[2][5], c[2][6], c[2][7], c[2][8])),
-        CellGroup(3, listOf(c[3][0], c[3][1], c[3][2], c[3][3], c[3][4], c[3][5], c[3][6], c[3][7], c[3][8])),
-        CellGroup(4, listOf(c[4][0], c[4][1], c[4][2], c[4][3], c[4][4], c[4][5], c[4][6], c[4][7], c[4][8])),
-        CellGroup(5, listOf(c[5][0], c[5][1], c[5][2], c[5][3], c[5][4], c[5][5], c[5][6], c[5][7], c[5][8])),
-        CellGroup(6, listOf(c[6][0], c[6][1], c[6][2], c[6][3], c[6][4], c[6][5], c[6][6], c[6][7], c[6][8])),
-        CellGroup(7, listOf(c[7][0], c[7][1], c[7][2], c[7][3], c[7][4], c[7][5], c[7][6], c[7][7], c[7][8])),
-        CellGroup(8, listOf(c[8][0], c[8][1], c[8][2], c[8][3], c[8][4], c[8][5], c[8][6], c[8][7], c[8][8]))
+        CellGroup("R", 0, listOf(c[0][0], c[0][1], c[0][2], c[0][3], c[0][4], c[0][5], c[0][6], c[0][7], c[0][8])),
+        CellGroup("R", 1, listOf(c[1][0], c[1][1], c[1][2], c[1][3], c[1][4], c[1][5], c[1][6], c[1][7], c[1][8])),
+        CellGroup("R", 2, listOf(c[2][0], c[2][1], c[2][2], c[2][3], c[2][4], c[2][5], c[2][6], c[2][7], c[2][8])),
+        CellGroup("R", 3, listOf(c[3][0], c[3][1], c[3][2], c[3][3], c[3][4], c[3][5], c[3][6], c[3][7], c[3][8])),
+        CellGroup("R", 4, listOf(c[4][0], c[4][1], c[4][2], c[4][3], c[4][4], c[4][5], c[4][6], c[4][7], c[4][8])),
+        CellGroup("R", 5, listOf(c[5][0], c[5][1], c[5][2], c[5][3], c[5][4], c[5][5], c[5][6], c[5][7], c[5][8])),
+        CellGroup("R", 6, listOf(c[6][0], c[6][1], c[6][2], c[6][3], c[6][4], c[6][5], c[6][6], c[6][7], c[6][8])),
+        CellGroup("R", 7, listOf(c[7][0], c[7][1], c[7][2], c[7][3], c[7][4], c[7][5], c[7][6], c[7][7], c[7][8])),
+        CellGroup("R", 8, listOf(c[8][0], c[8][1], c[8][2], c[8][3], c[8][4], c[8][5], c[8][6], c[8][7], c[8][8]))
     )
 
     val columns = listOf(
-        CellGroup(0, listOf(c[0][0], c[1][0], c[2][0], c[3][0], c[4][0], c[5][0], c[6][0], c[7][0], c[8][0])),
-        CellGroup(1, listOf(c[0][1], c[1][1], c[2][1], c[3][1], c[4][1], c[5][1], c[6][1], c[7][1], c[8][1])),
-        CellGroup(2, listOf(c[0][2], c[1][2], c[2][2], c[3][2], c[4][2], c[5][2], c[6][2], c[7][2], c[8][2])),
-        CellGroup(3, listOf(c[0][3], c[1][3], c[2][3], c[3][3], c[4][3], c[5][3], c[6][3], c[7][3], c[8][3])),
-        CellGroup(4, listOf(c[0][4], c[1][4], c[2][4], c[3][4], c[4][4], c[5][4], c[6][4], c[7][4], c[8][4])),
-        CellGroup(5, listOf(c[0][5], c[1][5], c[2][5], c[3][5], c[4][5], c[5][5], c[6][5], c[7][5], c[8][5])),
-        CellGroup(6, listOf(c[0][6], c[1][6], c[2][6], c[3][6], c[4][6], c[5][6], c[6][6], c[7][6], c[8][6])),
-        CellGroup(7, listOf(c[0][7], c[1][7], c[2][7], c[3][7], c[4][7], c[5][7], c[6][7], c[7][7], c[8][7])),
-        CellGroup(8, listOf(c[0][8], c[1][8], c[2][8], c[3][8], c[4][8], c[5][8], c[6][8], c[7][8], c[8][8]))
+        CellGroup("C", 0, listOf(c[0][0], c[1][0], c[2][0], c[3][0], c[4][0], c[5][0], c[6][0], c[7][0], c[8][0])),
+        CellGroup("C", 1, listOf(c[0][1], c[1][1], c[2][1], c[3][1], c[4][1], c[5][1], c[6][1], c[7][1], c[8][1])),
+        CellGroup("C", 2, listOf(c[0][2], c[1][2], c[2][2], c[3][2], c[4][2], c[5][2], c[6][2], c[7][2], c[8][2])),
+        CellGroup("C", 3, listOf(c[0][3], c[1][3], c[2][3], c[3][3], c[4][3], c[5][3], c[6][3], c[7][3], c[8][3])),
+        CellGroup("C", 4, listOf(c[0][4], c[1][4], c[2][4], c[3][4], c[4][4], c[5][4], c[6][4], c[7][4], c[8][4])),
+        CellGroup("C", 5, listOf(c[0][5], c[1][5], c[2][5], c[3][5], c[4][5], c[5][5], c[6][5], c[7][5], c[8][5])),
+        CellGroup("C", 6, listOf(c[0][6], c[1][6], c[2][6], c[3][6], c[4][6], c[5][6], c[6][6], c[7][6], c[8][6])),
+        CellGroup("C", 7, listOf(c[0][7], c[1][7], c[2][7], c[3][7], c[4][7], c[5][7], c[6][7], c[7][7], c[8][7])),
+        CellGroup("C", 8, listOf(c[0][8], c[1][8], c[2][8], c[3][8], c[4][8], c[5][8], c[6][8], c[7][8], c[8][8]))
     )
 
     val blocks = listOf(
-        CellGroup(0, listOf(c[0][0], c[0][1], c[0][2], c[1][0], c[1][1], c[1][2], c[2][0], c[2][1], c[2][2])),
-        CellGroup(1, listOf(c[0][3], c[0][4], c[0][5], c[1][3], c[1][4], c[1][5], c[2][3], c[2][4], c[2][5])),
-        CellGroup(2, listOf(c[0][6], c[0][7], c[0][8], c[1][6], c[1][7], c[1][8], c[2][6], c[2][7], c[2][8])),
-        CellGroup(3, listOf(c[3][0], c[3][1], c[3][2], c[4][0], c[4][1], c[4][2], c[5][0], c[5][1], c[5][2])),
-        CellGroup(4, listOf(c[3][3], c[3][4], c[3][5], c[4][3], c[4][4], c[4][5], c[5][3], c[5][4], c[5][5])),
-        CellGroup(5, listOf(c[3][6], c[3][7], c[3][8], c[4][6], c[4][7], c[4][8], c[5][6], c[5][7], c[5][8])),
-        CellGroup(6, listOf(c[6][0], c[6][1], c[6][2], c[7][0], c[7][1], c[7][2], c[8][0], c[8][1], c[8][2])),
-        CellGroup(7, listOf(c[6][3], c[6][4], c[6][5], c[7][3], c[7][4], c[7][5], c[8][3], c[8][4], c[8][5])),
-        CellGroup(8, listOf(c[6][6], c[6][7], c[6][8], c[7][6], c[7][7], c[7][8], c[8][6], c[8][7], c[8][8]))
+        CellGroup("Block", 0, listOf(c[0][0], c[0][1], c[0][2], c[1][0], c[1][1], c[1][2], c[2][0], c[2][1], c[2][2])),
+        CellGroup("Block", 1, listOf(c[0][3], c[0][4], c[0][5], c[1][3], c[1][4], c[1][5], c[2][3], c[2][4], c[2][5])),
+        CellGroup("Block", 2, listOf(c[0][6], c[0][7], c[0][8], c[1][6], c[1][7], c[1][8], c[2][6], c[2][7], c[2][8])),
+        CellGroup("Block", 3, listOf(c[3][0], c[3][1], c[3][2], c[4][0], c[4][1], c[4][2], c[5][0], c[5][1], c[5][2])),
+        CellGroup("Block", 4, listOf(c[3][3], c[3][4], c[3][5], c[4][3], c[4][4], c[4][5], c[5][3], c[5][4], c[5][5])),
+        CellGroup("Block", 5, listOf(c[3][6], c[3][7], c[3][8], c[4][6], c[4][7], c[4][8], c[5][6], c[5][7], c[5][8])),
+        CellGroup("Block", 6, listOf(c[6][0], c[6][1], c[6][2], c[7][0], c[7][1], c[7][2], c[8][0], c[8][1], c[8][2])),
+        CellGroup("Block", 7, listOf(c[6][3], c[6][4], c[6][5], c[7][3], c[7][4], c[7][5], c[8][3], c[8][4], c[8][5])),
+        CellGroup("Block", 8, listOf(c[6][6], c[6][7], c[6][8], c[7][6], c[7][7], c[7][8], c[8][6], c[8][7], c[8][8]))
+    )
+
+    val units = listOf(
+        rows[0], rows[1], rows[2], rows[3], rows[4], rows[5], rows[6], rows[7], rows[8],
+        columns[0], columns[1], columns[2], columns[3], columns[4], columns[5], columns[6], columns[7], columns[8],
+        blocks[0], blocks[1], blocks[2], blocks[3], blocks[4], blocks[5], blocks[6], blocks[7], blocks[8]
     )
 
     init {
@@ -210,32 +243,6 @@ class Board {
 
     }
 
-    fun withCellValueSet(rowIndex: Int, colIndex: Int, value: Int): Board {
-
-        val result = Board()
-
-        for ( i in 0..8 ) {
-
-            for ( j in 0..8 ) {
-
-                val cell = this.rows[i].cells[j]
-                val newCell = result.rows[i].cells[j]
-
-                val oldValue = cell.value
-                if ( oldValue != null && !cell.solved ) {
-                    newCell.setValue( oldValue )
-                }
-                else if ( cell.row.index == rowIndex && cell.column.index == colIndex ) {
-                    newCell.setValue( value)
-                }
-
-            }
-
-        }
-
-        return result
-
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -243,17 +250,45 @@ class Board {
 /** Top-level model for this application. */
 class SudokuSolverAppState(
 
-    val board: Board = Board()
+    val board: Board = Board(),
+
+    val changes: List<BoardChange> = listOf()
 
 ) {
 
     fun withCellValueSet(rowIndex: Int, colIndex: Int, value: Int): SudokuSolverAppState {
 
-        val newBoard = this.board.withCellValueSet(rowIndex, colIndex, value)
+        val newBoard = Board()
+        val newChanges = mutableListOf<BoardChange>()
 
-        solve( newBoard )
+        for (i in 0..8) {
 
-        return SudokuSolverAppState( newBoard )
+            for (j in 0..8) {
+
+                val cell = board.rows[i].cells[j]
+                val newCell = newBoard.rows[i].cells[j]
+
+                val oldValue = cell.value
+                lateinit var candidatesRemoved : List<String>
+                if (oldValue != null && !cell.solved) {
+                    candidatesRemoved = newCell.setValue(oldValue)
+                }
+                else if (cell.row.index == rowIndex && cell.column.index == colIndex) {
+                    candidatesRemoved = newCell.setValue(value)
+                }
+                else {
+                    continue
+                }
+
+                newChanges.add( BoardChange( "Cell Value Set: ${newCell.name}", candidatesRemoved ) )
+
+            }
+
+        }
+
+        newChanges.addAll( solve(newBoard) )
+
+        return SudokuSolverAppState(newBoard, newChanges)
 
     }
 
@@ -261,85 +296,77 @@ class SudokuSolverAppState(
 
 //---------------------------------------------------------------------------------------------------------------------
 
-fun solve( board: Board ) {
+fun solveNakedSingles( board: Board ) : List<BoardChange> {
 
-    var changed = true
+    val result = mutableListOf<BoardChange>()
 
-    while ( changed ) {
+    for (row in board.rows) {
 
-        changed = false
+        for (cell in row.cells) {
 
-        // naked singles
-        for (row in board.rows) {
-
-            for (cell in row.cells) {
-
-                if (cell.candidates.size == 1) {
-                    val c = cell.candidates.elementAt(0)
-                    cell.setValue(c)
-                    cell.solved = true
-                    changed = true
-                    console.log("Naked Single: ${cell.name}")
-                }
-
-            }
-
-        }
-
-        if ( changed ) {
-            continue
-        }
-
-        // hidden singles
-        for (row in board.rows) {
-
-            for (c in 0..8) {
-
-                if (row.cellsWithCandidate[c].size == 1) {
-                    val cell = row.cellsWithCandidate[c].elementAt(0)
-                    cell.setValue(c)
-                    cell.solved = true
-                    changed = true
-                    console.log("Hidden Single: ${cell.name} for row R${row.index}.")
-                }
-
-            }
-
-        }
-
-        for (column in board.columns) {
-
-            for (c in 0..8) {
-
-                if (column.cellsWithCandidate[c].size == 1) {
-                    val cell = column.cellsWithCandidate[c].elementAt(0)
-                    cell.setValue(c)
-                    cell.solved = true
-                    changed = true
-                    console.log("Hidden Single: ${cell.name} for row C${column.index}.")
-                }
-
-            }
-
-        }
-
-        for (block in board.blocks) {
-
-            for (c in 0..8) {
-
-                if (block.cellsWithCandidate[c].size == 1) {
-                    val cell = block.cellsWithCandidate[c].elementAt(0)
-                    cell.setValue(c)
-                    cell.solved = true
-                    changed = true
-                    console.log("Hidden Single: ${cell.name} for block ${block.index}.")
-                }
-
+            if (cell.candidates.size == 1) {
+                val c = cell.candidates.elementAt(0)
+                val candidatesRemoved = cell.setValue(c)
+                result.add( BoardChange( "Naked Single: ${cell.name}", candidatesRemoved ) )
+                cell.solved = true
             }
 
         }
 
     }
+
+    return result
+
+}
+
+fun solveHiddenSingles( board: Board ) : List<BoardChange> {
+
+    val result = mutableListOf<BoardChange>()
+
+    for (unit in board.units) {
+
+        for (c in 0..8) {
+
+            if (unit.cellsWithCandidate[c].size == 1) {
+                val cell = unit.cellsWithCandidate[c].elementAt(0)
+                val candidatesRemoved = cell.setValue(c)
+                result.add(BoardChange("Hidden Single: ${cell.name} for ${unit.name}.", candidatesRemoved))
+                cell.solved = true
+            }
+
+        }
+
+    }
+
+    return result
+
+}
+
+fun solve( board: Board ) : List<BoardChange> {
+
+    val result = mutableListOf<BoardChange>()
+
+    while (true) {
+
+        var changes = solveNakedSingles(board)
+
+        if (!changes.isEmpty()) {
+            result.addAll(changes)
+            continue
+        }
+
+        changes = solveHiddenSingles(board)
+
+        if (!changes.isEmpty()) {
+            result.addAll(changes)
+            continue
+        }
+
+        break
+
+    }
+
+    return result
 
 }
 

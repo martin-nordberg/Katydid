@@ -28,13 +28,13 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
      */
     override fun update(applicationState: SudokuSolverAppState, message: SudokuSolverMsg): SudokuSolverAppState {
 
-        if ( message.action == SudokuSolverAction.PLACE_VALUE) {
+        if (message.action == SudokuSolverAction.PLACE_VALUE) {
             return applicationState.withCellValueSet(
                 message.cell.row.index, message.cell.column.index, message.newValue
             )
         }
 
-        throw IllegalArgumentException( "Unknown action: '${message.action}'.")
+        throw IllegalArgumentException("Unknown action: '${message.action}'.")
 
     }
 
@@ -46,13 +46,13 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
         {
 
             // This top level element replaces the "#app" div in greetme.html.
-            main("#sudoku-solver-app") {
+            main("#sudoku-solver-app", style = "margin-left: 30px") {
 
                 h1 {
                     text("Sudoku Solver")
                 }
 
-                section(style = "margin-left: 5em;") {
+                section(key="board") {
 
                     table(".game") {
 
@@ -109,6 +109,45 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
 
                 }
 
+                br {}
+
+                section(key="changes") {
+
+                    table(".changes") {
+
+                        tr {
+
+                            th(".change-description", key=1) {
+                                text("Action")
+                            }
+
+                            th(".candidates-removed", key=2) {
+                                text("Candidates Removed")
+                            }
+
+                        }
+
+                        var row = 1
+                        for (change in applicationState.changes) {
+
+                            tr(key=row++) {
+
+                                td(".change-description", key=1) {
+                                    text(change.description)
+                                }
+
+                                td(".candidates-removed", key=2) {
+                                    text(change.candidatesRemoved.sorted().joinToString(", "))
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
             }
 
         }
@@ -128,10 +167,10 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
                             val cell = cellGroup.cells[3 * k + m]
                             val v = cell.value
 
-                            classes( "solved" to cell.solved )
+                            classes("solved" to cell.solved)
 
                             if (v != null) {
-                                text("${v+1}")
+                                text("${v + 1}")
                             }
                             else {
                                 candidates(cell)
@@ -163,15 +202,15 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
 
                         td(key = q) {
 
-                            if ( cell.candidates.contains(c) ) {
+                            if (cell.candidates.contains(c)) {
 
-                                classes( "candidate" to true )
+                                classes("candidate" to true)
 
                                 onclick {
-                                    listOf(SudokuSolverMsg(cell, SudokuSolverAction.PLACE_VALUE, c ))
+                                    listOf(SudokuSolverMsg(SudokuSolverAction.PLACE_VALUE, cell, c))
                                 }
 
-                                text("${c+1}")
+                                text("${c + 1}")
 
                             }
 
