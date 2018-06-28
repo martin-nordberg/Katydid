@@ -76,12 +76,12 @@ class Cell {
 
     ////
 
-    internal fun removeCandidate(candidate: Int) : Boolean {
+    internal fun removeCandidate(candidate: Int): Boolean {
 
-        if ( _candidates.remove(candidate) ) {
-            row.removeCellCandidate(this,candidate)
-            column.removeCellCandidate(this,candidate)
-            block.removeCellCandidate(this,candidate)
+        if (_candidates.remove(candidate)) {
+            row.removeCellCandidate(this, candidate)
+            column.removeCellCandidate(this, candidate)
+            block.removeCellCandidate(this, candidate)
             return true
         }
 
@@ -89,9 +89,9 @@ class Cell {
 
     }
 
-    internal fun setValue(v: Int) : List<String> {
+    internal fun setValue(v: Int): List<String> {
 
-        for ( c in candidates ) {
+        for (c in candidates) {
             removeCandidate(c)
         }
 
@@ -99,20 +99,20 @@ class Cell {
 
         val result = mutableListOf<String>()
 
-        for ( cell in row.cells ) {
+        for (cell in row.cells) {
             if (cell.removeCandidate(v)) {
                 result.add("${cell.name}#${v + 1}")
             }
         }
 
-        for ( cell in column.cells ) {
-            if ( cell.removeCandidate(v) ) {
+        for (cell in column.cells) {
+            if (cell.removeCandidate(v)) {
                 result.add("${cell.name}#${v + 1}")
             }
         }
 
-        for ( cell in block.cells ) {
-            if ( cell.removeCandidate(v) ) {
+        for (cell in block.cells) {
+            if (cell.removeCandidate(v)) {
                 result.add("${cell.name}#${v + 1}")
             }
         }
@@ -121,7 +121,6 @@ class Cell {
 
     }
 }
-
 
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -145,20 +144,16 @@ class CellGroup(
     )
 
     init {
-        for ( cellsList in cellsWithCandidate ) {
+        for (cellsList in cellsWithCandidate) {
             cellsList.addAll(cells)
         }
     }
 
     val name
-        get() = "$type${index+1}"
+        get() = "$type${index + 1}"
 
-    internal fun removeCellCandidate(cell:Cell, candidate: Int) {
-
-        // TODO: return list of actual removals
-
+    internal fun removeCellCandidate(cell: Cell, candidate: Int) {
         cellsWithCandidate[candidate].remove(cell)
-
     }
 
 }
@@ -274,7 +269,7 @@ class SudokuSolverAppState(
                 val newCell = newBoard.rows[i].cells[j]
 
                 val oldValue = cell.value
-                lateinit var candidatesRemoved : List<String>
+                lateinit var candidatesRemoved: List<String>
                 if (oldValue != null && !cell.solved) {
                     candidatesRemoved = newCell.setValue(oldValue)
                 }
@@ -282,13 +277,13 @@ class SudokuSolverAppState(
                     continue
                 }
 
-                newChanges.add( BoardChange( "Cell Value Set: ${newCell.name}", candidatesRemoved ) )
+                newChanges.add(BoardChange("Cell Value Set: ${newCell.name}", candidatesRemoved))
 
             }
 
         }
 
-        newChanges.addAll( solve(newBoard) )
+        newChanges.addAll(solve(newBoard))
 
         return SudokuSolverAppState(newBoard, newChanges)
 
@@ -307,24 +302,24 @@ class SudokuSolverAppState(
                 val newCell = newBoard.rows[i].cells[j]
 
                 val oldValue = cell.value
-                lateinit var candidatesRemoved : List<String>
-                if (oldValue != null && !cell.solved) {
-                    candidatesRemoved = newCell.setValue(oldValue)
-                }
-                else if (cell.row.index == rowIndex && cell.column.index == colIndex) {
-                    candidatesRemoved = newCell.setValue(value)
-                }
-                else {
-                    continue
-                }
+                val candidatesRemoved =
+                    if (oldValue != null && !cell.solved) {
+                        newCell.setValue(oldValue)
+                    }
+                    else if (cell.row.index == rowIndex && cell.column.index == colIndex) {
+                        newCell.setValue(value)
+                    }
+                    else {
+                        continue
+                    }
 
-                newChanges.add( BoardChange( "Cell Value Set: ${newCell.name}", candidatesRemoved ) )
+                newChanges.add(BoardChange("Cell Value Set: ${newCell.name}", candidatesRemoved))
 
             }
 
         }
 
-        newChanges.addAll( solve(newBoard) )
+        newChanges.addAll(solve(newBoard))
 
         return SudokuSolverAppState(newBoard, newChanges)
 
@@ -334,7 +329,7 @@ class SudokuSolverAppState(
 
 //---------------------------------------------------------------------------------------------------------------------
 
-fun solveNakedSingles( board: Board ) : List<BoardChange> {
+fun solveNakedSingles(board: Board): List<BoardChange> {
 
     val result = mutableListOf<BoardChange>()
 
@@ -345,7 +340,7 @@ fun solveNakedSingles( board: Board ) : List<BoardChange> {
             if (cell.candidates.size == 1) {
                 val c = cell.candidates.elementAt(0)
                 val candidatesRemoved = cell.setValue(c)
-                result.add( BoardChange( "Naked Single: ${cell.name}", candidatesRemoved ) )
+                result.add(BoardChange("Naked Single: ${cell.name}", candidatesRemoved))
                 cell.solved = true
             }
 
@@ -357,7 +352,7 @@ fun solveNakedSingles( board: Board ) : List<BoardChange> {
 
 }
 
-fun solveHiddenSingles( board: Board ) : List<BoardChange> {
+fun solveHiddenSingles(board: Board): List<BoardChange> {
 
     val result = mutableListOf<BoardChange>()
 
@@ -380,7 +375,7 @@ fun solveHiddenSingles( board: Board ) : List<BoardChange> {
 
 }
 
-fun solveNakedPairs( board: Board ) : List<BoardChange> {
+fun solveNakedPairs(board: Board): List<BoardChange> {
 
     val result = mutableListOf<BoardChange>()
 
@@ -390,7 +385,7 @@ fun solveNakedPairs( board: Board ) : List<BoardChange> {
 
             val cell1 = unit.cells[u1]
 
-            for ( u2 in (u1+1)..8 ) {
+            for (u2 in (u1 + 1)..8) {
 
                 val cell2 = unit.cells[u2]
 
@@ -401,17 +396,17 @@ fun solveNakedPairs( board: Board ) : List<BoardChange> {
 
                     val candidatesRemoved = mutableListOf<String>()
 
-                    for ( u in 0..8 ) {
+                    for (u in 0..8) {
 
-                        if ( u != u1 && u != u2 ) {
+                        if (u != u1 && u != u2) {
 
                             val cell = unit.cells[u]
 
-                            if ( cell.removeCandidate(c1) ) {
+                            if (cell.removeCandidate(c1)) {
                                 candidatesRemoved.add("${cell.name}#${c1 + 1}")
                             }
 
-                            if ( cell.removeCandidate(c2) ) {
+                            if (cell.removeCandidate(c2)) {
                                 candidatesRemoved.add("${cell.name}#${c2 + 1}")
                             }
 
@@ -419,8 +414,9 @@ fun solveNakedPairs( board: Board ) : List<BoardChange> {
 
                     }
 
-                    if ( candidatesRemoved.isNotEmpty()) {
-                        result.add( BoardChange("Naked Pair: ${cell1.name}/${cell2.name} in ${unit.name}", candidatesRemoved))
+                    if (candidatesRemoved.isNotEmpty()) {
+                        result.add(
+                            BoardChange("Naked Pair: ${cell1.name}/${cell2.name} in ${unit.name}", candidatesRemoved))
                     }
 
                 }
@@ -435,7 +431,7 @@ fun solveNakedPairs( board: Board ) : List<BoardChange> {
 
 }
 
-fun solve( board: Board ) : List<BoardChange> {
+fun solve(board: Board): List<BoardChange> {
 
     val result = mutableListOf<BoardChange>()
 

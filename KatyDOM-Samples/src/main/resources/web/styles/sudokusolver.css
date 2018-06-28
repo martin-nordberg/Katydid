@@ -5,6 +5,17 @@ body {
 }
 
 
+/* SECTION */
+section {
+    display: inline-block;
+    float: left;
+}
+
+section#changes {
+    max-height: 700px;
+    overflow-y: scroll;
+}
+
 /* TABLE */
 table {
     border-collapse: collapse;
@@ -63,7 +74,9 @@ table.changes tr:nth-child(even) {
 
 table.changes th.candidates-removed,
 table.changes td.candidates-removed {
+    font-size: 15px;
     text-align: left;
+    vertical-align: top;
     width: 450px;
 }
 

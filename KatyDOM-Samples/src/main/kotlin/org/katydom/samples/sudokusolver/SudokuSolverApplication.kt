@@ -12,7 +12,7 @@ import o.org.katydom.builders.KatyDomFlowContentBuilder
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * KatyDOM application.
+ * KatyDOM application for solving Sudoku.
  */
 class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuSolverMsg> {
 
@@ -58,98 +58,75 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
                     text("Sudoku Solver")
                 }
 
-                section(key="board") {
+                board(applicationState)
 
-                    table(".board") {
+                changes(applicationState)
 
-                        tr(key = "headings") {
-                            th {}
-                            th(key = 1) { text("C1") }
-                            th(key = 2) { text("C2") }
-                            th(key = 3) { text("C3") }
-                            th(key = 4) { text("C4") }
-                            th(key = 5) { text("C5") }
-                            th(key = 6) { text("C6") }
-                            th(key = 7) { text("C7") }
-                            th(key = 8) { text("C8") }
-                            th(key = 9) { text("C9") }
-                        }
+            }
 
-                        for (i in 0..2) {
+        }
 
-                            tr(key = 3 * i + 1) {
+    /**
+     * Generates the virtual DOM for the Sudoku board as a whole.
+     */
+    private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.board(
+        applicationState: SudokuSolverAppState
+    ) {
 
-                                th {
-                                    text("R${3 * i + 1}")
-                                }
+        section("#board") {
 
-                                for (j in 0..2) {
+            span(style="font-weight: bold") {
+                text( "Board")
+            }
 
-                                    val cellGroup = applicationState.board.blocks[3 * i + j]
+            table(".board") {
 
-                                    td(".block", key = j, colspan = 3, rowspan = 3) {
+                tr(key = "headings") {
 
-                                        block(cellGroup)
+                    th {}
 
-                                    }
+                    for (columnIndex in 1..9) {
 
-                                }
-
-                            }
-
-                            tr(key = 3 * i + 2) {
-                                th {
-                                    text("R${3 * i + 2}")
-                                }
-                            }
-
-                            tr(key = 3 * i + 3) {
-                                th {
-                                    text("R${3 * i + 3}")
-                                }
-                            }
-
+                        th(key = columnIndex) {
+                            text("C$columnIndex")
                         }
 
                     }
 
                 }
 
-                br {}
+                for (i in 0..2) {
 
-                section(key="changes") {
+                    tr(key = 3 * i + 1) {
 
-                    table(".changes") {
-
-                        tr {
-
-                            th(".change-description", key=1) {
-                                text("Action")
-                            }
-
-                            th(".candidates-removed", key=2) {
-                                text("Candidates Removed")
-                            }
-
+                        th {
+                            text("R${3 * i + 1}")
                         }
 
-                        var row = 1
-                        for (change in applicationState.changes) {
+                        for (j in 0..2) {
 
-                            tr(key=row++) {
+                            val cellGroup = applicationState.board.blocks[3 * i + j]
 
-                                td(".change-description", key=1) {
-                                    text(change.description)
-                                }
+                            td(".block", key = j, colspan = 3, rowspan = 3) {
 
-                                td(".candidates-removed", key=2) {
-                                    text(change.candidatesRemoved.sorted().joinToString(", "))
-                                }
+                                block(cellGroup)
 
                             }
 
                         }
 
+                    }
+
+                    tr(key = 3 * i + 2) {
+                        th {
+                            text("R${3 * i + 2}")
+                        }
+                    }
+
+                    tr(key = 3 * i + 3) {
+                        th {
+                            text("R${3 * i + 3}")
+                        }
                     }
 
                 }
@@ -158,6 +135,11 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
 
         }
 
+    }
+
+    /**
+     * Generates the virtual DOM for one block within the Sudoku board.
+     */
     private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.block(cellGroup: CellGroup) {
 
         table(".block") {
@@ -177,7 +159,7 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
 
                             if (v != null) {
 
-                                if ( !cell.solved) {
+                                if (!cell.solved) {
 
                                     classes("placed" to true)
 
@@ -206,6 +188,9 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
 
     }
 
+    /**
+     * Generates the virtual DOM for one cell of the Sudoku board.
+     */
     private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.candidates(cell: Cell) {
 
         table(".candidates") {
@@ -225,13 +210,60 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
                                 classes("candidate" to true)
 
                                 onclick {
-                                    listOf(SudokuSolverMsg(SudokuSolverAction.PLACE_VALUE, cell.row.index, cell.column.index, c))
+                                    listOf(SudokuSolverMsg(SudokuSolverAction.PLACE_VALUE, cell.row.index,
+                                                           cell.column.index, c))
                                 }
 
                                 text("${c + 1}")
 
                             }
 
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+    /**
+     * Generates the table of changes and candidate removals.
+     */
+    private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.changes(
+        applicationState: SudokuSolverAppState
+    ) {
+
+        section("#changes", style = "margin-left: 30px") {
+
+            table(".changes") {
+
+                tr {
+
+                    th(".change-description", key = 1) {
+                        text("Action")
+                    }
+
+                    th(".candidates-removed", key = 2) {
+                        text("Candidates Removed")
+                    }
+
+                }
+
+                var row = 1
+                for (change in applicationState.changes) {
+
+                    tr(key = row++) {
+
+                        td(".change-description", key = 1) {
+                            text(change.description)
+                        }
+
+                        td(".candidates-removed", key = 2) {
+                            text(change.candidatesRemoved.sorted().joinToString(", "))
                         }
 
                     }
