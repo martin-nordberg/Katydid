@@ -330,8 +330,63 @@ fun solveHiddenSingles( board: Board ) : List<BoardChange> {
             if (unit.cellsWithCandidate[c].size == 1) {
                 val cell = unit.cellsWithCandidate[c].elementAt(0)
                 val candidatesRemoved = cell.setValue(c)
-                result.add(BoardChange("Hidden Single: ${cell.name} for ${unit.name}.", candidatesRemoved))
+                result.add(BoardChange("Hidden Single: ${cell.name} in ${unit.name}", candidatesRemoved))
                 cell.solved = true
+            }
+
+        }
+
+    }
+
+    return result
+
+}
+
+fun solveNakedPairs( board: Board ) : List<BoardChange> {
+
+    val result = mutableListOf<BoardChange>()
+
+    for (unit in board.units) {
+
+        for (u1 in 0..8) {
+
+            val cell1 = unit.cells[u1]
+
+            for ( u2 in (u1+1)..8 ) {
+
+                val cell2 = unit.cells[u2]
+
+                if (cell1.candidates.size == 2 && cell1.candidates == cell2.candidates) {
+
+                    val c1 = cell1.candidates.elementAt(0)
+                    val c2 = cell1.candidates.elementAt(1)
+
+                    val candidatesRemoved = mutableListOf<String>()
+
+                    for ( u in 0..8 ) {
+
+                        if ( u != u1 && u != u2 ) {
+
+                            val cell = unit.cells[u]
+
+                            if ( cell.removeCandidate(c1) ) {
+                                candidatesRemoved.add("${cell.name}#${c1 + 1}")
+                            }
+
+                            if ( cell.removeCandidate(c2) ) {
+                                candidatesRemoved.add("${cell.name}#${c2 + 1}")
+                            }
+
+                        }
+
+                    }
+
+                    if ( candidatesRemoved.isNotEmpty()) {
+                        result.add( BoardChange("Naked Pair: ${cell1.name}/${cell2.name} in ${unit.name}", candidatesRemoved))
+                    }
+
+                }
+
             }
 
         }
@@ -350,14 +405,21 @@ fun solve( board: Board ) : List<BoardChange> {
 
         var changes = solveNakedSingles(board)
 
-        if (!changes.isEmpty()) {
+        if (changes.isNotEmpty()) {
             result.addAll(changes)
             continue
         }
 
         changes = solveHiddenSingles(board)
 
-        if (!changes.isEmpty()) {
+        if (changes.isNotEmpty()) {
+            result.addAll(changes)
+            continue
+        }
+
+        changes = solveNakedPairs(board)
+
+        if (changes.isNotEmpty()) {
             result.addAll(changes)
             continue
         }
