@@ -9,7 +9,8 @@ package org.katydom.samples.sudokusolver
 
 enum class SudokuSolverAction {
     PLACE_VALUE,
-    REMOVE_VALUE
+    REMOVE_VALUE,
+    SETTINGS_IS_X_SUDOKU
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -19,7 +20,8 @@ data class SudokuSolverMsg(
     val action: SudokuSolverAction,
     val rowIndex: Int,
     val columnIndex: Int,
-    val newValue: Int?
+    val newValue: Int?,
+    val newIsX: Boolean?
 )
 
 //---------------------------------------------------------------------------------------------------------------------

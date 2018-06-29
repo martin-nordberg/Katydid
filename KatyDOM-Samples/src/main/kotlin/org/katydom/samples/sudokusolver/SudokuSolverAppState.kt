@@ -12,6 +12,8 @@ data class BoardChange(
 
     val description: String,
 
+    val cellValueSet: String,
+
     val candidatesRemoved: List<String>
 
 )
@@ -26,9 +28,13 @@ class Cell {
 
     private lateinit var _column: CellGroup
 
-    private var _solved: Boolean = false
+    private var _diagonal0: CellGroup? = null
+
+    private var _diagonal1: CellGroup? = null
 
     private lateinit var _row: CellGroup
+
+    private var _solved: Boolean = false
 
     private var _value: Int? = null
 
@@ -47,6 +53,18 @@ class Cell {
         get() = _column
         internal set(c) {
             _column = c
+        }
+
+    var diagonal0: CellGroup?
+        get() = _diagonal0
+        internal set(d) {
+            _diagonal0 = d
+        }
+
+    var diagonal1: CellGroup?
+        get() = _diagonal1
+        internal set(d) {
+            _diagonal1 = d
         }
 
     val name: String
@@ -82,6 +100,8 @@ class Cell {
             row.removeCellCandidate(this, candidate)
             column.removeCellCandidate(this, candidate)
             block.removeCellCandidate(this, candidate)
+            diagonal0?.removeCellCandidate(this, candidate)
+            diagonal1?.removeCellCandidate(this, candidate)
             return true
         }
 
@@ -117,9 +137,22 @@ class Cell {
             }
         }
 
+        for (cell in diagonal0?.cells ?: listOf()) {
+            if (cell.removeCandidate(v)) {
+                result.add("${cell.name}#${v + 1}")
+            }
+        }
+
+        for (cell in diagonal1?.cells ?: listOf()) {
+            if (cell.removeCandidate(v)) {
+                result.add("${cell.name}#${v + 1}")
+            }
+        }
+
         return result
 
     }
+
 }
 
 
@@ -160,7 +193,9 @@ class CellGroup(
 
 //---------------------------------------------------------------------------------------------------------------------
 
-class Board {
+class Board(
+    val isXSudoku: Boolean
+) {
 
     private val c: List<List<Cell>> = listOf(
         listOf(Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell()),
@@ -210,11 +245,33 @@ class Board {
         CellGroup("Block", 8, listOf(c[6][6], c[6][7], c[6][8], c[7][6], c[7][7], c[7][8], c[8][6], c[8][7], c[8][8]))
     )
 
-    val units = listOf(
-        rows[0], rows[1], rows[2], rows[3], rows[4], rows[5], rows[6], rows[7], rows[8],
-        columns[0], columns[1], columns[2], columns[3], columns[4], columns[5], columns[6], columns[7], columns[8],
-        blocks[0], blocks[1], blocks[2], blocks[3], blocks[4], blocks[5], blocks[6], blocks[7], blocks[8]
-    )
+    val diagonals =
+        if (isXSudoku)
+            listOf(
+                CellGroup("Diag", 0,
+                          listOf(c[0][0], c[1][1], c[2][2], c[3][3], c[4][4], c[5][5], c[6][6], c[7][7], c[8][8])),
+                CellGroup("Diag", 1,
+                          listOf(c[8][0], c[7][1], c[6][2], c[5][3], c[4][4], c[3][5], c[2][6], c[1][7], c[0][8]))
+            )
+        else
+            listOf()
+
+    val units =
+        if (isXSudoku)
+            listOf(
+                rows[0], rows[1], rows[2], rows[3], rows[4], rows[5], rows[6], rows[7], rows[8],
+                columns[0], columns[1], columns[2], columns[3], columns[4], columns[5], columns[6], columns[7],
+                columns[8],
+                blocks[0], blocks[1], blocks[2], blocks[3], blocks[4], blocks[5], blocks[6], blocks[7], blocks[8],
+                diagonals[0], diagonals[1]
+            )
+        else
+            listOf(
+                rows[0], rows[1], rows[2], rows[3], rows[4], rows[5], rows[6], rows[7], rows[8],
+                columns[0], columns[1], columns[2], columns[3], columns[4], columns[5], columns[6], columns[7],
+                columns[8],
+                blocks[0], blocks[1], blocks[2], blocks[3], blocks[4], blocks[5], blocks[6], blocks[7], blocks[8]
+            )
 
     init {
 
@@ -236,24 +293,49 @@ class Board {
             }
         }
 
+        if (diagonals.isNotEmpty()) {
+
+            for (cell in diagonals[0].cells) {
+                cell.diagonal0 = diagonals[0]
+            }
+
+            for (cell in diagonals[1].cells) {
+                cell.diagonal1 = diagonals[1]
+            }
+
+        }
+
     }
 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 
+data class SudokuSolverSettings(
+
+    val isXSudoku: Boolean = false
+
+)
+
+//---------------------------------------------------------------------------------------------------------------------
+
 /** Top-level model for this application. */
 class SudokuSolverAppState(
 
-    val board: Board = Board(),
+    val board: Board = Board(false),
 
-    val changes: List<BoardChange> = listOf()
+    val changes: List<BoardChange> = listOf(),
+
+    val settings: SudokuSolverSettings = SudokuSolverSettings()
 
 ) {
 
+    /**
+     * Clones this board but removes one placed value.
+     */
     fun withCellValueRemoved(rowIndex: Int, colIndex: Int): SudokuSolverAppState {
 
-        val newBoard = Board()
+        val newBoard = Board(settings.isXSudoku)
         val newChanges = mutableListOf<BoardChange>()
 
         for (i in 0..8) {
@@ -277,7 +359,7 @@ class SudokuSolverAppState(
                     continue
                 }
 
-                newChanges.add(BoardChange("Cell Value Set: ${newCell.name}", candidatesRemoved))
+                newChanges.add(BoardChange("Cell Value Set", newCell.name, candidatesRemoved))
 
             }
 
@@ -285,13 +367,16 @@ class SudokuSolverAppState(
 
         newChanges.addAll(solve(newBoard))
 
-        return SudokuSolverAppState(newBoard, newChanges)
+        return SudokuSolverAppState(newBoard, newChanges, settings)
 
     }
 
+    /**
+     * Clones this board but with one additional cell value set.
+     */
     fun withCellValueSet(rowIndex: Int, colIndex: Int, value: Int): SudokuSolverAppState {
 
-        val newBoard = Board()
+        val newBoard = Board(settings.isXSudoku)
         val newChanges = mutableListOf<BoardChange>()
 
         for (i in 0..8) {
@@ -313,7 +398,7 @@ class SudokuSolverAppState(
                         continue
                     }
 
-                newChanges.add(BoardChange("Cell Value Set: ${newCell.name}", candidatesRemoved))
+                newChanges.add(BoardChange("Cell Value Set", newCell.name, candidatesRemoved))
 
             }
 
@@ -321,7 +406,44 @@ class SudokuSolverAppState(
 
         newChanges.addAll(solve(newBoard))
 
-        return SudokuSolverAppState(newBoard, newChanges)
+        return SudokuSolverAppState(newBoard, newChanges, settings)
+
+    }
+
+    /**
+     * Clones this board but changes whether it is an X-Sudoku.
+     */
+    fun withIsXChanged(newIsX: Boolean): SudokuSolverAppState {
+
+        val newSettings = SudokuSolverSettings(newIsX)
+        val newBoard = Board(newSettings.isXSudoku)
+        val newChanges = mutableListOf<BoardChange>()
+
+        for (i in 0..8) {
+
+            for (j in 0..8) {
+
+                val cell = board.rows[i].cells[j]
+                val newCell = newBoard.rows[i].cells[j]
+
+                val oldValue = cell.value
+                lateinit var candidatesRemoved: List<String>
+                if (oldValue != null && !cell.solved) {
+                    candidatesRemoved = newCell.setValue(oldValue)
+                }
+                else {
+                    continue
+                }
+
+                newChanges.add(BoardChange("Cell Value Set", newCell.name, candidatesRemoved))
+
+            }
+
+        }
+
+        newChanges.addAll(solve(newBoard))
+
+        return SudokuSolverAppState(newBoard, newChanges, newSettings)
 
     }
 
@@ -340,7 +462,7 @@ fun solveNakedSingles(board: Board): List<BoardChange> {
             if (cell.candidates.size == 1) {
                 val c = cell.candidates.elementAt(0)
                 val candidatesRemoved = cell.setValue(c)
-                result.add(BoardChange("Naked Single: ${cell.name}", candidatesRemoved))
+                result.add(BoardChange("Naked Single", cell.name, candidatesRemoved))
                 cell.solved = true
             }
 
@@ -363,7 +485,7 @@ fun solveHiddenSingles(board: Board): List<BoardChange> {
             if (unit.cellsWithCandidate[c].size == 1) {
                 val cell = unit.cellsWithCandidate[c].elementAt(0)
                 val candidatesRemoved = cell.setValue(c)
-                result.add(BoardChange("Hidden Single: ${cell.name} in ${unit.name}", candidatesRemoved))
+                result.add(BoardChange("Hidden Single in ${unit.name}", cell.name, candidatesRemoved))
                 cell.solved = true
             }
 
@@ -416,7 +538,8 @@ fun solveNakedPairs(board: Board): List<BoardChange> {
 
                     if (candidatesRemoved.isNotEmpty()) {
                         result.add(
-                            BoardChange("Naked Pair: ${cell1.name}/${cell2.name} in ${unit.name}", candidatesRemoved))
+                            BoardChange("Naked Pair: ${cell1.name}/${cell2.name} in ${unit.name}", "",
+                                        candidatesRemoved))
                     }
 
                 }

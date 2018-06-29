@@ -12,8 +12,13 @@ section {
 }
 
 section#changes {
-    max-height: 700px;
+    max-height: 850px;
     overflow-y: scroll;
+}
+
+section#settings {
+    clear: both;
+    margin-top: 15px;
 }
 
 /* TABLE */
@@ -80,9 +85,16 @@ table.changes td.candidates-removed {
     width: 450px;
 }
 
+table.changes th.cell-value-set,
+table.changes td.cell-value-set {
+    text-align: left;
+    vertical-align: top;
+    width: 100px;
+}
+
 table.changes th.change-description,
 table.changes td.change-description {
     text-align: left;
     vertical-align: top;
-    width: 250px;
+    width: 200px;
 }

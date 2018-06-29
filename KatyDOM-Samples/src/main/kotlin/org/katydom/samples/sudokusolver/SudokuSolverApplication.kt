@@ -40,6 +40,12 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
             )
         }
 
+        if (message.action == SudokuSolverAction.SETTINGS_IS_X_SUDOKU) {
+            return applicationState.withIsXChanged(
+                message.newIsX!!
+            )
+        }
+
         throw IllegalArgumentException("Unknown action: '${message.action}'.")
 
     }
@@ -58,13 +64,51 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
                     text("Sudoku Solver")
                 }
 
-                board(applicationState)
+                section {
+
+                    board(applicationState)
+
+                    settings(applicationState)
+
+                }
 
                 changes(applicationState)
 
             }
 
         }
+
+    private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.settings(
+        applicationState: SudokuSolverAppState
+    ) {
+
+        section("#settings") {
+
+            span(style = "font-weight: bold") {
+                text("Settings")
+            }
+
+            form {
+
+                inputCheckbox("is-x-sudoku", checked = applicationState.settings.isXSudoku) {
+
+                    onchange { event ->
+                        val newValue: Boolean? = (event.target.asDynamic().checked as Boolean)
+
+                        listOf(SudokuSolverMsg(SudokuSolverAction.SETTINGS_IS_X_SUDOKU, 0, 0, null, newValue))
+                    }
+
+                }
+
+                label(`for` = "is-x-sudoku") {
+                    text("X-Sudoku (unique values on diagonals)")
+                }
+
+            }
+
+        }
+
+    }
 
     /**
      * Generates the virtual DOM for the Sudoku board as a whole.
@@ -75,8 +119,8 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
 
         section("#board") {
 
-            span(style="font-weight: bold") {
-                text( "Board")
+            span(style = "font-weight: bold") {
+                text("Board")
             }
 
             table(".board") {
@@ -118,15 +162,19 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
                     }
 
                     tr(key = 3 * i + 2) {
+
                         th {
                             text("R${3 * i + 2}")
                         }
+
                     }
 
                     tr(key = 3 * i + 3) {
+
                         th {
                             text("R${3 * i + 3}")
                         }
+
                     }
 
                 }
@@ -165,7 +213,7 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
 
                                     onclick {
                                         listOf(SudokuSolverMsg(SudokuSolverAction.REMOVE_VALUE, cell.row.index,
-                                                               cell.column.index, null))
+                                                               cell.column.index, null, null))
                                     }
 
                                 }
@@ -211,7 +259,7 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
 
                                 onclick {
                                     listOf(SudokuSolverMsg(SudokuSolverAction.PLACE_VALUE, cell.row.index,
-                                                           cell.column.index, c))
+                                                           cell.column.index, c, null))
                                 }
 
                                 text("${c + 1}")
@@ -247,7 +295,11 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
                         text("Action")
                     }
 
-                    th(".candidates-removed", key = 2) {
+                    th(".cell-value-set", key = 2) {
+                        text("Value Set")
+                    }
+
+                    th(".candidates-removed", key = 3) {
                         text("Candidates Removed")
                     }
 
@@ -262,8 +314,26 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
                             text(change.description)
                         }
 
-                        td(".candidates-removed", key = 2) {
+                        td(".cell-value-set", key = 2) {
+                            text(change.cellValueSet)
+                        }
+
+                        td(".candidates-removed", key = 3) {
                             text(change.candidatesRemoved.sorted().joinToString(", "))
+                        }
+
+                    }
+
+                }
+
+                if (applicationState.changes.isEmpty()) {
+
+                    tr(key = row) {
+
+                        td(colspan = 3) {
+
+                            text("Click any small candidate number in the board to begin defining a puzzle.")
+
                         }
 
                     }
