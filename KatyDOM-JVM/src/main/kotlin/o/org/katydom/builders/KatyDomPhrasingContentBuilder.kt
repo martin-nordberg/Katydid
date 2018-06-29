@@ -1819,6 +1819,7 @@ interface KatyDomPhrasingContentBuilder<Msg> : KatyDomEmbeddedContentBuilder<Msg
 
     /**
      * Adds a label element with its attributes as the next child of the element under construction.
+     * Note: If key is not specified, the `for` attribute will be used as the key.
      * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
      * @param key a non-DOM key for this KatyDOM element that is unique among all the siblings of this element.
      * @param accesskey a string specifying the HTML accesskey value.

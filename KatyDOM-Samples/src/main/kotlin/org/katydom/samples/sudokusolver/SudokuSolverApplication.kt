@@ -28,25 +28,39 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
      */
     override fun update(applicationState: SudokuSolverAppState, message: SudokuSolverMsg): SudokuSolverAppState {
 
-        if (message.action == SudokuSolverAction.PLACE_VALUE) {
-            return applicationState.withCellValueSet(
-                message.rowIndex, message.columnIndex, message.newValue!!
-            )
-        }
+        when (message) {
 
-        if (message.action == SudokuSolverAction.REMOVE_VALUE) {
-            return applicationState.withCellValueRemoved(
-                message.rowIndex, message.columnIndex
-            )
-        }
+            is PlaceValueMsg     ->
+                return applicationState.withCellValueSet(
+                    message.rowIndex, message.columnIndex, message.newValue
+                )
 
-        if (message.action == SudokuSolverAction.SETTINGS_IS_X_SUDOKU) {
-            return applicationState.withIsXChanged(
-                message.newIsX!!
-            )
-        }
+            is RemoveValueMsg    ->
+                return applicationState.withCellValueRemoved(
+                    message.rowIndex, message.columnIndex
+                )
 
-        throw IllegalArgumentException("Unknown action: '${message.action}'.")
+            is ChangeSettingsMsg ->
+                when (message.settingsChange) {
+
+                    is ChangeIsSolvedAutomatically ->
+                        return applicationState.withSettingsChanged(
+                            applicationState.settings.isXSudoku,
+                            message.settingsChange.newIsSolvedAutomatically
+                        )
+
+                    is ChangeIsXSudoku ->
+                        return applicationState.withSettingsChanged(
+                            message.settingsChange.newIsXSudoku,
+                            applicationState.settings.isSolvedAutomatically
+                        )
+
+                }
+
+            else                 ->
+                throw IllegalArgumentException("Unknown action: '${message}'.")
+
+        }
 
     }
 
@@ -90,18 +104,32 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
 
             form {
 
-                inputCheckbox("is-x-sudoku", checked = applicationState.settings.isXSudoku) {
+                inputCheckbox("#is-x-sudoku", checked = applicationState.settings.isXSudoku) {
 
                     onchange { event ->
-                        val newValue: Boolean? = (event.target.asDynamic().checked as Boolean)
-
-                        listOf(SudokuSolverMsg(SudokuSolverAction.SETTINGS_IS_X_SUDOKU, 0, 0, null, newValue))
+                        val newValue: Boolean = (event.target.asDynamic().checked as Boolean)
+                        listOf(ChangeSettingsMsg(ChangeIsXSudoku(newValue)))
                     }
 
                 }
 
                 label(`for` = "is-x-sudoku") {
                     text("X-Sudoku (unique values on diagonals)")
+                }
+
+                br {}
+
+                inputCheckbox("#is-solved-automatically", checked = applicationState.settings.isSolvedAutomatically) {
+
+                    onchange { event ->
+                        val newValue: Boolean = (event.target.asDynamic().checked as Boolean)
+                        listOf(ChangeSettingsMsg(ChangeIsSolvedAutomatically(newValue)))
+                    }
+
+                }
+
+                label(`for` = "is-solved-automatically") {
+                    text("Solve automatically")
                 }
 
             }
@@ -212,8 +240,7 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
                                     classes("placed" to true)
 
                                     onclick {
-                                        listOf(SudokuSolverMsg(SudokuSolverAction.REMOVE_VALUE, cell.row.index,
-                                                               cell.column.index, null, null))
+                                        listOf(RemoveValueMsg(cell.row.index, cell.column.index))
                                     }
 
                                 }
@@ -258,8 +285,7 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
                                 classes("candidate" to true)
 
                                 onclick {
-                                    listOf(SudokuSolverMsg(SudokuSolverAction.PLACE_VALUE, cell.row.index,
-                                                           cell.column.index, c, null))
+                                    listOf(PlaceValueMsg(cell.row.index, cell.column.index, c))
                                 }
 
                                 text("${c + 1}")

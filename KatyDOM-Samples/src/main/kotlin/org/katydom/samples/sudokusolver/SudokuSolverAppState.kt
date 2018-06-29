@@ -313,7 +313,9 @@ class Board(
 
 data class SudokuSolverSettings(
 
-    val isXSudoku: Boolean = false
+    val isXSudoku: Boolean = false,
+
+    val isSolvedAutomatically: Boolean = true
 
 )
 
@@ -365,7 +367,9 @@ class SudokuSolverAppState(
 
         }
 
-        newChanges.addAll(solve(newBoard))
+        if ( settings.isSolvedAutomatically) {
+            newChanges.addAll(solve(newBoard))
+        }
 
         return SudokuSolverAppState(newBoard, newChanges, settings)
 
@@ -404,18 +408,23 @@ class SudokuSolverAppState(
 
         }
 
-        newChanges.addAll(solve(newBoard))
+        if (settings.isSolvedAutomatically) {
+            newChanges.addAll(solve(newBoard))
+        }
 
         return SudokuSolverAppState(newBoard, newChanges, settings)
 
     }
 
     /**
-     * Clones this board but changes whether it is an X-Sudoku.
+     * Clones this board but changes its settings.
      */
-    fun withIsXChanged(newIsX: Boolean): SudokuSolverAppState {
+    fun withSettingsChanged(
+        newIsXSudoku: Boolean,
+        newIsSolvedAutomatically: Boolean
+    ): SudokuSolverAppState {
 
-        val newSettings = SudokuSolverSettings(newIsX)
+        val newSettings = SudokuSolverSettings(newIsXSudoku,newIsSolvedAutomatically)
         val newBoard = Board(newSettings.isXSudoku)
         val newChanges = mutableListOf<BoardChange>()
 
@@ -427,21 +436,18 @@ class SudokuSolverAppState(
                 val newCell = newBoard.rows[i].cells[j]
 
                 val oldValue = cell.value
-                lateinit var candidatesRemoved: List<String>
-                if (oldValue != null && !cell.solved) {
-                    candidatesRemoved = newCell.setValue(oldValue)
+                if (oldValue != null && !cell.solved && newCell.candidates.contains(oldValue)) {
+                    val candidatesRemoved = newCell.setValue(oldValue)
+                    newChanges.add(BoardChange("Cell Value Set", newCell.name, candidatesRemoved))
                 }
-                else {
-                    continue
-                }
-
-                newChanges.add(BoardChange("Cell Value Set", newCell.name, candidatesRemoved))
 
             }
 
         }
 
-        newChanges.addAll(solve(newBoard))
+        if(newIsSolvedAutomatically) {
+            newChanges.addAll(solve(newBoard))
+        }
 
         return SudokuSolverAppState(newBoard, newChanges, newSettings)
 

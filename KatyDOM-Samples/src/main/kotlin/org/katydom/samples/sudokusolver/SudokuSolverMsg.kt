@@ -7,21 +7,37 @@ package org.katydom.samples.sudokusolver
 
 //---------------------------------------------------------------------------------------------------------------------
 
-enum class SudokuSolverAction {
-    PLACE_VALUE,
-    REMOVE_VALUE,
-    SETTINGS_IS_X_SUDOKU
-}
+/** Simple message for user events (clicked candidate). */
+sealed class SudokuSolverMsg
+
+/** Message when a candidate has been clicked. */
+data class PlaceValueMsg(
+    val rowIndex: Int,
+    val columnIndex: Int,
+    val newValue: Int
+) : SudokuSolverMsg()
+
+/** Message when a value has been clicked. */
+data class RemoveValueMsg(
+    val rowIndex: Int,
+    val columnIndex: Int
+) : SudokuSolverMsg()
+
+/** Message for a change in settings. */
+data class ChangeSettingsMsg(
+    val settingsChange : SettingsChange
+) : SudokuSolverMsg()
 
 //---------------------------------------------------------------------------------------------------------------------
 
-/** Simple message for user events (clicked candidate). */
-data class SudokuSolverMsg(
-    val action: SudokuSolverAction,
-    val rowIndex: Int,
-    val columnIndex: Int,
-    val newValue: Int?,
-    val newIsX: Boolean?
-)
+sealed class SettingsChange
+
+data class ChangeIsXSudoku(
+    val newIsXSudoku: Boolean
+) : SettingsChange()
+
+data class ChangeIsSolvedAutomatically(
+    val newIsSolvedAutomatically: Boolean
+) : SettingsChange()
 
 //---------------------------------------------------------------------------------------------------------------------
