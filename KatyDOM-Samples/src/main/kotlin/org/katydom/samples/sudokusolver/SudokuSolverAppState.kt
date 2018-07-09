@@ -22,81 +22,38 @@ data class BoardChange(
 
 class Cell {
 
-    private lateinit var _block: CellGroup
+    lateinit var block: CellGroup
 
-    private val _candidates = mutableSetOf(0, 1, 2, 3, 4, 5, 6, 7, 8)
+    val candidates = mutableSetOf(0, 1, 2, 3, 4, 5, 6, 7, 8)
 
-    private lateinit var _column: CellGroup
+    lateinit var column: CellGroup
 
-    private var _diagonal0: CellGroup? = null
+    var diagonal0: CellGroup? = null
 
-    private var _diagonal1: CellGroup? = null
+    var diagonal1: CellGroup? = null
 
-    private lateinit var _row: CellGroup
+    lateinit var row: CellGroup
 
-    private var _solved: Boolean = false
+    var solved: Boolean = false
 
-    private var _value: Int? = null
+    var value: Int? = null
 
     ////
 
-    var block: CellGroup
-        get() = _block
-        internal set(b) {
-            _block = b
-        }
-
-    val candidates: Set<Int>
-        get() = _candidates
-
-    var column: CellGroup
-        get() = _column
-        internal set(c) {
-            _column = c
-        }
-
-    var diagonal0: CellGroup?
-        get() = _diagonal0
-        internal set(d) {
-            _diagonal0 = d
-        }
-
-    var diagonal1: CellGroup?
-        get() = _diagonal1
-        internal set(d) {
-            _diagonal1 = d
-        }
-
     val name: String
         get() {
-            val v = _value
+            val v = value
             return if (v != null)
                 "${row.name}${column.name}#${v + 1}"
             else
                 "${row.name}${column.name}"
         }
 
-    var solved: Boolean
-        get() = _solved
-        internal set(s) {
-            _solved = s
-        }
-
-    var row: CellGroup
-        get() = _row
-        internal set(r) {
-            _row = r
-        }
-
-    val value: Int?
-        get() = _value
-
-
     ////
 
-    internal fun removeCandidate(candidate: Int): Boolean {
+    fun removeCandidate(candidate: Int): Boolean {
 
-        if (_candidates.remove(candidate)) {
+        if (candidates.remove(candidate)) {
             row.removeCellCandidate(this, candidate)
             column.removeCellCandidate(this, candidate)
             block.removeCellCandidate(this, candidate)
@@ -109,13 +66,13 @@ class Cell {
 
     }
 
-    internal fun setValue(v: Int): List<String> {
+    fun setValue(v: Int): List<String> {
 
         for (c in candidates) {
             removeCandidate(c)
         }
 
-        _value = v
+        value = v
 
         val result = mutableListOf<String>()
 
@@ -164,7 +121,7 @@ class CellGroup(
     val cells: List<Cell>
 ) {
 
-    internal val cellsWithCandidate = listOf(
+    val cellsWithCandidate = listOf(
         mutableListOf<Cell>(),
         mutableListOf(),
         mutableListOf(),
@@ -185,7 +142,7 @@ class CellGroup(
     val name
         get() = "$type${index + 1}"
 
-    internal fun removeCellCandidate(cell: Cell, candidate: Int) {
+    fun removeCellCandidate(cell: Cell, candidate: Int) {
         cellsWithCandidate[candidate].remove(cell)
     }
 
@@ -311,6 +268,7 @@ class Board(
 
 //---------------------------------------------------------------------------------------------------------------------
 
+/** Behavioral settings for how the board is defined and updated. */
 data class SudokuSolverSettings(
 
     val isXSudoku: Boolean = false,
@@ -322,7 +280,7 @@ data class SudokuSolverSettings(
 //---------------------------------------------------------------------------------------------------------------------
 
 /** Top-level model for this application. */
-class SudokuSolverAppState(
+data class SudokuSolverAppState(
 
     val board: Board = Board(false),
 
@@ -330,270 +288,7 @@ class SudokuSolverAppState(
 
     val settings: SudokuSolverSettings = SudokuSolverSettings()
 
-) {
-
-    /**
-     * Clones this board but removes one placed value.
-     */
-    fun withCellValueRemoved(rowIndex: Int, colIndex: Int): SudokuSolverAppState {
-
-        val newBoard = Board(settings.isXSudoku)
-        val newChanges = mutableListOf<BoardChange>()
-
-        for (i in 0..8) {
-
-            for (j in 0..8) {
-
-                val cell = board.rows[i].cells[j]
-
-                if (cell.row.index == rowIndex && cell.column.index == colIndex) {
-                    continue
-                }
-
-                val newCell = newBoard.rows[i].cells[j]
-
-                val oldValue = cell.value
-                lateinit var candidatesRemoved: List<String>
-                if (oldValue != null && !cell.solved) {
-                    candidatesRemoved = newCell.setValue(oldValue)
-                }
-                else {
-                    continue
-                }
-
-                newChanges.add(BoardChange("Cell Value Set", newCell.name, candidatesRemoved))
-
-            }
-
-        }
-
-        if ( settings.isSolvedAutomatically) {
-            newChanges.addAll(solve(newBoard))
-        }
-
-        return SudokuSolverAppState(newBoard, newChanges, settings)
-
-    }
-
-    /**
-     * Clones this board but with one additional cell value set.
-     */
-    fun withCellValueSet(rowIndex: Int, colIndex: Int, value: Int): SudokuSolverAppState {
-
-        val newBoard = Board(settings.isXSudoku)
-        val newChanges = mutableListOf<BoardChange>()
-
-        for (i in 0..8) {
-
-            for (j in 0..8) {
-
-                val cell = board.rows[i].cells[j]
-                val newCell = newBoard.rows[i].cells[j]
-
-                val oldValue = cell.value
-                val candidatesRemoved =
-                    if (oldValue != null && !cell.solved) {
-                        newCell.setValue(oldValue)
-                    }
-                    else if (cell.row.index == rowIndex && cell.column.index == colIndex) {
-                        newCell.setValue(value)
-                    }
-                    else {
-                        continue
-                    }
-
-                newChanges.add(BoardChange("Cell Value Set", newCell.name, candidatesRemoved))
-
-            }
-
-        }
-
-        if (settings.isSolvedAutomatically) {
-            newChanges.addAll(solve(newBoard))
-        }
-
-        return SudokuSolverAppState(newBoard, newChanges, settings)
-
-    }
-
-    /**
-     * Clones this board but changes its settings.
-     */
-    fun withSettingsChanged(
-        newIsXSudoku: Boolean,
-        newIsSolvedAutomatically: Boolean
-    ): SudokuSolverAppState {
-
-        val newSettings = SudokuSolverSettings(newIsXSudoku,newIsSolvedAutomatically)
-        val newBoard = Board(newSettings.isXSudoku)
-        val newChanges = mutableListOf<BoardChange>()
-
-        for (i in 0..8) {
-
-            for (j in 0..8) {
-
-                val cell = board.rows[i].cells[j]
-                val newCell = newBoard.rows[i].cells[j]
-
-                val oldValue = cell.value
-                if (oldValue != null && !cell.solved && newCell.candidates.contains(oldValue)) {
-                    val candidatesRemoved = newCell.setValue(oldValue)
-                    newChanges.add(BoardChange("Cell Value Set", newCell.name, candidatesRemoved))
-                }
-
-            }
-
-        }
-
-        if(newIsSolvedAutomatically) {
-            newChanges.addAll(solve(newBoard))
-        }
-
-        return SudokuSolverAppState(newBoard, newChanges, newSettings)
-
-    }
-
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-
-fun solveNakedSingles(board: Board): List<BoardChange> {
-
-    val result = mutableListOf<BoardChange>()
-
-    for (row in board.rows) {
-
-        for (cell in row.cells) {
-
-            if (cell.candidates.size == 1) {
-                val c = cell.candidates.elementAt(0)
-                val candidatesRemoved = cell.setValue(c)
-                result.add(BoardChange("Naked Single", cell.name, candidatesRemoved))
-                cell.solved = true
-            }
-
-        }
-
-    }
-
-    return result
-
-}
-
-fun solveHiddenSingles(board: Board): List<BoardChange> {
-
-    val result = mutableListOf<BoardChange>()
-
-    for (unit in board.units) {
-
-        for (c in 0..8) {
-
-            if (unit.cellsWithCandidate[c].size == 1) {
-                val cell = unit.cellsWithCandidate[c].elementAt(0)
-                val candidatesRemoved = cell.setValue(c)
-                result.add(BoardChange("Hidden Single in ${unit.name}", cell.name, candidatesRemoved))
-                cell.solved = true
-            }
-
-        }
-
-    }
-
-    return result
-
-}
-
-fun solveNakedPairs(board: Board): List<BoardChange> {
-
-    val result = mutableListOf<BoardChange>()
-
-    for (unit in board.units) {
-
-        for (u1 in 0..8) {
-
-            val cell1 = unit.cells[u1]
-
-            for (u2 in (u1 + 1)..8) {
-
-                val cell2 = unit.cells[u2]
-
-                if (cell1.candidates.size == 2 && cell1.candidates == cell2.candidates) {
-
-                    val c1 = cell1.candidates.elementAt(0)
-                    val c2 = cell1.candidates.elementAt(1)
-
-                    val candidatesRemoved = mutableListOf<String>()
-
-                    for (u in 0..8) {
-
-                        if (u != u1 && u != u2) {
-
-                            val cell = unit.cells[u]
-
-                            if (cell.removeCandidate(c1)) {
-                                candidatesRemoved.add("${cell.name}#${c1 + 1}")
-                            }
-
-                            if (cell.removeCandidate(c2)) {
-                                candidatesRemoved.add("${cell.name}#${c2 + 1}")
-                            }
-
-                        }
-
-                    }
-
-                    if (candidatesRemoved.isNotEmpty()) {
-                        result.add(
-                            BoardChange("Naked Pair: ${cell1.name}/${cell2.name} in ${unit.name}", "",
-                                        candidatesRemoved))
-                    }
-
-                }
-
-            }
-
-        }
-
-    }
-
-    return result
-
-}
-
-fun solve(board: Board): List<BoardChange> {
-
-    val result = mutableListOf<BoardChange>()
-
-    while (true) {
-
-        var changes = solveNakedSingles(board)
-
-        if (changes.isNotEmpty()) {
-            result.addAll(changes)
-            continue
-        }
-
-        changes = solveHiddenSingles(board)
-
-        if (changes.isNotEmpty()) {
-            result.addAll(changes)
-            continue
-        }
-
-        changes = solveNakedPairs(board)
-
-        if (changes.isNotEmpty()) {
-            result.addAll(changes)
-            continue
-        }
-
-        break
-
-    }
-
-    return result
-
-}
+)
 
 //---------------------------------------------------------------------------------------------------------------------
 

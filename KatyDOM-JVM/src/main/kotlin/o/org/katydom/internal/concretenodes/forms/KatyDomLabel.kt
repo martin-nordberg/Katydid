@@ -31,7 +31,7 @@ internal class KatyDomLabel<Msg>(
     title: String?,
     translate: Boolean?,
     defineContent: KatyDomPhrasingContentBuilder<Msg>.() -> Unit
-) : KatyDomHtmlElement<Msg>(selector, key ?: `for`?.prependIndent("for-"), accesskey, contenteditable, dir,
+) : KatyDomHtmlElement<Msg>(selector, key ?: `for`?.concat("-label"), accesskey, contenteditable, dir,
                             hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {

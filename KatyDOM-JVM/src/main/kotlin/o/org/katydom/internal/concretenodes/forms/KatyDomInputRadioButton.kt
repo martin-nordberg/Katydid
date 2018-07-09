@@ -37,7 +37,7 @@ internal class KatyDomInputRadioButton<Msg>(
     translate: Boolean?,
     value: String?,
     defineAttributes: KatyDomAttributesContentBuilder<Msg>.() -> Unit
-) : KatyDomHtmlElement<Msg>(selector, key ?: name, accesskey, contenteditable, dir,
+) : KatyDomHtmlElement<Msg>(selector, key, accesskey, contenteditable, dir,
                             hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {

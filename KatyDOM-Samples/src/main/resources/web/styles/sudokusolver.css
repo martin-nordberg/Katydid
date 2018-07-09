@@ -21,6 +21,11 @@ section#settings {
     margin-top: 15px;
 }
 
+section#settings fieldset {
+    border: none;
+    margin: 3px 3px 3px 3px;
+}
+
 /* TABLE */
 table {
     border-collapse: collapse;
