@@ -54,14 +54,23 @@ table.block td.cell {
     width: 66px;
 }
 
+table.block td.cell.guessed {
+    color: blue;
+}
+
 table.block td.cell.solved {
     color: green;
 }
 
-table.block td.cell.placed:hover {
-    color: blue;
+table.block td.cell.guessed:hover,
+table.block td.cell.defined:hover {
+    color: purple;
     cursor: pointer;
     text-decoration: underline;
+}
+
+table.block td.cell.unfillable {
+    background-color: pink;
 }
 
 

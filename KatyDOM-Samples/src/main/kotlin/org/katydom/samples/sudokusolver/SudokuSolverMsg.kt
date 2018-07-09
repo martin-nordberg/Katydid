@@ -25,7 +25,7 @@ data class RemoveValueMsg(
 
 /** Message for a change in settings. */
 data class ChangeSettingsMsg(
-    val settingsChange : SettingsChange
+    val settingsChange: SettingsChange
 ) : SudokuSolverMsg()
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -38,6 +38,10 @@ data class ChangeIsXSudoku(
 
 data class ChangeIsSolvedAutomatically(
     val newIsSolvedAutomatically: Boolean
+) : SettingsChange()
+
+data class ChangeIsUserSolving(
+    val newIsUserSolving: Boolean
 ) : SettingsChange()
 
 //---------------------------------------------------------------------------------------------------------------------

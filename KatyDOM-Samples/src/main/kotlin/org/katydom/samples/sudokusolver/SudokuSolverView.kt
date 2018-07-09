@@ -10,13 +10,13 @@ import o.org.katydom.builders.KatyDomFlowContentBuilder
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Constructs the KatyDOM virtual DOM tree for given input application state [applicationState].
+ * Constructs the KatyDOM virtual DOM tree for given input [applicationState].
  * @return the root of the application's virtual DOM tree for given application state.
  */
 fun viewSudokuSolver(applicationState: SudokuSolverAppState): KatyDomFlowContentBuilder<SudokuSolverMsg>.() -> Unit =
     {
 
-        // This top level element replaces the "#app" div in greetme.html.
+        // This top level element replaces the "#app" div in sudokusolver.html.
         main("#sudoku-solver-app", style = "margin-left: 30px") {
 
             h1 {
@@ -52,14 +52,14 @@ private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.settings(
             text("Settings")
         }
 
-        form(key="settings") {
+        form(key = "settings") {
 
-            fieldset( key="is-x-sudoku" ) {
+            fieldset(key = "is-x-sudoku") {
 
                 inputRadioButton(
                     "#is-not-x-sudoku",
                     checked = !applicationState.settings.isXSudoku,
-                    name = "is-x-sudoku-name",
+                    name = "is-x-sudoku",
                     value = "false"
                 ) {
 
@@ -78,8 +78,8 @@ private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.settings(
                 inputRadioButton(
                     "#is-x-sudoku",
                     checked = applicationState.settings.isXSudoku,
-                    name = "is-x-sudoku-name",
-                    style="margin-left:15px;",
+                    name = "is-x-sudoku",
+                    style = "margin-left:15px;",
                     value = "true"
                 ) {
 
@@ -97,7 +97,7 @@ private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.settings(
 
             }
 
-            fieldset(key="is-solved-automatically") {
+            fieldset(key = "is-solved-automatically") {
 
                 inputCheckbox("#is-solved-automatically", checked = applicationState.settings.isSolvedAutomatically) {
 
@@ -110,6 +110,35 @@ private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.settings(
 
                 label(`for` = "is-solved-automatically") {
                     text("Solve automatically")
+                }
+
+            }
+
+            if (!applicationState.settings.isSolvedAutomatically) {
+
+                fieldset(key = "is-solving") {
+
+                    span(key = 1) {
+                        text("I am currently ")
+                    }
+
+                    select("#is-solving") {
+
+                        onchange { event ->
+                            val newValue: Boolean = (event.target.asDynamic().value as String).toBoolean()
+                            listOf(ChangeSettingsMsg(ChangeIsUserSolving(newValue)))
+                        }
+
+                        option(key = false, label = "defining", value = "false") {}
+
+                        option(key = true, label = "solving", value = "true") {}
+
+                    }
+
+                    span(key = 2) {
+                        text(" the puzzle.")
+                    }
+
                 }
 
             }
@@ -137,6 +166,7 @@ private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.board(
 
         table(".board") {
 
+            // Top row has column headings.
             tr(key = "headings") {
 
                 th {}
@@ -151,8 +181,10 @@ private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.board(
 
             }
 
+            // Loop through three rows of blocks.
             for (i in 0..2) {
 
+                // First row heading plus block itself spanning three rows
                 tr(key = 3 * i + 1) {
 
                     th {
@@ -173,6 +205,7 @@ private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.board(
 
                 }
 
+                // Second row heading
                 tr(key = 3 * i + 2) {
 
                     th {
@@ -181,6 +214,7 @@ private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.board(
 
                 }
 
+                // Third row heading
                 tr(key = 3 * i + 3) {
 
                     th {
@@ -217,13 +251,13 @@ private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.block(cellGroup: CellGrou
                         val cell = cellGroup.cells[3 * k + m]
                         val v = cell.value
 
-                        classes("solved" to cell.solved)
+                        classes("solved" to (cell.state == Cell.State.SOLVED))
+                        classes("defined" to (cell.state == Cell.State.DEFINED))
+                        classes("guessed" to (cell.state == Cell.State.GUESSED))
 
                         if (v != null) {
 
-                            if (!cell.solved) {
-
-                                classes("placed" to true)
+                            if (cell.state != Cell.State.SOLVED) {
 
                                 onclick {
                                     listOf(RemoveValueMsg(cell.row.index, cell.column.index))
@@ -232,9 +266,13 @@ private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.block(cellGroup: CellGrou
                             }
 
                             text("${v + 1}")
+
+                        }
+                        else if (cell.candidates.isNotEmpty()) {
+                            candidates(cell)
                         }
                         else {
-                            candidates(cell)
+                            classes("unfillable" to true)
                         }
 
                     }
@@ -252,7 +290,7 @@ private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.block(cellGroup: CellGrou
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Generates the virtual DOM for one cell of the Sudoku board.
+ * Generates the virtual DOM for one cell of the Sudoku board when it has not yet been defined or solved.
  */
 private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.candidates(cell: Cell) {
 

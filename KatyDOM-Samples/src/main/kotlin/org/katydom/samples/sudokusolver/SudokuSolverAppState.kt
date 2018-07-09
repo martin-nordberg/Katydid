@@ -22,6 +22,13 @@ data class BoardChange(
 
 class Cell {
 
+    enum class State {
+        UNSET,
+        DEFINED,
+        GUESSED,
+        SOLVED
+    }
+
     lateinit var block: CellGroup
 
     val candidates = mutableSetOf(0, 1, 2, 3, 4, 5, 6, 7, 8)
@@ -34,7 +41,7 @@ class Cell {
 
     lateinit var row: CellGroup
 
-    var solved: Boolean = false
+    var state: State = State.UNSET
 
     var value: Int? = null
 
@@ -66,43 +73,44 @@ class Cell {
 
     }
 
-    fun setValue(v: Int): List<String> {
+    fun setValue(newValue: Int, newState: Cell.State): List<String> {
 
         for (c in candidates) {
             removeCandidate(c)
         }
 
-        value = v
+        value = newValue
+        state = newState
 
         val result = mutableListOf<String>()
 
         for (cell in row.cells) {
-            if (cell.removeCandidate(v)) {
-                result.add("${cell.name}#${v + 1}")
+            if (cell.removeCandidate(newValue)) {
+                result.add("${cell.name}#${newValue + 1}")
             }
         }
 
         for (cell in column.cells) {
-            if (cell.removeCandidate(v)) {
-                result.add("${cell.name}#${v + 1}")
+            if (cell.removeCandidate(newValue)) {
+                result.add("${cell.name}#${newValue + 1}")
             }
         }
 
         for (cell in block.cells) {
-            if (cell.removeCandidate(v)) {
-                result.add("${cell.name}#${v + 1}")
+            if (cell.removeCandidate(newValue)) {
+                result.add("${cell.name}#${newValue + 1}")
             }
         }
 
         for (cell in diagonal0?.cells ?: listOf()) {
-            if (cell.removeCandidate(v)) {
-                result.add("${cell.name}#${v + 1}")
+            if (cell.removeCandidate(newValue)) {
+                result.add("${cell.name}#${newValue + 1}")
             }
         }
 
         for (cell in diagonal1?.cells ?: listOf()) {
-            if (cell.removeCandidate(v)) {
-                result.add("${cell.name}#${v + 1}")
+            if (cell.removeCandidate(newValue)) {
+                result.add("${cell.name}#${newValue + 1}")
             }
         }
 
@@ -273,7 +281,9 @@ data class SudokuSolverSettings(
 
     val isXSudoku: Boolean = false,
 
-    val isSolvedAutomatically: Boolean = true
+    val isSolvedAutomatically: Boolean = true,
+
+    val isUserSolving: Boolean = false
 
 )
 

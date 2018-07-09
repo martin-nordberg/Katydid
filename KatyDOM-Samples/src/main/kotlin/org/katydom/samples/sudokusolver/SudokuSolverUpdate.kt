@@ -34,13 +34,22 @@ fun updateSudokuSolver(
                 is ChangeIsSolvedAutomatically ->
                     applicationState.withSettingsChanged(
                         applicationState.settings.isXSudoku,
-                        message.settingsChange.newIsSolvedAutomatically
+                        message.settingsChange.newIsSolvedAutomatically,
+                        false
                     )
 
-                is ChangeIsXSudoku ->
+                is ChangeIsUserSolving         ->
+                    applicationState.withSettingsChanged(
+                        applicationState.settings.isXSudoku,
+                        applicationState.settings.isSolvedAutomatically,
+                        message.settingsChange.newIsUserSolving
+                    )
+
+                is ChangeIsXSudoku             ->
                     applicationState.withSettingsChanged(
                         message.settingsChange.newIsXSudoku,
-                        applicationState.settings.isSolvedAutomatically
+                        applicationState.settings.isSolvedAutomatically,
+                        applicationState.settings.isUserSolving
                     )
 
             }
@@ -73,8 +82,8 @@ fun SudokuSolverAppState.withCellValueRemoved(rowIndex: Int, colIndex: Int): Sud
 
             val oldValue = cell.value
             lateinit var candidatesRemoved: List<String>
-            if (oldValue != null && !cell.solved) {
-                candidatesRemoved = newCell.setValue(oldValue)
+            if (oldValue != null && cell.state != Cell.State.SOLVED) {
+                candidatesRemoved = newCell.setValue(oldValue, cell.state)
             }
             else {
                 continue
@@ -113,11 +122,12 @@ fun SudokuSolverAppState.withCellValueSet(rowIndex: Int, colIndex: Int, value: I
 
             val oldValue = cell.value
             val candidatesRemoved =
-                if (oldValue != null && !cell.solved) {
-                    newCell.setValue(oldValue)
+                if (oldValue != null && (cell.state == Cell.State.DEFINED || settings.isUserSolving)) {
+                    newCell.setValue(oldValue, cell.state)
                 }
                 else if (cell.row.index == rowIndex && cell.column.index == colIndex) {
-                    newCell.setValue(value)
+                    val newState = if (settings.isUserSolving) Cell.State.GUESSED else Cell.State.DEFINED
+                    newCell.setValue(value, newState)
                 }
                 else {
                     continue
@@ -144,10 +154,11 @@ fun SudokuSolverAppState.withCellValueSet(rowIndex: Int, colIndex: Int, value: I
  */
 fun SudokuSolverAppState.withSettingsChanged(
     newIsXSudoku: Boolean,
-    newIsSolvedAutomatically: Boolean
+    newIsSolvedAutomatically: Boolean,
+    newIsUserSolving: Boolean
 ): SudokuSolverAppState {
 
-    val newSettings = SudokuSolverSettings(newIsXSudoku, newIsSolvedAutomatically)
+    val newSettings = SudokuSolverSettings(newIsXSudoku, newIsSolvedAutomatically, newIsUserSolving)
     val newBoard = Board(newSettings.isXSudoku)
     val newChanges = mutableListOf<BoardChange>()
 
@@ -159,8 +170,9 @@ fun SudokuSolverAppState.withSettingsChanged(
             val newCell = newBoard.rows[i].cells[j]
 
             val oldValue = cell.value
-            if (oldValue != null && !cell.solved && newCell.candidates.contains(oldValue)) {
-                val candidatesRemoved = newCell.setValue(oldValue)
+            if (oldValue != null && newCell.candidates.contains(
+                    oldValue) && (cell.state == Cell.State.DEFINED || newSettings.isUserSolving)) {
+                val candidatesRemoved = newCell.setValue(oldValue, cell.state)
                 newChanges.add(BoardChange("Cell Value Set", newCell.name, candidatesRemoved))
             }
 
@@ -225,9 +237,8 @@ private fun solveNakedSingles(board: Board): List<BoardChange> {
 
             if (cell.candidates.size == 1) {
                 val c = cell.candidates.elementAt(0)
-                val candidatesRemoved = cell.setValue(c)
+                val candidatesRemoved = cell.setValue(c, Cell.State.SOLVED)
                 result.add(BoardChange("Naked Single", cell.name, candidatesRemoved))
-                cell.solved = true
             }
 
         }
@@ -250,9 +261,8 @@ private fun solveHiddenSingles(board: Board): List<BoardChange> {
 
             if (unit.cellsWithCandidate[c].size == 1) {
                 val cell = unit.cellsWithCandidate[c].elementAt(0)
-                val candidatesRemoved = cell.setValue(c)
+                val candidatesRemoved = cell.setValue(c, Cell.State.SOLVED)
                 result.add(BoardChange("Hidden Single in ${unit.name}", cell.name, candidatesRemoved))
-                cell.solved = true
             }
 
         }
