@@ -18,9 +18,11 @@ import x.org.katydom.dom.Text
 internal class KatyDomText<Msg>(
 
     /** The text within the node. */
-    val nodeValue: String
+    val nodeValue: String,
 
-) : KatyDomNode<Msg>(null) {
+    key: Any?
+
+) : KatyDomNode<Msg>(key) {
 
     init {
         this.freeze()

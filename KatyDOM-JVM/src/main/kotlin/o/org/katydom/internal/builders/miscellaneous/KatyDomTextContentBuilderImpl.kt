@@ -32,8 +32,8 @@ internal class KatyDomTextContentBuilderImpl<Msg>(
         element.addChildNode(KatyDomComment(nodeValue, key))
     }
 
-    override fun text(nodeValue: String) {
-        element.addChildNode(KatyDomText(nodeValue))
+    override fun text(nodeValue: String, key: Any?) {
+        element.addChildNode(KatyDomText(nodeValue, key))
     }
 
 }

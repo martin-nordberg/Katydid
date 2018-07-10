@@ -16,9 +16,11 @@ section#changes {
     overflow-y: scroll;
 }
 
-section#settings {
+section#settings,
+section#notes {
     clear: both;
     margin-top: 15px;
+    max-width: 700px;
 }
 
 section#settings fieldset {

@@ -30,7 +30,8 @@ interface KatyDomTextContentBuilder<Msg> : KatyDomAttributesContentBuilder<Msg> 
      * @param nodeValue the text within the node.
      */
     fun text(
-        nodeValue: String
+        nodeValue: String,
+        key: Any? = null
     )
 
 }

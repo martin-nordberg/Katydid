@@ -82,14 +82,45 @@ fun SudokuSolverAppState.withCellValueRemoved(rowIndex: Int, colIndex: Int): Sud
 
             val oldValue = cell.value
             lateinit var candidatesRemoved: List<String>
-            if (oldValue != null && cell.state != Cell.State.SOLVED) {
+            if (oldValue != null && cell.state == Cell.State.DEFINED) {
                 candidatesRemoved = newCell.setValue(oldValue, cell.state)
             }
             else {
                 continue
             }
 
-            newChanges.add(BoardChange("Cell Value Set", newCell.name, candidatesRemoved))
+            newChanges.add(BoardChange("Cell Value Defined", newCell.name, candidatesRemoved))
+
+        }
+
+    }
+
+    if ( settings.isUserSolving) {
+
+        for (i in 0..8) {
+
+            for (j in 0..8) {
+
+                val cell = board.rows[i].cells[j]
+
+                if (cell.row.index == rowIndex && cell.column.index == colIndex) {
+                    continue
+                }
+
+                val newCell = newBoard.rows[i].cells[j]
+
+                val oldValue = cell.value
+                lateinit var candidatesRemoved: List<String>
+                if (oldValue != null && cell.state == Cell.State.GUESSED) {
+                    candidatesRemoved = newCell.setValue(oldValue, cell.state)
+                }
+                else {
+                    continue
+                }
+
+                newChanges.add(BoardChange("Solved by User", newCell.name, candidatesRemoved))
+
+            }
 
         }
 
@@ -106,7 +137,7 @@ fun SudokuSolverAppState.withCellValueRemoved(rowIndex: Int, colIndex: Int): Sud
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Clones this board but with one additional cell value set.
+ * Clones this board but with one additional cell in row [rowIndex] and column [colIndex] set to [value].
  */
 fun SudokuSolverAppState.withCellValueSet(rowIndex: Int, colIndex: Int, value: Int): SudokuSolverAppState {
 
@@ -122,18 +153,46 @@ fun SudokuSolverAppState.withCellValueSet(rowIndex: Int, colIndex: Int, value: I
 
             val oldValue = cell.value
             val candidatesRemoved =
-                if (oldValue != null && (cell.state == Cell.State.DEFINED || settings.isUserSolving)) {
-                    newCell.setValue(oldValue, cell.state)
+                if (oldValue != null && cell.state == Cell.State.DEFINED) {
+                    newCell.setValue(oldValue, Cell.State.DEFINED)
                 }
-                else if (cell.row.index == rowIndex && cell.column.index == colIndex) {
-                    val newState = if (settings.isUserSolving) Cell.State.GUESSED else Cell.State.DEFINED
-                    newCell.setValue(value, newState)
+                else if (cell.row.index == rowIndex && cell.column.index == colIndex && !settings.isUserSolving) {
+                    newCell.setValue(value, Cell.State.DEFINED)
                 }
                 else {
                     continue
                 }
 
-            newChanges.add(BoardChange("Cell Value Set", newCell.name, candidatesRemoved))
+            newChanges.add(BoardChange("Cell Value Defined", newCell.name, candidatesRemoved))
+
+        }
+
+    }
+
+    if ( settings.isUserSolving ) {
+
+        for (i in 0..8) {
+
+            for (j in 0..8) {
+
+                val cell = board.rows[i].cells[j]
+                val newCell = newBoard.rows[i].cells[j]
+
+                val oldValue = cell.value
+                val candidatesRemoved =
+                    if (oldValue != null && cell.state == Cell.State.GUESSED) {
+                        newCell.setValue(oldValue, Cell.State.GUESSED)
+                    }
+                    else if (cell.row.index == rowIndex && cell.column.index == colIndex) {
+                        newCell.setValue(value, Cell.State.GUESSED)
+                    }
+                    else {
+                        continue
+                    }
+
+                newChanges.add(BoardChange("Solved by User", newCell.name, candidatesRemoved))
+
+            }
 
         }
 
@@ -170,10 +229,30 @@ fun SudokuSolverAppState.withSettingsChanged(
             val newCell = newBoard.rows[i].cells[j]
 
             val oldValue = cell.value
-            if (oldValue != null && newCell.candidates.contains(
-                    oldValue) && (cell.state == Cell.State.DEFINED || newSettings.isUserSolving)) {
+            if (oldValue != null && newCell.candidates.contains(oldValue) && cell.state == Cell.State.DEFINED) {
                 val candidatesRemoved = newCell.setValue(oldValue, cell.state)
-                newChanges.add(BoardChange("Cell Value Set", newCell.name, candidatesRemoved))
+                newChanges.add(BoardChange("Cell Value Defined", newCell.name, candidatesRemoved))
+            }
+
+        }
+
+    }
+
+    if ( newIsUserSolving ) {
+
+        for (i in 0..8) {
+
+            for (j in 0..8) {
+
+                val cell = board.rows[i].cells[j]
+                val newCell = newBoard.rows[i].cells[j]
+
+                val oldValue = cell.value
+                if (oldValue != null && newCell.candidates.contains(oldValue) && cell.state == Cell.State.GUESSED) {
+                    val candidatesRemoved = newCell.setValue(oldValue, cell.state)
+                    newChanges.add(BoardChange("Solved by User", newCell.name, candidatesRemoved))
+                }
+
             }
 
         }

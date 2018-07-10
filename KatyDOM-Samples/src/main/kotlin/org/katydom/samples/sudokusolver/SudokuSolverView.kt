@@ -29,6 +29,8 @@ fun viewSudokuSolver(applicationState: SudokuSolverAppState): KatyDomFlowContent
 
                 settings(applicationState)
 
+                notes()
+
             }
 
             changes(applicationState)
@@ -36,6 +38,37 @@ fun viewSudokuSolver(applicationState: SudokuSolverAppState): KatyDomFlowContent
         }
 
     }
+
+//---------------------------------------------------------------------------------------------------------------------
+
+/**
+ * Generates the virtual DOM for the form for the settings of the puzzle.
+ */
+private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.notes() {
+
+    section("#notes") {
+
+        span(style = "font-weight: bold") {
+            text("Notes")
+        }
+
+        br {}
+
+        text(
+            "This solver can handle modest Sudoku puzzles. " +
+            "Inspiration and terminology for this sample come from ",
+            key = 1
+        )
+
+        a(href = "http://www.sudokuwiki.org/", target = "_blank") {
+            text("SudokuWiki.org")
+        }
+
+        text(", which is highly recommended for more serious Sudoku solving.", key = 2)
+
+    }
+
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 

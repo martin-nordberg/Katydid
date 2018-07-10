@@ -1574,8 +1574,11 @@ internal open class KatyDomPhrasingContentBuilderImpl<Msg>(
         )
     }
 
-    override fun text(nodeValue: String) {
-        element.addChildNode(KatyDomText(nodeValue))
+    override fun text(
+        nodeValue: String,
+        key: Any?
+    ) {
+        element.addChildNode(KatyDomText(nodeValue, key))
     }
 
     override fun textarea(
