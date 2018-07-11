@@ -19,11 +19,11 @@ enum class EEventType {
      * The name of the event in the DOM.
      */
     val domName: String
-        get() {
-            return when (this) {
+        get() =
+            when (this) {
                 CHANGE -> "change"
             }
-        }
+
 
 }
 

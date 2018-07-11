@@ -61,7 +61,7 @@ fun updateSudokuSolver(
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Clones this board but removes one previously placed value.
+ * Clones this board but removes one previously placed value in row [rowIndex] and column [colIndex].
  */
 fun SudokuSolverAppState.withCellValueRemoved(rowIndex: Int, colIndex: Int): SudokuSolverAppState {
 
@@ -95,7 +95,7 @@ fun SudokuSolverAppState.withCellValueRemoved(rowIndex: Int, colIndex: Int): Sud
 
     }
 
-    if ( settings.isUserSolving) {
+    if (settings.isUserSolving) {
 
         for (i in 0..8) {
 
@@ -169,7 +169,7 @@ fun SudokuSolverAppState.withCellValueSet(rowIndex: Int, colIndex: Int, value: I
 
     }
 
-    if ( settings.isUserSolving ) {
+    if (settings.isUserSolving) {
 
         for (i in 0..8) {
 
@@ -218,7 +218,7 @@ fun SudokuSolverAppState.withSettingsChanged(
 ): SudokuSolverAppState {
 
     val newSettings = SudokuSolverSettings(newIsXSudoku, newIsSolvedAutomatically, newIsUserSolving)
-    val newBoard = Board(newSettings.isXSudoku)
+    val newBoard = Board(newIsXSudoku)
     val newChanges = mutableListOf<BoardChange>()
 
     for (i in 0..8) {
@@ -238,7 +238,7 @@ fun SudokuSolverAppState.withSettingsChanged(
 
     }
 
-    if ( newIsUserSolving ) {
+    if (newIsUserSolving) {
 
         for (i in 0..8) {
 
@@ -269,6 +269,10 @@ fun SudokuSolverAppState.withSettingsChanged(
 
 //---------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Solves the given puzzle [board] (as far as possible).
+ * @return a list of changes made to reach the (partial) solution
+ */
 private fun solve(board: Board): List<BoardChange> {
 
     val result = mutableListOf<BoardChange>()
@@ -306,6 +310,10 @@ private fun solve(board: Board): List<BoardChange> {
 
 //---------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Solves the puzzle [board] for any naked singles found.
+ * (See SudokuWiki.org for terminology).
+ */
 private fun solveNakedSingles(board: Board): List<BoardChange> {
 
     val result = mutableListOf<BoardChange>()
@@ -330,6 +338,10 @@ private fun solveNakedSingles(board: Board): List<BoardChange> {
 
 //---------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Solves the puzzle [board] for any hidden singles found.
+ * (See SudokuWiki.org for terminology).
+ */
 private fun solveHiddenSingles(board: Board): List<BoardChange> {
 
     val result = mutableListOf<BoardChange>()
@@ -354,6 +366,10 @@ private fun solveHiddenSingles(board: Board): List<BoardChange> {
 
 //---------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Solves the puzzle [board] for any naked pairs found.
+ * (See SudokuWiki.org for terminology).
+ */
 private fun solveNakedPairs(board: Board): List<BoardChange> {
 
     val result = mutableListOf<BoardChange>()

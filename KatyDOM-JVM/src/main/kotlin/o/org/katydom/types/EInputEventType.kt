@@ -22,12 +22,11 @@ enum class EInputEventType {
      * The name of the event in the DOM.
      */
     val domName: String
-        get() {
-            return when (this) {
+        get() =
+            when (this) {
                 BEFORE_INPUT -> "beforeinput"
                 INPUT        -> "input"
             }
-        }
 
 }
 

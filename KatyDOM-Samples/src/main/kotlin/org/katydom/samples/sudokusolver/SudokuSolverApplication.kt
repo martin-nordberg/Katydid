@@ -31,7 +31,7 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
 
     /**
      * Constructs the KatyDOM virtual DOM tree for given input application state [applicationState].
-     * @return the root of the application's virtual DOM tree for given application state.
+     * @return a builder that builds the root of the application's virtual DOM tree for given application state.
      */
     override fun view(applicationState: SudokuSolverAppState): KatyDomFlowContentBuilder<SudokuSolverMsg>.() -> Unit =
         viewSudokuSolver(applicationState)

@@ -22,12 +22,11 @@ enum class EKeyboardEventType {
      * The name of the event in the DOM.
      */
     val domName: String
-        get() {
-            return when (this) {
+        get() =
+            when (this) {
                 KEY_DOWN -> "keydown"
                 KEY_UP   -> "keyup"
             }
-        }
 
 }
 

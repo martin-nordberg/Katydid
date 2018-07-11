@@ -22,12 +22,11 @@ enum class EFocusEventType {
      * The name of the event in the DOM.
      */
     val domName: String
-        get() {
-            return when (this) {
+        get() =
+            when (this) {
                 BLUR  -> "blur"
                 FOCUS -> "focus"
             }
-        }
 
 }
 

@@ -9,6 +9,7 @@ import jvm.org.katydom.api.checkBuild
 import o.org.katydom.api.katyDom
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import kotlin.test.assertEquals
 
 @Suppress("RemoveRedundantBackticks")
 class LabelTests {
@@ -20,8 +21,8 @@ class LabelTests {
 
             form {
 
-                label( `for`="input1" ) {
-                    inputText("#input1", name="myinput") {}
+                label(`for` = "input1") {
+                    inputText("#input1", name = "myinput") {}
                 }
 
             }
@@ -54,6 +55,19 @@ class LabelTests {
             }
 
         }
+
+    }
+
+    @Test
+    fun `A label can have its key taken from its _for_ attribute`() {
+
+        val element = katyDom<Unit> {
+
+            label(`for` = "sample") {}
+
+        }
+
+        assertEquals("sample-label", element.key)
 
     }
 
