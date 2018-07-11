@@ -20,7 +20,7 @@ import o.org.katydom.types.EOrderedListType
  * Virtual DOM builder for the normal case of HTML "flow content".
  */
 @Suppress("unused")
-interface KatyDomFlowContentBuilder<Msg> :
+interface KatyDomFlowContentBuilder<in Msg> :
     KatyDomPhrasingContentBuilder<Msg>,
     KatyDomHeadingContentBuilder<Msg>,
     KatyDomSectioningContentBuilder<Msg> {

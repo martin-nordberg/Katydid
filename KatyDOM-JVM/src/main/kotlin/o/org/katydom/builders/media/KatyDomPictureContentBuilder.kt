@@ -16,7 +16,7 @@ import o.org.katydom.types.MimeType
 /**
  * Builder DSL to create the contents of a picture element.
  */
-interface KatyDomPictureContentBuilder<Msg> : KatyDomAttributesContentBuilder<Msg> {
+interface KatyDomPictureContentBuilder<in Msg> : KatyDomAttributesContentBuilder<Msg> {
 
     /**
      * Adds an `<img>` element with its attributes as the next child of the element under construction.

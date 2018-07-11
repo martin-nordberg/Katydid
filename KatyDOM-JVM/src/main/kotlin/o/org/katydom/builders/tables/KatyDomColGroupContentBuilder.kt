@@ -13,7 +13,7 @@ import o.org.katydom.types.EDirection
 /**
  * Builder DSL to create the contents of a column group.
  */
-interface KatyDomColGroupContentBuilder<Msg> : KatyDomAttributesContentBuilder<Msg> {
+interface KatyDomColGroupContentBuilder<in Msg> : KatyDomAttributesContentBuilder<Msg> {
 
     /**
      * Adds a `<col>` element with given attributes as the next child of the element under construction.

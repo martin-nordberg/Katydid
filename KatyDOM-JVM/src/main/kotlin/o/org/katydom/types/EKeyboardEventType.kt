@@ -8,7 +8,7 @@ package o.org.katydom.types
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Enumeration of DOM keyboard event types.
+ * Enumeration of DOM keyboard event types. Note that "keypress" is omitted because it is deprecated.
  */
 enum class EKeyboardEventType {
 

@@ -15,7 +15,7 @@ import o.org.katydom.types.EDirection
 /**
  * Builder DSL to create the contents of a details element.
  */
-interface KatyDomDetailsFlowContentBuilder<Msg> : KatyDomFlowContentBuilder<Msg> {
+interface KatyDomDetailsFlowContentBuilder<in Msg> : KatyDomFlowContentBuilder<Msg> {
 
     /**
      * Adds a `<source>` element with its attributes as the next child of the element under construction.

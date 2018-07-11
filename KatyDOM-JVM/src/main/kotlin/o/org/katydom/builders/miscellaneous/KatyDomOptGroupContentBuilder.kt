@@ -13,7 +13,7 @@ import o.org.katydom.types.EDirection
 /**
  * Builder DSL to create the contents of a `<optgroup>` or `<datalist>` element.
  */
-interface KatyDomOptGroupContentBuilder<Msg> : KatyDomAttributesContentBuilder<Msg> {
+interface KatyDomOptGroupContentBuilder<in Msg> : KatyDomAttributesContentBuilder<Msg> {
 
     /**
      * Adds a comment node as the next child of the element under construction.

@@ -17,7 +17,7 @@ import o.org.katydom.types.MimeType
  * Builder DSL to create the contents of a media element.
  * TODO: To support "transparent" content, we need embedded / phrased / flow media content builders or at least runtime checking.
  */
-interface KatyDomMediaFlowContentBuilder<Msg> : KatyDomFlowContentBuilder<Msg> {
+interface KatyDomMediaFlowContentBuilder<in Msg> : KatyDomFlowContentBuilder<Msg> {
 
     /**
      * Adds a `<source>` element with its attributes as the next child of the element under construction.

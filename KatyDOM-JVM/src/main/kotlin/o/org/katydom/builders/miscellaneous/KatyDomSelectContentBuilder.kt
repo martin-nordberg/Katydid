@@ -12,7 +12,7 @@ import o.org.katydom.types.EDirection
 /**
  * Builder DSL to create the contents of a `<select>` element.
  */
-interface KatyDomSelectContentBuilder<Msg> : KatyDomOptGroupContentBuilder<Msg> {
+interface KatyDomSelectContentBuilder<in Msg> : KatyDomOptGroupContentBuilder<Msg> {
 
     /**
      * Adds an `<optgroup>` element with any global attributes as the next child of the element under construction.

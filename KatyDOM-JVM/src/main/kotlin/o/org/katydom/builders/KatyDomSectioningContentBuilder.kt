@@ -13,7 +13,7 @@ import o.org.katydom.types.EDirection
  * Virtual DOM builder for the normal case of HTML "flow content".
  */
 @Suppress("unused")
-interface KatyDomSectioningContentBuilder<Msg> :
+interface KatyDomSectioningContentBuilder<in Msg> :
     KatyDomAttributesContentBuilder<Msg> {
 
     /**

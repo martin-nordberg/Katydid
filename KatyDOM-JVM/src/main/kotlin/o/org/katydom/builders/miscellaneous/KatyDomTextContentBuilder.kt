@@ -13,7 +13,7 @@ import o.org.katydom.builders.KatyDomAttributesContentBuilder
  * Virtual DOM builder for content that must be text.
  */
 @Suppress("unused")
-interface KatyDomTextContentBuilder<Msg> : KatyDomAttributesContentBuilder<Msg> {
+interface KatyDomTextContentBuilder<in Msg> : KatyDomAttributesContentBuilder<Msg> {
 
     /**
      * Adds a comment node as the next child of the element under construction.

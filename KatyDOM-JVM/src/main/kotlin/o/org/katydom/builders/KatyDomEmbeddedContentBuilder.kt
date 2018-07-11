@@ -16,7 +16,7 @@ import o.org.katydom.types.*
  * Virtual DOM builder for the case of HTML "embedded content".
  */
 @Suppress("unused")
-interface KatyDomEmbeddedContentBuilder<Msg> : KatyDomAttributesContentBuilder<Msg> {
+interface KatyDomEmbeddedContentBuilder<in Msg> : KatyDomAttributesContentBuilder<Msg> {
 
     /**
      * Adds an `<audio>` element with its attributes as the next child of the element under construction.

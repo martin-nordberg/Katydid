@@ -15,7 +15,7 @@ import o.org.katydom.types.EHeadingScope
 /**
  * Builder DSL to create the contents of a table row.
  */
-interface KatyDomTableRowContentBuilder<Msg> : KatyDomAttributesContentBuilder<Msg> {
+interface KatyDomTableRowContentBuilder<in Msg> : KatyDomAttributesContentBuilder<Msg> {
 
     /**
      * Adds a comment node as the next child of the element under construction.

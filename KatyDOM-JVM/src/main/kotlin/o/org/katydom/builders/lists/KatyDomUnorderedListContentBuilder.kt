@@ -14,7 +14,7 @@ import o.org.katydom.types.EDirection
 /**
  * Builder DSL to create the contents of an unordered list (an `<ol>` element).
  */
-interface KatyDomUnorderedListContentBuilder<Msg> : KatyDomAttributesContentBuilder<Msg> {
+interface KatyDomUnorderedListContentBuilder<in Msg> : KatyDomAttributesContentBuilder<Msg> {
 
     /**
      * Adds a comment node as the next child of the element under construction.

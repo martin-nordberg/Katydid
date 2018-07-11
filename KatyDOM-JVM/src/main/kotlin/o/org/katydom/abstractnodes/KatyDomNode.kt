@@ -166,10 +166,10 @@ abstract class KatyDomNode<Msg>(
 
     /**
      * Adds a general event handler for the given type of event.
-     * @param eventType the kind of event
+     * @param eventName the name of the kind of event
      * @param handler the callback when the vent occurs
      */
-    internal fun addEventHandler(eventType: EEventType, handler: EventHandler) {
+    internal fun addEventHandler(eventName: String, handler: EventHandler) {
 
         if (isAddingAttributes) {
             freezeAttributes()
@@ -179,11 +179,11 @@ abstract class KatyDomNode<Msg>(
             check(isAddingEventHandlers) { "KatyDOM node's event handlers must be defined before its child nodes." }
         }
 
-        check(!eventHandlers.containsKey(eventType.domName)) {
-            "Only one '${eventType.domName}' handler can be defined per element."
+        check(!eventHandlers.containsKey(eventName)) {
+            "Only one '${eventName}' handler can be defined per element."
         }
 
-        eventHandlers[eventType.domName] =
+        eventHandlers[eventName] =
             { event: Event ->
                 try {
                     handler(event)
@@ -193,6 +193,15 @@ abstract class KatyDomNode<Msg>(
                 }
             }
 
+    }
+
+    /**
+     * Adds a general event handler for the given type of event.
+     * @param eventType the kind of event
+     * @param handler the callback when the vent occurs
+     */
+    internal fun addEventHandler(eventType: EEventType, handler: EventHandler) {
+        this.addEventHandler(eventType.domName, handler)
     }
 
     /**

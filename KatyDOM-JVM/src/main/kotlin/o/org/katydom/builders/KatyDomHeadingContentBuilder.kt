@@ -13,7 +13,7 @@ import o.org.katydom.types.EDirection
  * Virtual DOM builder for "heading content".
  */
 @Suppress("unused")
-interface KatyDomHeadingContentBuilder<Msg> :
+interface KatyDomHeadingContentBuilder<in Msg> :
     KatyDomAttributesContentBuilder<Msg> {
 
     /**

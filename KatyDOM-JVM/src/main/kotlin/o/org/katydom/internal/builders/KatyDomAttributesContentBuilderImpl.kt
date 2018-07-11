@@ -6,20 +6,11 @@
 package o.org.katydom.internal.builders
 
 import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.api.Event2Message
-import o.org.katydom.api.FocusEvent2Message
-import o.org.katydom.api.InputEvent2Message
-import o.org.katydom.api.MouseEvent2Message
+import o.org.katydom.api.*
 import o.org.katydom.builders.KatyDomAttributesContentBuilder
 import o.org.katydom.builders.KatyDomContentBuilderDsl
-import o.org.katydom.types.EEventType
-import o.org.katydom.types.EFocusEventType
-import o.org.katydom.types.EInputEventType
-import o.org.katydom.types.EMouseEventType
-import x.org.katydom.dom.events.Event
-import x.org.katydom.dom.events.FocusEvent
-import x.org.katydom.dom.events.InputEvent
-import x.org.katydom.dom.events.MouseEvent
+import o.org.katydom.types.*
+import x.org.katydom.dom.events.*
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -116,6 +107,22 @@ internal open class KatyDomAttributesContentBuilderImpl<Msg>(
 
     }
 
+    override fun ondblclick(handler: MouseEvent2Message<Msg>) {
+
+        element.addMouseEventHandler(EMouseEventType.DOUBLE_CLICK) { e: MouseEvent ->
+            dispatchMessages(handler(e))
+        }
+
+    }
+
+    override fun onevent(eventName: String, handler: Event2Message<Msg>) {
+
+        element.addEventHandler(eventName) { e: Event ->
+            dispatchMessages(handler(e))
+        }
+
+    }
+
     override fun onfocus(handler: FocusEvent2Message<Msg>) {
 
         element.addFocusEventHandler(EFocusEventType.FOCUS) { e: FocusEvent ->
@@ -127,6 +134,78 @@ internal open class KatyDomAttributesContentBuilderImpl<Msg>(
     override fun oninput(handler: InputEvent2Message<Msg>) {
 
         element.addInputEventHandler(EInputEventType.INPUT) { e: InputEvent ->
+            dispatchMessages(handler(e))
+        }
+
+    }
+
+    override fun onkeydown(handler: KeyboardEvent2Message<Msg>) {
+
+        element.addKeyboardEventHandler(EKeyboardEventType.KEY_DOWN) { e: KeyboardEvent ->
+            dispatchMessages(handler(e))
+        }
+
+    }
+
+    override fun onkeyup(handler: KeyboardEvent2Message<Msg>) {
+
+        element.addKeyboardEventHandler(EKeyboardEventType.KEY_UP) { e: KeyboardEvent ->
+            dispatchMessages(handler(e))
+        }
+
+    }
+
+    override fun onmousedown(handler: MouseEvent2Message<Msg>) {
+
+        element.addMouseEventHandler(EMouseEventType.MOUSE_DOWN) { e: MouseEvent ->
+            dispatchMessages(handler(e))
+        }
+
+    }
+
+    override fun onmouseenter(handler: MouseEvent2Message<Msg>) {
+
+        element.addMouseEventHandler(EMouseEventType.MOUSE_ENTER) { e: MouseEvent ->
+            dispatchMessages(handler(e))
+        }
+
+    }
+
+    override fun onmouseleave(handler: MouseEvent2Message<Msg>) {
+
+        element.addMouseEventHandler(EMouseEventType.MOUSE_LEAVE) { e: MouseEvent ->
+            dispatchMessages(handler(e))
+        }
+
+    }
+
+    override fun onmousemove(handler: MouseEvent2Message<Msg>) {
+
+        element.addMouseEventHandler(EMouseEventType.MOUSE_MOVE) { e: MouseEvent ->
+            dispatchMessages(handler(e))
+        }
+
+    }
+
+    override fun onmouseout(handler: MouseEvent2Message<Msg>) {
+
+        element.addMouseEventHandler(EMouseEventType.MOUSE_OUT) { e: MouseEvent ->
+            dispatchMessages(handler(e))
+        }
+
+    }
+
+    override fun onmouseover(handler: MouseEvent2Message<Msg>) {
+
+        element.addMouseEventHandler(EMouseEventType.MOUSE_OVER) { e: MouseEvent ->
+            dispatchMessages(handler(e))
+        }
+
+    }
+
+    override fun onmouseup(handler: MouseEvent2Message<Msg>) {
+
+        element.addMouseEventHandler(EMouseEventType.MOUSE_UP) { e: MouseEvent ->
             dispatchMessages(handler(e))
         }
 

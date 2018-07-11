@@ -14,7 +14,7 @@ import o.org.katydom.types.EDirection
 /**
  * Builder DSL to create the contents of a table.
  */
-interface KatyDomTableContentBuilder<Msg> : KatyDomAttributesContentBuilder<Msg> {
+interface KatyDomTableContentBuilder<in Msg> : KatyDomAttributesContentBuilder<Msg> {
 
     /**
      * Adds a `<caption>` element with given attributes as the next child of the element under construction.

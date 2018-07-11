@@ -13,7 +13,7 @@ import o.org.katydom.types.EDirection
 /**
  * Builder DSL to create the contents of a table's thead, tbody, or tfoot element.
  */
-interface KatyDomTableBodyContentBuilder<Msg> : KatyDomAttributesContentBuilder<Msg> {
+interface KatyDomTableBodyContentBuilder<in Msg> : KatyDomAttributesContentBuilder<Msg> {
 
     /**
      * Adds a comment node as the next child of the element under construction.
