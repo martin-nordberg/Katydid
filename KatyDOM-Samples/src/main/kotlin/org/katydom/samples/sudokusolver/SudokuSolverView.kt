@@ -6,6 +6,8 @@
 package org.katydom.samples.sudokusolver
 
 import o.org.katydom.builders.KatyDomFlowContentBuilder
+import o.org.katydom.eventhandling.onchange
+import o.org.katydom.eventhandling.onclick
 
 //---------------------------------------------------------------------------------------------------------------------
 

@@ -8,6 +8,7 @@ package org.katydom.samples.greetme
 import js.org.katydom.api.KatyDomApplication
 import js.org.katydom.api.runApplication
 import o.org.katydom.builders.KatyDomFlowContentBuilder
+import o.org.katydom.eventhandling.oninput
 
 //---------------------------------------------------------------------------------------------------------------------
 

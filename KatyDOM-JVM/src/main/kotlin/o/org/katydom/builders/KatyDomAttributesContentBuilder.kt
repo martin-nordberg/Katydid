@@ -31,14 +31,18 @@ interface KatyDomAttributesContentBuilder<in Msg> {
      * Adds multiple attributes to the content being built.
      * @param pairs a list of the names (first) and values (second) for the attributes to add.
      */
-    fun attributes(vararg pairs: Pair<String, Any>)
+    fun attributes(
+        vararg pairs: Pair<String, Any>
+    )
 
     /**
      * Adds multiple classes to the content being built. For each pair in [pairs] the named class is added
      * to the element if the paired value is true.
      * @param pairs a list of the classes (first) and on/off flags (second) for the classes to add.
      */
-    fun classes(vararg pairs: Pair<String, Boolean>)
+    fun classes(
+        vararg pairs: Pair<String, Boolean>
+    )
 
     /**
      * Adds one data attribute to the content being built.
@@ -55,109 +59,21 @@ interface KatyDomAttributesContentBuilder<in Msg> {
      * @param pairs a list of the names (first) and values (second) for the attributes to add. Names may have the
      * "data-" prefix omitted.
      */
-    fun dataset(vararg pairs: Pair<String, String>)
+    fun dataset(
+        vararg pairs: Pair<String, String>
+    )
 
     /**
-     * Adds an event handler for "beforeinput" events.
-     * @param handler the callback that listens to beforeinput events.
-     */
-    fun onbeforeinput(handler: InputEvent2Message<Msg>)
-
-    /**
-     * Adds an event handler for "blur" events.
-     * @param handler the callback that listens to blur events.
-     */
-    fun onblur(handler: FocusEvent2Message<Msg>)
-
-    /**
-     * Adds an event handler for "change" events.
-     * @param handler the callback that listens to change events.
-     */
-    fun onchange(handler: Event2Message<Msg>)
-
-    /**
-     * Adds an event handler for "click" events.
-     * @param handler the callback that listens to click events.
-     */
-    fun onclick(handler: MouseEvent2Message<Msg>)
-
-    /**
-     * Adds an event handler for "dblclick" events.
-     * @param handler the callback that listens to dblclick events.
-     */
-    fun ondblclick(handler: MouseEvent2Message<Msg>)
-
-    /**
-     * Adds an event handler for an arbitrary named event
+     * Adds an event handler for an arbitrary named event. Specialized event handling extensions (e.g. package
+     * o.org.katydom.events make use of this generic event handling mechanism. The callback takes in an event and
+     * returns a list of messages. (Just use Msg=Unit in an architecture that handles events immediately without
+     * Elm-like messages.)
      * @param handler the callback that listens to events.
      */
-    fun onevent(eventName: String, handler: Event2Message<Msg>)
-
-    /**
-     * Adds an event handler for "focus" events.
-     * @param handler the callback that listens to focus events.
-     */
-    fun onfocus(handler: FocusEvent2Message<Msg>)
-
-    /**
-     * Adds an event handler for "input" events.
-     * @param handler the callback that listens to input events.
-     */
-    fun oninput(handler: InputEvent2Message<Msg>)
-
-    /**
-     * Adds an event handler for "keydown" events.
-     * @param handler the callback that listens to keydown events.
-     */
-    fun onkeydown(handler: KeyboardEvent2Message<Msg>)
-
-    /**
-     * Adds an event handler for "keyup" events.
-     * @param handler the callback that listens to keyup events.
-     */
-    fun onkeyup(handler: KeyboardEvent2Message<Msg>)
-
-    /**
-     * Adds an event handler for "mousedown" events.
-     * @param handler the callback that listens to mousedown events.
-     */
-    fun onmousedown(handler: MouseEvent2Message<Msg>)
-
-    /**
-     * Adds an event handler for "mouseenter" events.
-     * @param handler the callback that listens to mouseenter events.
-     */
-    fun onmouseenter(handler: MouseEvent2Message<Msg>)
-
-    /**
-     * Adds an event handler for "mouseleave" events.
-     * @param handler the callback that listens to mouseleave events.
-     */
-    fun onmouseleave(handler: MouseEvent2Message<Msg>)
-
-    /**
-     * Adds an event handler for "mousemove" events.
-     * @param handler the callback that listens to mousemove events.
-     */
-    fun onmousemove(handler: MouseEvent2Message<Msg>)
-
-    /**
-     * Adds an event handler for "mouseout" events.
-     * @param handler the callback that listens to mouseout events.
-     */
-    fun onmouseout(handler: MouseEvent2Message<Msg>)
-
-    /**
-     * Adds an event handler for "mouseover" events.
-     * @param handler the callback that listens to mouseover events.
-     */
-    fun onmouseover(handler: MouseEvent2Message<Msg>)
-
-    /**
-     * Adds an event handler for "mouseup" events.
-     * @param handler the callback that listens to mouseup events.
-     */
-    fun onmouseup(handler: MouseEvent2Message<Msg>)
+    fun onEvent(
+        eventName: String,
+        handler: Event2Message<Msg>
+    )
 
 }
 

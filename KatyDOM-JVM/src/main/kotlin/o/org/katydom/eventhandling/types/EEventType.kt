@@ -3,20 +3,17 @@
 // Apache 2.0 License
 //
 
-package o.org.katydom.types
+package o.org.katydom.eventhandling.types
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Enumeration of DOM focus event types.
+ * Enumeration of DOM event types.
  */
-enum class EFocusEventType {
+enum class EEventType {
 
-    /** A "blur" event. */
-    BLUR,
-
-    /** A "focus" event. */
-    FOCUS;
+    /** A "change" event. */
+    CHANGE;
 
     /**
      * The name of the event in the DOM.
@@ -24,9 +21,9 @@ enum class EFocusEventType {
     val domName: String
         get() =
             when (this) {
-                BLUR  -> "blur"
-                FOCUS -> "focus"
+                CHANGE -> "change"
             }
+
 
 }
 

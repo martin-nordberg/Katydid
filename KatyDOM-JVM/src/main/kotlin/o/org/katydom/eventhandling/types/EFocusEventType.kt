@@ -3,20 +3,20 @@
 // Apache 2.0 License
 //
 
-package o.org.katydom.types
+package o.org.katydom.eventhandling.types
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Enumeration of DOM keyboard event types. Note that "keypress" is omitted because it is deprecated.
+ * Enumeration of DOM focus event types.
  */
-enum class EKeyboardEventType {
+enum class EFocusEventType {
 
-    /** Keyboard event type "keydown". */
-    KEY_DOWN,
+    /** A "blur" event. */
+    BLUR,
 
-    /** Keyboard event type "keyup". */
-    KEY_UP;
+    /** A "focus" event. */
+    FOCUS;
 
     /**
      * The name of the event in the DOM.
@@ -24,8 +24,8 @@ enum class EKeyboardEventType {
     val domName: String
         get() =
             when (this) {
-                KEY_DOWN -> "keydown"
-                KEY_UP   -> "keyup"
+                BLUR  -> "blur"
+                FOCUS -> "focus"
             }
 
 }
