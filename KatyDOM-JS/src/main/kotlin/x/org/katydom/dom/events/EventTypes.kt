@@ -22,3 +22,6 @@ typealias MouseEvent = org.w3c.dom.events.MouseEvent
 
 /** Type of DOM events from the user interface. */
 typealias UIEvent = org.w3c.dom.events.UIEvent
+
+/** Type of DOM events from mouse wheel. */
+typealias WheelEvent = org.w3c.dom.events.WheelEvent
