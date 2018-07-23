@@ -10,8 +10,8 @@ import o.org.katydom.builders.KatyDomFlowContentBuilder
 import o.org.katydom.builders.KatyDomPhrasingContentBuilder
 import o.org.katydom.builders.lists.KatyDomOrderedListContentBuilder
 import o.org.katydom.builders.lists.KatyDomUnorderedListContentBuilder
-import o.org.katydom.internal.concretenodes.application.KatyDomAppPseudoNode
-import o.org.katydom.internal.lifecycle.KatyDomLifecycleImpl
+import i.org.katydom.elements.application.KatyDomAppPseudoNode
+import i.org.katydom.lifecycle.KatyDomLifecycleImpl
 
 //---------------------------------------------------------------------------------------------------------------------
 
