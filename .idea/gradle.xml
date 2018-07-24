@@ -10,9 +10,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/KatyDOM-JS" />
-            <option value="$PROJECT_DIR$/KatyDOM-JVM" />
-            <option value="$PROJECT_DIR$/KatyDOM-Samples" />
+            <option value="$PROJECT_DIR$/Katydid-Samples" />
+            <option value="$PROJECT_DIR$/Katydid-VDOM-JS" />
+            <option value="$PROJECT_DIR$/Katydid-VDOM-JVM" />
           </set>
         </option>
         <option name="useAutoImport" value="true" />

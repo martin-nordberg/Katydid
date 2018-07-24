@@ -1,7 +1,7 @@
 
-rootProject.name = 'KatyDOM'
+rootProject.name = 'Katydid'
 
-include 'KatyDOM-JVM'
-include 'KatyDOM-JS'
-include 'KatyDOM-Samples'
+include 'Katydid-VDOM-JVM'
+include 'Katydid-VDOM-JS'
+include 'Katydid-Samples'
 
