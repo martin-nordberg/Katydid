@@ -5,9 +5,9 @@
 
 package i.org.katydom.elements.embedded
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.media.KatyDomPictureContentBuilder
 import i.org.katydom.builders.KatyDomEmbeddedContentBuilderImpl
+import i.org.katydom.elements.KatyDomHtmlElement
+import o.org.katydom.builders.media.KatyDomPictureContentBuilder
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -5,9 +5,9 @@
 
 package i.org.katydom.elements.tabular
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.tables.KatyDomTableContentBuilder
 import i.org.katydom.builders.KatyDomFlowContentBuilderImpl
+import i.org.katydom.elements.KatyDomHtmlElement
+import o.org.katydom.builders.tables.KatyDomTableContentBuilder
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------

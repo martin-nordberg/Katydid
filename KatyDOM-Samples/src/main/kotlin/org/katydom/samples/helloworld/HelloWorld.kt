@@ -5,8 +5,8 @@
 
 package org.katydom.samples.helloworld
 
-import o.org.katydom.api.katyDom
-import o.org.katydom.api.makeKatyDomLifecycle
+import o.org.katydom.application.katyDom
+import o.org.katydom.application.makeKatyDomLifecycle
 import kotlin.browser.document
 
 

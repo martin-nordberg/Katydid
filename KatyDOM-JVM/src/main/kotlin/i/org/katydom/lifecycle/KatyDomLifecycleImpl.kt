@@ -5,8 +5,9 @@
 
 package i.org.katydom.lifecycle
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.api.KatyDomLifecycle
+import i.org.katydom.elements.KatyDomHtmlElement
+import o.org.katydom.application.KatyDomLifecycle
+import o.org.katydom.elements.AbstractKatyDomHtmlElement
 import x.org.katydom.dom.Element
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -17,7 +18,10 @@ import x.org.katydom.dom.Element
  */
 internal class KatyDomLifecycleImpl<Msg> : KatyDomLifecycle<Msg> {
 
-    override fun build(domElement: Element, katyDomElement: KatyDomHtmlElement<Msg>) {
+    override fun build(
+        domElement: Element,
+        katyDomElement: AbstractKatyDomHtmlElement<Msg>
+    ) {
 
         val document = domElement.ownerDocument!!
 
@@ -25,7 +29,7 @@ internal class KatyDomLifecycleImpl<Msg> : KatyDomLifecycle<Msg> {
         val root: Element = document.createElement(katyDomElement.nodeName)
 
         // Fill it in from the virtual DOM.
-        katyDomElement.establish(root)
+        (katyDomElement as KatyDomHtmlElement<Msg>).establish(root)
 
         // Replace the placeholder element.
         val parent = domElement.parentNode!!
@@ -34,8 +38,11 @@ internal class KatyDomLifecycleImpl<Msg> : KatyDomLifecycle<Msg> {
 
     }
 
-    override fun patch(oldKatyDomElement: KatyDomHtmlElement<Msg>, newKatyDomElement: KatyDomHtmlElement<Msg>) {
-        newKatyDomElement.patch(oldKatyDomElement)
+    override fun patch(
+        oldKatyDomElement: AbstractKatyDomHtmlElement<Msg>,
+        newKatyDomElement: AbstractKatyDomHtmlElement<Msg>
+    ) {
+        (newKatyDomElement as KatyDomHtmlElement<Msg>).patch(oldKatyDomElement as KatyDomHtmlElement<Msg>)
     }
 
 }

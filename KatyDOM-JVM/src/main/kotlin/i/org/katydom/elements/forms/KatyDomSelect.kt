@@ -5,9 +5,9 @@
 
 package i.org.katydom.elements.forms
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.miscellaneous.KatyDomSelectContentBuilder
 import i.org.katydom.builders.KatyDomPhrasingContentBuilderImpl
+import i.org.katydom.elements.KatyDomHtmlElement
+import o.org.katydom.builders.miscellaneous.KatyDomSelectContentBuilder
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------

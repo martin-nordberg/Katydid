@@ -5,8 +5,8 @@
 
 package i.org.katydom.builders
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.api.Event2Message
+import i.org.katydom.elements.KatyDomHtmlElement
+import o.org.katydom.application.Event2Message
 import o.org.katydom.builders.KatyDomAttributesContentBuilder
 import o.org.katydom.builders.KatyDomContentBuilderDsl
 import x.org.katydom.dom.events.Event

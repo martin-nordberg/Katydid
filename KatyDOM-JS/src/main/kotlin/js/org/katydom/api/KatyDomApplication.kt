@@ -5,8 +5,8 @@
 
 package js.org.katydom.api
 
-import o.org.katydom.api.katyDom
-import o.org.katydom.api.makeKatyDomLifecycle
+import o.org.katydom.application.katyDom
+import o.org.katydom.application.makeKatyDomLifecycle
 import o.org.katydom.builders.KatyDomFlowContentBuilder
 import kotlin.browser.document
 import kotlin.browser.window

@@ -3,9 +3,9 @@
 // Apache 2.0 License
 //
 
-package o.org.katydom.api
+package o.org.katydom.application
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
+import o.org.katydom.elements.AbstractKatyDomHtmlElement
 import x.org.katydom.dom.Element
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -23,7 +23,7 @@ interface KatyDomLifecycle<Msg> {
      * @param katyDomElement the virtual DOM root element to be built into the real DOM. Note that as a side
      *                            effect each virtual DOM element in this tree is linked to its real DOM counterpart.
      */
-    fun build(domElement: Element, katyDomElement: KatyDomHtmlElement<Msg>)
+    fun build(domElement: Element, katyDomElement: AbstractKatyDomHtmlElement<Msg>)
 
     /**
      * Updates the real DOM, which was last built or patched to mirror oldKatyDomElement, with the operations needed
@@ -33,7 +33,7 @@ interface KatyDomLifecycle<Msg> {
      *                          side effect each virtual DOM element in this tree is linked to its real DOM counterpart
      *                          where not already so linked.
      */
-    fun patch(oldKatyDomElement: KatyDomHtmlElement<Msg>, newKatyDomElement: KatyDomHtmlElement<Msg>)
+    fun patch(oldKatyDomElement: AbstractKatyDomHtmlElement<Msg>, newKatyDomElement: AbstractKatyDomHtmlElement<Msg>)
 
 }
 

@@ -7,7 +7,7 @@
 
 package o.org.katydom.eventhandling
 
-import o.org.katydom.api.WheelEvent2Message
+import o.org.katydom.application.WheelEvent2Message
 import o.org.katydom.builders.KatyDomAttributesContentBuilder
 import o.org.katydom.eventhandling.types.EWheelEventType
 import x.org.katydom.dom.events.Event

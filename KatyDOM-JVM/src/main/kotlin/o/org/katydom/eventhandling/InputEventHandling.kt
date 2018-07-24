@@ -8,8 +8,8 @@
 
 package o.org.katydom.eventhandling
 
-import o.org.katydom.api.Event2Message
-import o.org.katydom.api.InputEvent2Message
+import o.org.katydom.application.Event2Message
+import o.org.katydom.application.InputEvent2Message
 import o.org.katydom.builders.KatyDomAttributesContentBuilder
 import o.org.katydom.eventhandling.types.EEventType
 import o.org.katydom.eventhandling.types.EInputEventType

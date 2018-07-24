@@ -5,9 +5,9 @@
 
 package i.org.katydom.elements.forms
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.KatyDomFlowContentBuilder
 import i.org.katydom.builders.KatyDomFlowContentBuilderImpl
+import i.org.katydom.elements.KatyDomHtmlElement
+import o.org.katydom.builders.KatyDomFlowContentBuilder
 import o.org.katydom.types.EDirection
 import o.org.katydom.types.EFormEncodingType
 import o.org.katydom.types.EFormSubmissionMethod

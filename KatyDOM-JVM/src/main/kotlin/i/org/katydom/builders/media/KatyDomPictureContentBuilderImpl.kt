@@ -5,13 +5,13 @@
 
 package i.org.katydom.builders.media
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.KatyDomAttributesContentBuilder
-import o.org.katydom.builders.media.KatyDomPictureContentBuilder
 import i.org.katydom.builders.KatyDomAttributesContentBuilderImpl
+import i.org.katydom.elements.KatyDomHtmlElement
 import i.org.katydom.elements.embedded.KatyDomImg
 import i.org.katydom.elements.embedded.KatyDomPicture
 import i.org.katydom.elements.embedded.KatyDomSource
+import o.org.katydom.builders.KatyDomAttributesContentBuilder
+import o.org.katydom.builders.media.KatyDomPictureContentBuilder
 import o.org.katydom.types.ECorsSetting
 import o.org.katydom.types.EDirection
 import o.org.katydom.types.EReferrerPolicy

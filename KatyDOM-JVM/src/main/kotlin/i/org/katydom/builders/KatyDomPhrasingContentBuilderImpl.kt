@@ -5,18 +5,18 @@
 
 package i.org.katydom.builders
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
+import i.org.katydom.builders.miscellaneous.KatyDomOptGroupContentBuilderImpl
+import i.org.katydom.builders.miscellaneous.KatyDomSelectContentBuilderImpl
+import i.org.katydom.elements.KatyDomHtmlElement
+import i.org.katydom.elements.edits.KatyDomDel
+import i.org.katydom.elements.edits.KatyDomIns
+import i.org.katydom.elements.forms.*
+import i.org.katydom.elements.text.*
 import o.org.katydom.builders.KatyDomAttributesContentBuilder
 import o.org.katydom.builders.KatyDomPhrasingContentBuilder
 import o.org.katydom.builders.miscellaneous.KatyDomOptGroupContentBuilder
 import o.org.katydom.builders.miscellaneous.KatyDomSelectContentBuilder
 import o.org.katydom.builders.miscellaneous.KatyDomTextContentBuilder
-import i.org.katydom.builders.miscellaneous.KatyDomOptGroupContentBuilderImpl
-import i.org.katydom.builders.miscellaneous.KatyDomSelectContentBuilderImpl
-import i.org.katydom.elements.edits.KatyDomDel
-import i.org.katydom.elements.edits.KatyDomIns
-import i.org.katydom.elements.forms.*
-import i.org.katydom.elements.text.*
 import o.org.katydom.types.*
 import x.org.katydom.types.KatyDateTime
 import x.org.katydom.types.KatyTime

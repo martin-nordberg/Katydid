@@ -5,13 +5,13 @@
 
 package i.org.katydom.builders.details
 
-import o.org.katydom.builders.KatyDomHeadingContentBuilder
-import o.org.katydom.builders.KatyDomPhrasingContentBuilder
-import o.org.katydom.builders.details.KatyDomDetailsFlowContentBuilder
 import i.org.katydom.builders.KatyDomContentRestrictions
 import i.org.katydom.builders.KatyDomFlowContentBuilderImpl
 import i.org.katydom.elements.interactive.KatyDomDetails
 import i.org.katydom.elements.interactive.KatyDomSummary
+import o.org.katydom.builders.KatyDomHeadingContentBuilder
+import o.org.katydom.builders.KatyDomPhrasingContentBuilder
+import o.org.katydom.builders.details.KatyDomDetailsFlowContentBuilder
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------

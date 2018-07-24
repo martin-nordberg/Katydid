@@ -6,7 +6,7 @@
 package jvm.org.katydom.builders.edits
 
 import jvm.org.katydom.api.checkBuild
-import o.org.katydom.api.katyDom
+import o.org.katydom.application.katyDom
 import org.junit.jupiter.api.Test
 import x.org.katydom.types.KatyDateTime
 import java.time.ZoneOffset

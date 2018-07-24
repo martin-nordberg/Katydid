@@ -5,10 +5,10 @@
 
 package i.org.katydom.elements.embedded
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.KatyDomAttributesContentBuilder
 import i.org.katydom.builders.media.KatyDomMediaFlowContentBuilderImpl
 import i.org.katydom.builders.media.KatyDomPictureContentBuilderImpl
+import i.org.katydom.elements.KatyDomHtmlElement
+import o.org.katydom.builders.KatyDomAttributesContentBuilder
 import o.org.katydom.types.EDirection
 import o.org.katydom.types.MimeType
 

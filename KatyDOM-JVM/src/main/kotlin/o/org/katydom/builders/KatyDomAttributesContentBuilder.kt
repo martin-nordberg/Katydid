@@ -5,7 +5,7 @@
 
 package o.org.katydom.builders
 
-import o.org.katydom.api.*
+import o.org.katydom.application.Event2Message
 
 //---------------------------------------------------------------------------------------------------------------------
 

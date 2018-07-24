@@ -3,15 +3,18 @@
 // Apache 2.0 License
 //
 
-package o.org.katydom.api
+@file:Suppress("unused")
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
+package o.org.katydom.application
+
+import i.org.katydom.elements.KatyDomHtmlElement
+import i.org.katydom.elements.application.KatyDomAppPseudoNode
+import i.org.katydom.lifecycle.KatyDomLifecycleImpl
 import o.org.katydom.builders.KatyDomFlowContentBuilder
 import o.org.katydom.builders.KatyDomPhrasingContentBuilder
 import o.org.katydom.builders.lists.KatyDomOrderedListContentBuilder
 import o.org.katydom.builders.lists.KatyDomUnorderedListContentBuilder
-import i.org.katydom.elements.application.KatyDomAppPseudoNode
-import i.org.katydom.lifecycle.KatyDomLifecycleImpl
+import o.org.katydom.elements.AbstractKatyDomHtmlElement
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -26,7 +29,7 @@ import i.org.katydom.lifecycle.KatyDomLifecycleImpl
 fun <Msg> katyDom(
     dispatchMessages: (Iterable<Msg>) -> Unit = {},
     defineContent: KatyDomFlowContentBuilder<Msg>.() -> Unit
-): KatyDomHtmlElement<Msg> {
+): AbstractKatyDomHtmlElement<Msg> {
     val pseudoParentElement = KatyDomAppPseudoNode<Msg>()
     pseudoParentElement.fill(dispatchMessages = dispatchMessages, defineContent = defineContent)
     return pseudoParentElement.soleChildNode as KatyDomHtmlElement<Msg>

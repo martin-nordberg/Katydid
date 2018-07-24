@@ -5,10 +5,10 @@
 
 package jvm.org.katydom.api
 
+import i.org.katydom.elements.KatyDomHtmlElement
 import jvm.org.katydom.kdom.KDomDocument
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.abstractnodes.KatyDomNode
-import o.org.katydom.api.makeKatyDomLifecycle
+import o.org.katydom.elements.AbstractKatyDomNode
+import o.org.katydom.application.makeKatyDomLifecycle
 import kotlin.test.assertEquals
 import kotlin.test.fail
 
@@ -17,7 +17,10 @@ import kotlin.test.fail
 /**
  * Builds the DOM for a given KatyDOM node and checks the HTML output against what's expected.
  */
-internal fun <Msg> checkBuild(expectedHtml: String, vdomNode: KatyDomNode<Msg>) {
+internal fun <Msg> checkBuild(
+    expectedHtml: String,
+    vdomNode: AbstractKatyDomNode<Msg>
+) {
 
     val body = KDomDocument().createElement("body")
     val div = body.ownerDocument.createElement("div")
@@ -41,8 +44,12 @@ internal fun <Msg> checkBuild(expectedHtml: String, vdomNode: KatyDomNode<Msg>) 
 /**
  * Builds the DOM for a given KatyDOM node and checks the HTML output against what's expected before and after a patch.
  */
-internal fun <Msg> checkPatch(expectedHtml2: String, vdomNode2: KatyDomNode<Msg>, expectedHtml1: String,
-                              vdomNode1: KatyDomNode<Msg>) {
+internal fun <Msg> checkPatch(
+    expectedHtml2: String,
+    vdomNode2: AbstractKatyDomNode<Msg>,
+    expectedHtml1: String,
+    vdomNode1: AbstractKatyDomNode<Msg>
+) {
 
     val body = KDomDocument().createElement("body")
     val div = body.ownerDocument.createElement("div")

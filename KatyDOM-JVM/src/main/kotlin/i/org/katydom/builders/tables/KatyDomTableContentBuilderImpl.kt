@@ -5,18 +5,18 @@
 
 package i.org.katydom.builders.tables
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
+import i.org.katydom.builders.KatyDomAttributesContentBuilderImpl
+import i.org.katydom.builders.KatyDomContentRestrictions
+import i.org.katydom.builders.KatyDomFlowContentBuilderImpl
+import i.org.katydom.elements.KatyDomHtmlElement
+import i.org.katydom.elements.tabular.*
+import i.org.katydom.elements.text.KatyDomComment
 import o.org.katydom.builders.KatyDomAttributesContentBuilder
 import o.org.katydom.builders.KatyDomFlowContentBuilder
 import o.org.katydom.builders.tables.KatyDomColGroupContentBuilder
 import o.org.katydom.builders.tables.KatyDomTableBodyContentBuilder
 import o.org.katydom.builders.tables.KatyDomTableContentBuilder
 import o.org.katydom.builders.tables.KatyDomTableRowContentBuilder
-import i.org.katydom.builders.KatyDomAttributesContentBuilderImpl
-import i.org.katydom.builders.KatyDomContentRestrictions
-import i.org.katydom.builders.KatyDomFlowContentBuilderImpl
-import i.org.katydom.elements.tabular.*
-import i.org.katydom.elements.text.KatyDomComment
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------

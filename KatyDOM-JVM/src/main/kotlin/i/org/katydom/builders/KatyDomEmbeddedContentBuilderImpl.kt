@@ -5,22 +5,22 @@
 
 package i.org.katydom.builders
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.KatyDomAttributesContentBuilder
-import o.org.katydom.builders.KatyDomEmbeddedContentBuilder
-import o.org.katydom.builders.details.KatyDomDetailsFlowContentBuilder
-import o.org.katydom.builders.media.KatyDomMediaFlowContentBuilder
-import o.org.katydom.builders.media.KatyDomPictureContentBuilder
-import o.org.katydom.builders.miscellaneous.KatyDomTextContentBuilder
 import i.org.katydom.builders.details.KatyDomDetailsFlowContentBuilderImpl
 import i.org.katydom.builders.media.KatyDomMediaContentRestrictions
 import i.org.katydom.builders.media.KatyDomMediaFlowContentBuilderImpl
 import i.org.katydom.builders.media.KatyDomPictureContentBuilderImpl
 import i.org.katydom.builders.media.KatyDomPictureContentRestrictions
 import i.org.katydom.builders.miscellaneous.KatyDomTextContentBuilderImpl
+import i.org.katydom.elements.KatyDomHtmlElement
 import i.org.katydom.elements.embedded.*
 import i.org.katydom.elements.interactive.KatyDomDetails
 import i.org.katydom.elements.text.KatyDomComment
+import o.org.katydom.builders.KatyDomAttributesContentBuilder
+import o.org.katydom.builders.KatyDomEmbeddedContentBuilder
+import o.org.katydom.builders.details.KatyDomDetailsFlowContentBuilder
+import o.org.katydom.builders.media.KatyDomMediaFlowContentBuilder
+import o.org.katydom.builders.media.KatyDomPictureContentBuilder
+import o.org.katydom.builders.miscellaneous.KatyDomTextContentBuilder
 import o.org.katydom.types.*
 
 //---------------------------------------------------------------------------------------------------------------------

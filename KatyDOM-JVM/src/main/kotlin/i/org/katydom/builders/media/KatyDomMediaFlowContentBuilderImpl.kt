@@ -5,13 +5,13 @@
 
 package i.org.katydom.builders.media
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.KatyDomAttributesContentBuilder
-import o.org.katydom.builders.media.KatyDomMediaFlowContentBuilder
 import i.org.katydom.builders.KatyDomContentRestrictions
 import i.org.katydom.builders.KatyDomFlowContentBuilderImpl
+import i.org.katydom.elements.KatyDomHtmlElement
 import i.org.katydom.elements.embedded.KatyDomSource
 import i.org.katydom.elements.embedded.KatyDomTrack
+import o.org.katydom.builders.KatyDomAttributesContentBuilder
+import o.org.katydom.builders.media.KatyDomMediaFlowContentBuilder
 import o.org.katydom.types.EDirection
 import o.org.katydom.types.ETrackKind
 import o.org.katydom.types.MimeType

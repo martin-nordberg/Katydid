@@ -5,13 +5,13 @@
 
 package i.org.katydom.builders.lists
 
-import o.org.katydom.builders.KatyDomFlowContentBuilder
-import o.org.katydom.builders.lists.KatyDomOrderedListContentBuilder
 import i.org.katydom.builders.KatyDomAttributesContentBuilderImpl
 import i.org.katydom.builders.KatyDomFlowContentBuilderImpl
 import i.org.katydom.elements.grouping.KatyDomLi
 import i.org.katydom.elements.grouping.KatyDomOl
 import i.org.katydom.elements.text.KatyDomComment
+import o.org.katydom.builders.KatyDomFlowContentBuilder
+import o.org.katydom.builders.lists.KatyDomOrderedListContentBuilder
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------

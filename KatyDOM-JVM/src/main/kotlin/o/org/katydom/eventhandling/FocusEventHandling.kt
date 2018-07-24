@@ -8,7 +8,7 @@
 
 package o.org.katydom.eventhandling
 
-import o.org.katydom.api.FocusEvent2Message
+import o.org.katydom.application.FocusEvent2Message
 import o.org.katydom.builders.KatyDomAttributesContentBuilder
 import o.org.katydom.eventhandling.types.EFocusEventType
 import x.org.katydom.dom.events.Event

@@ -5,11 +5,11 @@
 
 package i.org.katydom.builders.miscellaneous
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.miscellaneous.KatyDomTextContentBuilder
 import i.org.katydom.builders.KatyDomAttributesContentBuilderImpl
+import i.org.katydom.elements.KatyDomHtmlElement
 import i.org.katydom.elements.text.KatyDomComment
 import i.org.katydom.elements.text.KatyDomText
+import o.org.katydom.builders.miscellaneous.KatyDomTextContentBuilder
 
 //---------------------------------------------------------------------------------------------------------------------
 

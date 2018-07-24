@@ -8,11 +8,11 @@
 
 package o.org.katydom.eventhandling
 
-import o.org.katydom.api.KeyboardEvent2Message
+import o.org.katydom.application.KeyboardEvent2Message
 import o.org.katydom.builders.KatyDomAttributesContentBuilder
 import o.org.katydom.eventhandling.types.EKeyboardEventType
-import x.org.katydom.dom.events.KeyboardEvent
 import x.org.katydom.dom.events.Event
+import x.org.katydom.dom.events.KeyboardEvent
 
 
 //---------------------------------------------------------------------------------------------------------------------

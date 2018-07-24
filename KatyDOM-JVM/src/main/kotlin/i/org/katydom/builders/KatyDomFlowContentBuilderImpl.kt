@@ -5,17 +5,10 @@
 
 package i.org.katydom.builders
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.KatyDomAttributesContentBuilder
-import o.org.katydom.builders.KatyDomFlowContentBuilder
-import o.org.katydom.builders.KatyDomPhrasingContentBuilder
-import o.org.katydom.builders.details.KatyDomDetailsFlowContentBuilder
-import o.org.katydom.builders.lists.KatyDomOrderedListContentBuilder
-import o.org.katydom.builders.lists.KatyDomUnorderedListContentBuilder
-import o.org.katydom.builders.tables.KatyDomTableContentBuilder
 import i.org.katydom.builders.lists.KatyDomOrderedListContentBuilderImpl
 import i.org.katydom.builders.lists.KatyDomUnorderedListContentBuilderImpl
 import i.org.katydom.builders.tables.KatyDomTableContentBuilderImpl
+import i.org.katydom.elements.KatyDomHtmlElement
 import i.org.katydom.elements.forms.KatyDomFieldSet
 import i.org.katydom.elements.forms.KatyDomForm
 import i.org.katydom.elements.forms.KatyDomLegend
@@ -23,6 +16,13 @@ import i.org.katydom.elements.grouping.*
 import i.org.katydom.elements.interactive.KatyDomDetails
 import i.org.katydom.elements.sections.*
 import i.org.katydom.elements.tabular.KatyDomTable
+import o.org.katydom.builders.KatyDomAttributesContentBuilder
+import o.org.katydom.builders.KatyDomFlowContentBuilder
+import o.org.katydom.builders.KatyDomPhrasingContentBuilder
+import o.org.katydom.builders.details.KatyDomDetailsFlowContentBuilder
+import o.org.katydom.builders.lists.KatyDomOrderedListContentBuilder
+import o.org.katydom.builders.lists.KatyDomUnorderedListContentBuilder
+import o.org.katydom.builders.tables.KatyDomTableContentBuilder
 import o.org.katydom.types.EDirection
 import o.org.katydom.types.EFormEncodingType
 import o.org.katydom.types.EFormSubmissionMethod

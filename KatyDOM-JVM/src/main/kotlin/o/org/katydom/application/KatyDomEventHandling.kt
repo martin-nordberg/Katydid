@@ -3,7 +3,7 @@
 // Apache 2.0 License
 //
 
-package o.org.katydom.api
+package o.org.katydom.application
 
 import x.org.katydom.dom.events.*
 

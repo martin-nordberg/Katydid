@@ -6,7 +6,7 @@
 package jvm.org.katydom.builders.forms
 
 import jvm.org.katydom.api.checkBuild
-import o.org.katydom.api.katyDom
+import o.org.katydom.application.katyDom
 import o.org.katydom.types.EFormEncodingType
 import o.org.katydom.types.EFormSubmissionMethod
 import org.junit.jupiter.api.Test

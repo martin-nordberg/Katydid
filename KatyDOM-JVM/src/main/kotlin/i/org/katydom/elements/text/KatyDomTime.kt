@@ -5,10 +5,10 @@
 
 package i.org.katydom.elements.text
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
+import i.org.katydom.builders.KatyDomPhrasingContentBuilderImpl
+import i.org.katydom.elements.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomPhrasingContentBuilder
 import o.org.katydom.builders.miscellaneous.KatyDomTextContentBuilder
-import i.org.katydom.builders.KatyDomPhrasingContentBuilderImpl
 import o.org.katydom.types.EDirection
 import x.org.katydom.types.KatyDateTime
 

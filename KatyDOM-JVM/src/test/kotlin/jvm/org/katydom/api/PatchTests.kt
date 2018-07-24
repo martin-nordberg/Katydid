@@ -5,7 +5,7 @@
 
 package jvm.org.katydom.api
 
-import o.org.katydom.api.katyDom
+import o.org.katydom.application.katyDom
 import org.junit.jupiter.api.Test
 
 //---------------------------------------------------------------------------------------------------------------------

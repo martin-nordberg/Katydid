@@ -5,10 +5,10 @@
 
 package i.org.katydom.elements.interactive
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
+import i.org.katydom.builders.details.KatyDomDetailsFlowContentBuilderImpl
+import i.org.katydom.elements.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomFlowContentBuilder
 import o.org.katydom.builders.KatyDomHeadingContentBuilder
-import i.org.katydom.builders.details.KatyDomDetailsFlowContentBuilderImpl
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------

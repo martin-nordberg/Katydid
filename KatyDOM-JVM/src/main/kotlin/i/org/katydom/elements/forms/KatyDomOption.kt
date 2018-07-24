@@ -5,10 +5,10 @@
 
 package i.org.katydom.elements.forms
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
+import i.org.katydom.builders.miscellaneous.KatyDomOptGroupContentBuilderImpl
+import i.org.katydom.elements.KatyDomHtmlElement
 import o.org.katydom.builders.KatyDomAttributesContentBuilder
 import o.org.katydom.builders.miscellaneous.KatyDomTextContentBuilder
-import i.org.katydom.builders.miscellaneous.KatyDomOptGroupContentBuilderImpl
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------

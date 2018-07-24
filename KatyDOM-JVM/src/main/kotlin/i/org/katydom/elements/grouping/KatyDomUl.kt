@@ -5,9 +5,9 @@
 
 package i.org.katydom.elements.grouping
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.lists.KatyDomUnorderedListContentBuilder
 import i.org.katydom.builders.KatyDomFlowContentBuilderImpl
+import i.org.katydom.elements.KatyDomHtmlElement
+import o.org.katydom.builders.lists.KatyDomUnorderedListContentBuilder
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------

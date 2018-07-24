@@ -5,11 +5,11 @@
 
 package i.org.katydom.builders.tables
 
-import o.org.katydom.builders.KatyDomAttributesContentBuilder
-import o.org.katydom.builders.tables.KatyDomColGroupContentBuilder
 import i.org.katydom.builders.KatyDomAttributesContentBuilderImpl
 import i.org.katydom.elements.tabular.KatyDomCol
 import i.org.katydom.elements.tabular.KatyDomColGroup
+import o.org.katydom.builders.KatyDomAttributesContentBuilder
+import o.org.katydom.builders.tables.KatyDomColGroupContentBuilder
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -5,7 +5,7 @@
 
 package i.org.katydom.elements.text
 
-import o.org.katydom.abstractnodes.KatyDomNode
+import i.org.katydom.elements.KatyDomNode
 import x.org.katydom.dom.Document
 import x.org.katydom.dom.Node
 import x.org.katydom.dom.Text

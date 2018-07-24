@@ -7,7 +7,7 @@
 
 package o.org.katydom.eventhandling
 
-import o.org.katydom.api.MouseEvent2Message
+import o.org.katydom.application.MouseEvent2Message
 import o.org.katydom.builders.KatyDomAttributesContentBuilder
 import o.org.katydom.eventhandling.types.EMouseEventType
 import x.org.katydom.dom.events.Event

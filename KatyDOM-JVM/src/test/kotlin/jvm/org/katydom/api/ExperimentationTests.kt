@@ -5,7 +5,7 @@
 
 package jvm.org.katydom.api
 
-import o.org.katydom.api.katyDom
+import o.org.katydom.application.katyDom
 import o.org.katydom.eventhandling.onclick
 import o.org.katydom.types.EAnchorHtmlLinkType
 import org.junit.jupiter.api.Test

@@ -5,10 +5,10 @@
 
 package i.org.katydom.elements.tabular
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.builders.tables.KatyDomTableRowContentBuilder
 import i.org.katydom.builders.tables.KatyDomTableBodyContentBuilderImpl
 import i.org.katydom.builders.tables.KatyDomTableContentBuilderImpl
+import i.org.katydom.elements.KatyDomHtmlElement
+import o.org.katydom.builders.tables.KatyDomTableRowContentBuilder
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------

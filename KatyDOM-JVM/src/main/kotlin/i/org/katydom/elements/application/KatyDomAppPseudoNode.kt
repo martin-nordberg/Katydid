@@ -5,11 +5,11 @@
 
 package i.org.katydom.elements.application
 
-import o.org.katydom.abstractnodes.KatyDomHtmlElement
-import o.org.katydom.abstractnodes.KatyDomNode
-import o.org.katydom.builders.KatyDomFlowContentBuilder
 import i.org.katydom.builders.KatyDomContentRestrictions
 import i.org.katydom.builders.KatyDomFlowContentBuilderImpl
+import i.org.katydom.elements.KatyDomHtmlElement
+import i.org.katydom.elements.KatyDomNode
+import o.org.katydom.builders.KatyDomFlowContentBuilder
 
 //---------------------------------------------------------------------------------------------------------------------
 

@@ -3,10 +3,11 @@
 // Apache 2.0 License
 //
 
-package o.org.katydom.abstractnodes
+package i.org.katydom.elements
 
 import i.org.katydom.infrastructure.UnusedMap
 import i.org.katydom.infrastructure.UnusedSet
+import o.org.katydom.elements.AbstractKatyDomElement
 import x.org.katydom.dom.*
 import x.org.katydom.types.KatyDateTime
 import x.org.katydom.types.KatyTime
@@ -19,7 +20,7 @@ import x.org.katydom.types.formatHtmlTime
  * Abstract class representing a KatyDom virtual element. Corresponds to DOM Element.
  * @param Msg the type of message returned by events from this element when an Elm-like architecture is in use.
  */
-abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
+internal abstract class KatyDomElement<Msg> : KatyDomNode<Msg>, AbstractKatyDomElement<Msg> {
 
     private constructor(
         selectorPieces: List<String>?,
@@ -92,7 +93,7 @@ abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
      * Adds a given class to this element.
      * @param className the name of the class to add.
      */
-    internal fun addClass(className: String) {
+    fun addClass(className: String) {
 
         check(isAddingAttributes) {
             "Cannot modify KatyDOM attributes after beginning to add event handlers or child nodes."
@@ -106,7 +107,7 @@ abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
      * Adds multiple classes to this element.
      * @param classes a sequence of class names to add.
      */
-    internal fun addClasses(classes: Iterable<String>) {
+    fun addClasses(classes: Iterable<String>) {
 
         check(isAddingAttributes) {
             "Cannot modify KatyDOM attributes after beginning to add event handlers or child nodes."
@@ -196,7 +197,7 @@ abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
      * @param name the name of the attribute to set.
      * @param value the value of the attribute.
      */
-    internal fun setAttribute(name: String, value: String?) {
+    fun setAttribute(name: String, value: String?) {
 
         check(isAddingAttributes) {
             "Cannot modify KatyDOM attributes after beginning to add event handlers or child nodes."
@@ -214,7 +215,7 @@ abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
      * Sets multiple attributes provided as a map from name to value.
      * @param attributes the attribute name/value pairs to set.
      */
-    internal fun setAttributes(attributes: Map<String, String>) {
+    fun setAttributes(attributes: Map<String, String>) {
 
         check(isAddingAttributes) {
             "Cannot modify KatyDOM attributes after beginning to add event handlers or child nodes."
@@ -231,7 +232,7 @@ abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
      * @param name the name of the attribute to set.
      * @param value the value of the attribute.
      */
-    internal fun setBooleanAttribute(name: String, value: Boolean?) {
+    fun setBooleanAttribute(name: String, value: Boolean?) {
 
         check(isAddingAttributes) {
             "Cannot modify KatyDOM attributes after beginning to add event handlers or child nodes."
@@ -251,7 +252,7 @@ abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
      * @param name the name of the attribute to set.
      * @param value the value of the attribute.
      */
-    internal fun setDateTimeAttribute(name: String, value: KatyDateTime?) {
+    fun setDateTimeAttribute(name: String, value: KatyDateTime?) {
 
         check(isAddingAttributes) {
             "Cannot modify KatyDOM attributes after beginning to add event handlers or child nodes."
@@ -270,7 +271,7 @@ abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
      * @param name the name of the attribute to set.
      * @param value the value of the attribute.
      */
-    internal fun setTimeAttribute(name: String, value: KatyTime?) {
+    fun setTimeAttribute(name: String, value: KatyTime?) {
 
         check(isAddingAttributes) {
             "Cannot modify KatyDOM attributes after beginning to add event handlers or child nodes."
@@ -289,7 +290,7 @@ abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
      * @param name the name of the attribute without its "data-" prefix.
      * @param value the value of the attribute.
      */
-    internal fun setData(name: String, value: String) {
+    fun setData(name: String, value: String) {
 
         check(isAddingAttributes) {
             "Cannot modify KatyDOM attributes after beginning to add event handlers or child nodes."
@@ -309,7 +310,7 @@ abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
      * Sets multiple data attributes at once.
      * @param dataset a collection of name/value pairs of "data-" attributes.
      */
-    internal fun setData(dataset: Map<String, String>) {
+    fun setData(dataset: Map<String, String>) {
 
         check(isAddingAttributes) {
             "Cannot modify KatyDOM attributes after beginning to add event handlers or child nodes."
@@ -326,7 +327,7 @@ abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
      * @param name the name of the attribute to set.
      * @param value the value of the attribute.
      */
-    internal fun setNumberAttribute(name: String, value: Number?) {
+    fun setNumberAttribute(name: String, value: Number?) {
 
         check(isAddingAttributes) {
             "Cannot modify KatyDOM attributes after beginning to add event handlers or child nodes."
@@ -344,7 +345,7 @@ abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
     /**
      * Sets the style attribute for this element. TODO: addStyle( cssKey, cssValue )
      */
-    internal fun setStyle(style: String?) {
+    fun setStyle(style: String?) {
 
         check(isAddingAttributes) {
             "Cannot modify KatyDOM attributes after beginning to add event handlers or child nodes."
@@ -359,7 +360,7 @@ abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
      * @param name the name of the attribute to set.
      * @param value the value of the attribute.
      */
-    internal fun setTrueFalseAttribute(name: String, value: Boolean?) {
+    fun setTrueFalseAttribute(name: String, value: Boolean?) {
 
         check(isAddingAttributes) {
             "Cannot modify KatyDOM attributes after beginning to add event handlers or child nodes."
@@ -384,7 +385,7 @@ abstract class KatyDomElement<Msg> : KatyDomNode<Msg> {
      * @param name the name of the attribute to set.
      * @param value the value of the attribute.
      */
-    internal fun setYesNoAttribute(name: String, value: Boolean?) {
+    fun setYesNoAttribute(name: String, value: Boolean?) {
 
         check(isAddingAttributes) {
             "Cannot modify KatyDOM attributes after beginning to add event handlers or child nodes."

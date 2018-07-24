@@ -3,12 +3,14 @@
 // Apache 2.0 License
 //
 
-package o.org.katydom.abstractnodes
+package i.org.katydom.elements
 
-import o.org.katydom.api.*
+import o.org.katydom.application.EventCancellationException
+import o.org.katydom.application.EventHandler
+import o.org.katydom.elements.AbstractKatyDomNode
 import x.org.katydom.dom.Document
 import x.org.katydom.dom.Node
-import x.org.katydom.dom.events.*
+import x.org.katydom.dom.events.Event
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -20,9 +22,9 @@ import x.org.katydom.dom.events.*
  * @param _key a key for this KatyDOM node that is unique among all the siblings of this node. If [_key]
  *             is null, then the node name becomes the key.
  */
-abstract class KatyDomNode<Msg>(
+internal abstract class KatyDomNode<Msg> (
     private val _key: Any?
-) {
+) : AbstractKatyDomNode<Msg> {
 
     /**
      * States in the lifecycle of a node.
@@ -101,14 +103,14 @@ abstract class KatyDomNode<Msg>(
         get() = state == EState.PATCHED_REPLACED
 
     /** The key for this node. If none provided, uses the node name. */
-    val key: Any
+    override val key: Any
         get() = _key ?: nodeName
 
     /** The name of this node (usually the HTML tag name, otherwise a pseudo tag name like "#text"). */
-    abstract val nodeName: String
+    abstract override val nodeName: String
 
     /** The first and only child node in this node. (Exception if there is none or more than one.) */
-    val soleChildNode: KatyDomNode<Msg>
+    override val soleChildNode: KatyDomNode<Msg>
         get() {
 
             check(firstChildNode != null) { "No child found." }
@@ -124,7 +126,7 @@ abstract class KatyDomNode<Msg>(
      * Adds a new child node to this node.
      * @param childNode the child node to add.
      */
-    internal fun addChildNode(childNode: KatyDomNode<Msg>) {
+    fun addChildNode(childNode: KatyDomNode<Msg>) {
 
         when {
 
@@ -168,7 +170,7 @@ abstract class KatyDomNode<Msg>(
      * @param eventName the name of the kind of event
      * @param handler the callback when the vent occurs
      */
-    internal fun addEventHandler(eventName: String, handler: EventHandler) {
+    fun addEventHandler(eventName: String, handler: EventHandler) {
 
         if (isAddingAttributes) {
             freezeAttributes()
@@ -211,7 +213,7 @@ abstract class KatyDomNode<Msg>(
      * Sets the attributes and child nodes of a newly created real DOM node to match this virtual DOM node.
      * @param domNode the real DOM node to be configured to mirror this virtual DOM node.
      */
-    internal fun establish(domNode: Node) {
+    fun establish(domNode: Node) {
 
         check(state >= EState.CONSTRUCTED) {
             "KatyDOM node must be fully constructed before establishing the real DOM."
@@ -316,7 +318,7 @@ abstract class KatyDomNode<Msg>(
      * Patches a real DOM node by determining the difference between this KatyDOM node and its prior edition.
      * @param priorNode the prior edition of this KatyDOM node.
      */
-    internal fun patch(priorNode: KatyDomNode<Msg>) {
+    fun patch(priorNode: KatyDomNode<Msg>) {
 
         // Quit early if the node is the same (e.g. memoized).
         if (this === priorNode) {

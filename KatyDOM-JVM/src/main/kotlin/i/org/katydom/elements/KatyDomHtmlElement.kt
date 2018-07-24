@@ -3,8 +3,9 @@
 // Apache 2.0 License
 //
 
-package o.org.katydom.abstractnodes
+package i.org.katydom.elements
 
+import o.org.katydom.elements.AbstractKatyDomHtmlElement
 import o.org.katydom.types.EDirection
 import x.org.katydom.dom.Document
 import x.org.katydom.dom.Node
@@ -31,7 +32,7 @@ import x.org.katydom.dom.Node
  * @param translate whether to translate text within this element.
  */
 @Suppress("unused")
-abstract class KatyDomHtmlElement<Msg>(
+internal abstract class KatyDomHtmlElement<Msg>(
     selector: String?,
     key: Any?,
     accesskey: Char? = null,
@@ -44,7 +45,7 @@ abstract class KatyDomHtmlElement<Msg>(
     tabindex: Int? = null,
     title: String? = null,
     translate: Boolean? = null
-) : KatyDomElement<Msg>(selector, key, style, tabindex) {
+) : KatyDomElement<Msg>(selector, key, style, tabindex), AbstractKatyDomHtmlElement<Msg> {
 
     init {
         // TODO: need to output a string with Unicode escapes for non-ASCII characters

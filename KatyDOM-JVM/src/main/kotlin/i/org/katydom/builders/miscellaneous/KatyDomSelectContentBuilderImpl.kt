@@ -5,11 +5,11 @@
 
 package i.org.katydom.builders.miscellaneous
 
-import o.org.katydom.builders.miscellaneous.KatyDomOptGroupContentBuilder
-import o.org.katydom.builders.miscellaneous.KatyDomSelectContentBuilder
 import i.org.katydom.builders.KatyDomContentRestrictions
 import i.org.katydom.elements.forms.KatyDomOptGroup
 import i.org.katydom.elements.forms.KatyDomSelect
+import o.org.katydom.builders.miscellaneous.KatyDomOptGroupContentBuilder
+import o.org.katydom.builders.miscellaneous.KatyDomSelectContentBuilder
 import o.org.katydom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------
