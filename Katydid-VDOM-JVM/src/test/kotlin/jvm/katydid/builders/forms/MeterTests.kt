@@ -6,7 +6,7 @@
 package jvm.katydid.builders.forms
 
 import jvm.katydid.api.checkBuild
-import o.katydid.vdom.application.katyDom
+import o.katydid.vdom.application.katydid
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -16,7 +16,7 @@ class MeterTests {
     @Test
     fun `A meter element with floating point attributes produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             form {
 
@@ -44,7 +44,7 @@ class MeterTests {
     @Test
     fun `A meter element with integer attributes produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             form {
 
@@ -74,7 +74,7 @@ class MeterTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 meter(value = 0.5) {
                     meter(value = 0.2) {}
@@ -91,7 +91,7 @@ class MeterTests {
 
         assertThrows<IllegalArgumentException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 meter(value = 5, min = 10, max = 0) {}
             }
 
@@ -99,7 +99,7 @@ class MeterTests {
 
         assertThrows<IllegalArgumentException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 meter(value = 0.5, min = 1.0, max = 0.0) {}
             }
 
@@ -112,7 +112,7 @@ class MeterTests {
 
         assertThrows<IllegalArgumentException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 meter(value = 1.1) {}
             }
 
@@ -120,7 +120,7 @@ class MeterTests {
 
         assertThrows<IllegalArgumentException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 meter(high = 1.1, value = 0.5) {}
             }
 
@@ -128,7 +128,7 @@ class MeterTests {
 
         assertThrows<IllegalArgumentException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 meter(low = -0.1, value = 0.5) {}
             }
 
@@ -136,7 +136,7 @@ class MeterTests {
 
         assertThrows<IllegalArgumentException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 meter(optimum = 1.1, value = 0.5) {}
             }
 
@@ -149,7 +149,7 @@ class MeterTests {
 
         assertThrows<IllegalArgumentException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 meter(min = 0, max = 100, value = 110) {}
             }
 
@@ -157,7 +157,7 @@ class MeterTests {
 
         assertThrows<IllegalArgumentException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 meter(min = 0, max = 100, high = 110, value = 50) {}
             }
 
@@ -165,7 +165,7 @@ class MeterTests {
 
         assertThrows<IllegalArgumentException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 meter(min = 0, max = 100, low = -10, value = 50) {}
             }
 
@@ -173,7 +173,7 @@ class MeterTests {
 
         assertThrows<IllegalArgumentException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 meter(min = 0, max = 100, optimum = 110, value = 50) {}
             }
 

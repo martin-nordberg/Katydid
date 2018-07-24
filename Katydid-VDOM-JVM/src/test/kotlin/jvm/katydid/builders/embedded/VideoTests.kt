@@ -6,7 +6,7 @@
 package jvm.katydid.builders.embedded
 
 import jvm.katydid.api.checkBuild
-import o.katydid.vdom.application.katyDom
+import o.katydid.vdom.application.katydid
 import o.katydid.vdom.types.ECorsSetting
 import o.katydid.vdom.types.EPreloadHint
 import o.katydid.vdom.types.ETrackKind
@@ -20,7 +20,7 @@ class VideoTests {
     @Test
     fun `A video element with all its attributes produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             video(
                 "#myvideo.annoying",
@@ -47,7 +47,7 @@ class VideoTests {
     @Test
     fun `A video element with nested elements produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             video {
 
@@ -85,7 +85,7 @@ class VideoTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 video {
                     audio {}
                 }
@@ -95,7 +95,7 @@ class VideoTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 video {
                     video {}
                 }
@@ -110,7 +110,7 @@ class VideoTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 video(src = "http://url") {
                     source(src = "http://url2") {}
                 }
@@ -125,7 +125,7 @@ class VideoTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 video(src = "http://url") {
                     track(src="http://trackurl") {}

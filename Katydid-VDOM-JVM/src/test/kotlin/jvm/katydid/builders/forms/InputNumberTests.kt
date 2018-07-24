@@ -6,7 +6,7 @@
 package jvm.katydid.builders.forms
 
 import jvm.katydid.api.checkBuild
-import o.katydid.vdom.application.katyDom
+import o.katydid.vdom.application.katydid
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -16,7 +16,7 @@ class InputNumberTests {
     @Test
     fun `A floating point number input element with all its attributes produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             form {
                 inputNumber(
@@ -49,7 +49,7 @@ class InputNumberTests {
     @Test
     fun `An integer number input element with all its attributes produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             form {
                 inputNumber(
@@ -84,7 +84,7 @@ class InputNumberTests {
 
         assertThrows<IllegalArgumentException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 inputNumber(min = 100.0, max = 90.0, value = 95.0) {}
             }
 
@@ -92,7 +92,7 @@ class InputNumberTests {
 
         assertThrows<IllegalArgumentException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 inputNumber(min = 100, max = 90, value = 95) {}
             }
 

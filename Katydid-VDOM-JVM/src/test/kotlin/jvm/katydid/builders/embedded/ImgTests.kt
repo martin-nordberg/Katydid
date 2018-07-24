@@ -6,7 +6,7 @@
 package jvm.katydid.builders.embedded
 
 import jvm.katydid.api.checkBuild
-import o.katydid.vdom.application.katyDom
+import o.katydid.vdom.application.katydid
 import o.katydid.vdom.types.ECorsSetting
 import o.katydid.vdom.types.EReferrerPolicy
 import org.junit.jupiter.api.Test
@@ -17,7 +17,7 @@ class ImgTests {
     @Test
     fun `An img element with all its attributes produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             img(
                 "#myimage.fancy",

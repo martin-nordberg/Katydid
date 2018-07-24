@@ -5,9 +5,9 @@
 
 package js.katydid.samples.greetme
 
-import js.katydid.vdom.api.KatyDomApplication
+import js.katydid.vdom.api.KatydidApplication
 import js.katydid.vdom.api.runApplication
-import o.katydid.vdom.builders.KatyDomFlowContentBuilder
+import o.katydid.vdom.builders.KatydidFlowContentBuilder
 import o.katydid.vdom.eventhandling.oninput
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -27,9 +27,9 @@ data class GreetMeMsg (
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * KatyDOM application.
+ * Katydid application.
  */
-class GreetMeApplication : KatyDomApplication<GreetMeAppState, GreetMeMsg> {
+class GreetMeApplication : KatydidApplication<GreetMeAppState, GreetMeMsg> {
 
     /**
      * Initializes the application state for the first time.
@@ -46,10 +46,10 @@ class GreetMeApplication : KatyDomApplication<GreetMeAppState, GreetMeMsg> {
     }
 
     /**
-     * Constructs the KatyDOM virtual DOM tree for given input application state [applicationState].
+     * Constructs the Katydid virtual DOM tree for given input application state [applicationState].
      * @return the root of the application's virtual DOM tree for given application state.
      */
-    override fun view(applicationState: GreetMeAppState): KatyDomFlowContentBuilder<GreetMeMsg>.() -> Unit =
+    override fun view(applicationState: GreetMeAppState): KatydidFlowContentBuilder<GreetMeMsg>.() -> Unit =
         {
 
             // This top level element replaces the "#app" div in greetme.html.

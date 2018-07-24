@@ -5,16 +5,16 @@
 
 package js.katydid.samples.sudokusolver
 
-import js.katydid.vdom.api.KatyDomApplication
+import js.katydid.vdom.api.KatydidApplication
 import js.katydid.vdom.api.runApplication
-import o.katydid.vdom.builders.KatyDomFlowContentBuilder
+import o.katydid.vdom.builders.KatydidFlowContentBuilder
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * KatyDOM application for solving Sudoku.
+ * Katydid application for solving Sudoku.
  */
-class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuSolverMsg> {
+class SudokuSolverApplication : KatydidApplication<SudokuSolverAppState, SudokuSolverMsg> {
 
     /**
      * Initializes the application state for the first time.
@@ -30,10 +30,10 @@ class SudokuSolverApplication : KatyDomApplication<SudokuSolverAppState, SudokuS
         updateSudokuSolver(applicationState, message)
 
     /**
-     * Constructs the KatyDOM virtual DOM tree for given input application state [applicationState].
+     * Constructs the Katydid virtual DOM tree for given input application state [applicationState].
      * @return a builder that builds the root of the application's virtual DOM tree for given application state.
      */
-    override fun view(applicationState: SudokuSolverAppState): KatyDomFlowContentBuilder<SudokuSolverMsg>.() -> Unit =
+    override fun view(applicationState: SudokuSolverAppState): KatydidFlowContentBuilder<SudokuSolverMsg>.() -> Unit =
         viewSudokuSolver(applicationState)
 
 }

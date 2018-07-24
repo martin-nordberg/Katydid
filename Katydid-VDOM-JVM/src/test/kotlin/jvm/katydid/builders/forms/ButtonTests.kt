@@ -6,8 +6,8 @@
 package jvm.katydid.builders.forms
 
 import jvm.katydid.api.checkBuild
-import o.katydid.vdom.application.katyDom
-import o.katydid.vdom.builders.KatyDomPhrasingContentBuilder
+import o.katydid.vdom.application.katydid
+import o.katydid.vdom.builders.KatydidPhrasingContentBuilder
 import o.katydid.vdom.types.EButtonType
 import o.katydid.vdom.types.EFormEncodingType
 import o.katydid.vdom.types.EFormSubmissionMethod
@@ -20,7 +20,7 @@ class ButtonTests {
     @Test
     fun `A button element produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             form {
 
@@ -62,12 +62,12 @@ class ButtonTests {
     fun `A button may not contain interactive content`() {
 
         fun checkInteractiveContentDisallowed(
-            defineContent: KatyDomPhrasingContentBuilder<Unit>.() -> Unit
+            defineContent: KatydidPhrasingContentBuilder<Unit>.() -> Unit
         ) {
 
             assertThrows<IllegalStateException> {
 
-                katyDom<Unit> {
+                katydid<Unit> {
                     button(defineContent = defineContent)
                 }
 

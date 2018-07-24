@@ -6,7 +6,7 @@
 package jvm.katydid.builders.sections
 
 import jvm.katydid.api.checkBuild
-import o.katydid.vdom.application.katyDom
+import o.katydid.vdom.application.katydid
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -16,7 +16,7 @@ class FooterTests {
     @Test
     fun `A footer element produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             footer {
 
@@ -43,7 +43,7 @@ class FooterTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 footer {
                     footer {}
@@ -55,7 +55,7 @@ class FooterTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 footer {
 
@@ -71,7 +71,7 @@ class FooterTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 header {
 

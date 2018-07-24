@@ -6,7 +6,7 @@
 package jvm.katydid.builders.embedded
 
 import jvm.katydid.api.checkBuild
-import o.katydid.vdom.application.katyDom
+import o.katydid.vdom.application.katydid
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -16,7 +16,7 @@ class PictureTests {
     @Test
     fun `A picture element produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             picture(
                 "#mypicture.funky"
@@ -43,7 +43,7 @@ class PictureTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 picture {
                     img(alt = "Kittens") {}
@@ -60,7 +60,7 @@ class PictureTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 picture {
                     img(alt = "Kittens", src = "myurl") {}

@@ -6,7 +6,7 @@
 package jvm.katydid.builders.forms
 
 import jvm.katydid.api.checkBuild
-import o.katydid.vdom.application.katyDom
+import o.katydid.vdom.application.katydid
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -16,7 +16,7 @@ class ProgressTests {
     @Test
     fun `A progress element with floating point attributes produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             form {
 
@@ -40,7 +40,7 @@ class ProgressTests {
     @Test
     fun `A progress element with integer attributes produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             form {
 
@@ -66,7 +66,7 @@ class ProgressTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 progress(value = 0.5) {
                     progress(value = 0.2) {}
@@ -83,7 +83,7 @@ class ProgressTests {
 
         assertThrows<IllegalArgumentException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 progress(value = 5, max = 0) {}
             }
 
@@ -91,7 +91,7 @@ class ProgressTests {
 
         assertThrows<IllegalArgumentException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 progress(value = 0.5, max = -100.0) {}
             }
 
@@ -104,7 +104,7 @@ class ProgressTests {
 
         assertThrows<IllegalArgumentException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 progress(value = 1.1) {}
             }
 
@@ -117,7 +117,7 @@ class ProgressTests {
 
         assertThrows<IllegalArgumentException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 progress(max = 100, value = 110) {}
             }
 
@@ -125,7 +125,7 @@ class ProgressTests {
 
         assertThrows<IllegalArgumentException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 progress(max = 100.0, value = 101.0) {}
             }
 

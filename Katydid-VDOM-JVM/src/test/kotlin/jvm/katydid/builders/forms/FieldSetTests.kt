@@ -6,7 +6,7 @@
 package jvm.katydid.builders.forms
 
 import jvm.katydid.api.checkBuild
-import o.katydid.vdom.application.katyDom
+import o.katydid.vdom.application.katydid
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -16,7 +16,7 @@ class FieldSetTests {
     @Test
     fun `A fieldset element produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             fieldset(disabled=true,form="SomeForm",name="bunch o'fields") {
 
@@ -43,7 +43,7 @@ class FieldSetTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 fieldset {
 
@@ -64,7 +64,7 @@ class FieldSetTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 legend {}
 

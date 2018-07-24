@@ -5,8 +5,8 @@
 
 package js.katydid.samples.helloworld
 
-import o.katydid.vdom.application.katyDom
-import o.katydid.vdom.application.makeKatyDomLifecycle
+import o.katydid.vdom.application.katydid
+import o.katydid.vdom.application.makeKatydidLifecycle
 import kotlin.browser.document
 
 
@@ -15,7 +15,7 @@ import kotlin.browser.document
 /**
  * Top-level component to build the virtual DOM for the Hello World application.
  */
-val helloWorldView = katyDom<Unit> {
+val helloWorldView = katydid<Unit> {
 
     // This top level element replaces the "#app" div in helloworld.html.
     div("#hello-world-app") {
@@ -42,14 +42,14 @@ val helloWorldView = katyDom<Unit> {
 @Suppress("UNUSED_PARAMETER")
 fun helloWorldMain(args: Array<String>) {
 
-    // Establish a KatyDOM lifecyle (Unit means no messages from user input).
-    val lifecycle = makeKatyDomLifecycle<Unit>()
+    // Establish a Katydid lifecyle (Unit means no messages from user input).
+    val lifecycle = makeKatydidLifecycle<Unit>()
 
     // Find the placeholder application element in helloworld.html.
     val appElement = document.getElementById("app")
 
     if (appElement != null) {
-        // This is a minimal use of the KatyDOM lifecyle: build the virtual DOM and copy it to the real DOM just
+        // This is a minimal use of the Katydid lifecyle: build the virtual DOM and copy it to the real DOM just
         // once. See more advanced samples for the realistic scenario of updating the virtual and real DOMs in
         // response to user input.
         lifecycle.build(appElement, helloWorldView)

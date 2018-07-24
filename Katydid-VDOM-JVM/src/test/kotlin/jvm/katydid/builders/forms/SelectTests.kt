@@ -6,7 +6,7 @@
 package jvm.katydid.builders.forms
 
 import jvm.katydid.api.checkBuild
-import o.katydid.vdom.application.katyDom
+import o.katydid.vdom.application.katydid
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -16,7 +16,7 @@ class SelectTests {
     @Test
     fun `A select element with various options produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             select(
                 "#combo",
@@ -60,7 +60,7 @@ class SelectTests {
 
         assertThrows<IllegalArgumentException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 select(size = 0) {}
             }
 
@@ -68,7 +68,7 @@ class SelectTests {
 
         assertThrows<IllegalArgumentException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 select(size = -1) {}
             }
 

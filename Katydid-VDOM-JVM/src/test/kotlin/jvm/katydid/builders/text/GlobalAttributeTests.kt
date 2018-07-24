@@ -6,7 +6,7 @@
 package jvm.katydid.builders.text
 
 import jvm.katydid.api.checkBuild
-import o.katydid.vdom.application.katyDom
+import o.katydid.vdom.application.katydid
 import o.katydid.vdom.types.EDirection
 import org.junit.jupiter.api.Test
 
@@ -16,7 +16,7 @@ class GlobalAttributeTests {
     @Test
     fun `A span element with all global attributes produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             span(
                 selector = "#aspan.withclass",

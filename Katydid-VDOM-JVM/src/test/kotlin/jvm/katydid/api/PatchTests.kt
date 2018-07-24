@@ -5,7 +5,7 @@
 
 package jvm.katydid.api
 
-import o.katydid.vdom.application.katyDom
+import o.katydid.vdom.application.katydid
 import org.junit.jupiter.api.Test
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ class PatchTests {
     @Test
     fun `Sample 1 patches correctly`() {
 
-        val vnode1 = katyDom<Unit> {
+        val vnode1 = katydid<Unit> {
 
             div("#mydiv.funnyone") {
 
@@ -53,7 +53,7 @@ class PatchTests {
                       |  </ul>
                       |</div>""".trimMargin()
 
-        val vnode2 = katyDom<Unit> {
+        val vnode2 = katydid<Unit> {
 
             div("#mydiv.funnyone") {
 
@@ -93,7 +93,7 @@ class PatchTests {
     @Test
     fun `Completely removed child nodes patch correctly`() {
 
-        val vnode1 = katyDom<Unit> {
+        val vnode1 = katydid<Unit> {
 
             div("#mydiv.funnyone") {
 
@@ -127,7 +127,7 @@ class PatchTests {
                       |  </ul>
                       |</div>""".trimMargin()
 
-        val vnode2 = katyDom<Unit> {
+        val vnode2 = katydid<Unit> {
 
             div("#mydiv.funnyone") {
 
@@ -149,7 +149,7 @@ class PatchTests {
     @Test
     fun `Completely replaced child nodes patch correctly`() {
 
-        val vnode1 = katyDom<Unit> {
+        val vnode1 = katydid<Unit> {
 
             div("#mydiv.funnyone") {
 
@@ -183,7 +183,7 @@ class PatchTests {
                       |  </ul>
                       |</div>""".trimMargin()
 
-        val vnode2 = katyDom<Unit> {
+        val vnode2 = katydid<Unit> {
 
             div("#mydiv.funnyone") {
 
@@ -224,7 +224,7 @@ class PatchTests {
     @Test
     fun `Child nodes removed all but one patch correctly`() {
 
-        val vnode1 = katyDom<Unit> {
+        val vnode1 = katydid<Unit> {
 
             div("#mydiv.funnyone") {
 
@@ -258,7 +258,7 @@ class PatchTests {
                       |  </ul>
                       |</div>""".trimMargin()
 
-        val vnode2 = katyDom<Unit> {
+        val vnode2 = katydid<Unit> {
 
             div("#mydiv.funnyone") {
 
@@ -287,7 +287,7 @@ class PatchTests {
     @Test
     fun `Child nodes removed all but one patch correctly A`() {
 
-        val vnode1 = katyDom<Unit> {
+        val vnode1 = katydid<Unit> {
 
             div("#mydiv.funnyone") {
 
@@ -313,7 +313,7 @@ class PatchTests {
                       |  </ul>
                       |</div>""".trimMargin()
 
-        val vnode2 = katyDom<Unit> {
+        val vnode2 = katydid<Unit> {
 
             div("#mydiv.funnyone") {
 
@@ -340,7 +340,7 @@ class PatchTests {
     @Test
     fun `Sample 2 patches correctly`() {
 
-        val vnode1 = katyDom<Unit> {
+        val vnode1 = katydid<Unit> {
 
             section("#mysection") {
 
@@ -369,7 +369,7 @@ class PatchTests {
                       |  </span>
                       |</section>""".trimMargin()
 
-        val vnode2 = katyDom<Unit> {
+        val vnode2 = katydid<Unit> {
 
             section("#mysection") {
 
@@ -401,7 +401,7 @@ class PatchTests {
     @Test
     fun `Reordered nodes (A) patch correctly`() {
 
-        val vnode1 = katyDom<Unit> {
+        val vnode1 = katydid<Unit> {
 
             article("#holder") {
 
@@ -421,7 +421,7 @@ class PatchTests {
                       |  <div id="d"></div>
                       |</article>""".trimMargin()
 
-        val vnode2 = katyDom<Unit> {
+        val vnode2 = katydid<Unit> {
 
             article("#holder") {
 
@@ -448,7 +448,7 @@ class PatchTests {
     @Test
     fun `Text changes patch correctly`() {
 
-        val vnode1 = katyDom<Unit> {
+        val vnode1 = katydid<Unit> {
 
             div("#mydiv.textinside") {
 
@@ -468,7 +468,7 @@ class PatchTests {
                       |  </span>
                       |</div>""".trimMargin()
 
-        val vnode2 = katyDom<Unit> {
+        val vnode2 = katydid<Unit> {
 
             div("#mydiv.textinside") {
 

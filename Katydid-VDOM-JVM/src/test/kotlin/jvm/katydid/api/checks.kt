@@ -5,21 +5,21 @@
 
 package jvm.katydid.api
 
-import i.katydid.vdom.elements.KatyDomHtmlElement
 import jvm.katydid.kdom.KDomDocument
-import o.katydid.vdom.application.makeKatyDomLifecycle
-import o.katydid.vdom.elements.AbstractKatyDomNode
+import o.katydid.vdom.application.makeKatydidLifecycle
+import o.katydid.vdom.elements.KatydidHtmlElement
+import o.katydid.vdom.elements.KatydidNode
 import kotlin.test.assertEquals
 import kotlin.test.fail
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Builds the DOM for a given KatyDOM node and checks the HTML output against what's expected.
+ * Builds the DOM for a given Katydid node and checks the HTML output against what's expected.
  */
 internal fun <Msg> checkBuild(
     expectedHtml: String,
-    vdomNode: AbstractKatyDomNode<Msg>
+    vdomNode: KatydidNode<Msg>
 ) {
 
     val body = KDomDocument().createElement("body")
@@ -29,9 +29,9 @@ internal fun <Msg> checkBuild(
 
     assertEquals(div, body.firstChild)
 
-    val lifecycle = makeKatyDomLifecycle<Msg>()
+    val lifecycle = makeKatydidLifecycle<Msg>()
 
-    if (vdomNode is KatyDomHtmlElement) {
+    if (vdomNode is KatydidHtmlElement) {
         lifecycle.build(div, vdomNode)
     }
 
@@ -42,13 +42,13 @@ internal fun <Msg> checkBuild(
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Builds the DOM for a given KatyDOM node and checks the HTML output against what's expected before and after a patch.
+ * Builds the DOM for a given Katydid node and checks the HTML output against what's expected before and after a patch.
  */
 internal fun <Msg> checkPatch(
     expectedHtml2: String,
-    vdomNode2: AbstractKatyDomNode<Msg>,
+    vdomNode2: KatydidNode<Msg>,
     expectedHtml1: String,
-    vdomNode1: AbstractKatyDomNode<Msg>
+    vdomNode1: KatydidNode<Msg>
 ) {
 
     val body = KDomDocument().createElement("body")
@@ -58,9 +58,9 @@ internal fun <Msg> checkPatch(
 
     assertEquals(div, body.firstChild)
 
-    val lifecycle = makeKatyDomLifecycle<Msg>()
+    val lifecycle = makeKatydidLifecycle<Msg>()
 
-    if (vdomNode1 is KatyDomHtmlElement && vdomNode2 is KatyDomHtmlElement) {
+    if (vdomNode1 is KatydidHtmlElement && vdomNode2 is KatydidHtmlElement) {
         lifecycle.build(div, vdomNode1)
 
         assertEquals(expectedHtml1, body.firstChild?.toHtmlString())

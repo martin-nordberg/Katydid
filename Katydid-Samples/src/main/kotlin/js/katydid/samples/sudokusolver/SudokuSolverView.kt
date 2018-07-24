@@ -5,7 +5,7 @@
 
 package js.katydid.samples.sudokusolver
 
-import o.katydid.vdom.builders.KatyDomFlowContentBuilder
+import o.katydid.vdom.builders.KatydidFlowContentBuilder
 import o.katydid.vdom.eventhandling.onchange
 import o.katydid.vdom.eventhandling.onclick
 
@@ -13,10 +13,10 @@ import o.katydid.vdom.eventhandling.onclick
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Constructs the KatyDOM virtual DOM tree for given input [applicationState].
+ * Constructs the Katydid virtual DOM tree for given input [applicationState].
  * @return the root of the application's virtual DOM tree for given application state.
  */
-fun viewSudokuSolver(applicationState: SudokuSolverAppState): KatyDomFlowContentBuilder<SudokuSolverMsg>.() -> Unit =
+fun viewSudokuSolver(applicationState: SudokuSolverAppState): KatydidFlowContentBuilder<SudokuSolverMsg>.() -> Unit =
     {
 
         // This top level element replaces the "#app" div in sudokusolver.html.
@@ -47,7 +47,7 @@ fun viewSudokuSolver(applicationState: SudokuSolverAppState): KatyDomFlowContent
 /**
  * Generates the virtual DOM for one block corresponding to [cellGroup] within the Sudoku board.
  */
-private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.block(cellGroup: CellGroup) {
+private fun KatydidFlowContentBuilder<SudokuSolverMsg>.block(cellGroup: CellGroup) {
 
     table(".block") {
 
@@ -106,7 +106,7 @@ private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.block(cellGroup: CellGrou
 /**
  * Generates the virtual DOM for the Sudoku board as a whole from given [applicationState].
  */
-private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.board(
+private fun KatydidFlowContentBuilder<SudokuSolverMsg>.board(
     applicationState: SudokuSolverAppState
 ) {
 
@@ -183,7 +183,7 @@ private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.board(
 /**
  * Generates the virtual DOM for one [cell] of the Sudoku board when it has not yet been defined or solved.
  */
-private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.candidates(cell: Cell) {
+private fun KatydidFlowContentBuilder<SudokuSolverMsg>.candidates(cell: Cell) {
 
     table(".candidates") {
 
@@ -227,7 +227,7 @@ private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.candidates(cell: Cell) {
 /**
  * Generates the table of changes and candidate removals for given [applicationState] with its changes.
  */
-private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.changes(
+private fun KatydidFlowContentBuilder<SudokuSolverMsg>.changes(
     applicationState: SudokuSolverAppState
 ) {
 
@@ -300,7 +300,7 @@ private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.changes(
 /**
  * Generates the virtual DOM for the form for the settings of the puzzle.
  */
-private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.notes() {
+private fun KatydidFlowContentBuilder<SudokuSolverMsg>.notes() {
 
     section("#notes") {
 
@@ -331,7 +331,7 @@ private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.notes() {
 /**
  * Generates the virtual DOM for the form for the settings of the puzzle taken from given [applicationState].
  */
-private fun KatyDomFlowContentBuilder<SudokuSolverMsg>.settings(
+private fun KatydidFlowContentBuilder<SudokuSolverMsg>.settings(
     applicationState: SudokuSolverAppState
 ) {
 

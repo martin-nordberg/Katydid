@@ -6,7 +6,7 @@
 package jvm.katydid.builders.grouping
 
 import jvm.katydid.api.checkBuild
-import o.katydid.vdom.application.katyDom
+import o.katydid.vdom.application.katydid
 import org.junit.jupiter.api.Test
 
 @Suppress("RemoveRedundantBackticks")
@@ -15,7 +15,7 @@ class ListTests {
     @Test
     fun `An ordered list produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             ol("#alist") {
 
@@ -47,7 +47,7 @@ class ListTests {
     @Test
     fun `An unordered list produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             ul("#anotherlist") {
 

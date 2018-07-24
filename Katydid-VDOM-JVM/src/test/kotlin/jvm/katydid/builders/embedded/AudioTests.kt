@@ -6,7 +6,7 @@
 package jvm.katydid.builders.embedded
 
 import jvm.katydid.api.checkBuild
-import o.katydid.vdom.application.katyDom
+import o.katydid.vdom.application.katydid
 import o.katydid.vdom.types.ECorsSetting
 import o.katydid.vdom.types.EPreloadHint
 import o.katydid.vdom.types.ETrackKind
@@ -20,7 +20,7 @@ class AudioTests {
     @Test
     fun `An audio element with all its attributes produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             audio(
                 "#myaudio.soothing",
@@ -44,7 +44,7 @@ class AudioTests {
     @Test
     fun `An audio element with nested elements produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             audio {
 
@@ -82,7 +82,7 @@ class AudioTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 audio {
                     audio {}
@@ -94,7 +94,7 @@ class AudioTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 audio {
                     video {}
@@ -111,7 +111,7 @@ class AudioTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 audio(src = "http://url") {
                     source(src = "http://url2") {}
@@ -128,7 +128,7 @@ class AudioTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 audio(src = "http://url") {
                     track(src="http://trackurl") {}

@@ -6,7 +6,7 @@
 package jvm.katydid.builders.forms
 
 import jvm.katydid.api.checkBuild
-import o.katydid.vdom.application.katyDom
+import o.katydid.vdom.application.katydid
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import kotlin.test.assertEquals
@@ -17,7 +17,7 @@ class LabelTests {
     @Test
     fun `A label element produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             form {
 
@@ -44,7 +44,7 @@ class LabelTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 label {
 
@@ -61,7 +61,7 @@ class LabelTests {
     @Test
     fun `A label can have its key taken from its _for_ attribute`() {
 
-        val element = katyDom<Unit> {
+        val element = katydid<Unit> {
 
             label(`for` = "sample") {}
 

@@ -6,7 +6,7 @@
 package jvm.katydid.builders.forms
 
 import jvm.katydid.api.checkBuild
-import o.katydid.vdom.application.katyDom
+import o.katydid.vdom.application.katydid
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -16,7 +16,7 @@ class InputTextTests {
     @Test
     fun `A text input element with all its attributes produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             form {
 
@@ -55,7 +55,7 @@ class InputTextTests {
 
         assertThrows<IllegalArgumentException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 inputText(minlength = 100, maxlength = 90, value = "stuff") {}
             }
 
@@ -63,7 +63,7 @@ class InputTextTests {
 
         assertThrows<IllegalArgumentException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 inputText(minlength = -1) {}
             }
 
@@ -71,7 +71,7 @@ class InputTextTests {
 
         assertThrows<IllegalArgumentException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 inputText(maxlength = -1) {}
             }
 
@@ -84,7 +84,7 @@ class InputTextTests {
 
         assertThrows<IllegalArgumentException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 inputText(size = 0) {}
             }
 
@@ -92,7 +92,7 @@ class InputTextTests {
 
         assertThrows<IllegalArgumentException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
                 inputText(size = -1) {}
             }
 

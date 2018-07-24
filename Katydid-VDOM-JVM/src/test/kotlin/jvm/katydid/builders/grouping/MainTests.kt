@@ -6,7 +6,7 @@
 package jvm.katydid.builders.grouping
 
 import jvm.katydid.api.checkBuild
-import o.katydid.vdom.application.katyDom
+import o.katydid.vdom.application.katydid
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -16,7 +16,7 @@ class MainTests {
     @Test
     fun `A main element produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             main("#mine.stuff") {
 
@@ -35,7 +35,7 @@ class MainTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 main {
                     main {}
@@ -47,7 +47,7 @@ class MainTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 main {
 
@@ -67,7 +67,7 @@ class MainTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 article {
 
@@ -83,7 +83,7 @@ class MainTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 aside {
 
@@ -99,7 +99,7 @@ class MainTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 footer {
 
@@ -115,7 +115,7 @@ class MainTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 header {
 
@@ -131,7 +131,7 @@ class MainTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 nav {
 

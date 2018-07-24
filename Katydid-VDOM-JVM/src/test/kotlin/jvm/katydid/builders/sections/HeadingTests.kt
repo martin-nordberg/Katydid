@@ -6,7 +6,7 @@
 package jvm.katydid.builders.sections
 
 import jvm.katydid.api.checkBuild
-import o.katydid.vdom.application.katyDom
+import o.katydid.vdom.application.katydid
 import org.junit.jupiter.api.Test
 
 @Suppress("RemoveRedundantBackticks")
@@ -15,7 +15,7 @@ class HeadingTests {
     @Test
     fun `Heading elements produce correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             article {
 

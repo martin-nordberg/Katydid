@@ -6,7 +6,7 @@
 package jvm.katydid.builders.grouping
 
 import jvm.katydid.api.checkBuild
-import o.katydid.vdom.application.katyDom
+import o.katydid.vdom.application.katydid
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -16,7 +16,7 @@ class FigureTests {
     @Test
     fun `A simple figure produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             figure("#notmuch2it") {
 
@@ -51,7 +51,7 @@ class FigureTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 figCaption { }
 
@@ -66,7 +66,7 @@ class FigureTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 figure {
 
@@ -86,7 +86,7 @@ class FigureTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 figure {
 
@@ -110,7 +110,7 @@ class FigureTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 figure {
 
@@ -133,7 +133,7 @@ class FigureTests {
     @Test
     fun `A figure can have a nested figure with a nested caption`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             figure {
 

@@ -6,7 +6,7 @@
 package jvm.katydid.builders.tabular
 
 import jvm.katydid.api.checkBuild
-import o.katydid.vdom.application.katyDom
+import o.katydid.vdom.application.katydid
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -16,7 +16,7 @@ class TableTests {
     @Test
     fun `A simple table produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             table("#tabular.classy") {
 
@@ -60,7 +60,7 @@ class TableTests {
     @Test
     fun `A structured table produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             table(".classy") {
 
@@ -179,7 +179,7 @@ class TableTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 table {
                     colgroup {}
@@ -192,7 +192,7 @@ class TableTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 table {
                     thead {}
@@ -205,7 +205,7 @@ class TableTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 table {
                     tbody {}
@@ -218,7 +218,7 @@ class TableTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 table {
                     tfoot {}
@@ -231,7 +231,7 @@ class TableTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 table {
                     tr {}
@@ -249,7 +249,7 @@ class TableTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 table {
                     thead {}
@@ -262,7 +262,7 @@ class TableTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 table {
                     tbody {}
@@ -275,7 +275,7 @@ class TableTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 table {
                     tfoot {}
@@ -288,7 +288,7 @@ class TableTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 table {
                     tr {}
@@ -306,7 +306,7 @@ class TableTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 table {
                     tbody {}
@@ -319,7 +319,7 @@ class TableTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 table {
                     tfoot {}
@@ -332,7 +332,7 @@ class TableTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 table {
                     tr {}
@@ -350,7 +350,7 @@ class TableTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 table {
                     tfoot {}
@@ -368,7 +368,7 @@ class TableTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 table {
                     tr {}
@@ -381,7 +381,7 @@ class TableTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 table {
                     tbody {}

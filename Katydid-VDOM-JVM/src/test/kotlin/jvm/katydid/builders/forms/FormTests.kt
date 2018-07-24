@@ -6,7 +6,7 @@
 package jvm.katydid.builders.forms
 
 import jvm.katydid.api.checkBuild
-import o.katydid.vdom.application.katyDom
+import o.katydid.vdom.application.katydid
 import o.katydid.vdom.types.EFormEncodingType
 import o.katydid.vdom.types.EFormSubmissionMethod
 import org.junit.jupiter.api.Test
@@ -18,7 +18,7 @@ class FormTests {
     @Test
     fun `A form element with all its attributes produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             form(
                 acceptCharset = "utf-8",
@@ -48,7 +48,7 @@ class FormTests {
 
         assertThrows<IllegalStateException> {
 
-            katyDom<Unit> {
+            katydid<Unit> {
 
                 form {
                     form {}

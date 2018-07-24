@@ -5,7 +5,7 @@
 
 package jvm.katydid.api
 
-import o.katydid.vdom.application.katyDom
+import o.katydid.vdom.application.katydid
 import o.katydid.vdom.eventhandling.onclick
 import o.katydid.vdom.types.EAnchorHtmlLinkType
 import org.junit.jupiter.api.Test
@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Tests for quick trials of KatyDOM DSL.
+ * Tests for quick trials of Katydid DSL.
  */
 @Suppress("RemoveRedundantBackticks")
 class ExperimentationTests {
@@ -21,7 +21,7 @@ class ExperimentationTests {
     @Test
     fun `Sample 1 of Katydid-VDOM DSL should produce correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             div("#myDiv.my-class", style = "color:red") {
 
@@ -93,7 +93,7 @@ class ExperimentationTests {
     @Test
     fun `Sample 2 of Katydid-VDOM DSL should produce correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             div("#myDiv.my-class", style = "color:red") {
 
@@ -129,7 +129,7 @@ class ExperimentationTests {
     @Test
     fun `Sample 3 of Katydid-VDOM DSL should produce correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             div("#myDiv.my-class", "div1") {
 

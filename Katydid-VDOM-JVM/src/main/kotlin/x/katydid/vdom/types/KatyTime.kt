@@ -9,7 +9,7 @@ import java.time.OffsetTime
 
 //---------------------------------------------------------------------------------------------------------------------
 
-/** KatyDom time on JVM is Java's OffsetTime. */
+/** Katydid time on JVM is Java's OffsetTime. */
 typealias KatyTime = OffsetTime
 
 //---------------------------------------------------------------------------------------------------------------------

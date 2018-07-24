@@ -6,7 +6,7 @@
 package jvm.katydid.builders.edits
 
 import jvm.katydid.api.checkBuild
-import o.katydid.vdom.application.katyDom
+import o.katydid.vdom.application.katydid
 import org.junit.jupiter.api.Test
 import x.katydid.vdom.types.KatyDateTime
 import java.time.ZoneOffset
@@ -17,7 +17,7 @@ class EditsTests {
     @Test
     fun `A del element produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             del(cite = "http://somewhere.com/citation",
                 datetime = KatyDateTime.of(2001, 9, 8, 21, 46, 40, 0, ZoneOffset.ofHours(-4))) {
@@ -37,7 +37,7 @@ class EditsTests {
     @Test
     fun `An ins element produces correct HTML`() {
 
-        val vdomNode = katyDom<Unit> {
+        val vdomNode = katydid<Unit> {
 
             ins(cite = "http://somewhere.com/citation",
                 datetime = KatyDateTime.of(2001, 9, 8, 21, 46, 40, 0, ZoneOffset.ofHours(-4))) {
