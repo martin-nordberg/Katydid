@@ -3,9 +3,9 @@
 // Apache 2.0 License
 //
 
-import org.katydom.samples.greetme.greetMeMain
-import org.katydom.samples.helloworld.helloWorldMain
-import org.katydom.samples.sudokusolver.sudokuSolverMain
+import js.katydid.samples.greetme.greetMeMain
+import js.katydid.samples.helloworld.helloWorldMain
+import js.katydid.samples.sudokusolver.sudokuSolverMain
 import org.w3c.dom.get
 import kotlin.browser.window
 
