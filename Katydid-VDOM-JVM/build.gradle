@@ -56,15 +56,16 @@ dokka {
 
     includes = [
         'src/main/kotlin/module.md',
-        'src/main/kotlin/jvm/org/katydid/infrastructure/package.md',
-        'src/main/kotlin/jvm/org/katydid/kdom/package.md',
-        'src/main/kotlin/o/org/katydid/abstractnodes/package.md',
-        'src/main/kotlin/o/org/katydid/api/package.md',
-        'src/main/kotlin/o/org/katydid/builders/package.md',
-        'src/main/kotlin/o/org/katydid/types/package.md',
-        'src/main/kotlin/x/org/katydid/dom/package.md',
-        'src/main/kotlin/x/org/katydid/dom/events/package.md',
-        'src/main/kotlin/x/org/katydid/types/package.md'
+        'src/main/kotlin/jvm/katydid/infrastructure/package.md',
+        'src/main/kotlin/jvm/katydid/kdom/package.md',
+        'src/main/kotlin/o/katydid/vdom/application/package.md',
+        'src/main/kotlin/o/katydid/vdom/builders/package.md',
+        'src/main/kotlin/o/katydid/vdom/elements/package.md',
+        'src/main/kotlin/o/katydid/vdom/eventhandling/package.md',
+        'src/main/kotlin/o/katydid/vdom/types/package.md',
+        'src/main/kotlin/x/katydid/vdom/dom/package.md',
+        'src/main/kotlin/x/katydid/vdom/dom/events/package.md',
+        'src/main/kotlin/x/katydid/vdom/types/package.md'
     ]
 
     moduleName = 'Katydid-VDOM-JVM'

@@ -1,4 +1,4 @@
-# Package jvm.org.katydid.kdom
+# Package jvm.katydid.kdom
 
 The KDom package contains a very simple static implementation of the Katydid-VDOM interfaces for the DOM.
 
