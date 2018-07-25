@@ -6,7 +6,6 @@
 package jvm.katydid.api
 
 import o.katydid.vdom.application.katydid
-import o.katydid.vdom.eventhandling.onclick
 import o.katydid.vdom.types.EAnchorHtmlLinkType
 import org.junit.jupiter.api.Test
 
@@ -42,10 +41,6 @@ class ExperimentationTests {
                     classes("big" to true, "small" to false, "smelly" to true)
                     attribute("class", "very-classy")
                     attributes("a1" to "v1", "a2" to "v2")
-
-                    onclick { _ ->
-                        emptyList()
-                    }
                 }
 
                 p {
@@ -105,10 +100,6 @@ class ExperimentationTests {
                     classes("big" to true, "small" to false, "smelly" to true)
                     attribute("class", "very-classy")
                     attributes("a1" to "v1", "a2" to "v2")
-
-                    onclick { _ ->
-                        emptyList()
-                    }
                 }
 
             }

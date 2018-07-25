@@ -6,10 +6,10 @@
 package i.katydid.vdom.builders
 
 import i.katydid.vdom.elements.KatydidHtmlElementImpl
-import o.katydid.vdom.application.Event2Message
 import o.katydid.vdom.builders.KatydidAttributesContentBuilder
 import o.katydid.vdom.builders.KatydidContentBuilderDsl
 import x.katydid.vdom.dom.events.Event
+import o.katydid.vdom.types.Event2Message
 
 //---------------------------------------------------------------------------------------------------------------------
 

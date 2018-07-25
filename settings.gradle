@@ -3,5 +3,7 @@ rootProject.name = 'Katydid'
 
 include 'Katydid-VDOM-JVM'
 include 'Katydid-VDOM-JS'
+include 'Katydid-Events-JVM'
+include 'Katydid-Events-JS'
 include 'Katydid-Samples'
 

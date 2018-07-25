@@ -28,6 +28,7 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
 
     compile project( ":Katydid-VDOM-JS" )
+    compile project( ":Katydid-Events-JS" )
 
     testCompile "org.jetbrains.kotlin:kotlin-test-js:$kotlin_version"
 
@@ -40,6 +41,11 @@ task copyWebResources(type: Copy) {
 
     into('scripts') {
         from('../build/Katydid-VDOM-JS/classes/kotlin/main')
+        include('**/*.*')
+    }
+
+    into('scripts') {
+        from('../build/Katydid-Events-JS/classes/kotlin/main')
         include('**/*.*')
     }
 

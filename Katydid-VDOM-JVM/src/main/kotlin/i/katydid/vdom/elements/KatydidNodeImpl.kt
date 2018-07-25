@@ -5,12 +5,12 @@
 
 package i.katydid.vdom.elements
 
-import o.katydid.vdom.application.EventCancellationException
-import o.katydid.vdom.application.EventHandler
 import o.katydid.vdom.elements.KatydidNode
 import x.katydid.vdom.dom.Document
 import x.katydid.vdom.dom.Node
 import x.katydid.vdom.dom.events.Event
+import o.katydid.vdom.types.EventCancellationException
+import o.katydid.vdom.types.EventHandler
 
 //---------------------------------------------------------------------------------------------------------------------
 

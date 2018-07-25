@@ -7,8 +7,8 @@ package js.katydid.samples.greetme
 
 import js.katydid.vdom.api.KatydidApplication
 import js.katydid.vdom.api.runApplication
+import o.katydid.events.eventhandling.oninput
 import o.katydid.vdom.builders.KatydidFlowContentBuilder
-import o.katydid.vdom.eventhandling.oninput
 
 //---------------------------------------------------------------------------------------------------------------------
 

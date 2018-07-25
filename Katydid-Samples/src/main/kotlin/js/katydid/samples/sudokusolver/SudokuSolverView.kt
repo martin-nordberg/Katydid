@@ -5,10 +5,9 @@
 
 package js.katydid.samples.sudokusolver
 
+import o.katydid.events.eventhandling.onchange
+import o.katydid.events.eventhandling.onclick
 import o.katydid.vdom.builders.KatydidFlowContentBuilder
-import o.katydid.vdom.eventhandling.onchange
-import o.katydid.vdom.eventhandling.onclick
-
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -73,8 +72,7 @@ private fun KatydidFlowContentBuilder<SudokuSolverMsg>.block(cellGroup: CellGrou
                             if (cell.state != Cell.State.SOLVED) {
 
                                 onclick {
-                                    listOf(RemoveValueMsg(cell.row.index,
-                                                                                          cell.column.index))
+                                    listOf(RemoveValueMsg(cell.row.index, cell.column.index))
                                 }
 
                             }
@@ -202,8 +200,7 @@ private fun KatydidFlowContentBuilder<SudokuSolverMsg>.candidates(cell: Cell) {
                             classes("candidate" to true)
 
                             onclick {
-                                listOf(PlaceValueMsg(cell.row.index, cell.column.index,
-                                                                                     c))
+                                listOf(PlaceValueMsg(cell.row.index, cell.column.index, c))
                             }
 
                             text("${c + 1}")

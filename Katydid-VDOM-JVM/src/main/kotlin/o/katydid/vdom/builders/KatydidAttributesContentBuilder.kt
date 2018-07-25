@@ -5,7 +5,8 @@
 
 package o.katydid.vdom.builders
 
-import o.katydid.vdom.application.Event2Message
+import o.katydid.vdom.types.Event2Message
+
 
 //---------------------------------------------------------------------------------------------------------------------
 
