@@ -180,22 +180,20 @@ class CellGroup(
                 }
     }
 
-    val cellsWithCandidate = listOf(
-        mutableListOf<Cell>(),
-        mutableListOf(),
-        mutableListOf(),
-        mutableListOf(),
-        mutableListOf(),
-        mutableListOf(),
-        mutableListOf(),
-        mutableListOf(),
-        mutableListOf()
-    )
+    val cellsWithCandidate : List<MutableList<Cell>>
 
     init {
-        for (cellsList in cellsWithCandidate) {
-            cellsList.addAll(cells)
-        }
+        cellsWithCandidate = listOf(
+            ArrayList(cells),
+            ArrayList(cells),
+            ArrayList(cells),
+            ArrayList(cells),
+            ArrayList(cells),
+            ArrayList(cells),
+            ArrayList(cells),
+            ArrayList(cells),
+            ArrayList(cells)
+        )
     }
 
     val name

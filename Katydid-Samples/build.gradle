@@ -60,7 +60,7 @@ task copyWebResources(type: Copy) {
 
 task unzipKotlinJs(type: Copy) {
 
-    from zipTree('../lib/kotlin-stdlib-js.jar')
+    from zipTree("../lib/kotlin-stdlib-js-${kotlin_version}.jar")
 
     into('../build/website/scripts/lib')
 

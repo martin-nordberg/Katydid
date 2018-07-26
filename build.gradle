@@ -6,13 +6,13 @@ subprojects {
 
     ext.buildRoot = "../../Katydid/build"
 
-    ext.dokka_version = '0.9.16'
+    ext.dokka_version = '0.9.17'
 
     ext.junit_version = '5.2.0'
 
     ext.junit_platform_version = '1.2.0'
 
-    ext.kotlin_version = '1.2.41'
+    ext.kotlin_version = '1.2.51'
 
 
     repositories {
