@@ -12,7 +12,7 @@ subprojects {
 
     ext.junit_platform_version = '1.2.0'
 
-    ext.kotlin_version = '1.2.51'
+    ext.kotlin_version = '1.2.60'
 
 
     repositories {
