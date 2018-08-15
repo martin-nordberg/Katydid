@@ -8,10 +8,9 @@
 
 package o.katydid.events.eventhandling
 
+import o.katydid.events.types.KatydidFocusEvent
 import o.katydid.vdom.builders.KatydidAttributesContentBuilder
-import o.katydid.events.eventhandling.types.EFocusEventType
-import o.katydid.events.eventhandling.types.FocusEvent2Message
-import x.katydid.events.types.FocusEvent
+import i.katydid.events.pool.EventPool
 import x.katydid.vdom.dom.events.Event
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -20,10 +19,12 @@ import x.katydid.vdom.dom.events.Event
  * Adds an event handler for "blur" events.
  * @param handler the callback that listens to blur events.
  */
-fun <Msg> KatydidAttributesContentBuilder<Msg>.onblur(handler: FocusEvent2Message<Msg>) {
+fun <Msg> KatydidAttributesContentBuilder<Msg>.onblur(
+    handler: KatydidFocusEventToMessage<Msg>
+) {
 
-    onEvent(EFocusEventType.BLUR.domName) { event: Event ->
-        handler(event as FocusEvent)
+    onEvent("blur") { event: Event ->
+        handler(EventPool.makeFocusEvent(event))
     }
 
 }
@@ -34,10 +35,12 @@ fun <Msg> KatydidAttributesContentBuilder<Msg>.onblur(handler: FocusEvent2Messag
  * Adds an event handler for "focus" events.
  * @param handler the callback that listens to focus events.
  */
-fun <Msg> KatydidAttributesContentBuilder<Msg>.onfocus(handler: FocusEvent2Message<Msg>) {
+fun <Msg> KatydidAttributesContentBuilder<Msg>.onfocus(
+    handler: KatydidFocusEventToMessage<Msg>
+) {
 
-    onEvent(EFocusEventType.FOCUS.domName) { event: Event ->
-        handler(event as FocusEvent)
+    onEvent("focus") { event: Event ->
+        handler(EventPool.makeFocusEvent(event))
     }
 
 }

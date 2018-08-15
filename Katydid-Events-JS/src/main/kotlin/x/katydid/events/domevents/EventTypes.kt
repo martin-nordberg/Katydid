@@ -3,10 +3,7 @@
 // Apache 2.0 License
 //
 
-package /*js*/x.katydid.events.types
-
-/** Type of general DOM events. */
-typealias Event = org.w3c.dom.events.Event
+package /*js*/x.katydid.events.domevents
 
 /** Type of DOM events from keyboard. */
 typealias FocusEvent = org.w3c.dom.events.FocusEvent

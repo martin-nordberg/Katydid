@@ -21,7 +21,7 @@ class KDomDocument : KDomNode(), Document {
 
     override var nodeValue: String?
         get() = null
-        set(value) {}
+        set(_) {}
 
     override val ownerDocument = this
 

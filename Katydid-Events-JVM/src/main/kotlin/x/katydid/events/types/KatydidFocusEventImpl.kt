@@ -5,10 +5,16 @@
 
 package /*jvm*/x.katydid.events.types
 
+import o.katydid.events.types.KatydidFocusEvent
+import x.katydid.events.domevents.FocusEvent
+
 //---------------------------------------------------------------------------------------------------------------------
 
-/** Interface to an input event from the DOM. */
-interface InputEvent : UIEvent
+class KatydidFocusEventImpl(
+    private val event: FocusEvent
+) : KatydidUiEventImpl(event), KatydidFocusEvent {
+
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 

@@ -351,7 +351,7 @@ private fun KatydidFlowContentBuilder<SudokuSolverMsg>.settings(
                 ) {
 
                     onchange { event ->
-                        val newValue = (event.target.asDynamic().value as String).toBoolean()
+                        val newValue = event.targetAttribute<String>("value").toBoolean()
                         console.log("RADIO: ", newValue)
                         listOf(ChangeSettingsMsg(
                             ChangeIsXSudoku(newValue)))
@@ -372,7 +372,7 @@ private fun KatydidFlowContentBuilder<SudokuSolverMsg>.settings(
                 ) {
 
                     onchange { event ->
-                        val newValue = (event.target.asDynamic().value as String).toBoolean()
+                        val newValue = event.targetAttribute<String>("value").toBoolean()
                         console.log("RADIO: ", newValue)
                         listOf(ChangeSettingsMsg(
                             ChangeIsXSudoku(newValue)))
@@ -392,7 +392,7 @@ private fun KatydidFlowContentBuilder<SudokuSolverMsg>.settings(
                 inputCheckbox("#is-solved-automatically", checked = applicationState.settings.isSolvedAutomatically) {
 
                     onchange { event ->
-                        val newValue: Boolean = (event.target.asDynamic().checked as Boolean)
+                        val newValue: Boolean = event.targetAttribute<Boolean>("checked")
                         listOf(ChangeSettingsMsg(
                             ChangeIsSolvedAutomatically(newValue)))
                     }
@@ -417,7 +417,7 @@ private fun KatydidFlowContentBuilder<SudokuSolverMsg>.settings(
                     select("#is-solving") {
 
                         onchange { event ->
-                            val newValue: Boolean = (event.target.asDynamic().value as String).toBoolean()
+                            val newValue: Boolean = event.targetAttribute<String>("value").toBoolean()
                             listOf(ChangeSettingsMsg(
                                 ChangeIsUserSolving(newValue)))
                         }

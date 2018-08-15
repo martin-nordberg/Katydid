@@ -23,7 +23,7 @@ class KDomElement(
 
     override var nodeValue: String?
         get() = null
-        set(value) {}
+        set(_) {}
 
     override val tagName: String
         get() {

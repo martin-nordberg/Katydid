@@ -8,12 +8,18 @@
 
 package o.katydid.events.eventhandling
 
-import o.katydid.events.eventhandling.types.KeyboardEvent2Message
 import o.katydid.vdom.builders.KatydidAttributesContentBuilder
-import o.katydid.events.eventhandling.types.EKeyboardEventType
-import x.katydid.events.types.KeyboardEvent
+import x.katydid.events.domevents.KeyboardEvent
 import x.katydid.vdom.dom.events.Event
 
+
+//---------------------------------------------------------------------------------------------------------------------
+
+/**
+ * Message-generating event handler: argument is any keyboard event, output is a list of messages.
+ * To cancel an event throw EventCancellationException.
+ */
+typealias KeyboardEvent2Message<Msg> = (event: KeyboardEvent) -> Iterable<Msg>
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -21,9 +27,11 @@ import x.katydid.vdom.dom.events.Event
  * Adds an event handler for "keydown" events.
  * @param handler the callback that listens to keydown events.
  */
-fun <Msg> KatydidAttributesContentBuilder<Msg>.onkeydown(handler: KeyboardEvent2Message<Msg>) {
+fun <Msg> KatydidAttributesContentBuilder<Msg>.onkeydown(
+    handler: KeyboardEvent2Message<Msg>
+) {
 
-    onEvent(EKeyboardEventType.KEY_DOWN.domName) { event: Event ->
+    onEvent("keydown") { event: Event ->
         handler(event as KeyboardEvent)
     }
 
@@ -35,9 +43,11 @@ fun <Msg> KatydidAttributesContentBuilder<Msg>.onkeydown(handler: KeyboardEvent2
  * Adds an event handler for "keyup" events.
  * @param handler the callback that listens to keyup events.
  */
-fun <Msg> KatydidAttributesContentBuilder<Msg>.onkeyup(handler: KeyboardEvent2Message<Msg>) {
+fun <Msg> KatydidAttributesContentBuilder<Msg>.onkeyup(
+    handler: KeyboardEvent2Message<Msg>
+) {
 
-    onEvent(EKeyboardEventType.KEY_UP.domName) { event: Event ->
+    onEvent("keyup") { event: Event ->
         handler(event as KeyboardEvent)
     }
 

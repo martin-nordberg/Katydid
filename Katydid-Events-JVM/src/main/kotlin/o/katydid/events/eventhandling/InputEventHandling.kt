@@ -8,11 +8,10 @@
 
 package o.katydid.events.eventhandling
 
-import o.katydid.events.eventhandling.types.InputEvent2Message
+import i.katydid.events.pool.EventPool
+import o.katydid.events.types.KatydidInputEvent
 import o.katydid.vdom.builders.KatydidAttributesContentBuilder
-import o.katydid.events.eventhandling.types.EEventType
-import o.katydid.events.eventhandling.types.EInputEventType
-import x.katydid.events.types.InputEvent
+import x.katydid.events.domevents.InputEvent
 import x.katydid.vdom.dom.events.Event
 import o.katydid.vdom.types.Event2Message
 
@@ -23,10 +22,12 @@ import o.katydid.vdom.types.Event2Message
  * Adds an event handler for "beforeinput" events.
  * @param handler the callback that listens to beforeinput events.
  */
-fun <Msg> KatydidAttributesContentBuilder<Msg>.onbeforeinput(handler: InputEvent2Message<Msg>) {
+fun <Msg> KatydidAttributesContentBuilder<Msg>.onbeforeinput(
+    handler: KatydidInputEventToMessage<Msg>
+) {
 
-    onEvent(EInputEventType.BEFORE_INPUT.domName) { event: Event ->
-        handler(event as InputEvent)
+    onEvent("beforeinput") { event: Event ->
+        handler(EventPool.makeInputEvent(event))
     }
 
 }
@@ -37,10 +38,12 @@ fun <Msg> KatydidAttributesContentBuilder<Msg>.onbeforeinput(handler: InputEvent
  * Adds an event handler for "change" events.
  * @param handler the callback that listens to change events.
  */
-fun <Msg> KatydidAttributesContentBuilder<Msg>.onchange(handler: Event2Message<Msg>) {
+fun <Msg> KatydidAttributesContentBuilder<Msg>.onchange(
+    handler: KatydidEventToMessage<Msg>
+) {
 
-    onEvent(EEventType.CHANGE.domName) { event: Event ->
-        handler(event)
+    onEvent("change") { event: Event ->
+        handler(EventPool.makeEvent(event))
     }
 
 }
@@ -51,10 +54,12 @@ fun <Msg> KatydidAttributesContentBuilder<Msg>.onchange(handler: Event2Message<M
  * Adds an event handler for "input" events.
  * @param handler the callback that listens to input events.
  */
-fun <Msg> KatydidAttributesContentBuilder<Msg>.oninput(handler: InputEvent2Message<Msg>) {
+fun <Msg> KatydidAttributesContentBuilder<Msg>.oninput(
+    handler: KatydidInputEventToMessage<Msg>
+) {
 
-    onEvent(EInputEventType.INPUT.domName) { event: Event ->
-        handler(event as InputEvent)
+    onEvent("input") { event: Event ->
+        handler(EventPool.makeInputEvent(event))
     }
 
 }

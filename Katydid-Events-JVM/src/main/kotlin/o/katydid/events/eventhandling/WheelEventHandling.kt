@@ -7,11 +7,17 @@
 
 package o.katydid.events.eventhandling
 
-import o.katydid.events.eventhandling.types.WheelEvent2Message
 import o.katydid.vdom.builders.KatydidAttributesContentBuilder
-import o.katydid.events.eventhandling.types.EWheelEventType
-import x.katydid.events.types.WheelEvent
+import x.katydid.events.domevents.WheelEvent
 import x.katydid.vdom.dom.events.Event
+
+//---------------------------------------------------------------------------------------------------------------------
+
+/**
+ * Message-generating event handler: argument is a wheel event, output is a list of messages.
+ * To cancel an event throw EventCancellationException.
+ */
+typealias WheelEvent2Message<Msg> = (event: WheelEvent) -> Iterable<Msg>
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -19,9 +25,11 @@ import x.katydid.vdom.dom.events.Event
  * Adds an event handler for "wheel" events.
  * @param handler the callback that listens to wheel events.
  */
-fun <Msg> KatydidAttributesContentBuilder<Msg>.onwheel(handler: WheelEvent2Message<Msg>) {
+fun <Msg> KatydidAttributesContentBuilder<Msg>.onwheel(
+    handler: WheelEvent2Message<Msg>
+) {
 
-    onEvent(EWheelEventType.WHEEL.domName) { event: Event ->
+    onEvent("wheel") { event: Event ->
         handler(event as WheelEvent)
     }
 
