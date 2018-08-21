@@ -20,16 +20,22 @@ open class KatydidEventImpl(
     override val isPropagationStopped : Boolean
         get() = false
 
+    ////
+
+    override fun <T> getTargetAttribute(attrName: String): T {
+        TODO()
+    }
+
     override fun preventDefault() {
         // maybe add stuff for JVM mock testing
     }
 
-    override fun stopPropagation() {
-        // maybe add stuff for JVM mock testing
+    override fun <T> setTargetAttribute(attrName: String, value: T) {
+        TODO()
     }
 
-    override fun <T> targetAttribute(attrName: String): T {
-        TODO()
+    override fun stopPropagation() {
+        // maybe add stuff for JVM mock testing
     }
 
 }

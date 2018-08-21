@@ -10,15 +10,19 @@ package o.katydid.events.types
 
 interface KatydidEvent {
 
-    val isDefaultPrevented : Boolean
+    val isDefaultPrevented: Boolean
 
-    val isPropagationStopped : Boolean
+    val isPropagationStopped: Boolean
+
+    ////
+
+    fun <T> getTargetAttribute(attrName: String): T
 
     fun preventDefault()
 
-    fun stopPropagation()
+    fun <T> setTargetAttribute(attrName: String, value: T)
 
-    fun <T> targetAttribute( attrName: String ) : T
+    fun stopPropagation()
 
     // TODO: cf. React SyntheticEvent
     // boolean bubbles

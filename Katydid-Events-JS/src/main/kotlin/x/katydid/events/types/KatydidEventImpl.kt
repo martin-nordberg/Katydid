@@ -19,6 +19,12 @@ open class KatydidEventImpl(
     override val isPropagationStopped : Boolean
         get() = false // TODO: need to track it ourself
 
+    ////
+
+    override fun <T> getTargetAttribute(attrName: String): T {
+        return event.target.asDynamic()[attrName] as T
+    }
+
     override fun preventDefault() {
         event.preventDefault()
     }
@@ -27,8 +33,8 @@ open class KatydidEventImpl(
         event.stopPropagation()
     }
 
-    override fun <T> targetAttribute(attrName: String): T {
-        return event.target.asDynamic()[attrName] as T
+    override fun <T> setTargetAttribute(attrName: String, value: T) {
+        event.target.asDynamic()[attrName] = value
     }
 
 }

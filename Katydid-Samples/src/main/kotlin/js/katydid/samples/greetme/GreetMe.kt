@@ -77,7 +77,7 @@ class GreetMeApplication : KatydidApplication<GreetMeAppState, GreetMeMsg> {
 
                             // Capture the new value out of the change event and pass it to the application
                             // lifecycle as a message (a list of one message).
-                            val newValue: String = event.targetAttribute("value")
+                            val newValue: String = event.getTargetAttribute("value")
                             listOf(GreetMeMsg(newValue))
 
                         }
