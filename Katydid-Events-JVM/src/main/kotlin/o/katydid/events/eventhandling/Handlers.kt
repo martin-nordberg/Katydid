@@ -8,9 +8,7 @@
 
 package o.katydid.events.eventhandling
 
-import o.katydid.events.types.KatydidEvent
-import o.katydid.events.types.KatydidFocusEvent
-import o.katydid.events.types.KatydidInputEvent
+import o.katydid.events.types.*
 
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -36,6 +34,22 @@ typealias KatydidFocusEventToMessage<Msg> = (event: KatydidFocusEvent) -> Iterab
  * To cancel an event throw EventCancellationException.
  */
 typealias KatydidInputEventToMessage<Msg> = (event: KatydidInputEvent) -> Iterable<Msg>
+
+//---------------------------------------------------------------------------------------------------------------------
+
+/**
+ * Message-generating event handler: argument is any mouse event, output is a list of messages.
+ * To cancel an event throw EventCancellationException.
+ */
+typealias KatydidMouseEventToMessage<Msg> = (event: KatydidMouseEvent) -> Iterable<Msg>
+
+//---------------------------------------------------------------------------------------------------------------------
+
+/**
+ * Message-generating event handler: argument is any wheel event, output is a list of messages.
+ * To cancel an event throw EventCancellationException.
+ */
+typealias KatydidWheelEventToMessage<Msg> = (event: KatydidWheelEvent) -> Iterable<Msg>
 
 //---------------------------------------------------------------------------------------------------------------------
 

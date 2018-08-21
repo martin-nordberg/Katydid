@@ -8,9 +8,8 @@
 
 package o.katydid.events.eventhandling
 
-import o.katydid.events.types.KatydidFocusEvent
-import o.katydid.vdom.builders.KatydidAttributesContentBuilder
 import i.katydid.events.pool.EventPool
+import o.katydid.vdom.builders.KatydidAttributesContentBuilder
 import x.katydid.vdom.dom.events.Event
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -7,17 +7,9 @@
 
 package o.katydid.events.eventhandling
 
+import i.katydid.events.pool.EventPool
 import o.katydid.vdom.builders.KatydidAttributesContentBuilder
-import x.katydid.events.domevents.MouseEvent
 import x.katydid.vdom.dom.events.Event
-
-//---------------------------------------------------------------------------------------------------------------------
-
-/**
- * Message-generating event handler: argument is any mouse event, output is a list of messages.
- * To cancel an event throw EventCancellationException.
- */
-typealias MouseEvent2Message<Msg> = (event: MouseEvent) -> Iterable<Msg>
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -26,11 +18,11 @@ typealias MouseEvent2Message<Msg> = (event: MouseEvent) -> Iterable<Msg>
  * @param handler the callback that listens to click events.
  */
 fun <Msg> KatydidAttributesContentBuilder<Msg>.onclick(
-    handler: MouseEvent2Message<Msg>
+    handler: KatydidMouseEventToMessage<Msg>
 ) {
 
     onEvent("click") { event: Event ->
-        handler(event as MouseEvent)
+        handler(EventPool.makeMouseEvent(event))
     }
 
 }
@@ -42,11 +34,11 @@ fun <Msg> KatydidAttributesContentBuilder<Msg>.onclick(
  * @param handler the callback that listens to dblclick events.
  */
 fun <Msg> KatydidAttributesContentBuilder<Msg>.ondblclick(
-    handler: MouseEvent2Message<Msg>
+    handler: KatydidMouseEventToMessage<Msg>
 ) {
 
     onEvent("dblclick") { event: Event ->
-        handler(event as MouseEvent)
+        handler(EventPool.makeMouseEvent(event))
     }
 
 }
@@ -58,11 +50,11 @@ fun <Msg> KatydidAttributesContentBuilder<Msg>.ondblclick(
  * @param handler the callback that listens to mousedown events.
  */
 fun <Msg> KatydidAttributesContentBuilder<Msg>.onmousedown(
-    handler: MouseEvent2Message<Msg>
+    handler: KatydidMouseEventToMessage<Msg>
 ) {
 
     onEvent("mousedown") { event: Event ->
-        handler(event as MouseEvent)
+        handler(EventPool.makeMouseEvent(event))
     }
 
 }
@@ -74,11 +66,11 @@ fun <Msg> KatydidAttributesContentBuilder<Msg>.onmousedown(
  * @param handler the callback that listens to mouseenter events.
  */
 fun <Msg> KatydidAttributesContentBuilder<Msg>.onmouseenter(
-    handler: MouseEvent2Message<Msg>
+    handler: KatydidMouseEventToMessage<Msg>
 ) {
 
     onEvent("mouseenter") { event: Event ->
-        handler(event as MouseEvent)
+        handler(EventPool.makeMouseEvent(event))
     }
 
 }
@@ -90,11 +82,11 @@ fun <Msg> KatydidAttributesContentBuilder<Msg>.onmouseenter(
  * @param handler the callback that listens to mouseleave events.
  */
 fun <Msg> KatydidAttributesContentBuilder<Msg>.onmouseleave(
-    handler: MouseEvent2Message<Msg>
+    handler: KatydidMouseEventToMessage<Msg>
 ) {
 
     onEvent("mouseleave") { event: Event ->
-        handler(event as MouseEvent)
+        handler(EventPool.makeMouseEvent(event))
     }
 
 }
@@ -106,11 +98,11 @@ fun <Msg> KatydidAttributesContentBuilder<Msg>.onmouseleave(
  * @param handler the callback that listens to mousemove events.
  */
 fun <Msg> KatydidAttributesContentBuilder<Msg>.onmousemove(
-    handler: MouseEvent2Message<Msg>
+    handler: KatydidMouseEventToMessage<Msg>
 ) {
 
     onEvent("mousemove") { event: Event ->
-        handler(event as MouseEvent)
+        handler(EventPool.makeMouseEvent(event))
     }
 
 }
@@ -122,11 +114,11 @@ fun <Msg> KatydidAttributesContentBuilder<Msg>.onmousemove(
  * @param handler the callback that listens to mouseout events.
  */
 fun <Msg> KatydidAttributesContentBuilder<Msg>.onmouseout(
-    handler: MouseEvent2Message<Msg>
+    handler: KatydidMouseEventToMessage<Msg>
 ) {
 
     onEvent("mouseout") { event: Event ->
-        handler(event as MouseEvent)
+        handler(EventPool.makeMouseEvent(event))
     }
 
 }
@@ -138,11 +130,11 @@ fun <Msg> KatydidAttributesContentBuilder<Msg>.onmouseout(
  * @param handler the callback that listens to mouseover events.
  */
 fun <Msg> KatydidAttributesContentBuilder<Msg>.onmouseover(
-    handler: MouseEvent2Message<Msg>
+    handler: KatydidMouseEventToMessage<Msg>
 ) {
 
     onEvent("mouseover") { event: Event ->
-        handler(event as MouseEvent)
+        handler(EventPool.makeMouseEvent(event))
     }
 
 }
@@ -154,11 +146,11 @@ fun <Msg> KatydidAttributesContentBuilder<Msg>.onmouseover(
  * @param handler the callback that listens to mouseup events.
  */
 fun <Msg> KatydidAttributesContentBuilder<Msg>.onmouseup(
-    handler: MouseEvent2Message<Msg>
+    handler: KatydidMouseEventToMessage<Msg>
 ) {
 
     onEvent("mouseup") { event: Event ->
-        handler(event as MouseEvent)
+        handler(EventPool.makeMouseEvent(event))
     }
 
 }

@@ -9,11 +9,8 @@
 package o.katydid.events.eventhandling
 
 import i.katydid.events.pool.EventPool
-import o.katydid.events.types.KatydidInputEvent
 import o.katydid.vdom.builders.KatydidAttributesContentBuilder
-import x.katydid.events.domevents.InputEvent
 import x.katydid.vdom.dom.events.Event
-import o.katydid.vdom.types.Event2Message
 
 
 //---------------------------------------------------------------------------------------------------------------------
