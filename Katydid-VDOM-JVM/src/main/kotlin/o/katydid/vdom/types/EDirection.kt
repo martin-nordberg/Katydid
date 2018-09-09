@@ -23,13 +23,12 @@ enum class EDirection {
     AUTO;
 
     /** @return the HTML attribute text for this direction. */
-    fun toHtmlString(): String {
-        return when (this) {
+    fun toHtmlString() =
+        when (this) {
             LEFT_TO_RIGHT -> "ltr"
             RIGHT_TO_LEFT -> "rtl"
             AUTO          -> "auto"
         }
-    }
 
 }
 

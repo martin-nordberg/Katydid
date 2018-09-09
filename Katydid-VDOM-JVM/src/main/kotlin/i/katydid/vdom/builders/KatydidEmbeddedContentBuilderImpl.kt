@@ -127,7 +127,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         lang: String?,
         name: String?,
         referrerpolicy: EReferrerPolicy?,
-        sandbox: List<ESandboxOptions>?,
+        sandbox: List<ESandboxOption>?,
         spellcheck: Boolean?,
         src: String,
         srcdoc: String?,

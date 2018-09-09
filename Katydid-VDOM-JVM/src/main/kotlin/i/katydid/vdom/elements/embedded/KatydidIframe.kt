@@ -10,7 +10,7 @@ import i.katydid.vdom.elements.KatydidHtmlElementImpl
 import o.katydid.vdom.builders.miscellaneous.KatydidTextContentBuilder
 import o.katydid.vdom.types.EDirection
 import o.katydid.vdom.types.EReferrerPolicy
-import o.katydid.vdom.types.ESandboxOptions
+import o.katydid.vdom.types.ESandboxOption
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -31,7 +31,7 @@ internal class KatydidIframe<Msg>(
     lang: String?,
     name: String?,
     referrerpolicy: EReferrerPolicy?,
-    sandbox: List<ESandboxOptions>?,
+    sandbox: List<ESandboxOption>?,
     spellcheck: Boolean?,
     src: String,
     srcdoc: String?,

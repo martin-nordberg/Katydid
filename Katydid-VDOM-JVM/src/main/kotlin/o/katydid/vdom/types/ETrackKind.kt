@@ -28,15 +28,14 @@ enum class ETrackKind {
     SUBTITLES;
 
     /** @return the HTML attribute text for this direction. */
-    fun toHtmlString(): String {
-        return when (this) {
+    fun toHtmlString() =
+        when (this) {
             CAPTIONS     -> "captions"
             CHAPTERS     -> "chapters"
             DESCRIPTIONS -> "descriptions"
             METADATA     -> "metadata"
             SUBTITLES    -> "subtitles"
         }
-    }
 
 }
 

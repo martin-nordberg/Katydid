@@ -10,7 +10,7 @@ package o.katydid.vdom.types
 /**
  * Enumeration of allowed values for an iframe's sandbox attribute.
  */
-enum class ESandboxOptions {
+enum class ESandboxOption {
 
     /** The "allow-forms" attribute value. */
     ALLOW_FORMS,

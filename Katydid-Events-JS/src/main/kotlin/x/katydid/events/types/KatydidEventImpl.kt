@@ -3,7 +3,7 @@
 // Apache 2.0 License
 //
 
-package /*jvm*/x.katydid.events.types
+package /*js*/x.katydid.events.types
 
 import o.katydid.events.types.KatydidEvent
 import x.katydid.vdom.dom.events.Event

@@ -38,8 +38,8 @@ enum class EReferrerPolicy {
     UNSAFE_URL;
 
     /** @return the HTML attribute text for this direction. */
-    fun toHtmlString(): String {
-        return when (this) {
+    fun toHtmlString() =
+        when (this) {
             NO_REFERRER                     -> "no-referrer"
             NO_REFERRER_WHEN_DOWNGRADE      -> "no-referrer-when-downgrade"
             ORIGIN                          -> "origin"
@@ -49,7 +49,6 @@ enum class EReferrerPolicy {
             STRICT_ORIGIN_WHEN_CROSS_ORIGIN -> "strict-origin-when-cross-origin"
             UNSAFE_URL                      -> "unsafe-url"
         }
-    }
 
 }
 

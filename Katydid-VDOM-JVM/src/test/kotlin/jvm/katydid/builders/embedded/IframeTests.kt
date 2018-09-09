@@ -8,7 +8,7 @@ package jvm.katydid.builders.embedded
 import jvm.katydid.api.checkBuild
 import o.katydid.vdom.application.katydid
 import o.katydid.vdom.types.EReferrerPolicy
-import o.katydid.vdom.types.ESandboxOptions
+import o.katydid.vdom.types.ESandboxOption
 import org.junit.jupiter.api.Test
 
 @Suppress("RemoveRedundantBackticks")
@@ -26,7 +26,7 @@ class IframeTests {
                 height = 120,
                 name = "myframe",
                 referrerpolicy = EReferrerPolicy.ORIGIN,
-                sandbox = listOf(ESandboxOptions.ALLOW_FORMS, ESandboxOptions.ALLOW_POPUPS),
+                sandbox = listOf(ESandboxOption.ALLOW_FORMS, ESandboxOption.ALLOW_POPUPS),
                 src = "http://someurl/path",
                 srcdoc = "stuff",
                 width = 99

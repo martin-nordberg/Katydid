@@ -23,13 +23,12 @@ enum class EFormEncodingType {
     WWW_FORM_URL_ENCODED;
 
     /** @return the corresponding HTML attribute value for this encoding type. */
-    fun toHtmlString(): String {
-        return when (this) {
+    fun toHtmlString() =
+        when (this) {
             MULTIPART_FORM_DATA  -> "multipart/form-data"
             TEXT_PLAIN           -> "text/plain"
             WWW_FORM_URL_ENCODED -> "application/x-www-form-urlencoded"
         }
-    }
 
 }
 

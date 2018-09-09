@@ -141,7 +141,7 @@ interface KatydidEmbeddedContentBuilder<in Msg> : KatydidAttributesContentBuilde
         lang: String? = null,
         name: String? = null,
         referrerpolicy: EReferrerPolicy? = null,
-        sandbox: List<ESandboxOptions>? = null,
+        sandbox: List<ESandboxOption>? = null,
         spellcheck: Boolean? = null,
         src: String,
         srcdoc: String? = null,

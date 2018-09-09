@@ -23,13 +23,12 @@ enum class EPreloadHint {
     NONE;
 
     /** @return the HTML attribute text for this direction. */
-    fun toHtmlString(): String {
-        return when (this) {
+    fun toHtmlString() =
+        when (this) {
             AUTO     -> "auto"
             METADATA -> "metadata"
             NONE     -> "none"
         }
-    }
 
 }
 

@@ -20,12 +20,11 @@ enum class EFormSubmissionMethod {
     POST;
 
     /** @return the HTML attribute text for this submission method. */
-    fun toHtmlString(): String {
-        return when (this) {
+    fun toHtmlString() =
+        when (this) {
             GET  -> "get"
             POST -> "post"
         }
-    }
 
 }
 

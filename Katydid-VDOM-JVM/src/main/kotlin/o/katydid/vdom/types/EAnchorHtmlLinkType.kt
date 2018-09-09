@@ -47,8 +47,8 @@ enum class EAnchorHtmlLinkType {
     TAG;
 
     /** @return the HTML attribute value of this anchor link type. */
-    fun toHtmlString(): String {
-        return when (this) {
+    fun toHtmlString() =
+        when (this) {
             ALTERNATE  -> "alternate"
             AUTHOR     -> "author"
             BOOKMARK   -> "bookmark"
@@ -61,7 +61,6 @@ enum class EAnchorHtmlLinkType {
             SEARCH     -> "search"
             TAG        -> "tag"
         }
-    }
 
 }
 

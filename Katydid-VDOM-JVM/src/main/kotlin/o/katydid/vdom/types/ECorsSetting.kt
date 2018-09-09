@@ -20,12 +20,11 @@ enum class ECorsSetting {
     USE_CREDENTIALS;
 
     /** @return the HTML attribute text for this direction. */
-    fun toHtmlString(): String {
-        return when (this) {
+    fun toHtmlString() =
+        when (this) {
             ANONYMOUS       -> "anonymous"
             USE_CREDENTIALS -> "use-credentials"
         }
-    }
 
 }
 

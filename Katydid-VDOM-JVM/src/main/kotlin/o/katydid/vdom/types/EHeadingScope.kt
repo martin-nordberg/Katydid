@@ -26,14 +26,13 @@ enum class EHeadingScope {
     ROWGROUP;
 
     /** @return the HTML attribute text corresponding to this heading scope. */
-    fun toHtmlString(): String {
-        return when (this) {
+    fun toHtmlString() =
+        when (this) {
             COL      -> "col"
             COLGROUP -> "colgroup"
             ROW      -> "row"
             ROWGROUP -> "rowgroup"
         }
-    }
 
 }
 

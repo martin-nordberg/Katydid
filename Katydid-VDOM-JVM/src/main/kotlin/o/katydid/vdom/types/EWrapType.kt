@@ -19,12 +19,11 @@ enum class EWrapType {
     SOFT;
 
     /** @return the HTML attribute text value corresponding to this wrap type. */
-    fun toHtmlString(): String {
-        return when (this) {
+    fun toHtmlString() =
+        when (this) {
             HARD -> "hard"
             SOFT -> "soft"
         }
-    }
 
 }
 

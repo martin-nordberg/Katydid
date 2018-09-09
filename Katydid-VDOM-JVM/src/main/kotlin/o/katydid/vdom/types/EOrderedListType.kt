@@ -29,15 +29,14 @@ enum class EOrderedListType {
     UPPER_CASE_ROMAN_NUMERALS;
 
     /** @return the HTML attribute text corresponding to this ordered list type. */
-    fun toHtmlString(): String {
-        return when (this) {
+    fun toHtmlString() =
+        when (this) {
             DECIMAL_NUMBERS           -> "1"
             LOWER_CASE_LETTERS        -> "a"
             UPPER_CASE_LETTERS        -> "A"
             LOWER_CASE_ROMAN_NUMERALS -> "i"
             UPPER_CASE_ROMAN_NUMERALS -> "I"
         }
-    }
 
 }
 

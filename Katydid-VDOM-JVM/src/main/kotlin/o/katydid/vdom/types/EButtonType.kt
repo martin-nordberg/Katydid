@@ -25,14 +25,13 @@ enum class EButtonType {
     SUBMIT;
 
     /** @return the attribute value corresponding to this button type. */
-    fun toHtmlString(): String {
-        return when (this) {
+    fun toHtmlString() =
+        when (this) {
             BUTTON -> "button"
             MENU   -> "menu"
             RESET  -> "reset"
             SUBMIT -> "submit"
         }
-    }
 
 }
 

@@ -3,7 +3,7 @@
 // Apache 2.0 License
 //
 
-package /*jvm*/i.katydid.events.pool
+package i.katydid.events.pool
 
 import o.katydid.events.types.*
 import x.katydid.events.domevents.FocusEvent
