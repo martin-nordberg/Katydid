@@ -10,6 +10,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Katydid-CSS-JS" />
             <option value="$PROJECT_DIR$/Katydid-CSS-JVM" />
             <option value="$PROJECT_DIR$/Katydid-Events-JS" />
             <option value="$PROJECT_DIR$/Katydid-Events-JVM" />

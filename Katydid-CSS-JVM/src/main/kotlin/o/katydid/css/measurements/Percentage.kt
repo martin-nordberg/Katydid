@@ -48,7 +48,7 @@ fun percentage(value: Any): Percentage =
 		is String     -> percentage(value)
 		is Percentage -> value
 		else          -> throw IllegalArgumentException(
-			"Cannot create Percentage from ${value.javaClass.simpleName}")
+			"Cannot create Percentage from '${value}'.")
 	}
 
 //---------------------------------------------------------------------------------------------------------------------

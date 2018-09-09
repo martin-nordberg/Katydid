@@ -5,7 +5,6 @@
 
 package o.katydid.css.measurements
 
-import java.lang.IllegalArgumentException
 
 //---------------------------------------------------------------------------------------------------------------------
 

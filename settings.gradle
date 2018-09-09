@@ -6,5 +6,6 @@ include 'Katydid-VDOM-JS'
 include 'Katydid-Events-JVM'
 include 'Katydid-Events-JS'
 include 'Katydid-CSS-JVM'
+include 'Katydid-CSS-JS'
 include 'Katydid-Samples'
 

@@ -84,7 +84,7 @@ fun length(value: Any): Length =
 		is String -> length(value)
 		is Length -> value
 		else      -> throw IllegalArgumentException(
-			"Cannot create Length from ${value.javaClass.simpleName}")
+			"Cannot create Length from '$value'.")
 	}
 
 //---------------------------------------------------------------------------------------------------------------------
