@@ -57,10 +57,11 @@ class KDomElement(
             result.append(">")
         }
         else {
-            result.appendln(">")
+            result.append(">\n")
 
             while (child != null) {
-                result.appendln(child.toHtmlString(indent + 2))
+                result.append(child.toHtmlString(indent + 2))
+                result.append('\n')
                 child = child.nextSibling
             }
 
