@@ -24,6 +24,10 @@ interface KatydidMouseEvent : KatydidUiEvent {
 
     val metaKey: Boolean
 
+    val offsetX: Double
+
+    val offsetY : Double
+
     val pageX: Double
 
     val pageY : Double

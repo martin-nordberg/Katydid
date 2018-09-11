@@ -35,6 +35,12 @@ open class KatydidMouseEventImpl(
     override val metaKey: Boolean
         get() = TODO("not implemented")
 
+    override val offsetX: Double
+        get() = TODO("not implemented")
+
+    override val offsetY: Double
+        get() = TODO("not implemented")
+
     override val pageX: Double
         get() = TODO("not implemented")
 

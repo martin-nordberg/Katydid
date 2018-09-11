@@ -35,6 +35,12 @@ open class KatydidMouseEventImpl(
     override val metaKey: Boolean
         get() = event.metaKey
 
+    override val offsetX: Double
+        get() = event.offsetX
+
+    override val offsetY: Double
+        get() = event.offsetY
+
     override val pageX: Double
         get() = event.pageX
 
