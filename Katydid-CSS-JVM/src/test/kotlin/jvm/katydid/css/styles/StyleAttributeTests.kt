@@ -25,8 +25,8 @@ class StyleAttributeTests {
             span {
 
                 style {
-                    color = red
-                    width = 45.px
+                    color(red)
+                    width(45.px)
                 }
 
             }
