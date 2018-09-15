@@ -11,24 +11,25 @@ package o.katydid.vdom.types
  * Enumeration of allowed values for the enctype attribute for a form element.
  * See https://www.w3.org/TR/html51/sec-forms.html#element-attrdef-submitbuttonelements-formenctype.
  */
-enum class EFormEncodingType {
+@Suppress("EnumEntryName")
+enum class EFormEncodingType(
+    private val html: String
+) {
 
     /** Encoding type "multipart/form-data". */
-    MULTIPART_FORM_DATA,
+    multipartFormData("multipart/form-data"),
 
     /** Encoding type "text/plain". */
-    TEXT_PLAIN,
+    textPlain("text/plain"),
 
     /** Encoding type "application/x-www-form-urlencoded". */
-    WWW_FORM_URL_ENCODED;
+    wwwFormUrlEncoded("application/x-www-form-urlencoded");
+
+    ////
 
     /** @return the corresponding HTML attribute value for this encoding type. */
     fun toHtmlString() =
-        when (this) {
-            MULTIPART_FORM_DATA  -> "multipart/form-data"
-            TEXT_PLAIN           -> "text/plain"
-            WWW_FORM_URL_ENCODED -> "application/x-www-form-urlencoded"
-        }
+        html
 
 }
 

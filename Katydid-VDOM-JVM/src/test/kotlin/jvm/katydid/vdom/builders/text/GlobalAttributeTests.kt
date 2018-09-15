@@ -7,7 +7,7 @@ package jvm.katydid.vdom.builders.text
 
 import jvm.katydid.vdom.api.checkBuild
 import o.katydid.vdom.application.katydid
-import o.katydid.vdom.types.EDirection
+import o.katydid.vdom.types.EDirection.ltr
 import org.junit.jupiter.api.Test
 
 @Suppress("RemoveRedundantBackticks")
@@ -23,7 +23,7 @@ class GlobalAttributeTests {
                 key = "key",
                 accesskey = 'S',
                 contenteditable = true,
-                dir = EDirection.LEFT_TO_RIGHT,
+                dir = ltr,
                 hidden = true,
                 lang = "EN",
                 spellcheck = true,
@@ -37,7 +37,8 @@ class GlobalAttributeTests {
 
         }
 
-        val html = """<span accesskey="S" class="withclass" contenteditable="true" dir="ltr" hidden="" id="aspan" lang="EN" spellcheck="true" style="font-weight:bold;" tabindex="1" title="My Span" translate="yes"></span>"""
+        val html =
+            """<span accesskey="S" class="withclass" contenteditable="true" dir="ltr" hidden="" id="aspan" lang="EN" spellcheck="true" style="font-weight:bold;" tabindex="1" title="My Span" translate="yes"></span>"""
 
         checkBuild(html, vdomNode)
 

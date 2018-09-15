@@ -7,8 +7,9 @@ package jvm.katydid.vdom.builders.embedded
 
 import jvm.katydid.vdom.api.checkBuild
 import o.katydid.vdom.application.katydid
-import o.katydid.vdom.types.EReferrerPolicy
-import o.katydid.vdom.types.ESandboxOption
+import o.katydid.vdom.types.EReferrerPolicy.origin
+import o.katydid.vdom.types.ESandboxOption.allowForms
+import o.katydid.vdom.types.ESandboxOption.allowPopups
 import org.junit.jupiter.api.Test
 
 @Suppress("RemoveRedundantBackticks")
@@ -25,8 +26,8 @@ class IframeTests {
                 allowpaymentrequest = true,
                 height = 120,
                 name = "myframe",
-                referrerpolicy = EReferrerPolicy.ORIGIN,
-                sandbox = listOf(ESandboxOption.ALLOW_FORMS, ESandboxOption.ALLOW_POPUPS),
+                referrerpolicy = origin,
+                sandbox = listOf(allowForms, allowPopups),
                 src = "http://someurl/path",
                 srcdoc = "stuff",
                 width = 99
@@ -34,10 +35,12 @@ class IframeTests {
 
         }
 
-        val html = """<iframe allowfullscreen="" allowpaymentrequest="" class="framed" height="120" id="myeye" name="myframe" referrerpolicy="origin" sandbox="allow-forms allow-popups" src="http://someurl/path" srcdoc="stuff" width="99"></iframe>"""
+        val html =
+            """<iframe allowfullscreen="" allowpaymentrequest="" class="framed" height="120" id="myeye" name="myframe" referrerpolicy="origin" sandbox="allow-forms allow-popups" src="http://someurl/path" srcdoc="stuff" width="99"></iframe>"""
 
         checkBuild(html, vdomNode)
 
     }
 
 }
+

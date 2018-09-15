@@ -6,7 +6,8 @@
 package jvm.katydid.vdom.api
 
 import o.katydid.vdom.application.katydid
-import o.katydid.vdom.types.EAnchorHtmlLinkType
+import o.katydid.vdom.types.EAnchorHtmlLinkType.next
+import o.katydid.vdom.types.EAnchorHtmlLinkType.noreferrer
 import org.junit.jupiter.api.Test
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -125,7 +126,7 @@ class ExperimentationTests {
             div("#myDiv.my-class", "div1") {
 
                 span(".mottled") {
-                    a(href = "#somewhere", rel = listOf(EAnchorHtmlLinkType.NEXT, EAnchorHtmlLinkType.NOREFERRER)) {
+                    a(href = "#somewhere", rel = listOf(next, noreferrer)) {
                         text("Go Somewhere")
                     }
                 }

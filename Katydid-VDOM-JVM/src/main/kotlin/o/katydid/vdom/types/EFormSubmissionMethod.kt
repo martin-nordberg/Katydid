@@ -11,20 +11,22 @@ package o.katydid.vdom.types
  * Enumeration of allowed values for the method attribute for a form element.
  * See https://www.w3.org/TR/html51/sec-forms.html#forms-method.
  */
-enum class EFormSubmissionMethod {
+@Suppress("EnumEntryName")
+enum class EFormSubmissionMethod(
+    private val html: String
+) {
 
     /** Submission method "get". */
-    GET,
+    get("get"),
 
     /** Submission method "post". */
-    POST;
+    post("post");
+
+    ////
 
     /** @return the HTML attribute text for this submission method. */
     fun toHtmlString() =
-        when (this) {
-            GET  -> "get"
-            POST -> "post"
-        }
+        html
 
 }
 

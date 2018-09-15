@@ -31,10 +31,10 @@ internal class KatydidBdo<Msg>(
     translate: Boolean?,
     defineContent: KatydidPhrasingContentBuilder<Msg>.() -> Unit
 ) : KatydidHtmlElementImpl<Msg>(selector, key, accesskey, contenteditable, dir,
-                                hidden, lang, spellcheck, style, tabindex, title, translate) {
+    hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {
-        require(dir != EDirection.AUTO) { "Attribute dir must be ltr or rtl in a <bdo> element." }
+        require(dir != EDirection.auto) { "Attribute dir must be ltr or rtl in a <bdo> element." }
         phrasingContent.withNoAddedRestrictions(this).defineContent()
         this.freeze()
     }

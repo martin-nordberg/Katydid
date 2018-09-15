@@ -3,8 +3,6 @@
 // Apache 2.0 License
 //
 
-@file:Suppress("ClassName")
-
 package o.katydid.css.types
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -12,15 +10,16 @@ package o.katydid.css.types
 /**
  * Enumeration of options for the CSS 'display' property.
  */
+@Suppress("EnumEntryName")
 enum class EBackgroundAttachmentOption(
     private val css: String
 ) {
 
     /** The "fixed" background attachment option. */
-    FIXED("fixed"),
+    fixed("fixed"),
 
     /** The "scroll" background attachment option. */
-    SCROLL("scroll");
+    scroll("scroll");
 
     /** @return the CSS attribute text for this display option. */
     fun toCssString() =
@@ -41,11 +40,6 @@ enum class EBackgroundAttachmentOption(
     }
 
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-
-val fixed = EBackgroundAttachmentOption.FIXED;
-val scroll = EBackgroundAttachmentOption.SCROLL;
 
 //---------------------------------------------------------------------------------------------------------------------
 

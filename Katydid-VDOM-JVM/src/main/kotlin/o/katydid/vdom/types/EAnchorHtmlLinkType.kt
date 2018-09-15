@@ -11,58 +11,52 @@ package o.katydid.vdom.types
  * Enumeration of allowed values for the rel or rev attribute of an <a> or <area> tag.
  * See https://www.w3.org/TR/html51/links.html#allowed-keywords-and-their-meanings.
  */
-enum class EAnchorHtmlLinkType {
+@Suppress("EnumEntryName")
+enum class EAnchorHtmlLinkType(
+    private val html: String
+) {
 
     /** Attribute value "alternate". */
-    ALTERNATE,
+    alternate("alternate"),
 
     /** Attribute value "author". */
-    AUTHOR,
+    author("author"),
 
     /** Attribute value "bookmark". */
-    BOOKMARK,
+    bookmark("bookmark"),
 
     /** Attribute value "help". */
-    HELP,
+    help("help"),
 
     /** Attribute value "license". */
-    LICENSE,
+    license("license"),
 
     /** Attribute value "next". */
-    NEXT,
+    next("next"),
 
     /** Attribute value "nofollow". */
-    NOFOLLOW,
+    nofollow("nofollow"),
 
     /** Attribute value "noreferrer". */
-    NOREFERRER,
+    noreferrer("noreferrer"),
 
     /** Attribute value "prev". */
-    PREV,
+    prev("prev"),
 
     /** Attribute value "search". */
-    SEARCH,
+    search("search"),
 
     /** Attribute value "tag". */
-    TAG;
+    tag("tag");
+
+    ////
 
     /** @return the HTML attribute value of this anchor link type. */
     fun toHtmlString() =
-        when (this) {
-            ALTERNATE  -> "alternate"
-            AUTHOR     -> "author"
-            BOOKMARK   -> "bookmark"
-            HELP       -> "help"
-            LICENSE    -> "license"
-            NEXT       -> "next"
-            NOFOLLOW   -> "nofollow"
-            NOREFERRER -> "noreferrer"
-            PREV       -> "prev"
-            SEARCH     -> "search"
-            TAG        -> "tag"
-        }
+        html
 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+
 

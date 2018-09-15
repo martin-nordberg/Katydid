@@ -10,28 +10,28 @@ package o.katydid.vdom.types
 /**
  * Enumeration of allowed values for the type attribute of a button element.
  */
-enum class EButtonType {
+@Suppress("EnumEntryName")
+enum class EButtonType(
+    private val html: String
+) {
 
     /** Simple button. */
-    BUTTON,
+    button("button"),
 
     /** Button in a menu. */
-    MENU,
+    menu("menu"),
 
     /** Button to submit a form. */
-    RESET,
+    reset("reset"),
 
     /** Button to reset a form. */
-    SUBMIT;
+    submit("submit");
+
+    ////
 
     /** @return the attribute value corresponding to this button type. */
     fun toHtmlString() =
-        when (this) {
-            BUTTON -> "button"
-            MENU   -> "menu"
-            RESET  -> "reset"
-            SUBMIT -> "submit"
-        }
+        html
 
 }
 

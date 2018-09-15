@@ -7,8 +7,8 @@ package jvm.katydid.vdom.builders.forms
 
 import jvm.katydid.vdom.api.checkBuild
 import o.katydid.vdom.application.katydid
-import o.katydid.vdom.types.EFormEncodingType
-import o.katydid.vdom.types.EFormSubmissionMethod
+import o.katydid.vdom.types.EFormEncodingType.textPlain
+import o.katydid.vdom.types.EFormSubmissionMethod.post
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -24,8 +24,8 @@ class FormTests {
                 acceptCharset = "utf-8",
                 action = "myform/post",
                 autocomplete = "mystuff",
-                enctype = EFormEncodingType.TEXT_PLAIN,
-                method = EFormSubmissionMethod.POST,
+                enctype = textPlain,
+                method = post,
                 name = "myform",
                 novalidate = true,
                 target = "_blank"
@@ -35,9 +35,10 @@ class FormTests {
 
         }
 
-        val html = """<form accept-charset="utf-8" action="myform/post" autocomplete="mystuff" enctype="text/plain" method="post" name="myform" novalidate="" title="_blank">
-                     |  <input type="text">
-                     |</form>""".trimMargin()
+        val html =
+            """<form accept-charset="utf-8" action="myform/post" autocomplete="mystuff" enctype="text/plain" method="post" name="myform" novalidate="" title="_blank">
+              |  <input type="text">
+              |</form>""".trimMargin()
 
         checkBuild(html, vdomNode)
 

@@ -10,54 +10,55 @@ package o.katydid.css.types
 /**
  * Enumeration of options for the CSS 'display' property.
  */
+@Suppress("EnumEntryName")
 enum class EDisplayOption(
     private val css: String
 ) {
 
     /** The "block" display option. */
-    BLOCK("block"),
+    block("block"),
 
     /** The "inline" display option. */
-    INLINE("inline"),
+    `inline`("inline"),
 
     /** The "inline-block" display option. */
-    INLINE_BLOCK("inline-block"),
+    inlineBlock("inline-block"),
 
     /** The "inline-table" display option. */
-    INLINE_TABLE("inline-table"),
+    inlineTable("inline-table"),
 
     /** The "list-item" display option. */
-    LIST_ITEM("list-item"),
+    listItem("list-item"),
 
     /** The "none" display option. */
-    NONE("none"),
+    none("none"),
 
     /** The "table" display option. */
-    TABLE("table"),
+    table("table"),
 
     /** The "table-caption" display option. */
-    TABLE_CAPTION("table-caption"),
+    tableCaption("table-caption"),
 
     /** The "table-cell" display option. */
-    TABLE_CELL("table-cell"),
+    tableCell("table-cell"),
 
     /** The "table-column" display option. */
-    TABLE_COLUMN("table-column"),
+    tableColumn("table-column"),
 
     /** The "table-column-group" display option. */
-    TABLE_COLUMN_GROUP("table-column-group"),
+    tableColumnGroup("table-column-group"),
 
     /** The "table-footer-group" display option. */
-    TABLE_FOOTER_GROUP("table-footer-group"),
+    tableFooterGroup("table-footer-group"),
 
     /** The "table-header-group" display option. */
-    TABLE_HEADER_GROUP("table-header-group"),
+    tableHeaderGroup("table-header-group"),
 
     /** The "table-row" display option. */
-    TABLE_ROW("table-row"),
+    tableRow("table-row"),
 
     /** The "table-row-group" display option. */
-    TABLE_ROW_GROUP("table-row-group");
+    tableRowGroup("table-row-group");
 
     ////
 
@@ -72,45 +73,27 @@ enum class EDisplayOption(
         fun fromString(option: String?) =
             when (option) {
                 null                 -> null
-                "block"              -> BLOCK
-                "inline"             -> INLINE
-                "inline-block"       -> INLINE_BLOCK
-                "inline-table"       -> INLINE_TABLE
-                "list-item"          -> LIST_ITEM
-                "none"               -> NONE
-                "table"              -> TABLE
-                "table-caption"      -> TABLE_CAPTION
-                "table-cell"         -> TABLE_CELL
-                "table-column"       -> TABLE_COLUMN
-                "table-column-group" -> TABLE_COLUMN_GROUP
-                "table-footer-group" -> TABLE_FOOTER_GROUP
-                "table-header-group" -> TABLE_HEADER_GROUP
-                "table-row"          -> TABLE_ROW
-                "table-row-group"    -> TABLE_ROW_GROUP
+                "block"              -> block
+                "inline"             -> inline
+                "inline-block"       -> inlineBlock
+                "inline-table"       -> inlineTable
+                "list-item"          -> listItem
+                "none"               -> none
+                "table"              -> table
+                "table-caption"      -> tableCaption
+                "table-cell"         -> tableCell
+                "table-column"       -> tableColumn
+                "table-column-group" -> tableColumnGroup
+                "table-footer-group" -> tableFooterGroup
+                "table-header-group" -> tableHeaderGroup
+                "table-row"          -> tableRow
+                "table-row-group"    -> tableRowGroup
                 else                 -> throw IllegalArgumentException("Unknown display option: '$option'.")
             }
 
     }
 
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-
-val block = EDisplayOption.BLOCK
-val inline = EDisplayOption.INLINE
-val inlineBlock = EDisplayOption.INLINE_BLOCK
-val inlineTable = EDisplayOption.INLINE_TABLE
-val listItem = EDisplayOption.LIST_ITEM
-// Note: "none" does odd things in Kotlin compiler
-val table = EDisplayOption.TABLE
-val tableCaption = EDisplayOption.TABLE_CAPTION
-val tableCell = EDisplayOption.TABLE_CELL
-val tableColumn = EDisplayOption.TABLE_COLUMN
-val tableColumnGroup = EDisplayOption.TABLE_COLUMN_GROUP
-val tableFooterGroup = EDisplayOption.TABLE_FOOTER_GROUP
-val tableHeaderGroup = EDisplayOption.TABLE_HEADER_GROUP
-val tableRow = EDisplayOption.TABLE_ROW
-val tableRowGroup = EDisplayOption.TABLE_ROW_GROUP
 
 //---------------------------------------------------------------------------------------------------------------------
 

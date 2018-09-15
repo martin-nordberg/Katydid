@@ -275,7 +275,7 @@ interface KatydidPhrasingContentBuilder<in Msg> : KatydidEmbeddedContentBuilder<
         tabindex: Int? = null,
         title: String? = null,
         translate: Boolean? = null,
-        type: EButtonType? = EButtonType.BUTTON,
+        type: EButtonType? = EButtonType.button,
         value: String? = null,
         defineContent: KatydidPhrasingContentBuilder<Msg>.() -> Unit
     )

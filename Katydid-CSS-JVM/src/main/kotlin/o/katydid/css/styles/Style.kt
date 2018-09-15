@@ -8,7 +8,11 @@ package o.katydid.css.styles
 import o.katydid.css.colors.Color
 import o.katydid.css.measurements.Length
 import o.katydid.css.measurements.Percentage
-import o.katydid.css.types.*
+import o.katydid.css.types.EBackgroundAttachmentOption
+import o.katydid.css.types.EBackgroundPositionOption
+import o.katydid.css.types.EBackgroundPositionOption.center
+import o.katydid.css.types.EBackgroundRepeatOption
+import o.katydid.css.types.EDisplayOption
 
 //---------------------------------------------------------------------------------------------------------------------
 

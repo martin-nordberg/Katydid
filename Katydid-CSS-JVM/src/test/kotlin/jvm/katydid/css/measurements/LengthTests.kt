@@ -17,7 +17,7 @@ class LengthTests {
 
         assertEquals("0", Length(0f, LengthUnit.PIXEL).toString())
         assertEquals("1px", Length(1f, LengthUnit.PIXEL).toString())
-        assertEquals("1.12em", Length(1.12004f, LengthUnit.EM).toString())
+        assertEquals("1.12em", Length(1.12004f, LengthUnit.em).toString())
 
     }
 
@@ -33,9 +33,9 @@ class LengthTests {
     @Test
     fun `Linear measurements convert from strings`() {
 
-        for ( unit in LengthUnit.values() ) {
+        for (unit in LengthUnit.values()) {
             assertEquals("1.12" + unit.toString(),
-                         length("1.12004"+unit.toString()).toString())
+                length("1.12004" + unit.toString()).toString())
         }
 
     }

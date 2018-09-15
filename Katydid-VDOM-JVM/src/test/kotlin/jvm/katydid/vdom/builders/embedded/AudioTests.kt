@@ -7,9 +7,9 @@ package jvm.katydid.vdom.builders.embedded
 
 import jvm.katydid.vdom.api.checkBuild
 import o.katydid.vdom.application.katydid
-import o.katydid.vdom.types.ECorsSetting
-import o.katydid.vdom.types.EPreloadHint
-import o.katydid.vdom.types.ETrackKind
+import o.katydid.vdom.types.ECorsSetting.anonymous
+import o.katydid.vdom.types.EPreloadHint.auto
+import o.katydid.vdom.types.ETrackKind.subtitles
 import o.katydid.vdom.types.MimeType
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -26,16 +26,17 @@ class AudioTests {
                 "#myaudio.soothing",
                 autoplay = true,
                 controls = true,
-                crossorigin = ECorsSetting.ANONYMOUS,
+                crossorigin = anonymous,
                 loop = true,
                 muted = true,
-                preload = EPreloadHint.AUTO,
+                preload = auto,
                 src = "http://someurl/path"
             ) {}
 
         }
 
-        val html = """<audio autoplay="" class="soothing" controls="" crossorigin="anonymous" id="myaudio" loop="" muted="" preload="auto" src="http://someurl/path"></audio>"""
+        val html =
+            """<audio autoplay="" class="soothing" controls="" crossorigin="anonymous" id="myaudio" loop="" muted="" preload="auto" src="http://someurl/path"></audio>"""
 
         checkBuild(html, vdomNode)
 
@@ -58,7 +59,7 @@ class AudioTests {
 
                 track(
                     default = true,
-                    kind = ETrackKind.SUBTITLES,
+                    kind = subtitles,
                     label = "My Track",
                     src = "http://somewhere/audiopath",
                     srclang = "EN"
@@ -131,7 +132,7 @@ class AudioTests {
             katydid<Unit> {
 
                 audio(src = "http://url") {
-                    track(src="http://trackurl") {}
+                    track(src = "http://trackurl") {}
                     source(src = "http://url2") {}
                 }
 

@@ -28,6 +28,8 @@ class MimeType(
         require(!subtype.isEmpty()) { "MIME subtype cannot be empty." }
     }
 
+    ////
+
     /** Converts this MIME type to its string equivalent. */
     override fun toString(): String {
 
@@ -41,10 +43,12 @@ class MimeType(
 
     }
 
+    ////
+
     companion object {
 
         /**
-         * Parses a string into a MIME type.
+         * Parses a string [mimeType] into a MIME type.
          */
         fun fromString(mimeType: String): MimeType {
 

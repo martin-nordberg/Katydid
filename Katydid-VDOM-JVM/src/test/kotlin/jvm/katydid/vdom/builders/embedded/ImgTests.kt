@@ -7,8 +7,8 @@ package jvm.katydid.vdom.builders.embedded
 
 import jvm.katydid.vdom.api.checkBuild
 import o.katydid.vdom.application.katydid
-import o.katydid.vdom.types.ECorsSetting
-import o.katydid.vdom.types.EReferrerPolicy
+import o.katydid.vdom.types.ECorsSetting.anonymous
+import o.katydid.vdom.types.EReferrerPolicy.origin
 import org.junit.jupiter.api.Test
 
 @Suppress("RemoveRedundantBackticks")
@@ -22,10 +22,10 @@ class ImgTests {
             img(
                 "#myimage.fancy",
                 alt = "just testing",
-                crossorigin = ECorsSetting.ANONYMOUS,
+                crossorigin = anonymous,
                 height = 120,
                 ismap = true,
-                referrerpolicy = EReferrerPolicy.ORIGIN,
+                referrerpolicy = origin,
                 sizes = "some sizes",
                 src = "http://someurl/path",
                 srcset = "source set",
@@ -35,7 +35,8 @@ class ImgTests {
 
         }
 
-        val html = """<img alt="just testing" class="fancy" crossorigin="anonymous" height="120" id="myimage" ismap="" referrerpolicy="origin" sizes="some sizes" src="http://someurl/path" srcset="source set" usemap="the map" width="99">"""
+        val html =
+            """<img alt="just testing" class="fancy" crossorigin="anonymous" height="120" id="myimage" ismap="" referrerpolicy="origin" sizes="some sizes" src="http://someurl/path" srcset="source set" usemap="the map" width="99">"""
 
         checkBuild(html, vdomNode)
 

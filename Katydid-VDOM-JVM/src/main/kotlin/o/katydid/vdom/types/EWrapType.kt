@@ -10,20 +10,22 @@ package o.katydid.vdom.types
 /**
  * Enumeration of allowed values for the wrap attribute of a textarea element.
  */
-enum class EWrapType {
+@Suppress("EnumEntryName")
+enum class EWrapType(
+    private val html: String
+) {
 
     /** Wrap type "hard". */
-    HARD,
+    hard("hard"),
 
     /** Wrap type "soft". */
-    SOFT;
+    soft("soft");
+
+    ////
 
     /** @return the HTML attribute text value corresponding to this wrap type. */
     fun toHtmlString() =
-        when (this) {
-            HARD -> "hard"
-            SOFT -> "soft"
-        }
+        html
 
 }
 

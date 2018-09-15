@@ -10,32 +10,31 @@ package o.katydid.vdom.types
 /**
  * Enumeration of allowed values for the kind attribute of a track element.
  */
-enum class ETrackKind {
+@Suppress("EnumEntryName")
+enum class ETrackKind(
+    private val html: String
+) {
 
     /** The "captions" attribute value. */
-    CAPTIONS,
+    captions("captions"),
 
     /** The "chapters" attribute value. */
-    CHAPTERS,
+    chapters("chapters"),
 
     /** The "descriptions" attribute value. */
-    DESCRIPTIONS,
+    descriptions("descriptions"),
 
     /** The "metadata" attribute value. */
-    METADATA,
+    metadata("metadata"),
 
     /** The "subtitles" attribute value. */
-    SUBTITLES;
+    subtitles("subtitles");
+
+    ////
 
     /** @return the HTML attribute text for this direction. */
     fun toHtmlString() =
-        when (this) {
-            CAPTIONS     -> "captions"
-            CHAPTERS     -> "chapters"
-            DESCRIPTIONS -> "descriptions"
-            METADATA     -> "metadata"
-            SUBTITLES    -> "subtitles"
-        }
+        html
 
 }
 

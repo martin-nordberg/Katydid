@@ -11,28 +11,28 @@ package o.katydid.vdom.types
  * Enumeration of allowed values for the scope attribute of a th element.
  * See https://www.w3.org/TR/html5/tabular-data.html#elementdef-th.
  */
-enum class EHeadingScope {
+@Suppress("EnumEntryName")
+enum class EHeadingScope(
+    private val html: String
+) {
 
     /** Heading scope "col". */
-    COL,
+    col("col"),
 
     /** Heading scope "colgroup". */
-    COLGROUP,
+    colgroup("colgroup"),
 
-    /** Input mode "kana-name". */
-    ROW,
+    /** Heading scope "row". */
+    row("row"),
 
-    /** Input mode "katakana". */
-    ROWGROUP;
+    /** Heading scope "rowgroup". */
+    rowgroup("rowgroup");
+
+    ////
 
     /** @return the HTML attribute text corresponding to this heading scope. */
     fun toHtmlString() =
-        when (this) {
-            COL      -> "col"
-            COLGROUP -> "colgroup"
-            ROW      -> "row"
-            ROWGROUP -> "rowgroup"
-        }
+        html
 
 }
 

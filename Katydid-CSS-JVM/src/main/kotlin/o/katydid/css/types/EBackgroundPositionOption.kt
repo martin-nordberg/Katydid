@@ -3,30 +3,29 @@
 // Apache 2.0 License
 //
 
-@file:Suppress("ClassName")
-
 package o.katydid.css.types
 
 //---------------------------------------------------------------------------------------------------------------------
 
+@Suppress("EnumEntryName")
 enum class EBackgroundPositionOption(
     private val css: String
 ) {
 
     /** The "bottom" background position option. */
-    BOTTOM("bottom"),
+    bottom("bottom"),
 
     /** The "center" background position option. */
-    CENTER("center"),
+    center("center"),
 
     /** The "left" background position option. */
-    LEFT("left"),
+    left("left"),
 
     /** The "right" background position option. */
-    RIGHT("right"),
+    right("right"),
 
     /** The "top" background position option. */
-    TOP("top");
+    top("top");
 
     /** @return the CSS attribute text for this background position option. */
     fun toCssString() =
@@ -39,25 +38,17 @@ enum class EBackgroundPositionOption(
         fun fromString(option: String?) =
             when (option) {
                 null     -> null
-                "bottom" -> BOTTOM
-                "center" -> CENTER
-                "left"   -> LEFT
-                "right"  -> RIGHT
-                "top"    -> TOP
+                "bottom" -> bottom
+                "center" -> center
+                "left"   -> left
+                "right"  -> right
+                "top"    -> top
                 else     -> throw IllegalArgumentException("Unknown display option: '$option'.")
             }
 
     }
 
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-
-val bottom = EBackgroundPositionOption.BOTTOM
-val center = EBackgroundPositionOption.CENTER
-val left = EBackgroundPositionOption.LEFT
-val right = EBackgroundPositionOption.RIGHT
-val top = EBackgroundPositionOption.TOP
 
 //---------------------------------------------------------------------------------------------------------------------
 

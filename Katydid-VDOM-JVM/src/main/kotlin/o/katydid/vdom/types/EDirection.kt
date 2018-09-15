@@ -11,24 +11,25 @@ package o.katydid.vdom.types
  * Enumeration of allowed values for the dir attribute.
  * See https://www.w3.org/TR/html5/dom.html#the-dir-attribute.
  */
-enum class EDirection {
+@Suppress("EnumEntryName")
+enum class EDirection(
+    private val html: String
+) {
 
     /** The "ltr" attribute value. */
-    LEFT_TO_RIGHT,
+    ltr("ltr"),
 
     /** The "rtl" attribute value. */
-    RIGHT_TO_LEFT,
+    rtl("rtl"),
 
     /** The "auto" attribute value. */
-    AUTO;
+    auto("auto");
+
+    ////
 
     /** @return the HTML attribute text for this direction. */
     fun toHtmlString() =
-        when (this) {
-            LEFT_TO_RIGHT -> "ltr"
-            RIGHT_TO_LEFT -> "rtl"
-            AUTO          -> "auto"
-        }
+        html
 
 }
 

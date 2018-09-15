@@ -3,8 +3,6 @@
 // Apache 2.0 License
 //
 
-@file:Suppress("ClassName")
-
 package o.katydid.css.types
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -12,21 +10,22 @@ package o.katydid.css.types
 /**
  * Enumeration of options for the CSS 'background-repeat' property.
  */
+@Suppress("EnumEntryName")
 enum class EBackgroundRepeatOption(
     private val css: String
 ) {
 
     /** The "no-repeat" background repeat option. */
-    NO_REPEAT("no-repeat"),
+    noRepeat("no-repeat"),
 
     /** The "repeat" background repeat option. */
-    REPEAT("repeat"),
+    repeat("repeat"),
 
     /** The "repeat-x" background repeat option. */
-    REPEAT_X("repeat-x"),
+    repeatX("repeat-x"),
 
     /** The "repeat-y" background repeat option. */
-    REPEAT_Y("repeat-y");
+    repeatY("repeat-y");
 
     /** @return the CSS attribute text for this background repeat option. */
     fun toCssString() =
@@ -50,13 +49,6 @@ enum class EBackgroundRepeatOption(
     }
 
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-
-val repeat = EBackgroundRepeatOption.REPEAT
-val repeatX = EBackgroundRepeatOption.REPEAT_X
-val repeatY = EBackgroundRepeatOption.REPEAT_Y
-val noRepeat = EBackgroundRepeatOption.NO_REPEAT
 
 //---------------------------------------------------------------------------------------------------------------------
 

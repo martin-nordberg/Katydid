@@ -11,24 +11,25 @@ package o.katydid.vdom.types
  * Enumeration of allowed values for a CORS setting attribute.
  * See https://www.w3.org/TR/html5/infrastructure.html#cors-settings-attribute.
  */
-enum class EPreloadHint {
+@Suppress("EnumEntryName")
+enum class EPreloadHint(
+    private val html: String
+) {
 
     /** The "auto" attribute value. */
-    AUTO,
+    auto("auto"),
 
     /** The "metadata" attribute value. */
-    METADATA,
+    metadata("metadata"),
 
     /** The "none" attribute value. */
-    NONE;
+    none("none");
+
+    ////
 
     /** @return the HTML attribute text for this direction. */
     fun toHtmlString() =
-        when (this) {
-            AUTO     -> "auto"
-            METADATA -> "metadata"
-            NONE     -> "none"
-        }
+        html
 
 }
 

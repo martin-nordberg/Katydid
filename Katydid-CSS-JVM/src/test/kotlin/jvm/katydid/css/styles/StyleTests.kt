@@ -6,10 +6,15 @@
 package jvm.katydid.css.styles
 
 import o.katydid.css.colors.*
-import o.katydid.css.measurements.*
+import o.katydid.css.measurements.percent
+import o.katydid.css.measurements.px
 import o.katydid.css.styles.Style
 import o.katydid.css.styles.style
-import o.katydid.css.types.*
+import o.katydid.css.types.EBackgroundAttachmentOption.fixed
+import o.katydid.css.types.EBackgroundAttachmentOption.scroll
+import o.katydid.css.types.EBackgroundPositionOption.*
+import o.katydid.css.types.EBackgroundRepeatOption.*
+import o.katydid.css.types.EDisplayOption.*
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -20,7 +25,7 @@ class StyleTests {
         expectedCss: String,
         build: Style.() -> Unit
     ) {
-        assertEquals(expectedCss, style(build).toString() )
+        assertEquals(expectedCss, style(build).toString())
     }
 
 
@@ -72,7 +77,7 @@ class StyleTests {
         checkStyle("display: table-column;") { display(tableColumn) }
         checkStyle("display: table-cell;") { display(tableCell) }
         checkStyle("display: table-caption;") { display(tableCaption) }
-        checkStyle("display: none;") { display(EDisplayOption.NONE) }
+        checkStyle("display: none;") { display(none) }
 
     }
 
@@ -101,7 +106,7 @@ class StyleTests {
     fun `Style properties can be made important`() {
 
         checkStyle("display: none !important; color: #172D43; height: 45px !important;") {
-            display(EDisplayOption.NONE); important
+            display(none); important
             color(rgb(23, 45, 67))
             height(45.px); important
         }

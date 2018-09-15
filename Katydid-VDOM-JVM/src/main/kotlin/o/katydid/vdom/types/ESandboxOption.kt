@@ -10,41 +10,37 @@ package o.katydid.vdom.types
 /**
  * Enumeration of allowed values for an iframe's sandbox attribute.
  */
-enum class ESandboxOption {
+@Suppress("EnumEntryName")
+enum class ESandboxOption(
+    private val html: String
+) {
 
     /** The "allow-forms" attribute value. */
-    ALLOW_FORMS,
+    allowForms("allow-forms"),
 
     /** The "allow-pointer-lock" attribute value. */
-    ALLOW_POINTER_LOCK,
+    allowPointerLock("allow-pointer-lock"),
 
     /** The "allow-popups" attribute value. */
-    ALLOW_POPUPS,
+    allowPopups("allow-popups"),
 
-    /** The "origin-when-cross-origin" attribute value. */
-    ALLOW_PRESENTATION,
+    /** The "allow-presentation" attribute value. */
+    allowPresentation("allow-presentation"),
 
     /** The "allow-same-origin" attribute value. */
-    ALLOW_SAME_ORIGIN,
+    allowSameOrigin("allow-same-origin"),
 
     /** The "allow-scripts" attribute value. */
-    ALLOW_SCRIPTS,
+    allowScripts("allow-scripts"),
 
     /** The "allow-top-navigation" attribute value. */
-    ALLOW_TOP_NAVIGATION;
+    allowTopNavigation("allow-top-navigation");
+
+    ////
 
     /** @return the HTML attribute text for this direction. */
-    fun toHtmlString(): String {
-        return when (this) {
-            ALLOW_FORMS          -> "allow-forms"
-            ALLOW_POINTER_LOCK   -> "allow-pointer-lock"
-            ALLOW_POPUPS         -> "allow-popups"
-            ALLOW_PRESENTATION   -> "allow-presentation"
-            ALLOW_SAME_ORIGIN    -> "allow-same-origin"
-            ALLOW_SCRIPTS        -> "allow-scripts"
-            ALLOW_TOP_NAVIGATION -> "allow-top-navigation"
-        }
-    }
+    fun toHtmlString() =
+        html
 
 }
 

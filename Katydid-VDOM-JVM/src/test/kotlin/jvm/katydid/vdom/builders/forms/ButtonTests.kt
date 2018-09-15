@@ -8,9 +8,9 @@ package jvm.katydid.vdom.builders.forms
 import jvm.katydid.vdom.api.checkBuild
 import o.katydid.vdom.application.katydid
 import o.katydid.vdom.builders.KatydidPhrasingContentBuilder
-import o.katydid.vdom.types.EButtonType
-import o.katydid.vdom.types.EFormEncodingType
-import o.katydid.vdom.types.EFormSubmissionMethod
+import o.katydid.vdom.types.EButtonType.*
+import o.katydid.vdom.types.EFormEncodingType.*
+import o.katydid.vdom.types.EFormSubmissionMethod.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -25,17 +25,17 @@ class ButtonTests {
             form {
 
                 button(
-                    autofocus=true,
-                    disabled=true,
-                    form="SomeForm",
-                    formaction="http://myform/url",
-                    formenctype= EFormEncodingType.WWW_FORM_URL_ENCODED,
-                    formmethod= EFormSubmissionMethod.POST,
-                    formnovalidate=true,
-                    formtarget="_blank",
-                    name="GreatButton",
-                    type= EButtonType.SUBMIT,
-                    value="TheButton"
+                    autofocus = true,
+                    disabled = true,
+                    form = "SomeForm",
+                    formaction = "http://myform/url",
+                    formenctype = wwwFormUrlEncoded,
+                    formmethod = post,
+                    formnovalidate = true,
+                    formtarget = "_blank",
+                    name = "GreatButton",
+                    type = submit,
+                    value = "TheButton"
                 ) {
                     span {
                         text("Press Me")

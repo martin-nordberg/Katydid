@@ -7,7 +7,7 @@ package jvm.katydid.vdom.builders.forms
 
 import jvm.katydid.vdom.api.checkBuild
 import o.katydid.vdom.application.katydid
-import o.katydid.vdom.types.EWrapType
+import o.katydid.vdom.types.EWrapType.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -25,7 +25,7 @@ class TextAreaTests {
                     autocomplete = "mystuff",
                     autofocus = true,
                     cols = 50,
-                    dirname="direction",
+                    dirname = "direction",
                     disabled = true,
                     form = "myform",
                     maxlength = 50,
@@ -35,7 +35,7 @@ class TextAreaTests {
                     readonly = true,
                     required = true,
                     rows = 3,
-                    wrap = EWrapType.SOFT
+                    wrap = soft
                 ) {
                     text("My long field value")
                 }

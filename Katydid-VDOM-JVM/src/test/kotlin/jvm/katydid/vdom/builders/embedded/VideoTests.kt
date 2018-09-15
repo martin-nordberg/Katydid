@@ -7,9 +7,9 @@ package jvm.katydid.vdom.builders.embedded
 
 import jvm.katydid.vdom.api.checkBuild
 import o.katydid.vdom.application.katydid
-import o.katydid.vdom.types.ECorsSetting
-import o.katydid.vdom.types.EPreloadHint
-import o.katydid.vdom.types.ETrackKind
+import o.katydid.vdom.types.ECorsSetting.anonymous
+import o.katydid.vdom.types.EPreloadHint.auto
+import o.katydid.vdom.types.ETrackKind.subtitles
 import o.katydid.vdom.types.MimeType
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -26,19 +26,20 @@ class VideoTests {
                 "#myvideo.annoying",
                 autoplay = true,
                 controls = true,
-                crossorigin = ECorsSetting.ANONYMOUS,
+                crossorigin = anonymous,
                 height = 120,
                 loop = true,
                 muted = true,
                 poster = "http://poster/path",
-                preload = EPreloadHint.AUTO,
+                preload = auto,
                 src = "http://someurl/path",
                 width = 99
             ) {}
 
         }
 
-        val html = """<video autoplay="" class="annoying" controls="" crossorigin="anonymous" height="120" id="myvideo" loop="" muted="" poster="http://poster/path" preload="auto" src="http://someurl/path" width="99"></video>"""
+        val html =
+            """<video autoplay="" class="annoying" controls="" crossorigin="anonymous" height="120" id="myvideo" loop="" muted="" poster="http://poster/path" preload="auto" src="http://someurl/path" width="99"></video>"""
 
         checkBuild(html, vdomNode)
 
@@ -61,7 +62,7 @@ class VideoTests {
 
                 track(
                     default = true,
-                    kind = ETrackKind.SUBTITLES,
+                    kind = subtitles,
                     label = "My Track",
                     src = "http://somewhere/videotrack",
                     srclang = "EN"
@@ -128,7 +129,7 @@ class VideoTests {
             katydid<Unit> {
 
                 video(src = "http://url") {
-                    track(src="http://trackurl") {}
+                    track(src = "http://trackurl") {}
                     source(src = "http://url2") {}
                 }
 

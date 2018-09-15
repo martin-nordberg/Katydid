@@ -11,20 +11,22 @@ package o.katydid.vdom.types
  * Enumeration of allowed values for a CORS setting attribute.
  * See https://www.w3.org/TR/html5/infrastructure.html#cors-settings-attribute.
  */
-enum class ECorsSetting {
+@Suppress("EnumEntryName")
+enum class ECorsSetting(
+    private val html: String
+) {
 
     /** The "anonymous" attribute value. */
-    ANONYMOUS,
+    anonymous("anonymous"),
 
     /** The "use-credentials" attribute value. */
-    USE_CREDENTIALS;
+    useCredentials("use-credentials");
+
+    ////
 
     /** @return the HTML attribute text for this direction. */
     fun toHtmlString() =
-        when (this) {
-            ANONYMOUS       -> "anonymous"
-            USE_CREDENTIALS -> "use-credentials"
-        }
+        html
 
 }
 

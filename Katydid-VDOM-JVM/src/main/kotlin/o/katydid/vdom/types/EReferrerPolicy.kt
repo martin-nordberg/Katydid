@@ -11,44 +11,40 @@ package o.katydid.vdom.types
  * Enumeration of allowed values for a referrer policy attribute.
  * See https://www.w3.org/TR/referrer-policy/.
  */
-enum class EReferrerPolicy {
+@Suppress("EnumEntryName")
+enum class EReferrerPolicy(
+    private val html: String
+) {
 
     /** The "no-referrer" attribute value. */
-    NO_REFERRER,
+    noReferrer("no-referrer"),
 
     /** The "no-referrer-when-downgrade" attribute value. */
-    NO_REFERRER_WHEN_DOWNGRADE,
+    noReferrerWhenDowngrade("no-referrer-when-downgrade"),
 
     /** The "origin" attribute value. */
-    ORIGIN,
+    origin("origin"),
 
     /** The "origin-when-cross-origin" attribute value. */
-    ORIGIN_WHEN_CROSS_ORIGIN,
+    originWhenCrossOrigin("origin-when-cross-origin"),
 
     /** The "same-origin" attribute value. */
-    SAME_ORIGIN,
+    sameOrigin("same-origin"),
 
     /** The "strict-origin" attribute value. */
-    STRICT_ORIGIN,
+    strictOrigin("strict-origin"),
 
     /** The "strict-origin-when-cross-origin" attribute value. */
-    STRICT_ORIGIN_WHEN_CROSS_ORIGIN,
+    strictOriginWhenCrossOrigin("strict-origin-when-cross-origin"),
 
     /** The "unsafe_url" attribute value. */
-    UNSAFE_URL;
+    unsafeUrl("unsafe-url");
+
+    ////
 
     /** @return the HTML attribute text for this direction. */
     fun toHtmlString() =
-        when (this) {
-            NO_REFERRER                     -> "no-referrer"
-            NO_REFERRER_WHEN_DOWNGRADE      -> "no-referrer-when-downgrade"
-            ORIGIN                          -> "origin"
-            ORIGIN_WHEN_CROSS_ORIGIN        -> "origin-when-cross-origin"
-            SAME_ORIGIN                     -> "same-origin"
-            STRICT_ORIGIN                   -> "strict-origin"
-            STRICT_ORIGIN_WHEN_CROSS_ORIGIN -> "strict-origin-when-cross-origin"
-            UNSAFE_URL                      -> "unsafe-url"
-        }
+        html
 
 }
 
