@@ -8,20 +8,19 @@ package o.katydid.css.types
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Enumeration of options for the CSS 'background-attachment' property.
+ * Enumeration of the option 'none' when other options for a property are not enumerated.
  */
 @Suppress("EnumEntryName")
-enum class EBackgroundAttachmentOption(
+enum class ENoneOption(
     private val css: String
 ) {
 
-    /** The "fixed" background attachment option. */
-    fixed("fixed"),
+    /** The "none" option. */
+    none("none");
 
-    /** The "scroll" background attachment option. */
-    scroll("scroll");
+    ////
 
-    /** @return the CSS attribute text for this background attachment option. */
+    /** @return the CSS attribute text for this option. */
     fun toCssString() =
         css
 
@@ -31,10 +30,9 @@ enum class EBackgroundAttachmentOption(
 
         fun fromString(option: String?) =
             when (option) {
-                null     -> null
-                "fixed"  -> fixed
-                "scroll" -> scroll
-                else     -> throw IllegalArgumentException("Unknown background attachment option: '$option'.")
+                null                 -> null
+                "none"               -> none
+                else                 -> throw IllegalArgumentException("Unknown 'none' option: '$option'.")
             }
 
     }

@@ -7,6 +7,7 @@ package o.katydid.css.types
 
 //---------------------------------------------------------------------------------------------------------------------
 
+/** Enumeration of background positions. */
 @Suppress("EnumEntryName")
 enum class EBackgroundPositionOption(
     private val css: String
