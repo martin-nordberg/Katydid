@@ -10,6 +10,7 @@ import o.katydid.css.measurements.Length
 import o.katydid.css.measurements.Percentage
 import o.katydid.css.types.*
 import o.katydid.css.types.EBackgroundPositionOption.center
+import x.katydid.css.infrastructure.makeDecimalString
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -30,7 +31,7 @@ class Style {
     fun backgroundImage(url: String) =
         setProperty("background-image", "url(\"$url\")")
 
-    fun backgroundImage(value:ENoneOption) =
+    fun backgroundImage(value: ENoneOption) =
         setProperty("background-image", value.toCssString())
 
     fun backgroundPosition(x: EBackgroundPositionOption, y: EBackgroundPositionOption = center) =
@@ -73,13 +74,13 @@ class Style {
 
     fun borderColor(top: Color, right: Color = top, bottom: Color = top, left: Color = right) {
         var css = "$top"
-        if ( right != top || bottom != top || left != right ) {
+        if (right != top || bottom != top || left != right) {
             css += " $right"
         }
-        if ( bottom != top || left != right ) {
+        if (bottom != top || left != right) {
             css += " $bottom"
         }
-        if ( left != right ) {
+        if (left != right) {
             css += " $left"
         }
         setProperty("border-color", css)
@@ -117,7 +118,7 @@ class Style {
 
     fun borderSpacing(horizontal: Length, vertical: Length = horizontal) {
         var css = "$horizontal"
-        if ( vertical != horizontal ) {
+        if (vertical != horizontal) {
             css += " $vertical"
         }
         setProperty("border-spacing", css)
@@ -126,16 +127,16 @@ class Style {
     fun borderStyle(top: EBorderStyleOption, right: EBorderStyleOption = top,
                     bottom: EBorderStyleOption = top, left: EBorderStyleOption = right) {
         var css = top.toCssString()
-        if ( right != top || bottom != top || left != right ) {
+        if (right != top || bottom != top || left != right) {
             css += " " + right.toCssString()
         }
-        if ( bottom != top || left != right ) {
+        if (bottom != top || left != right) {
             css += " " + bottom.toCssString()
         }
-        if ( left != right ) {
+        if (left != right) {
             css += " " + left.toCssString()
         }
-        setProperty("border-style",css)
+        setProperty("border-style", css)
     }
 
     fun borderTop(width: EBorderWidthOption, style: EBorderStyleOption, color: Color) =
@@ -153,19 +154,19 @@ class Style {
     fun borderTopWidth(value: Length) =
         setProperty("border-top-width", "$value")
 
-    fun bottom(value:Length) =
+    fun bottom(value: Length) =
         setProperty("bottom", "$value")
 
-    fun bottom(value:Percentage) =
+    fun bottom(value: Percentage) =
         setProperty("bottom", "$value")
 
-    fun bottom(value:EAutoOption) =
+    fun bottom(value: EAutoOption) =
         setProperty("bottom", value.toCssString())
 
-    fun boxSizing(value:EBoxSizingOption) =
+    fun boxSizing(value: EBoxSizingOption) =
         setProperty("box-sizing", value.toCssString())
 
-    fun captionSide(value:ECaptionSideOption) =
+    fun captionSide(value: ECaptionSideOption) =
         setProperty("caption-side", value.toCssString())
 
     fun caretColor(value: Color) =
@@ -196,18 +197,119 @@ class Style {
     fun contentUrl(value: String) =
         setProperty("content", "url(\"$value\")")
 
+    // TODO: counter-increment
+
+    // TODO: counter-reset
+
+    // TODO?: cue, cue-before, cure-after
+
+    fun cursor(value: ECursorOption) =
+        setProperty("cursor", value.toCssString())
+
+    fun direction(value: EDirectionOption) =
+        setProperty("direction", value.toCssString())
+
     fun display(value: EDisplayOption) =
         setProperty("display", value.toCssString())
+
+    // TODO?: elevation
+
+    fun emptyCells(value: EEmptyCellsOption) =
+        setProperty("empty-cells", value.toCssString())
+
+    fun float(value: EFloatOption) =
+        setProperty("float", value.toCssString())
+
+    // TODO: font
+
+    fun fontFamily(vararg values: String) {
+
+        var css = ""
+        var delimiter = ""
+
+        for (value in values) {
+
+            css += delimiter
+            delimiter = ", "
+
+            if (value.matches(Regex("[a-zA-Z-]+"))) {
+                css += value
+            }
+            else {
+                css += "\""
+                css += value
+                css += "\""
+            }
+
+        }
+
+        setProperty("font-family", css.trim())
+
+    }
+
+    fun fontSize(value: EFontSizeOption) =
+        setProperty("font-size", value.toCssString())
+
+    fun fontSize(value: Length) =
+        setProperty("font-size", "$value")
+
+    fun fontSize(value: Percentage) =
+        setProperty("font-size", "$value")
+
+    fun fontStyle(value: EFontStyleOption) =
+        setProperty("font-style", value.toCssString())
+
+    fun fontVariant(value: EFontVariantOption) =
+        setProperty("font-variant", value.toCssString())
+
+    fun fontWeight(value: EFontWeightOption) =
+        setProperty("font-weight", value.toCssString())
 
     fun height(value: Length) =
         setProperty("height", "$value")
 
-    /** Funky getter actually sets the last used key to be !important. */
+    fun height(value: Percentage) =
+        setProperty("height", "$value")
+
+    fun height(value: EAutoOption) =
+        setProperty("height", value.toCssString())
+
+    /** Funky side-effecting getter actually sets the last used property to be !important. */
     val important: Unit
         get() {
             require(properties.size > 0) { "Set a property before making it important." }
+            require(!properties[properties.size - 1].endsWith("!important")) { "Last property already set to important." }
             properties[properties.size - 1] += " !important"
         }
+
+    fun left(value: Length) =
+        setProperty("left", "$value")
+
+    fun left(value: Percentage) =
+        setProperty("left", "$value")
+
+    fun left(value: EAutoOption) =
+        setProperty("left", value.toCssString())
+
+    fun letterSpacing(value: Length) =
+        setProperty("letter-spacing", "$value")
+
+    fun letterSpacing(value: ENormalOption) =
+        setProperty("letter-spacing", value.toCssString())
+
+    fun lineHeight(value: Length) =
+        setProperty("line-height", "$value")
+
+    fun lineHeight(value: Percentage) =
+        setProperty("line-height", "$value")
+
+    fun lineHeight(value: Float) =
+        setProperty("line-height", makeDecimalString(value))
+
+    fun lineHeight(value: ENormalOption) =
+        setProperty("line-height", value.toCssString())
+
+    // TODO next: list-style
 
     fun width(value: Length) =
         setProperty("width", "$value")
@@ -223,10 +325,10 @@ class Style {
     }
 
     private fun setStringProperty(key: String, value: String) {
-        var cssValue = value.replace("\"","\\\"")
-        cssValue = cssValue.replace( "\n", "\\A")
+        var cssValue = value.replace("\"", "\\\"")
+        cssValue = cssValue.replace("\n", "\\A")
         // TODO: probably more characters worth escaping
-        setProperty( key, "\"$cssValue\"")
+        setProperty(key, "\"$cssValue\"")
     }
 
     fun toCssString(whitespace: String = "\n") =

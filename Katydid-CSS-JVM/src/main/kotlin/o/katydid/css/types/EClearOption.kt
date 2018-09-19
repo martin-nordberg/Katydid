@@ -1,23 +1,26 @@
 //
-// (C) Copyright 2017-2018 Martin E. Nordberg III
+// (C) Copyright 2018 Martin E. Nordberg III
 // Apache 2.0 License
 //
 
 package o.katydid.css.types
 
-/**Enumeration of options for the 'clear' property. */
+/** Enumeration of options for the 'clear' property. */
 @Suppress("EnumEntryName")
-enum class EClearOption (
-    private val css : String
+enum class EClearOption(
+    private val css: String
 ) {
 
-    /* Requires that the top border edge of the box be below the bottom outer edge of any left-floating boxes that resulted from elements earlier in the source document. */
+    /** Requires that the top border edge of the box be below the bottom outer edge of any left-floating boxes that
+     * resulted from elements earlier in the source document. */
     left("left"),
 
-    /** Requires that the top border edge of the box be below the bottom outer edge of any right-floating boxes that resulted from elements earlier in the source document. */
+    /** Requires that the top border edge of the box be below the bottom outer edge of any right-floating boxes
+     * that resulted from elements earlier in the source document. */
     right("right"),
 
-    /** Requires that the top border edge of the box be below the bottom outer edge of any right-floating and left-floating boxes that resulted from elements earlier in the source document. */
+    /** Requires that the top border edge of the box be below the bottom outer edge of any right-floating and
+     * left-floating boxes that resulted from elements earlier in the source document. */
     both("both"),
 
     /** No constraint on the box's position with respect to floats. */

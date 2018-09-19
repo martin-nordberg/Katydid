@@ -1,5 +1,5 @@
 //
-// (C) Copyright 2017-2018 Martin E. Nordberg III
+// (C) Copyright 2018 Martin E. Nordberg III
 // Apache 2.0 License
 //
 
@@ -7,8 +7,8 @@ package o.katydid.css.types
 
 /** Enumeration of options for the 'border-xxx-style' family of options. */
 @Suppress("EnumEntryName")
-enum class EBorderStyleOption (
-    private val css : String
+enum class EBorderStyleOption(
+    private val css: String
 ) {
 
     /** No border; the computed border width is zero. */

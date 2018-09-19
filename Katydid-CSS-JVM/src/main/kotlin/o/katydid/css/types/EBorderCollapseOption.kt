@@ -1,5 +1,5 @@
 //
-// (C) Copyright 2017-2018 Martin E. Nordberg III
+// (C) Copyright 2018 Martin E. Nordberg III
 // Apache 2.0 License
 //
 
@@ -7,8 +7,8 @@ package o.katydid.css.types
 
 /** Enumeration of border collapse options. */
 @Suppress("EnumEntryName")
-enum class EBorderCollapseOption (
-    private val css : String
+enum class EBorderCollapseOption(
+    private val css: String
 ) {
 
     /** Collapsed borders. */
@@ -29,10 +29,10 @@ enum class EBorderCollapseOption (
 
         fun fromString(option: String?) =
             when (option) {
-                null     -> null
-                "collapse"   -> collapse
+                null       -> null
+                "collapse" -> collapse
                 "separate" -> separate
-                else     -> throw IllegalArgumentException("Unknown border collapse option: '$option'.")
+                else       -> throw IllegalArgumentException("Unknown border collapse option: '$option'.")
             }
 
     }

@@ -1,5 +1,5 @@
 //
-// (C) Copyright 2017-2018 Martin E. Nordberg III
+// (C) Copyright 2018 Martin E. Nordberg III
 // Apache 2.0 License
 //
 
@@ -7,8 +7,8 @@ package o.katydid.css.types
 
 /**Enumeration of options for the 'border-xxx-width' property. */
 @Suppress("EnumEntryName")
-enum class EBorderWidthOption (
-    private val css : String
+enum class EBorderWidthOption(
+    private val css: String
 ) {
 
     /** A thin border. */
@@ -18,7 +18,7 @@ enum class EBorderWidthOption (
     medium("medium"),
 
     /** A thick border. */
-    thick( "thick");
+    thick("thick");
 
     ////
 

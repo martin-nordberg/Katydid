@@ -8,19 +8,22 @@ package o.katydid.css.types
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Enumeration of the option 'auto' when other options for a property are not enumerated.
+ * Enumeration of options for the 'direction' property.
  */
 @Suppress("EnumEntryName")
-enum class EAutoOption(
+enum class EDirectionOption(
     private val css: String
 ) {
 
-    /** The "auto" option. */
-    auto("auto");
+    /** Left-to-right direction. */
+    ltr("ltr"),
+
+    /** Right-to-left direction. */
+    rtl("rtl");
 
     ////
 
-    /** @return the CSS attribute text for this option. */
+    /** @return the CSS attribute text for this direction option. */
     fun toCssString() =
         css
 
@@ -30,9 +33,10 @@ enum class EAutoOption(
 
         fun fromString(option: String?) =
             when (option) {
-                null   -> null
-                "auto" -> auto
-                else   -> throw IllegalArgumentException("Unknown 'auto' option: '$option'.")
+                null  -> null
+                "ltr" -> ltr
+                "rtl" -> rtl
+                else  -> throw IllegalArgumentException("Unknown direction option: '$option'.")
             }
 
     }

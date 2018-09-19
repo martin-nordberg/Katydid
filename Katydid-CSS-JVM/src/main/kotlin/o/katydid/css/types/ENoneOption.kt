@@ -1,5 +1,5 @@
 //
-// (C) Copyright 2017-2018 Martin E. Nordberg III
+// (C) Copyright 2018 Martin E. Nordberg III
 // Apache 2.0 License
 //
 
@@ -30,9 +30,9 @@ enum class ENoneOption(
 
         fun fromString(option: String?) =
             when (option) {
-                null                 -> null
-                "none"               -> none
-                else                 -> throw IllegalArgumentException("Unknown 'none' option: '$option'.")
+                null   -> null
+                "none" -> none
+                else   -> throw IllegalArgumentException("Unknown 'none' option: '$option'.")
             }
 
     }
