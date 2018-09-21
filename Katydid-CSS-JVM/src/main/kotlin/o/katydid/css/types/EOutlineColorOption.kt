@@ -8,19 +8,19 @@ package o.katydid.css.types
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Enumeration of the option 'none' when other options for a property are not enumerated or are not mutually exclusive.
+ * Enumeration of the option 'invert' for outline color.
  */
 @Suppress("EnumEntryName")
-enum class ENoneOption(
+enum class EOutlineColorOption(
     private val css: String
 ) {
 
-    /** The "none" option. */
-    none("none");
+    /** Performs a color inversion on the pixels on the screen.. */
+    invert("invert");
 
     ////
 
-    /** @return the CSS attribute text for this option. */
+    /** @return the CSS attribute text for this outline color option. */
     fun toCssString() =
         css
 
@@ -31,8 +31,8 @@ enum class ENoneOption(
         fun fromString(option: String?) =
             when (option) {
                 null   -> null
-                "none" -> none
-                else   -> throw IllegalArgumentException("Unknown 'none' option: '$option'.")
+                "invert" -> invert
+                else   -> throw IllegalArgumentException("Unknown outline color option: '$option'.")
             }
 
     }
