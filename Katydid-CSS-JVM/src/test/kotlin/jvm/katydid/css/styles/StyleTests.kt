@@ -10,19 +10,7 @@ import o.katydid.css.measurements.*
 import o.katydid.css.styles.Style
 import o.katydid.css.styles.style
 import o.katydid.css.types.*
-import o.katydid.css.types.EAutoOption.auto
-import o.katydid.css.types.EBackgroundAttachmentOption.fixed
-import o.katydid.css.types.EBackgroundAttachmentOption.scroll
-import o.katydid.css.types.EBackgroundPositionOption.*
-import o.katydid.css.types.EBackgroundRepeatOption.*
-import o.katydid.css.types.EBorderCollapseOption.collapse
-import o.katydid.css.types.EBorderCollapseOption.separate
-import o.katydid.css.types.EBorderStyleOption.*
-import o.katydid.css.types.EBorderWidthOption.*
-import o.katydid.css.types.EBoxSizingOption.borderBox
-import o.katydid.css.types.EBoxSizingOption.contentBox
 import o.katydid.css.types.EDisplayOption.*
-import o.katydid.css.types.EOutlineColorOption.*
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 

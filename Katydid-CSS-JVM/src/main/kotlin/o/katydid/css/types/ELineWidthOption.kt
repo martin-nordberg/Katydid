@@ -7,7 +7,7 @@ package o.katydid.css.types
 
 /**Enumeration of options for the 'border-xxx-width' property. */
 @Suppress("EnumEntryName")
-enum class EBorderWidthOption(
+enum class ELineWidthOption(
     private val css: String
 ) {
 

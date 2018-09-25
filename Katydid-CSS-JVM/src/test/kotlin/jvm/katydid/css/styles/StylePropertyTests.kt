@@ -18,7 +18,7 @@ import o.katydid.css.types.EBackgroundRepeatOption.*
 import o.katydid.css.types.EBorderCollapseOption.collapse
 import o.katydid.css.types.EBorderCollapseOption.separate
 import o.katydid.css.types.EBorderStyleOption.*
-import o.katydid.css.types.EBorderWidthOption.*
+import o.katydid.css.types.ELineWidthOption.*
 import o.katydid.css.types.EBoxSizingOption.borderBox
 import o.katydid.css.types.EBoxSizingOption.contentBox
 import o.katydid.css.types.EDisplayOption.*
@@ -68,9 +68,14 @@ class StylePropertyTests {
     @Test
     fun `Border style properties convert to correct CSS`() {
 
-        // TODO: border
+        checkStyle("border: thin;") { border(thin) }
+        checkStyle("border: 4px dashed green;") { border(4.px,EBorderStyleOption.dashed,green) }
+        checkStyle("border: solid;") { border(EBorderStyleOption.solid) }
 
         checkStyle("border-bottom: thin dotted mediumslateblue;") { borderBottom(thin, dotted, mediumslateblue) }
+        checkStyle("border-bottom: thin;") { borderBottom(thin) }
+        checkStyle("border-bottom: 4px dashed green;") { borderBottom(4.px,EBorderStyleOption.dashed,green) }
+        checkStyle("border-bottom: solid;") { borderBottom(EBorderStyleOption.solid) }
 
         checkStyle("border-bottom-color: navajowhite;") { borderBottomColor(navajowhite) }
 
@@ -100,6 +105,9 @@ class StylePropertyTests {
         checkStyle("border-color: purple orange olivedrab salmon;") { borderColor(purple, orange, olivedrab, salmon) }
 
         checkStyle("border-left: thin dotted mediumslateblue;") { borderLeft(thin, dotted, mediumslateblue) }
+        checkStyle("border-left: thin;") { borderLeft(thin) }
+        checkStyle("border-left: 4px dashed green;") { borderLeft(4.px,EBorderStyleOption.dashed,green) }
+        checkStyle("border-left: solid;") { borderLeft(EBorderStyleOption.solid) }
 
         checkStyle("border-left-color: navajowhite;") { borderLeftColor(navajowhite) }
 
@@ -109,6 +117,9 @@ class StylePropertyTests {
         checkStyle("border-left-width: 4px;") { borderLeftWidth(4.px) }
 
         checkStyle("border-right: thin dotted mediumslateblue;") { borderRight(thin, dotted, mediumslateblue) }
+        checkStyle("border-right: thin;") { borderRight(thin) }
+        checkStyle("border-right: 4px dashed green;") { borderRight(4.px,EBorderStyleOption.dashed,green) }
+        checkStyle("border-right: solid;") { borderRight(EBorderStyleOption.solid) }
 
         checkStyle("border-right-color: navajowhite;") { borderRightColor(navajowhite) }
 
@@ -127,6 +138,9 @@ class StylePropertyTests {
         checkStyle("border-style: solid dotted ridge dashed;") { borderStyle(solid, dotted, ridge, dashed) }
 
         checkStyle("border-top: thin dotted mediumslateblue;") { borderTop(thin, dotted, mediumslateblue) }
+        checkStyle("border-top: thin;") { borderTop(thin) }
+        checkStyle("border-top: 4px dashed green;") { borderTop(4.px,EBorderStyleOption.dashed,green) }
+        checkStyle("border-top: solid;") { borderTop(EBorderStyleOption.solid) }
 
         checkStyle("border-top-color: navajowhite;") { borderTopColor(navajowhite) }
 
@@ -134,6 +148,11 @@ class StylePropertyTests {
 
         checkStyle("border-top-width: thick;") { borderTopWidth(thick) }
         checkStyle("border-top-width: 4px;") { borderTopWidth(4.px) }
+
+        checkStyle("border-width: thick;") { borderWidth(thick) }
+        checkStyle("border-width: thick thin thick medium;") { borderWidth(thick,thin,thick,medium) }
+        checkStyle("border-width: 4px;") { borderWidth(4.px) }
+        checkStyle("border-width: 4px 2px;") { borderWidth(4.px, 2.px) }
 
     }
 
@@ -441,10 +460,20 @@ class StylePropertyTests {
         checkStyle("outline-width: thick;") { outlineWidth(thick) }
         checkStyle("outline-width: 3px;") { outlineWidth(3.px) }
 
+    }
+
+    @Test
+    fun `Overflow style properties convert to correct CSS`() {
+
         checkStyle("overflow: auto;") { overflow(EOverflowOption.auto) }
         checkStyle("overflow: hidden;") { overflow(EOverflowOption.hidden) }
         checkStyle("overflow: scroll;") { overflow(EOverflowOption.scroll) }
+        checkStyle("overflow: scroll hidden;") { overflow(EOverflowOption.scroll, EOverflowOption.hidden) }
         checkStyle("overflow: visible;") { overflow(EOverflowOption.visible) }
+
+        checkStyle("overflow-x: scroll;") { overflowX(EOverflowOption.scroll) }
+
+        checkStyle("overflow-y: scroll;") { overflowY(EOverflowOption.scroll) }
 
     }
 
