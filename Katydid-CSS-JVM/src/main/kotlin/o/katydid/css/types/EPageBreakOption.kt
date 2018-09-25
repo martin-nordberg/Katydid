@@ -29,7 +29,7 @@ enum class EPageBreakOption(
     ////
 
     /** @return the CSS attribute text for this page break option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

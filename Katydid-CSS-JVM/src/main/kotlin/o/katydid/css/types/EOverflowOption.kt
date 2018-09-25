@@ -30,7 +30,7 @@ enum class EOverflowOption(
     ////
 
     /** @return the CSS attribute text for this overflow option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

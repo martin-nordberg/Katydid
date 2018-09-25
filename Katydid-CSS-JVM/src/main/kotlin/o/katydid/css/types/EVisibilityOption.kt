@@ -24,7 +24,7 @@ enum class EVisibilityOption(
     ////
 
     /** @return the CSS attribute text for this visibility option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

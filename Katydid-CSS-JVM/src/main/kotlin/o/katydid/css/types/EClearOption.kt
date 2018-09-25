@@ -29,7 +29,7 @@ enum class EClearOption(
     ////
 
     /** @return the CSS attribute text for this clear option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

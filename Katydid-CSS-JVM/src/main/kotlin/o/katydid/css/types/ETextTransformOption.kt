@@ -26,7 +26,7 @@ enum class ETextTransformOption(
     ////
 
     /** @return the CSS attribute text for this text transform option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

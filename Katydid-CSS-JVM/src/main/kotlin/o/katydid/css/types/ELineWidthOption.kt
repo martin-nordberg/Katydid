@@ -23,7 +23,7 @@ enum class ELineWidthOption(
     ////
 
     /** @return the CSS attribute text for this border width option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

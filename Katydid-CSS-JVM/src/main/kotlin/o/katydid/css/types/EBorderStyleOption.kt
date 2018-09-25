@@ -44,7 +44,7 @@ enum class EBorderStyleOption(
     ////
 
     /** @return the CSS attribute text for this border style option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

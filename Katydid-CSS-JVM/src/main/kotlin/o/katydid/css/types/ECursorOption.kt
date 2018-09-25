@@ -144,7 +144,7 @@ enum class ECursorOption(
     ////
 
     /** @return the CSS attribute text for this cursor option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

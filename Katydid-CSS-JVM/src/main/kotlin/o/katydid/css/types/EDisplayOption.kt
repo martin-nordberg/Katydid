@@ -63,7 +63,7 @@ enum class EDisplayOption(
     ////
 
     /** @return the CSS attribute text for this display option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

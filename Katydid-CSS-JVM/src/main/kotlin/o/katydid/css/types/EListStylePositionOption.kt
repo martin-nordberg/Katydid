@@ -21,7 +21,7 @@ enum class EListStylePositionOption(
     ////
 
     /** @return the CSS attribute text for this list style position option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

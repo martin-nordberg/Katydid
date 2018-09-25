@@ -30,7 +30,7 @@ enum class EResizeOption(
     ////
 
     /** @return the CSS attribute text for this resize option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

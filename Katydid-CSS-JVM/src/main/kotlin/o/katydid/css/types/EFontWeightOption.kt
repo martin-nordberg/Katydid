@@ -28,7 +28,7 @@ enum class EFontWeightOption(
     ////
 
     /** @return the CSS attribute text for this font weight option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

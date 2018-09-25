@@ -22,7 +22,7 @@ enum class ETextOverflowOption(
     ////
 
     /** @return the CSS attribute text for this text overflow option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

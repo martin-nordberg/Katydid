@@ -20,7 +20,7 @@ enum class EBorderCollapseOption(
     ////
 
     /** @return the CSS attribute text for this border collapse option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

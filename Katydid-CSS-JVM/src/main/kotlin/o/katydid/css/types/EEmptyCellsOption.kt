@@ -20,7 +20,7 @@ enum class EEmptyCellsOption(
     ////
 
     /** @return the CSS attribute text for this empty cells option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

@@ -20,7 +20,7 @@ enum class ETableLayoutOption(
     ////
 
     /** @return the CSS attribute text for this table layout option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

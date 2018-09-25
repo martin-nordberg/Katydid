@@ -25,7 +25,7 @@ enum class EFontSizeOption(
     ////
 
     /** @return the CSS attribute text for this font size option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

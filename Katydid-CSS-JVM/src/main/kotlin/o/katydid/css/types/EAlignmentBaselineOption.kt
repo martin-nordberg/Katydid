@@ -49,7 +49,7 @@ enum class EAlignmentBaselineOption(
     ////
 
     /** @return the CSS attribute text for this alignment-baseline option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

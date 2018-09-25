@@ -19,7 +19,7 @@ enum class ETextAlignOption(
     ////
 
     /** @return the CSS attribute text for this text align option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

@@ -25,7 +25,7 @@ enum class EFloatOption(
     ////
 
     /** @return the CSS attribute text for this clear option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

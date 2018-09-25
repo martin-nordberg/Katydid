@@ -22,7 +22,7 @@ enum class EBackgroundAttachmentOption(
     scroll("scroll");
 
     /** @return the CSS attribute text for this background attachment option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

@@ -17,7 +17,7 @@ enum class EFontVariantOption(
     ////
 
     /** @return the CSS attribute text for this font variant option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

@@ -24,7 +24,7 @@ enum class EDirectionOption(
     ////
 
     /** @return the CSS attribute text for this direction option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

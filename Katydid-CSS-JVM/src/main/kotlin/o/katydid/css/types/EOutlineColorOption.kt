@@ -21,7 +21,7 @@ enum class EOutlineColorOption(
     ////
 
     /** @return the CSS attribute text for this outline color option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

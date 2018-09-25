@@ -20,7 +20,7 @@ enum class ECaptionSideOption(
     ////
 
     /** @return the CSS attribute text for this caption side option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

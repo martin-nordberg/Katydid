@@ -21,7 +21,7 @@ enum class EAutoOption(
     ////
 
     /** @return the CSS attribute text for this option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

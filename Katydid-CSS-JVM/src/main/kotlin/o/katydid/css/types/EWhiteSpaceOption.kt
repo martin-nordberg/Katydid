@@ -38,7 +38,7 @@ enum class EWhiteSpaceOption(
     ////
 
     /** @return the CSS attribute text for this white space option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

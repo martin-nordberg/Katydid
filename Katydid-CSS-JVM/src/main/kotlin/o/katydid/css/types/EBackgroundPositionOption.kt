@@ -29,7 +29,7 @@ enum class EBackgroundPositionOption(
     top("top");
 
     /** @return the CSS attribute text for this background position option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

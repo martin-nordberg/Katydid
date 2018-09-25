@@ -20,7 +20,7 @@ enum class EBoxSizingOption(
     ////
 
     /** @return the CSS attribute text for this box sizing option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

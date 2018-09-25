@@ -28,7 +28,7 @@ enum class EBackgroundRepeatOption(
     repeatY("repeat-y");
 
     /** @return the CSS attribute text for this background repeat option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

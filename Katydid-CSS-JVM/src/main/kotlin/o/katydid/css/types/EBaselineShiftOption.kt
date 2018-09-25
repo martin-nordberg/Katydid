@@ -22,7 +22,7 @@ enum class EBaselineShiftOption(
     ////
 
     /** @return the CSS attribute text for this baseline shift align option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

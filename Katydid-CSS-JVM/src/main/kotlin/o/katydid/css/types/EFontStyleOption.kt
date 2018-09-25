@@ -18,7 +18,7 @@ enum class EFontStyleOption(
     ////
 
     /** @return the CSS attribute text for this font style option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

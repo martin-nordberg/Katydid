@@ -31,7 +31,7 @@ enum class EPositionOption(
     ////
 
     /** @return the CSS attribute text for this position option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

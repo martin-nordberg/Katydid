@@ -32,7 +32,7 @@ class Style {
     // TODO: background
 
     fun backgroundAttachment(value: EBackgroundAttachmentOption) =
-        setProperty("background-attachment", value.toCssString())
+        setProperty("background-attachment", "$value")
 
     fun backgroundColor(value: Color) =
         setProperty("background-color", "$value")
@@ -41,10 +41,10 @@ class Style {
         setProperty("background-image", "url(\"$url\")")
 
     fun backgroundImage(value: ENoneOption) =
-        setProperty("background-image", value.toCssString())
+        setProperty("background-image", "$value")
 
     fun backgroundPosition(x: EBackgroundPositionOption, y: EBackgroundPositionOption = center) =
-        setProperty("background-position", x.toCssString() + " " + y.toCssString())
+        setProperty("background-position", "$x $y")
 
     fun backgroundPosition(x: Length) =
         setProperty("background-position", "$x center")
@@ -59,197 +59,120 @@ class Style {
         setProperty("background-position", "$x $y")
 
     fun backgroundRepeat(value: EBackgroundRepeatOption) =
-        setProperty("background-repeat", value.toCssString())
+        setProperty("background-repeat", "$value")
 
     fun border(style: EBorderStyleOption? = null, color: Color? = null) =
-        setBorderProperty( "border", "", style, color )
+        setBorderProperty("border", "", style, color)
 
     fun border(width: ELineWidthOption, style: EBorderStyleOption? = null, color: Color? = null) =
-        setBorderProperty( "border", width.toCssString(), style, color )
+        setBorderProperty("border", width, style, color)
 
     fun border(width: Length, style: EBorderStyleOption? = null, color: Color? = null) =
-        setBorderProperty( "border", width.toString(), style, color )
+        setBorderProperty("border", width, style, color)
 
     fun borderBottom(style: EBorderStyleOption? = null, color: Color? = null) =
-        setBorderProperty( "border-bottom", "", style, color )
+        setBorderProperty("border-bottom", "", style, color)
 
     fun borderBottom(width: ELineWidthOption, style: EBorderStyleOption? = null, color: Color? = null) =
-        setBorderProperty( "border-bottom", width.toCssString(), style, color )
+        setBorderProperty("border-bottom", width, style, color)
 
     fun borderBottom(width: Length, style: EBorderStyleOption? = null, color: Color? = null) =
-        setBorderProperty( "border-bottom", width.toString(), style, color )
+        setBorderProperty("border-bottom", width, style, color)
 
     fun borderBottomColor(value: Color) =
         setProperty("border-bottom-color", "$value")
 
     fun borderBottomStyle(value: EBorderStyleOption) =
-        setProperty("border-bottom-style", value.toCssString())
+        setProperty("border-bottom-style", "$value")
 
     fun borderBottomWidth(value: ELineWidthOption) =
-        setProperty("border-bottom-width", value.toCssString())
+        setProperty("border-bottom-width", "$value")
 
     fun borderBottomWidth(value: Length) =
         setProperty("border-bottom-width", "$value")
 
     fun borderCollapse(value: EBorderCollapseOption) =
-        setProperty("border-collapse", value.toCssString())
+        setProperty("border-collapse", "$value")
 
-    fun borderColor(top: Color, right: Color = top, bottom: Color = top, left: Color = right) {
-
-        var css = "$top"
-
-        if (right != top || bottom != top || left != right) {
-            css += " $right"
-        }
-
-        if (bottom != top || left != right) {
-            css += " $bottom"
-        }
-
-        if (left != right) {
-            css += " $left"
-        }
-
-        setProperty("border-color", css)
-
-    }
+    fun borderColor(top: Color, right: Color = top, bottom: Color = top, left: Color = right) =
+        setBoxProperty("border-color", top, right, bottom, left)
 
     fun borderLeft(style: EBorderStyleOption? = null, color: Color? = null) =
-        setBorderProperty( "border-left", "", style, color )
+        setBorderProperty("border-left", "", style, color)
 
     fun borderLeft(width: ELineWidthOption, style: EBorderStyleOption? = null, color: Color? = null) =
-        setBorderProperty( "border-left", width.toCssString(), style, color )
+        setBorderProperty("border-left", width, style, color)
 
     fun borderLeft(width: Length, style: EBorderStyleOption? = null, color: Color? = null) =
-        setBorderProperty( "border-left", width.toString(), style, color )
+        setBorderProperty("border-left", width, style, color)
 
     fun borderLeftColor(value: Color) =
         setProperty("border-left-color", "$value")
 
     fun borderLeftStyle(value: EBorderStyleOption) =
-        setProperty("border-left-style", value.toCssString())
+        setProperty("border-left-style", "$value")
 
     fun borderLeftWidth(value: ELineWidthOption) =
-        setProperty("border-left-width", value.toCssString())
+        setProperty("border-left-width", "$value")
 
     fun borderLeftWidth(value: Length) =
         setProperty("border-left-width", "$value")
 
     fun borderRight(style: EBorderStyleOption? = null, color: Color? = null) =
-        setBorderProperty( "border-right", "", style, color )
+        setBorderProperty("border-right", "", style, color)
 
     fun borderRight(width: ELineWidthOption, style: EBorderStyleOption? = null, color: Color? = null) =
-        setBorderProperty( "border-right", width.toCssString(), style, color )
+        setBorderProperty("border-right", width, style, color)
 
     fun borderRight(width: Length, style: EBorderStyleOption? = null, color: Color? = null) =
-        setBorderProperty( "border-right", width.toString(), style, color )
+        setBorderProperty("border-right", width, style, color)
 
     fun borderRightColor(value: Color) =
         setProperty("border-right-color", "$value")
 
     fun borderRightStyle(value: EBorderStyleOption) =
-        setProperty("border-right-style", value.toCssString())
+        setProperty("border-right-style", "$value")
 
     fun borderRightWidth(value: ELineWidthOption) =
-        setProperty("border-right-width", value.toCssString())
+        setProperty("border-right-width", "$value")
 
     fun borderRightWidth(value: Length) =
         setProperty("border-right-width", "$value")
 
-    fun borderSpacing(horizontal: Length, vertical: Length = horizontal) {
-
-        var css = "$horizontal"
-
-        if (vertical != horizontal) {
-            css += " $vertical"
-        }
-
-        setProperty("border-spacing", css)
-
-    }
+    fun borderSpacing(horizontal: Length, vertical: Length = horizontal) =
+        setXyProperty("border-spacing", horizontal, vertical)
 
     fun borderStyle(top: EBorderStyleOption, right: EBorderStyleOption = top,
-                    bottom: EBorderStyleOption = top, left: EBorderStyleOption = right) {
-
-        var css = top.toCssString()
-
-        if (right != top || bottom != top || left != right) {
-            css += " " + right.toCssString()
-        }
-
-        if (bottom != top || left != right) {
-            css += " " + bottom.toCssString()
-        }
-
-        if (left != right) {
-            css += " " + left.toCssString()
-        }
-
-        setProperty("border-style", css)
-
-    }
+                    bottom: EBorderStyleOption = top, left: EBorderStyleOption = right) =
+        setBoxProperty("border-style", top, right, bottom, left)
 
     fun borderTop(style: EBorderStyleOption? = null, color: Color? = null) =
-        setBorderProperty( "border-top", "", style, color )
+        setBorderProperty("border-top", "", style, color)
 
     fun borderTop(width: ELineWidthOption, style: EBorderStyleOption? = null, color: Color? = null) =
-        setBorderProperty( "border-top", width.toCssString(), style, color )
+        setBorderProperty("border-top", width, style, color)
 
     fun borderTop(width: Length, style: EBorderStyleOption? = null, color: Color? = null) =
-        setBorderProperty( "border-top", width.toString(), style, color )
+        setBorderProperty("border-top", width, style, color)
 
     fun borderTopColor(value: Color) =
         setProperty("border-top-color", "$value")
 
     fun borderTopStyle(value: EBorderStyleOption) =
-        setProperty("border-top-style", value.toCssString())
+        setProperty("border-top-style", "$value")
 
     fun borderTopWidth(value: ELineWidthOption) =
-        setProperty("border-top-width", value.toCssString())
+        setProperty("border-top-width", "$value")
 
     fun borderTopWidth(value: Length) =
         setProperty("border-top-width", "$value")
 
-    fun borderWidth(top: ELineWidthOption, right:ELineWidthOption = top,
-                    bottom:ELineWidthOption = top, left: ELineWidthOption = right)  {
+    fun borderWidth(top: ELineWidthOption, right: ELineWidthOption = top,
+                    bottom: ELineWidthOption = top, left: ELineWidthOption = right) =
+        setBoxProperty("border-width", top, right, bottom, left)
 
-        var css = top.toCssString()
-
-        if (right != top || bottom != top || left != right) {
-            css += " " + right.toCssString()
-        }
-
-        if (bottom != top || left != right) {
-            css += " " + bottom.toCssString()
-        }
-
-        if (left != right) {
-            css += " " + left.toCssString()
-        }
-
-        setProperty("border-width", css)
-
-    }
-
-    fun borderWidth(top: Length, right: Length = top, bottom: Length = top, left: Length = right) {
-
-        var css = "$top"
-
-        if (right != top || bottom != top || left != right) {
-            css += " $right"
-        }
-
-        if (bottom != top || left != right) {
-            css += " $bottom"
-        }
-
-        if (left != right) {
-            css += " $left"
-        }
-
-        setProperty("border-width", css)
-
-    }
+    fun borderWidth(top: Length, right: Length = top, bottom: Length = top, left: Length = right) =
+        setBoxProperty("border-width", top, right, bottom, left)
 
     fun bottom(value: Length) =
         setProperty("bottom", "$value")
@@ -258,24 +181,24 @@ class Style {
         setProperty("bottom", "$value")
 
     fun bottom(value: EAutoOption) =
-        setProperty("bottom", value.toCssString())
+        setProperty("bottom", "$value")
 
     fun boxSizing(value: EBoxSizingOption) =
-        setProperty("box-sizing", value.toCssString())
+        setProperty("box-sizing", "$value")
 
     fun captionSide(value: ECaptionSideOption) =
-        setProperty("caption-side", value.toCssString())
+        setProperty("caption-side", "$value")
 
     fun caretColor(value: Color) =
         setProperty("caret-color", "$value")
 
     fun caretColor(value: EAutoOption) =
-        setProperty("caret-color", value.toCssString())
+        setProperty("caret-color", "$value")
 
     // TODO?: chains
 
     fun clear(value: EClearOption) =
-        setProperty("clear", value.toCssString())
+        setProperty("clear", "$value")
 
     // TODO: clip
 
@@ -283,7 +206,7 @@ class Style {
         setProperty("color", "$value")
 
     fun content(value: EContentOption) =
-        setProperty("content", value.toCssString())
+        setProperty("content", "$value")
 
     fun content(value: String) =
         setStringProperty("content", value)
@@ -301,21 +224,21 @@ class Style {
     // TODO?: cue, cue-before, cure-after
 
     fun cursor(value: ECursorOption) =
-        setProperty("cursor", value.toCssString())
+        setProperty("cursor", "$value")
 
     fun direction(value: EDirectionOption) =
-        setProperty("direction", value.toCssString())
+        setProperty("direction", "$value")
 
     fun display(value: EDisplayOption) =
-        setProperty("display", value.toCssString())
+        setProperty("display", "$value")
 
     // TODO?: elevation
 
     fun emptyCells(value: EEmptyCellsOption) =
-        setProperty("empty-cells", value.toCssString())
+        setProperty("empty-cells", "$value")
 
     fun float(value: EFloatOption) =
-        setProperty("float", value.toCssString())
+        setProperty("float", "$value")
 
     // TODO: font
 
@@ -345,7 +268,7 @@ class Style {
     }
 
     fun fontSize(value: EFontSizeOption) =
-        setProperty("font-size", value.toCssString())
+        setProperty("font-size", "$value")
 
     fun fontSize(value: Length) =
         setProperty("font-size", "$value")
@@ -354,13 +277,13 @@ class Style {
         setProperty("font-size", "$value")
 
     fun fontStyle(value: EFontStyleOption) =
-        setProperty("font-style", value.toCssString())
+        setProperty("font-style", "$value")
 
     fun fontVariant(value: EFontVariantOption) =
-        setProperty("font-variant", value.toCssString())
+        setProperty("font-variant", "$value")
 
     fun fontWeight(value: EFontWeightOption) =
-        setProperty("font-weight", value.toCssString())
+        setProperty("font-weight", "$value")
 
     fun height(value: Length) =
         setProperty("height", "$value")
@@ -369,7 +292,7 @@ class Style {
         setProperty("height", "$value")
 
     fun height(value: EAutoOption) =
-        setProperty("height", value.toCssString())
+        setProperty("height", "$value")
 
     fun inherit(key: String) {
         properties.add("$key: inherit")
@@ -382,13 +305,13 @@ class Style {
         setProperty("left", "$value")
 
     fun left(value: EAutoOption) =
-        setProperty("left", value.toCssString())
+        setProperty("left", "$value")
 
     fun letterSpacing(value: Length) =
         setProperty("letter-spacing", "$value")
 
     fun letterSpacing(value: ENormalOption) =
-        setProperty("letter-spacing", value.toCssString())
+        setProperty("letter-spacing", "$value")
 
     fun lineHeight(value: Length) =
         setProperty("line-height", "$value")
@@ -400,14 +323,14 @@ class Style {
         setProperty("line-height", makeDecimalString(value))
 
     fun lineHeight(value: ENormalOption) =
-        setProperty("line-height", value.toCssString())
+        setProperty("line-height", "$value")
 
     fun listStyle(type: EListStyleTypeOption, position: EListStylePositionOption? = null, imageUrl: String? = null) {
 
-        var css = type.toCssString()
+        var css = "$type"
 
         if (position != null) {
-            css += " " + position.toCssString()
+            css += " $position"
         }
 
         if (imageUrl != null) {
@@ -423,56 +346,22 @@ class Style {
         setProperty("list-style-image", "url(\"$url\")")
 
     fun listStyleImage(value: ENoneOption) =
-        setProperty("list-style-image", value.toCssString())
+        setProperty("list-style-image", "$value")
 
     fun listStylePosition(value: EListStylePositionOption) =
-        setProperty("list-style-position", value.toCssString())
+        setProperty("list-style-position", "$value")
 
     fun listStyleType(value: EListStyleTypeOption) =
-        setProperty("list-style-type", value.toCssString())
+        setProperty("list-style-type", "$value")
 
-    fun margin(top: Length, right: Length = top, bottom: Length = top, left: Length = right) {
+    fun margin(top: Length, right: Length = top, bottom: Length = top, left: Length = right) =
+        setBoxProperty("margin", top, right, bottom, left)
 
-        var css = "$top"
-
-        if ( right != top || bottom != top || left != right ) {
-            css += " $right"
-        }
-
-        if ( bottom != top || left != right ) {
-            css += " $bottom"
-        }
-
-        if ( left != right ) {
-            css += " $left"
-        }
-
-        setProperty("margin", css)
-
-    }
-
-    fun margin(top: Percentage, right: Percentage = top, bottom: Percentage = top, left: Percentage = right) {
-
-        var css = "$top"
-
-        if ( right != top || bottom != top || left != right ) {
-            css += " $right"
-        }
-
-        if ( bottom != top || left != right ) {
-            css += " $bottom"
-        }
-
-        if ( left != right ) {
-            css += " $left"
-        }
-
-        setProperty("margin", css)
-
-    }
+    fun margin(top: Percentage, right: Percentage = top, bottom: Percentage = top, left: Percentage = right) =
+        setBoxProperty("margin", top, right, bottom, left)
 
     fun margin(value: EAutoOption) =
-        setProperty("margin", value.toCssString())
+        setProperty("margin", "$value")
 
     fun marginBottom(value: Length) =
         setProperty("margin-bottom", "$value")
@@ -481,7 +370,7 @@ class Style {
         setProperty("margin-bottom", "$value")
 
     fun marginBottom(value: EAutoOption) =
-        setProperty("margin-bottom", value.toCssString())
+        setProperty("margin-bottom", "$value")
 
     fun marginLeft(value: Length) =
         setProperty("margin-left", "$value")
@@ -490,7 +379,7 @@ class Style {
         setProperty("margin-left", "$value")
 
     fun marginLeft(value: EAutoOption) =
-        setProperty("margin-left", value.toCssString())
+        setProperty("margin-left", "$value")
 
     fun marginRight(value: Length) =
         setProperty("margin-right", "$value")
@@ -499,7 +388,7 @@ class Style {
         setProperty("margin-right", "$value")
 
     fun marginRight(value: EAutoOption) =
-        setProperty("margin-right", value.toCssString())
+        setProperty("margin-right", "$value")
 
     fun marginTop(value: Length) =
         setProperty("margin-top", "$value")
@@ -508,7 +397,7 @@ class Style {
         setProperty("margin-top", "$value")
 
     fun marginTop(value: EAutoOption) =
-        setProperty("margin-top", value.toCssString())
+        setProperty("margin-top", "$value")
 
     fun maxHeight(value: Length) =
         setProperty("max-height", "$value")
@@ -517,7 +406,7 @@ class Style {
         setProperty("max-height", "$value")
 
     fun maxHeight(value: ENoneOption) =
-        setProperty("max-height", value.toCssString())
+        setProperty("max-height", "$value")
 
     fun maxWidth(value: Length) =
         setProperty("max-width", "$value")
@@ -526,7 +415,7 @@ class Style {
         setProperty("max-width", "$value")
 
     fun maxWidth(value: ENoneOption) =
-        setProperty("max-width", value.toCssString())
+        setProperty("max-width", "$value")
 
     fun minHeight(value: Length) =
         setProperty("min-height", "$value")
@@ -540,59 +429,47 @@ class Style {
     fun minWidth(value: Percentage) =
         setProperty("min-width", "$value")
 
-    fun opacity(value:Float) {
-
+    fun opacity(value: Float) =
         when {
-            value <= 0 -> setProperty("opacity","0")
-            value >= 1 -> setProperty("opacity","1")
+            value <= 0 -> setProperty("opacity", "0")
+            value >= 1 -> setProperty("opacity", "1")
             else       -> setProperty("opacity", makeDecimalString(value))
         }
-
-    }
 
     fun orphans(value: Int) {
         require(value > 0) { "CSS orphans property must be greater than zero." }
         setProperty("orphans", "$value")
     }
 
-    fun outline(color: Color, style: EBorderStyleOption, width:ELineWidthOption) =
-        setProperty("outline","$color " + style.toCssString() + " " + width.toCssString())
+    fun outline(color: Color, style: EBorderStyleOption, width: ELineWidthOption) =
+        setProperty("outline", "$color $style $width")
 
-    fun outline(color: EOutlineColorOption, style: EBorderStyleOption, width:ELineWidthOption) =
-        setProperty("outline",color.toCssString() + " " + style.toCssString() + " " + width.toCssString())
+    fun outline(color: EOutlineColorOption, style: EBorderStyleOption, width: ELineWidthOption) =
+        setProperty("outline", "$color $style $width")
 
-    fun outline(color: Color, style: EBorderStyleOption, width:Length) =
-        setProperty("outline","$color " + style.toCssString() + " $width")
+    fun outline(color: Color, style: EBorderStyleOption, width: Length) =
+        setProperty("outline", "$color $style $width")
 
-    fun outline(color: EOutlineColorOption, style: EBorderStyleOption, width:Length) =
-        setProperty("outline",color.toCssString() + " " + style.toCssString() + " $width")
+    fun outline(color: EOutlineColorOption, style: EBorderStyleOption, width: Length) =
+        setProperty("outline", "$color $style $width")
 
     fun outlineColor(value: Color) =
         setProperty("outline-color", "$value")
 
     fun outlineColor(value: EOutlineColorOption) =
-        setProperty("outline-color", value.toCssString())
+        setProperty("outline-color", "$value")
 
     fun outlineStyle(value: EBorderStyleOption) =
         setProperty("outline-style", "$value")
 
     fun outlineWidth(value: ELineWidthOption) =
-        setProperty("outline-width", value.toCssString())
+        setProperty("outline-width", "$value")
 
     fun outlineWidth(value: Length) =
         setProperty("outline-width", "$value")
 
-    fun overflow(x: EOverflowOption, y: EOverflowOption = x) {
-
-        var css = x.toCssString()
-
-        if ( y != x ) {
-            css += " " + y.toCssString()
-        }
-
-        setProperty("overflow", css)
-
-    }
+    fun overflow(x: EOverflowOption, y: EOverflowOption = x) =
+        setXyProperty("overflow", x, y)
 
     fun overflowX(value: EOverflowOption) =
         setProperty("overflow-x", "$value")
@@ -600,45 +477,11 @@ class Style {
     fun overflowY(value: EOverflowOption) =
         setProperty("overflow-y", "$value")
 
-    fun padding(top: Length, right: Length = top, bottom: Length = top, left: Length = right) {
+    fun padding(top: Length, right: Length = top, bottom: Length = top, left: Length = right) =
+        setBoxProperty("padding", top, right, bottom, left)
 
-        var css = "$top"
-
-        if ( right != top || bottom != top || left != right ) {
-            css += " $right"
-        }
-
-        if ( bottom != top || left != right ) {
-            css += " $bottom"
-        }
-
-        if ( left != right ) {
-            css += " $left"
-        }
-
-        setProperty("padding", css)
-
-    }
-
-    fun padding(top: Percentage, right: Percentage = top, bottom: Percentage = top, left: Percentage = right) {
-
-        var css = "$top"
-
-        if ( right != top || bottom != top || left != right ) {
-            css += " $right"
-        }
-
-        if ( bottom != top || left != right ) {
-            css += " $bottom"
-        }
-
-        if ( left != right ) {
-            css += " $left"
-        }
-
-        setProperty("padding", css)
-
-    }
+    fun padding(top: Percentage, right: Percentage = top, bottom: Percentage = top, left: Percentage = right) =
+        setBoxProperty("padding", top, right, bottom, left)
 
     fun paddingBottom(value: Length) =
         setProperty("padding-bottom", "$value")
@@ -665,21 +508,21 @@ class Style {
         setProperty("padding-top", "$value")
 
     fun pageBreakAfter(value: EPageBreakOption) =
-        setProperty("page-break-after", value.toCssString())
+        setProperty("page-break-after", "$value")
 
     fun pageBreakBefore(value: EPageBreakOption) =
-        setProperty("page-break-before", value.toCssString())
+        setProperty("page-break-before", "$value")
 
     fun pageBreakInside(value: EPageBreakInsideOption) =
-        setProperty("page-break-inside", value.toCssString())
+        setProperty("page-break-inside", "$value")
 
     fun position(value: EPositionOption) =
-        setProperty("position", value.toCssString())
+        setProperty("position", "$value")
 
     // TODO: quotes
 
     fun resize(value: EResizeOption) =
-        setProperty("resize", value.toCssString())
+        setProperty("resize", "$value")
 
     fun right(value: Length) =
         setProperty("right", "$value")
@@ -688,28 +531,60 @@ class Style {
         setProperty("right", "$value")
 
     fun right(value: EAutoOption) =
-        setProperty("right", value.toCssString())
+        setProperty("right", "$value")
 
-    private fun setBorderProperty(key: String, width: String?, style: EBorderStyleOption?, color: Color?) {
+    private fun <T> setBorderProperty(key: String, width: T?, style: EBorderStyleOption?, color: Color?) {
 
         var css = "$width"
 
-        if ( style != null ) {
-            css += " " + style.toCssString()
+        if (style != null) {
+            css += " $style"
         }
 
-        if ( color != null ) {
+        if (color != null) {
             css += " $color"
         }
 
-        require( css.isNotEmpty() ) { "Specify at least one non-null parameter for $key." }
+        require(css.isNotEmpty()) { "Specify at least one non-null parameter for $key." }
 
         setProperty(key, css.trim())
 
     }
 
+    private fun <T> setBoxProperty(key: String, top: T, right: T = top, bottom: T = top, left: T = right) {
+
+        var css = "$top"
+
+        if (right != top || bottom != top || left != right) {
+            css += " $right"
+        }
+
+        if (bottom != top || left != right) {
+            css += " $bottom"
+        }
+
+        if (left != right) {
+            css += " $left"
+        }
+
+        setProperty(key, css)
+
+    }
+
     fun setProperty(key: String, value: String) {
         properties.add("$key: $value")
+    }
+
+    private fun <T> setXyProperty(key: String, x: T, y: T = x) {
+
+        var css = "$x"
+
+        if (x != y) {
+            css += " $y"
+        }
+
+        setProperty(key, css)
+
     }
 
     private fun setStringProperty(key: String, value: String) {
@@ -720,16 +595,16 @@ class Style {
     }
 
     fun tableLayout(value: ETableLayoutOption) =
-        setProperty("table-layout", value.toCssString())
+        setProperty("table-layout", "$value")
 
     fun textAlign(value: ETextAlignOption) =
-        setProperty("text-align", value.toCssString())
+        setProperty("text-align", "$value")
 
     fun textDecoration(value: ENoneOption) =
-        setProperty("text-decoration", value.toCssString())
+        setProperty("text-decoration", "$value")
 
     fun textDecoration(vararg values: ETextDecorationOption) {
-        val css = values.map { v -> v.toCssString() }.joinToString(" ")
+        val css = values.map { v -> v.toString() }.joinToString(" ")
         setProperty("text-decoration", css)
     }
 
@@ -740,13 +615,13 @@ class Style {
         setProperty("text-indent", "$value")
 
     fun textOverflow(value: ETextOverflowOption) =
-        setProperty("text-overflow", value.toCssString())
+        setProperty("text-overflow", "$value")
 
     fun textTransform(value: ETextTransformOption) =
-        setProperty("text-transform", value.toCssString())
+        setProperty("text-transform", "$value")
 
-    fun toCssString(indent:String="",whitespace: String = "\n") =
-        properties.map{ p -> indent + p }.joinToString(";" + whitespace) + ";"
+    fun toCssString(indent: String = "", whitespace: String = "\n") =
+        properties.map { p -> indent + p }.joinToString(";" + whitespace) + ";"
 
     fun top(value: Length) =
         setProperty("top", "$value")
@@ -755,13 +630,13 @@ class Style {
         setProperty("top", "$value")
 
     fun top(value: EAutoOption) =
-        setProperty("top", value.toCssString())
+        setProperty("top", "$value")
 
     override fun toString() =
         toCssString("", " ")
 
     fun unicodeBidi(value: EUnicodeBidiOption) =
-        setProperty("unicode-bidi", value.toCssString())
+        setProperty("unicode-bidi", "$value")
 
     fun verticalAlign(value: Length) =
         setProperty("vertical-align", "$value")
@@ -770,16 +645,16 @@ class Style {
         setProperty("vertical-align", "$value")
 
     fun verticalAlign(value: EAlignmentBaselineOption) =
-        setProperty("vertical-align", value.toCssString())
+        setProperty("vertical-align", "$value")
 
     fun verticalAlign(value: EBaselineShiftOption) =
-        setProperty("vertical-align", value.toCssString())
+        setProperty("vertical-align", "$value")
 
     fun visibility(value: EVisibilityOption) =
-        setProperty("visibility", value.toCssString())
+        setProperty("visibility", "$value")
 
     fun whiteSpace(value: EWhiteSpaceOption) =
-        setProperty("white-space", value.toCssString())
+        setProperty("white-space", "$value")
 
     fun widows(value: Int) {
         require(value > 0) { "CSS widows property must be greater than zero." }
@@ -793,7 +668,7 @@ class Style {
         setProperty("width", "$value")
 
     fun width(value: EAutoOption) =
-        setProperty("width", value.toCssString())
+        setProperty("width", "$value")
 
     fun wordSpacing(value: Length) =
         setProperty("word-spacing", "$value")
@@ -802,13 +677,13 @@ class Style {
         setProperty("word-spacing", "$value")
 
     fun wordSpacing(value: ENormalOption) =
-        setProperty("word-spacing", value.toCssString())
+        setProperty("word-spacing", "$value")
 
     fun zIndex(value: Int) =
         setProperty("z-index", "$value")
 
     fun zIndex(value: EAutoOption) =
-        setProperty("z-index", value.toCssString())
+        setProperty("z-index", "$value")
 
 }
 

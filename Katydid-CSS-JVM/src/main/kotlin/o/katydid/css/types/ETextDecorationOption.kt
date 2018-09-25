@@ -26,7 +26,7 @@ enum class ETextDecorationOption(
     ////
 
     /** @return the CSS attribute text for this text decoration option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

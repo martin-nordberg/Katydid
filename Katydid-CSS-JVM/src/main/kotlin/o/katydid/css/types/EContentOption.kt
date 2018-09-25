@@ -32,7 +32,7 @@ enum class EContentOption(
     ////
 
     /** @return the CSS attribute text for this content option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

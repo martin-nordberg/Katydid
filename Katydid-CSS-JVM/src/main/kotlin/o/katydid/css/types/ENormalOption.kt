@@ -21,7 +21,7 @@ enum class ENormalOption(
     ////
 
     /** @return the CSS attribute text for this option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

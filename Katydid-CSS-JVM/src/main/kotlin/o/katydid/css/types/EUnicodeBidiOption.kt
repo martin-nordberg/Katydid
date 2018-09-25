@@ -32,7 +32,7 @@ enum class EUnicodeBidiOption(
     ////
 
     /** @return the CSS attribute text for this unicode-bidi option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////

@@ -50,7 +50,7 @@ enum class EListStyleTypeOption(
     ////
 
     /** @return the CSS attribute text for this list style type option. */
-    fun toCssString() =
+    override fun toString() =
         css
 
     ////
