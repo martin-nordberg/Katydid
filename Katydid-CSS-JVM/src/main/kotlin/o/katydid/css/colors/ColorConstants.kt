@@ -162,4 +162,11 @@ val yellowgreen : Color = RgbColor(154, 205, 50, 1f, "yellowgreen")
 
 //---------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Call this function to initialize the color names before first use if they are wanted even when not
+ * referenced directly.
+ */
+fun useCssColorNames() {}
+
+//---------------------------------------------------------------------------------------------------------------------
 

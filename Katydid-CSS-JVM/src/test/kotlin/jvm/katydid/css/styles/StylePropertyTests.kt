@@ -22,9 +22,10 @@ import o.katydid.css.types.EBorderWidthOption.*
 import o.katydid.css.types.EBoxSizingOption.borderBox
 import o.katydid.css.types.EBoxSizingOption.contentBox
 import o.katydid.css.types.EDisplayOption.*
-import o.katydid.css.types.EOutlineColorOption.*
+import o.katydid.css.types.EOutlineColorOption.invert
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 @Suppress("RemoveRedundantBackticks")
 class StylePropertyTests {
@@ -534,6 +535,13 @@ class StylePropertyTests {
     }
 
     @Test
+    fun `Arbitrary properties convert to correct CSS`() {
+
+        checkStyle("not-yet-invented: 7px;") { setProperty("not-yet-invented",7.px.toString()) }
+
+    }
+
+    @Test
     fun `Size style properties convert to correct CSS`() {
 
         checkStyle("height: 100px;") { height(100.px) }
@@ -599,6 +607,87 @@ class StylePropertyTests {
         checkStyle("text-transform: lowercase;") { textTransform(ETextTransformOption.lowercase) }
         checkStyle("text-transform: none;") { textTransform(ETextTransformOption.none) }
         checkStyle("text-transform: uppercase;") { textTransform(ETextTransformOption.uppercase) }
+
+    }
+
+    @Test
+    fun `Unicode bidirectional properties convert to correct CSS`() {
+
+        checkStyle("unicode-bidi: bidi-override;") { unicodeBidi(EUnicodeBidiOption.bidiOverride) }
+        checkStyle("unicode-bidi: embed;") { unicodeBidi(EUnicodeBidiOption.embed) }
+        checkStyle("unicode-bidi: normal;") { unicodeBidi(EUnicodeBidiOption.normal) }
+
+    }
+
+    @Test
+    fun `Vertical alignment properties convert to correct CSS`() {
+
+        checkStyle("vertical-align: 4px;") { verticalAlign(4.px) }
+        checkStyle("vertical-align: 4%;") { verticalAlign(4.percent) }
+        checkStyle("vertical-align: alphabetic;") { verticalAlign(EAlignmentBaselineOption.alphabetic) }
+        checkStyle("vertical-align: baseline;") { verticalAlign(EAlignmentBaselineOption.baseline) }
+        checkStyle("vertical-align: bottom;") { verticalAlign(EAlignmentBaselineOption.bottom) }
+        checkStyle("vertical-align: center;") { verticalAlign(EAlignmentBaselineOption.center) }
+        checkStyle("vertical-align: central;") { verticalAlign(EAlignmentBaselineOption.central) }
+        checkStyle("vertical-align: ideographic;") { verticalAlign(EAlignmentBaselineOption.ideographic) }
+        checkStyle("vertical-align: mathematical;") { verticalAlign(EAlignmentBaselineOption.mathematical) }
+        checkStyle("vertical-align: middle;") { verticalAlign(EAlignmentBaselineOption.middle) }
+        checkStyle("vertical-align: text-bottom;") { verticalAlign(EAlignmentBaselineOption.textBottom) }
+        checkStyle("vertical-align: text-top;") { verticalAlign(EAlignmentBaselineOption.textTop) }
+        checkStyle("vertical-align: top;") { verticalAlign(EAlignmentBaselineOption.top) }
+        checkStyle("vertical-align: sub;") { verticalAlign(EBaselineShiftOption.sub) }
+        checkStyle("vertical-align: super;") { verticalAlign(EBaselineShiftOption.`super`) }
+
+    }
+
+    @Test
+    fun `Visibility properties convert to correct CSS`() {
+
+        checkStyle("visibility: collapse;") { visibility(EVisibilityOption.collapse) }
+        checkStyle("visibility: hidden;") { visibility(EVisibilityOption.hidden) }
+        checkStyle("visibility: visible;") { visibility(EVisibilityOption.visible) }
+
+    }
+
+    @Test
+    fun `White space properties convert to correct CSS`() {
+
+        checkStyle("white-space: break-spaces;") { whiteSpace(EWhiteSpaceOption.breakSpaces) }
+        checkStyle("white-space: normal;") { whiteSpace(EWhiteSpaceOption.normal) }
+        checkStyle("white-space: nowrap;") { whiteSpace(EWhiteSpaceOption.nowrap) }
+        checkStyle("white-space: pre;") { whiteSpace(EWhiteSpaceOption.pre) }
+        checkStyle("white-space: pre-line;") { whiteSpace(EWhiteSpaceOption.preLine) }
+        checkStyle("white-space: pre-wrap;") { whiteSpace(EWhiteSpaceOption.preWrap) }
+
+    }
+
+    @Test
+    fun `Widows and orphans properties convert to correct CSS`() {
+
+        checkStyle("orphans: 3;") { orphans(3) }
+        checkStyle("widows: 2;") { widows(2) }
+
+        assertFailsWith(IllegalArgumentException::class) { checkStyle("throws") { orphans(0) } }
+        assertFailsWith(IllegalArgumentException::class) { checkStyle("throws") { orphans(-1) } }
+        assertFailsWith(IllegalArgumentException::class) { checkStyle("throws") { widows(0) } }
+        assertFailsWith(IllegalArgumentException::class) { checkStyle("throws") { widows(-1) } }
+
+    }
+
+    @Test
+    fun `Word spacing properties convert to correct CSS`() {
+
+        checkStyle("word-spacing: 4px;") { wordSpacing(4.px) }
+        checkStyle("word-spacing: 4%;") { wordSpacing(4.percent) }
+        checkStyle("word-spacing: normal;") { wordSpacing(ENormalOption.normal) }
+
+    }
+
+    @Test
+    fun `Z index properties convert to correct CSS`() {
+
+        checkStyle("z-index: 2;") { zIndex(2) }
+        checkStyle("z-index: auto;") { zIndex(auto) }
 
     }
 

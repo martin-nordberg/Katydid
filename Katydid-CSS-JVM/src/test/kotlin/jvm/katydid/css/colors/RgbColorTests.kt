@@ -49,6 +49,8 @@ class RgbColorTests {
     @Test
     fun `Unnamed colors convert to valid CSS color names when relevant`() {
 
+        useCssColorNames()
+
         assertColorName("lemonchiffon", rgb(255, 250, 205))
         assertColorName("lime", rgb(0, 255, 0))
         assertColorName("palegoldenrod", rgb(238, 232, 170))

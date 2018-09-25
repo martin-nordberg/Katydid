@@ -5,6 +5,9 @@
 
 package js.katydid.samples.sudokusolver
 
+import o.katydid.css.measurements.px
+import o.katydid.css.styles.style
+import o.katydid.css.types.EFontWeightOption.bold
 import o.katydid.events.eventhandling.onchange
 import o.katydid.events.eventhandling.onclick
 import o.katydid.vdom.builders.KatydidFlowContentBuilder
@@ -19,7 +22,9 @@ fun viewSudokuSolver(applicationState: SudokuSolverAppState): KatydidFlowContent
     {
 
         // This top level element replaces the "#app" div in sudokusolver.html.
-        main("#sudoku-solver-app", style = "margin-left: 30px") {
+        main("#sudoku-solver-app") {
+
+            style { marginLeft(30.px) }
 
             h1 {
                 text("Sudoku Solver")
@@ -110,7 +115,8 @@ private fun KatydidFlowContentBuilder<SudokuSolverMsg>.board(
 
     section("#board") {
 
-        span(style = "font-weight: bold") {
+        span {
+            style { fontWeight(bold) }
             text("Board")
         }
 
@@ -228,7 +234,9 @@ private fun KatydidFlowContentBuilder<SudokuSolverMsg>.changes(
     applicationState: SudokuSolverAppState
 ) {
 
-    section("#changes", style = "margin-left: 30px") {
+    section("#changes") {
+
+        style { marginLeft(30.px) }
 
         table(".changes") {
 
@@ -301,7 +309,8 @@ private fun KatydidFlowContentBuilder<SudokuSolverMsg>.notes() {
 
     section("#notes") {
 
-        span(style = "font-weight: bold") {
+        span {
+            style { fontWeight(bold) }
             text("Notes")
         }
 
@@ -334,7 +343,8 @@ private fun KatydidFlowContentBuilder<SudokuSolverMsg>.settings(
 
     section("#settings") {
 
-        span(style = "font-weight: bold") {
+        span {
+            style { fontWeight(bold) }
             text("Settings")
         }
 
@@ -367,9 +377,10 @@ private fun KatydidFlowContentBuilder<SudokuSolverMsg>.settings(
                     "#is-x-sudoku",
                     checked = applicationState.settings.isXSudoku,
                     name = "is-x-sudoku",
-                    style = "margin-left:15px;",
                     value = "true"
                 ) {
+
+                    style { marginLeft(15.px) }
 
                     onchange { event ->
                         val newValue = event.getTargetAttribute<String>("value").toBoolean()

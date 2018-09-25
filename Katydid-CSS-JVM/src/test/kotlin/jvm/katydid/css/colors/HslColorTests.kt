@@ -5,9 +5,7 @@
 
 package jvm.katydid.css.colors
 
-import o.katydid.css.colors.Color
-import o.katydid.css.colors.hsl
-import o.katydid.css.colors.hsla
+import o.katydid.css.colors.*
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -28,6 +26,8 @@ class HslColorTests {
     @Test
     fun `HSL colors convert to name strings when relevant`() {
 
+        useCssColorNames()
+
         assertColorName("black", hsl(0, 0f, 0f))
         assertColorName("white", hsl(0, 0f, 1f))
         assertColorName("red", hsl(0, 1f, 0.5f))
@@ -43,6 +43,8 @@ class HslColorTests {
     @Test
     fun `HSL colors convert to RGB`() {
 
+        useCssColorNames()
+
         assertColorName("black", hsl(0, 0f, 0f).toRgbColor())
         assertColorName("white", hsl(0, 0f, 1f).toRgbColor())
         assertColorName("red", hsl(0, 1f, 0.5f).toRgbColor())
@@ -57,6 +59,8 @@ class HslColorTests {
 
     @Test
     fun `HSL hues are modulo 360`() {
+
+        useCssColorNames()
 
         assertColorName("hsl(120,1,0.6)", hsl(480, 1f, 0.6f))
         assertColorName("hsl(240,1,0.6)", hsl(600, 1f, 0.6f))

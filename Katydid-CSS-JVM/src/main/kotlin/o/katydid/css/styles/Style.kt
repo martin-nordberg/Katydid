@@ -18,6 +18,15 @@ class Style {
 
     private val properties = mutableListOf<String>()
 
+    /** Funky side-effecting getter actually sets the last used property to be !important. */
+    val important: Unit
+        get() {
+            require(properties.size > 0) { "Set a property before making it important." }
+            require(!properties[properties.size - 1].endsWith("!important")) { "Last property already set to important." }
+
+            properties[properties.size - 1] += " !important"
+        }
+
     ////
 
     // TODO: background
@@ -290,13 +299,9 @@ class Style {
     fun height(value: EAutoOption) =
         setProperty("height", value.toCssString())
 
-    /** Funky side-effecting getter actually sets the last used property to be !important. */
-    val important: Unit
-        get() {
-            require(properties.size > 0) { "Set a property before making it important." }
-            require(!properties[properties.size - 1].endsWith("!important")) { "Last property already set to important." }
-            properties[properties.size - 1] += " !important"
-        }
+    fun inherit(key: String) {
+        properties.add("$key: inherit")
+    }
 
     fun left(value: Length) =
         setProperty("left", "$value")
@@ -465,19 +470,18 @@ class Style {
 
     fun opacity(value:Float) {
 
-        if ( value <= 0 ) {
-            setProperty("opacity","0")
-        }
-        else if ( value >= 1 ) {
-            setProperty("opacity","1")
-        }
-        else {
-            setProperty("opacity", makeDecimalString(value))
+        when {
+            value <= 0 -> setProperty("opacity","0")
+            value >= 1 -> setProperty("opacity","1")
+            else       -> setProperty("opacity", makeDecimalString(value))
         }
 
     }
 
-    // TODO: orphans
+    fun orphans(value: Int) {
+        require(value > 0) { "CSS orphans property must be greater than zero." }
+        setProperty("orphans", "$value")
+    }
 
     fun outline(color: Color, style: EBorderStyleOption, width:EBorderWidthOption) =
         setProperty("outline","$color " + style.toCssString() + " " + width.toCssString())
@@ -599,6 +603,17 @@ class Style {
     fun right(value: EAutoOption) =
         setProperty("right", value.toCssString())
 
+    fun setProperty(key: String, value: String) {
+        properties.add("$key: $value")
+    }
+
+    private fun setStringProperty(key: String, value: String) {
+        var cssValue = value.replace("\"", "\\\"")
+        cssValue = cssValue.replace("\n", "\\A")
+        // TODO: probably more characters worth escaping
+        setProperty(key, "\"$cssValue\"")
+    }
+
     fun tableLayout(value: ETableLayoutOption) =
         setProperty("table-layout", value.toCssString())
 
@@ -625,7 +640,8 @@ class Style {
     fun textTransform(value: ETextTransformOption) =
         setProperty("text-transform", value.toCssString())
 
-
+    fun toCssString(whitespace: String = "\n") =
+        properties.joinToString(";" + whitespace) + ";"
 
     fun top(value: Length) =
         setProperty("top", "$value")
@@ -636,7 +652,34 @@ class Style {
     fun top(value: EAutoOption) =
         setProperty("top", value.toCssString())
 
-    // TODO: widows
+    override fun toString() =
+        toCssString(" ")
+
+    fun unicodeBidi(value: EUnicodeBidiOption) =
+        setProperty("unicode-bidi", value.toCssString())
+
+    fun verticalAlign(value: Length) =
+        setProperty("vertical-align", "$value")
+
+    fun verticalAlign(value: Percentage) =
+        setProperty("vertical-align", "$value")
+
+    fun verticalAlign(value: EAlignmentBaselineOption) =
+        setProperty("vertical-align", value.toCssString())
+
+    fun verticalAlign(value: EBaselineShiftOption) =
+        setProperty("vertical-align", value.toCssString())
+
+    fun visibility(value: EVisibilityOption) =
+        setProperty("visibility", value.toCssString())
+
+    fun whiteSpace(value: EWhiteSpaceOption) =
+        setProperty("white-space", value.toCssString())
+
+    fun widows(value: Int) {
+        require(value > 0) { "CSS widows property must be greater than zero." }
+        setProperty("widows", "$value")
+    }
 
     fun width(value: Length) =
         setProperty("width", "$value")
@@ -647,28 +690,20 @@ class Style {
     fun width(value: EAutoOption) =
         setProperty("width", value.toCssString())
 
-    ////
+    fun wordSpacing(value: Length) =
+        setProperty("word-spacing", "$value")
 
-    fun inherit(key: String) {
-        properties.add("$key: inherit")
-    }
+    fun wordSpacing(value: Percentage) =
+        setProperty("word-spacing", "$value")
 
-    fun setProperty(key: String, value: String) {
-        properties.add("$key: $value")
-    }
+    fun wordSpacing(value: ENormalOption) =
+        setProperty("word-spacing", value.toCssString())
 
-    private fun setStringProperty(key: String, value: String) {
-        var cssValue = value.replace("\"", "\\\"")
-        cssValue = cssValue.replace("\n", "\\A")
-        // TODO: probably more characters worth escaping
-        setProperty(key, "\"$cssValue\"")
-    }
+    fun zIndex(value: Int) =
+        setProperty("z-index", "$value")
 
-    fun toCssString(whitespace: String = "\n") =
-        properties.joinToString(";" + whitespace) + ";"
-
-    override fun toString() =
-        toCssString(" ")
+    fun zIndex(value: EAutoOption) =
+        setProperty("z-index", value.toCssString())
 
 }
 

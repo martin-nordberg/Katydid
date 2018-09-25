@@ -149,9 +149,6 @@ internal class RgbColor(
 
             INV_HEX_STRINGS = inv
 
-            // wake up the color names so that they register themselves
-            transparent.toString()
-
         }
 
         ////

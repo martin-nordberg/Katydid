@@ -7,6 +7,8 @@ package js.katydid.samples.greetme
 
 import js.katydid.vdom.api.KatydidApplication
 import js.katydid.vdom.api.runApplication
+import o.katydid.css.measurements.em
+import o.katydid.css.styles.style
 import o.katydid.events.eventhandling.oninput
 import o.katydid.vdom.builders.KatydidFlowContentBuilder
 
@@ -65,9 +67,12 @@ class GreetMeApplication : KatydidApplication<GreetMeAppState, GreetMeMsg> {
 
                 br {}
 
+                // A. style attribute as string
                 form(style = "margin-top:1.5em;") {
 
-                    label(`for` = "name-box", style = "margin-right:1.5em;") {
+                    label(`for` = "name-box") {
+                        // B. style attribute via DSL
+                        style { marginRight(1.5.em) }
                         text("My Name Is:")
                     }
 
