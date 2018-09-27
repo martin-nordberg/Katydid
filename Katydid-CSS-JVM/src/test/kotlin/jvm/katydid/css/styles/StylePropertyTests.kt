@@ -10,19 +10,16 @@ import o.katydid.css.measurements.*
 import o.katydid.css.styles.Style
 import o.katydid.css.styles.style
 import o.katydid.css.types.*
-import o.katydid.css.types.EAutoOption.auto
-import o.katydid.css.types.EBackgroundAttachmentOption.fixed
-import o.katydid.css.types.EBackgroundAttachmentOption.scroll
-import o.katydid.css.types.EBackgroundPositionOption.*
-import o.katydid.css.types.EBackgroundRepeatOption.*
-import o.katydid.css.types.EBorderCollapseOption.collapse
-import o.katydid.css.types.EBorderCollapseOption.separate
-import o.katydid.css.types.EBorderStyleOption.*
-import o.katydid.css.types.ELineWidthOption.*
-import o.katydid.css.types.EBoxSizingOption.borderBox
-import o.katydid.css.types.EBoxSizingOption.contentBox
-import o.katydid.css.types.EDisplayOption.*
-import o.katydid.css.types.EOutlineColorOption.invert
+import o.katydid.css.types.EAuto.auto
+import o.katydid.css.types.EBackgroundPosition.*
+import o.katydid.css.types.EBorderCollapse.collapse
+import o.katydid.css.types.EBorderCollapse.separate
+import o.katydid.css.types.EBoxSizing.borderBox
+import o.katydid.css.types.EBoxSizing.contentBox
+import o.katydid.css.types.EDisplay.*
+import o.katydid.css.types.ELineStyle.*
+import o.katydid.css.types.ELineWidth.*
+import o.katydid.css.types.EOutlineColor.invert
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -42,13 +39,15 @@ class StylePropertyTests {
 
         // TODO: background
 
-        checkStyle("background-attachment: fixed;") { backgroundAttachment(fixed) }
-        checkStyle("background-attachment: scroll;") { backgroundAttachment(scroll) }
+        checkStyle("background-attachment: fixed;") { backgroundAttachment(EAttachment.fixed) }
+        checkStyle("background-attachment: scroll, local;") { backgroundAttachment(EAttachment.scroll, EAttachment.local) }
 
         checkStyle("background-color: aquamarine;") { backgroundColor(aquamarine) }
 
-        checkStyle("background-image: none;") { backgroundImage(ENoneOption.none) }
+        checkStyle("background-image: none;") { backgroundImage(ENone.none) }
         checkStyle("background-image: url(\"http://myimage.jpg\");") { backgroundImage("http://myimage.jpg") }
+        checkStyle("background-image: url(\"images/1.jpg\"), url(\"images/2.jpg\");") { backgroundImage("images/1.jpg", "images/2.jpg") }
+        checkStyle("background-image: url(\"images/1.jpg\"), none;") { backgroundImage("images/1.jpg", "none") }
 
         checkStyle("background-position: center center;") { backgroundPosition(center) }
         checkStyle("background-position: left top;") { backgroundPosition(left, top) }
@@ -57,29 +56,37 @@ class StylePropertyTests {
         checkStyle("background-position: 50% 75%;") { backgroundPosition(50.percent, 75.percent) }
         checkStyle("background-position: 100px center;") { backgroundPosition(100.px) }
         checkStyle("background-position: 10px 20px;") { backgroundPosition(10.px, 20.px) }
+        checkStyle("background-position: left 50% bottom 75%;") { backgroundPosition(left, 50.percent, bottom, 75.percent) }
+        checkStyle("background-position: left 2px bottom -5px;") { backgroundPosition(left, 2.px, bottom, (-5).px) }
 
-        checkStyle("background-repeat: repeat;") { backgroundRepeat(repeat) }
-        checkStyle("background-repeat: repeat-x;") { backgroundRepeat(repeatX) }
-        checkStyle("background-repeat: repeat-y;") { backgroundRepeat(repeatY) }
-        checkStyle("background-repeat: no-repeat;") { backgroundRepeat(noRepeat) }
-
+        checkStyle("background-repeat: repeat;") { backgroundRepeat(ERepeatStyle.repeat) }
+        checkStyle("background-repeat: repeat-x;") { backgroundRepeat(ERepeatStyle.repeatX) }
+        checkStyle("background-repeat: repeat-y;") { backgroundRepeat(ERepeatStyle.repeatY) }
+        checkStyle("background-repeat: no-repeat;") { backgroundRepeat(ERepeatStyle.noRepeat) }
+        checkStyle("background-repeat: round space;") { backgroundRepeat(ERepeatStyle.round, ERepeatStyle.space) }
+        checkStyle("background-repeat: round space, repeat no-repeat;") {
+            backgroundRepeat(Pair(ERepeatStyle.round, ERepeatStyle.space), Pair(ERepeatStyle.repeat, ERepeatStyle.noRepeat))
+        }
+        assertFailsWith<IllegalArgumentException> { checkStyle("throws") { backgroundRepeat(ERepeatStyle.repeatX, ERepeatStyle.repeat) } }
+        assertFailsWith<IllegalArgumentException> { checkStyle("throws") { backgroundRepeat(ERepeatStyle.repeatY, ERepeatStyle.repeat) } }
+        assertFailsWith<IllegalArgumentException> { checkStyle("throws") { backgroundRepeat(Pair(ERepeatStyle.repeatX, ERepeatStyle.repeat)) } }
     }
 
     @Test
     fun `Border style properties convert to correct CSS`() {
 
         checkStyle("border: thin;") { border(thin) }
-        checkStyle("border: 4px dashed green;") { border(4.px,EBorderStyleOption.dashed,green) }
-        checkStyle("border: solid;") { border(EBorderStyleOption.solid) }
+        checkStyle("border: 4px dashed green;") { border(4.px, ELineStyle.dashed, green) }
+        checkStyle("border: solid;") { border(ELineStyle.solid) }
 
         checkStyle("border-bottom: thin dotted mediumslateblue;") { borderBottom(thin, dotted, mediumslateblue) }
         checkStyle("border-bottom: thin;") { borderBottom(thin) }
-        checkStyle("border-bottom: 4px dashed green;") { borderBottom(4.px,EBorderStyleOption.dashed,green) }
-        checkStyle("border-bottom: solid;") { borderBottom(EBorderStyleOption.solid) }
+        checkStyle("border-bottom: 4px dashed green;") { borderBottom(4.px, ELineStyle.dashed, green) }
+        checkStyle("border-bottom: solid;") { borderBottom(ELineStyle.solid) }
 
         checkStyle("border-bottom-color: navajowhite;") { borderBottomColor(navajowhite) }
 
-        checkStyle("border-bottom-style: none;") { borderBottomStyle(EBorderStyleOption.none) }
+        checkStyle("border-bottom-style: none;") { borderBottomStyle(ELineStyle.none) }
         checkStyle("border-bottom-style: hidden;") { borderBottomStyle(hidden) }
         checkStyle("border-bottom-style: dotted;") { borderBottomStyle(dotted) }
         checkStyle("border-bottom-style: dashed;") { borderBottomStyle(dashed) }
@@ -106,8 +113,8 @@ class StylePropertyTests {
 
         checkStyle("border-left: thin dotted mediumslateblue;") { borderLeft(thin, dotted, mediumslateblue) }
         checkStyle("border-left: thin;") { borderLeft(thin) }
-        checkStyle("border-left: 4px dashed green;") { borderLeft(4.px,EBorderStyleOption.dashed,green) }
-        checkStyle("border-left: solid;") { borderLeft(EBorderStyleOption.solid) }
+        checkStyle("border-left: 4px dashed green;") { borderLeft(4.px, ELineStyle.dashed, green) }
+        checkStyle("border-left: solid;") { borderLeft(ELineStyle.solid) }
 
         checkStyle("border-left-color: navajowhite;") { borderLeftColor(navajowhite) }
 
@@ -118,8 +125,8 @@ class StylePropertyTests {
 
         checkStyle("border-right: thin dotted mediumslateblue;") { borderRight(thin, dotted, mediumslateblue) }
         checkStyle("border-right: thin;") { borderRight(thin) }
-        checkStyle("border-right: 4px dashed green;") { borderRight(4.px,EBorderStyleOption.dashed,green) }
-        checkStyle("border-right: solid;") { borderRight(EBorderStyleOption.solid) }
+        checkStyle("border-right: 4px dashed green;") { borderRight(4.px, ELineStyle.dashed, green) }
+        checkStyle("border-right: solid;") { borderRight(ELineStyle.solid) }
 
         checkStyle("border-right-color: navajowhite;") { borderRightColor(navajowhite) }
 
@@ -139,8 +146,8 @@ class StylePropertyTests {
 
         checkStyle("border-top: thin dotted mediumslateblue;") { borderTop(thin, dotted, mediumslateblue) }
         checkStyle("border-top: thin;") { borderTop(thin) }
-        checkStyle("border-top: 4px dashed green;") { borderTop(4.px,EBorderStyleOption.dashed,green) }
-        checkStyle("border-top: solid;") { borderTop(EBorderStyleOption.solid) }
+        checkStyle("border-top: 4px dashed green;") { borderTop(4.px, ELineStyle.dashed, green) }
+        checkStyle("border-top: solid;") { borderTop(ELineStyle.solid) }
 
         checkStyle("border-top-color: navajowhite;") { borderTopColor(navajowhite) }
 
@@ -150,7 +157,7 @@ class StylePropertyTests {
         checkStyle("border-top-width: 4px;") { borderTopWidth(4.px) }
 
         checkStyle("border-width: thick;") { borderWidth(thick) }
-        checkStyle("border-width: thick thin thick medium;") { borderWidth(thick,thin,thick,medium) }
+        checkStyle("border-width: thick thin thick medium;") { borderWidth(thick, thin, thick, medium) }
         checkStyle("border-width: 4px;") { borderWidth(4.px) }
         checkStyle("border-width: 4px 2px;") { borderWidth(4.px, 2.px) }
 
@@ -167,8 +174,8 @@ class StylePropertyTests {
     @Test
     fun `Caption side style properties convert to correct CSS`() {
 
-        checkStyle("caption-side: top;") { captionSide(ECaptionSideOption.top) }
-        checkStyle("caption-side: bottom;") { captionSide(ECaptionSideOption.bottom) }
+        checkStyle("caption-side: top;") { captionSide(ECaptionSide.top) }
+        checkStyle("caption-side: bottom;") { captionSide(ECaptionSide.bottom) }
 
     }
 
@@ -183,14 +190,27 @@ class StylePropertyTests {
     @Test
     fun `Clear and float style properties convert to correct CSS`() {
 
-        checkStyle("clear: left;") { clear(EClearOption.left) }
-        checkStyle("clear: right;") { clear(EClearOption.right) }
-        checkStyle("clear: both;") { clear(EClearOption.both) }
-        checkStyle("clear: none;") { clear(EClearOption.none) }
+        checkStyle("clear: block-end;") { clear(EClear.blockEnd) }
+        checkStyle("clear: block-start;") { clear(EClear.blockStart) }
+        checkStyle("clear: both;") { clear(EClear.both) }
+        checkStyle("clear: bottom;") { clear(EClear.bottom) }
+        checkStyle("clear: inline-end;") { clear(EClear.inlineEnd) }
+        checkStyle("clear: inline-start;") { clear(EClear.inlineStart) }
+        checkStyle("clear: left;") { clear(EClear.left) }
+        checkStyle("clear: none;") { clear(EClear.none) }
+        checkStyle("clear: right;") { clear(EClear.right) }
+        checkStyle("clear: top;") { clear(EClear.top) }
 
-        checkStyle("float: left;") { float(EFloatOption.left) }
-        checkStyle("float: right;") { float(EFloatOption.right) }
-        checkStyle("float: none;") { float(EFloatOption.none) }
+        checkStyle("float: block-end;") { float(EFloat.blockEnd) }
+        checkStyle("float: block-start;") { float(EFloat.blockStart) }
+        checkStyle("float: bottom;") { float(EFloat.bottom) }
+        checkStyle("float: inline-end;") { float(EFloat.inlineEnd) }
+        checkStyle("float: inline-start;") { float(EFloat.inlineStart) }
+        checkStyle("float: left;") { float(EFloat.left) }
+        checkStyle("float: none;") { float(EFloat.none) }
+        checkStyle("float: right;") { float(EFloat.right) }
+        checkStyle("float: snap-block;") { float(EFloat.snapBlock) }
+        checkStyle("float: snap-inline;") { float(EFloat.snapInline) }
 
     }
 
@@ -204,12 +224,12 @@ class StylePropertyTests {
     @Test
     fun `Content style properties convert to correct CSS`() {
 
-        checkStyle("content: close-quote;") { content(EContentOption.closeQuote) }
-        checkStyle("content: no-close-quote;") { content(EContentOption.noCloseQuote) }
-        checkStyle("content: no-open-quote;") { content(EContentOption.noOpenQuote) }
-        checkStyle("content: none;") { content(EContentOption.none) }
-        checkStyle("content: normal;") { content(EContentOption.normal) }
-        checkStyle("content: open-quote;") { content(EContentOption.openQuote) }
+        checkStyle("content: close-quote;") { content(EContent.closeQuote) }
+        checkStyle("content: no-close-quote;") { content(EContent.noCloseQuote) }
+        checkStyle("content: no-open-quote;") { content(EContent.noOpenQuote) }
+        checkStyle("content: none;") { content(EContent.none) }
+        checkStyle("content: normal;") { content(EContent.normal) }
+        checkStyle("content: open-quote;") { content(EContent.openQuote) }
         checkStyle("content: \"a \\\"quoted\\\" string\";") { content("a \"quoted\" string") }
         checkStyle("content: url(\"http://somewhere\");") { contentUrl("http://somewhere") }
         checkStyle("content: attr(data-content);") { contentAttr("data-content") }
@@ -219,50 +239,50 @@ class StylePropertyTests {
     @Test
     fun `Cursor style properties convert to correct CSS`() {
 
-        checkStyle("cursor: alias;") { cursor(ECursorOption.alias) }
-        checkStyle("cursor: all-scroll;") { cursor(ECursorOption.allScroll) }
-        checkStyle("cursor: auto;") { cursor(ECursorOption.auto) }
-        checkStyle("cursor: cell;") { cursor(ECursorOption.cell) }
-        checkStyle("cursor: col-resize;") { cursor(ECursorOption.colResize) }
-        checkStyle("cursor: context-menu;") { cursor(ECursorOption.contextMenu) }
-        checkStyle("cursor: copy;") { cursor(ECursorOption.copy) }
-        checkStyle("cursor: crosshair;") { cursor(ECursorOption.crosshair) }
-        checkStyle("cursor: default;") { cursor(ECursorOption.default) }
-        checkStyle("cursor: e-resize;") { cursor(ECursorOption.eResize) }
-        checkStyle("cursor: ew-resize;") { cursor(ECursorOption.ewResize) }
-        checkStyle("cursor: grab;") { cursor(ECursorOption.grab) }
-        checkStyle("cursor: grabbing;") { cursor(ECursorOption.grabbing) }
-        checkStyle("cursor: help;") { cursor(ECursorOption.help) }
-        checkStyle("cursor: move;") { cursor(ECursorOption.move) }
-        checkStyle("cursor: n-resize;") { cursor(ECursorOption.nResize) }
-        checkStyle("cursor: ne-resize;") { cursor(ECursorOption.neResize) }
-        checkStyle("cursor: nesw-resize;") { cursor(ECursorOption.neswResize) }
-        checkStyle("cursor: no-drop;") { cursor(ECursorOption.noDrop) }
-        checkStyle("cursor: none;") { cursor(ECursorOption.none) }
-        checkStyle("cursor: not-allowed;") { cursor(ECursorOption.notAlowed) }
-        checkStyle("cursor: ns-resize;") { cursor(ECursorOption.nsResize) }
-        checkStyle("cursor: nw-resize;") { cursor(ECursorOption.nwResize) }
-        checkStyle("cursor: nwse-resize;") { cursor(ECursorOption.nwseResize) }
-        checkStyle("cursor: pointer;") { cursor(ECursorOption.pointer) }
-        checkStyle("cursor: progress;") { cursor(ECursorOption.progress) }
-        checkStyle("cursor: row-resize;") { cursor(ECursorOption.rowResize) }
-        checkStyle("cursor: s-resize;") { cursor(ECursorOption.sResize) }
-        checkStyle("cursor: se-resize;") { cursor(ECursorOption.seResize) }
-        checkStyle("cursor: sw-resize;") { cursor(ECursorOption.swResize) }
-        checkStyle("cursor: text;") { cursor(ECursorOption.text) }
-        checkStyle("cursor: vertical-text;") { cursor(ECursorOption.verticalText) }
-        checkStyle("cursor: w-resize;") { cursor(ECursorOption.wResize) }
-        checkStyle("cursor: wait;") { cursor(ECursorOption.wait) }
-        checkStyle("cursor: zoom-in;") { cursor(ECursorOption.zoomIn) }
-        checkStyle("cursor: zoom-out;") { cursor(ECursorOption.zoomOut) }
+        checkStyle("cursor: alias;") { cursor(ECursor.alias) }
+        checkStyle("cursor: all-scroll;") { cursor(ECursor.allScroll) }
+        checkStyle("cursor: auto;") { cursor(ECursor.auto) }
+        checkStyle("cursor: cell;") { cursor(ECursor.cell) }
+        checkStyle("cursor: col-resize;") { cursor(ECursor.colResize) }
+        checkStyle("cursor: context-menu;") { cursor(ECursor.contextMenu) }
+        checkStyle("cursor: copy;") { cursor(ECursor.copy) }
+        checkStyle("cursor: crosshair;") { cursor(ECursor.crosshair) }
+        checkStyle("cursor: default;") { cursor(ECursor.default) }
+        checkStyle("cursor: e-resize;") { cursor(ECursor.eResize) }
+        checkStyle("cursor: ew-resize;") { cursor(ECursor.ewResize) }
+        checkStyle("cursor: grab;") { cursor(ECursor.grab) }
+        checkStyle("cursor: grabbing;") { cursor(ECursor.grabbing) }
+        checkStyle("cursor: help;") { cursor(ECursor.help) }
+        checkStyle("cursor: move;") { cursor(ECursor.move) }
+        checkStyle("cursor: n-resize;") { cursor(ECursor.nResize) }
+        checkStyle("cursor: ne-resize;") { cursor(ECursor.neResize) }
+        checkStyle("cursor: nesw-resize;") { cursor(ECursor.neswResize) }
+        checkStyle("cursor: no-drop;") { cursor(ECursor.noDrop) }
+        checkStyle("cursor: none;") { cursor(ECursor.none) }
+        checkStyle("cursor: not-allowed;") { cursor(ECursor.notAlowed) }
+        checkStyle("cursor: ns-resize;") { cursor(ECursor.nsResize) }
+        checkStyle("cursor: nw-resize;") { cursor(ECursor.nwResize) }
+        checkStyle("cursor: nwse-resize;") { cursor(ECursor.nwseResize) }
+        checkStyle("cursor: pointer;") { cursor(ECursor.pointer) }
+        checkStyle("cursor: progress;") { cursor(ECursor.progress) }
+        checkStyle("cursor: row-resize;") { cursor(ECursor.rowResize) }
+        checkStyle("cursor: s-resize;") { cursor(ECursor.sResize) }
+        checkStyle("cursor: se-resize;") { cursor(ECursor.seResize) }
+        checkStyle("cursor: sw-resize;") { cursor(ECursor.swResize) }
+        checkStyle("cursor: text;") { cursor(ECursor.text) }
+        checkStyle("cursor: vertical-text;") { cursor(ECursor.verticalText) }
+        checkStyle("cursor: w-resize;") { cursor(ECursor.wResize) }
+        checkStyle("cursor: wait;") { cursor(ECursor.wait) }
+        checkStyle("cursor: zoom-in;") { cursor(ECursor.zoomIn) }
+        checkStyle("cursor: zoom-out;") { cursor(ECursor.zoomOut) }
 
     }
 
     @Test
     fun `Direction style properties convert to correct CSS`() {
 
-        checkStyle("direction: ltr;") { direction(EDirectionOption.ltr) }
-        checkStyle("direction: rtl;") { direction(EDirectionOption.rtl) }
+        checkStyle("direction: ltr;") { direction(EDirection.ltr) }
+        checkStyle("direction: rtl;") { direction(EDirection.rtl) }
 
     }
 
@@ -283,15 +303,15 @@ class StylePropertyTests {
         checkStyle("display: table-column;") { display(tableColumn) }
         checkStyle("display: table-cell;") { display(tableCell) }
         checkStyle("display: table-caption;") { display(tableCaption) }
-        checkStyle("display: none;") { display(EDisplayOption.none) }
+        checkStyle("display: none;") { display(EDisplay.none) }
 
     }
 
     @Test
     fun `Empty cells style properties convert to correct CSS`() {
 
-        checkStyle("empty-cells: show;") { emptyCells(EEmptyCellsOption.show) }
-        checkStyle("empty-cells: hide;") { emptyCells(EEmptyCellsOption.hide) }
+        checkStyle("empty-cells: show;") { emptyCells(EEmptyCells.show) }
+        checkStyle("empty-cells: hide;") { emptyCells(EEmptyCells.hide) }
 
     }
 
@@ -301,38 +321,43 @@ class StylePropertyTests {
         checkStyle("font-family: arial, helvetica, sans-serif;") { fontFamily("arial", "helvetica", "sans-serif") }
         checkStyle("font-family: \"Courier New\", serif;") { fontFamily("Courier New", "serif") }
 
-        checkStyle("font-size: large;") { fontSize(EFontSizeOption.large) }
-        checkStyle("font-size: larger;") { fontSize(EFontSizeOption.larger) }
-        checkStyle("font-size: medium;") { fontSize(EFontSizeOption.medium) }
-        checkStyle("font-size: small;") { fontSize(EFontSizeOption.small) }
-        checkStyle("font-size: smaller;") { fontSize(EFontSizeOption.smaller) }
-        checkStyle("font-size: x-large;") { fontSize(EFontSizeOption.xLarge) }
-        checkStyle("font-size: x-small;") { fontSize(EFontSizeOption.xSmall) }
-        checkStyle("font-size: xx-large;") { fontSize(EFontSizeOption.xxLarge) }
-        checkStyle("font-size: xx-small;") { fontSize(EFontSizeOption.xxSmall) }
+        checkStyle("font-size: large;") { fontSize(EFontSize.large) }
+        checkStyle("font-size: larger;") { fontSize(EFontSize.larger) }
+        checkStyle("font-size: medium;") { fontSize(EFontSize.medium) }
+        checkStyle("font-size: small;") { fontSize(EFontSize.small) }
+        checkStyle("font-size: smaller;") { fontSize(EFontSize.smaller) }
+        checkStyle("font-size: x-large;") { fontSize(EFontSize.xLarge) }
+        checkStyle("font-size: x-small;") { fontSize(EFontSize.xSmall) }
+        checkStyle("font-size: xx-large;") { fontSize(EFontSize.xxLarge) }
+        checkStyle("font-size: xx-small;") { fontSize(EFontSize.xxSmall) }
         checkStyle("font-size: 14pt;") { fontSize(14.pt) }
         checkStyle("font-size: 90%;") { fontSize(90.percent) }
 
-        checkStyle("font-style: normal;") { fontStyle(EFontStyleOption.normal) }
-        checkStyle("font-style: italic;") { fontStyle(EFontStyleOption.italic) }
-        checkStyle("font-style: oblique;") { fontStyle(EFontStyleOption.oblique) }
+        checkStyle("font-style: normal;") { fontStyle(EFontStyle.normal) }
+        checkStyle("font-style: italic;") { fontStyle(EFontStyle.italic) }
+        checkStyle("font-style: oblique;") { fontStyle(EFontStyle.oblique) }
 
-        checkStyle("font-variant: normal;") { fontVariant(EFontVariantOption.normal) }
-        checkStyle("font-variant: small-caps;") { fontVariant(EFontVariantOption.smallCaps) }
+        checkStyle("font-variant: all-petite-caps;") { fontVariant(EFontVariant.allPetiteCaps) }
+        checkStyle("font-variant: all-small-caps;") { fontVariant(EFontVariant.allSmallCaps) }
+        checkStyle("font-variant: normal;") { fontVariant(EFontVariant.normal) }
+        checkStyle("font-variant: petite-caps;") { fontVariant(EFontVariant.petiteCaps) }
+        checkStyle("font-variant: small-caps;") { fontVariant(EFontVariant.smallCaps) }
+        checkStyle("font-variant: titling-caps;") { fontVariant(EFontVariant.titlingCaps) }
+        checkStyle("font-variant: unicase;") { fontVariant(EFontVariant.unicase) }
 
-        checkStyle("font-weight: bold;") { fontWeight(EFontWeightOption.bold) }
-        checkStyle("font-weight: bolder;") { fontWeight(EFontWeightOption.bolder) }
-        checkStyle("font-weight: lighter;") { fontWeight(EFontWeightOption.lighter) }
-        checkStyle("font-weight: normal;") { fontWeight(EFontWeightOption.normal) }
-        checkStyle("font-weight: 100;") { fontWeight(EFontWeightOption.weight100) }
-        checkStyle("font-weight: 200;") { fontWeight(EFontWeightOption.weight200) }
-        checkStyle("font-weight: 300;") { fontWeight(EFontWeightOption.weight300) }
-        checkStyle("font-weight: 400;") { fontWeight(EFontWeightOption.weight400) }
-        checkStyle("font-weight: 500;") { fontWeight(EFontWeightOption.weight500) }
-        checkStyle("font-weight: 600;") { fontWeight(EFontWeightOption.weight600) }
-        checkStyle("font-weight: 700;") { fontWeight(EFontWeightOption.weight700) }
-        checkStyle("font-weight: 800;") { fontWeight(EFontWeightOption.weight800) }
-        checkStyle("font-weight: 900;") { fontWeight(EFontWeightOption.weight900) }
+        checkStyle("font-weight: bold;") { fontWeight(EFontWeight.bold) }
+        checkStyle("font-weight: bolder;") { fontWeight(EFontWeight.bolder) }
+        checkStyle("font-weight: lighter;") { fontWeight(EFontWeight.lighter) }
+        checkStyle("font-weight: normal;") { fontWeight(EFontWeight.normal) }
+        checkStyle("font-weight: 100;") { fontWeight(EFontWeight.weight100) }
+        checkStyle("font-weight: 200;") { fontWeight(EFontWeight.weight200) }
+        checkStyle("font-weight: 300;") { fontWeight(EFontWeight.weight300) }
+        checkStyle("font-weight: 400;") { fontWeight(EFontWeight.weight400) }
+        checkStyle("font-weight: 500;") { fontWeight(EFontWeight.weight500) }
+        checkStyle("font-weight: 600;") { fontWeight(EFontWeight.weight600) }
+        checkStyle("font-weight: 700;") { fontWeight(EFontWeight.weight700) }
+        checkStyle("font-weight: 800;") { fontWeight(EFontWeight.weight800) }
+        checkStyle("font-weight: 900;") { fontWeight(EFontWeight.weight900) }
 
     }
 
@@ -340,9 +365,9 @@ class StylePropertyTests {
     fun `Letter spacing and line height style properties convert to correct CSS`() {
 
         checkStyle("letter-spacing: 0.05em;") { letterSpacing(0.05.em) }
-        checkStyle("letter-spacing: normal;") { letterSpacing(ENormalOption.normal) }
+        checkStyle("letter-spacing: normal;") { letterSpacing(ENormal.normal) }
 
-        checkStyle("line-height: normal;") { lineHeight(ENormalOption.normal) }
+        checkStyle("line-height: normal;") { lineHeight(ENormal.normal) }
         checkStyle("line-height: 1.2em;") { lineHeight(1.2.em) }
         checkStyle("line-height: 120%;") { lineHeight(120.percent) }
         checkStyle("line-height: 1.2;") { lineHeight(1.2f) }
@@ -352,30 +377,30 @@ class StylePropertyTests {
     @Test
     fun `List style properties convert to correct CSS`() {
 
-        checkStyle("list-style-image: none;") { listStyleImage(ENoneOption.none) }
+        checkStyle("list-style-image: none;") { listStyleImage(ENone.none) }
         checkStyle("list-style-image: url(\"http://myimage.jpg\");") { listStyleImage("http://myimage.jpg") }
 
-        checkStyle("list-style-position: inside;") { listStylePosition(EListStylePositionOption.inside) }
-        checkStyle("list-style-position: outside;") { listStylePosition(EListStylePositionOption.outside) }
+        checkStyle("list-style-position: inside;") { listStylePosition(EListStylePosition.inside) }
+        checkStyle("list-style-position: outside;") { listStylePosition(EListStylePosition.outside) }
 
-        checkStyle("list-style-type: armenian;") { listStyleType(EListStyleTypeOption.armenian) }
-        checkStyle("list-style-type: circle;") { listStyleType(EListStyleTypeOption.circle) }
-        checkStyle("list-style-type: decimal;") { listStyleType(EListStyleTypeOption.decimal) }
-        checkStyle("list-style-type: decimal-leading-zero;") { listStyleType(EListStyleTypeOption.decimalLeadingZero) }
-        checkStyle("list-style-type: disc;") { listStyleType(EListStyleTypeOption.disc) }
-        checkStyle("list-style-type: georgian;") { listStyleType(EListStyleTypeOption.georgian) }
-        checkStyle("list-style-type: lower-greek;") { listStyleType(EListStyleTypeOption.lowerGreek) }
-        checkStyle("list-style-type: lower-latin;") { listStyleType(EListStyleTypeOption.lowerLatin) }
-        checkStyle("list-style-type: lower-roman;") { listStyleType(EListStyleTypeOption.lowerRoman) }
-        checkStyle("list-style-type: square;") { listStyleType(EListStyleTypeOption.square) }
-        checkStyle("list-style-type: upper-latin;") { listStyleType(EListStyleTypeOption.upperLatin) }
-        checkStyle("list-style-type: upper-roman;") { listStyleType(EListStyleTypeOption.upperRoman) }
-        checkStyle("list-style-type: lower-latin;") { listStyleType(EListStyleTypeOption.lowerAlpha) }
-        checkStyle("list-style-type: upper-latin;") { listStyleType(EListStyleTypeOption.upperAlpha) }
+        checkStyle("list-style-type: armenian;") { listStyleType(EListStyleType.armenian) }
+        checkStyle("list-style-type: circle;") { listStyleType(EListStyleType.circle) }
+        checkStyle("list-style-type: decimal;") { listStyleType(EListStyleType.decimal) }
+        checkStyle("list-style-type: decimal-leading-zero;") { listStyleType(EListStyleType.decimalLeadingZero) }
+        checkStyle("list-style-type: disc;") { listStyleType(EListStyleType.disc) }
+        checkStyle("list-style-type: georgian;") { listStyleType(EListStyleType.georgian) }
+        checkStyle("list-style-type: lower-greek;") { listStyleType(EListStyleType.lowerGreek) }
+        checkStyle("list-style-type: lower-latin;") { listStyleType(EListStyleType.lowerLatin) }
+        checkStyle("list-style-type: lower-roman;") { listStyleType(EListStyleType.lowerRoman) }
+        checkStyle("list-style-type: square;") { listStyleType(EListStyleType.square) }
+        checkStyle("list-style-type: upper-latin;") { listStyleType(EListStyleType.upperLatin) }
+        checkStyle("list-style-type: upper-roman;") { listStyleType(EListStyleType.upperRoman) }
+        checkStyle("list-style-type: lower-latin;") { listStyleType(EListStyleType.lowerAlpha) }
+        checkStyle("list-style-type: upper-latin;") { listStyleType(EListStyleType.upperAlpha) }
 
-        checkStyle("list-style: square;") { listStyle(EListStyleTypeOption.square) }
-        checkStyle("list-style: square outside;") { listStyle(EListStyleTypeOption.square,EListStylePositionOption.outside) }
-        checkStyle("list-style: square outside url(\"images/image.jpg\");") { listStyle(EListStyleTypeOption.square,EListStylePositionOption.outside,"images/image.jpg") }
+        checkStyle("list-style: square;") { listStyle(EListStyleType.square) }
+        checkStyle("list-style: square outside;") { listStyle(EListStyleType.square, EListStylePosition.outside) }
+        checkStyle("list-style: square outside url(\"images/image.jpg\");") { listStyle(EListStyleType.square, EListStylePosition.outside, "images/image.jpg") }
 
     }
 
@@ -383,17 +408,17 @@ class StylePropertyTests {
     fun `Margin style properties convert to correct CSS`() {
 
         checkStyle("margin: -2px;") { margin((-2).px) }
-        checkStyle("margin: -2px;") { margin((-2).px,(-2).px) }
-        checkStyle("margin: -2px;") { margin((-2).px,(-2).px,(-2).px) }
-        checkStyle("margin: -2px -3px;") { margin((-2).px,(-3).px,(-2).px,(-3).px) }
-        checkStyle("margin: 1px 2px 3px;") { margin(1.px,2.px,3.px) }
-        checkStyle("margin: 1px 2px 3px 4px;") { margin(1.px,2.px,3.px,4.px) }
+        checkStyle("margin: -2px;") { margin((-2).px, (-2).px) }
+        checkStyle("margin: -2px;") { margin((-2).px, (-2).px, (-2).px) }
+        checkStyle("margin: -2px -3px;") { margin((-2).px, (-3).px, (-2).px, (-3).px) }
+        checkStyle("margin: 1px 2px 3px;") { margin(1.px, 2.px, 3.px) }
+        checkStyle("margin: 1px 2px 3px 4px;") { margin(1.px, 2.px, 3.px, 4.px) }
         checkStyle("margin: 2%;") { margin(2.percent) }
-        checkStyle("margin: 2%;") { margin(2.percent,2.percent) }
-        checkStyle("margin: 2%;") { margin(2.percent,2.percent,2.percent) }
-        checkStyle("margin: 2% 3%;") { margin(2.percent,3.percent,2.percent,3.percent) }
-        checkStyle("margin: 1% 2% 3%;") { margin(1.percent,2.percent,3.percent) }
-        checkStyle("margin: 1% 2% 3% 4%;") { margin(1.percent,2.percent,3.percent,4.percent) }
+        checkStyle("margin: 2%;") { margin(2.percent, 2.percent) }
+        checkStyle("margin: 2%;") { margin(2.percent, 2.percent, 2.percent) }
+        checkStyle("margin: 2% 3%;") { margin(2.percent, 3.percent, 2.percent, 3.percent) }
+        checkStyle("margin: 1% 2% 3%;") { margin(1.percent, 2.percent, 3.percent) }
+        checkStyle("margin: 1% 2% 3% 4%;") { margin(1.percent, 2.percent, 3.percent, 4.percent) }
         checkStyle("margin: auto;") { margin(auto) }
 
         checkStyle("margin-bottom: 2px;") { marginBottom(2.px) }
@@ -419,11 +444,11 @@ class StylePropertyTests {
 
         checkStyle("max-height: 25px;") { maxHeight(25.px) }
         checkStyle("max-height: 50%;") { maxHeight(50.percent) }
-        checkStyle("max-height: none;") { maxHeight(ENoneOption.none) }
+        checkStyle("max-height: none;") { maxHeight(ENone.none) }
 
         checkStyle("max-width: 25px;") { maxWidth(25.px) }
         checkStyle("max-width: 50%;") { maxWidth(50.percent) }
-        checkStyle("max-width: none;") { maxWidth(ENoneOption.none) }
+        checkStyle("max-width: none;") { maxWidth(ENone.none) }
 
         checkStyle("min-height: 25px;") { minHeight(25.px) }
         checkStyle("min-height: 50%;") { minHeight(50.percent) }
@@ -447,10 +472,10 @@ class StylePropertyTests {
     @Test
     fun `Outline style properties convert to correct CSS`() {
 
-        checkStyle("outline: red solid thick;") { outline(red,solid,thick) }
-        checkStyle("outline: invert solid thick;") { outline(invert,solid,thick) }
-        checkStyle("outline: red solid 3px;") { outline(red,solid,3.px) }
-        checkStyle("outline: invert solid 3px;") { outline(invert,solid,3.px) }
+        checkStyle("outline: red solid thick;") { outline(red, solid, thick) }
+        checkStyle("outline: invert solid thick;") { outline(invert, solid, thick) }
+        checkStyle("outline: red solid 3px;") { outline(red, solid, 3.px) }
+        checkStyle("outline: invert solid 3px;") { outline(invert, solid, 3.px) }
 
         checkStyle("outline-color: red;") { outlineColor(red) }
         checkStyle("outline-color: invert;") { outlineColor(invert) }
@@ -465,15 +490,16 @@ class StylePropertyTests {
     @Test
     fun `Overflow style properties convert to correct CSS`() {
 
-        checkStyle("overflow: auto;") { overflow(EOverflowOption.auto) }
-        checkStyle("overflow: hidden;") { overflow(EOverflowOption.hidden) }
-        checkStyle("overflow: scroll;") { overflow(EOverflowOption.scroll) }
-        checkStyle("overflow: scroll hidden;") { overflow(EOverflowOption.scroll, EOverflowOption.hidden) }
-        checkStyle("overflow: visible;") { overflow(EOverflowOption.visible) }
+        checkStyle("overflow: auto;") { overflow(EOverflow.auto) }
+        checkStyle("overflow: hidden;") { overflow(EOverflow.hidden) }
+        checkStyle("overflow: scroll;") { overflow(EOverflow.scroll) }
+        checkStyle("overflow: clip;") { overflow(EOverflow.clip) }
+        checkStyle("overflow: scroll hidden;") { overflow(EOverflow.scroll, EOverflow.hidden) }
+        checkStyle("overflow: visible;") { overflow(EOverflow.visible) }
 
-        checkStyle("overflow-x: scroll;") { overflowX(EOverflowOption.scroll) }
+        checkStyle("overflow-x: scroll;") { overflowX(EOverflow.scroll) }
 
-        checkStyle("overflow-y: scroll;") { overflowY(EOverflowOption.scroll) }
+        checkStyle("overflow-y: scroll;") { overflowY(EOverflow.scroll) }
 
     }
 
@@ -481,17 +507,17 @@ class StylePropertyTests {
     fun `Padding style properties convert to correct CSS`() {
 
         checkStyle("padding: 2px;") { padding(2.px) }
-        checkStyle("padding: 2px;") { padding(2.px,2.px) }
-        checkStyle("padding: 2px;") { padding(2.px,2.px,2.px) }
-        checkStyle("padding: 2px -3px;") { padding(2.px,(-3).px,2.px,(-3).px) }
-        checkStyle("padding: 1px 2px 3px;") { padding(1.px,2.px,3.px) }
-        checkStyle("padding: 1px 2px 3px 4px;") { padding(1.px,2.px,3.px,4.px) }
+        checkStyle("padding: 2px;") { padding(2.px, 2.px) }
+        checkStyle("padding: 2px;") { padding(2.px, 2.px, 2.px) }
+        checkStyle("padding: 2px -3px;") { padding(2.px, (-3).px, 2.px, (-3).px) }
+        checkStyle("padding: 1px 2px 3px;") { padding(1.px, 2.px, 3.px) }
+        checkStyle("padding: 1px 2px 3px 4px;") { padding(1.px, 2.px, 3.px, 4.px) }
         checkStyle("padding: 2%;") { padding(2.percent) }
-        checkStyle("padding: 2%;") { padding(2.percent,2.percent) }
-        checkStyle("padding: 2%;") { padding(2.percent,2.percent,2.percent) }
-        checkStyle("padding: 2% 3%;") { padding(2.percent,3.percent,2.percent,3.percent) }
-        checkStyle("padding: 1% 2% 3%;") { padding(1.percent,2.percent,3.percent) }
-        checkStyle("padding: 1% 2% 3% 4%;") { padding(1.percent,2.percent,3.percent,4.percent) }
+        checkStyle("padding: 2%;") { padding(2.percent, 2.percent) }
+        checkStyle("padding: 2%;") { padding(2.percent, 2.percent, 2.percent) }
+        checkStyle("padding: 2% 3%;") { padding(2.percent, 3.percent, 2.percent, 3.percent) }
+        checkStyle("padding: 1% 2% 3%;") { padding(1.percent, 2.percent, 3.percent) }
+        checkStyle("padding: 1% 2% 3% 4%;") { padding(1.percent, 2.percent, 3.percent, 4.percent) }
 
         checkStyle("padding-bottom: 2px;") { paddingBottom(2.px) }
         checkStyle("padding-bottom: 2%;") { paddingBottom(2.percent) }
@@ -510,20 +536,20 @@ class StylePropertyTests {
     @Test
     fun `Page break style properties convert to correct CSS`() {
 
-        checkStyle("page-break-after: always;") { pageBreakAfter(EPageBreakOption.always) }
-        checkStyle("page-break-after: auto;") { pageBreakAfter(EPageBreakOption.auto) }
-        checkStyle("page-break-after: avoid;") { pageBreakAfter(EPageBreakOption.avoid) }
-        checkStyle("page-break-after: left;") { pageBreakAfter(EPageBreakOption.left) }
-        checkStyle("page-break-after: right;") { pageBreakAfter(EPageBreakOption.right) }
+        checkStyle("page-break-after: always;") { pageBreakAfter(EPageBreak.always) }
+        checkStyle("page-break-after: auto;") { pageBreakAfter(EPageBreak.auto) }
+        checkStyle("page-break-after: avoid;") { pageBreakAfter(EPageBreak.avoid) }
+        checkStyle("page-break-after: left;") { pageBreakAfter(EPageBreak.left) }
+        checkStyle("page-break-after: right;") { pageBreakAfter(EPageBreak.right) }
 
-        checkStyle("page-break-before: always;") { pageBreakBefore(EPageBreakOption.always) }
-        checkStyle("page-break-before: auto;") { pageBreakBefore(EPageBreakOption.auto) }
-        checkStyle("page-break-before: avoid;") { pageBreakBefore(EPageBreakOption.avoid) }
-        checkStyle("page-break-before: left;") { pageBreakBefore(EPageBreakOption.left) }
-        checkStyle("page-break-before: right;") { pageBreakBefore(EPageBreakOption.right) }
+        checkStyle("page-break-before: always;") { pageBreakBefore(EPageBreak.always) }
+        checkStyle("page-break-before: auto;") { pageBreakBefore(EPageBreak.auto) }
+        checkStyle("page-break-before: avoid;") { pageBreakBefore(EPageBreak.avoid) }
+        checkStyle("page-break-before: left;") { pageBreakBefore(EPageBreak.left) }
+        checkStyle("page-break-before: right;") { pageBreakBefore(EPageBreak.right) }
 
-        checkStyle("page-break-inside: auto;") { pageBreakInside(EPageBreakInsideOption.auto) }
-        checkStyle("page-break-inside: avoid;") { pageBreakInside(EPageBreakInsideOption.avoid) }
+        checkStyle("page-break-inside: auto;") { pageBreakInside(EPageBreakInside.auto) }
+        checkStyle("page-break-inside: avoid;") { pageBreakInside(EPageBreakInside.avoid) }
 
     }
 
@@ -538,10 +564,11 @@ class StylePropertyTests {
         checkStyle("left: 3%;") { left(3.percent) }
         checkStyle("left: auto;") { left(auto) }
 
-        checkStyle("position: absolute;") { position(EPositionOption.absolute) }
-        checkStyle("position: fixed;") { position(EPositionOption.fixed) }
-        checkStyle("position: relative;") { position(EPositionOption.relative) }
-        checkStyle("position: static;") { position(EPositionOption.static) }
+        checkStyle("position: absolute;") { position(EPosition.absolute) }
+        checkStyle("position: fixed;") { position(EPosition.fixed) }
+        checkStyle("position: relative;") { position(EPosition.relative) }
+        checkStyle("position: static;") { position(EPosition.static) }
+        checkStyle("position: sticky;") { position(EPosition.sticky) }
 
         checkStyle("right: 14.1px;") { right(14.1.px) }
         checkStyle("right: 3%;") { right(3.percent) }
@@ -556,17 +583,17 @@ class StylePropertyTests {
     @Test
     fun `Resize properties convert to correct CSS`() {
 
-        checkStyle("resize: both;") { resize(EResizeOption.both) }
-        checkStyle("resize: horizontal;") { resize(EResizeOption.horizontal) }
-        checkStyle("resize: none;") { resize(EResizeOption.none) }
-        checkStyle("resize: vertical;") { resize(EResizeOption.vertical) }
+        checkStyle("resize: both;") { resize(EResize.both) }
+        checkStyle("resize: horizontal;") { resize(EResize.horizontal) }
+        checkStyle("resize: none;") { resize(EResize.none) }
+        checkStyle("resize: vertical;") { resize(EResize.vertical) }
 
     }
 
     @Test
     fun `Arbitrary properties convert to correct CSS`() {
 
-        checkStyle("not-yet-invented: 7px;") { setProperty("not-yet-invented",7.px.toString()) }
+        checkStyle("not-yet-invented: 7px;") { setProperty("not-yet-invented", 7.px.toString()) }
 
     }
 
@@ -586,31 +613,46 @@ class StylePropertyTests {
     @Test
     fun `Table layout properties convert to correct CSS`() {
 
-        checkStyle("table-layout: auto;") { tableLayout(ETableLayoutOption.auto) }
-        checkStyle("table-layout: fixed;") { tableLayout(ETableLayoutOption.fixed) }
+        checkStyle("table-layout: auto;") { tableLayout(ETableLayout.auto) }
+        checkStyle("table-layout: fixed;") { tableLayout(ETableLayout.fixed) }
 
     }
 
     @Test
     fun `Text align properties convert to correct CSS`() {
 
-        checkStyle("text-align: center;") { textAlign(ETextAlignOption.center) }
-        checkStyle("text-align: justify;") { textAlign(ETextAlignOption.justify) }
-        checkStyle("text-align: left;") { textAlign(ETextAlignOption.left) }
-        checkStyle("text-align: right;") { textAlign(ETextAlignOption.right) }
+        checkStyle("text-align: center;") { textAlign(ETextAlign.center) }
+        checkStyle("text-align: end;") { textAlign(ETextAlign.end) }
+        checkStyle("text-align: justify;") { textAlign(ETextAlign.justify) }
+        checkStyle("text-align: justify-all;") { textAlign(ETextAlign.justifyAll) }
+        checkStyle("text-align: left;") { textAlign(ETextAlign.left) }
+        checkStyle("text-align: match-parent;") { textAlign(ETextAlign.matchParent) }
+        checkStyle("text-align: right;") { textAlign(ETextAlign.right) }
+        checkStyle("text-align: start;") { textAlign(ETextAlign.start) }
 
     }
 
     @Test
     fun `Text decoration properties convert to correct CSS`() {
 
-        checkStyle("text-decoration: none;") { textDecoration(ENoneOption.none) }
-        checkStyle("text-decoration: blink;") { textDecoration(ETextDecorationOption.blink) }
-        checkStyle("text-decoration: line-through;") { textDecoration(ETextDecorationOption.lineThrough) }
-        checkStyle("text-decoration: overline;") { textDecoration(ETextDecorationOption.overline) }
-        checkStyle("text-decoration: underline;") { textDecoration(ETextDecorationOption.underline) }
-        checkStyle("text-decoration: underline blink;") { textDecoration(ETextDecorationOption.underline, ETextDecorationOption.blink) }
+        checkStyle("text-decoration-color: antiquewhite;") { textDecorationColor(antiquewhite) }
 
+        checkStyle("text-decoration: none;") { textDecoration(ENone.none) }
+        checkStyle("text-decoration: underline;") { textDecoration(ETextDecorationLine.underline) }
+        checkStyle("text-decoration: underline line-through;") { textDecoration(ETextDecorationLine.underline, moreLines = *arrayOf(ETextDecorationLine.lineThrough)) }
+        checkStyle("text-decoration: underline wavy red overline;") { textDecoration(ETextDecorationLine.underline, ETextDecorationStyle.wavy, red, moreLines = *arrayOf(ETextDecorationLine.overline)) }
+
+        checkStyle("text-decoration-line: none;") { textDecorationLine(ENone.none) }
+        checkStyle("text-decoration-line: line-through;") { textDecorationLine(ETextDecorationLine.lineThrough) }
+        checkStyle("text-decoration-line: overline;") { textDecorationLine(ETextDecorationLine.overline) }
+        checkStyle("text-decoration-line: underline;") { textDecorationLine(ETextDecorationLine.underline) }
+        checkStyle("text-decoration-line: underline overline;") { textDecorationLine(ETextDecorationLine.underline, ETextDecorationLine.overline) }
+
+        checkStyle("text-decoration-style: dashed;") { textDecorationStyle(ETextDecorationStyle.dashed) }
+        checkStyle("text-decoration-style: dotted;") { textDecorationStyle(ETextDecorationStyle.dotted) }
+        checkStyle("text-decoration-style: double;") { textDecorationStyle(ETextDecorationStyle.double) }
+        checkStyle("text-decoration-style: solid;") { textDecorationStyle(ETextDecorationStyle.solid) }
+        checkStyle("text-decoration-style: wavy;") { textDecorationStyle(ETextDecorationStyle.wavy) }
     }
 
     @Test
@@ -624,27 +666,31 @@ class StylePropertyTests {
     @Test
     fun `Text overflow properties convert to correct CSS`() {
 
-        checkStyle("text-overflow: clip;") { textOverflow(ETextOverflowOption.clip) }
-        checkStyle("text-overflow: ellipsis;") { textOverflow(ETextOverflowOption.ellipsis) }
+        checkStyle("text-overflow: clip;") { textOverflow(ETextOverflow.clip) }
+        checkStyle("text-overflow: ellipsis;") { textOverflow(ETextOverflow.ellipsis) }
 
     }
 
     @Test
     fun `Text transform properties convert to correct CSS`() {
 
-        checkStyle("text-transform: capitalize;") { textTransform(ETextTransformOption.capitalize) }
-        checkStyle("text-transform: lowercase;") { textTransform(ETextTransformOption.lowercase) }
-        checkStyle("text-transform: none;") { textTransform(ETextTransformOption.none) }
-        checkStyle("text-transform: uppercase;") { textTransform(ETextTransformOption.uppercase) }
+        checkStyle("text-transform: capitalize;") { textTransform(ETextTransform.capitalize) }
+        checkStyle("text-transform: lowercase;") { textTransform(ETextTransform.lowercase) }
+        checkStyle("text-transform: none;") { textTransform(ETextTransform.none) }
+        checkStyle("text-transform: uppercase;") { textTransform(ETextTransform.uppercase) }
+        checkStyle("text-transform: full-width;") { textTransform(ETextTransform.fullWidth) }
 
     }
 
     @Test
     fun `Unicode bidirectional properties convert to correct CSS`() {
 
-        checkStyle("unicode-bidi: bidi-override;") { unicodeBidi(EUnicodeBidiOption.bidiOverride) }
-        checkStyle("unicode-bidi: embed;") { unicodeBidi(EUnicodeBidiOption.embed) }
-        checkStyle("unicode-bidi: normal;") { unicodeBidi(EUnicodeBidiOption.normal) }
+        checkStyle("unicode-bidi: bidi-override;") { unicodeBidi(EUnicodeBidi.bidiOverride) }
+        checkStyle("unicode-bidi: embed;") { unicodeBidi(EUnicodeBidi.embed) }
+        checkStyle("unicode-bidi: normal;") { unicodeBidi(EUnicodeBidi.normal) }
+        checkStyle("unicode-bidi: isolate;") { unicodeBidi(EUnicodeBidi.isolate) }
+        checkStyle("unicode-bidi: isolate-override;") { unicodeBidi(EUnicodeBidi.isolateOverride) }
+        checkStyle("unicode-bidi: plaintext;") { unicodeBidi(EUnicodeBidi.plaintext) }
 
     }
 
@@ -653,40 +699,40 @@ class StylePropertyTests {
 
         checkStyle("vertical-align: 4px;") { verticalAlign(4.px) }
         checkStyle("vertical-align: 4%;") { verticalAlign(4.percent) }
-        checkStyle("vertical-align: alphabetic;") { verticalAlign(EAlignmentBaselineOption.alphabetic) }
-        checkStyle("vertical-align: baseline;") { verticalAlign(EAlignmentBaselineOption.baseline) }
-        checkStyle("vertical-align: bottom;") { verticalAlign(EAlignmentBaselineOption.bottom) }
-        checkStyle("vertical-align: center;") { verticalAlign(EAlignmentBaselineOption.center) }
-        checkStyle("vertical-align: central;") { verticalAlign(EAlignmentBaselineOption.central) }
-        checkStyle("vertical-align: ideographic;") { verticalAlign(EAlignmentBaselineOption.ideographic) }
-        checkStyle("vertical-align: mathematical;") { verticalAlign(EAlignmentBaselineOption.mathematical) }
-        checkStyle("vertical-align: middle;") { verticalAlign(EAlignmentBaselineOption.middle) }
-        checkStyle("vertical-align: text-bottom;") { verticalAlign(EAlignmentBaselineOption.textBottom) }
-        checkStyle("vertical-align: text-top;") { verticalAlign(EAlignmentBaselineOption.textTop) }
-        checkStyle("vertical-align: top;") { verticalAlign(EAlignmentBaselineOption.top) }
-        checkStyle("vertical-align: sub;") { verticalAlign(EBaselineShiftOption.sub) }
-        checkStyle("vertical-align: super;") { verticalAlign(EBaselineShiftOption.`super`) }
+        checkStyle("vertical-align: alphabetic;") { verticalAlign(EAlignmentBaseline.alphabetic) }
+        checkStyle("vertical-align: baseline;") { verticalAlign(EAlignmentBaseline.baseline) }
+        checkStyle("vertical-align: bottom;") { verticalAlign(EAlignmentBaseline.bottom) }
+        checkStyle("vertical-align: center;") { verticalAlign(EAlignmentBaseline.center) }
+        checkStyle("vertical-align: central;") { verticalAlign(EAlignmentBaseline.central) }
+        checkStyle("vertical-align: ideographic;") { verticalAlign(EAlignmentBaseline.ideographic) }
+        checkStyle("vertical-align: mathematical;") { verticalAlign(EAlignmentBaseline.mathematical) }
+        checkStyle("vertical-align: middle;") { verticalAlign(EAlignmentBaseline.middle) }
+        checkStyle("vertical-align: text-bottom;") { verticalAlign(EAlignmentBaseline.textBottom) }
+        checkStyle("vertical-align: text-top;") { verticalAlign(EAlignmentBaseline.textTop) }
+        checkStyle("vertical-align: top;") { verticalAlign(EAlignmentBaseline.top) }
+        checkStyle("vertical-align: sub;") { verticalAlign(EBaselineShift.sub) }
+        checkStyle("vertical-align: super;") { verticalAlign(EBaselineShift.`super`) }
 
     }
 
     @Test
     fun `Visibility properties convert to correct CSS`() {
 
-        checkStyle("visibility: collapse;") { visibility(EVisibilityOption.collapse) }
-        checkStyle("visibility: hidden;") { visibility(EVisibilityOption.hidden) }
-        checkStyle("visibility: visible;") { visibility(EVisibilityOption.visible) }
+        checkStyle("visibility: collapse;") { visibility(EVisibility.collapse) }
+        checkStyle("visibility: hidden;") { visibility(EVisibility.hidden) }
+        checkStyle("visibility: visible;") { visibility(EVisibility.visible) }
 
     }
 
     @Test
     fun `White space properties convert to correct CSS`() {
 
-        checkStyle("white-space: break-spaces;") { whiteSpace(EWhiteSpaceOption.breakSpaces) }
-        checkStyle("white-space: normal;") { whiteSpace(EWhiteSpaceOption.normal) }
-        checkStyle("white-space: nowrap;") { whiteSpace(EWhiteSpaceOption.nowrap) }
-        checkStyle("white-space: pre;") { whiteSpace(EWhiteSpaceOption.pre) }
-        checkStyle("white-space: pre-line;") { whiteSpace(EWhiteSpaceOption.preLine) }
-        checkStyle("white-space: pre-wrap;") { whiteSpace(EWhiteSpaceOption.preWrap) }
+        checkStyle("white-space: break-spaces;") { whiteSpace(EWhiteSpace.breakSpaces) }
+        checkStyle("white-space: normal;") { whiteSpace(EWhiteSpace.normal) }
+        checkStyle("white-space: nowrap;") { whiteSpace(EWhiteSpace.nowrap) }
+        checkStyle("white-space: pre;") { whiteSpace(EWhiteSpace.pre) }
+        checkStyle("white-space: pre-line;") { whiteSpace(EWhiteSpace.preLine) }
+        checkStyle("white-space: pre-wrap;") { whiteSpace(EWhiteSpace.preWrap) }
 
     }
 
@@ -696,10 +742,10 @@ class StylePropertyTests {
         checkStyle("orphans: 3;") { orphans(3) }
         checkStyle("widows: 2;") { widows(2) }
 
-        assertFailsWith(IllegalArgumentException::class) { checkStyle("throws") { orphans(0) } }
-        assertFailsWith(IllegalArgumentException::class) { checkStyle("throws") { orphans(-1) } }
-        assertFailsWith(IllegalArgumentException::class) { checkStyle("throws") { widows(0) } }
-        assertFailsWith(IllegalArgumentException::class) { checkStyle("throws") { widows(-1) } }
+        assertFailsWith<IllegalArgumentException> { checkStyle("throws") { orphans(0) } }
+        assertFailsWith<IllegalArgumentException> { checkStyle("throws") { orphans(-1) } }
+        assertFailsWith<IllegalArgumentException> { checkStyle("throws") { widows(0) } }
+        assertFailsWith<IllegalArgumentException> { checkStyle("throws") { widows(-1) } }
 
     }
 
@@ -708,7 +754,7 @@ class StylePropertyTests {
 
         checkStyle("word-spacing: 4px;") { wordSpacing(4.px) }
         checkStyle("word-spacing: 4%;") { wordSpacing(4.percent) }
-        checkStyle("word-spacing: normal;") { wordSpacing(ENormalOption.normal) }
+        checkStyle("word-spacing: normal;") { wordSpacing(ENormal.normal) }
 
     }
 

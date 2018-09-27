@@ -5,12 +5,13 @@
 
 package jvm.katydid.css.styles
 
-import o.katydid.css.colors.*
-import o.katydid.css.measurements.*
+import o.katydid.css.colors.blue
+import o.katydid.css.colors.rgb
+import o.katydid.css.measurements.px
 import o.katydid.css.styles.Style
 import o.katydid.css.styles.style
-import o.katydid.css.types.*
-import o.katydid.css.types.EDisplayOption.*
+import o.katydid.css.types.EDisplay
+import o.katydid.css.types.EDisplay.block
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -49,7 +50,7 @@ class StyleTests {
     fun `Style properties can be made important`() {
 
         checkStyle("display: none !important; color: #172D43; height: 45px !important;") {
-            display(EDisplayOption.none); important
+            display(EDisplay.none); important
             color(rgb(23, 45, 67))
             height(45.px); important
         }

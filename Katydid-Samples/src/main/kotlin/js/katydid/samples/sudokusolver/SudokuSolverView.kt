@@ -7,7 +7,7 @@ package js.katydid.samples.sudokusolver
 
 import o.katydid.css.measurements.px
 import o.katydid.css.styles.style
-import o.katydid.css.types.EFontWeightOption.bold
+import o.katydid.css.types.EFontWeight
 import o.katydid.events.eventhandling.onchange
 import o.katydid.events.eventhandling.onclick
 import o.katydid.vdom.builders.KatydidFlowContentBuilder
@@ -116,7 +116,7 @@ private fun KatydidFlowContentBuilder<SudokuSolverMsg>.board(
     section("#board") {
 
         span {
-            style { fontWeight(bold) }
+            style { fontWeight(EFontWeight.bold) }
             text("Board")
         }
 
@@ -310,7 +310,7 @@ private fun KatydidFlowContentBuilder<SudokuSolverMsg>.notes() {
     section("#notes") {
 
         span {
-            style { fontWeight(bold) }
+            style { fontWeight(EFontWeight.bold) }
             text("Notes")
         }
 
@@ -344,7 +344,7 @@ private fun KatydidFlowContentBuilder<SudokuSolverMsg>.settings(
     section("#settings") {
 
         span {
-            style { fontWeight(bold) }
+            style { fontWeight(EFontWeight.bold) }
             text("Settings")
         }
 
