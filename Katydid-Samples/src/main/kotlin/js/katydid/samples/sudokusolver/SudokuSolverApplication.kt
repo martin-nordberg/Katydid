@@ -86,7 +86,7 @@ fun makeStyleSheet() =
             overflowY(EOverflow.scroll)
         }
 
-        "section#settings, section#notes" {
+        "section#settings" and "section#notes" {
             clear(EClear.both)
             marginTop(15.px)
             maxWidth(700.px)
@@ -131,7 +131,7 @@ fun makeStyleSheet() =
             color(green)
         }
 
-        "table.block td.cell.guessed:hover, table.block td.cell.defined:hover" {
+        "table.block td.cell.guessed:hover" and "table.block td.cell.defined:hover" {
             color(purple)
             cursor(ECursor.pointer)
             textDecoration(ETextDecorationLine.underline)
@@ -157,20 +157,20 @@ fun makeStyleSheet() =
             backgroundColor(Color.fromHex("#f2f2f2")!!)
         }
 
-        "table.changes th.candidates-removed, table.changes td.candidates-removed" {
+        "table.changes th.candidates-removed" and "table.changes td.candidates-removed" {
             fontSize(15.px)
             textAlign(ETextAlign.left)
             verticalAlign(EAlignmentBaseline.top)
             width(450.px)
         }
 
-        "table.changes th.cell-value-set, table.changes td.cell-value-set" {
+        "table.changes th.cell-value-set" and "table.changes td.cell-value-set" {
             textAlign(ETextAlign.left)
             verticalAlign(EAlignmentBaseline.top)
             width(100.px)
         }
 
-        "table.changes th.change-description, table.changes td.change-description" {
+        "table.changes th.change-description" and "table.changes td.change-description" {
             textAlign(ETextAlign.left)
             verticalAlign(EAlignmentBaseline.top)
             width(200.px)

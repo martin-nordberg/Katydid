@@ -5,9 +5,11 @@
 
 package jvm.katydid.css.stylesheets
 
+import o.katydid.css.measurements.pt
 import o.katydid.css.measurements.px
 import o.katydid.css.stylesheets.StyleSheet
 import o.katydid.css.stylesheets.styleSheet
+import o.katydid.css.types.EFontStyle
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -43,6 +45,26 @@ class StyleSheetTests {
             }
             "div.wider" {
                 width(45.px)
+            }
+        }
+
+    }
+
+    @Test
+    fun `Selectors and be combined with the and operator`() {
+
+        val css = """
+            |td, th, div {
+            |    font-size: 10pt;
+            |    font-style: italic;
+            |}
+            |
+        """.trimMargin()+"\n"
+
+        checkStyle(css) {
+            "td" and "th" and "div" {
+                fontSize(10.pt)
+                fontStyle(EFontStyle.italic)
             }
         }
 
