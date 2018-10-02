@@ -11,7 +11,7 @@ import o.katydid.css.styles.Style
 
 class StyleSheet {
 
-    private val styleBlock : StyleBlock = StyleBlock(null, "")
+    private val styleBlock : StyleBlock = StyleBlock(null)
 
     private var activeStyleBlock: StyleBlock = styleBlock
 
@@ -21,23 +21,38 @@ class StyleSheet {
         this + ", " + that
 
     infix fun String.and(styleBlock: StyleBlock): StyleBlock {
-        styleBlock.selector = this + ", " + styleBlock.selector
+        for (selector in this.split(",").map { s -> s.trim() }.reversed()) {
+            styleBlock.selectors.add(0,selector)
+        }
         return styleBlock
     }
 
     operator fun String.invoke(build: Style.() -> Unit) : StyleBlock {
-        val result = StyleBlock(activeStyleBlock, this)
+        val result = StyleBlock(activeStyleBlock)
+        result.selectors.addAll(this.split(",").map { s -> s.trim() })
         activeStyleBlock.nestedBlocks.add(result)
+
         activeStyleBlock = result
+
         val style = Style()
         style.build()
         activeStyleBlock.style = style
+
         activeStyleBlock = activeStyleBlock.parent!!
         return result
     }
 
-    override fun toString(): String =
-        styleBlock.toCssString()
+    override fun toString(): String {
+
+        val result = StringBuilder("")
+
+        for (nestedBlock in styleBlock.nestedBlocks) {
+            result.append(nestedBlock.toCssString())
+        }
+
+        return result.toString()
+
+    }
 
 }
 

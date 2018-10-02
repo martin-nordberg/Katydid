@@ -4,40 +4,46 @@ import o.katydid.css.styles.Style
 
 data class StyleBlock(
     val parent: StyleBlock?,
-    var selector: String,
+    val selectors: MutableList<String> = mutableListOf(),
     var style: Style? = null,
     val nestedBlocks: MutableList<StyleBlock> = mutableListOf()
 ) {
 
-    fun toCssString(outerSelector:String = ""): String {
+    fun toCssString(outerSelectors:List<String> = listOf("")): String {
 
         val result = StringBuilder("")
 
-        var accumulatedSelector = outerSelector
+        val accumulatedSelectors = mutableListOf<String>()
 
-        if ( style != null) {
+        for (outerSelector in outerSelectors) {
 
-            // TODO: handle cases when outer or inner selectors have commas in them
+            for (selector in selectors) {
 
-            if ( selector.startsWith("&") ) {
-                accumulatedSelector += selector.substring(1)
-            }
-            else {
-                if ( outerSelector.isNotEmpty() ) {
-                    accumulatedSelector += " "
+                var accumulatedSelector = outerSelector
+
+                if (selector.startsWith("&")) {
+                    accumulatedSelector += selector.substring(1)
                 }
-                accumulatedSelector += selector
-            }
+                else {
+                    if (outerSelector.isNotEmpty()) {
+                        accumulatedSelector += " "
+                    }
+                    accumulatedSelector += selector
+                }
 
-            result.append(accumulatedSelector)
-            result.append(" {\n")
-            result.append(style?.toCssString("    "), "\n")
-            result.append("}\n\n")
+                accumulatedSelectors.add(accumulatedSelector)
+
+            }
 
         }
 
+        result.append(accumulatedSelectors.joinToString(",\n"))
+        result.append(" {\n")
+        result.append(style?.toCssString("    "), "\n")
+        result.append("}\n\n")
+
         for (nestedBlock in nestedBlocks) {
-            result.append(nestedBlock.toCssString(accumulatedSelector))
+            result.append(nestedBlock.toCssString(accumulatedSelectors))
         }
 
         return result.toString()

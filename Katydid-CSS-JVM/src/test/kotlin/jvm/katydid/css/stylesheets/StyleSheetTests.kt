@@ -88,10 +88,12 @@ class StyleSheetTests {
     }
 
     @Test
-    fun `Selectors and be combined with the and operator`() {
+    fun `Selectors can be combined with the and operator`() {
 
         val css = """
-            |td, th, div {
+            |td,
+            |th,
+            |div {
             |    font-size: 10pt;
             |    font-style: italic;
             |}
@@ -102,6 +104,140 @@ class StyleSheetTests {
             "td" and "th" and "div" {
                 fontSize(10.pt)
                 fontStyle(EFontStyle.italic)
+            }
+        }
+
+    }
+
+    @Test
+    fun `Nesting works with the and operator inside the nesting`() {
+
+        val css = """
+            |td {
+            |    font-size: 10pt;
+            |    font-style: italic;
+            |}
+            |
+            |td div,
+            |td span {
+            |    color: green;
+            |}
+            |
+        """.trimMargin()+"\n"
+
+        checkStyle(css) {
+            "td" {
+                fontSize(10.pt)
+                fontStyle(EFontStyle.italic)
+                "div" and "span" {
+                    color(green)
+                }
+            }
+        }
+
+    }
+
+    @Test
+    fun `Nesting works with the and operator outside the nesting`() {
+
+        val css = """
+            |td,
+            |th {
+            |    font-size: 10pt;
+            |    font-style: italic;
+            |}
+            |
+            |td div,
+            |th div {
+            |    color: green;
+            |}
+            |
+        """.trimMargin()+"\n"
+
+        checkStyle(css) {
+            "td" and "th" {
+                fontSize(10.pt)
+                fontStyle(EFontStyle.italic)
+                "div" {
+                    color(green)
+                }
+            }
+        }
+
+    }
+
+    @Test
+    fun `Nesting works with the and operator at both levels`() {
+
+        val css = """
+            |nav,
+            |td,
+            |th {
+            |    font-size: 10pt;
+            |    font-style: italic;
+            |}
+            |
+            |nav div,
+            |nav span,
+            |td div,
+            |td span,
+            |th div,
+            |th span {
+            |    color: green;
+            |}
+            |
+        """.trimMargin()+"\n"
+
+        checkStyle(css) {
+            "nav" and "td" and "th" {
+                fontSize(10.pt)
+                fontStyle(EFontStyle.italic)
+                "div" and "span" {
+                    color(green)
+                }
+            }
+        }
+
+    }
+
+    @Test
+    fun `Three layers of nesting works with the and operator`() {
+
+        val css = """
+            |nav,
+            |td,
+            |th {
+            |    font-size: 10pt;
+            |    font-style: italic;
+            |}
+            |
+            |nav.quirky,
+            |td.quirky,
+            |th.quirky {
+            |    max-width: 45px;
+            |}
+            |
+            |nav.quirky div,
+            |nav.quirky span,
+            |td.quirky div,
+            |td.quirky span,
+            |th.quirky div,
+            |th.quirky span {
+            |    color: green;
+            |}
+            |
+        """.trimMargin()+"\n"
+
+        checkStyle(css) {
+            "nav" and "td" and "th" {
+                fontSize(10.pt)
+                fontStyle(EFontStyle.italic)
+                "&.quirky" {
+                    maxWidth(45.px)
+                    "div" and "span" {
+                        color(green)
+                    }
+                }
             }
         }
 
