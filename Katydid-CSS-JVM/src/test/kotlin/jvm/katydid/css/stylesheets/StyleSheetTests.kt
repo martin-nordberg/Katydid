@@ -5,6 +5,7 @@
 
 package jvm.katydid.css.stylesheets
 
+import o.katydid.css.colors.green
 import o.katydid.css.measurements.pt
 import o.katydid.css.measurements.px
 import o.katydid.css.stylesheets.StyleSheet
@@ -45,6 +46,42 @@ class StyleSheetTests {
             }
             "div.wider" {
                 width(45.px)
+            }
+        }
+
+    }
+
+    @Test
+    fun `A nested style sheet can be constructed from selectors and styles`() {
+
+        val css = """
+            |div {
+            |    height: 23px;
+            |    width: 30px;
+            |}
+            |
+            |div.wider {
+            |    width: 45px;
+            |}
+            |
+            |div.wider span {
+            |    color: green;
+            |}
+            |
+        """.trimMargin()+"\n"
+
+        checkStyle(css) {
+            "div" {
+                height(23.px)
+                width(30.px)
+
+                "&.wider" {
+                    width(45.px)
+
+                    "span" {
+                        color(green)
+                    }
+                }
             }
         }
 

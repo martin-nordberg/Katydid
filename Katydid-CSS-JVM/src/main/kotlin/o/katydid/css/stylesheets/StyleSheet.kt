@@ -6,42 +6,38 @@
 package o.katydid.css.stylesheets
 
 import o.katydid.css.styles.Style
-import o.katydid.css.styles.style
 
 //---------------------------------------------------------------------------------------------------------------------
 
 class StyleSheet {
 
-    private val styleEntries = mutableMapOf<String, Style>()
+    private val styleBlock : StyleBlock = StyleBlock(null, "")
+
+    private var activeStyleBlock: StyleBlock = styleBlock
 
     ////
 
     infix fun String.and(that: String) =
         this + ", " + that
 
-    infix fun String.and(pair: Pair<String, Style>): Pair<String, Style> {
-        styleEntries.remove(pair.first)
-        val selector = this + ", " + pair.first
-        styleEntries[selector] = pair.second
-        return Pair(selector, pair.second)
+    infix fun String.and(styleBlock: StyleBlock): StyleBlock {
+        styleBlock.selector = this + ", " + styleBlock.selector
+        return styleBlock
     }
 
-    operator fun String.invoke(build: Style.() -> Unit): Pair<String, Style> {
-        val style = style(build)
-        styleEntries[this] = style
-        return Pair(this, style)
+    operator fun String.invoke(build: Style.() -> Unit) : StyleBlock {
+        val result = StyleBlock(activeStyleBlock, this)
+        activeStyleBlock.nestedBlocks.add(result)
+        activeStyleBlock = result
+        val style = Style()
+        style.build()
+        activeStyleBlock.style = style
+        activeStyleBlock = activeStyleBlock.parent!!
+        return result
     }
 
-    override fun toString(): String {
-        val result = StringBuilder("")
-        for (styleEntry in styleEntries) {
-            result.append(styleEntry.key)
-            result.append(" {\n")
-            result.append(styleEntry.value.toCssString("    "), "\n")
-            result.append("}\n\n")
-        }
-        return result.toString()
-    }
+    override fun toString(): String =
+        styleBlock.toCssString()
 
 }
 
