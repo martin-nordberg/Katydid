@@ -27,6 +27,9 @@ class Style {
             properties[properties.size - 1] += " !important"
         }
 
+    val isNotEmpty
+        get() = properties.isNotEmpty()
+
     ////
 
     // TODO: background
@@ -336,6 +339,14 @@ class Style {
 
     fun height(value: EAuto) =
         setProperty("height", "$value")
+
+    fun include(style:Style) {
+
+        for ( property in style.properties ) {
+            properties.add(property)
+        }
+
+    }
 
     fun inherit(key: String) =
         setProperty(key, "inherit")
