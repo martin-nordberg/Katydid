@@ -13,7 +13,9 @@ import o.katydid.css.stylesheets.StyleSheet
 import o.katydid.css.stylesheets.styleSheet
 import o.katydid.css.types.EFontStyle
 import org.junit.jupiter.api.Test
+import java.lang.IllegalArgumentException
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 @Suppress("RemoveRedundantBackticks")
 class StyleSheetTests {
@@ -105,7 +107,7 @@ class StyleSheetTests {
             |    color: honeydew;
             |}
             |
-            |a::hover {
+            |a:hover {
             |    color: aquamarine;
             |}
             |
@@ -121,7 +123,7 @@ class StyleSheetTests {
 
                 color(honeydew)
 
-                "&::hover" {
+                "&:hover" {
                     color(aquamarine)
                 }
 
@@ -160,7 +162,7 @@ class StyleSheetTests {
     }
 
     @Test
-    fun `Selectors can be combined with the and operator`() {
+    fun `Selectors can be combined with the or operator`() {
 
         val css = """
             |td,
@@ -174,7 +176,7 @@ class StyleSheetTests {
 
         checkStyle(css) {
 
-            "td" and "th" and "div" {
+            "td" or "th" or "div" {
                 fontSize(10.pt)
                 fontStyle(EFontStyle.italic)
             }
@@ -184,7 +186,7 @@ class StyleSheetTests {
     }
 
     @Test
-    fun `Nesting works with the and operator inside the nesting`() {
+    fun `Nesting works with the or operator inside the nesting`() {
 
         val css = """
             |td {
@@ -206,7 +208,7 @@ class StyleSheetTests {
                 fontSize(10.pt)
                 fontStyle(EFontStyle.italic)
 
-                "div" and "span" {
+                "div" or "span" {
                     color(green)
                 }
 
@@ -217,7 +219,7 @@ class StyleSheetTests {
     }
 
     @Test
-    fun `Nesting works with the and operator outside the nesting`() {
+    fun `Nesting works with the or operator outside the nesting`() {
 
         val css = """
             |td,
@@ -235,7 +237,7 @@ class StyleSheetTests {
 
         checkStyle(css) {
 
-            "td" and "th" {
+            "td" or "th" {
 
                 fontSize(10.pt)
                 fontStyle(EFontStyle.italic)
@@ -251,7 +253,7 @@ class StyleSheetTests {
     }
 
     @Test
-    fun `Nesting works with the and operator at both levels`() {
+    fun `Nesting works with the or operator at both levels`() {
 
         val css = """
             |nav,
@@ -274,12 +276,12 @@ class StyleSheetTests {
 
         checkStyle(css) {
 
-            "nav" and "td" and "th" {
+            "nav" or "td" or "th" {
 
                 fontSize(10.pt)
                 fontStyle(EFontStyle.italic)
 
-                "div" and "span" {
+                "div" or "span" {
                     color(green)
                 }
 
@@ -290,7 +292,7 @@ class StyleSheetTests {
     }
 
     @Test
-    fun `Three layers of nesting works with the and operator`() {
+    fun `Three layers of nesting works with the or operator`() {
 
         val css = """
             |nav,
@@ -319,7 +321,7 @@ class StyleSheetTests {
 
         checkStyle(css) {
 
-            "nav" and "td" and "th" {
+            "nav" or "td" or "th" {
                 fontSize(10.pt)
                 fontStyle(EFontStyle.italic)
 
@@ -327,7 +329,7 @@ class StyleSheetTests {
 
                     maxWidth(45.px)
 
-                    "div" and "span" {
+                    "div" or "span" {
                         color(green)
                     }
 
@@ -362,13 +364,13 @@ class StyleSheetTests {
 
         checkStyle(css) {
 
-            "nav" and "td" and "th" {
+            "nav" or "td" or "th" {
 
                 "&.quirky" {
 
                     maxWidth(45.px)
 
-                    "div" and "span" {
+                    "div" or "span" {
                         color(green)
                     }
 
@@ -404,13 +406,13 @@ class StyleSheetTests {
 
         checkStyle(css) {
 
-            "nav" and "td" and "th" {
+            "nav" or "td" or "th" {
                 fontSize(10.pt)
                 fontStyle(EFontStyle.italic)
 
                 "&.quirky" {
 
-                    "div" and "span" {
+                    "div" or "span" {
                         color(green)
                     }
 
@@ -516,12 +518,11 @@ class StyleSheetTests {
     }
 
     @Test
-    fun `Nested style blocks can extend other style blocks`() {
+    fun `An extended placeholder style block can also have a selector`() {
 
         val css = """
-            |div.wider,
-            |div.deeper,
-            |span {
+            |span,
+            |div {
             |    background-color: gray;
             |    color: blue;
             |}
@@ -529,6 +530,96 @@ class StyleSheetTests {
             |div {
             |    height: 23px;
             |    width: 30px;
+            |}
+            |
+            |div.wider {
+            |    width: 45px;
+            |}
+            |
+        """.trimMargin() + "\n"
+
+        checkStyle(css) {
+
+            val commonColors = "%common-colors"
+
+            "span" or commonColors {
+                backgroundColor(gray)
+                color(blue)
+            }
+
+            "div" {
+
+                extend(commonColors)
+
+                height(23.px)
+                width(30.px)
+
+                "&.wider" {
+                    width(45.px)
+                }
+
+            }
+
+        }
+
+    }
+
+    @Test
+    fun `Extending an unknown style block fails`() {
+
+        // wrong name
+        assertFailsWith<IllegalArgumentException> {
+
+            styleSheet {
+
+                "%x" {
+                    color(blue)
+                }
+
+                "div" {
+                    extend("%y")
+                }
+
+            }
+
+        }
+
+        // right name, wrong nesting
+        assertFailsWith<IllegalArgumentException> {
+
+            styleSheet {
+
+                "%x" {
+                    color(blue)
+                }
+
+                "div" {
+
+                    "span" {
+                        extend("%x")
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+    @Test
+    fun `Nested style blocks can extend other nested style blocks`() {
+
+        val css = """
+            |div {
+            |    height: 23px;
+            |    width: 30px;
+            |}
+            |
+            |div.wider,
+            |div.deeper {
+            |    background-color: gray;
+            |    color: blue;
             |}
             |
             |div.wider,
@@ -540,17 +631,17 @@ class StyleSheetTests {
 
         checkStyle(css) {
 
-            val commonColors = "%common-colors"
-
-            commonColors {
-                backgroundColor(gray)
-                color(blue)
-            }
-
             "div" {
 
                 height(23.px)
                 width(30.px)
+
+                val commonColors = "%common-colors"
+
+                commonColors {
+                    backgroundColor(gray)
+                    color(blue)
+                }
 
                 "&.wider, &.deeper" {
                     extend(commonColors)
@@ -559,8 +650,57 @@ class StyleSheetTests {
 
             }
 
-            "span" {
-                extend(commonColors)
+        }
+
+    }
+
+    @Test
+    fun `Nested style blocks cannot extend unnested style blocks`() {
+
+        assertFailsWith<IllegalArgumentException> {
+
+            styleSheet {
+
+                val commonColors = "%common-colors"
+
+                commonColors {
+                    backgroundColor(gray)
+                    color(blue)
+                }
+
+                "div" {
+
+                    height(23.px)
+                    width(30.px)
+
+                    "&.wider, &.deeper" {
+                        extend(commonColors)
+                        width(45.px)
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+    @Test
+    fun `Non-placeholder style blocks cannot be extended`() {
+
+        assertFailsWith<IllegalArgumentException> {
+
+            styleSheet {
+
+                "span" {
+                    color(blue)
+                }
+
+                "div" {
+                    extend("span")
+                }
+
             }
 
         }
@@ -590,7 +730,7 @@ class StyleSheetTests {
 
         val commonColors = styleSheet {
 
-            "div" and "span" {
+            "div" or "span" {
                 backgroundColor(gray)
                 color(blue)
             }

@@ -23,29 +23,16 @@ class StyleSheet {
 
     ////
 
-    /** Combines a selector with another selector [that] into a comma-separated pair. */
-    infix fun String.and(that: String) =
-        this + ", " + that
-
-    /** Combines a selector with an already created [styleBlock] by adding the selector to the block. */
-    infix fun String.and(styleBlock: StyleBlock): StyleBlock {
-
-        for (selector in this.split(",").map { s -> s.trim() }.reversed()) {
-            styleBlock.selectors.add(0,selector)
-        }
-
-        return styleBlock
-
-    }
-
     /** Extends a style block named [styleBlockName] with the selector of the currently active style block. */
     @Suppress("unused")
     fun Style.extend(styleBlockName:String) {
 
-        val block = activeStyleBlock.find(styleBlockName)
+        require(styleBlockName.startsWith("%")) { "Only placeholders can be extended." }
+
+        val block = activeStyleBlock.parent!!.nestedPlaceholders.get(styleBlockName)
             ?: throw IllegalArgumentException("Unknown block to be extended: '$styleBlockName'.")
 
-        block.selectors.addAll(activeStyleBlock.fullSelectors)
+        block.selectors.addAll(activeStyleBlock.selectors)
 
     }
 
@@ -60,7 +47,7 @@ class StyleSheet {
         val result = StyleBlock(activeStyleBlock)
 
         if ( this.startsWith("%") ) {
-            result.name = this
+            activeStyleBlock.nestedPlaceholders.put(this,result)
         }
         else {
             result.selectors.addAll(this.split(",").map { s -> s.trim() })
@@ -75,6 +62,21 @@ class StyleSheet {
 
         activeStyleBlock = activeStyleBlock.parent!!
         return result
+
+    }
+
+    /** Combines a selector with another selector [that] into a comma-separated pair. */
+    infix fun String.or(that: String) =
+        this + ", " + that
+
+    /** Combines a selector with an already created [styleBlock] by adding the selector to the block. */
+    infix fun String.or(styleBlock: StyleBlock): StyleBlock {
+
+        for (selector in this.split(",").map { s -> s.trim() }.reversed()) {
+            styleBlock.selectors.add(0,selector)
+        }
+
+        return styleBlock
 
     }
 

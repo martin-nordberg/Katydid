@@ -77,103 +77,117 @@ fun makeStyleSheet() =
 
         /* SECTION */
         "section" {
+
             display(EDisplay.inlineBlock)
             float(EFloat.left)
-        }
 
-        "section#changes" {
-            maxHeight(850.px)
-            overflowY(EOverflow.scroll)
-        }
+            "&#changes" {
+                maxHeight(850.px)
+                overflowY(EOverflow.scroll)
+            }
 
-        "section#settings" and "section#notes" {
-            clear(EClear.both)
-            marginTop(15.px)
-            maxWidth(700.px)
-        }
+            "&#settings" or "&#notes" {
+                clear(EClear.both)
+                marginTop(15.px)
+                maxWidth(700.px)
+            }
 
-        "section#settings fieldset" {
-            borderStyle(ELineStyle.none)
-            margin(3.px, 3.px, 3.px, 3.px)
+            "&#settings fieldset" {
+                borderStyle(ELineStyle.none)
+                margin(3.px, 3.px, 3.px, 3.px)
+            }
+
         }
 
         /* TABLE */
         "table" {
+
             borderCollapse(EBorderCollapse.collapse)
             borderSpacing(0.px)
             padding(0.px)
-        }
 
-        "table.board" {
-            border(3.px, ELineStyle.solid, black)
-        }
+            "&.board" {
+                border(3.px, ELineStyle.solid, black)
+            }
 
-        "table.block" {
-            border(2.px, ELineStyle.solid, black)
-        }
+            "&.block" {
 
-        "table.block td.cell" {
-            border(1.px, ELineStyle.solid, black)
-            borderCollapse(EBorderCollapse.collapse)
-            borderSpacing(0.px)
-            fontSize(50.px)
-            height(66.px)
-            padding(3.px)
-            textAlign(ETextAlign.center)
-            width(66.px)
-        }
+                border(2.px, ELineStyle.solid, black)
 
-        "table.block td.cell.guessed" {
-            color(blue)
-        }
+                "td.cell" {
 
-        "table.block td.cell.solved" {
-            color(green)
-        }
+                    border(1.px, ELineStyle.solid, black)
+                    borderCollapse(EBorderCollapse.collapse)
+                    borderSpacing(0.px)
+                    fontSize(50.px)
+                    height(66.px)
+                    padding(3.px)
+                    textAlign(ETextAlign.center)
+                    width(66.px)
 
-        "table.block td.cell.guessed:hover" and "table.block td.cell.defined:hover" {
-            color(purple)
-            cursor(ECursor.pointer)
-            textDecoration(ETextDecorationLine.underline)
-        }
+                    "&.guessed" {
+                        color(blue)
+                    }
 
-        "table.block td.cell.unfillable" {
-            backgroundColor(pink)
-        }
+                    "&.solved" {
+                        color(green)
+                    }
 
-        "table.candidates td" {
-            fontSize(12.px)
-            height(20.px)
-            width(20.px)
-        }
+                    "&.guessed:hover" or "&.defined:hover" {
+                        color(purple)
+                        cursor(ECursor.pointer)
+                        textDecoration(ETextDecorationLine.underline)
+                    }
 
-        "table.candidates td.candidate:hover" {
-            color(blue)
-            cursor(ECursor.pointer)
-            textDecoration(ETextDecorationLine.underline)
-        }
+                    "&.unfillable" {
+                        backgroundColor(pink)
+                    }
 
-        "table.changes tr:nth-child(even)" {
-            backgroundColor(Color.fromHex("#f2f2f2")!!)
-        }
+                }
 
-        "table.changes th.candidates-removed" and "table.changes td.candidates-removed" {
-            fontSize(15.px)
-            textAlign(ETextAlign.left)
-            verticalAlign(EAlignmentBaseline.top)
-            width(450.px)
-        }
+            }
 
-        "table.changes th.cell-value-set" and "table.changes td.cell-value-set" {
-            textAlign(ETextAlign.left)
-            verticalAlign(EAlignmentBaseline.top)
-            width(100.px)
-        }
+            "&.candidates td" {
 
-        "table.changes th.change-description" and "table.changes td.change-description" {
-            textAlign(ETextAlign.left)
-            verticalAlign(EAlignmentBaseline.top)
-            width(200.px)
+                fontSize(12.px)
+                height(20.px)
+                width(20.px)
+
+                "&.candidate:hover" {
+                    color(blue)
+                    cursor(ECursor.pointer)
+                    textDecoration(ETextDecorationLine.underline)
+                }
+
+            }
+
+            "&.changes" {
+
+                "tr:nth-child(even)" {
+                    backgroundColor(Color.fromHex("#f2f2f2")!!)
+                }
+
+                "th.candidates-removed" or "td.candidates-removed" {
+                    fontSize(15.px)
+                    textAlign(ETextAlign.left)
+                    verticalAlign(EAlignmentBaseline.top)
+                    width(450.px)
+                }
+
+                "th.cell-value-set" or "td.cell-value-set" {
+                    textAlign(ETextAlign.left)
+                    verticalAlign(EAlignmentBaseline.top)
+                    width(100.px)
+                }
+
+                "th.change-description" or "td.change-description" {
+                    textAlign(ETextAlign.left)
+                    verticalAlign(EAlignmentBaseline.top)
+                    width(200.px)
+                }
+
+            }
+
         }
 
     }
