@@ -7,7 +7,6 @@ package i.katydid.css.colors
 
 import o.katydid.css.colors.Color
 import o.katydid.css.colors.rgba
-import o.katydid.css.colors.transparent
 import x.katydid.css.infrastructure.makeDecimalString
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -51,7 +50,7 @@ internal class RgbColor(
         red,
         green,
         blue,
-        alpha ,
+        alpha,
         null
     )
 
@@ -86,8 +85,11 @@ internal class RgbColor(
     }
 
     override fun hashCode(): Int {
-        return _red.shl(24) + _green.shl(16) + _blue.shl(8) + (_alpha*255).toInt()
+        return _red.shl(24) + _green.shl(16) + _blue.shl(8) + (_alpha * 255).toInt()
     }
+
+    override fun opacified(alphaIncrement: Float) =
+        RgbColor(_red, _green, _blue, _alpha + alphaIncrement)
 
     override fun toString(): String {
 
@@ -109,6 +111,9 @@ internal class RgbColor(
     }
 
     override fun toRgbColor() = this
+
+    override fun transparentized(alphaDecrement: Float) =
+        RgbColor(_red, _green, _blue, _alpha - alphaDecrement)
 
     ////
 

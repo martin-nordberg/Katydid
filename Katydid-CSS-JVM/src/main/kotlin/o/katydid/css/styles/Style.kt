@@ -34,6 +34,8 @@ class Style {
 
     // TODO: background
 
+    // TODO: consider SASS-like nested style groups: background { color(blue); position(center) }
+
     fun backgroundAttachment(vararg values: EAttachment) =
         setProperty("background-attachment", values.map { v -> v.toString() }.joinToString(", "))
 
@@ -340,9 +342,9 @@ class Style {
     fun height(value: EAuto) =
         setProperty("height", "$value")
 
-    fun include(style:Style) {
+    fun include(style: Style) {
 
-        for ( property in style.properties ) {
+        for (property in style.properties) {
             properties.add(property)
         }
 

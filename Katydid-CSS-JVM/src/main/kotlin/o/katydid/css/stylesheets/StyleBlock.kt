@@ -29,8 +29,8 @@ data class StyleBlock(
 
                     var fullSelector = outerSelector
 
-                    if (selector.startsWith("&")) {
-                        fullSelector += selector.substring(1)
+                    if (selector.contains("&")) {
+                        fullSelector = selector.replace("&", fullSelector)
                     }
                     else {
 

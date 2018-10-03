@@ -77,6 +77,22 @@ class HslColorTests {
 
     }
 
+    @Test
+    fun `HSL colors can have their transparency changed`() {
+
+        useCssColorNames()
+
+        assertColorName(
+            "hsla(0,1,0,0.75)",
+            opacify(hsla(0, 1f, 0f, 0.5f), 0.25f)
+        )
+        assertColorName(
+            "hsla(0,1,0,0.25)",
+            transparentize(hsla(0, 1f, 0f, 0.5f), 0.25f)
+        )
+
+    }
+
     private fun assertColorName(expected: String, color: Color) {
         assertEquals(expected, color.toString())
     }

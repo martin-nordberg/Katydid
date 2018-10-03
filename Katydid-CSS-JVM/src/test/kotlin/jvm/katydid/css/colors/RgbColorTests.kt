@@ -86,6 +86,20 @@ class RgbColorTests {
 
     }
 
+    @Test
+    fun `RGB colors can have their transparency changed`() {
+
+        assertColorName(
+            "rgba(1,34,51,0.75)",
+            opacify(rgba(1, 34, 51, 0.5f), 0.25f)
+        )
+        assertColorName(
+            "rgba(1,34,51,0.25)",
+            transparentize(rgba(1, 34, 51, 0.5f), 0.25f)
+        )
+
+    }
+
     private fun assertColorName(expected: String, color: Color) {
         assertEquals(expected, color.toString())
     }

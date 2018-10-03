@@ -5,9 +5,7 @@
 
 package jvm.katydid.css.stylesheets
 
-import o.katydid.css.colors.blue
-import o.katydid.css.colors.gray
-import o.katydid.css.colors.green
+import o.katydid.css.colors.*
 import o.katydid.css.measurements.pt
 import o.katydid.css.measurements.px
 import o.katydid.css.styles.style
@@ -40,7 +38,7 @@ class StyleSheetTests {
             |    width: 45px;
             |}
             |
-        """.trimMargin()+"\n"
+        """.trimMargin() + "\n"
 
         checkStyle(css) {
 
@@ -74,7 +72,7 @@ class StyleSheetTests {
             |    color: green;
             |}
             |
-        """.trimMargin()+"\n"
+        """.trimMargin() + "\n"
 
         checkStyle(css) {
 
@@ -100,6 +98,68 @@ class StyleSheetTests {
     }
 
     @Test
+    fun `Nested styles can reference the parent selector after the nested selector`() {
+
+        val css = """
+            |a {
+            |    color: honeydew;
+            |}
+            |
+            |a::hover {
+            |    color: aquamarine;
+            |}
+            |
+            |td a {
+            |    color: chartreuse;
+            |}
+            |
+        """.trimMargin() + "\n"
+
+        checkStyle(css) {
+
+            "a" {
+
+                color(honeydew)
+
+                "&::hover" {
+                    color(aquamarine)
+                }
+
+                "td &" {
+                    color(chartreuse)
+                }
+
+            }
+
+        }
+
+    }
+
+    @Test
+    fun `Comma-separated seelctors are handled`() {
+
+        val css = """
+            |td,
+            |th,
+            |div {
+            |    font-size: 10pt;
+            |    font-style: italic;
+            |}
+            |
+        """.trimMargin() + "\n"
+
+        checkStyle(css) {
+
+            " td,th,  div " {
+                fontSize(10.pt)
+                fontStyle(EFontStyle.italic)
+            }
+
+        }
+
+    }
+
+    @Test
     fun `Selectors can be combined with the and operator`() {
 
         val css = """
@@ -110,7 +170,7 @@ class StyleSheetTests {
             |    font-style: italic;
             |}
             |
-        """.trimMargin()+"\n"
+        """.trimMargin() + "\n"
 
         checkStyle(css) {
 
@@ -137,7 +197,7 @@ class StyleSheetTests {
             |    color: green;
             |}
             |
-        """.trimMargin()+"\n"
+        """.trimMargin() + "\n"
 
         checkStyle(css) {
 
@@ -171,7 +231,7 @@ class StyleSheetTests {
             |    color: green;
             |}
             |
-        """.trimMargin()+"\n"
+        """.trimMargin() + "\n"
 
         checkStyle(css) {
 
@@ -210,7 +270,7 @@ class StyleSheetTests {
             |    color: green;
             |}
             |
-        """.trimMargin()+"\n"
+        """.trimMargin() + "\n"
 
         checkStyle(css) {
 
@@ -255,7 +315,7 @@ class StyleSheetTests {
             |    color: green;
             |}
             |
-        """.trimMargin()+"\n"
+        """.trimMargin() + "\n"
 
         checkStyle(css) {
 
@@ -298,7 +358,7 @@ class StyleSheetTests {
             |    color: green;
             |}
             |
-        """.trimMargin()+"\n"
+        """.trimMargin() + "\n"
 
         checkStyle(css) {
 
@@ -340,7 +400,7 @@ class StyleSheetTests {
             |    color: green;
             |}
             |
-        """.trimMargin()+"\n"
+        """.trimMargin() + "\n"
 
         checkStyle(css) {
 
@@ -377,11 +437,11 @@ class StyleSheetTests {
             |    width: 45px;
             |}
             |
-        """.trimMargin()+"\n"
+        """.trimMargin() + "\n"
 
         checkStyle(css) {
 
-            val commonColors = style{
+            val commonColors = style {
                 backgroundColor(gray)
                 color(blue)
             }
@@ -423,7 +483,7 @@ class StyleSheetTests {
             |    width: 45px;
             |}
             |
-        """.trimMargin()+"\n"
+        """.trimMargin() + "\n"
 
         checkStyle(css) {
 
@@ -476,7 +536,7 @@ class StyleSheetTests {
             |    width: 45px;
             |}
             |
-        """.trimMargin()+"\n"
+        """.trimMargin() + "\n"
 
         checkStyle(css) {
 
@@ -526,7 +586,7 @@ class StyleSheetTests {
             |    width: 45px;
             |}
             |
-        """.trimMargin()+"\n"
+        """.trimMargin() + "\n"
 
         val commonColors = styleSheet {
 

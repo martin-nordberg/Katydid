@@ -27,7 +27,7 @@ internal class HslColor(
 
     private val _alpha: Float
 
-    private val _rgbColor : RgbColor
+    private val _rgbColor: RgbColor
 
     init {
 
@@ -93,6 +93,9 @@ internal class HslColor(
         return _rgbColor.hashCode()
     }
 
+    override fun opacified(alphaIncrement: Float) =
+        HslColor(_hue, _saturation, _lightness, _alpha + alphaIncrement)
+
     override fun toString(): String {
 
         val saturationStr = makeDecimalString(_saturation)
@@ -110,6 +113,9 @@ internal class HslColor(
     override fun toHslColor() = this
 
     override fun toRgbColor() = _rgbColor
+
+    override fun transparentized(alphaDecrement: Float) =
+        HslColor(_hue, _saturation, _lightness, _alpha - alphaDecrement)
 
 }
 
