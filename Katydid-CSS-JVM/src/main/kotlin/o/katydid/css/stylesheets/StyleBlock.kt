@@ -9,9 +9,20 @@ data class StyleBlock(
     internal val parent: StyleBlock?,
     internal val selectors: MutableList<String> = mutableListOf(),
     internal var style: Style? = null,
-    internal val nestedBlocks: MutableList<StyleBlock> = mutableListOf(),
-    internal val nestedPlaceholders: MutableMap<String,StyleBlock> = mutableMapOf()
+    internal val nestedBlocks: MutableList<StyleBlock> = mutableListOf()
 ) {
+
+    /**
+     * Recursively copies this style block. The copy has parent [copyParent].
+     */
+    internal fun copy(copyParent: StyleBlock): StyleBlock {
+        val result = StyleBlock(copyParent, selectors.toMutableList(), style)
+        result.nestedBlocks.addAll(nestedBlocks.map { b -> b.copy(result) })
+        return result
+    }
+
+    internal fun findPlaceholder(placeholderName: String) =
+        nestedBlocks.find { b -> b.selectors.contains(placeholderName) }
 
     /**
      * Returns a list of the full-path selectors for this block, i.e. the CSS selectors resulting from nesting.
@@ -21,7 +32,7 @@ data class StyleBlock(
         get() {
 
             if (parent == null || parent.selectors.isEmpty()) {
-                return selectors
+                return selectors.filter { s -> !s.startsWith("%") }
             }
 
             val result = mutableListOf<String>()
@@ -29,6 +40,10 @@ data class StyleBlock(
             for (outerSelector in parent.fullSelectors) {
 
                 for (selector in selectors) {
+
+                    if (selector.startsWith("%")) {
+                        continue
+                    }
 
                     var fullSelector = outerSelector
 
@@ -68,14 +83,11 @@ data class StyleBlock(
         // lower precedence than we want.
         for ( selector in compoundSelector.split(",").map { s -> s.trim() }.reversed()) {
 
-            if ( selector.startsWith("%") ) {
-                parent!!
-                require( !parent.nestedPlaceholders.containsKey(selector) ) { "Duplicate placeholder name: '$selector'." }
-                parent.nestedPlaceholders[selector] = this
+            if (selector.startsWith("%")) {
+                require(parent!!.findPlaceholder(selector) == null) { "Duplicate placeholder name: '$selector'." }
             }
-            else {
-                selectors.add(0,selector)
-            }
+
+            selectors.add(0, selector)
 
         }
 

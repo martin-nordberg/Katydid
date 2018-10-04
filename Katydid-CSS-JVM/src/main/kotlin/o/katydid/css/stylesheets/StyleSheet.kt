@@ -35,7 +35,7 @@ class StyleSheet {
             "Cannot extend a non-placeholder selector: '$placeholderSelector'."
         }
 
-        val block = activeStyleBlock.parent!!.nestedPlaceholders.get(placeholderSelector)
+        val block = activeStyleBlock.parent!!.findPlaceholder(placeholderSelector)
             ?: throw IllegalArgumentException("Unknown block to be extended: '$placeholderSelector'.")
 
         block.selectors.addAll(activeStyleBlock.selectors)
@@ -44,7 +44,7 @@ class StyleSheet {
 
     /** Includes the contents of another [styleSheet] directly in this one. */
     fun include(styleSheet:StyleSheet) {
-        activeStyleBlock.nestedBlocks.addAll(styleSheet.styleBlock.nestedBlocks)
+        activeStyleBlock.nestedBlocks.addAll(styleSheet.styleBlock.nestedBlocks.map{b->b.copy(activeStyleBlock)})
     }
 
     /** Builds a style block from a selector and the [build] function for the style. */
