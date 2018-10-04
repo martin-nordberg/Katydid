@@ -538,9 +538,9 @@ class StyleSheetTests {
             |
         """.trimMargin() + "\n"
 
-        checkStyle(css) {
+        val commonColors = "%common-colors"
 
-            val commonColors = "%common-colors"
+        checkStyle(css) {
 
             "span" or commonColors {
                 backgroundColor(gray)
@@ -556,6 +556,85 @@ class StyleSheetTests {
 
                 "&.wider" {
                     width(45.px)
+                }
+
+            }
+
+        }
+
+        checkStyle(css) {
+
+            "span, $commonColors" {
+                backgroundColor(gray)
+                color(blue)
+            }
+
+            "div" {
+
+                extend(commonColors)
+
+                height(23.px)
+                width(30.px)
+
+                "&.wider" {
+                    width(45.px)
+                }
+
+            }
+
+        }
+
+        checkStyle(css) {
+
+            "$commonColors, span" {
+                backgroundColor(gray)
+                color(blue)
+            }
+
+            "div" {
+
+                extend(commonColors)
+
+                height(23.px)
+                width(30.px)
+
+                "&.wider" {
+                    width(45.px)
+                }
+
+            }
+
+        }
+
+    }
+
+    @Test
+    fun `Duplicate placeholder names are not allowed`() {
+
+        // second instance
+        assertFailsWith<IllegalArgumentException> {
+
+            styleSheet {
+
+                "%x" {
+                    color(blue)
+                }
+
+                "%x" {
+                    color(green)
+                }
+
+            }
+
+        }
+
+        // named twice
+        assertFailsWith<IllegalArgumentException> {
+
+            styleSheet {
+
+                "%x" or "%x" {
+                    color(green)
                 }
 
             }

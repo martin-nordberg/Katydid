@@ -23,14 +23,20 @@ class StyleSheet {
 
     ////
 
-    /** Extends a style block named [styleBlockName] with the selector of the currently active style block. */
+    /**
+     * Extends a style block that has placeholder selector [placeholderSelector] with the selector of the currently
+     * active style block. The placeholder must be found in a previously occurring sibling of the currently active
+     * block.
+     */
     @Suppress("unused")
-    fun Style.extend(styleBlockName:String) {
+    fun Style.extend(placeholderSelector:String) {
 
-        require(styleBlockName.startsWith("%")) { "Only placeholders can be extended." }
+        require(placeholderSelector.startsWith("%")) {
+            "Cannot extend a non-placeholder selector: '$placeholderSelector'."
+        }
 
-        val block = activeStyleBlock.parent!!.nestedPlaceholders.get(styleBlockName)
-            ?: throw IllegalArgumentException("Unknown block to be extended: '$styleBlockName'.")
+        val block = activeStyleBlock.parent!!.nestedPlaceholders.get(placeholderSelector)
+            ?: throw IllegalArgumentException("Unknown block to be extended: '$placeholderSelector'.")
 
         block.selectors.addAll(activeStyleBlock.selectors)
 
@@ -44,23 +50,27 @@ class StyleSheet {
     /** Builds a style block from a selector and the [build] function for the style. */
     operator fun String.invoke(build: Style.() -> Unit) : StyleBlock {
 
+        // Create the new style block.
         val result = StyleBlock(activeStyleBlock)
 
-        if ( this.startsWith("%") ) {
-            activeStyleBlock.nestedPlaceholders.put(this,result)
-        }
-        else {
-            result.selectors.addAll(this.split(",").map { s -> s.trim() })
-        }
+        // Add its selectors or placeholder selectors.
+        result.prependSelectors(this)
+
+        // Nest the new block in the active block.
         activeStyleBlock.nestedBlocks.add(result)
 
+        // Make the new block active while we build it.
+        val priorActiveStyleBlock = activeStyleBlock
         activeStyleBlock = result
 
+        // Build its style.
         val style = Style()
         style.build()
         activeStyleBlock.style = style
 
-        activeStyleBlock = activeStyleBlock.parent!!
+        // Make the parent block active again.
+        activeStyleBlock = priorActiveStyleBlock
+
         return result
 
     }
@@ -72,15 +82,13 @@ class StyleSheet {
     /** Combines a selector with an already created [styleBlock] by adding the selector to the block. */
     infix fun String.or(styleBlock: StyleBlock): StyleBlock {
 
-        for (selector in this.split(",").map { s -> s.trim() }.reversed()) {
-            styleBlock.selectors.add(0,selector)
-        }
+        styleBlock.prependSelectors(this)
 
         return styleBlock
 
     }
 
-    /** Converts this stylesheet to CSS. */
+    /** Converts this style sheet to CSS. */
     override fun toString(): String {
 
         val result = StringBuilder("")
