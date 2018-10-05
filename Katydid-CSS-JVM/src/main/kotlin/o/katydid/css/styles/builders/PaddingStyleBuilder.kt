@@ -13,33 +13,34 @@ import o.katydid.css.styles.Style
 /**
  * Builder class for setting padding properties of a given [style] from a nested block.
  */
+@StyleBuilderDsl
 class PaddingStyleBuilder(
     private val style: Style
 ) {
 
     fun bottom(value: Length) =
-        style.setProperty("padding-bottom", "$value")
+        style.paddingBottom(value)
 
     fun bottom(value: Percentage) =
-        style.setProperty("padding-bottom", "$value")
+        style.paddingBottom(value)
 
     fun left(value: Length) =
-        style.setProperty("padding-left", "$value")
+        style.paddingLeft(value)
 
     fun left(value: Percentage) =
-        style.setProperty("padding-left", "$value")
+        style.paddingLeft(value)
 
     fun right(value: Length) =
-        style.setProperty("padding-right", "$value")
+        style.paddingRight(value)
 
     fun right(value: Percentage) =
-        style.setProperty("padding-right", "$value")
+        style.paddingRight(value)
 
     fun top(value: Length) =
-        style.setProperty("padding-top", "$value")
+        style.paddingTop(value)
 
     fun top(value: Percentage) =
-        style.setProperty("padding-top", "$value")
+        style.paddingTop(value)
 
 }
 

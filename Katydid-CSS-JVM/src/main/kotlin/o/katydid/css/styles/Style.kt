@@ -222,15 +222,6 @@ class Style {
     fun borderWidth(top: Length, right: Length = top, bottom: Length = top, left: Length = right) =
         setBoxProperty("border-width", top, right, bottom, left)
 
-    fun bottom(value: Length) =
-        setProperty("bottom", "$value")
-
-    fun bottom(value: Percentage) =
-        setProperty("bottom", "$value")
-
-    fun bottom(value: EAuto) =
-        setProperty("bottom", "$value")
-
     fun captionSide(value: ECaptionSide) =
         setProperty("caption-side", "$value")
 
@@ -246,9 +237,6 @@ class Style {
         setProperty("clear", "$value")
 
     // TODO: clip
-
-    fun color(value: Color) =
-        setProperty("color", "$value")
 
     fun content(value: EContent) =
         setProperty("content", "$value")
@@ -341,15 +329,6 @@ class Style {
     fun inherit(key: String) =
         setProperty(key, "inherit")
 
-    fun left(value: Length) =
-        setProperty("left", "$value")
-
-    fun left(value: Percentage) =
-        setProperty("left", "$value")
-
-    fun left(value: EAuto) =
-        setProperty("left", "$value")
-
     fun letterSpacing(value: Length) =
         setProperty("letter-spacing", "$value")
 
@@ -397,79 +376,15 @@ class Style {
     fun listStyleType(value: EListStyleType) =
         setProperty("list-style-type", "$value")
 
-    fun opacity(value: Float) =
-        when {
-            value <= 0 -> setProperty("opacity", "0")
-            value >= 1 -> setProperty("opacity", "1")
-            else       -> setProperty("opacity", makeDecimalString(value))
-        }
-
     fun orphans(value: Int) {
         require(value > 0) { "CSS orphans property must be greater than zero." }
         setProperty("orphans", "$value")
     }
 
-    fun outline(color: Color, style: ELineStyle, width: ELineWidth) =
-        setProperty("outline", "$color $style $width")
-
-    fun outline(color: EOutlineColor, style: ELineStyle, width: ELineWidth) =
-        setProperty("outline", "$color $style $width")
-
-    fun outline(color: Color, style: ELineStyle, width: Length) =
-        setProperty("outline", "$color $style $width")
-
-    fun outline(color: EOutlineColor, style: ELineStyle, width: Length) =
-        setProperty("outline", "$color $style $width")
-
-    fun outlineColor(value: Color) =
-        setProperty("outline-color", "$value")
-
-    fun outlineColor(value: EOutlineColor) =
-        setProperty("outline-color", "$value")
-
-    fun outlineStyle(value: ELineStyle) =
-        setProperty("outline-style", "$value")
-
-    fun outlineWidth(value: ELineWidth) =
-        setProperty("outline-width", "$value")
-
-    fun outlineWidth(value: Length) =
-        setProperty("outline-width", "$value")
-
-    fun overflow(x: EOverflow, y: EOverflow = x) =
-        setXyProperty("overflow", x, y)
-
-    fun overflowX(value: EOverflow) =
-        setProperty("overflow-x", "$value")
-
-    fun overflowY(value: EOverflow) =
-        setProperty("overflow-y", "$value")
-
-    fun pageBreakAfter(value: EPageBreak) =
-        setProperty("page-break-after", "$value")
-
-    fun pageBreakBefore(value: EPageBreak) =
-        setProperty("page-break-before", "$value")
-
-    fun pageBreakInside(value: EPageBreakInside) =
-        setProperty("page-break-inside", "$value")
-
-    fun position(value: EPosition) =
-        setProperty("position", "$value")
-
     // TODO: quotes
 
     fun resize(value: EResize) =
         setProperty("resize", "$value")
-
-    fun right(value: Length) =
-        setProperty("right", "$value")
-
-    fun right(value: Percentage) =
-        setProperty("right", "$value")
-
-    fun right(value: EAuto) =
-        setProperty("right", "$value")
 
     private fun <T> setBorderProperty(key: String, width: T?, style: ELineStyle?, color: Color?) {
 
@@ -513,7 +428,7 @@ class Style {
         properties.add("$key: $value")
     }
 
-    private fun <T> setXyProperty(key: String, x: T, y: T = x) {
+    fun <T> setXyProperty(key: String, x: T, y: T = x) {
 
         var css = "$x"
 
@@ -535,70 +450,8 @@ class Style {
     fun tableLayout(value: ETableLayout) =
         setProperty("table-layout", "$value")
 
-    fun textAlign(value: ETextAlign) =
-        setProperty("text-align", "$value")
-
-    fun textDecoration(value: ENone) =
-        setProperty("text-decoration", "$value")
-
-    fun textDecoration(line: ETextDecorationLine? = null, style: ETextDecorationStyle? = null,
-                       color: Color? = null, vararg moreLines: ETextDecorationLine? = arrayOf()) {
-        var css = ""
-        if (line != null) {
-            css = "$line"
-        }
-        if (style != null) {
-            css += " $style"
-        }
-        if (color != null) {
-            css += " $color"
-        }
-        for (l in moreLines) {
-            css += " $l"
-        }
-
-        require(css.isNotEmpty()) { "Specify at least one non-null parameter for text-decoration." }
-
-        setProperty("text-decoration", css.trim())
-    }
-
-    fun textDecorationColor(value: Color) =
-        setProperty("text-decoration-color", "$value")
-
-    fun textDecorationLine(value: ENone) =
-        setProperty("text-decoration-line", "$value")
-
-    fun textDecorationLine(vararg values: ETextDecorationLine) {
-        val css = values.map { v -> v.toString() }.joinToString(" ")
-        setProperty("text-decoration-line", css)
-    }
-
-    fun textDecorationStyle(value: ETextDecorationStyle) =
-        setProperty("text-decoration-style", "$value")
-
-    fun textIndent(value: Length) =
-        setProperty("text-indent", "$value")
-
-    fun textIndent(value: Percentage) =
-        setProperty("text-indent", "$value")
-
-    fun textOverflow(value: ETextOverflow) =
-        setProperty("text-overflow", "$value")
-
-    fun textTransform(value: ETextTransform) =
-        setProperty("text-transform", "$value")
-
     fun toCssString(indent: String = "", whitespace: String = "\n") =
         properties.map { p -> indent + p }.joinToString(";" + whitespace) + ";"
-
-    fun top(value: Length) =
-        setProperty("top", "$value")
-
-    fun top(value: Percentage) =
-        setProperty("top", "$value")
-
-    fun top(value: EAuto) =
-        setProperty("top", "$value")
 
     override fun toString() =
         toCssString("", " ")

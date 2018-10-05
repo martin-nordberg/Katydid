@@ -8,6 +8,7 @@ package jvm.katydid.css.stylesheets
 import o.katydid.css.colors.*
 import o.katydid.css.measurements.pt
 import o.katydid.css.measurements.px
+import o.katydid.css.styles.builders.color
 import o.katydid.css.styles.builders.height
 import o.katydid.css.styles.builders.maxWidth
 import o.katydid.css.styles.builders.width
@@ -139,7 +140,7 @@ class StyleSheetTests {
     }
 
     @Test
-    fun `Comma-separated seelctors are handled`() {
+    fun `Comma-separated selectors are handled`() {
 
         val css = """
             |td,

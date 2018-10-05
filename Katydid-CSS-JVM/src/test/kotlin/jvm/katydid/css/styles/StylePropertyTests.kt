@@ -6,7 +6,10 @@
 package jvm.katydid.css.styles
 
 import o.katydid.css.colors.*
-import o.katydid.css.measurements.*
+import o.katydid.css.measurements.em
+import o.katydid.css.measurements.percent
+import o.katydid.css.measurements.pt
+import o.katydid.css.measurements.px
 import o.katydid.css.styles.Style
 import o.katydid.css.styles.style
 import o.katydid.css.types.*
@@ -17,10 +20,11 @@ import o.katydid.css.types.EBorderCollapse.separate
 import o.katydid.css.types.EDisplay.*
 import o.katydid.css.types.ELineStyle.*
 import o.katydid.css.types.ELineWidth.*
-import o.katydid.css.types.EOutlineColor.invert
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+
+//---------------------------------------------------------------------------------------------------------------------
 
 @Suppress("RemoveRedundantBackticks")
 class StylePropertyTests {
@@ -201,13 +205,6 @@ class StylePropertyTests {
         checkStyle("float: right;") { float(EFloat.right) }
         checkStyle("float: snap-block;") { float(EFloat.snapBlock) }
         checkStyle("float: snap-inline;") { float(EFloat.snapInline) }
-
-    }
-
-    @Test
-    fun `Color style properties convert to correct CSS`() {
-
-        checkStyle("color: aliceblue;") { color(aliceblue) }
 
     }
 
@@ -395,98 +392,6 @@ class StylePropertyTests {
     }
 
     @Test
-    fun `Opacity style properties convert to correct CSS`() {
-
-        checkStyle("opacity: 0;") { opacity(-1f) }
-        checkStyle("opacity: 0;") { opacity(0f) }
-        checkStyle("opacity: 0.642;") { opacity(0.6421f) }
-        checkStyle("opacity: 1;") { opacity(1f) }
-        checkStyle("opacity: 1;") { opacity(3f) }
-
-    }
-
-    @Test
-    fun `Outline style properties convert to correct CSS`() {
-
-        checkStyle("outline: red solid thick;") { outline(red, solid, thick) }
-        checkStyle("outline: invert solid thick;") { outline(invert, solid, thick) }
-        checkStyle("outline: red solid 3px;") { outline(red, solid, 3.px) }
-        checkStyle("outline: invert solid 3px;") { outline(invert, solid, 3.px) }
-
-        checkStyle("outline-color: red;") { outlineColor(red) }
-        checkStyle("outline-color: invert;") { outlineColor(invert) }
-
-        checkStyle("outline-style: solid;") { outlineStyle(solid) }
-
-        checkStyle("outline-width: thick;") { outlineWidth(thick) }
-        checkStyle("outline-width: 3px;") { outlineWidth(3.px) }
-
-    }
-
-    @Test
-    fun `Overflow style properties convert to correct CSS`() {
-
-        checkStyle("overflow: auto;") { overflow(EOverflow.auto) }
-        checkStyle("overflow: hidden;") { overflow(EOverflow.hidden) }
-        checkStyle("overflow: scroll;") { overflow(EOverflow.scroll) }
-        checkStyle("overflow: clip;") { overflow(EOverflow.clip) }
-        checkStyle("overflow: scroll hidden;") { overflow(EOverflow.scroll, EOverflow.hidden) }
-        checkStyle("overflow: visible;") { overflow(EOverflow.visible) }
-
-        checkStyle("overflow-x: scroll;") { overflowX(EOverflow.scroll) }
-
-        checkStyle("overflow-y: scroll;") { overflowY(EOverflow.scroll) }
-
-    }
-
-    @Test
-    fun `Page break style properties convert to correct CSS`() {
-
-        checkStyle("page-break-after: always;") { pageBreakAfter(EPageBreak.always) }
-        checkStyle("page-break-after: auto;") { pageBreakAfter(EPageBreak.auto) }
-        checkStyle("page-break-after: avoid;") { pageBreakAfter(EPageBreak.avoid) }
-        checkStyle("page-break-after: left;") { pageBreakAfter(EPageBreak.left) }
-        checkStyle("page-break-after: right;") { pageBreakAfter(EPageBreak.right) }
-
-        checkStyle("page-break-before: always;") { pageBreakBefore(EPageBreak.always) }
-        checkStyle("page-break-before: auto;") { pageBreakBefore(EPageBreak.auto) }
-        checkStyle("page-break-before: avoid;") { pageBreakBefore(EPageBreak.avoid) }
-        checkStyle("page-break-before: left;") { pageBreakBefore(EPageBreak.left) }
-        checkStyle("page-break-before: right;") { pageBreakBefore(EPageBreak.right) }
-
-        checkStyle("page-break-inside: auto;") { pageBreakInside(EPageBreakInside.auto) }
-        checkStyle("page-break-inside: avoid;") { pageBreakInside(EPageBreakInside.avoid) }
-
-    }
-
-    @Test
-    fun `Position style properties convert to correct CSS`() {
-
-        checkStyle("bottom: 4.5ex;") { bottom(4.5.ex) }
-        checkStyle("bottom: 45%;") { bottom(45.percent) }
-        checkStyle("bottom: auto;") { bottom(auto) }
-
-        checkStyle("left: 14.1px;") { left(14.1.px) }
-        checkStyle("left: 3%;") { left(3.percent) }
-        checkStyle("left: auto;") { left(auto) }
-
-        checkStyle("position: absolute;") { position(EPosition.absolute) }
-        checkStyle("position: fixed;") { position(EPosition.fixed) }
-        checkStyle("position: relative;") { position(EPosition.relative) }
-        checkStyle("position: static;") { position(EPosition.static) }
-        checkStyle("position: sticky;") { position(EPosition.sticky) }
-
-        checkStyle("right: 14.1px;") { right(14.1.px) }
-        checkStyle("right: 3%;") { right(3.percent) }
-        checkStyle("right: auto;") { right(auto) }
-
-        checkStyle("top: 4.5ex;") { top(4.5.ex) }
-        checkStyle("top: 45%;") { top(45.percent) }
-        checkStyle("top: auto;") { top(auto) }
-
-    }
-
-    @Test
     fun `Resize properties convert to correct CSS`() {
 
         checkStyle("resize: both;") { resize(EResize.both) }
@@ -508,70 +413,6 @@ class StylePropertyTests {
 
         checkStyle("table-layout: auto;") { tableLayout(ETableLayout.auto) }
         checkStyle("table-layout: fixed;") { tableLayout(ETableLayout.fixed) }
-
-    }
-
-    @Test
-    fun `Text align properties convert to correct CSS`() {
-
-        checkStyle("text-align: center;") { textAlign(ETextAlign.center) }
-        checkStyle("text-align: end;") { textAlign(ETextAlign.end) }
-        checkStyle("text-align: justify;") { textAlign(ETextAlign.justify) }
-        checkStyle("text-align: justify-all;") { textAlign(ETextAlign.justifyAll) }
-        checkStyle("text-align: left;") { textAlign(ETextAlign.left) }
-        checkStyle("text-align: match-parent;") { textAlign(ETextAlign.matchParent) }
-        checkStyle("text-align: right;") { textAlign(ETextAlign.right) }
-        checkStyle("text-align: start;") { textAlign(ETextAlign.start) }
-
-    }
-
-    @Test
-    fun `Text decoration properties convert to correct CSS`() {
-
-        checkStyle("text-decoration-color: antiquewhite;") { textDecorationColor(antiquewhite) }
-
-        checkStyle("text-decoration: none;") { textDecoration(ENone.none) }
-        checkStyle("text-decoration: underline;") { textDecoration(ETextDecorationLine.underline) }
-        checkStyle("text-decoration: underline line-through;") { textDecoration(ETextDecorationLine.underline, moreLines = *arrayOf(ETextDecorationLine.lineThrough)) }
-        checkStyle("text-decoration: underline wavy red overline;") { textDecoration(ETextDecorationLine.underline, ETextDecorationStyle.wavy, red, moreLines = *arrayOf(ETextDecorationLine.overline)) }
-
-        checkStyle("text-decoration-line: none;") { textDecorationLine(ENone.none) }
-        checkStyle("text-decoration-line: line-through;") { textDecorationLine(ETextDecorationLine.lineThrough) }
-        checkStyle("text-decoration-line: overline;") { textDecorationLine(ETextDecorationLine.overline) }
-        checkStyle("text-decoration-line: underline;") { textDecorationLine(ETextDecorationLine.underline) }
-        checkStyle("text-decoration-line: underline overline;") { textDecorationLine(ETextDecorationLine.underline, ETextDecorationLine.overline) }
-
-        checkStyle("text-decoration-style: dashed;") { textDecorationStyle(ETextDecorationStyle.dashed) }
-        checkStyle("text-decoration-style: dotted;") { textDecorationStyle(ETextDecorationStyle.dotted) }
-        checkStyle("text-decoration-style: double;") { textDecorationStyle(ETextDecorationStyle.double) }
-        checkStyle("text-decoration-style: solid;") { textDecorationStyle(ETextDecorationStyle.solid) }
-        checkStyle("text-decoration-style: wavy;") { textDecorationStyle(ETextDecorationStyle.wavy) }
-    }
-
-    @Test
-    fun `Text indent properties convert to correct CSS`() {
-
-        checkStyle("text-indent: 3em;") { textIndent(3.em) }
-        checkStyle("text-indent: 3%;") { textIndent(3.percent) }
-
-    }
-
-    @Test
-    fun `Text overflow properties convert to correct CSS`() {
-
-        checkStyle("text-overflow: clip;") { textOverflow(ETextOverflow.clip) }
-        checkStyle("text-overflow: ellipsis;") { textOverflow(ETextOverflow.ellipsis) }
-
-    }
-
-    @Test
-    fun `Text transform properties convert to correct CSS`() {
-
-        checkStyle("text-transform: capitalize;") { textTransform(ETextTransform.capitalize) }
-        checkStyle("text-transform: lowercase;") { textTransform(ETextTransform.lowercase) }
-        checkStyle("text-transform: none;") { textTransform(ETextTransform.none) }
-        checkStyle("text-transform: uppercase;") { textTransform(ETextTransform.uppercase) }
-        checkStyle("text-transform: full-width;") { textTransform(ETextTransform.fullWidth) }
 
     }
 
@@ -660,3 +501,6 @@ class StylePropertyTests {
     }
 
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+

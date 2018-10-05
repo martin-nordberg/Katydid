@@ -3,7 +3,7 @@
 // Apache 2.0 License
 //
 
-package jvm.katydid.css.styles
+package jvm.katydid.css.styles.builders
 
 import o.katydid.css.measurements.box
 import o.katydid.css.measurements.percent
@@ -14,6 +14,8 @@ import o.katydid.css.styles.style
 import o.katydid.css.types.EAuto.auto
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+
+//---------------------------------------------------------------------------------------------------------------------
 
 @Suppress("RemoveRedundantBackticks")
 class BoxModelStylePropertyTests {
@@ -143,3 +145,6 @@ class BoxModelStylePropertyTests {
     }
 
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+

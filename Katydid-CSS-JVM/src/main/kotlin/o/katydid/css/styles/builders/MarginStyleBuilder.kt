@@ -14,45 +14,46 @@ import o.katydid.css.types.EAuto
 /**
  * Builder class for setting margin properties of a given [style] from a nested block.
  */
+@StyleBuilderDsl
 class MarginStyleBuilder(
     private val style: Style
 ) {
 
     fun bottom(value: Length) =
-        style.setProperty("margin-bottom", "$value")
+        style.marginBottom(value)
 
     fun bottom(value: Percentage) =
-        style.setProperty("margin-bottom", "$value")
+        style.marginBottom(value)
 
     fun bottom(value: EAuto) =
-        style.setProperty("margin-bottom", "$value")
+        style.marginBottom(value)
 
     fun left(value: Length) =
-        style.setProperty("margin-left", "$value")
+        style.marginLeft(value)
 
     fun left(value: Percentage) =
-        style.setProperty("margin-left", "$value")
+        style.marginLeft(value)
 
     fun left(value: EAuto) =
-        style.setProperty("margin-left", "$value")
+        style.marginLeft(value)
 
     fun right(value: Length) =
-        style.setProperty("margin-right", "$value")
+        style.marginRight(value)
 
     fun right(value: Percentage) =
-        style.setProperty("margin-right", "$value")
+        style.marginRight(value)
 
     fun right(value: EAuto) =
-        style.setProperty("margin-right", "$value")
+        style.marginRight(value)
 
     fun top(value: Length) =
-        style.setProperty("margin-top", "$value")
+        style.marginTop(value)
 
     fun top(value: Percentage) =
-        style.setProperty("margin-top", "$value")
+        style.marginTop(value)
 
     fun top(value: EAuto) =
-        style.setProperty("margin-top", "$value")
+        style.marginTop(value)
 
 }
 
