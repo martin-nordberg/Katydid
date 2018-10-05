@@ -6,6 +6,7 @@
 package js.katydid.samples.sudokusolver
 
 import o.katydid.css.measurements.px
+import o.katydid.css.styles.builders.marginLeft
 import o.katydid.css.styles.style
 import o.katydid.css.types.EFontWeight
 import o.katydid.events.eventhandling.onchange

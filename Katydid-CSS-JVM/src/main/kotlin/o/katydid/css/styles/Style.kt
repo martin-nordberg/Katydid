@@ -231,9 +231,6 @@ class Style {
     fun bottom(value: EAuto) =
         setProperty("bottom", "$value")
 
-    fun boxSizing(value: EBoxSizing) =
-        setProperty("box-sizing", "$value")
-
     fun captionSide(value: ECaptionSide) =
         setProperty("caption-side", "$value")
 
@@ -333,15 +330,6 @@ class Style {
     fun fontWeight(value: EFontWeight) =
         setProperty("font-weight", "$value")
 
-    fun height(value: Length) =
-        setProperty("height", "$value")
-
-    fun height(value: Percentage) =
-        setProperty("height", "$value")
-
-    fun height(value: EAuto) =
-        setProperty("height", "$value")
-
     fun include(style: Style) {
 
         for (property in style.properties) {
@@ -409,81 +397,6 @@ class Style {
     fun listStyleType(value: EListStyleType) =
         setProperty("list-style-type", "$value")
 
-    fun margin(top: Length, right: Length = top, bottom: Length = top, left: Length = right) =
-        setBoxProperty("margin", top, right, bottom, left)
-
-    fun margin(top: Percentage, right: Percentage = top, bottom: Percentage = top, left: Percentage = right) =
-        setBoxProperty("margin", top, right, bottom, left)
-
-    fun margin(value: EAuto) =
-        setProperty("margin", "$value")
-
-    fun marginBottom(value: Length) =
-        setProperty("margin-bottom", "$value")
-
-    fun marginBottom(value: Percentage) =
-        setProperty("margin-bottom", "$value")
-
-    fun marginBottom(value: EAuto) =
-        setProperty("margin-bottom", "$value")
-
-    fun marginLeft(value: Length) =
-        setProperty("margin-left", "$value")
-
-    fun marginLeft(value: Percentage) =
-        setProperty("margin-left", "$value")
-
-    fun marginLeft(value: EAuto) =
-        setProperty("margin-left", "$value")
-
-    fun marginRight(value: Length) =
-        setProperty("margin-right", "$value")
-
-    fun marginRight(value: Percentage) =
-        setProperty("margin-right", "$value")
-
-    fun marginRight(value: EAuto) =
-        setProperty("margin-right", "$value")
-
-    fun marginTop(value: Length) =
-        setProperty("margin-top", "$value")
-
-    fun marginTop(value: Percentage) =
-        setProperty("margin-top", "$value")
-
-    fun marginTop(value: EAuto) =
-        setProperty("margin-top", "$value")
-
-    fun maxHeight(value: Length) =
-        setProperty("max-height", "$value")
-
-    fun maxHeight(value: Percentage) =
-        setProperty("max-height", "$value")
-
-    fun maxHeight(value: ENone) =
-        setProperty("max-height", "$value")
-
-    fun maxWidth(value: Length) =
-        setProperty("max-width", "$value")
-
-    fun maxWidth(value: Percentage) =
-        setProperty("max-width", "$value")
-
-    fun maxWidth(value: ENone) =
-        setProperty("max-width", "$value")
-
-    fun minHeight(value: Length) =
-        setProperty("min-height", "$value")
-
-    fun minHeight(value: Percentage) =
-        setProperty("min-height", "$value")
-
-    fun minWidth(value: Length) =
-        setProperty("min-width", "$value")
-
-    fun minWidth(value: Percentage) =
-        setProperty("min-width", "$value")
-
     fun opacity(value: Float) =
         when {
             value <= 0 -> setProperty("opacity", "0")
@@ -532,36 +445,6 @@ class Style {
     fun overflowY(value: EOverflow) =
         setProperty("overflow-y", "$value")
 
-    fun padding(top: Length, right: Length = top, bottom: Length = top, left: Length = right) =
-        setBoxProperty("padding", top, right, bottom, left)
-
-    fun padding(top: Percentage, right: Percentage = top, bottom: Percentage = top, left: Percentage = right) =
-        setBoxProperty("padding", top, right, bottom, left)
-
-    fun paddingBottom(value: Length) =
-        setProperty("padding-bottom", "$value")
-
-    fun paddingBottom(value: Percentage) =
-        setProperty("padding-bottom", "$value")
-
-    fun paddingLeft(value: Length) =
-        setProperty("padding-left", "$value")
-
-    fun paddingLeft(value: Percentage) =
-        setProperty("padding-left", "$value")
-
-    fun paddingRight(value: Length) =
-        setProperty("padding-right", "$value")
-
-    fun paddingRight(value: Percentage) =
-        setProperty("padding-right", "$value")
-
-    fun paddingTop(value: Length) =
-        setProperty("padding-top", "$value")
-
-    fun paddingTop(value: Percentage) =
-        setProperty("padding-top", "$value")
-
     fun pageBreakAfter(value: EPageBreak) =
         setProperty("page-break-after", "$value")
 
@@ -606,7 +489,7 @@ class Style {
 
     }
 
-    private fun <T> setBoxProperty(key: String, top: T, right: T = top, bottom: T = top, left: T = right) {
+    fun <T> setBoxProperty(key: String, top: T, right: T = top, bottom: T = top, left: T = right) {
 
         var css = "$top"
 
@@ -745,15 +628,6 @@ class Style {
         require(value > 0) { "CSS widows property must be greater than zero." }
         setProperty("widows", "$value")
     }
-
-    fun width(value: Length) =
-        setProperty("width", "$value")
-
-    fun width(value: Percentage) =
-        setProperty("width", "$value")
-
-    fun width(value: EAuto) =
-        setProperty("width", "$value")
 
     fun wordSpacing(value: Length) =
         setProperty("word-spacing", "$value")

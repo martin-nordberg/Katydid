@@ -10,8 +10,13 @@ import x.katydid.css.infrastructure.makeDecimalString
 //---------------------------------------------------------------------------------------------------------------------
 
 class Percentage(
-	val amount: Float
+    val amount: Float
 ) {
+
+    val isNotNegative
+        get() = amount >= 0
+
+    ////
 
     override fun equals(other: Any?): Boolean {
         if (other is Percentage) {
@@ -27,34 +32,37 @@ class Percentage(
     override fun toString(): String =
         if (amount == 0f) "0" else "${makeDecimalString(amount)}%"
 
+    operator fun unaryMinus() =
+        Percentage(-amount)
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 
 fun percentage(s: String): Percentage {
 
-	if ( s.takeLast(1) == "%" ) {
-		return Percentage(s.dropLast(1).toFloat())
-	}
+    if (s.takeLast(1) == "%") {
+        return Percentage(s.dropLast(1).toFloat())
+    }
 
-	throw IllegalArgumentException( "Not a valid percentage: \"$s\".")
+    throw IllegalArgumentException("Not a valid percentage: \"$s\".")
 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 
 fun percentage(value: Any): Percentage =
-	when (value) {
-		is String     -> percentage(value)
-		is Percentage -> value
-		else          -> throw IllegalArgumentException(
-			"Cannot create Percentage from '${value}'.")
-	}
+    when (value) {
+        is String     -> percentage(value)
+        is Percentage -> value
+        else          -> throw IllegalArgumentException(
+            "Cannot create Percentage from '${value}'.")
+    }
 
 //---------------------------------------------------------------------------------------------------------------------
 
 val Number.percent
-	get() = Percentage(this.toFloat())
+    get() = Percentage(this.toFloat())
 
 //---------------------------------------------------------------------------------------------------------------------
 

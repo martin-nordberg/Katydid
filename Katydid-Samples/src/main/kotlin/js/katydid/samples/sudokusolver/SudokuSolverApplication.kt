@@ -10,6 +10,7 @@ import js.katydid.vdom.api.KatydidApplication
 import js.katydid.vdom.api.runApplication
 import o.katydid.css.colors.*
 import o.katydid.css.measurements.px
+import o.katydid.css.styles.builders.*
 import o.katydid.css.stylesheets.styleSheet
 import o.katydid.css.types.*
 import o.katydid.vdom.builders.KatydidFlowContentBuilder

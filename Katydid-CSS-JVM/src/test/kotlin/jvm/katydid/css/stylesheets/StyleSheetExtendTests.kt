@@ -9,6 +9,8 @@ import o.katydid.css.colors.blue
 import o.katydid.css.colors.gray
 import o.katydid.css.colors.green
 import o.katydid.css.measurements.px
+import o.katydid.css.styles.builders.height
+import o.katydid.css.styles.builders.width
 import o.katydid.css.stylesheets.StyleSheet
 import o.katydid.css.stylesheets.styleSheet
 import org.junit.jupiter.api.Test
@@ -403,7 +405,7 @@ class StyleSheetExtendTests {
 
         }
 
-        assertEquals(css1,sheet1.toString())
+        assertEquals(css1, sheet1.toString())
 
         checkStyle(css2) {
 
@@ -420,7 +422,7 @@ class StyleSheetExtendTests {
 
         }
 
-        assertEquals(css1,sheet1.toString())
+        assertEquals(css1, sheet1.toString())
 
     }
 

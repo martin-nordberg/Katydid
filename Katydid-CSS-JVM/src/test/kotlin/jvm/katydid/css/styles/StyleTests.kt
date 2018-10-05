@@ -9,6 +9,8 @@ import o.katydid.css.colors.blue
 import o.katydid.css.colors.rgb
 import o.katydid.css.measurements.px
 import o.katydid.css.styles.Style
+import o.katydid.css.styles.builders.height
+import o.katydid.css.styles.builders.width
 import o.katydid.css.styles.style
 import o.katydid.css.types.EDisplay
 import o.katydid.css.types.EDisplay.block

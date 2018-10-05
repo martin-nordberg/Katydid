@@ -10,9 +10,14 @@ import x.katydid.css.infrastructure.makeDecimalString
 //---------------------------------------------------------------------------------------------------------------------
 
 class Length(
-	val length: Float,
-	val unit: LengthUnit
+    val length: Float,
+    val unit: LengthUnit
 ) {
+
+    val isNotNegative
+        get() = length >= 0
+
+    ////
 
     override fun equals(other: Any?): Boolean {
         if (other is Length) {
@@ -20,6 +25,9 @@ class Length(
         }
         return false
     }
+
+    operator fun unaryMinus() =
+        Length(-length, unit)
 
     override fun hashCode(): Int {
         var result = length.hashCode()
@@ -79,60 +87,60 @@ fun length(s: String): Length {
 //---------------------------------------------------------------------------------------------------------------------
 
 fun length(value: Any): Length =
-	when (value) {
-		is Number -> Length(value.toFloat(), LengthUnit.PIXEL)
-		is String -> length(value)
-		is Length -> value
-		else      -> throw IllegalArgumentException(
-			"Cannot create Length from '$value'.")
-	}
+    when (value) {
+        is Number -> Length(value.toFloat(), LengthUnit.PIXEL)
+        is String -> length(value)
+        is Length -> value
+        else      -> throw IllegalArgumentException(
+            "Cannot create Length from '$value'.")
+    }
 
 //---------------------------------------------------------------------------------------------------------------------
 
 val Number.ch
-	get() = Length(this.toFloat(), LengthUnit.ZERO_WIDTH)
+    get() = Length(this.toFloat(), LengthUnit.ZERO_WIDTH)
 
 val Number.cm
-	get() = Length(this.toFloat(), LengthUnit.CENTIMETER)
+    get() = Length(this.toFloat(), LengthUnit.CENTIMETER)
 
 val Number.em
-	get() = Length(this.toFloat(), LengthUnit.FONT_SIZE_ELEMENT)
+    get() = Length(this.toFloat(), LengthUnit.FONT_SIZE_ELEMENT)
 
 val Number.ex
-	get() = Length(this.toFloat(), LengthUnit.X_HEIGHT)
+    get() = Length(this.toFloat(), LengthUnit.X_HEIGHT)
 
 val Number.inch
-	get() = Length(this.toFloat(), LengthUnit.INCH)
+    get() = Length(this.toFloat(), LengthUnit.INCH)
 
 val Number.mm
-	get() = Length(this.toFloat(), LengthUnit.MILLIMETER)
+    get() = Length(this.toFloat(), LengthUnit.MILLIMETER)
 
 val Number.pc
-	get() = Length(this.toFloat(), LengthUnit.PICA)
+    get() = Length(this.toFloat(), LengthUnit.PICA)
 
 val Number.pt
-	get() = Length(this.toFloat(), LengthUnit.POINT)
+    get() = Length(this.toFloat(), LengthUnit.POINT)
 
 val Number.px
-	get() = Length(this.toFloat(), LengthUnit.PIXEL)
+    get() = Length(this.toFloat(), LengthUnit.PIXEL)
 
 val Number.Q
-	get() = Length(this.toFloat(), LengthUnit.QUARTER_MILLIMETER)
+    get() = Length(this.toFloat(), LengthUnit.QUARTER_MILLIMETER)
 
 val Number.rem
-	get() = Length(this.toFloat(), LengthUnit.FONT_SIZE_ROOT_ELEMENT)
+    get() = Length(this.toFloat(), LengthUnit.FONT_SIZE_ROOT_ELEMENT)
 
 val Number.vh
-	get() = Length(this.toFloat(), LengthUnit.VIEW_PORT_HEIGHT_01)
+    get() = Length(this.toFloat(), LengthUnit.VIEW_PORT_HEIGHT_01)
 
 val Number.vmax
-	get() = Length(this.toFloat(), LengthUnit.VIEW_PORT_MAXIMUM_01)
+    get() = Length(this.toFloat(), LengthUnit.VIEW_PORT_MAXIMUM_01)
 
 val Number.vmin
-	get() = Length(this.toFloat(), LengthUnit.VIEW_PORT_MINIMUM_01)
+    get() = Length(this.toFloat(), LengthUnit.VIEW_PORT_MINIMUM_01)
 
 val Number.vw
-	get() = Length(this.toFloat(), LengthUnit.VIEW_PORT_WIDTH_01)
+    get() = Length(this.toFloat(), LengthUnit.VIEW_PORT_WIDTH_01)
 
 //---------------------------------------------------------------------------------------------------------------------
 

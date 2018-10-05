@@ -8,6 +8,7 @@ package js.katydid.samples.greetme
 import js.katydid.vdom.api.KatydidApplication
 import js.katydid.vdom.api.runApplication
 import o.katydid.css.measurements.em
+import o.katydid.css.styles.builders.marginRight
 import o.katydid.css.styles.style
 import o.katydid.events.eventhandling.oninput
 import o.katydid.vdom.builders.KatydidFlowContentBuilder
@@ -15,15 +16,15 @@ import o.katydid.vdom.builders.KatydidFlowContentBuilder
 //---------------------------------------------------------------------------------------------------------------------
 
 /** Simple model for this application. */
-data class GreetMeAppState (
-    val myName : String
+data class GreetMeAppState(
+    val myName: String
 )
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /** Simple message for user events (changed name). */
-data class GreetMeMsg (
-    val newName : String
+data class GreetMeMsg(
+    val newName: String
 )
 
 //---------------------------------------------------------------------------------------------------------------------

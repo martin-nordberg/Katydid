@@ -14,8 +14,6 @@ import o.katydid.css.types.EAuto.auto
 import o.katydid.css.types.EBackgroundPosition.*
 import o.katydid.css.types.EBorderCollapse.collapse
 import o.katydid.css.types.EBorderCollapse.separate
-import o.katydid.css.types.EBoxSizing.borderBox
-import o.katydid.css.types.EBoxSizing.contentBox
 import o.katydid.css.types.EDisplay.*
 import o.katydid.css.types.ELineStyle.*
 import o.katydid.css.types.ELineWidth.*
@@ -160,14 +158,6 @@ class StylePropertyTests {
         checkStyle("border-width: thick thin thick medium;") { borderWidth(thick, thin, thick, medium) }
         checkStyle("border-width: 4px;") { borderWidth(4.px) }
         checkStyle("border-width: 4px 2px;") { borderWidth(4.px, 2.px) }
-
-    }
-
-    @Test
-    fun `Box sizing style properties convert to correct CSS`() {
-
-        checkStyle("box-sizing: content-box;") { boxSizing(contentBox) }
-        checkStyle("box-sizing: border-box;") { boxSizing(borderBox) }
 
     }
 
@@ -405,60 +395,6 @@ class StylePropertyTests {
     }
 
     @Test
-    fun `Margin style properties convert to correct CSS`() {
-
-        checkStyle("margin: -2px;") { margin((-2).px) }
-        checkStyle("margin: -2px;") { margin((-2).px, (-2).px) }
-        checkStyle("margin: -2px;") { margin((-2).px, (-2).px, (-2).px) }
-        checkStyle("margin: -2px -3px;") { margin((-2).px, (-3).px, (-2).px, (-3).px) }
-        checkStyle("margin: 1px 2px 3px;") { margin(1.px, 2.px, 3.px) }
-        checkStyle("margin: 1px 2px 3px 4px;") { margin(1.px, 2.px, 3.px, 4.px) }
-        checkStyle("margin: 2%;") { margin(2.percent) }
-        checkStyle("margin: 2%;") { margin(2.percent, 2.percent) }
-        checkStyle("margin: 2%;") { margin(2.percent, 2.percent, 2.percent) }
-        checkStyle("margin: 2% 3%;") { margin(2.percent, 3.percent, 2.percent, 3.percent) }
-        checkStyle("margin: 1% 2% 3%;") { margin(1.percent, 2.percent, 3.percent) }
-        checkStyle("margin: 1% 2% 3% 4%;") { margin(1.percent, 2.percent, 3.percent, 4.percent) }
-        checkStyle("margin: auto;") { margin(auto) }
-
-        checkStyle("margin-bottom: 2px;") { marginBottom(2.px) }
-        checkStyle("margin-bottom: 2%;") { marginBottom(2.percent) }
-        checkStyle("margin-bottom: auto;") { marginBottom(auto) }
-
-        checkStyle("margin-left: 2px;") { marginLeft(2.px) }
-        checkStyle("margin-left: 2%;") { marginLeft(2.percent) }
-        checkStyle("margin-left: auto;") { marginLeft(auto) }
-
-        checkStyle("margin-right: 2px;") { marginRight(2.px) }
-        checkStyle("margin-right: 2%;") { marginRight(2.percent) }
-        checkStyle("margin-right: auto;") { marginRight(auto) }
-
-        checkStyle("margin-top: 2px;") { marginTop(2.px) }
-        checkStyle("margin-top: 2%;") { marginTop(2.percent) }
-        checkStyle("margin-top: auto;") { marginTop(auto) }
-
-    }
-
-    @Test
-    fun `Min and max size style properties convert to correct CSS`() {
-
-        checkStyle("max-height: 25px;") { maxHeight(25.px) }
-        checkStyle("max-height: 50%;") { maxHeight(50.percent) }
-        checkStyle("max-height: none;") { maxHeight(ENone.none) }
-
-        checkStyle("max-width: 25px;") { maxWidth(25.px) }
-        checkStyle("max-width: 50%;") { maxWidth(50.percent) }
-        checkStyle("max-width: none;") { maxWidth(ENone.none) }
-
-        checkStyle("min-height: 25px;") { minHeight(25.px) }
-        checkStyle("min-height: 50%;") { minHeight(50.percent) }
-
-        checkStyle("min-width: 25px;") { minWidth(25.px) }
-        checkStyle("min-width: 50%;") { minWidth(50.percent) }
-
-    }
-
-    @Test
     fun `Opacity style properties convert to correct CSS`() {
 
         checkStyle("opacity: 0;") { opacity(-1f) }
@@ -500,36 +436,6 @@ class StylePropertyTests {
         checkStyle("overflow-x: scroll;") { overflowX(EOverflow.scroll) }
 
         checkStyle("overflow-y: scroll;") { overflowY(EOverflow.scroll) }
-
-    }
-
-    @Test
-    fun `Padding style properties convert to correct CSS`() {
-
-        checkStyle("padding: 2px;") { padding(2.px) }
-        checkStyle("padding: 2px;") { padding(2.px, 2.px) }
-        checkStyle("padding: 2px;") { padding(2.px, 2.px, 2.px) }
-        checkStyle("padding: 2px -3px;") { padding(2.px, (-3).px, 2.px, (-3).px) }
-        checkStyle("padding: 1px 2px 3px;") { padding(1.px, 2.px, 3.px) }
-        checkStyle("padding: 1px 2px 3px 4px;") { padding(1.px, 2.px, 3.px, 4.px) }
-        checkStyle("padding: 2%;") { padding(2.percent) }
-        checkStyle("padding: 2%;") { padding(2.percent, 2.percent) }
-        checkStyle("padding: 2%;") { padding(2.percent, 2.percent, 2.percent) }
-        checkStyle("padding: 2% 3%;") { padding(2.percent, 3.percent, 2.percent, 3.percent) }
-        checkStyle("padding: 1% 2% 3%;") { padding(1.percent, 2.percent, 3.percent) }
-        checkStyle("padding: 1% 2% 3% 4%;") { padding(1.percent, 2.percent, 3.percent, 4.percent) }
-
-        checkStyle("padding-bottom: 2px;") { paddingBottom(2.px) }
-        checkStyle("padding-bottom: 2%;") { paddingBottom(2.percent) }
-
-        checkStyle("padding-left: 2px;") { paddingLeft(2.px) }
-        checkStyle("padding-left: 2%;") { paddingLeft(2.percent) }
-
-        checkStyle("padding-right: 2px;") { paddingRight(2.px) }
-        checkStyle("padding-right: 2%;") { paddingRight(2.percent) }
-
-        checkStyle("padding-top: 2px;") { paddingTop(2.px) }
-        checkStyle("padding-top: 2%;") { paddingTop(2.percent) }
 
     }
 
@@ -594,19 +500,6 @@ class StylePropertyTests {
     fun `Arbitrary properties convert to correct CSS`() {
 
         checkStyle("not-yet-invented: 7px;") { setProperty("not-yet-invented", 7.px.toString()) }
-
-    }
-
-    @Test
-    fun `Size style properties convert to correct CSS`() {
-
-        checkStyle("height: 100px;") { height(100.px) }
-        checkStyle("height: 90%;") { height(90.percent) }
-        checkStyle("height: auto;") { height(auto) }
-
-        checkStyle("width: 100px;") { width(100.px) }
-        checkStyle("width: 90%;") { width(90.percent) }
-        checkStyle("width: auto;") { width(auto) }
 
     }
 
