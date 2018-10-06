@@ -60,6 +60,14 @@ class PositionStylePropertyTests {
 
     }
 
+    @Test
+    fun `Z index properties convert to correct CSS`() {
+
+        checkStyle("z-index: 2;") { zIndex(2) }
+        checkStyle("z-index: auto;") { zIndex(auto) }
+
+    }
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------

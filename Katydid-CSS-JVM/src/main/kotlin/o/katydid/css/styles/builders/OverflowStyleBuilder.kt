@@ -7,6 +7,7 @@ package o.katydid.css.styles.builders
 
 import o.katydid.css.styles.Style
 import o.katydid.css.types.EOverflow
+import o.katydid.css.types.EOverflowWrap
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -20,6 +21,9 @@ class OverflowStyleBuilder(
 
     fun Style.y(value: EOverflow) =
         style.overflowY(value)
+
+    fun Style.wrap(value: EOverflowWrap) =
+        style.overflowWrap(value)
 
 }
 
@@ -40,6 +44,11 @@ fun Style.overflowX(value: EOverflow) =
 
 fun Style.overflowY(value: EOverflow) =
     setProperty("overflow-y", "$value")
+
+//---------------------------------------------------------------------------------------------------------------------
+
+fun Style.overflowWrap(value: EOverflowWrap) =
+    setProperty("overflow-wrap", "$value")
 
 //---------------------------------------------------------------------------------------------------------------------
 

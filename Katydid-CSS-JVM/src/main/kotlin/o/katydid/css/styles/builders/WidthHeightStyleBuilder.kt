@@ -10,13 +10,7 @@ import o.katydid.css.measurements.Percentage
 import o.katydid.css.styles.Style
 import o.katydid.css.types.EAuto
 import o.katydid.css.types.EBoxSize
-import o.katydid.css.types.EBoxSizing
 import o.katydid.css.types.ENone
-
-//---------------------------------------------------------------------------------------------------------------------
-
-fun Style.boxSizing(value: EBoxSizing) =
-    setProperty("box-sizing", "$value")
 
 //---------------------------------------------------------------------------------------------------------------------
 

@@ -238,18 +238,6 @@ class Style {
 
     // TODO: clip
 
-    fun content(value: EContent) =
-        setProperty("content", "$value")
-
-    fun content(value: String) =
-        setStringProperty("content", value)
-
-    fun contentAttr(value: String) =
-        setProperty("content", "attr($value)")
-
-    fun contentUrl(value: String) =
-        setProperty("content", "url(\"$value\")")
-
     // TODO: counter-increment
 
     // TODO: counter-reset
@@ -258,9 +246,6 @@ class Style {
 
     fun cursor(value: ECursor) =
         setProperty("cursor", "$value")
-
-    fun direction(value: EDirection) =
-        setProperty("direction", "$value")
 
     fun display(value: EDisplay) =
         setProperty("display", "$value")
@@ -440,7 +425,7 @@ class Style {
 
     }
 
-    private fun setStringProperty(key: String, value: String) {
+    fun setStringProperty(key: String, value: String) {
         var cssValue = value.replace("\"", "\\\"")
         cssValue = cssValue.replace("\n", "\\A")
         // TODO: probably more characters worth escaping
@@ -456,46 +441,10 @@ class Style {
     override fun toString() =
         toCssString("", " ")
 
-    fun unicodeBidi(value: EUnicodeBidi) =
-        setProperty("unicode-bidi", "$value")
-
-    fun verticalAlign(value: Length) =
-        setProperty("vertical-align", "$value")
-
-    fun verticalAlign(value: Percentage) =
-        setProperty("vertical-align", "$value")
-
-    fun verticalAlign(value: EAlignmentBaseline) =
-        setProperty("vertical-align", "$value")
-
-    fun verticalAlign(value: EBaselineShift) =
-        setProperty("vertical-align", "$value")
-
-    fun visibility(value: EVisibility) =
-        setProperty("visibility", "$value")
-
-    fun whiteSpace(value: EWhiteSpace) =
-        setProperty("white-space", "$value")
-
     fun widows(value: Int) {
         require(value > 0) { "CSS widows property must be greater than zero." }
         setProperty("widows", "$value")
     }
-
-    fun wordSpacing(value: Length) =
-        setProperty("word-spacing", "$value")
-
-    fun wordSpacing(value: Percentage) =
-        setProperty("word-spacing", "$value")
-
-    fun wordSpacing(value: ENormal) =
-        setProperty("word-spacing", "$value")
-
-    fun zIndex(value: Int) =
-        setProperty("z-index", "$value")
-
-    fun zIndex(value: EAuto) =
-        setProperty("z-index", "$value")
 
 }
 

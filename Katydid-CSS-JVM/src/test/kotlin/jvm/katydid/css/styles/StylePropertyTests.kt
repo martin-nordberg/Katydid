@@ -209,21 +209,6 @@ class StylePropertyTests {
     }
 
     @Test
-    fun `Content style properties convert to correct CSS`() {
-
-        checkStyle("content: close-quote;") { content(EContent.closeQuote) }
-        checkStyle("content: no-close-quote;") { content(EContent.noCloseQuote) }
-        checkStyle("content: no-open-quote;") { content(EContent.noOpenQuote) }
-        checkStyle("content: none;") { content(EContent.none) }
-        checkStyle("content: normal;") { content(EContent.normal) }
-        checkStyle("content: open-quote;") { content(EContent.openQuote) }
-        checkStyle("content: \"a \\\"quoted\\\" string\";") { content("a \"quoted\" string") }
-        checkStyle("content: url(\"http://somewhere\");") { contentUrl("http://somewhere") }
-        checkStyle("content: attr(data-content);") { contentAttr("data-content") }
-
-    }
-
-    @Test
     fun `Cursor style properties convert to correct CSS`() {
 
         checkStyle("cursor: alias;") { cursor(ECursor.alias) }
@@ -262,14 +247,6 @@ class StylePropertyTests {
         checkStyle("cursor: wait;") { cursor(ECursor.wait) }
         checkStyle("cursor: zoom-in;") { cursor(ECursor.zoomIn) }
         checkStyle("cursor: zoom-out;") { cursor(ECursor.zoomOut) }
-
-    }
-
-    @Test
-    fun `Direction style properties convert to correct CSS`() {
-
-        checkStyle("direction: ltr;") { direction(EDirection.ltr) }
-        checkStyle("direction: rtl;") { direction(EDirection.rtl) }
 
     }
 
@@ -417,60 +394,6 @@ class StylePropertyTests {
     }
 
     @Test
-    fun `Unicode bidirectional properties convert to correct CSS`() {
-
-        checkStyle("unicode-bidi: bidi-override;") { unicodeBidi(EUnicodeBidi.bidiOverride) }
-        checkStyle("unicode-bidi: embed;") { unicodeBidi(EUnicodeBidi.embed) }
-        checkStyle("unicode-bidi: normal;") { unicodeBidi(EUnicodeBidi.normal) }
-        checkStyle("unicode-bidi: isolate;") { unicodeBidi(EUnicodeBidi.isolate) }
-        checkStyle("unicode-bidi: isolate-override;") { unicodeBidi(EUnicodeBidi.isolateOverride) }
-        checkStyle("unicode-bidi: plaintext;") { unicodeBidi(EUnicodeBidi.plaintext) }
-
-    }
-
-    @Test
-    fun `Vertical alignment properties convert to correct CSS`() {
-
-        checkStyle("vertical-align: 4px;") { verticalAlign(4.px) }
-        checkStyle("vertical-align: 4%;") { verticalAlign(4.percent) }
-        checkStyle("vertical-align: alphabetic;") { verticalAlign(EAlignmentBaseline.alphabetic) }
-        checkStyle("vertical-align: baseline;") { verticalAlign(EAlignmentBaseline.baseline) }
-        checkStyle("vertical-align: bottom;") { verticalAlign(EAlignmentBaseline.bottom) }
-        checkStyle("vertical-align: center;") { verticalAlign(EAlignmentBaseline.center) }
-        checkStyle("vertical-align: central;") { verticalAlign(EAlignmentBaseline.central) }
-        checkStyle("vertical-align: ideographic;") { verticalAlign(EAlignmentBaseline.ideographic) }
-        checkStyle("vertical-align: mathematical;") { verticalAlign(EAlignmentBaseline.mathematical) }
-        checkStyle("vertical-align: middle;") { verticalAlign(EAlignmentBaseline.middle) }
-        checkStyle("vertical-align: text-bottom;") { verticalAlign(EAlignmentBaseline.textBottom) }
-        checkStyle("vertical-align: text-top;") { verticalAlign(EAlignmentBaseline.textTop) }
-        checkStyle("vertical-align: top;") { verticalAlign(EAlignmentBaseline.top) }
-        checkStyle("vertical-align: sub;") { verticalAlign(EBaselineShift.sub) }
-        checkStyle("vertical-align: super;") { verticalAlign(EBaselineShift.`super`) }
-
-    }
-
-    @Test
-    fun `Visibility properties convert to correct CSS`() {
-
-        checkStyle("visibility: collapse;") { visibility(EVisibility.collapse) }
-        checkStyle("visibility: hidden;") { visibility(EVisibility.hidden) }
-        checkStyle("visibility: visible;") { visibility(EVisibility.visible) }
-
-    }
-
-    @Test
-    fun `White space properties convert to correct CSS`() {
-
-        checkStyle("white-space: break-spaces;") { whiteSpace(EWhiteSpace.breakSpaces) }
-        checkStyle("white-space: normal;") { whiteSpace(EWhiteSpace.normal) }
-        checkStyle("white-space: nowrap;") { whiteSpace(EWhiteSpace.nowrap) }
-        checkStyle("white-space: pre;") { whiteSpace(EWhiteSpace.pre) }
-        checkStyle("white-space: pre-line;") { whiteSpace(EWhiteSpace.preLine) }
-        checkStyle("white-space: pre-wrap;") { whiteSpace(EWhiteSpace.preWrap) }
-
-    }
-
-    @Test
     fun `Widows and orphans properties convert to correct CSS`() {
 
         checkStyle("orphans: 3;") { orphans(3) }
@@ -480,23 +403,6 @@ class StylePropertyTests {
         assertFailsWith<IllegalArgumentException> { checkStyle("throws") { orphans(-1) } }
         assertFailsWith<IllegalArgumentException> { checkStyle("throws") { widows(0) } }
         assertFailsWith<IllegalArgumentException> { checkStyle("throws") { widows(-1) } }
-
-    }
-
-    @Test
-    fun `Word spacing properties convert to correct CSS`() {
-
-        checkStyle("word-spacing: 4px;") { wordSpacing(4.px) }
-        checkStyle("word-spacing: 4%;") { wordSpacing(4.percent) }
-        checkStyle("word-spacing: normal;") { wordSpacing(ENormal.normal) }
-
-    }
-
-    @Test
-    fun `Z index properties convert to correct CSS`() {
-
-        checkStyle("z-index: 2;") { zIndex(2) }
-        checkStyle("z-index: auto;") { zIndex(auto) }
 
     }
 

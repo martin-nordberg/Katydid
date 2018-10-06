@@ -48,6 +48,12 @@ class TextStyleBuilder(
     fun align(value: ETextAlign) =
         style.textAlign(value)
 
+    fun alignAll(value: ETextAlign) =
+        style.textAlignAll(value)
+
+    fun alignLast(value: ETextAlign) =
+        style.textAlignLast(value)
+
     fun decoration(build: TextDecorationStyleBuilder.() -> Unit) =
         TextDecorationStyleBuilder(style).build()
 
@@ -76,12 +82,27 @@ class TextStyleBuilder(
     fun indent(value: Percentage) =
         style.textIndent(value)
 
+    fun justify(value: ETextJustify) =
+        style.textJustify(value)
+
     fun overflow(value: ETextOverflow) =
         style.textOverflow(value)
 
     fun transform(value: ETextTransform) =
         style.textTransform(value)
 
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+
+fun Style.tabSize(value: Int) {
+    require(value >= 0) { "Tab size cannot be negative: '$value'." }
+    setProperty("tab-size", "$value")
+}
+
+fun Style.tabSize(value: Length) {
+    require(value.isNotNegative) { "Tab size cannot be negative: '$value'." }
+    setProperty("tab-size", "$value")
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -93,6 +114,16 @@ fun Style.text(build: TextStyleBuilder.() -> Unit) =
 
 fun Style.textAlign(value: ETextAlign) =
     setProperty("text-align", "$value")
+
+fun Style.textAlignAll(value: ETextAlign) {
+    require(value != ETextAlign.justifyAll) { "Option 'justify-all' does not apply for property text-align-all." }
+    setProperty("text-align-all", "$value")
+}
+
+fun Style.textAlignLast(value: ETextAlign) {
+    require(value != ETextAlign.justifyAll) { "Option 'justify-all' does not apply for property text-align-last." }
+    setProperty("text-align-last", "$value")
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -150,6 +181,11 @@ fun Style.textIndent(value: Percentage) =
 
 //---------------------------------------------------------------------------------------------------------------------
 
+fun Style.textJustify(value: ETextJustify) =
+    setProperty("text-justify", "$value")
+
+//---------------------------------------------------------------------------------------------------------------------
+
 fun Style.textOverflow(value: ETextOverflow) =
     setProperty("text-overflow", "$value")
 
@@ -159,3 +195,9 @@ fun Style.textTransform(value: ETextTransform) =
     setProperty("text-transform", "$value")
 
 //---------------------------------------------------------------------------------------------------------------------
+
+fun Style.whiteSpace(value: EWhiteSpace) =
+    setProperty("white-space", "$value")
+
+//---------------------------------------------------------------------------------------------------------------------
+

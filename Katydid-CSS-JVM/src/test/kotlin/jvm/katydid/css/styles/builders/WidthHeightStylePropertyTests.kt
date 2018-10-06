@@ -12,8 +12,6 @@ import o.katydid.css.styles.builders.*
 import o.katydid.css.styles.style
 import o.katydid.css.types.EAuto.auto
 import o.katydid.css.types.EBoxSize
-import o.katydid.css.types.EBoxSizing.borderBox
-import o.katydid.css.types.EBoxSizing.contentBox
 import o.katydid.css.types.ENone
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
@@ -22,7 +20,7 @@ import kotlin.test.assertFailsWith
 //---------------------------------------------------------------------------------------------------------------------
 
 @Suppress("RemoveRedundantBackticks")
-class BoxSizeStylePropertyTests {
+class WidthHeightStylePropertyTests {
 
     private fun checkStyle(
         expectedCss: String,
@@ -32,23 +30,10 @@ class BoxSizeStylePropertyTests {
     }
 
     @Test
-    fun `Box sizing style properties convert to correct CSS`() {
-
-        checkStyle("box-sizing: content-box;") { boxSizing(contentBox) }
-        checkStyle("box-sizing: border-box;") { boxSizing(borderBox) }
-
-    }
-
-    @Test
     fun `Fit-content cannot be negative`() {
 
-        assertFailsWith<IllegalArgumentException> {
-            style { maxHeight(EBoxSize.fitContent(-2.px)) }
-        }
-
-        assertFailsWith<IllegalArgumentException> {
-            style { maxHeight(EBoxSize.fitContent(-2.percent)) }
-        }
+        assertFailsWith<IllegalArgumentException> { style { maxHeight(EBoxSize.fitContent(-2.px)) } }
+        assertFailsWith<IllegalArgumentException> { style { maxHeight(EBoxSize.fitContent(-2.percent)) } }
 
     }
 

@@ -9,12 +9,14 @@ import o.katydid.css.colors.antiquewhite
 import o.katydid.css.colors.red
 import o.katydid.css.measurements.em
 import o.katydid.css.measurements.percent
+import o.katydid.css.measurements.px
 import o.katydid.css.styles.Style
 import o.katydid.css.styles.builders.*
 import o.katydid.css.styles.style
 import o.katydid.css.types.*
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -29,9 +31,22 @@ class TextStylePropertyTests {
     }
 
     @Test
-    fun `Nested text align properties convert to correct CSS`() {
+    fun `Tab size properties convert to correct CSS`() {
+
+        checkStyle("tab-size: 10;") { tabSize(10) }
+        checkStyle("tab-size: 15px;") { tabSize(15.px) }
+
+        assertFailsWith<IllegalArgumentException> { style { tabSize(-1) } }
+        assertFailsWith<IllegalArgumentException> { style { tabSize(-1.px) } }
+
+    }
+
+    @Test
+    fun `Nested text properties convert to correct CSS`() {
 
         checkStyle("text-align: center;") { text { align(ETextAlign.center) } }
+        checkStyle("text-align-all: center;") { text { alignAll(ETextAlign.center) } }
+        checkStyle("text-align-last: center;") { text { alignLast(ETextAlign.center) } }
         checkStyle("text-decoration: none;") { text { decoration(ENone.none) } }
         checkStyle("text-decoration: underline;") { text { decoration(ETextDecorationLine.underline) } }
         checkStyle("text-decoration: underline wavy red overline;") { text { decoration(ETextDecorationLine.underline, ETextDecorationStyle.wavy, red, moreLines = *arrayOf(ETextDecorationLine.overline)) } }
@@ -45,6 +60,7 @@ class TextStylePropertyTests {
         checkStyle("text-decoration-style: dotted;") { text { decoration { style(ETextDecorationStyle.dotted) } } }
         checkStyle("text-indent: 3em;") { text { indent(3.em) } }
         checkStyle("text-indent: 3%;") { text { indent(3.percent) } }
+        checkStyle("text-justify: inter-word;") { text { justify(ETextJustify.interWord) } }
         checkStyle("text-overflow: ellipsis;") { text { overflow(ETextOverflow.ellipsis) } }
         checkStyle("text-transform: lowercase;") { text { transform(ETextTransform.lowercase) } }
 
@@ -61,6 +77,9 @@ class TextStylePropertyTests {
         checkStyle("text-align: match-parent;") { textAlign(ETextAlign.matchParent) }
         checkStyle("text-align: right;") { textAlign(ETextAlign.right) }
         checkStyle("text-align: start;") { textAlign(ETextAlign.start) }
+
+        checkStyle("text-align-all: center;") { textAlignAll(ETextAlign.center) }
+        checkStyle("text-align-last: center;") { textAlignLast(ETextAlign.center) }
 
     }
 
@@ -96,6 +115,16 @@ class TextStylePropertyTests {
     }
 
     @Test
+    fun `Text justify properties convert to correct CSS`() {
+
+        checkStyle("text-justify: auto;") { textJustify(ETextJustify.auto) }
+        checkStyle("text-justify: inter-character;") { textJustify(ETextJustify.interCharacter) }
+        checkStyle("text-justify: inter-word;") { textJustify(ETextJustify.interWord) }
+        checkStyle("text-justify: none;") { textJustify(ETextJustify.none) }
+
+    }
+
+    @Test
     fun `Text overflow properties convert to correct CSS`() {
 
         checkStyle("text-overflow: clip;") { textOverflow(ETextOverflow.clip) }
@@ -111,6 +140,27 @@ class TextStylePropertyTests {
         checkStyle("text-transform: none;") { textTransform(ETextTransform.none) }
         checkStyle("text-transform: uppercase;") { textTransform(ETextTransform.uppercase) }
         checkStyle("text-transform: full-width;") { textTransform(ETextTransform.fullWidth) }
+
+    }
+
+    @Test
+    fun `White space properties convert to correct CSS`() {
+
+        checkStyle("white-space: break-spaces;") { whiteSpace(EWhiteSpace.breakSpaces) }
+        checkStyle("white-space: normal;") { whiteSpace(EWhiteSpace.normal) }
+        checkStyle("white-space: nowrap;") { whiteSpace(EWhiteSpace.nowrap) }
+        checkStyle("white-space: pre;") { whiteSpace(EWhiteSpace.pre) }
+        checkStyle("white-space: pre-line;") { whiteSpace(EWhiteSpace.preLine) }
+        checkStyle("white-space: pre-wrap;") { whiteSpace(EWhiteSpace.preWrap) }
+
+    }
+
+    @Test
+    fun `Word spacing properties convert to correct CSS`() {
+
+        checkStyle("word-spacing: 4px;") { wordSpacing(4.px) }
+        checkStyle("word-spacing: 4%;") { wordSpacing(4.percent) }
+        checkStyle("word-spacing: normal;") { wordSpacing(ENormal.normal) }
 
     }
 

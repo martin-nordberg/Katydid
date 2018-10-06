@@ -7,10 +7,12 @@ package jvm.katydid.css.styles.builders
 
 import o.katydid.css.styles.Style
 import o.katydid.css.styles.builders.overflow
+import o.katydid.css.styles.builders.overflowWrap
 import o.katydid.css.styles.builders.overflowX
 import o.katydid.css.styles.builders.overflowY
 import o.katydid.css.styles.style
 import o.katydid.css.types.EOverflow.*
+import o.katydid.css.types.EOverflowWrap
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -31,6 +33,8 @@ class OverflowStylePropertyTests {
 
         checkStyle("overflow-x: scroll; overflow-y: clip;") { overflow { x(scroll); y(clip) } }
 
+        checkStyle("overflow-wrap: normal;") { overflow { wrap(EOverflowWrap.normal) } }
+
     }
 
     @Test
@@ -46,6 +50,9 @@ class OverflowStylePropertyTests {
         checkStyle("overflow-x: scroll;") { overflowX(scroll) }
 
         checkStyle("overflow-y: scroll;") { overflowY(scroll) }
+
+        checkStyle("overflow-wrap: break-word;") { overflowWrap(EOverflowWrap.breakWord) }
+        checkStyle("overflow-wrap: normal;") { overflowWrap(EOverflowWrap.normal) }
 
     }
 

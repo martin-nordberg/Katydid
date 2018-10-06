@@ -7,27 +7,33 @@ package o.katydid.css.types
 
 /**Enumeration of options for the 'content' property. */
 @Suppress("EnumEntryName")
-enum class EContent(
+sealed class EContent(
     private val css: String
 ) {
 
     /** The pseudo-element is not generated. */
-    none("none"),
+    object none : EContent("none")
 
     /** Computes to 'none' for the :before and :after pseudo-elements. */
-    normal("normal"),
+    object normal : EContent("normal")
 
     /** Inserts the appropriate string from the 'quotes' property. */
-    openQuote("open-quote"),
+    object openQuote : EContent("open-quote")
 
     /** Inserts the appropriate string from the 'quotes' property. */
-    closeQuote("close-quote"),
+    object closeQuote : EContent("close-quote")
 
     /** Introduces no content, but increments the level of nesting for quotes. */
-    noOpenQuote("no-open-quote"),
+    object noOpenQuote : EContent("no-open-quote")
 
     /** Introduces no content, but decrements the level of nesting for quotes. */
-    noCloseQuote("no-close-quote");
+    object noCloseQuote : EContent("no-close-quote")
+
+    /** Introduces content from an element attribute with given name. */
+    class attr(attribute: String) : EContent("attr($attribute)")
+
+    /** Introduces content from a URL. */
+    class url(attribute: String) : EContent("url(\"$attribute\")")
 
     ////
 
@@ -48,6 +54,7 @@ enum class EContent(
                 "none"           -> none
                 "normal"         -> normal
                 "open-quote"     -> openQuote
+                // TODO: parse attr(..) and url(..)
                 else             -> throw IllegalArgumentException("Unknown content option: '$option'.")
             }
 

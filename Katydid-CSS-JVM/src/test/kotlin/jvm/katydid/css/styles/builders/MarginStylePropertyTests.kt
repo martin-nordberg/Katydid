@@ -18,7 +18,7 @@ import kotlin.test.assertEquals
 //---------------------------------------------------------------------------------------------------------------------
 
 @Suppress("RemoveRedundantBackticks")
-class BoxModelStylePropertyTests {
+class MarginStylePropertyTests {
 
     private fun checkStyle(
         expectedCss: String,
@@ -28,7 +28,7 @@ class BoxModelStylePropertyTests {
     }
 
     @Test
-    fun `Margin style properties convert to correct CSS`() {
+    fun `Nested margin style properties convert to correct CSS`() {
 
         checkStyle("margin-bottom: 2px;") { margin { bottom(2.px) } }
         checkStyle("margin-bottom: 2%;") { margin { bottom(2.percent) } }
@@ -47,6 +47,11 @@ class BoxModelStylePropertyTests {
         checkStyle("margin-top: auto;") { margin { top(auto) } }
 
         checkStyle("margin-top: 2px; margin-right: 3%;") { margin { top(2.px); right(3.percent) } }
+
+    }
+
+    @Test
+    fun `Margin style properties convert to correct CSS`() {
 
         checkStyle("margin: 1px;") { margin(box(1.px)) }
         checkStyle("margin: 1px 2px;") { margin(box(1.px, 2.px)) }
@@ -87,60 +92,6 @@ class BoxModelStylePropertyTests {
         checkStyle("margin-top: 2px;") { marginTop(2.px) }
         checkStyle("margin-top: 2%;") { marginTop(2.percent) }
         checkStyle("margin-top: auto;") { marginTop(auto) }
-
-    }
-
-    @Test
-    fun `Padding style properties convert to correct CSS`() {
-
-        checkStyle("padding-bottom: 2px;") { padding { bottom(2.px) } }
-        checkStyle("padding-bottom: 2%;") { padding { bottom(2.percent) } }
-
-        checkStyle("padding-left: 2px;") { padding { left(2.px) } }
-        checkStyle("padding-left: 2%;") { padding { left(2.percent) } }
-
-        checkStyle("padding-right: 2px;") { padding { right(2.px) } }
-        checkStyle("padding-right: 2%;") { padding { right(2.percent) } }
-
-        checkStyle("padding-top: 2px;") { padding { top(2.px) } }
-        checkStyle("padding-top: 2%;") { padding { top(2.percent) } }
-
-        checkStyle("padding-top: 2px; padding-right: 3%;") { padding { top(2.px); right(3.percent) } }
-
-        checkStyle("padding: 1px;") { padding(box(1.px)) }
-        checkStyle("padding: 1px 2px;") { padding(box(1.px, 2.px)) }
-        checkStyle("padding: 1px 2px 3px;") { padding(box(1.px, 2.px, 3.px)) }
-        checkStyle("padding: 1px 2px 3px 4px;") { padding(box(1.px, 2.px, 3.px, 4.px)) }
-
-        checkStyle("padding: 1%;") { padding(box(1.percent)) }
-        checkStyle("padding: 1% 2%;") { padding(box(1.percent, 2.percent)) }
-        checkStyle("padding: 1% 2% 3%;") { padding(box(1.percent, 2.percent, 3.percent)) }
-        checkStyle("padding: 1% 2% 3% 4%;") { padding(box(1.percent, 2.percent, 3.percent, 4.percent)) }
-
-        checkStyle("padding: -2px;") { padding((-2).px) }
-        checkStyle("padding: -2px;") { padding((-2).px, (-2).px) }
-        checkStyle("padding: -2px;") { padding((-2).px, (-2).px, (-2).px) }
-        checkStyle("padding: -2px -3px;") { padding((-2).px, (-3).px, (-2).px, (-3).px) }
-        checkStyle("padding: 1px 2px 3px;") { padding(1.px, 2.px, 3.px) }
-        checkStyle("padding: 1px 2px 3px 4px;") { padding(1.px, 2.px, 3.px, 4.px) }
-        checkStyle("padding: 2%;") { padding(2.percent) }
-        checkStyle("padding: 2%;") { padding(2.percent, 2.percent) }
-        checkStyle("padding: 2%;") { padding(2.percent, 2.percent, 2.percent) }
-        checkStyle("padding: 2% 3%;") { padding(2.percent, 3.percent, 2.percent, 3.percent) }
-        checkStyle("padding: 1% 2% 3%;") { padding(1.percent, 2.percent, 3.percent) }
-        checkStyle("padding: 1% 2% 3% 4%;") { padding(1.percent, 2.percent, 3.percent, 4.percent) }
-
-        checkStyle("padding-bottom: 2px;") { paddingBottom(2.px) }
-        checkStyle("padding-bottom: 2%;") { paddingBottom(2.percent) }
-
-        checkStyle("padding-left: 2px;") { paddingLeft(2.px) }
-        checkStyle("padding-left: 2%;") { paddingLeft(2.percent) }
-
-        checkStyle("padding-right: 2px;") { paddingRight(2.px) }
-        checkStyle("padding-right: 2%;") { paddingRight(2.percent) }
-
-        checkStyle("padding-top: 2px;") { paddingTop(2.px) }
-        checkStyle("padding-top: 2%;") { paddingTop(2.percent) }
 
     }
 
