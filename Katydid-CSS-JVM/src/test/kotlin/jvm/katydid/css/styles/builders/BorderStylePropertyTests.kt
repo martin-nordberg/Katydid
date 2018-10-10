@@ -9,7 +9,7 @@ import o.katydid.css.colors.*
 import o.katydid.css.measurements.px
 import o.katydid.css.styles.Style
 import o.katydid.css.styles.builders.*
-import o.katydid.css.styles.style
+import o.katydid.css.styles.makeStyle
 import o.katydid.css.types.ELineStyle
 import o.katydid.css.types.ELineStyle.*
 import o.katydid.css.types.ELineWidth.*
@@ -25,7 +25,7 @@ class BorderStylePropertyTests {
         expectedCss: String,
         build: Style.() -> Unit
     ) {
-        assertEquals(expectedCss, style(build).toString())
+        assertEquals(expectedCss, makeStyle(build).toString())
     }
 
     @Test

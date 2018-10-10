@@ -17,9 +17,8 @@ fun <Msg> KatydidAttributesContentBuilder<Msg>.style(
     build: Style.() -> Unit
 ) {
 
-    val s = Style()
-    s.build()
-    this.attribute( "style", s.toString() )
+    val s = makeStyle(build)
+    this.attribute("style", s.toString())
 
 }
 

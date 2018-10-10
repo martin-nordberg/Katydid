@@ -7,83 +7,30 @@ package o.katydid.css.styles
 
 //---------------------------------------------------------------------------------------------------------------------
 
-class Style {
+interface Style {
 
-    private val properties = mutableListOf<String>()
+    val properties: List<String>
 
-    /** Funky side-effecting getter actually sets the last used property to be !important. */
+    /** Funky side-effecting getter actually sets the previously set property to be !important. */
     val important: Unit
-        get() {
-            require(properties.size > 0) { "Set a property before making it important." }
-            require(!properties[properties.size - 1].endsWith("!important")) { "Last property already set to important." }
 
-            properties[properties.size - 1] += " !important"
-        }
-
-    val isNotEmpty
-        get() = properties.isNotEmpty()
+    val isNotEmpty: Boolean
 
     ////
 
-    fun include(style: Style) {
+    fun include(style: Style)
 
-        for (property in style.properties) {
-            properties.add(property)
-        }
+    fun inherit(key: String)
 
-    }
+    fun <T> setBoxProperty(key: String, top: T, right: T = top, bottom: T = top, left: T = right)
 
-    fun inherit(key: String) =
-        setProperty(key, "inherit")
+    fun setProperty(key: String, value: String)
 
-    fun <T> setBoxProperty(key: String, top: T, right: T = top, bottom: T = top, left: T = right) {
+    fun <T> setXyProperty(key: String, x: T, y: T = x)
 
-        var css = "$top"
+    fun setStringProperty(key: String, value: String)
 
-        if (right != top || bottom != top || left != right) {
-            css += " $right"
-        }
-
-        if (bottom != top || left != right) {
-            css += " $bottom"
-        }
-
-        if (left != right) {
-            css += " $left"
-        }
-
-        setProperty(key, css)
-
-    }
-
-    fun setProperty(key: String, value: String) {
-        properties.add("$key: $value")
-    }
-
-    fun <T> setXyProperty(key: String, x: T, y: T = x) {
-
-        var css = "$x"
-
-        if (x != y) {
-            css += " $y"
-        }
-
-        setProperty(key, css)
-
-    }
-
-    fun setStringProperty(key: String, value: String) {
-        var cssValue = value.replace("\"", "\\\"")
-        cssValue = cssValue.replace("\n", "\\A")
-        // TODO: probably more characters worth escaping
-        setProperty(key, "\"$cssValue\"")
-    }
-
-    fun toCssString(indent: String = "", whitespace: String = "\n") =
-        properties.map { p -> indent + p }.joinToString(";" + whitespace) + ";"
-
-    override fun toString() =
-        toCssString("", " ")
+    fun toCssString(indent: String = "", whitespace: String = "\n"): String
 
 }
 
@@ -93,11 +40,11 @@ class Style {
  * Builds a new style object.
  * @param build the callback that fills in the CSS properties.
  */
-fun style(
+fun makeStyle(
     build: Style.() -> Unit
 ): Style {
 
-    val result = Style()
+    val result = StyleImpl()
     result.build()
     return result
 

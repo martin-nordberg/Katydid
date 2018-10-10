@@ -11,7 +11,7 @@ import o.katydid.css.styles.Style
 import o.katydid.css.styles.builders.word
 import o.katydid.css.styles.builders.wordSpacing
 import o.katydid.css.styles.builders.wordWrap
-import o.katydid.css.styles.style
+import o.katydid.css.styles.makeStyle
 import o.katydid.css.types.ENormal
 import o.katydid.css.types.EOverflowWrap
 import org.junit.jupiter.api.Test
@@ -26,7 +26,7 @@ class WordStylePropertyTests {
         expectedCss: String,
         build: Style.() -> Unit
     ) {
-        assertEquals(expectedCss, style(build).toString())
+        assertEquals(expectedCss, makeStyle(build).toString())
     }
 
     @Test

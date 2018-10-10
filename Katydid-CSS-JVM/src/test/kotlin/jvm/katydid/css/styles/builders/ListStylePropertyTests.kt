@@ -11,7 +11,7 @@ import o.katydid.css.styles.builders.listStyle
 import o.katydid.css.styles.builders.listStyleImage
 import o.katydid.css.styles.builders.listStylePosition
 import o.katydid.css.styles.builders.listStyleType
-import o.katydid.css.styles.style
+import o.katydid.css.styles.makeStyle
 import o.katydid.css.types.EImage
 import o.katydid.css.types.EListStylePosition
 import o.katydid.css.types.EListStyleType
@@ -27,7 +27,7 @@ class ListStylePropertyTests {
         expectedCss: String,
         build: Style.() -> Unit
     ) {
-        assertEquals(expectedCss, style(build).toString())
+        assertEquals(expectedCss, makeStyle(build).toString())
     }
 
     @Test

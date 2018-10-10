@@ -9,7 +9,7 @@ import o.katydid.css.colors.*
 import o.katydid.css.measurements.pt
 import o.katydid.css.measurements.px
 import o.katydid.css.styles.builders.*
-import o.katydid.css.styles.style
+import o.katydid.css.styles.makeStyle
 import o.katydid.css.stylesheets.StyleSheet
 import o.katydid.css.stylesheets.styleSheet
 import o.katydid.css.types.EFontStyle
@@ -442,7 +442,7 @@ class StyleSheetTests {
 
         checkStyle(css) {
 
-            val commonColors = style {
+            val commonColors = makeStyle {
                 backgroundColor(gray)
                 color(blue)
             }

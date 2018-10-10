@@ -13,7 +13,7 @@ import o.katydid.css.styles.builders.color
 import o.katydid.css.styles.builders.display
 import o.katydid.css.styles.builders.height
 import o.katydid.css.styles.builders.width
-import o.katydid.css.styles.style
+import o.katydid.css.styles.makeStyle
 import o.katydid.css.types.EDisplay
 import o.katydid.css.types.EDisplay.block
 import org.junit.jupiter.api.Test
@@ -28,7 +28,7 @@ class StyleTests {
         expectedCss: String,
         build: Style.() -> Unit
     ) {
-        assertEquals(expectedCss, style(build).toString())
+        assertEquals(expectedCss, makeStyle(build).toString())
     }
 
     @Test

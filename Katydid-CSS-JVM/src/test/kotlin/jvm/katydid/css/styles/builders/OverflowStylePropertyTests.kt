@@ -7,7 +7,7 @@ package jvm.katydid.css.styles.builders
 
 import o.katydid.css.styles.Style
 import o.katydid.css.styles.builders.*
-import o.katydid.css.styles.style
+import o.katydid.css.styles.makeStyle
 import o.katydid.css.types.EOverflow.*
 import o.katydid.css.types.EOverflowWrap
 import o.katydid.css.types.EResize
@@ -23,7 +23,7 @@ class OverflowStylePropertyTests {
         expectedCss: String,
         build: Style.() -> Unit
     ) {
-        assertEquals(expectedCss, style(build).toString())
+        assertEquals(expectedCss, makeStyle(build).toString())
     }
 
     @Test

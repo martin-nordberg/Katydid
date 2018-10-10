@@ -8,7 +8,7 @@ package jvm.katydid.css.styles.builders
 import o.katydid.css.measurements.px
 import o.katydid.css.styles.Style
 import o.katydid.css.styles.builders.*
-import o.katydid.css.styles.style
+import o.katydid.css.styles.makeStyle
 import o.katydid.css.types.EBorderCollapse.collapse
 import o.katydid.css.types.EBorderCollapse.separate
 import o.katydid.css.types.ECaptionSide
@@ -26,7 +26,7 @@ class TableLayoutStylePropertyTests {
         expectedCss: String,
         build: Style.() -> Unit
     ) {
-        assertEquals(expectedCss, style(build).toString())
+        assertEquals(expectedCss, makeStyle(build).toString())
     }
 
     @Test

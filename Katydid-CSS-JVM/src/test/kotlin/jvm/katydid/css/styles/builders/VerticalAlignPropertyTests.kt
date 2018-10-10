@@ -11,7 +11,7 @@ import o.katydid.css.styles.Style
 import o.katydid.css.styles.builders.alignmentBaseline
 import o.katydid.css.styles.builders.baselineShift
 import o.katydid.css.styles.builders.verticalAlign
-import o.katydid.css.styles.style
+import o.katydid.css.styles.makeStyle
 import o.katydid.css.types.EAlignmentBaseline
 import o.katydid.css.types.EBaselineShift
 import org.junit.jupiter.api.Test
@@ -26,7 +26,7 @@ class VerticalAlignPropertyTests {
         expectedCss: String,
         build: Style.() -> Unit
     ) {
-        assertEquals(expectedCss, style(build).toString())
+        assertEquals(expectedCss, makeStyle(build).toString())
     }
 
     @Test

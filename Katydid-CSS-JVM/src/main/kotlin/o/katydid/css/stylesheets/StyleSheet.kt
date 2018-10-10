@@ -6,6 +6,7 @@
 package o.katydid.css.stylesheets
 
 import o.katydid.css.styles.Style
+import o.katydid.css.styles.makeStyle
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -16,7 +17,7 @@ import o.katydid.css.styles.Style
 class StyleSheet : StyleBlock() {
 
     /** The outermost style block in the tree structure of style blocks for this style sheet. */
-    private val styleBlock : StyleRule = StyleRule(null)
+    private val styleBlock: StyleRule = StyleRule(null)
 
     /** The style block that is currently under construction. */
     private var activeStyleBlock: StyleRule = styleBlock
@@ -39,7 +40,7 @@ class StyleSheet : StyleBlock() {
      * block.
      */
     @Suppress("unused")
-    fun Style.extend(placeholderSelector:String) {
+    fun Style.extend(placeholderSelector: String) {
 
         require(placeholderSelector.startsWith("%")) {
             "Cannot extend a non-placeholder selector: '$placeholderSelector'."
@@ -53,12 +54,12 @@ class StyleSheet : StyleBlock() {
     }
 
     /** Includes the contents of another [styleSheet] directly in this one. */
-    fun include(styleSheet:StyleSheet) {
-        activeStyleBlock.nestedBlocks.addAll(styleSheet.styleBlock.nestedBlocks.map{b->b.copy(activeStyleBlock)})
+    fun include(styleSheet: StyleSheet) {
+        activeStyleBlock.nestedBlocks.addAll(styleSheet.styleBlock.nestedBlocks.map { b -> b.copy(activeStyleBlock) })
     }
 
     /** Builds a style block from a selector and the [build] function for the style. */
-    operator fun String.invoke(build: Style.() -> Unit) : StyleRule {
+    operator fun String.invoke(build: Style.() -> Unit): StyleRule {
 
         // Create the new style block.
         val result = StyleRule(activeStyleBlock)
@@ -74,9 +75,7 @@ class StyleSheet : StyleBlock() {
         activeStyleBlock = result
 
         // Build its style.
-        val style = Style()
-        style.build()
-        activeStyleBlock.style = style
+        activeStyleBlock.style = makeStyle(build)
 
         // Make the parent block active again.
         activeStyleBlock = priorActiveStyleBlock

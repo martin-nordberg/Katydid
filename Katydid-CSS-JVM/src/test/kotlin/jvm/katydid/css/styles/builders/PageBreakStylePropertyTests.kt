@@ -10,7 +10,7 @@ import o.katydid.css.styles.builders.pageBreak
 import o.katydid.css.styles.builders.pageBreakAfter
 import o.katydid.css.styles.builders.pageBreakBefore
 import o.katydid.css.styles.builders.pageBreakInside
-import o.katydid.css.styles.style
+import o.katydid.css.styles.makeStyle
 import o.katydid.css.types.EPageBreak
 import o.katydid.css.types.EPageBreakInside
 import org.junit.jupiter.api.Test
@@ -25,7 +25,7 @@ class PageBreakStylePropertyTests {
         expectedCss: String,
         build: Style.() -> Unit
     ) {
-        assertEquals(expectedCss, style(build).toString())
+        assertEquals(expectedCss, makeStyle(build).toString())
     }
 
     @Test

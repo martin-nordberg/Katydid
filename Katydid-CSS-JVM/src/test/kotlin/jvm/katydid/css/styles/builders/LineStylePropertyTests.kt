@@ -13,7 +13,7 @@ import o.katydid.css.styles.builders.height
 import o.katydid.css.styles.builders.letterSpacing
 import o.katydid.css.styles.builders.line
 import o.katydid.css.styles.builders.lineHeight
-import o.katydid.css.styles.style
+import o.katydid.css.styles.makeStyle
 import o.katydid.css.types.ENormal
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
@@ -27,7 +27,7 @@ class LineStylePropertyTests {
         expectedCss: String,
         build: Style.() -> Unit
     ) {
-        assertEquals(expectedCss, style(build).toString())
+        assertEquals(expectedCss, makeStyle(build).toString())
     }
 
     @Test

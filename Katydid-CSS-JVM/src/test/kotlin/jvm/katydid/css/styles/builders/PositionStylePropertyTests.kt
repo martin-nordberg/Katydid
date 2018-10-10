@@ -10,7 +10,7 @@ import o.katydid.css.measurements.percent
 import o.katydid.css.measurements.px
 import o.katydid.css.styles.Style
 import o.katydid.css.styles.builders.*
-import o.katydid.css.styles.style
+import o.katydid.css.styles.makeStyle
 import o.katydid.css.types.EAuto.auto
 import o.katydid.css.types.EPosition
 import org.junit.jupiter.api.Test
@@ -25,7 +25,7 @@ class PositionStylePropertyTests {
         expectedCss: String,
         build: Style.() -> Unit
     ) {
-        assertEquals(expectedCss, style(build).toString())
+        assertEquals(expectedCss, makeStyle(build).toString())
     }
 
     @Test

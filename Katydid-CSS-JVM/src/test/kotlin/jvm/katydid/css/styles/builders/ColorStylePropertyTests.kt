@@ -9,7 +9,7 @@ import o.katydid.css.colors.aliceblue
 import o.katydid.css.styles.Style
 import o.katydid.css.styles.builders.color
 import o.katydid.css.styles.builders.opacity
-import o.katydid.css.styles.style
+import o.katydid.css.styles.makeStyle
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -22,7 +22,7 @@ class ColorStylePropertyTests {
         expectedCss: String,
         build: Style.() -> Unit
     ) {
-        assertEquals(expectedCss, style(build).toString())
+        assertEquals(expectedCss, makeStyle(build).toString())
     }
 
     @Test

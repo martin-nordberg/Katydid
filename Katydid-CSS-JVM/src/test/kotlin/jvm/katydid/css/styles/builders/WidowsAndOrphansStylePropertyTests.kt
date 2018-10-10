@@ -8,7 +8,7 @@ package jvm.katydid.css.styles.builders
 import o.katydid.css.styles.Style
 import o.katydid.css.styles.builders.orphans
 import o.katydid.css.styles.builders.widows
-import o.katydid.css.styles.style
+import o.katydid.css.styles.makeStyle
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -22,7 +22,7 @@ class WidowsAndOrphansStylePropertyTests {
         expectedCss: String,
         build: Style.() -> Unit
     ) {
-        assertEquals(expectedCss, style(build).toString())
+        assertEquals(expectedCss, makeStyle(build).toString())
     }
 
     @Test

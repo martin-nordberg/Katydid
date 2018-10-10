@@ -12,7 +12,7 @@ import o.katydid.css.measurements.percent
 import o.katydid.css.measurements.px
 import o.katydid.css.styles.Style
 import o.katydid.css.styles.builders.*
-import o.katydid.css.styles.style
+import o.katydid.css.styles.makeStyle
 import o.katydid.css.types.*
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
@@ -27,7 +27,7 @@ class TextStylePropertyTests {
         expectedCss: String,
         build: Style.() -> Unit
     ) {
-        assertEquals(expectedCss, style(build).toString())
+        assertEquals(expectedCss, makeStyle(build).toString())
     }
 
     @Test
@@ -36,8 +36,8 @@ class TextStylePropertyTests {
         checkStyle("tab-size: 10;") { tabSize(10) }
         checkStyle("tab-size: 15px;") { tabSize(15.px) }
 
-        assertFailsWith<IllegalArgumentException> { style { tabSize(-1) } }
-        assertFailsWith<IllegalArgumentException> { style { tabSize(-1.px) } }
+        assertFailsWith<IllegalArgumentException> { makeStyle { tabSize(-1) } }
+        assertFailsWith<IllegalArgumentException> { makeStyle { tabSize(-1.px) } }
 
     }
 

@@ -9,7 +9,7 @@ import o.katydid.css.measurements.percent
 import o.katydid.css.measurements.px
 import o.katydid.css.styles.Style
 import o.katydid.css.styles.builders.*
-import o.katydid.css.styles.style
+import o.katydid.css.styles.makeStyle
 import o.katydid.css.types.EAuto.auto
 import o.katydid.css.types.EBoxSize
 import o.katydid.css.types.ENone
@@ -26,14 +26,14 @@ class WidthHeightStylePropertyTests {
         expectedCss: String,
         build: Style.() -> Unit
     ) {
-        assertEquals(expectedCss, style(build).toString())
+        assertEquals(expectedCss, makeStyle(build).toString())
     }
 
     @Test
     fun `Fit-content cannot be negative`() {
 
-        assertFailsWith<IllegalArgumentException> { style { maxHeight(EBoxSize.fitContent(-2.px)) } }
-        assertFailsWith<IllegalArgumentException> { style { maxHeight(EBoxSize.fitContent(-2.percent)) } }
+        assertFailsWith<IllegalArgumentException> { makeStyle { maxHeight(EBoxSize.fitContent(-2.px)) } }
+        assertFailsWith<IllegalArgumentException> { makeStyle { maxHeight(EBoxSize.fitContent(-2.percent)) } }
 
     }
 

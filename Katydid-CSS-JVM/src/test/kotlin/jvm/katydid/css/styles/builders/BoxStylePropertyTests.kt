@@ -7,7 +7,7 @@ package jvm.katydid.css.styles.builders
 
 import o.katydid.css.styles.Style
 import o.katydid.css.styles.builders.boxSizing
-import o.katydid.css.styles.style
+import o.katydid.css.styles.makeStyle
 import o.katydid.css.types.EBoxSizing.borderBox
 import o.katydid.css.types.EBoxSizing.contentBox
 import org.junit.jupiter.api.Test
@@ -22,7 +22,7 @@ class BoxStylePropertyTests {
         expectedCss: String,
         build: Style.() -> Unit
     ) {
-        assertEquals(expectedCss, style(build).toString())
+        assertEquals(expectedCss, makeStyle(build).toString())
     }
 
     @Test

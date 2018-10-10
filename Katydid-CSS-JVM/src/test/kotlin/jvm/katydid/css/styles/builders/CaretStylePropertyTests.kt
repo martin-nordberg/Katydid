@@ -9,7 +9,7 @@ import o.katydid.css.colors.slateblue
 import o.katydid.css.styles.Style
 import o.katydid.css.styles.builders.caret
 import o.katydid.css.styles.builders.caretColor
-import o.katydid.css.styles.style
+import o.katydid.css.styles.makeStyle
 import o.katydid.css.types.EAuto.auto
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
@@ -23,7 +23,7 @@ class CaretStylePropertyTests {
         expectedCss: String,
         build: Style.() -> Unit
     ) {
-        assertEquals(expectedCss, style(build).toString())
+        assertEquals(expectedCss, makeStyle(build).toString())
     }
 
     @Test
