@@ -11,7 +11,7 @@ import o.katydid.css.measurements.Percentage
 import o.katydid.css.styles.Style
 import o.katydid.css.types.EAttachment
 import o.katydid.css.types.EBackgroundPosition
-import o.katydid.css.types.ENone
+import o.katydid.css.types.EImage
 import o.katydid.css.types.ERepeatStyle
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -32,11 +32,8 @@ class BackgroundStyleBuilder(
     fun color(value: Color) =
         style.backgroundColor(value)
 
-    fun image(vararg urls: String) =
-        style.backgroundImage(*urls)
-
-    fun image(value: ENone) =
-        style.backgroundImage(value)
+    fun image(vararg values: EImage) =
+        style.backgroundImage(*values)
 
     fun position(x: EBackgroundPosition, xOffset: Length, y: EBackgroundPosition, yOffset: Length) =
         style.backgroundPosition(x, xOffset, y, yOffset)
@@ -77,7 +74,7 @@ fun Style.background(build: BackgroundStyleBuilder.() -> Unit) =
 //---------------------------------------------------------------------------------------------------------------------
 
 fun Style.backgroundAttachment(vararg values: EAttachment) =
-    setProperty("background-attachment", values.map { v -> v.toString() }.joinToString(", "))
+    setProperty("background-attachment", values.joinToString(", ") { v -> v.toString() })
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -86,17 +83,8 @@ fun Style.backgroundColor(value: Color) =
 
 //---------------------------------------------------------------------------------------------------------------------
 
-// TODO: Use EImage
-
-fun Style.backgroundImage(vararg urls: String) {
-    setProperty(
-        "background-image",
-        urls.map { url -> ENone.fromString(url) ?: "url(\"$url\")" }.joinToString(", ")
-    )
-}
-
-fun Style.backgroundImage(value: ENone) =
-    setProperty("background-image", "$value")
+fun Style.backgroundImage(vararg values: EImage) =
+    setProperty("background-image", values.joinToString(", ") { v -> v.toString() })
 
 //---------------------------------------------------------------------------------------------------------------------
 

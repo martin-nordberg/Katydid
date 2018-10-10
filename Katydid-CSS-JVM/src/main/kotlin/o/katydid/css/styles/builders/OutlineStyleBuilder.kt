@@ -28,7 +28,7 @@ class OutlineStyleBuilder(
     fun color(value: EOutlineColor) =
         style.outlineColor(value)
 
-    fun Style.offset(value: Length) =
+    fun offset(value: Length) =
         style.outlineOffset(value)
 
     fun style(value: ELineStyle) =

@@ -117,67 +117,65 @@ class BorderStyleBuilder(
     private val style: Style
 ) {
 
-    fun Style.bottom(build: BorderBottomStyleBuilder.() -> Unit) =
-        BorderBottomStyleBuilder(this).build()
+    fun bottom(build: BorderBottomStyleBuilder.() -> Unit) =
+        BorderBottomStyleBuilder(style).build()
 
-    fun Style.bottom(style: ELineStyle? = null, color: Color? = null) =
-        setBorderProperty("border-bottom", "", style, color)
+    fun bottom(lineStyle: ELineStyle? = null, color: Color? = null) =
+        style.borderBottom(lineStyle, color)
 
-    fun Style.bottom(width: ELineWidth, style: ELineStyle? = null, color: Color? = null) =
-        setBorderProperty("border-bottom", width, style, color)
+    fun bottom(width: ELineWidth, lineStyle: ELineStyle? = null, color: Color? = null) =
+        style.borderBottom(width, lineStyle, color)
 
-    fun Style.bottom(width: Length, style: ELineStyle? = null, color: Color? = null) =
-        setBorderProperty("border-bottom", width, style, color)
+    fun bottom(width: Length, lineStyle: ELineStyle? = null, color: Color? = null) =
+        style.borderBottom(width, lineStyle, color)
 
-    fun Style.color(top: Color, right: Color = top, bottom: Color = top, left: Color = right) =
-        setBoxProperty("border-color", top, right, bottom, left)
+    fun color(top: Color, right: Color = top, bottom: Color = top, left: Color = right) =
+        style.borderColor(top, right, bottom, left)
 
-    fun Style.left(build: BorderLeftStyleBuilder.() -> Unit) =
-        BorderLeftStyleBuilder(this).build()
+    fun left(build: BorderLeftStyleBuilder.() -> Unit) =
+        BorderLeftStyleBuilder(style).build()
 
-    fun Style.left(style: ELineStyle? = null, color: Color? = null) =
-        setBorderProperty("border-left", "", style, color)
+    fun left(lineStyle: ELineStyle? = null, color: Color? = null) =
+        style.borderLeft(lineStyle, color)
 
-    fun Style.left(width: ELineWidth, style: ELineStyle? = null, color: Color? = null) =
-        setBorderProperty("border-left", width, style, color)
+    fun left(width: ELineWidth, lineStyle: ELineStyle? = null, color: Color? = null) =
+        style.borderLeft(width, lineStyle, color)
 
-    fun Style.left(width: Length, style: ELineStyle? = null, color: Color? = null) =
-        setBorderProperty("border-left", width, style, color)
+    fun left(width: Length, lineStyle: ELineStyle? = null, color: Color? = null) =
+        style.borderLeft(width, lineStyle, color)
 
-    fun Style.right(build: BorderRightStyleBuilder.() -> Unit) =
-        BorderRightStyleBuilder(this).build()
+    fun right(build: BorderRightStyleBuilder.() -> Unit) =
+        BorderRightStyleBuilder(style).build()
 
-    fun Style.right(style: ELineStyle? = null, color: Color? = null) =
-        setBorderProperty("border-right", "", style, color)
+    fun right(lineStyle: ELineStyle? = null, color: Color? = null) =
+        style.borderRight(lineStyle, color)
 
-    fun Style.right(width: ELineWidth, style: ELineStyle? = null, color: Color? = null) =
-        setBorderProperty("border-right", width, style, color)
+    fun right(width: ELineWidth, lineStyle: ELineStyle? = null, color: Color? = null) =
+        style.borderRight(width, lineStyle, color)
 
-    fun Style.right(width: Length, style: ELineStyle? = null, color: Color? = null) =
-        setBorderProperty("border-right", width, style, color)
+    fun right(width: Length, lineStyle: ELineStyle? = null, color: Color? = null) =
+        style.borderRight(width, lineStyle, color)
 
-    fun Style.style(top: ELineStyle, right: ELineStyle = top,
-                    bottom: ELineStyle = top, left: ELineStyle = right) =
-        setBoxProperty("border-style", top, right, bottom, left)
+    fun style(top: ELineStyle, right: ELineStyle = top, bottom: ELineStyle = top, left: ELineStyle = right) =
+        style.borderStyle(top, right, bottom, left)
 
-    fun Style.top(build: BorderTopStyleBuilder.() -> Unit) =
-        BorderTopStyleBuilder(this).build()
+    fun top(build: BorderTopStyleBuilder.() -> Unit) =
+        BorderTopStyleBuilder(style).build()
 
-    fun Style.top(style: ELineStyle? = null, color: Color? = null) =
-        setBorderProperty("border-top", "", style, color)
+    fun top(lineStyle: ELineStyle? = null, color: Color? = null) =
+        style.borderTop(lineStyle, color)
 
-    fun Style.top(width: ELineWidth, style: ELineStyle? = null, color: Color? = null) =
-        setBorderProperty("border-top", width, style, color)
+    fun top(width: ELineWidth, lineStyle: ELineStyle? = null, color: Color? = null) =
+        style.borderTop(width, lineStyle, color)
 
-    fun Style.top(width: Length, style: ELineStyle? = null, color: Color? = null) =
-        setBorderProperty("border-top", width, style, color)
+    fun top(width: Length, lineStyle: ELineStyle? = null, color: Color? = null) =
+        style.borderTop(width, lineStyle, color)
 
-    fun Style.width(top: ELineWidth, right: ELineWidth = top,
-                    bottom: ELineWidth = top, left: ELineWidth = right) =
-        setBoxProperty("border-width", top, right, bottom, left)
+    fun width(top: ELineWidth, right: ELineWidth = top, bottom: ELineWidth = top, left: ELineWidth = right) =
+        style.borderWidth(top, right, bottom, left)
 
-    fun Style.width(top: Length, right: Length = top, bottom: Length = top, left: Length = right) =
-        setBoxProperty("border-width", top, right, bottom, left)
+    fun width(top: Length, right: Length = top, bottom: Length = top, left: Length = right) =
+        style.borderWidth(top, right, bottom, left)
 
 }
 
@@ -289,8 +287,7 @@ fun Style.borderRightWidth(value: Length) =
 
 //---------------------------------------------------------------------------------------------------------------------
 
-fun Style.borderStyle(top: ELineStyle, right: ELineStyle = top,
-                      bottom: ELineStyle = top, left: ELineStyle = right) =
+fun Style.borderStyle(top: ELineStyle, right: ELineStyle = top, bottom: ELineStyle = top, left: ELineStyle = right) =
     setBoxProperty("border-style", top, right, bottom, left)
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -324,11 +321,31 @@ fun Style.borderTopWidth(value: Length) =
 
 //---------------------------------------------------------------------------------------------------------------------
 
-fun Style.borderWidth(top: ELineWidth, right: ELineWidth = top,
-                      bottom: ELineWidth = top, left: ELineWidth = right) =
+fun Style.borderWidth(top: ELineWidth, right: ELineWidth = top, bottom: ELineWidth = top, left: ELineWidth = right) =
     setBoxProperty("border-width", top, right, bottom, left)
 
 fun Style.borderWidth(top: Length, right: Length = top, bottom: Length = top, left: Length = right) =
     setBoxProperty("border-width", top, right, bottom, left)
 
 //---------------------------------------------------------------------------------------------------------------------
+
+private fun <T> Style.setBorderProperty(key: String, width: T?, style: ELineStyle?, color: Color?) {
+
+    var css = "$width"
+
+    if (style != null) {
+        css += " $style"
+    }
+
+    if (color != null) {
+        css += " $color"
+    }
+
+    require(css.isNotEmpty()) { "Specify at least one non-null parameter for $key." }
+
+    setProperty(key, css.trim())
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+

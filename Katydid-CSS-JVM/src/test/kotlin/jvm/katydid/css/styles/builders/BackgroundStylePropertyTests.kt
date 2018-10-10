@@ -13,7 +13,7 @@ import o.katydid.css.styles.builders.*
 import o.katydid.css.styles.style
 import o.katydid.css.types.EAttachment
 import o.katydid.css.types.EBackgroundPosition.*
-import o.katydid.css.types.ENone
+import o.katydid.css.types.EImage
 import o.katydid.css.types.ERepeatStyle
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
@@ -41,10 +41,10 @@ class BackgroundStylePropertyTests {
 
         checkStyle("background-color: aquamarine;") { backgroundColor(aquamarine) }
 
-        checkStyle("background-image: none;") { backgroundImage(ENone.none) }
-        checkStyle("background-image: url(\"http://myimage.jpg\");") { backgroundImage("http://myimage.jpg") }
-        checkStyle("background-image: url(\"images/1.jpg\"), url(\"images/2.jpg\");") { backgroundImage("images/1.jpg", "images/2.jpg") }
-        checkStyle("background-image: url(\"images/1.jpg\"), none;") { backgroundImage("images/1.jpg", "none") }
+        checkStyle("background-image: none;") { backgroundImage(EImage.none) }
+        checkStyle("background-image: url(\"http://myimage.jpg\");") { backgroundImage(EImage.url("http://myimage.jpg")) }
+        checkStyle("background-image: url(\"images/1.jpg\"), url(\"images/2.jpg\");") { backgroundImage(EImage.url("images/1.jpg"), EImage.url("images/2.jpg")) }
+        checkStyle("background-image: url(\"images/1.jpg\"), none;") { backgroundImage(EImage.url("images/1.jpg"), EImage.none) }
 
         checkStyle("background-position: center center;") { backgroundPosition(center) }
         checkStyle("background-position: left top;") { backgroundPosition(left, top) }
@@ -77,9 +77,9 @@ class BackgroundStylePropertyTests {
 
         checkStyle("background-color: aquamarine;") { background { color(aquamarine) } }
 
-        checkStyle("background-image: none;") { background { image(ENone.none) } }
-        checkStyle("background-image: url(\"images/1.jpg\"), url(\"images/2.jpg\");") { background { image("images/1.jpg", "images/2.jpg") } }
-        checkStyle("background-image: url(\"images/1.jpg\"), none;") { background { image("images/1.jpg", "none") } }
+        checkStyle("background-image: none;") { background { image(EImage.none) } }
+        checkStyle("background-image: url(\"images/1.jpg\"), url(\"images/2.jpg\");") { background { image(EImage.url("images/1.jpg"), EImage.url("images/2.jpg")) } }
+        checkStyle("background-image: url(\"images/1.jpg\"), none;") { background { image(EImage.url("images/1.jpg"), EImage.none) } }
 
         checkStyle("background-position: center center;") { background { position(center) } }
         checkStyle("background-position: left top;") { background { position(left, top) } }

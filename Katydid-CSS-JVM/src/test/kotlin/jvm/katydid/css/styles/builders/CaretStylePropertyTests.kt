@@ -7,6 +7,7 @@ package jvm.katydid.css.styles.builders
 
 import o.katydid.css.colors.slateblue
 import o.katydid.css.styles.Style
+import o.katydid.css.styles.builders.caret
 import o.katydid.css.styles.builders.caretColor
 import o.katydid.css.styles.style
 import o.katydid.css.types.EAuto.auto
@@ -30,6 +31,14 @@ class CaretStylePropertyTests {
 
         checkStyle("caret-color: slateblue;") { caretColor(slateblue) }
         checkStyle("caret-color: auto;") { caretColor(auto) }
+
+    }
+
+    @Test
+    fun `Nested caret color style properties convert to correct CSS`() {
+
+        checkStyle("caret-color: slateblue;") { caret { color(slateblue) } }
+        checkStyle("caret-color: auto;") { caret { color(auto) } }
 
     }
 

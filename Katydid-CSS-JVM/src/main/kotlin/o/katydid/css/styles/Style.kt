@@ -5,9 +5,6 @@
 
 package o.katydid.css.styles
 
-import o.katydid.css.colors.Color
-import o.katydid.css.types.ELineStyle
-
 //---------------------------------------------------------------------------------------------------------------------
 
 class Style {
@@ -38,24 +35,6 @@ class Style {
 
     fun inherit(key: String) =
         setProperty(key, "inherit")
-
-    fun <T> setBorderProperty(key: String, width: T?, style: ELineStyle?, color: Color?) {
-
-        var css = "$width"
-
-        if (style != null) {
-            css += " $style"
-        }
-
-        if (color != null) {
-            css += " $color"
-        }
-
-        require(css.isNotEmpty()) { "Specify at least one non-null parameter for $key." }
-
-        setProperty(key, css.trim())
-
-    }
 
     fun <T> setBoxProperty(key: String, top: T, right: T = top, bottom: T = top, left: T = right) {
 

@@ -29,6 +29,11 @@ class CaretStyleBuilder(
 
 //---------------------------------------------------------------------------------------------------------------------
 
+fun Style.caret(build: CaretStyleBuilder.() -> Unit) =
+    CaretStyleBuilder(this).build()
+
+//---------------------------------------------------------------------------------------------------------------------
+
 fun Style.caretColor(value: Color) =
     setProperty("caret-color", "$value")
 
