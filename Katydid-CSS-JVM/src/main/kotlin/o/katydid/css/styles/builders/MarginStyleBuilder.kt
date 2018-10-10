@@ -62,17 +62,11 @@ class MarginStyleBuilder(
 fun Style.margin(build: MarginStyleBuilder.() -> Unit) =
     MarginStyleBuilder(this).build()
 
-fun Style.margin(boxSize: BoxSize) =
-    setProperty("margin", "$boxSize")
-
-fun Style.margin(boxSize: BoxPercentages) =
-    setProperty("margin", "$boxSize")
-
 fun Style.margin(top: Length, right: Length = top, bottom: Length = top, left: Length = right) =
-    margin(box(top, right, bottom, left))
+    setBoxProperty("margin",top, right, bottom, left)
 
 fun Style.margin(top: Percentage, right: Percentage = top, bottom: Percentage = top, left: Percentage = right) =
-    margin(box(top, right, bottom, left))
+    setBoxProperty("margin",top, right, bottom, left)
 
 fun Style.margin(value: EAuto) =
     setProperty("margin", "$value")

@@ -5,7 +5,6 @@
 
 package jvm.katydid.css.styles.builders
 
-import o.katydid.css.measurements.box
 import o.katydid.css.measurements.percent
 import o.katydid.css.measurements.px
 import o.katydid.css.styles.Style
@@ -52,16 +51,6 @@ class MarginStylePropertyTests {
 
     @Test
     fun `Margin style properties convert to correct CSS`() {
-
-        checkStyle("margin: 1px;") { margin(box(1.px)) }
-        checkStyle("margin: 1px 2px;") { margin(box(1.px, 2.px)) }
-        checkStyle("margin: 1px 2px 3px;") { margin(box(1.px, 2.px, 3.px)) }
-        checkStyle("margin: 1px 2px 3px 4px;") { margin(box(1.px, 2.px, 3.px, 4.px)) }
-
-        checkStyle("margin: 1%;") { margin(box(1.percent)) }
-        checkStyle("margin: 1% 2%;") { margin(box(1.percent, 2.percent)) }
-        checkStyle("margin: 1% 2% 3%;") { margin(box(1.percent, 2.percent, 3.percent)) }
-        checkStyle("margin: 1% 2% 3% 4%;") { margin(box(1.percent, 2.percent, 3.percent, 4.percent)) }
 
         checkStyle("margin: -2px;") { margin((-2).px) }
         checkStyle("margin: -2px;") { margin((-2).px, (-2).px) }

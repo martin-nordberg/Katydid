@@ -49,17 +49,11 @@ class PaddingStyleBuilder(
 fun Style.padding(build: PaddingStyleBuilder.() -> Unit) =
     PaddingStyleBuilder(this).build()
 
-fun Style.padding(boxSize: BoxSize) =
-    setProperty("padding", "$boxSize")
-
-fun Style.padding(boxSize: BoxPercentages) =
-    setProperty("padding", "$boxSize")
-
 fun Style.padding(top: Length, right: Length = top, bottom: Length = top, left: Length = right) =
-    padding(box(top, right, bottom, left))
+    setBoxProperty("padding", top, right, bottom, left)
 
 fun Style.padding(top: Percentage, right: Percentage = top, bottom: Percentage = top, left: Percentage = right) =
-    padding(box(top, right, bottom, left))
+    setBoxProperty("padding", top, right, bottom, left)
 
 //---------------------------------------------------------------------------------------------------------------------
 

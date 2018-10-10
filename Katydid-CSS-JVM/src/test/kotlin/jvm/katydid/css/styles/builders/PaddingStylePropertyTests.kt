@@ -5,7 +5,6 @@
 
 package jvm.katydid.css.styles.builders
 
-import o.katydid.css.measurements.box
 import o.katydid.css.measurements.percent
 import o.katydid.css.measurements.px
 import o.katydid.css.styles.Style
@@ -47,16 +46,6 @@ class PaddingStylePropertyTests {
 
     @Test
     fun `Padding style properties convert to correct CSS`() {
-
-        checkStyle("padding: 1px;") { padding(box(1.px)) }
-        checkStyle("padding: 1px 2px;") { padding(box(1.px, 2.px)) }
-        checkStyle("padding: 1px 2px 3px;") { padding(box(1.px, 2.px, 3.px)) }
-        checkStyle("padding: 1px 2px 3px 4px;") { padding(box(1.px, 2.px, 3.px, 4.px)) }
-
-        checkStyle("padding: 1%;") { padding(box(1.percent)) }
-        checkStyle("padding: 1% 2%;") { padding(box(1.percent, 2.percent)) }
-        checkStyle("padding: 1% 2% 3%;") { padding(box(1.percent, 2.percent, 3.percent)) }
-        checkStyle("padding: 1% 2% 3% 4%;") { padding(box(1.percent, 2.percent, 3.percent, 4.percent)) }
 
         checkStyle("padding: -2px;") { padding((-2).px) }
         checkStyle("padding: -2px;") { padding((-2).px, (-2).px) }
