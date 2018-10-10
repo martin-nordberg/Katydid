@@ -13,13 +13,23 @@ import o.katydid.css.styles.Style
  * Represents a CSS style sheet with SASS-like provisions to build style blocks from string selectors and
  * styles.
  */
-class StyleSheet {
+class StyleSheet : StyleBlock() {
 
     /** The outermost style block in the tree structure of style blocks for this style sheet. */
-    private val styleBlock : StyleBlock = StyleBlock(null)
+    private val styleBlock : StyleRule = StyleRule(null)
 
     /** The style block that is currently under construction. */
-    private var activeStyleBlock: StyleBlock = styleBlock
+    private var activeStyleBlock: StyleRule = styleBlock
+
+    /**
+     * Returns a list of the full-path selectors for this block, i.e. the CSS selectors resulting from nesting.
+     * Accounts for multiple selectors (comma separated in the eventual CSS) at each level.
+     */
+    override val fullSelectors: List<String>
+        get() = emptyList()
+
+    /** The child style blocks nested within this parent block. */
+    override val nestedBlocks: MutableList<StyleRule> = mutableListOf()
 
     ////
 
@@ -48,10 +58,10 @@ class StyleSheet {
     }
 
     /** Builds a style block from a selector and the [build] function for the style. */
-    operator fun String.invoke(build: Style.() -> Unit) : StyleBlock {
+    operator fun String.invoke(build: Style.() -> Unit) : StyleRule {
 
         // Create the new style block.
-        val result = StyleBlock(activeStyleBlock)
+        val result = StyleRule(activeStyleBlock)
 
         // Add its selectors or placeholder selectors.
         result.prependSelectors(this)
@@ -80,7 +90,7 @@ class StyleSheet {
         this + ", " + that
 
     /** Combines a selector with an already created [styleBlock] by adding the selector to the block. */
-    infix fun String.or(styleBlock: StyleBlock): StyleBlock {
+    infix fun String.or(styleBlock: StyleRule): StyleRule {
 
         styleBlock.prependSelectors(this)
 
@@ -88,8 +98,8 @@ class StyleSheet {
 
     }
 
-    /** Converts this style sheet to CSS. */
-    override fun toString(): String {
+    /** Converts this style block to CSS. */
+    override fun toCssString(): String {
 
         val result = StringBuilder("")
 
@@ -100,6 +110,10 @@ class StyleSheet {
         return result.toString()
 
     }
+
+    /** Converts this style sheet to CSS. */
+    override fun toString(): String =
+        toCssString()
 
 }
 
