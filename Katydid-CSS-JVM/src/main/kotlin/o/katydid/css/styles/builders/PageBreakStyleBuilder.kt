@@ -11,6 +11,9 @@ import o.katydid.css.types.EPageBreakInside
 
 //---------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Builder class for setting page break properties of a given [style] from a nested block.
+ */
 @StyleBuilderDsl
 class PageBreakStyleBuilder(
     private val style: Style

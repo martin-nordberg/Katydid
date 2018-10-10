@@ -8,21 +8,25 @@ package o.katydid.css.styles.builders
 import o.katydid.css.styles.Style
 import o.katydid.css.types.EOverflow
 import o.katydid.css.types.EOverflowWrap
+import o.katydid.css.types.EResize
 
 //---------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Builder class for setting overflow properties of a given [style] from a nested block.
+ */
 @StyleBuilderDsl
 class OverflowStyleBuilder(
     private val style: Style
 ) {
 
-    fun Style.x(value: EOverflow) =
+    fun x(value: EOverflow) =
         style.overflowX(value)
 
-    fun Style.y(value: EOverflow) =
+    fun y(value: EOverflow) =
         style.overflowY(value)
 
-    fun Style.wrap(value: EOverflowWrap) =
+    fun wrap(value: EOverflowWrap) =
         style.overflowWrap(value)
 
 }
@@ -49,6 +53,11 @@ fun Style.overflowY(value: EOverflow) =
 
 fun Style.overflowWrap(value: EOverflowWrap) =
     setProperty("overflow-wrap", "$value")
+
+//---------------------------------------------------------------------------------------------------------------------
+
+fun Style.resize(value: EResize) =
+    setProperty("resize", "$value")
 
 //---------------------------------------------------------------------------------------------------------------------
 

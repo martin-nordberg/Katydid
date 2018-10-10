@@ -6,7 +6,7 @@
 package o.katydid.css.types
 
 /**Enumeration of options for the 'content' property. */
-@Suppress("EnumEntryName")
+@Suppress("ClassName")
 sealed class EContent(
     private val css: String
 ) {

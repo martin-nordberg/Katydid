@@ -6,13 +6,11 @@
 package jvm.katydid.css.styles.builders
 
 import o.katydid.css.styles.Style
-import o.katydid.css.styles.builders.overflow
-import o.katydid.css.styles.builders.overflowWrap
-import o.katydid.css.styles.builders.overflowX
-import o.katydid.css.styles.builders.overflowY
+import o.katydid.css.styles.builders.*
 import o.katydid.css.styles.style
 import o.katydid.css.types.EOverflow.*
 import o.katydid.css.types.EOverflowWrap
+import o.katydid.css.types.EResize
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -53,6 +51,16 @@ class OverflowStylePropertyTests {
 
         checkStyle("overflow-wrap: break-word;") { overflowWrap(EOverflowWrap.breakWord) }
         checkStyle("overflow-wrap: normal;") { overflowWrap(EOverflowWrap.normal) }
+
+    }
+
+    @Test
+    fun `Resize properties convert to correct CSS`() {
+
+        checkStyle("resize: both;") { resize(EResize.both) }
+        checkStyle("resize: horizontal;") { resize(EResize.horizontal) }
+        checkStyle("resize: none;") { resize(EResize.none) }
+        checkStyle("resize: vertical;") { resize(EResize.vertical) }
 
     }
 

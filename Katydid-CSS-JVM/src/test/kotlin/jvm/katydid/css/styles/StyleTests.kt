@@ -10,6 +10,7 @@ import o.katydid.css.colors.rgb
 import o.katydid.css.measurements.px
 import o.katydid.css.styles.Style
 import o.katydid.css.styles.builders.color
+import o.katydid.css.styles.builders.display
 import o.katydid.css.styles.builders.height
 import o.katydid.css.styles.builders.width
 import o.katydid.css.styles.style
@@ -68,6 +69,13 @@ class StyleTests {
         checkStyle("display: inherit;") {
             inherit("display")
         }
+
+    }
+
+    @Test
+    fun `Arbitrary properties convert to correct CSS`() {
+
+        checkStyle("not-yet-invented: 7px;") { setProperty("not-yet-invented", 7.px.toString()) }
 
     }
 

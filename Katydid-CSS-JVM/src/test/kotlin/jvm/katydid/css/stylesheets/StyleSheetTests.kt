@@ -8,10 +8,7 @@ package jvm.katydid.css.stylesheets
 import o.katydid.css.colors.*
 import o.katydid.css.measurements.pt
 import o.katydid.css.measurements.px
-import o.katydid.css.styles.builders.color
-import o.katydid.css.styles.builders.height
-import o.katydid.css.styles.builders.maxWidth
-import o.katydid.css.styles.builders.width
+import o.katydid.css.styles.builders.*
 import o.katydid.css.styles.style
 import o.katydid.css.stylesheets.StyleSheet
 import o.katydid.css.stylesheets.styleSheet

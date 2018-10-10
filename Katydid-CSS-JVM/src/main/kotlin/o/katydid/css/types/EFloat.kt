@@ -60,7 +60,7 @@ enum class EFloat(
     /** Behave like block-end or inline-end depending on the float containing block’s direction and writing-mode. */
     bottom("bottom"),
 
-    /** same as snap-block(2em, near) */
+    /** same as snap-block(2em, near)   TODO: sealed class & snapBlock with parameters (if/when browsers add this)*/
     snapBlock("snap-block"),
 
     /** same as snap-inline(2em, near) */

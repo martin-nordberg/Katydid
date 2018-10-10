@@ -47,6 +47,8 @@ enum class EListStyleType(
     /** Lowercase classical Greek alpha, beta, gamma, ... (α, β, γ, ...) */
     lowerGreek("lower-greek");
 
+    // TODO: Lots more: https://www.w3.org/TR/css-counter-styles-3/#predefined-counters
+
     ////
 
     /** @return the CSS attribute text for this list style type option. */

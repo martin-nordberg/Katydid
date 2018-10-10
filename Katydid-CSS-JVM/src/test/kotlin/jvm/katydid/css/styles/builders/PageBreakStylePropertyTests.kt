@@ -34,6 +34,9 @@ class PageBreakStylePropertyTests {
         checkStyle("page-break-after: always;") { pageBreak { after(EPageBreak.always) } }
         checkStyle("page-break-after: always; page-break-before: avoid;") { pageBreak { after(EPageBreak.always); before(EPageBreak.avoid) } }
 
+        checkStyle("page-break-before: always;") { pageBreak { before(EPageBreak.always) } }
+
+        checkStyle("page-break-inside: avoid;") { pageBreak { inside(EPageBreakInside.avoid) } }
     }
 
     @Test

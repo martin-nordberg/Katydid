@@ -14,6 +14,9 @@ import o.katydid.css.types.EOutlineColor
 
 //---------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Builder class for setting outline properties of a given [style] from a nested block.
+ */
 @StyleBuilderDsl
 class OutlineStyleBuilder(
     private val style: Style

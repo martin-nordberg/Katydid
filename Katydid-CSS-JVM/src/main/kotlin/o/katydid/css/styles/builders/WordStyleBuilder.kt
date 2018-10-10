@@ -14,7 +14,7 @@ import o.katydid.css.types.EOverflowWrap
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Builder class for setting margin properties of a given [style] from a nested block.
+ * Builder class for setting word style properties of a given [style] from a nested block.
  */
 @StyleBuilderDsl
 class WordStyleBuilder(
