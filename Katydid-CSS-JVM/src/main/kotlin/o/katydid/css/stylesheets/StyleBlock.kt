@@ -19,13 +19,25 @@ abstract class StyleBlock {
     abstract val fullSelectors: List<String>
 
     /** The child style blocks nested within this parent block. */
-    abstract val nestedBlocks: MutableList<StyleRule>
+    abstract val nestedBlocks: List<StyleBlock>
 
     ////
 
-    /** Finds the placeholder with given [placeholderName]. The name should start with "%". */
-    fun findPlaceholder(placeholderName: String) =
-        nestedBlocks.find { b -> b.selectors.contains(placeholderName) }
+    /** Makes a copy of this style block, placing the copy as a child of [parentOfCopy]. */
+    abstract fun copy(parentOfCopy: StyleBlock): StyleBlock
+
+    /** Finds the placeholder with given [placeholderName]. */
+    fun findPlaceholder(placeholderName: String): PlaceholderRule? {
+
+        for (block in nestedBlocks) {
+            if (block is PlaceholderRule && block.name == placeholderName) {
+                return block
+            }
+        }
+
+        return null
+
+    }
 
     /** Converts this style block to CSS. */
     abstract fun toCssString(): String

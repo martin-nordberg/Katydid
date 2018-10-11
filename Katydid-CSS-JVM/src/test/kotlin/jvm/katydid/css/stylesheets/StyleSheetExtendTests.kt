@@ -8,11 +8,9 @@ package jvm.katydid.css.stylesheets
 import o.katydid.css.colors.blue
 import o.katydid.css.colors.gray
 import o.katydid.css.colors.green
+import o.katydid.css.colors.purple
 import o.katydid.css.measurements.px
-import o.katydid.css.styles.builders.backgroundColor
-import o.katydid.css.styles.builders.color
-import o.katydid.css.styles.builders.height
-import o.katydid.css.styles.builders.width
+import o.katydid.css.styles.builders.*
 import o.katydid.css.stylesheets.StyleSheet
 import o.katydid.css.stylesheets.makeStyleSheet
 import org.junit.jupiter.api.Test
@@ -54,7 +52,7 @@ class StyleSheetExtendTests {
 
             val commonColors = "%common-colors"
 
-            commonColors {
+            placeholder(commonColors) {
                 backgroundColor(gray)
                 color(blue)
             }
@@ -81,7 +79,7 @@ class StyleSheetExtendTests {
     }
 
     @Test
-    fun `An extended placeholder style block can also have a selector`() {
+    fun `An placeholder style block can be extended multiple times`() {
 
         val css = """
             |span,
@@ -101,13 +99,15 @@ class StyleSheetExtendTests {
             |
         """.trimMargin() + "\n"
 
-        val commonColors = "%common-colors"
-
         checkStyle(css) {
 
-            "span" or commonColors {
+            val commonColors = placeholder("%common-colors") {
                 backgroundColor(gray)
                 color(blue)
+            }
+
+            "span" {
+                extend(commonColors)
             }
 
             "div" {
@@ -127,58 +127,18 @@ class StyleSheetExtendTests {
 
         checkStyle(css) {
 
-            commonColors or "span" {
+            placeholder("%common-colors") {
                 backgroundColor(gray)
                 color(blue)
             }
 
-            "div" {
-
-                extend(commonColors)
-
-                height(23.px)
-                width(30.px)
-
-                "&.wider" {
-                    width(45.px)
-                }
-
-            }
-
-        }
-
-        checkStyle(css) {
-
-            "span, $commonColors" {
-                backgroundColor(gray)
-                color(blue)
+            "span" {
+                extend("%common-colors")
             }
 
             "div" {
 
-                extend(commonColors)
-
-                height(23.px)
-                width(30.px)
-
-                "&.wider" {
-                    width(45.px)
-                }
-
-            }
-
-        }
-
-        checkStyle(css) {
-
-            "$commonColors, span" {
-                backgroundColor(gray)
-                color(blue)
-            }
-
-            "div" {
-
-                extend(commonColors)
+                extend("%common-colors")
 
                 height(23.px)
                 width(30.px)
@@ -201,24 +161,13 @@ class StyleSheetExtendTests {
 
             makeStyleSheet {
 
-                "%x" {
+                val x = "%x"
+
+                placeholder(x) {
                     color(blue)
                 }
 
-                "%x" {
-                    color(green)
-                }
-
-            }
-
-        }
-
-        // named twice
-        assertFailsWith<IllegalArgumentException> {
-
-            makeStyleSheet {
-
-                "%x" or "%x" {
+                placeholder(x) {
                     color(green)
                 }
 
@@ -229,14 +178,16 @@ class StyleSheetExtendTests {
     }
 
     @Test
-    fun `Extending an unknown style block fails`() {
+    fun `Extending an unknown placeholder fails`() {
 
         // wrong name
         assertFailsWith<IllegalArgumentException> {
 
             makeStyleSheet {
 
-                "%x" {
+                val x = "%x"
+
+                placeholder(x) {
                     color(blue)
                 }
 
@@ -253,14 +204,16 @@ class StyleSheetExtendTests {
 
             makeStyleSheet {
 
-                "%x" {
+                val x = "%x"
+
+                placeholder(x) {
                     color(blue)
                 }
 
                 "div" {
 
                     "span" {
-                        extend("%x")
+                        extend(x)
                     }
 
                 }
@@ -302,7 +255,7 @@ class StyleSheetExtendTests {
 
                 val commonColors = "%common-colors"
 
-                commonColors {
+                placeholder(commonColors) {
                     backgroundColor(gray)
                     color(blue)
                 }
@@ -327,7 +280,7 @@ class StyleSheetExtendTests {
 
                 val commonColors = "%common-colors"
 
-                commonColors {
+                placeholder(commonColors) {
                     backgroundColor(gray)
                     color(blue)
                 }
@@ -351,20 +304,45 @@ class StyleSheetExtendTests {
     }
 
     @Test
-    fun `Non-placeholder style blocks cannot be extended`() {
+    fun `Extending a placeholder with nested a block extends the nesting`() {
 
-        assertFailsWith<IllegalArgumentException> {
+        val css = """
+            |.wider,
+            |.deeper {
+            |    background-color: gray;
+            |    color: blue;
+            |}
+            |
+            |.wider div,
+            |.deeper div {
+            |    height: 23px;
+            |    width: 30px;
+            |}
+            |
+            |.wider,
+            |.deeper {
+            |    width: 45px;
+            |}
+            |
+        """.trimMargin() + "\n"
 
-            makeStyleSheet {
+        checkStyle(css) {
 
-                "span" {
-                    color(blue)
-                }
+            val commonColors = "%common-colors"
+
+            placeholder(commonColors) {
+                backgroundColor(gray)
+                color(blue)
 
                 "div" {
-                    extend("span")
+                    height(23.px)
+                    width(30.px)
                 }
+            }
 
+            ".wider, .deeper" {
+                extend(commonColors)
+                width(45.px)
             }
 
         }
@@ -400,9 +378,13 @@ class StyleSheetExtendTests {
 
         val sheet1 = makeStyleSheet {
 
-            commonColors or ".stuff" {
+            placeholder(commonColors) {
                 backgroundColor(gray)
                 color(blue)
+            }
+
+            ".stuff" {
+                extend(commonColors)
             }
 
         }
@@ -425,6 +407,139 @@ class StyleSheetExtendTests {
         }
 
         assertEquals(css1, sheet1.toString())
+
+    }
+
+    @Test
+    fun `A placeholder can extend another placeholder`() {
+
+        val css = """
+            |div,
+            |span {
+            |    color: purple;
+            |}
+            |
+            |div,
+            |span {
+            |    width: 100px;
+            |}
+            |
+            |span {
+            |    padding: 2px;
+            |}
+            |
+            |div {
+            |    height: 50px;
+            |}
+            |
+            |span {
+            |    height: 30px;
+            |}
+            |
+        """.trimMargin() + "\n"
+
+        checkStyle(css) {
+
+            placeholder("%a") {
+                color(purple)
+            }
+
+            placeholder("%b") {
+                extend("%a")
+                width(100.px)
+            }
+
+            placeholder("%c") {
+                extend("%b")
+                padding(2.px)
+            }
+
+            "div" {
+                extend("%b")
+                height(50.px)
+            }
+
+            "span" {
+                extend("%c")
+                height(30.px)
+            }
+
+        }
+
+    }
+
+    @Test
+    fun `Unused placeholders result in no output`() {
+
+        val css = ""
+
+        checkStyle(css) {
+
+            placeholder("%a") {
+                color(purple)
+            }
+
+            placeholder("%b") {
+                extend("%a")
+                width(100.px)
+            }
+
+        }
+
+    }
+
+    @Test
+    fun `Two placeholders cna be extended by one rule`() {
+
+        val css = """
+            |div {
+            |    color: purple;
+            |}
+            |
+            |div {
+            |    width: 100px;
+            |}
+            |
+            |div {
+            |    height: 50px;
+            |}
+            |
+        """.trimMargin() + "\n"
+
+        checkStyle(css) {
+
+            placeholder("%a") {
+                color(purple)
+            }
+
+            placeholder("%b") {
+                width(100.px)
+            }
+
+            "div" {
+                extend("%a", "%b")
+                height(50.px)
+            }
+
+        }
+
+        checkStyle(css) {
+
+            placeholder("%a") {
+                color(purple)
+            }
+
+            placeholder("%b") {
+                width(100.px)
+            }
+
+            "div" {
+                extend("%a")
+                extend("%b")
+                height(50.px)
+            }
+
+        }
 
     }
 

@@ -24,16 +24,19 @@ class StyleSheet : StyleBlock() {
         get() = emptyList()
 
     /** The child style blocks nested within this parent block. */
-    override val nestedBlocks: MutableList<StyleRule> = mutableListOf()
+    override val nestedBlocks: MutableList<StyleBlock> = mutableListOf()
 
     ////
+
+    override fun copy(parentOfCopy: StyleBlock): StyleSheet =
+        throw UnsupportedOperationException("A style sheet cannot be copied inside another style block.")
 
     /** Includes the contents of another [styleSheet] directly in this one. */
     fun include(styleSheet: StyleSheet) {
         nestedBlocks.addAll(styleSheet.nestedBlocks.map { b -> b.copy(this) })
     }
 
-    /** Builds a style rule from a selector and the [build] function for the style. */
+    /** Builds a style rule from a selector and the [build] function for the rule. */
     operator fun String.invoke(build: StyleRule.() -> Unit): StyleRule {
 
         // Create the new style block.
@@ -62,6 +65,24 @@ class StyleSheet : StyleBlock() {
         styleRule.prependSelectors(this)
 
         return styleRule
+
+    }
+
+    /** Builds a placeholder rule from a selector and the [build] function for the rule. */
+    fun placeholder(name: String, build: PlaceholderRule.() -> Unit): String {
+
+        require(findPlaceholder(name) == null) { "Duplicate placeholder name not allowed: '$this'." }
+
+        // Create the new placeholder rule.
+        val result = PlaceholderRule(this, name)
+
+        // Nest the new placeholder in this style sheet.
+        this.nestedBlocks.add(result)
+
+        // Build its style.
+        result.build()
+
+        return name
 
     }
 

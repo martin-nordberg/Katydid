@@ -514,4 +514,19 @@ class StyleSheetTests {
 
     }
 
+    @Test
+    fun `An empty style rule results in no output`() {
+
+        val css = ""
+
+        checkStyle(css) {
+
+            ".stuff" {}
+
+            ".morestuff" {}
+
+        }
+
+    }
+
 }
