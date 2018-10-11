@@ -14,7 +14,7 @@ import o.katydid.css.styles.builders.color
 import o.katydid.css.styles.builders.height
 import o.katydid.css.styles.builders.width
 import o.katydid.css.stylesheets.StyleSheet
-import o.katydid.css.stylesheets.styleSheet
+import o.katydid.css.stylesheets.makeStyleSheet
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -26,7 +26,7 @@ class StyleSheetExtendTests {
         expectedCss: String,
         build: StyleSheet.() -> Unit
     ) {
-        assertEquals(expectedCss, styleSheet(build).toString())
+        assertEquals(expectedCss, makeStyleSheet(build).toString())
     }
 
     @Test
@@ -199,7 +199,7 @@ class StyleSheetExtendTests {
         // second instance
         assertFailsWith<IllegalArgumentException> {
 
-            styleSheet {
+            makeStyleSheet {
 
                 "%x" {
                     color(blue)
@@ -216,7 +216,7 @@ class StyleSheetExtendTests {
         // named twice
         assertFailsWith<IllegalArgumentException> {
 
-            styleSheet {
+            makeStyleSheet {
 
                 "%x" or "%x" {
                     color(green)
@@ -234,7 +234,7 @@ class StyleSheetExtendTests {
         // wrong name
         assertFailsWith<IllegalArgumentException> {
 
-            styleSheet {
+            makeStyleSheet {
 
                 "%x" {
                     color(blue)
@@ -251,7 +251,7 @@ class StyleSheetExtendTests {
         // right name, wrong nesting
         assertFailsWith<IllegalArgumentException> {
 
-            styleSheet {
+            makeStyleSheet {
 
                 "%x" {
                     color(blue)
@@ -323,7 +323,7 @@ class StyleSheetExtendTests {
 
         assertFailsWith<IllegalArgumentException> {
 
-            styleSheet {
+            makeStyleSheet {
 
                 val commonColors = "%common-colors"
 
@@ -355,7 +355,7 @@ class StyleSheetExtendTests {
 
         assertFailsWith<IllegalArgumentException> {
 
-            styleSheet {
+            makeStyleSheet {
 
                 "span" {
                     color(blue)
@@ -398,7 +398,7 @@ class StyleSheetExtendTests {
 
         val commonColors = "%common-colors"
 
-        val sheet1 = styleSheet {
+        val sheet1 = makeStyleSheet {
 
             commonColors or ".stuff" {
                 backgroundColor(gray)

@@ -5,6 +5,11 @@
 
 package o.katydid.css.stylesheets
 
+import o.katydid.css.styles.builders.StyleBuilderDsl
+
+//---------------------------------------------------------------------------------------------------------------------
+
+@StyleBuilderDsl
 abstract class StyleBlock {
 
     /**
@@ -26,3 +31,6 @@ abstract class StyleBlock {
     abstract fun toCssString(): String
 
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+

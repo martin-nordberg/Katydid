@@ -11,7 +11,7 @@ import js.katydid.vdom.api.runApplication
 import o.katydid.css.colors.*
 import o.katydid.css.measurements.px
 import o.katydid.css.styles.builders.*
-import o.katydid.css.stylesheets.styleSheet
+import o.katydid.css.stylesheets.makeStyleSheet
 import o.katydid.css.types.*
 import o.katydid.vdom.builders.KatydidFlowContentBuilder
 import kotlin.browser.document
@@ -53,7 +53,7 @@ class SudokuSolverApplication : KatydidApplication<SudokuSolverAppState, SudokuS
 @Suppress("UNUSED_PARAMETER")
 fun sudokuSolverMain(args: Array<String>) {
 
-    val css = makeStyleSheet()
+    val css = makeSudokuStyleSheet()
 
     val cssElement = document.getElementById("appStyleElement")!!
 
@@ -68,8 +68,8 @@ fun sudokuSolverMain(args: Array<String>) {
 
 //---------------------------------------------------------------------------------------------------------------------
 
-fun makeStyleSheet() =
-    styleSheet {
+fun makeSudokuStyleSheet() =
+    makeStyleSheet {
 
         /* BODY */
         "body" {

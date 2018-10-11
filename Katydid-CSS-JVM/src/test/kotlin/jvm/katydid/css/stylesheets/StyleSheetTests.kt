@@ -11,7 +11,7 @@ import o.katydid.css.measurements.px
 import o.katydid.css.styles.builders.*
 import o.katydid.css.styles.makeStyle
 import o.katydid.css.stylesheets.StyleSheet
-import o.katydid.css.stylesheets.styleSheet
+import o.katydid.css.stylesheets.makeStyleSheet
 import o.katydid.css.types.EFontStyle
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
@@ -23,7 +23,7 @@ class StyleSheetTests {
         expectedCss: String,
         build: StyleSheet.() -> Unit
     ) {
-        assertEquals(expectedCss, styleSheet(build).toString())
+        assertEquals(expectedCss, makeStyleSheet(build).toString())
     }
 
     @Test
@@ -486,7 +486,7 @@ class StyleSheetTests {
             |
         """.trimMargin() + "\n"
 
-        val commonColors = styleSheet {
+        val commonColors = makeStyleSheet {
 
             "div" or "span" {
                 backgroundColor(gray)
