@@ -149,21 +149,25 @@ abstract class AbstractStyleRule(
     }
 
     /** Converts this style rule to CSS. */
-    override fun toCssString(): String {
+    override fun toCssString(indent: Int): String {
 
         val result = StringBuilder("")
+
+        val spaces = "                    ".substring(0, indent)
 
         val finalSelectors = fullSelectors
 
         if (style.isNotEmpty && finalSelectors.isNotEmpty()) {
-            result.append(finalSelectors.joinToString(",\n"))
+            result.append(spaces)
+            result.append(finalSelectors.joinToString(",\n$spaces"))
             result.append(" {\n")
-            result.append(style.toCssString("    "), "\n")
+            result.append(style.toCssString("$spaces    "), "\n")
+            result.append(spaces)
             result.append("}\n\n")
         }
 
         for (rule in myNestedRules) {
-            result.append(rule.toCssString())
+            result.append(rule.toCssString(indent))
         }
 
         return result.toString()

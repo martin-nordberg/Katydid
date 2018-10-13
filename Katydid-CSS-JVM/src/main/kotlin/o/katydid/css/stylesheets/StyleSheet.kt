@@ -16,18 +16,18 @@ import o.katydid.css.styles.builders.StyleBuilderDsl
 @StyleBuilderDsl
 class StyleSheet : CompositeCssRule() {
 
-    override val fullSelectors: List<String>
-        get() = emptyList()
+    override val fullSelectors: List<String> = emptyList()
 
     override val nestedRules: MutableList<CssRule> = mutableListOf()
 
     override val parent: CompositeCssRule
-        get() = throw UnsupportedOperationException( "A style sheet has no parent rule." )
+        get() = throw UnsupportedOperationException("A style sheet has no parent rule.")
 
     ////
 
-    fun charset(characterSet:String) : CharSetAtRule {
-        val result = CharSetAtRule(this,characterSet)
+    /** Creates a @charset at-rule. Must occur at the start of a stylesheet. */
+    fun charset(characterSet: String): CharSetAtRule {
+        val result = CharSetAtRule(this, characterSet)
         this.nestedRules.add(result)
         return result
     }
@@ -38,13 +38,16 @@ class StyleSheet : CompositeCssRule() {
     /** Includes the contents of another [styleSheet] directly in this one. */
     fun include(styleSheet: StyleSheet) {
 
-        for ( rule in styleSheet.nestedRules ) {
+        for (rule in styleSheet.nestedRules) {
 
-            if ( rule is AbstractStyleRule ) {
-                nestedRules.add( rule.copy(this) )
+            if (rule is AbstractStyleRule) {
+                nestedRules.add(rule.copy(this))
             }
-            else if ( rule is CharSetAtRule && nestedRules.isEmpty() ) {
-                nestedRules.add( rule.copy(this) )
+            else if (rule is CharSetAtRule && nestedRules.isEmpty()) {
+                nestedRules.add(rule.copy(this))
+            }
+            else if (rule is MediaAtRule) {
+                nestedRules.add(rule.copy(this))
             }
 
         }
@@ -68,6 +71,13 @@ class StyleSheet : CompositeCssRule() {
 
         return result
 
+    }
+
+    fun media(condition: String, build: MediaAtRule.() -> Unit): MediaAtRule {
+        val result = MediaAtRule(this, condition)
+        this.nestedRules.add(result)
+        result.build()
+        return result
     }
 
     /** Combines a selector with another selector [that] into a comma-separated pair. */
@@ -101,12 +111,12 @@ class StyleSheet : CompositeCssRule() {
 
     }
 
-    override fun toCssString(): String {
+    override fun toCssString(indent: Int): String {
 
         val result = StringBuilder("")
 
         for (rule in nestedRules) {
-            result.append(rule.toCssString())
+            result.append(rule.toCssString(indent))
         }
 
         return result.toString()

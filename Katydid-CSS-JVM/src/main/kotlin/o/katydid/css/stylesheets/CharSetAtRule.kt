@@ -19,15 +19,15 @@ class CharSetAtRule(
 ) : CssRule() {
 
     init {
-        require( parent.nestedRules.isEmpty() ) { "A @charset at-rule must be the first rule in a style sheet." }
+        require(parent.nestedRules.isEmpty()) { "A @charset at-rule must be the first rule in a style sheet." }
     }
 
     ////
 
     override fun copy(parentOfCopy: CompositeCssRule) =
-        CharSetAtRule(parentOfCopy,characterSet)
+        CharSetAtRule(parentOfCopy, characterSet)
 
-    override fun toCssString(): String =
+    override fun toCssString(indent: Int): String =
         "@charset \"$characterSet\";\n\n"
 
 }

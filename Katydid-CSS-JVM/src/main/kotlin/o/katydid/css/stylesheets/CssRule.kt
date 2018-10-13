@@ -21,7 +21,7 @@ abstract class CssRule {
     abstract fun copy(parentOfCopy: CompositeCssRule): CssRule
 
     /** Converts this rule to CSS. */
-    abstract fun toCssString(): String
+    abstract fun toCssString(indent: Int = 0): String
 
 }
 

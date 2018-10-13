@@ -26,7 +26,7 @@ abstract class CompositeCssRule : CssRule() {
 
     ////
 
-    abstract override fun copy(parentOfCopy:CompositeCssRule) : CompositeCssRule
+    abstract override fun copy(parentOfCopy: CompositeCssRule): CompositeCssRule
 
     /** Finds the placeholder with given [placeholderName]. */
     fun findPlaceholder(placeholderName: String): PlaceholderRule? {
