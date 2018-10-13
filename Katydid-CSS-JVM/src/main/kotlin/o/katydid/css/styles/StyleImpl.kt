@@ -7,7 +7,7 @@ package o.katydid.css.styles
 
 //---------------------------------------------------------------------------------------------------------------------
 
-class StyleImpl : Style {
+class StyleImpl internal constructor() : Style {
 
     private val myProperties = mutableListOf<String>()
 

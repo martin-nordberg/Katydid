@@ -178,6 +178,49 @@ class StyleSheetExtendTests {
     }
 
     @Test
+    fun `Extend must occur at the start of a style block`() {
+
+        // before any property
+        assertFailsWith<IllegalArgumentException> {
+
+            makeStyleSheet {
+
+                placeholder("%x") {
+                    color(blue)
+                }
+
+                "div" {
+                    width(100.px)
+                    extend("%x")
+                }
+
+            }
+
+        }
+
+        // before any nested block
+        assertFailsWith<IllegalArgumentException> {
+
+            makeStyleSheet {
+
+                placeholder("%x") {
+                    color(blue)
+                }
+
+                "div" {
+                    "span" {
+                        width(100.px)
+                    }
+                    extend("%x")
+                }
+
+            }
+
+        }
+
+    }
+
+    @Test
     fun `Extending an unknown placeholder fails`() {
 
         // wrong name
@@ -397,10 +440,10 @@ class StyleSheetExtendTests {
 
             "div" {
 
+                extend(commonColors)
+
                 height(23.px)
                 width(30.px)
-
-                extend(commonColors)
 
             }
 

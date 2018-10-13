@@ -16,7 +16,7 @@ import o.katydid.css.styles.makeStyle
  */
 @StyleBuilderDsl
 class PlaceholderRule(
-    parent: StyleBlock,
+    parent: CompositeCssRule,
     val name: String,
     style: Style = makeStyle {}
 ) : AbstractStyleRule(parent, style) {
@@ -40,19 +40,22 @@ class PlaceholderRule(
 
     }
 
-    override fun copy(parentOfCopy: StyleBlock): PlaceholderRule {
+    override fun copy(parentOfCopy: CompositeCssRule): PlaceholderRule {
 
         val result = PlaceholderRule(parentOfCopy, name)
 
         result.addSelectors(selectors)
         result.include(this)
-        result.addNestedBlocks(nestedBlocks.map { b -> b.copy(result) })
+
+        result.addNestedRules(nestedRules.map { b -> b.copy(result) })
 
         return result
 
     }
 
     override fun extend(vararg placeholderNames: String) {
+
+        require(properties.isEmpty()) { "Use of extend() must occur at the beginning of a placeholder rule." }
 
         for (placeholderName in placeholderNames) {
             val placeholder = parent.findPlaceholder(placeholderName)

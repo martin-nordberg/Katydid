@@ -10,43 +10,58 @@ import o.katydid.css.styles.builders.StyleBuilderDsl
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Represents a CSS style sheet with SASS-like provisions to build style blocks from string selectors and
+ * Represents a CSS style sheet with SASS-like provisions to build style rules from string selectors and
  * styles.
  */
 @StyleBuilderDsl
-class StyleSheet : StyleBlock() {
+class StyleSheet : CompositeCssRule() {
 
-    /**
-     * Returns a list of the full-path selectors for this block, i.e. the CSS selectors resulting from nesting.
-     * Accounts for multiple selectors (comma separated in the eventual CSS) at each level.
-     */
     override val fullSelectors: List<String>
         get() = emptyList()
 
-    /** The child style blocks nested within this parent block. */
-    override val nestedBlocks: MutableList<StyleBlock> = mutableListOf()
+    override val nestedRules: MutableList<CssRule> = mutableListOf()
+
+    override val parent: CompositeCssRule
+        get() = throw UnsupportedOperationException( "A style sheet has no parent rule." )
 
     ////
 
-    override fun copy(parentOfCopy: StyleBlock): StyleSheet =
-        throw UnsupportedOperationException("A style sheet cannot be copied inside another style block.")
+    fun charset(characterSet:String) : CharSetAtRule {
+        val result = CharSetAtRule(this,characterSet)
+        this.nestedRules.add(result)
+        return result
+    }
+
+    override fun copy(parentOfCopy: CompositeCssRule): StyleSheet =
+        throw UnsupportedOperationException("A style sheet cannot be copied inside another style rule.")
 
     /** Includes the contents of another [styleSheet] directly in this one. */
     fun include(styleSheet: StyleSheet) {
-        nestedBlocks.addAll(styleSheet.nestedBlocks.map { b -> b.copy(this) })
+
+        for ( rule in styleSheet.nestedRules ) {
+
+            if ( rule is AbstractStyleRule ) {
+                nestedRules.add( rule.copy(this) )
+            }
+            else if ( rule is CharSetAtRule && nestedRules.isEmpty() ) {
+                nestedRules.add( rule.copy(this) )
+            }
+
+        }
+
     }
 
     /** Builds a style rule from a selector and the [build] function for the rule. */
     operator fun String.invoke(build: StyleRule.() -> Unit): StyleRule {
 
-        // Create the new style block.
+        // Create the new style rule.
         val result = StyleRule(this@StyleSheet)
 
         // Add its selectors or placeholder selectors.
         result.prependSelectors(this)
 
-        // Nest the new block in the active block.
-        this@StyleSheet.nestedBlocks.add(result)
+        // Nest the new rule in this style sheet.
+        this@StyleSheet.nestedRules.add(result)
 
         // Build its style.
         result.build()
@@ -59,7 +74,7 @@ class StyleSheet : StyleBlock() {
     infix fun String.or(that: String) =
         this + ", " + that
 
-    /** Combines a selector with an already created [styleRule] by adding the selector to the block. */
+    /** Combines a selector with an already created [styleRule] by adding the selector to the rule. */
     infix fun String.or(styleRule: StyleRule): StyleRule {
 
         styleRule.prependSelectors(this)
@@ -77,7 +92,7 @@ class StyleSheet : StyleBlock() {
         val result = PlaceholderRule(this, name)
 
         // Nest the new placeholder in this style sheet.
-        this.nestedBlocks.add(result)
+        this.nestedRules.add(result)
 
         // Build its style.
         result.build()
@@ -86,20 +101,18 @@ class StyleSheet : StyleBlock() {
 
     }
 
-    /** Converts this style block to CSS. */
     override fun toCssString(): String {
 
         val result = StringBuilder("")
 
-        for (nestedBlock in nestedBlocks) {
-            result.append(nestedBlock.toCssString())
+        for (rule in nestedRules) {
+            result.append(rule.toCssString())
         }
 
         return result.toString()
 
     }
 
-    /** Converts this style sheet to CSS. */
     override fun toString(): String =
         toCssString()
 

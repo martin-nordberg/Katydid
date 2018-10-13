@@ -16,15 +16,17 @@ import o.katydid.css.styles.makeStyle
  */
 @StyleBuilderDsl
 abstract class AbstractStyleRule(
-    internal val parent: StyleBlock,
+    override val parent: CompositeCssRule,
     private var style: Style = makeStyle {}
-) : StyleBlock(), Style by style {
+) : CompositeCssRule(), Style by style {
 
     /** The rules nested inside this one. */
-    private val myNestedBlocks: MutableList<StyleBlock> = mutableListOf()
+    private val myNestedRules: MutableList<CompositeCssRule> = mutableListOf()
 
     /** The selectors of this rule. */
     private val mySelectors: MutableList<String> = mutableListOf()
+
+    ////
 
     /**
      * Returns a list of the full-path selectors for this rule, i.e. the CSS selectors resulting from nesting.
@@ -72,18 +74,18 @@ abstract class AbstractStyleRule(
 
         }
 
-    override val nestedBlocks: List<StyleBlock> = myNestedBlocks
+    override val nestedRules: List<CompositeCssRule> = myNestedRules
 
     val selectors: List<String> = mySelectors
 
     ////
 
-    internal fun addNestedBlock(nestedBlock: StyleBlock) {
-        myNestedBlocks.add(nestedBlock)
+    internal fun addNestedRule(nestedRule: CompositeCssRule) {
+        myNestedRules.add(nestedRule)
     }
 
-    internal fun addNestedBlocks(addedNestedBlocks: Collection<StyleBlock>) {
-        myNestedBlocks.addAll(addedNestedBlocks)
+    internal fun addNestedRules(addedNestedRules: Collection<CompositeCssRule>) {
+        myNestedRules.addAll(addedNestedRules)
     }
 
     internal fun addSelectors(addedSelectors: Collection<String>) {
@@ -102,14 +104,14 @@ abstract class AbstractStyleRule(
     /** Builds a style rule from a selector and the [build] function for the rule. */
     operator fun String.invoke(build: StyleRule.() -> Unit): StyleRule {
 
-        // Create the new style block.
+        // Create the new style rule.
         val result = StyleRule(this@AbstractStyleRule)
 
         // Add its selectors or placeholder selectors.
         result.prependSelectors(this)
 
-        // Nest the new block in the active block.
-        this@AbstractStyleRule.myNestedBlocks.add(result)
+        // Nest the new rule inside this one.
+        this@AbstractStyleRule.myNestedRules.add(result)
 
         // Build its style.
         result.build()
@@ -160,8 +162,8 @@ abstract class AbstractStyleRule(
             result.append("}\n\n")
         }
 
-        for (nestedBlock in myNestedBlocks) {
-            result.append(nestedBlock.toCssString())
+        for (rule in myNestedRules) {
+            result.append(rule.toCssString())
         }
 
         return result.toString()
