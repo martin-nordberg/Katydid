@@ -12,68 +12,66 @@ import x.katydid.css.infrastructure.makeDecimalString
 //---------------------------------------------------------------------------------------------------------------------
 
 internal class RgbColor(
-    red: Int,
-    green: Int,
-    blue: Int,
-    alpha: Float,
-    val colorName: String? = null
+    itsRed: Int,
+    itsGreen: Int,
+    itsBlue: Int,
+    itsAlpha: Float,
+    itsColorName: String? = null
 ) : Color {
 
-    private val _red: Int
+    private val myRed = if (itsRed < 0) 0 else if (itsRed > 255) 255 else itsRed
 
-    private val _green: Int
+    private val myGreen = if (itsGreen < 0) 0 else if (itsGreen > 255) 255 else itsGreen
 
-    private val _blue: Int
+    private val myBlue = if (itsBlue < 0) 0 else if (itsBlue > 255) 255 else itsBlue
 
-    private val _alpha: Float
+    private val myAlpha = if (itsAlpha < 0) 0f else if (itsAlpha > 1) 1f else itsAlpha
+
+    private val myColorName = itsColorName
+
+    ////
 
     init {
 
-        this._red = if (red < 0) 0 else if (red > 255) 255 else red
-        this._green = if (green < 0) 0 else if (green > 255) 255 else green
-        this._blue = if (blue < 0) 0 else if (blue > 255) 255 else blue
-
-        this._alpha = if (alpha < 0) 0f else if (alpha > 1) 1f else alpha
-
-        if (colorName != null && !namedColorsByHashCode.containsKey(this.hashCode())) {
+        if (myColorName != null && !namedColorsByHashCode.containsKey(this.hashCode())) {
             namedColorsByHashCode.put(this.hashCode(), this)
         }
 
     }
 
     constructor(
-        red: Int,
-        green: Int,
-        blue: Int,
-        alpha: Float
+        itsRed: Int,
+        itsGreen: Int,
+        itsBlue: Int,
+        itsAlpha: Float
     ) : this(
-        red,
-        green,
-        blue,
-        alpha,
+        itsRed,
+        itsGreen,
+        itsBlue,
+        itsAlpha,
         null
     )
 
     constructor(
-        redFraction: Float,
-        greenFraction: Float,
-        blueFraction: Float,
-        alpha: Float = 1.0f
+        itsRedFraction: Float,
+        itsGreenFraction: Float,
+        itsBlueFraction: Float,
+        itsAlpha: Float = 1.0f
     ) : this(
-        (redFraction * 255 + 0.49).toInt(),
-        (greenFraction * 255 + 0.49).toInt(),
-        (blueFraction * 255 + 0.49).toInt(),
-        alpha,
+        (itsRedFraction * 255 + 0.49).toInt(),
+        (itsGreenFraction * 255 + 0.49).toInt(),
+        (itsBlueFraction * 255 + 0.49).toInt(),
+        itsAlpha,
         null
     )
 
     override fun equals(other: Any?): Boolean {
 
         if (other is RgbColor) {
-            return this._alpha == other._alpha &&
-                this._red == other._red &&
-                this._green == other._green &&
-                this._blue == other._blue
+            return this.myAlpha == other.myAlpha &&
+                this.myRed == other.myRed &&
+                this.myGreen == other.myGreen &&
+                this.myBlue == other.myBlue
         }
 
         if (other is HslColor) {
@@ -85,24 +83,24 @@ internal class RgbColor(
     }
 
     override fun hashCode(): Int {
-        return _red.shl(24) + _green.shl(16) + _blue.shl(8) + (_alpha * 255).toInt()
+        return myRed.shl(24) + myGreen.shl(16) + myBlue.shl(8) + (myAlpha * 255).toInt()
     }
 
     override fun opacified(alphaIncrement: Float) =
-        RgbColor(_red, _green, _blue, _alpha + alphaIncrement)
+        RgbColor(myRed, myGreen, myBlue, myAlpha + alphaIncrement)
 
     override fun toString(): String {
 
-        if (colorName != null) {
-            return colorName
+        if (myColorName != null) {
+            return myColorName
         }
 
-        if (_alpha < 1f) {
-            val alphaStr = makeDecimalString(_alpha)
-            return "rgba($_red,$_green,$_blue,$alphaStr)"
+        if (myAlpha < 1f) {
+            val alphaStr = makeDecimalString(myAlpha)
+            return "rgba($myRed,$myGreen,$myBlue,$alphaStr)"
         }
 
-        return "#" + HEX_STRINGS[_red] + HEX_STRINGS[_green] + HEX_STRINGS[_blue]
+        return "#" + HEX_STRINGS[myRed] + HEX_STRINGS[myGreen] + HEX_STRINGS[myBlue]
 
     }
 
@@ -113,7 +111,7 @@ internal class RgbColor(
     override fun toRgbColor() = this
 
     override fun transparentized(alphaDecrement: Float) =
-        RgbColor(_red, _green, _blue, _alpha - alphaDecrement)
+        RgbColor(myRed, myGreen, myBlue, myAlpha - alphaDecrement)
 
     ////
 

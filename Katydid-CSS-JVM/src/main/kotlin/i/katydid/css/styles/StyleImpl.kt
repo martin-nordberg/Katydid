@@ -3,13 +3,19 @@
 // Apache 2.0 License
 //
 
-package o.katydid.css.styles
+package i.katydid.css.styles
+
+import o.katydid.css.styles.Style
 
 //---------------------------------------------------------------------------------------------------------------------
 
-class StyleImpl internal constructor() : Style {
+internal class StyleImpl
+    : Style {
 
+    /** The individual key: value properties of this style. */
     private val myProperties = mutableListOf<String>()
+
+    ////
 
     override val important: Unit
         get() {

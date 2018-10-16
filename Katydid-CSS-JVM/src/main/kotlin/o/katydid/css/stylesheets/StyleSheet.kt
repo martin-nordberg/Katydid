@@ -5,6 +5,7 @@
 
 package o.katydid.css.stylesheets
 
+import i.katydid.css.stylesheets.StyleSheetImpl
 import o.katydid.css.styles.builders.StyleBuilderDsl
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -14,117 +15,29 @@ import o.katydid.css.styles.builders.StyleBuilderDsl
  * styles.
  */
 @StyleBuilderDsl
-class StyleSheet : CompositeCssRule() {
-
-    override val fullSelectors: List<String> = emptyList()
-
-    override val nestedRules: MutableList<CssRule> = mutableListOf()
-
-    override val parent: CompositeCssRule
-        get() = throw UnsupportedOperationException("A style sheet has no parent rule.")
-
-    ////
+interface StyleSheet
+    : CompositeCssRule {
 
     /** Creates a @charset at-rule. Must occur at the start of a stylesheet. */
-    fun charset(characterSet: String): CharSetAtRule {
-        val result = CharSetAtRule(this, characterSet)
-        this.nestedRules.add(result)
-        return result
-    }
-
-    override fun copy(parentOfCopy: CompositeCssRule): StyleSheet =
-        throw UnsupportedOperationException("A style sheet cannot be copied inside another style rule.")
+    fun charset(characterSet: String): CharSetAtRule
 
     /** Includes the contents of another [styleSheet] directly in this one. */
-    fun include(styleSheet: StyleSheet) {
-
-        for (rule in styleSheet.nestedRules) {
-
-            if (rule is AbstractStyleRule) {
-                nestedRules.add(rule.copy(this))
-            }
-            else if (rule is CharSetAtRule && nestedRules.isEmpty()) {
-                nestedRules.add(rule.copy(this))
-            }
-            else if (rule is MediaAtRule) {
-                nestedRules.add(rule.copy(this))
-            }
-
-        }
-
-    }
+    fun include(styleSheet: StyleSheet)
 
     /** Builds a style rule from a selector and the [build] function for the rule. */
-    operator fun String.invoke(build: StyleRule.() -> Unit): StyleRule {
+    operator fun String.invoke(build: StyleRule.() -> Unit): StyleRule
 
-        // Create the new style rule.
-        val result = StyleRule(this@StyleSheet)
-
-        // Add its selectors or placeholder selectors.
-        result.prependSelectors(this)
-
-        // Nest the new rule in this style sheet.
-        this@StyleSheet.nestedRules.add(result)
-
-        // Build its style.
-        result.build()
-
-        return result
-
-    }
-
-    fun media(condition: String, build: MediaAtRule.() -> Unit): MediaAtRule {
-        val result = MediaAtRule(this, condition)
-        this.nestedRules.add(result)
-        result.build()
-        return result
-    }
+    /** Creates a @media at-rule with given [condition]. The style block of the rule is computed by [build]. */
+    fun media(condition: String, build: MediaAtRule.() -> Unit): MediaAtRule
 
     /** Combines a selector with another selector [that] into a comma-separated pair. */
-    infix fun String.or(that: String) =
-        this + ", " + that
+    infix fun String.or(that: String): String
 
     /** Combines a selector with an already created [styleRule] by adding the selector to the rule. */
-    infix fun String.or(styleRule: StyleRule): StyleRule {
-
-        styleRule.prependSelectors(this)
-
-        return styleRule
-
-    }
+    infix fun String.or(styleRule: StyleRule): StyleRule
 
     /** Builds a placeholder rule from a selector and the [build] function for the rule. */
-    fun placeholder(name: String, build: PlaceholderRule.() -> Unit): String {
-
-        require(findPlaceholder(name) == null) { "Duplicate placeholder name not allowed: '$this'." }
-
-        // Create the new placeholder rule.
-        val result = PlaceholderRule(this, name)
-
-        // Nest the new placeholder in this style sheet.
-        this.nestedRules.add(result)
-
-        // Build its style.
-        result.build()
-
-        return name
-
-    }
-
-    override fun toCssString(indent: Int): String {
-
-        val result = StringBuilder("")
-
-        for (rule in nestedRules) {
-            result.append(rule.toCssString(indent))
-        }
-
-        return result.toString()
-
-    }
-
-    override fun toString(): String =
-        toCssString()
+    fun placeholder(name: String, build: PlaceholderRule.() -> Unit): String
 
 }
 
@@ -138,7 +51,7 @@ fun makeStyleSheet(
     build: StyleSheet.() -> Unit
 ): StyleSheet {
 
-    val result = StyleSheet()
+    val result = StyleSheetImpl()
     result.build()
     return result
 
