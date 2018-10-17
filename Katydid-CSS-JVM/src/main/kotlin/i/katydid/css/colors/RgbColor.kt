@@ -12,18 +12,18 @@ import x.katydid.css.infrastructure.makeDecimalString
 //---------------------------------------------------------------------------------------------------------------------
 
 internal class RgbColor(
-    itsRed: Int,
-    itsGreen: Int,
-    itsBlue: Int,
+    itsRedByte: Int,
+    itsGreenByte: Int,
+    itsBlueByte: Int,
     itsAlpha: Float,
     itsColorName: String? = null
 ) : Color {
 
-    private val myRed = if (itsRed < 0) 0 else if (itsRed > 255) 255 else itsRed
+    private val myRedByte = if (itsRedByte < 0) 0 else if (itsRedByte > 255) 255 else itsRedByte
 
-    private val myGreen = if (itsGreen < 0) 0 else if (itsGreen > 255) 255 else itsGreen
+    private val myGreenByte = if (itsGreenByte < 0) 0 else if (itsGreenByte > 255) 255 else itsGreenByte
 
-    private val myBlue = if (itsBlue < 0) 0 else if (itsBlue > 255) 255 else itsBlue
+    private val myBlueByte = if (itsBlueByte < 0) 0 else if (itsBlueByte > 255) 255 else itsBlueByte
 
     private val myAlpha = if (itsAlpha < 0) 0f else if (itsAlpha > 1) 1f else itsAlpha
 
@@ -69,9 +69,9 @@ internal class RgbColor(
 
         if (other is RgbColor) {
             return this.myAlpha == other.myAlpha &&
-                this.myRed == other.myRed &&
-                this.myGreen == other.myGreen &&
-                this.myBlue == other.myBlue
+                this.myRedByte == other.myRedByte &&
+                this.myGreenByte == other.myGreenByte &&
+                this.myBlueByte == other.myBlueByte
         }
 
         if (other is HslColor) {
@@ -83,11 +83,11 @@ internal class RgbColor(
     }
 
     override fun hashCode(): Int {
-        return myRed.shl(24) + myGreen.shl(16) + myBlue.shl(8) + (myAlpha * 255).toInt()
+        return myRedByte.shl(24) + myGreenByte.shl(16) + myBlueByte.shl(8) + (myAlpha * 255).toInt()
     }
 
     override fun opacified(alphaIncrement: Float) =
-        RgbColor(myRed, myGreen, myBlue, myAlpha + alphaIncrement)
+        RgbColor(myRedByte, myGreenByte, myBlueByte, myAlpha + alphaIncrement)
 
     override fun toString(): String {
 
@@ -97,10 +97,10 @@ internal class RgbColor(
 
         if (myAlpha < 1f) {
             val alphaStr = makeDecimalString(myAlpha)
-            return "rgba($myRed,$myGreen,$myBlue,$alphaStr)"
+            return "rgba($myRedByte,$myGreenByte,$myBlueByte,$alphaStr)"
         }
 
-        return "#" + HEX_STRINGS[myRed] + HEX_STRINGS[myGreen] + HEX_STRINGS[myBlue]
+        return "#" + HEX_STRINGS[myRedByte] + HEX_STRINGS[myGreenByte] + HEX_STRINGS[myBlueByte]
 
     }
 
@@ -111,7 +111,7 @@ internal class RgbColor(
     override fun toRgbColor() = this
 
     override fun transparentized(alphaDecrement: Float) =
-        RgbColor(myRed, myGreen, myBlue, myAlpha - alphaDecrement)
+        RgbColor(myRedByte, myGreenByte, myBlueByte, myAlpha - alphaDecrement)
 
     ////
 

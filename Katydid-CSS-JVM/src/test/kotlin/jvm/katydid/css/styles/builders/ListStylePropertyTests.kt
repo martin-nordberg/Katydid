@@ -6,7 +6,7 @@
 package jvm.katydid.css.styles.builders
 
 import o.katydid.css.colors.blue
-import o.katydid.css.styles.Style
+import o.katydid.css.styles.KatydidStyle
 import o.katydid.css.styles.builders.listStyle
 import o.katydid.css.styles.builders.listStyleImage
 import o.katydid.css.styles.builders.listStylePosition
@@ -25,7 +25,7 @@ class ListStylePropertyTests {
 
     private fun checkStyle(
         expectedCss: String,
-        build: Style.() -> Unit
+        build: KatydidStyle.() -> Unit
     ) {
         assertEquals(expectedCss, makeStyle(build).toString())
     }

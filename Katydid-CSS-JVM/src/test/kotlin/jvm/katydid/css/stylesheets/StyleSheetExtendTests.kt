@@ -11,7 +11,7 @@ import o.katydid.css.colors.green
 import o.katydid.css.colors.purple
 import o.katydid.css.measurements.px
 import o.katydid.css.styles.builders.*
-import o.katydid.css.stylesheets.StyleSheet
+import o.katydid.css.stylesheets.KatydidStyleSheet
 import o.katydid.css.stylesheets.makeStyleSheet
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
@@ -22,7 +22,7 @@ class StyleSheetExtendTests {
 
     private fun checkStyle(
         expectedCss: String,
-        build: StyleSheet.() -> Unit
+        build: KatydidStyleSheet.() -> Unit
     ) {
         assertEquals(expectedCss, makeStyleSheet(build).toString())
     }

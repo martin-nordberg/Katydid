@@ -10,14 +10,29 @@ import i.katydid.css.colors.RgbColor
 
 //---------------------------------------------------------------------------------------------------------------------
 
+/** Interface to a CSS color, independent of its color space. */
 interface Color {
 
+    /**
+     * Returns a new color with the same RGB or HSL as this one, but with its alpha value increased by the
+     * given [alphaIncrement]. Alpha is constrained 0 to 1 as usual.
+     */
     fun opacified(alphaIncrement: Float): Color
 
+    /**
+     * Returns the HSL color corresponding to this one.
+     */
     fun toHslColor(): Color
 
+    /**
+     * Returns the RGB color corresponding to this one.
+     */
     fun toRgbColor(): Color
 
+    /**
+     * Returns a new color with the same RGB or HSL as this one, but with its alpha value decreased by the
+     * given [alphaDecrement]. Alpha is constrained 0 to 1 as usual.
+     */
     fun transparentized(alphaDecrement: Float): Color
 
 // TODO:
@@ -40,23 +55,24 @@ interface Color {
 
 //---------------------------------------------------------------------------------------------------------------------
 
+/** Constructs a new RGB color with given attributes. */
 fun rgb(
-    red: Int,
-    green: Int,
-    blue: Int
+    redByte: Int,
+    greenByte: Int,
+    blueByte: Int
 ): Color {
-    return rgba(red, green, blue, 1f)
+    return rgba(redByte, greenByte, blueByte, 1f)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 
 fun rgba(
-    red: Int,
-    green: Int,
-    blue: Int,
+    redByte: Int,
+    greenByte: Int,
+    blueByte: Int,
     alpha: Float
 ): Color {
-    val result = RgbColor(red, green, blue, alpha)
+    val result = RgbColor(redByte, greenByte, blueByte, alpha)
     return RgbColor.getNamedColorByHashCode(result.hashCode()) ?: result
 }
 
@@ -86,10 +102,10 @@ fun rgba(
 
 fun hsl(
     hue: Int,
-    saturationFraction: Float,
-    lightnessFraction: Float
+    saturation: Float,
+    lightness: Float
 ): Color {
-    return hsla(hue, saturationFraction, lightnessFraction, 1f)
+    return hsla(hue, saturation, lightness, 1f)
 }
 
 //---------------------------------------------------------------------------------------------------------------------

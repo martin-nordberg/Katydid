@@ -5,7 +5,7 @@
 
 package jvm.katydid.css.styles.builders
 
-import o.katydid.css.styles.Style
+import o.katydid.css.styles.KatydidStyle
 import o.katydid.css.styles.builders.pageBreak
 import o.katydid.css.styles.builders.pageBreakAfter
 import o.katydid.css.styles.builders.pageBreakBefore
@@ -23,7 +23,7 @@ class PageBreakStylePropertyTests {
 
     private fun checkStyle(
         expectedCss: String,
-        build: Style.() -> Unit
+        build: KatydidStyle.() -> Unit
     ) {
         assertEquals(expectedCss, makeStyle(build).toString())
     }

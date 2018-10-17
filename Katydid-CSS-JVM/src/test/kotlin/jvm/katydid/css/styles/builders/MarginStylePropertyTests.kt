@@ -7,7 +7,7 @@ package jvm.katydid.css.styles.builders
 
 import o.katydid.css.measurements.percent
 import o.katydid.css.measurements.px
-import o.katydid.css.styles.Style
+import o.katydid.css.styles.KatydidStyle
 import o.katydid.css.styles.builders.*
 import o.katydid.css.styles.makeStyle
 import o.katydid.css.types.EAuto.auto
@@ -21,7 +21,7 @@ class MarginStylePropertyTests {
 
     private fun checkStyle(
         expectedCss: String,
-        build: Style.() -> Unit
+        build: KatydidStyle.() -> Unit
     ) {
         assertEquals(expectedCss, makeStyle(build).toString())
     }

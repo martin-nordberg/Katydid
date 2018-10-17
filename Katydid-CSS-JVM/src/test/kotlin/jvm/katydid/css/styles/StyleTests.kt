@@ -8,7 +8,7 @@ package jvm.katydid.css.styles
 import o.katydid.css.colors.blue
 import o.katydid.css.colors.rgb
 import o.katydid.css.measurements.px
-import o.katydid.css.styles.Style
+import o.katydid.css.styles.KatydidStyle
 import o.katydid.css.styles.builders.color
 import o.katydid.css.styles.builders.display
 import o.katydid.css.styles.builders.height
@@ -26,7 +26,7 @@ class StyleTests {
 
     private fun checkStyle(
         expectedCss: String,
-        build: Style.() -> Unit
+        build: KatydidStyle.() -> Unit
     ) {
         assertEquals(expectedCss, makeStyle(build).toString())
     }

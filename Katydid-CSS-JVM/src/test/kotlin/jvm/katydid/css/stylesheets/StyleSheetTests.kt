@@ -10,7 +10,7 @@ import o.katydid.css.measurements.pt
 import o.katydid.css.measurements.px
 import o.katydid.css.styles.builders.*
 import o.katydid.css.styles.makeStyle
-import o.katydid.css.stylesheets.StyleSheet
+import o.katydid.css.stylesheets.KatydidStyleSheet
 import o.katydid.css.stylesheets.makeStyleSheet
 import o.katydid.css.types.EFontStyle
 import org.junit.jupiter.api.Test
@@ -21,7 +21,7 @@ class StyleSheetTests {
 
     private fun checkStyle(
         expectedCss: String,
-        build: StyleSheet.() -> Unit
+        build: KatydidStyleSheet.() -> Unit
     ) {
         assertEquals(expectedCss, makeStyleSheet(build).toString())
     }

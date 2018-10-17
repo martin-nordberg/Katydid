@@ -7,7 +7,7 @@ package jvm.katydid.css.styles.builders
 
 import o.katydid.css.measurements.percent
 import o.katydid.css.measurements.px
-import o.katydid.css.styles.Style
+import o.katydid.css.styles.KatydidStyle
 import o.katydid.css.styles.builders.alignmentBaseline
 import o.katydid.css.styles.builders.baselineShift
 import o.katydid.css.styles.builders.verticalAlign
@@ -24,7 +24,7 @@ class VerticalAlignPropertyTests {
 
     private fun checkStyle(
         expectedCss: String,
-        build: Style.() -> Unit
+        build: KatydidStyle.() -> Unit
     ) {
         assertEquals(expectedCss, makeStyle(build).toString())
     }

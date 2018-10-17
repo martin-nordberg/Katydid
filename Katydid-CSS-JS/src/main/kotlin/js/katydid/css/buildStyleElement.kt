@@ -5,7 +5,7 @@
 
 package js.katydid.css
 
-import o.katydid.css.stylesheets.StyleSheet
+import o.katydid.css.stylesheets.KatydidStyleSheet
 import x.katydid.vdom.dom.Element
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -17,7 +17,7 @@ import x.katydid.vdom.dom.Element
  */
 fun buildStyleElement(
     domElement: Element,
-    styleSheet: StyleSheet
+    styleSheet: KatydidStyleSheet
 ) {
     domElement.innerHTML = styleSheet.toString()
 }
