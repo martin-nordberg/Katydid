@@ -27,16 +27,16 @@ import x.katydid.vdom.types.KatyTime
  * Virtual DOM builder for the case of HTML "phrasing content".
  *
  * @constructor Constructs a new phrasing content builder for the given [element].
- * @param element the element whose content is being built.
- * @param contentRestrictions restrictions on content enforced at run time.
- * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
+ * @param itsElement the element whose content is being built.
+ * @param itsContentRestrictions restrictions on content enforced at run time.
+ * @param itsDispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
 @Suppress("unused")
 internal open class KatydidPhrasingContentBuilderImpl<Msg>(
-    element: KatydidHtmlElementImpl<Msg>,
-    contentRestrictions: KatydidContentRestrictions,
-    dispatchMessages: (messages: Iterable<Msg>) -> Unit
-) : KatydidEmbeddedContentBuilderImpl<Msg>(element, contentRestrictions, dispatchMessages),
+    itsElement: KatydidHtmlElementImpl<Msg>,
+    itsContentRestrictions: KatydidContentRestrictions,
+    itsDispatchMessages: (messages: Iterable<Msg>) -> Unit
+) : KatydidEmbeddedContentBuilderImpl<Msg>(itsElement, itsContentRestrictions, itsDispatchMessages),
     KatydidPhrasingContentBuilder<Msg> {
 
     override fun a(

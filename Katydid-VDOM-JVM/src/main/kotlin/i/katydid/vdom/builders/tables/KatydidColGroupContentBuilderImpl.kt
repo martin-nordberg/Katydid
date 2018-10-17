@@ -18,13 +18,13 @@ import o.katydid.vdom.types.EDirection
  * Builder DSL to create the contents of a column group.
  *
  * @constructor Constructs a new builder for the contents of a `<colgroup>` element.
- * @param element the element whose content is being built.
- * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
+ * @param itsElement the element whose content is being built.
+ * @param itsDispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
 internal class KatydidColGroupContentBuilderImpl<Msg>(
-    element: KatydidColGroup<Msg>,
-    dispatchMessages: (messages: Iterable<Msg>) -> Unit
-) : KatydidAttributesContentBuilderImpl<Msg>(element, dispatchMessages),
+    itsElement: KatydidColGroup<Msg>,
+    itsDispatchMessages: (messages: Iterable<Msg>) -> Unit
+) : KatydidAttributesContentBuilderImpl<Msg>(itsElement, itsDispatchMessages),
     KatydidColGroupContentBuilder<Msg> {
 
     /**

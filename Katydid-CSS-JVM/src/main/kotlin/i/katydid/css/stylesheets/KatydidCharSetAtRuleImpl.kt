@@ -15,10 +15,16 @@ import o.katydid.css.stylesheets.KatydidCompositeCssRule
  * Class representing the @charset declaration at the beginning of a style sheet.
  */
 @KatydidStyleBuilderDsl
-class KatydidCharSetAtRuleImpl(
-    override val parent: KatydidCompositeCssRuleImpl,
-    override val characterSet: String
+internal class KatydidCharSetAtRuleImpl(
+    itsParent: KatydidCompositeCssRuleImpl,
+    itsCharacterSet: String
 ) : KatydidCharSetAtRule {
+
+    override val characterSet = itsCharacterSet
+
+    override val parent = itsParent
+
+    ////
 
     init {
         require(parent.nestedRules.isEmpty()) { "A @charset at-rule must be the first rule in a style sheet." }

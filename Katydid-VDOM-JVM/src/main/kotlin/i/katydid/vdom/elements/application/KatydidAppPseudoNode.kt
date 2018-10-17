@@ -18,8 +18,7 @@ import o.katydid.vdom.builders.KatydidFlowContentBuilder
  * created. That child node is the root element of an application.
  */
 internal class KatydidAppPseudoNode<Msg> :
-    KatydidHtmlElementImpl<Msg>(null, null, null, null, null,
-                                null, null, null, null, null, null, null) {
+    KatydidHtmlElementImpl<Msg>(null, null) {
 
     override val nodeName = "!APPLICATION"
 
@@ -34,7 +33,7 @@ internal class KatydidAppPseudoNode<Msg> :
 
     /**
      * Fills this node with the content that is the whole application. The [defineContent] function should add
-     * exactly one child node that is to become the root node of the application. This pseudo node has no
+     * exactly one child node that is to become the root node of the application. This app pseudo node has no
      * corresponding real DOM node.
      */
     fun fill(

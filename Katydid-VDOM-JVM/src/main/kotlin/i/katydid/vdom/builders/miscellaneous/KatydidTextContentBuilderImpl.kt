@@ -20,12 +20,12 @@ import o.katydid.vdom.builders.miscellaneous.KatydidTextContentBuilder
 internal class KatydidTextContentBuilderImpl<Msg>(
 
     /** The element whose content is being built. */
-    element: KatydidHtmlElementImpl<Msg>,
+    itsElement: KatydidHtmlElementImpl<Msg>,
 
     /** Dispatcher of event handling results for when we want event handling to be reactive or Elm-like. */
-    dispatchMessages: (messages: Iterable<Msg>) -> Unit
+    itsDispatchMessages: (messages: Iterable<Msg>) -> Unit
 
-) : KatydidAttributesContentBuilderImpl<Msg>(element, dispatchMessages),
+) : KatydidAttributesContentBuilderImpl<Msg>(itsElement, itsDispatchMessages),
     KatydidTextContentBuilder<Msg> {
 
     override fun comment(nodeValue: String, key: Any?) {

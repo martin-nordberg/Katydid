@@ -11,8 +11,10 @@ package i.katydid.vdom.builders.media
  * Set of restrictions on media content.
  */
 internal class KatydidMediaContentRestrictions(
-    private var sourceAllowed: Boolean = true
+    itsSourceAllowed: Boolean = true
 ) {
+
+    private var sourceAllowed = itsSourceAllowed
 
     private var trackAllowed = true
 

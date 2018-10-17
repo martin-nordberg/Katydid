@@ -18,15 +18,15 @@ import o.katydid.vdom.types.EDirection
  * Builder DSL to create the contents of a `<select>` element.
  *
  * @constructor Constructs a new option content builder.
- * @param element the element whose content is being built.
- * @param contentRestrictions restrictions on content enforced at run time.
- * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
+ * @param itsElement the element whose content is being built.
+ * @param itsContentRestrictions restrictions on content enforced at run time.
+ * @param itsDispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
 internal class KatydidSelectContentBuilderImpl<Msg>(
-    element: KatydidSelect<Msg>,
-    contentRestrictions: KatydidContentRestrictions,
-    dispatchMessages: (messages: Iterable<Msg>) -> Unit
-) : KatydidOptGroupContentBuilderImpl<Msg>(element, contentRestrictions, dispatchMessages),
+    itsElement: KatydidSelect<Msg>,
+    itsContentRestrictions: KatydidContentRestrictions,
+    itsDispatchMessages: (messages: Iterable<Msg>) -> Unit
+) : KatydidOptGroupContentBuilderImpl<Msg>(itsElement, itsContentRestrictions, itsDispatchMessages),
     KatydidSelectContentBuilder<Msg> {
 
     override fun optGroup(

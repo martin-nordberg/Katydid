@@ -23,15 +23,19 @@ import o.katydid.vdom.types.MimeType
  * Builder DSL to create the contents of a picture element.
  *
  * @constructor Constructs a new builder for the contents of a `<picture>` element.
- * @param element the element whose content is being built.
- * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
+ * @param itsElement the element whose content is being built.
+ * @param itsDispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
 internal class KatydidPictureContentBuilderImpl<Msg>(
-    element: KatydidPicture<Msg>,
-    val pictureContentRestrictions: KatydidPictureContentRestrictions = KatydidPictureContentRestrictions(),
-    dispatchMessages: (messages: Iterable<Msg>) -> Unit
-) : KatydidAttributesContentBuilderImpl<Msg>(element, dispatchMessages),
+    itsElement: KatydidPicture<Msg>,
+    itsPictureContentRestrictions: KatydidPictureContentRestrictions = KatydidPictureContentRestrictions(),
+    itsDispatchMessages: (messages: Iterable<Msg>) -> Unit
+) : KatydidAttributesContentBuilderImpl<Msg>(itsElement, itsDispatchMessages),
     KatydidPictureContentBuilder<Msg> {
+
+    val pictureContentRestrictions = itsPictureContentRestrictions
+
+    ////
 
     /**
      * Creates a new attributes content builder for the given child [element].

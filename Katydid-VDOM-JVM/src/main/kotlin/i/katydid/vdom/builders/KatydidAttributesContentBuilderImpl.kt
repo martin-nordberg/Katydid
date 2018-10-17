@@ -24,9 +24,17 @@ import o.katydid.vdom.types.Event2Message
 @Suppress("unused")
 @KatydidContentBuilderDsl
 internal open class KatydidAttributesContentBuilderImpl<Msg>(
-    protected val element: KatydidHtmlElementImpl<Msg>,
-    protected val dispatchMessages: (Iterable<Msg>) -> Unit
+    itsElement: KatydidHtmlElementImpl<Msg>,
+    itsDispatchMessages: (Iterable<Msg>) -> Unit
 ) : KatydidAttributesContentBuilder<Msg> {
+
+    /** Dispatcher of event handling results for when we want event handling to be reactive or Elm-like. */
+    protected val dispatchMessages = itsDispatchMessages
+
+    /** The element whose content is being built. */
+    protected val element = itsElement
+
+    ////
 
     override fun attribute(name: String, value: String) {
 

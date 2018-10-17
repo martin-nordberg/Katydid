@@ -16,7 +16,7 @@ import o.katydid.css.stylesheets.KatydidStyleRule
  * Class representing one style rule (selectors plus style properties) in a larger style sheet.
  */
 @KatydidStyleBuilderDsl
-class KatydidMediaAtRuleImpl(
+internal class KatydidMediaAtRuleImpl(
     itsParent: KatydidCompositeCssRuleImpl,
     itsCondition: String
 ) : KatydidCompositeCssRuleImpl(), KatydidMediaAtRule {

@@ -20,17 +20,21 @@ import o.katydid.vdom.types.EDirection
  * Builder DSL to create the contents of an unordered list (an `<ol>` element).
  *
  * @constructor Constructs a new builder for the contents of an ordered or unordered list.
- * @param flowContent The parent flow content with restrictions that can be resumed for the content inside each
+ * @param itsFlowContent The parent flow content with restrictions that can be resumed for the content inside each
  *                    `<li>` element produced by this builder.
- * @param element the element whose content is being built.
- * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
+ * @param itsElement the element whose content is being built.
+ * @param itsDispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
 internal class KatydidUnorderedListContentBuilderImpl<Msg>(
-    internal val flowContent: KatydidFlowContentBuilderImpl<Msg>,
-    element: KatydidUl<Msg>,
-    dispatchMessages: (messages: Iterable<Msg>) -> Unit
-) : KatydidAttributesContentBuilderImpl<Msg>(element, dispatchMessages),
+    itsFlowContent: KatydidFlowContentBuilderImpl<Msg>,
+    itsElement: KatydidUl<Msg>,
+    itsDispatchMessages: (messages: Iterable<Msg>) -> Unit
+) : KatydidAttributesContentBuilderImpl<Msg>(itsElement, itsDispatchMessages),
     KatydidUnorderedListContentBuilder<Msg> {
+
+    internal val flowContent = itsFlowContent
+
+    ////
 
     override fun comment(nodeValue: String,
                          key: Any?) {

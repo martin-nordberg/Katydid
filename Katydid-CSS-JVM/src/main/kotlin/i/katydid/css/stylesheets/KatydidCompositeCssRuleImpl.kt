@@ -14,7 +14,7 @@ import o.katydid.css.stylesheets.KatydidCompositeCssRule
  * A CSS rule that potentially has other CSS rules nested inside it.
  */
 @KatydidStyleBuilderDsl
-abstract class KatydidCompositeCssRuleImpl
+internal abstract class KatydidCompositeCssRuleImpl
     : KatydidCompositeCssRule {
 
     override fun copy(parentOfCopy: KatydidCompositeCssRule): KatydidCompositeCssRuleImpl =

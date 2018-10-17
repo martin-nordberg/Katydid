@@ -21,16 +21,20 @@ import o.katydid.vdom.types.EDirection
  * Builder DSL to create the contents of a `<optgroup>` or `<datalist>` element.
  *
  * @constructor Constructs a new option content builder.
- * @param element the element whose content is being built.
+ * @param itsElement the element whose content is being built.
  * @param contentRestrictions restrictions on content enforced at run time.
- * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
+ * @param itsDispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
 internal open class KatydidOptGroupContentBuilderImpl<Msg>(
-    element: KatydidHtmlElementImpl<Msg>,
-    internal val contentRestrictions: KatydidContentRestrictions,
-    dispatchMessages: (messages: Iterable<Msg>) -> Unit
-) : KatydidAttributesContentBuilderImpl<Msg>(element, dispatchMessages),
+    itsElement: KatydidHtmlElementImpl<Msg>,
+    itsContentRestrictions: KatydidContentRestrictions,
+    itsDispatchMessages: (messages: Iterable<Msg>) -> Unit
+) : KatydidAttributesContentBuilderImpl<Msg>(itsElement, itsDispatchMessages),
     KatydidOptGroupContentBuilder<Msg> {
+
+    internal val contentRestrictions = itsContentRestrictions
+
+    ////
 
     /**
      * Creates a new attributes content builder for the given child [element].

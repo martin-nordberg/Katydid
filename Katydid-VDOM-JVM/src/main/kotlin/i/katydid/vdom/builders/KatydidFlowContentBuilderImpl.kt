@@ -34,16 +34,16 @@ import o.katydid.vdom.types.EOrderedListType
  * Virtual DOM builder for the normal case of HTML "flow content".
  *
  * @constructor Constructs a flow content builder for given [element] and [contentRestrictions].
- * @param element the element whose content is being built.
- * @param contentRestrictions restrictions on content enforced at run time.
- * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
+ * @param itsElement the element whose content is being built.
+ * @param itsContentRestrictions restrictions on content enforced at run time.
+ * @param itsDispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
 @Suppress("unused")
 internal open class KatydidFlowContentBuilderImpl<Msg>(
-    element: KatydidHtmlElementImpl<Msg>,
-    contentRestrictions: KatydidContentRestrictions,
-    dispatchMessages: (messages: Iterable<Msg>) -> Unit
-) : KatydidPhrasingContentBuilderImpl<Msg>(element, contentRestrictions, dispatchMessages),
+    itsElement: KatydidHtmlElementImpl<Msg>,
+    itsContentRestrictions: KatydidContentRestrictions,
+    itsDispatchMessages: (messages: Iterable<Msg>) -> Unit
+) : KatydidPhrasingContentBuilderImpl<Msg>(itsElement, itsContentRestrictions, itsDispatchMessages),
     KatydidFlowContentBuilder<Msg> {
 
     override fun article(

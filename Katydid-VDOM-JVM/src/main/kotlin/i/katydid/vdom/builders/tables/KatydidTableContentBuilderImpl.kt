@@ -25,16 +25,19 @@ import o.katydid.vdom.types.EDirection
  * Builder DSL to create the contents of a table.
  *
  * @constructor Constructs a new builder for the contents of a `<table>` element.
- * @param element the element whose content is being built.
- * @param contentRestrictions restrictions on content enforced at run time.
- * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
+ * @param itsElement the element whose content is being built.
+ * @param itsContentRestrictions restrictions on content enforced at run time.
+ * @param itsDispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
 internal class KatydidTableContentBuilderImpl<Msg>(
-    element: KatydidTable<Msg>,
-    val contentRestrictions: KatydidContentRestrictions = KatydidContentRestrictions(),
-    dispatchMessages: (messages: Iterable<Msg>) -> Unit
-) : KatydidAttributesContentBuilderImpl<Msg>(element, dispatchMessages),
+    itsElement: KatydidTable<Msg>,
+    itsContentRestrictions: KatydidContentRestrictions = KatydidContentRestrictions(),
+    itsDispatchMessages: (messages: Iterable<Msg>) -> Unit
+) : KatydidAttributesContentBuilderImpl<Msg>(itsElement, itsDispatchMessages),
     KatydidTableContentBuilder<Msg> {
+
+    /** Restrictions on content enforced at run time. */
+    val contentRestrictions = itsContentRestrictions
 
     /** Restrictions enforcing the order of sub-elements within the table being built. */
     val tableContentRestrictions = KatydidTableContentRestrictions()

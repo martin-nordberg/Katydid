@@ -22,19 +22,23 @@ import o.katydid.vdom.types.MimeType
  * Builder DSL to create the contents of a media element.
  *
  * @constructor Constructs a new builder for the contents of a `<audio>` or `<video>` element.
- * @param element the element whose content is being built.
- * @param contentRestrictions restrictions on content enforced at run time.
- * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
+ * @param itsElement the element whose content is being built.
+ * @param itsContentRestrictions restrictions on content enforced at run time.
+ * @param itsDispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  *
  * TODO: To support "transparent" content, we need embedded / phrased / flow media content builders or at least runtime checking.
  */
 internal class KatydidMediaFlowContentBuilderImpl<Msg>(
-    element: KatydidHtmlElementImpl<Msg>,
-    contentRestrictions: KatydidContentRestrictions = KatydidContentRestrictions(),
-    val mediaContentRestrictions: KatydidMediaContentRestrictions = KatydidMediaContentRestrictions(),
-    dispatchMessages: (messages: Iterable<Msg>) -> Unit
-) : KatydidFlowContentBuilderImpl<Msg>(element, contentRestrictions, dispatchMessages),
+    itsElement: KatydidHtmlElementImpl<Msg>,
+    itsContentRestrictions: KatydidContentRestrictions = KatydidContentRestrictions(),
+    itsMediaContentRestrictions: KatydidMediaContentRestrictions = KatydidMediaContentRestrictions(),
+    itsDispatchMessages: (messages: Iterable<Msg>) -> Unit
+) : KatydidFlowContentBuilderImpl<Msg>(itsElement, itsContentRestrictions, itsDispatchMessages),
     KatydidMediaFlowContentBuilder<Msg> {
+
+    val mediaContentRestrictions = itsMediaContentRestrictions
+
+    ////
 
     override fun source(
         selector: String?,

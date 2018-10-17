@@ -26,16 +26,20 @@ import o.katydid.vdom.types.*
  * Virtual DOM builder for the case of HTML "embedded content".
  *
  * @constructor Constructs a new embedded content builder for the given [element].
- * @param element the element whose content is being built.
- * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
+ * @param itsElement the element whose content is being built.
+ * @param itsDispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
 @Suppress("unused")
 internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
-    element: KatydidHtmlElementImpl<Msg>,
-    val contentRestrictions: KatydidContentRestrictions,
-    dispatchMessages: (messages: Iterable<Msg>) -> Unit
-) : KatydidAttributesContentBuilderImpl<Msg>(element, dispatchMessages),
+    itsElement: KatydidHtmlElementImpl<Msg>,
+    itsContentRestrictions: KatydidContentRestrictions,
+    itsDispatchMessages: (messages: Iterable<Msg>) -> Unit
+) : KatydidAttributesContentBuilderImpl<Msg>(itsElement, itsDispatchMessages),
     KatydidEmbeddedContentBuilder<Msg> {
+
+    val contentRestrictions = itsContentRestrictions
+
+    ////
 
     /**
      * Creates a new attributes content builder for the given child [element].
