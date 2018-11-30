@@ -9,3 +9,5 @@ include 'Katydid-CSS-JVM'
 include 'Katydid-CSS-JS'
 include 'Katydid-Samples'
 
+include 'Katydid-KotlGen-JVM'
+
