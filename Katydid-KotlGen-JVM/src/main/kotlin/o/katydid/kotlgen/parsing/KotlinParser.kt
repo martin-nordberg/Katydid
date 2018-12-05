@@ -10,12 +10,13 @@ import o.katydid.kotlgen.model.KgSourceRoot
 import o.katydid.kotlgen.model.core.names.KgQualifiedName
 import o.katydid.kotlgen.model.structure.KgSourceFile
 import java.io.Reader
+import java.io.StringReader
 
 //---------------------------------------------------------------------------------------------------------------------
 
 interface KotlinParser {
 
-    fun parseKotlinFile(fileName: String): KgSourceFile
+    fun parseKotlinFile(sourceRoot: KgSourceRoot, fileName: String): KgSourceFile
 
     fun parseQualifiedName(): KgQualifiedName
 
@@ -23,8 +24,13 @@ interface KotlinParser {
 
 //---------------------------------------------------------------------------------------------------------------------
 
-fun makeKotlinParser(sourceRoot: KgSourceRoot, code: Reader): KotlinParser =
-    KotlinParserImpl(sourceRoot, code)
+fun makeKotlinParser(code: Reader): KotlinParser =
+    KotlinParserImpl(code)
+
+//---------------------------------------------------------------------------------------------------------------------
+
+fun makeKotlinParser(code: String): KotlinParser =
+    KotlinParserImpl(StringReader(code))
 
 //---------------------------------------------------------------------------------------------------------------------
 

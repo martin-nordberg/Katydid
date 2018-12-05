@@ -5,25 +5,13 @@
 
 package o.katydid.kotlgen.model.types
 
-import o.katydid.kotlgen.model.annotations.KgAnnotated
 import o.katydid.kotlgen.model.core.KgCodeElement
 import o.katydid.kotlgen.model.core.KgComposite
-import o.katydid.kotlgen.model.structure.KgImporting
 
 //---------------------------------------------------------------------------------------------------------------------
 
-interface KgType
-    : KgCodeElement, KgAnnotated, KgComposite, KgImporting {
-
-    var isSuspend: Boolean
-
-    var text: String
-
-    var typeRef: KgTypeReference
-
-    ////
-
-
+interface KgTypeReference
+    : KgCodeElement, KgComposite {
 }
 
 //---------------------------------------------------------------------------------------------------------------------

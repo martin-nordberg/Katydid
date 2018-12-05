@@ -15,7 +15,6 @@ import o.katydid.kotlgen.model.structure.KgSourceFile
 import o.katydid.kotlgen.parsing.makeKotlinParser
 import org.junit.jupiter.api.Test
 import java.io.File
-import java.io.StringReader
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNull
@@ -28,10 +27,10 @@ class KotlinParserTests {
 
     private fun parseKotlinFile(code: String): KgSourceFile {
 
-        val srcRoot = makeSourceRoot(File("."))
-        val parser = makeKotlinParser(srcRoot, StringReader(code))
+        val parser = makeKotlinParser(code)
 
-        val srcFile = parser.parseKotlinFile("test")
+        val srcRoot = makeSourceRoot(File("."))
+        val srcFile = parser.parseKotlinFile(srcRoot, "test")
 
         assertEquals("test", srcFile.name)
 

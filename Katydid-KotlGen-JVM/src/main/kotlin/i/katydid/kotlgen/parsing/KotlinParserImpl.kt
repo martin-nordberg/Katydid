@@ -13,72 +13,32 @@ import o.katydid.kotlgen.model.core.modifiers.KgModifier
 import o.katydid.kotlgen.model.core.modifiers.KgModifierKeyword
 import o.katydid.kotlgen.model.core.modifiers.KgModifierList
 import o.katydid.kotlgen.model.core.names.KgQualifiedName
+import o.katydid.kotlgen.model.declarations.KgDeclaring
+import o.katydid.kotlgen.model.declarations.KgNonlocalDeclaring
 import o.katydid.kotlgen.model.declarations.classes.KgEnumClass
+import o.katydid.kotlgen.model.declarations.classes.KgMemberDeclaring
+import o.katydid.kotlgen.model.declarations.properties.KgAbstractProperty
+import o.katydid.kotlgen.model.structure.KgImporting
 import o.katydid.kotlgen.model.structure.KgPackage
 import o.katydid.kotlgen.model.structure.KgSourceFile
+import o.katydid.kotlgen.model.structure.KgTopLevelDeclaring
 import o.katydid.kotlgen.parsing.KotlinParser
 import java.io.Reader
 
 //---------------------------------------------------------------------------------------------------------------------
 
 internal class KotlinParserImpl(
-    private val sourceRoot: KgSourceRoot,
     code: Reader
 ) : KotlinParser,
-    KotlinTokenBuffer by KotlinTokenBufferImpl(KotlinLexer(code)) {
+    KotlinExpectedTokenBuffer by KotlinExpectedTokenBufferImpl(code) {
 
-    data class NameWithOrigin(
+    private data class NameWithOrigin(
         val text: String,
         val origin: KgOrigin
     )
 
-    private fun expected(description: String): Nothing =
-        throw IllegalArgumentException("Expected $description.")
-
-    private fun expected(vararg tokenTypes: EKotlinTokenType): Nothing {
-
-        if (tokenTypes.size == 1) {
-            throw IllegalArgumentException("Expected ${tokenTypes[0].text}.")
-        }
-
-        val tokenText = tokenTypes.joinToString(", ") { t -> t.text }
-        throw IllegalArgumentException("Expected one of { $tokenText }.")
-
-    }
-
-    private fun expected(description: String, vararg tokenTypes: EKotlinTokenType): Nothing {
-
-        if (tokenTypes.size == 1) {
-            throw IllegalArgumentException("Expected $description - ${tokenTypes[0].text}.")
-        }
-
-        val tokenText = tokenTypes.joinToString(", ") { t -> t.text }
-        throw IllegalArgumentException("Expected $description - one of { $tokenText }.")
-
-    }
-
-    private fun convertOrigin(origin: KotlinTokenOrigin): KgOriginLineColumnAndSize =
-        KgOriginLineColumnAndSize(origin.line, origin.column, origin.length)
-
-    private fun read(tokenType: EKotlinTokenType): KotlinToken {
-
-        if (!hasLookAhead(tokenType)) {
-            expected(tokenType)
-        }
-
-        return read()!!
-
-    }
-
-    private fun readIdentifier(): KotlinToken {
-
-        if (!hasLookAheadIdentifier()) {
-            expected(IDENTIFIER)
-        }
-
-        return read()!!
-
-    }
+    private fun convertOrigin(token: KotlinToken): KgOriginLineColumnAndSize =
+        KgOriginLineColumnAndSize(token.line, token.column, token.length)
 
     ////
 
@@ -92,10 +52,10 @@ internal class KotlinParserImpl(
      *   (classBody? | enumClassBody)
      *   ;
      */
-    private fun parseClass(srcFile: KgSourceFile, modifiers: KgModifierList) {
+    private fun parseClass(parent: KgNonlocalDeclaring, modifiers: KgModifierList) {
 
         // "class"
-        val keywOrigin = read()!!.origin
+        val keyword = read(CLASS)
 
         val className = parseSimpleName()
 
@@ -106,9 +66,9 @@ internal class KotlinParserImpl(
 
         if (modifiers.contains(KgModifierKeyword.`enum`)) {
 
-            val enumClass = srcFile.`enum class`(className.text) {
+            val enumClass = parent.`enum class`(className.text) {
                 nameOrigin = className.origin
-                keywordOrigin = convertOrigin(keywOrigin)
+                keywordOrigin = convertOrigin(keyword)
 
                 mergeModifiers(modifiers)
             }
@@ -175,18 +135,46 @@ internal class KotlinParserImpl(
     }
 
     /**
+     * class (used by memberDeclaration, declaration, topLevelObject)
+     *   : modifiers ("class" | "interface") SimpleName
+     *   typeParameters?
+     *   primaryConstructor?
+     *   (":" annotations delegationSpecifier{","})?
+     *   typeConstraints
+     *   (classBody? | enumClassBody)
+     *   ;
+     */
+    private fun parseFunction(srcFile: KgDeclaring, modifiers: KgModifierList) {
+
+        // "fun"
+        val keyword = read(FUN)
+
+        val functionName = parseSimpleName()
+
+        // TODO: typeParameters
+
+//        val function = srcFile.`fun`(functionName.text) {
+//            nameOrigin = functionName.origin
+//            keywordOrigin = convertOrigin(keyword)
+//
+//            mergeModifiers(modifiers)
+//        }
+
+    }
+
+    /**
      * import (used by preamble)
      *   : "import" SimpleName{"."} ("." "*" | "as" SimpleName)? SEMI?
      *   ;
      */
-    private fun parseImports(sourceFile: KgSourceFile) {
+    private fun parseImports(sourceFile: KgImporting) {
 
         while (consumeWhen(IMPORT)) {
 
-            val keywOrigin = lookAhead(0)!!.origin
+            val keyword = lookAhead(0)!!
 
             val imp = sourceFile.`import`(parseQualifiedName()) {
-                keywordOrigin = convertOrigin(keywOrigin)
+                keywordOrigin = convertOrigin(keyword)
             }
 
             if (consumeWhen(DOT, STAR)) {
@@ -204,7 +192,7 @@ internal class KotlinParserImpl(
 
     }
 
-    private fun parseInterface(srcFile: KgSourceFile, modifiers: KgModifierList) {
+    private fun parseInterface(srcFile: KgNonlocalDeclaring, modifiers: KgModifierList) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -213,9 +201,9 @@ internal class KotlinParserImpl(
      *   : preamble topLevelObject*
      *   ;
      */
-    override fun parseKotlinFile(fileName: String): KgSourceFile {
+    override fun parseKotlinFile(sourceRoot: KgSourceRoot, fileName: String): KgSourceFile {
 
-        val result = parsePreamble(fileName)
+        val result = parsePreamble(sourceRoot, fileName)
 
         while (hasLookAhead()) {
             parseTopLevelObject(result)
@@ -225,7 +213,7 @@ internal class KotlinParserImpl(
 
     }
 
-    private fun parseMembers(enumClass: KgEnumClass) {
+    private fun parseMembers(clazz: KgMemberDeclaring) {
         // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -234,17 +222,19 @@ internal class KotlinParserImpl(
         val result = KgModifierList()
 
         fun readModifier(keyword: KgModifierKeyword) =
-            KgModifier(keyword, convertOrigin(read()!!.origin))
+            KgModifier(keyword, convertOrigin(read()))
 
         while (true) {
             when (lookAhead(1)?.type) {
                 // TODO: annotations
                 ABSTRACT    -> result.add(readModifier(KgModifierKeyword.`abstract`))
+                ACTUAL      -> result.add(readModifier(KgModifierKeyword.`actual`))
                 ANNOTATION  -> result.add(readModifier(KgModifierKeyword.`annotation`))
                 CONST       -> result.add(readModifier(KgModifierKeyword.`const`))
                 CROSSINLINE -> result.add(readModifier(KgModifierKeyword.`crossinline`))
                 DATA        -> result.add(readModifier(KgModifierKeyword.`data`))
                 ENUM        -> result.add(readModifier(KgModifierKeyword.`enum`))
+                EXPECT      -> result.add(readModifier(KgModifierKeyword.`expect`))
                 EXTERNAL    -> result.add(readModifier(KgModifierKeyword.`external`))
                 FINAL       -> result.add(readModifier(KgModifierKeyword.`final`))
                 IN          -> result.add(readModifier(KgModifierKeyword.`in`))
@@ -271,7 +261,7 @@ internal class KotlinParserImpl(
 
     }
 
-    private fun parseObject(srcFile: KgSourceFile, modifiers: KgModifierList) {
+    private fun parseObject(parent: KgNonlocalDeclaring, modifiers: KgModifierList) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -280,9 +270,9 @@ internal class KotlinParserImpl(
      *   : modifiers "package" SimpleName{"."} SEMI?
      *   ;
      */
-    private fun parsePackageHeader(): KgPackage {
+    private fun parsePackageHeader(sourceRoot: KgSourceRoot): KgPackage {
 
-        // TODO: modifiers
+        // TODO: modifiers ??
 
         if (consumeWhen(PACKAGE)) {
             val pkgQualifiedName = parseQualifiedName()
@@ -300,11 +290,11 @@ internal class KotlinParserImpl(
      *   : fileAnnotations? packageHeader? import*
      *   ;
      */
-    private fun parsePreamble(fileName: String): KgSourceFile {
+    private fun parsePreamble(sourceRoot: KgSourceRoot, fileName: String): KgSourceFile {
 
         // TODO: fileAnnotations()
 
-        val pkg = parsePackageHeader()
+        val pkg = parsePackageHeader(sourceRoot)
 
         val result = pkg.`source file`(fileName)
 
@@ -340,9 +330,8 @@ internal class KotlinParserImpl(
     }
 
     private fun parseSimpleName(): NameWithOrigin {
-        // TODO: or soft keyword
         val nameToken = readIdentifier()
-        return NameWithOrigin(nameToken.text, convertOrigin(nameToken.origin))
+        return NameWithOrigin(nameToken.text, convertOrigin(nameToken))
     }
 
     /**
@@ -354,7 +343,7 @@ internal class KotlinParserImpl(
      *   : typeAlias
      *   ;
      */
-    private fun parseTopLevelObject(srcFile: KgSourceFile) {
+    private fun parseTopLevelObject(srcFile: KgTopLevelDeclaring) {
 
         val modifiers = parseModifiers()
 
@@ -362,15 +351,15 @@ internal class KotlinParserImpl(
             CLASS     -> parseClass(srcFile, modifiers)
             INTERFACE -> parseInterface(srcFile, modifiers)
             OBJECT    -> parseObject(srcFile, modifiers)
-            VAL       -> parseProperty(srcFile, modifiers)
-            VAR       -> parseProperty(srcFile, modifiers)
+            FUN       -> parseFunction(srcFile, modifiers)
+            VAL, VAR  -> parseProperty(srcFile, modifiers)
             TYPEALIAS -> parseTypeAlias(srcFile, modifiers)
             else      -> expected("top level object", CLASS, INTERFACE, OBJECT, VAL, VAR, TYPEALIAS)
         }
 
     }
 
-    private fun parseTypeAlias(srcFile: KgSourceFile, modifiers: KgModifierList) {
+    private fun parseTypeAlias(parent: KgTopLevelDeclaring, modifiers: KgModifierList) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -385,27 +374,28 @@ internal class KotlinParserImpl(
      *   (getter? setter? | setter? getter?) SEMI?
      *   ;
      */
-    private fun parseProperty(srcFile: KgSourceFile, modifiers: KgModifierList) { //: KtProperty {
+    private fun parseProperty(parent: KgDeclaring, modifiers: KgModifierList): KgAbstractProperty {
 
         // "val"
-        val keyword = read()!!
+        val keyword = readOneOf(VAL, VAR)
 
         // TODO: typeParameters
         // TODO: (type ".")?
 
         val propertyName = parseSimpleName()
 
-//        val result = if ( keyword.type == VAL ) {
-//            srcFile.`val`(propertyName){}
-//        }
-//        else {
-//            srcFile.`var`(propertyName){}
-//        }
-//
-//        result {
-//            keywordOrigin = keyword.origin
-//            add(modifiers)
-//        }
+        val result = if (keyword.type == VAL) {
+            parent.`val`(propertyName.text) {}
+        }
+        else {
+            parent.`var`(propertyName.text) {}
+        }
+
+        result.apply {
+            keywordOrigin = convertOrigin(keyword)
+            nameOrigin = propertyName.origin
+            mergeModifiers(modifiers)
+        }
 
         if (consumeWhen(COLON)) {
             // TODO: parseType()
@@ -417,7 +407,7 @@ internal class KotlinParserImpl(
 
         parseSemicolonOrNewLine()
 
-//        return result
+        return result
 
     }
 

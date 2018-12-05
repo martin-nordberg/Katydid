@@ -27,7 +27,7 @@ internal interface KotlinTokenBuffer {
 
     fun lookAhead(count: Int): KotlinToken?
 
-    fun read(): KotlinToken?
+    fun read(): KotlinToken
 
 }
 

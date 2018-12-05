@@ -19,3 +19,11 @@ interface KgReadOnlyProperty
 
 //---------------------------------------------------------------------------------------------------------------------
 
+private fun kgReadOnlyPropertyExample(element: KgReadOnlyProperty) {
+
+    element {
+        `protected`
+        type.text = "List<String>"
+    }
+
+}

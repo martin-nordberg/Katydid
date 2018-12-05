@@ -8,17 +8,31 @@ package i.katydid.kotlgen.parsing;
 public class KotlinToken {
 
     private final int channel;
-    private final KotlinTokenOrigin origin;
+
+    private final int column;
+
+    private final int line;
+
     private final String text;
+
     private final EKotlinTokenType type;
+
     private final Object value;
 
     ////
 
-    public KotlinToken(EKotlinTokenType type, String text, int zline, int zcolumn, Object value, int channel) {
+    public KotlinToken(
+            EKotlinTokenType type,
+            String text,
+            int zeroBasedLine,
+            int zeroBasedColumn,
+            Object value,
+            int channel
+    ) {
         this.type = type;
         this.text = text;
-        this.origin = new KotlinTokenOrigin(zline + 1, zcolumn + 1, text.length());
+        this.column = zeroBasedColumn + 1;
+        this.line = zeroBasedLine + 1;
         this.value = value == null ? text : value;
         this.channel = channel;
     }
@@ -30,15 +44,15 @@ public class KotlinToken {
     }
 
     public int getColumn() {
-        return origin.getColumn();
+        return this.column;
+    }
+
+    public int getLength() {
+        return text.length();
     }
 
     public int getLine() {
-        return origin.getLine();
-    }
-
-    public KotlinTokenOrigin getOrigin() {
-        return origin;
+        return this.line;
     }
 
     public String getText() {

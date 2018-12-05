@@ -21,7 +21,7 @@ enum class KgModifierKeyword {
     `crossinline`,
     `data`,
     `enum`,
-    `expected`,
+    `expect`,
     `external`,
     `final`,
     `in`,

@@ -12,7 +12,6 @@ import o.katydid.kotlgen.model.declarations.functions.KgInfixMemberFunction
 import o.katydid.kotlgen.model.declarations.functions.KgOperatorMemberFunction
 import o.katydid.kotlgen.model.declarations.functions.KgSecondaryConstructor
 import o.katydid.kotlgen.model.declarations.objects.KgCompanionObject
-import o.katydid.kotlgen.model.types.KgType
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -27,7 +26,7 @@ internal open class KgMemberDeclarationsImpl
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun `infix fun`(itsName: String, itsType: KgType, build: KgInfixMemberFunction.() -> Unit): KgInfixMemberFunction {
+    override fun `infix fun`(itsName: String, build: KgInfixMemberFunction.() -> Unit): KgInfixMemberFunction {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -35,7 +34,7 @@ internal open class KgMemberDeclarationsImpl
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun `operator fun`(itsName: String, itsType: KgType, build: KgOperatorMemberFunction.() -> Unit): KgOperatorMemberFunction {
+    override fun `operator fun`(itsName: String, build: KgOperatorMemberFunction.() -> Unit): KgOperatorMemberFunction {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

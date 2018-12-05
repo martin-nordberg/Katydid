@@ -34,27 +34,27 @@ internal abstract class KgDeclarationsImpl
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun `ext fun`(itsReceiverType: KgType, itsName: String, itsType: KgType, build: KgExtensionFunction.() -> Unit): KgExtensionFunction {
+    override fun `ext fun`(itsReceiverType: KgType, itsName: String, build: KgExtensionFunction.() -> Unit): KgExtensionFunction {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun `fun`(itsName: String, itsType: KgType, build: KgFunction.() -> Unit): KgFunction {
+    override fun `fun`(itsName: String, build: KgFunction.() -> Unit): KgFunction {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun `infix ext fun`(itsReceiverType: KgType, itsName: String, itsType: KgType, build: KgInfixExtensionFunction.() -> Unit): KgInfixExtensionFunction {
+    override fun `infix ext fun`(itsReceiverType: KgType, itsName: String, build: KgInfixExtensionFunction.() -> Unit): KgInfixExtensionFunction {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun `operator ext fun`(itsReceiverType: KgType, itsName: String, itsType: KgType, build: KgOperatorExtensionFunction.() -> Unit): KgOperatorExtensionFunction {
+    override fun `operator ext fun`(itsReceiverType: KgType, itsName: String, build: KgOperatorExtensionFunction.() -> Unit): KgOperatorExtensionFunction {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun `val`(itsName: String, itsType: KgType, build: KgAbstractProperty.() -> Unit): KgReadOnlyProperty {
+    override fun `val`(itsName: String, build: KgAbstractProperty.() -> Unit): KgReadOnlyProperty {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun `var`(itsName: String, itsType: KgType, build: KgAbstractProperty.() -> Unit): KgAbstractProperty {
+    override fun `var`(itsName: String, build: KgAbstractProperty.() -> Unit): KgAbstractProperty {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

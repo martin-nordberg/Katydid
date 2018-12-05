@@ -22,14 +22,16 @@ internal class KotlinTokenBufferImpl(
     ////
 
     override fun consume(count: Int) {
-        lookAhead(count)
+        fill(count)
         first = (first + count) % size
     }
 
     override fun consumeWhen(vararg tokenTypes: EKotlinTokenType): Boolean {
 
-        for (i in 1..tokenTypes.size) {
-            if (!hasLookAhead(i, tokenTypes[i - 1])) {
+        fill(tokenTypes.size)
+
+        for (i in 0 until tokenTypes.size) {
+            if (tokens[(first + i) % size]?.type != tokenTypes[i]) {
                 return false
             }
         }
@@ -76,8 +78,8 @@ internal class KotlinTokenBufferImpl(
         return tokens[(first + count - 1) % size]
     }
 
-    override fun read(): KotlinToken? {
-        val result = lookAhead(1)
+    override fun read(): KotlinToken {
+        val result = lookAhead(1) ?: throw IllegalStateException("Unexpected end of input.")
         first = (first + 1) % size
         return result
     }

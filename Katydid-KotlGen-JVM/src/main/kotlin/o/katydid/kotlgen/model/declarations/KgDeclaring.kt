@@ -39,39 +39,33 @@ interface KgDeclaring {
     fun `ext fun`(
         itsReceiverType: KgType,
         itsName: String,
-        itsType: KgType,
         build: KgExtensionFunction.() -> Unit
     ): KgExtensionFunction
 
     fun `fun`(
         itsName: String,
-        itsType: KgType,
         build: KgFunction.() -> Unit
     ): KgFunction
 
     fun `infix ext fun`(
         itsReceiverType: KgType,
         itsName: String,
-        itsType: KgType,
         build: KgInfixExtensionFunction.() -> Unit
     ): KgInfixExtensionFunction
 
     fun `operator ext fun`(
         itsReceiverType: KgType,
         itsName: String,
-        itsType: KgType,
         build: KgOperatorExtensionFunction.() -> Unit
     ): KgOperatorExtensionFunction
 
     fun `val`(
         itsName: String,
-        itsType: KgType,
         build: KgAbstractProperty.() -> Unit
     ): KgReadOnlyProperty
 
     fun `var`(
         itsName: String,
-        itsType: KgType,
         build: KgAbstractProperty.() -> Unit
     ): KgAbstractProperty
 

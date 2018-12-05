@@ -11,7 +11,6 @@ import o.katydid.kotlgen.parsing.makeKotlinParser
 import org.junit.jupiter.api.Test
 import java.io.File
 import java.io.PrintWriter
-import java.io.StringReader
 import java.io.StringWriter
 import kotlin.test.assertEquals
 
@@ -21,10 +20,10 @@ class KotlinCodeGeneratorTests {
 
     private fun checkParseAndCodeGen(code: String) {
 
-        val srcRoot = makeSourceRoot(File("."))
-        val parser = makeKotlinParser(srcRoot, StringReader(code))
+        val parser = makeKotlinParser(code)
 
-        val srcFile = parser.parseKotlinFile("test")
+        val srcRoot = makeSourceRoot(File("."))
+        val srcFile = parser.parseKotlinFile(srcRoot, "test")
 
         val code2 = StringWriter()
         val codeGenerator = makeKotlinCodeGenerator(srcRoot, PrintWriter(code2))
