@@ -25,7 +25,7 @@ interface KgModified {
 
     val `enum`: Unit
 
-    val `expected`: Unit
+    val `expect`: Unit
 
     val `external`: Unit
 

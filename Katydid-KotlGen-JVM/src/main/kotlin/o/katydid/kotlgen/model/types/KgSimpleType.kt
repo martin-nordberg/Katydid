@@ -5,13 +5,19 @@
 
 package o.katydid.kotlgen.model.types
 
+import o.katydid.kotlgen.model.core.KgCodeElement
+import o.katydid.kotlgen.model.core.KgComposite
+import o.katydid.kotlgen.model.core.names.KgNamed
+
 //---------------------------------------------------------------------------------------------------------------------
 
-interface KgTyped {
+interface KgSimpleType
+    : KgCodeElement, KgNamed, KgComposite {
 
-    val type: KgType
+    // TODO: type parameters
 
     ////
+
 
 }
 

@@ -10,7 +10,7 @@ package o.katydid.kotlgen.model.types
 interface KgUserType
     : KgTypeReference {
 
-    // TODO
+    val simpleTypes: List<KgSimpleType>
 
 }
 

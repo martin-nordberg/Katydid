@@ -14,8 +14,8 @@ import o.katydid.kotlgen.model.declarations.functions.KgExtensionFunction
 import o.katydid.kotlgen.model.declarations.functions.KgFunction
 import o.katydid.kotlgen.model.declarations.functions.KgInfixExtensionFunction
 import o.katydid.kotlgen.model.declarations.functions.KgOperatorExtensionFunction
-import o.katydid.kotlgen.model.declarations.properties.KgAbstractProperty
 import o.katydid.kotlgen.model.declarations.properties.KgReadOnlyProperty
+import o.katydid.kotlgen.model.declarations.properties.KgReadWriteProperty
 import o.katydid.kotlgen.model.types.KgType
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -61,13 +61,13 @@ interface KgDeclaring {
 
     fun `val`(
         itsName: String,
-        build: KgAbstractProperty.() -> Unit
+        build: KgReadOnlyProperty.() -> Unit
     ): KgReadOnlyProperty
 
     fun `var`(
         itsName: String,
-        build: KgAbstractProperty.() -> Unit
-    ): KgAbstractProperty
+        build: KgReadWriteProperty.() -> Unit
+    ): KgReadWriteProperty
 
 }
 

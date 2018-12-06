@@ -5,16 +5,18 @@
 
 package i.katydid.kotlgen.model.declarations
 
+import i.katydid.kotlgen.model.declarations.properties.KgReadOnlyPropertyImpl
 import o.katydid.kotlgen.model.declarations.KgDeclaration
 import o.katydid.kotlgen.model.declarations.KgDeclaring
 import o.katydid.kotlgen.model.declarations.classes.KgClass
 import o.katydid.kotlgen.model.declarations.classes.KgDataClass
+import o.katydid.kotlgen.model.declarations.declarationByName
 import o.katydid.kotlgen.model.declarations.functions.KgExtensionFunction
 import o.katydid.kotlgen.model.declarations.functions.KgFunction
 import o.katydid.kotlgen.model.declarations.functions.KgInfixExtensionFunction
 import o.katydid.kotlgen.model.declarations.functions.KgOperatorExtensionFunction
-import o.katydid.kotlgen.model.declarations.properties.KgAbstractProperty
 import o.katydid.kotlgen.model.declarations.properties.KgReadOnlyProperty
+import o.katydid.kotlgen.model.declarations.properties.KgReadWriteProperty
 import o.katydid.kotlgen.model.types.KgType
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -50,11 +52,22 @@ internal abstract class KgDeclarationsImpl
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun `val`(itsName: String, build: KgAbstractProperty.() -> Unit): KgReadOnlyProperty {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun `val`(itsName: String, build: KgReadOnlyProperty.() -> Unit): KgReadOnlyProperty {
+
+        var result = declarationByName<KgReadOnlyPropertyImpl>(itsName)
+
+        if (result == null) {
+            result = KgReadOnlyPropertyImpl(itsName)
+            declarations.add(result)
+        }
+
+        result.build()
+
+        return result
+
     }
 
-    override fun `var`(itsName: String, build: KgAbstractProperty.() -> Unit): KgAbstractProperty {
+    override fun `var`(itsName: String, build: KgReadWriteProperty.() -> Unit): KgReadWriteProperty {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

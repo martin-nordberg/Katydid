@@ -22,6 +22,8 @@ import o.katydid.kotlgen.model.structure.KgImporting
 import o.katydid.kotlgen.model.structure.KgPackage
 import o.katydid.kotlgen.model.structure.KgSourceFile
 import o.katydid.kotlgen.model.structure.KgTopLevelDeclaring
+import o.katydid.kotlgen.model.types.KgType
+import o.katydid.kotlgen.model.types.KgTyped
 import o.katydid.kotlgen.parsing.KotlinParser
 import java.io.Reader
 
@@ -144,7 +146,7 @@ internal class KotlinParserImpl(
      *   (classBody? | enumClassBody)
      *   ;
      */
-    private fun parseFunction(srcFile: KgDeclaring, modifiers: KgModifierList) {
+    private fun parseFunction(parent: KgDeclaring, modifiers: KgModifierList) {
 
         // "fun"
         val keyword = read(FUN)
@@ -153,12 +155,14 @@ internal class KotlinParserImpl(
 
         // TODO: typeParameters
 
-//        val function = srcFile.`fun`(functionName.text) {
-//            nameOrigin = functionName.origin
-//            keywordOrigin = convertOrigin(keyword)
-//
-//            mergeModifiers(modifiers)
-//        }
+        val function = parent.`fun`(functionName.text) {
+            nameOrigin = functionName.origin
+            keywordOrigin = convertOrigin(keyword)
+
+            mergeModifiers(modifiers)
+        }
+
+        // TODO ...
 
     }
 
@@ -192,7 +196,7 @@ internal class KotlinParserImpl(
 
     }
 
-    private fun parseInterface(srcFile: KgNonlocalDeclaring, modifiers: KgModifierList) {
+    private fun parseInterface(parent: KgNonlocalDeclaring, modifiers: KgModifierList) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -343,17 +347,17 @@ internal class KotlinParserImpl(
      *   : typeAlias
      *   ;
      */
-    private fun parseTopLevelObject(srcFile: KgTopLevelDeclaring) {
+    private fun parseTopLevelObject(parent: KgTopLevelDeclaring) {
 
         val modifiers = parseModifiers()
 
         when (lookAhead(1)?.type) {
-            CLASS     -> parseClass(srcFile, modifiers)
-            INTERFACE -> parseInterface(srcFile, modifiers)
-            OBJECT    -> parseObject(srcFile, modifiers)
-            FUN       -> parseFunction(srcFile, modifiers)
-            VAL, VAR  -> parseProperty(srcFile, modifiers)
-            TYPEALIAS -> parseTypeAlias(srcFile, modifiers)
+            CLASS     -> parseClass(parent, modifiers)
+            INTERFACE -> parseInterface(parent, modifiers)
+            OBJECT    -> parseObject(parent, modifiers)
+            FUN       -> parseFunction(parent, modifiers)
+            VAL, VAR  -> parseProperty(parent, modifiers)
+            TYPEALIAS -> parseTypeAlias(parent, modifiers)
             else      -> expected("top level object", CLASS, INTERFACE, OBJECT, VAL, VAR, TYPEALIAS)
         }
 
@@ -376,7 +380,7 @@ internal class KotlinParserImpl(
      */
     private fun parseProperty(parent: KgDeclaring, modifiers: KgModifierList): KgAbstractProperty {
 
-        // "val"
+        // "val" or "var"
         val keyword = readOneOf(VAL, VAR)
 
         // TODO: typeParameters
@@ -398,7 +402,7 @@ internal class KotlinParserImpl(
         }
 
         if (consumeWhen(COLON)) {
-            // TODO: parseType()
+            parseType(result)
         }
 
         // TODO: by/= expression
@@ -408,6 +412,36 @@ internal class KotlinParserImpl(
         parseSemicolonOrNewLine()
 
         return result
+
+    }
+
+    /**
+     * type
+     *   : typeModifiers typeReference
+     *   ;
+     */
+    private fun parseType(parent: KgTyped) {
+        parseTypeModifiers(parent.type)
+        parseTypeReference(parent.type)
+    }
+
+    /**
+     * typeModifiers (used by type)
+     *   : (suspendModifier | annotations)*
+     *   ;
+     */
+    private fun parseTypeModifiers(type: KgType) {
+        type.isSuspend = consumeWhen(SUSPEND)
+    }
+
+    /**
+     * type
+     *   : typeModifiers typeReference
+     *   ;
+     */
+    private fun parseTypeReference(type: KgType) {
+
+        // TODO
 
     }
 
