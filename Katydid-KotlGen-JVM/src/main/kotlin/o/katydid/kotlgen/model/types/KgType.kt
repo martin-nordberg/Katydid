@@ -13,16 +13,31 @@ import o.katydid.kotlgen.model.structure.KgImporting
 //---------------------------------------------------------------------------------------------------------------------
 
 interface KgType
-    : KgCodeElement, KgAnnotated, KgComposite, KgImporting {
+    : KgCodeElement, KgAnnotated, KgComposite, KgImporting /*, TODO: KgParameterized*/ {
+
+    var isDynamic: Boolean
+
+    var isFunction: Boolean
+
+    val isInferred: Boolean
+
+    var isNullable: Boolean
+
+    var isParenthesized: Boolean
 
     var isSuspend: Boolean
 
+    val receiverType: KgType
+
+    val returnType: KgType
+
     var text: String
 
-    var typeRef: KgTypeReference
+    val typeReferences: List<KgTypeReference>
 
     ////
 
+    fun addTypeReference( itsName: String, build: KgTypeReference.()->Unit ) : KgTypeReference
 
 }
 

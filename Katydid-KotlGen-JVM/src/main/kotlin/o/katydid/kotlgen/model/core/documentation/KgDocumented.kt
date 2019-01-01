@@ -20,13 +20,14 @@ interface KgDocumented {
     ////
 
     /** Sets or expands the documentation of this element. */
-    fun `doc`(itsDocumentation: String) {
-        if (documentation == null) {
-            documentation = itsDocumentation
+    fun `doc`(vararg itsDocumentation: String) {
+
+        if (documentation != null) {
+            documentation += "\n"
         }
-        else {
-            documentation += itsDocumentation
-        }
+
+        documentation += itsDocumentation.joinToString("\n")
+
     }
 
     /** Short hand: sets or extends the documentation of this element. */

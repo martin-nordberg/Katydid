@@ -20,8 +20,12 @@ import o.katydid.kotlgen.model.types.KgType
 
 //---------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Interface to a code element that declares other code entities.
+ */
 interface KgDeclaring {
 
+    /* The declarations declared by this code element. */
     val declarations: Iterable<KgDeclaration>
 
     ////

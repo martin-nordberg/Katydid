@@ -431,15 +431,33 @@ internal class KotlinParserImpl(
      *   ;
      */
     private fun parseTypeModifiers(type: KgType) {
+        // TODO: annotations
         type.isSuspend = consumeWhen(SUSPEND)
     }
 
     /**
-     * type
-     *   : typeModifiers typeReference
+     * typeReference (used by typeReference, nullableType, type)
+     *   : "(" typeReference ")"
+     *   : functionType
+     *       : (type ".")? "(" parameter{","}? ")" "->" type
+     *       ;
+     *   : userType
+     *       : simpleUserType{"."}
+     *       ;
+     *   : nullableType
+     *       : typeReference "?"
+     *       ;
+     *   : "dynamic"
      *   ;
      */
     private fun parseTypeReference(type: KgType) {
+
+        if ( consumeWhen(DYNAMIC)) {
+            type.isDynamic = true
+            return
+        }
+
+        // TODO: parenthesis - parenthesized or function type
 
         // TODO
 

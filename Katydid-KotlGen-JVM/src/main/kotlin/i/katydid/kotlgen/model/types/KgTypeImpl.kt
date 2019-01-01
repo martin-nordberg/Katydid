@@ -22,28 +22,111 @@ internal class KgTypeImpl
       KgAnnotated by KgAnnotationsImpl(),
       KgImporting by KgImportsImpl() {
 
+    private var amDynamic = false
+
+    private var amFunction = false
+
+    private val myTypeReferences = mutableListOf<KgTypeReference>()
+
+    ////
+
     override val childElements: Iterable<KgCodeElement>
         get() {
             val result = mutableListOf<KgCodeElement>()
             result.addAll(annotations)
             result.addAll(imports)
-            result.add(typeRef)
             return result
         }
+
+    override var isDynamic: Boolean
+        get() = amDynamic
+        set(value) {
+            isInferred = value
+            amDynamic = value
+        }
+
+    override var isFunction: Boolean
+        get() = amFunction
+        set(value) {
+            amFunction = value
+            if ( value ) {
+                amDynamic = false
+                TODO("what to do with type references?")
+            }
+        }
+
+    override var isInferred: Boolean
+        get() = !amDynamic && !amFunction && myTypeReferences.isEmpty()
+        set(value) {
+            if ( value ) {
+                amDynamic = false
+                amFunction = false
+                myTypeReferences.clear()
+                isNullable = false
+                isParenthesized = false
+                isSuspend = false
+                receiverType.isInferred = true
+                returnType.isInferred = true
+            }
+        }
+
+    override var isNullable: Boolean = false
+
+    override var isParenthesized: Boolean = false
 
     override var isSuspend: Boolean = false
 
     override var origin: KgOrigin = KgOriginUnspecified
 
+    override val receiverType = KgTypeImpl()
+
+    override val returnType = KgTypeImpl()
+
     override var text: String
-        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
-        set(value) {
-            TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+        get() {
+
+            if ( amDynamic ) {
+                return "dynamic"
+            }
+
+            if ( amFunction ) {
+                TODO( "not yet implemented" )
+            }
+
+            var result = myTypeReferences.map{ it.text }.joinToString(".")
+
+            if ( isNullable ) {
+                result += "?"
+            }
+
+            if ( isParenthesized ) {
+                result = "(" + result + ")"
+            }
+
+            return result
+
         }
 
-    override var typeRef: KgTypeReference
-        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
-        set(value) {}
+        set(value) {
+            TODO("not implemented: parse the text")
+        }
+
+    override val typeReferences: List<KgTypeReference>
+        get() = myTypeReferences
+
+    ////
+
+    override fun addTypeReference(itsName: String, build: KgTypeReference.() -> Unit): KgTypeReference {
+
+        val result = KgTypeReferenceImpl(itsName)
+
+        myTypeReferences.add(result)
+
+        result.build()
+
+        return result
+
+    }
 
 }
 

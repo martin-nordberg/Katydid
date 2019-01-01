@@ -10,7 +10,7 @@ import o.katydid.kotlgen.model.core.KgOriginGenerated
 
 //---------------------------------------------------------------------------------------------------------------------
 
-/** Indicates that a code element has a name. */
+/** Interface indicating that a code element has a name. */
 interface KgNamed {
 
     /** The name of this element. */

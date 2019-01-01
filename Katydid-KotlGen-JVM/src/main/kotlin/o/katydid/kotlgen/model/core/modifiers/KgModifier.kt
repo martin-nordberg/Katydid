@@ -13,6 +13,10 @@ import o.katydid.kotlgen.model.core.KgOriginUnspecified
 
 //---------------------------------------------------------------------------------------------------------------------
 
+/**
+ * An enumeration of all possible modifier keywords. Note that they appear in the order appropriate for source
+ * code output.
+ */
 enum class KgModifierKeyword {
     `actual`,
     `expect`,
@@ -48,25 +52,45 @@ enum class KgModifierKeyword {
 
 //---------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Class representing one code element modifier, consisting of its keyword and its origin.
+ */
 class KgModifier(
     val keyword: KgModifierKeyword,
     override var origin: KgOrigin
 ) : KgCodeElement {
 
+    /**
+     * Constructs a modifier from [itsKeyword] and [itsOrigin].
+     */
     constructor(
-        keyword: String,
-        origin: KgOrigin = KgOriginUnspecified
-    ) : this(KgModifierKeyword.valueOf(keyword), origin)
+        itsKeyword: String,
+        itsOrigin: KgOrigin = KgOriginUnspecified
+    ) : this(KgModifierKeyword.valueOf(itsKeyword), itsOrigin)
 
+    ////
+
+    /** The code equivalent to this modifier; the text of its keyword. */
     val text: String =
         keyword.toString()
 
+    ////
+
+    /**
+     * Tests whether this modifier has the same keyword as another one (ignoring origin differences).
+     */
     override fun equals(other: Any?): Boolean =
         other is KgModifier && keyword == other.keyword
 
+    /**
+     * Computes a hash code for this modifier from its keyword (ignoring its origin).
+     */
     override fun hashCode(): Int =
         keyword.hashCode()
 
+    /**
+     * Computes the code equivalent to this modifier; the text of its keyword.
+     */
     override fun toString(): String =
         text
 

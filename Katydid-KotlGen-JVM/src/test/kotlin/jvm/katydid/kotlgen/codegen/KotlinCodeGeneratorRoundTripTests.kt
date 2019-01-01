@@ -16,7 +16,7 @@ import kotlin.test.assertEquals
 
 //---------------------------------------------------------------------------------------------------------------------
 
-class KotlinCodeGeneratorTests {
+class KotlinCodeGeneratorRoundTripTests {
 
     private fun checkParseAndCodeGen(code: String) {
 

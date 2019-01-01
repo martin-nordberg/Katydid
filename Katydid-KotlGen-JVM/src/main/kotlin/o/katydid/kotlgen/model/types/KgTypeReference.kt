@@ -6,12 +6,18 @@
 package o.katydid.kotlgen.model.types
 
 import o.katydid.kotlgen.model.core.KgCodeElement
-import o.katydid.kotlgen.model.core.KgComposite
+import o.katydid.kotlgen.model.core.names.KgNamed
 
 //---------------------------------------------------------------------------------------------------------------------
 
 interface KgTypeReference
-    : KgCodeElement, KgComposite
+    : KgCodeElement, KgNamed {
+
+    val text: String
+
+}
 
 //---------------------------------------------------------------------------------------------------------------------
+
+
 

@@ -9,6 +9,10 @@ package o.katydid.kotlgen.model.core.modifiers
 
 //---------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Interface to a code element that is modified. Covers all possible modifiers, but note that not all modifiers
+ * apply to all concrete code elements.
+ */
 interface KgModified {
 
     val `abstract`: Unit
