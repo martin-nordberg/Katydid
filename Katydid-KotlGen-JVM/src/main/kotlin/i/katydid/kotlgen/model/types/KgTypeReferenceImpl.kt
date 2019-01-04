@@ -23,7 +23,7 @@ internal class KgTypeReferenceImpl(
         }
 
     override val text: String
-        get() = TODO("not yet implemented")
+        get() = name
 
 }
 

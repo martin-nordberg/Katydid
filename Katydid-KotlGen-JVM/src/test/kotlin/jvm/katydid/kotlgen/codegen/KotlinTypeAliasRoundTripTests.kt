@@ -9,19 +9,17 @@ import org.junit.jupiter.api.Test
 
 //---------------------------------------------------------------------------------------------------------------------
 
-class KotlinCodeGeneratorRoundTripTests
+class KotlinTypeAliasRoundTripTests
     : KotlinRoundTripTests() {
 
     @Test
-    fun `A package header and imports parse and regenerate`() {
+    fun `A simple type parses and regenerates`() {
 
         val code = """
                     |
                     |package example.pkg1
                     |
-                    |import sample.pkg1
-                    |import sample.pkg2.*
-                    |import sample.pkg3 as three
+                    |public typealias x = SomeType
                     |
                     |""".trimMargin()
 
@@ -30,18 +28,13 @@ class KotlinCodeGeneratorRoundTripTests
     }
 
     @Test
-    fun `A simple enum class parses and regenerates`() {
+    fun `A nullable type parses and regenerates`() {
 
         val code = """
                     |
                     |package example.pkg1
                     |
-                    |import sample.pkg1
-                    |
-                    |internal enum class ESample {
-                    |    A,
-                    |    B;
-                    |}
+                    |internal typealias x = SomeType?
                     |
                     |""".trimMargin()
 
@@ -49,16 +42,43 @@ class KotlinCodeGeneratorRoundTripTests
 
     }
 
-    @Test
-    fun `A top level property parses and regenerates`() {
+    fun `A nested type parses and regenerates`() {
 
         val code = """
                     |
                     |package example.pkg1
                     |
-                    |import sample.pkg1
+                    |internal typealias x = SomeType.Nested.Inner
                     |
-                    |public val x: SomeType
+                    |""".trimMargin()
+
+        checkParseAndCodeGen(code)
+
+    }
+
+    // TODO: @Test
+    fun `A parenthesized type parses and regenerates`() {
+
+        val code = """
+                    |
+                    |package example.pkg1
+                    |
+                    |internal typealias x = (SomeType)
+                    |
+                    |""".trimMargin()
+
+        checkParseAndCodeGen(code)
+
+    }
+
+    // TODO: @Test
+    fun `A more complicated parenthesized type parses and regenerates`() {
+
+        val code = """
+                    |
+                    |package example.pkg1
+                    |
+                    |internal typealias x = (SomeType.Nested.Inner?)
                     |
                     |""".trimMargin()
 

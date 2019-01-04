@@ -15,29 +15,42 @@ import o.katydid.kotlgen.model.structure.KgImporting
 interface KgType
     : KgCodeElement, KgAnnotated, KgComposite, KgImporting /*, TODO: KgParameterized*/ {
 
+    /** True if the the type is "dynamic". */
     var isDynamic: Boolean
 
+    /** True if the type is a function type. */
     var isFunction: Boolean
 
+    /** True if the type is implicit (no code present). */
     val isInferred: Boolean
 
+    /** True if the type allows null values (ends with "?"). */
     var isNullable: Boolean
 
+    /** True if the type is wrapped with parentheses. */
     var isParenthesized: Boolean
 
+    /**true if the type includes the suspend modifier. */
     var isSuspend: Boolean
 
-    val receiverType: KgType
+    /** The receiver type for a static extension function type. */
+    var receiverType: KgType?
 
-    val returnType: KgType
+    /** The return type for a function type. */
+    var returnType: KgType?
 
+    /** The code corresponding to the type (parsed when set). */
     var text: String
 
+    /** Path to referenced type (usually one element; multiple elements if nested type). */
     val typeReferences: List<KgTypeReference>
 
     ////
 
-    fun addTypeReference( itsName: String, build: KgTypeReference.()->Unit ) : KgTypeReference
+    /**
+     * Adds type reference [itsName] to a potentially nested list of type references.
+     */
+    fun addTypeReference( itsName: String, build: KgTypeReference.()->Unit = {} ) : KgTypeReference
 
 }
 

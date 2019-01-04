@@ -7,9 +7,12 @@ package i.katydid.kotlgen.codegen
 
 import o.katydid.kotlgen.codegen.KotlinCodeGenerator
 import o.katydid.kotlgen.model.KgSourceRoot
+import o.katydid.kotlgen.model.core.modifiers.KgModified
+import o.katydid.kotlgen.model.declarations.KgTypeAlias
 import o.katydid.kotlgen.model.declarations.classes.KgEnumClass
 import o.katydid.kotlgen.model.declarations.declarationsOfType
 import o.katydid.kotlgen.model.declarations.properties.KgEnumEntry
+import o.katydid.kotlgen.model.declarations.properties.KgReadOnlyProperty
 import o.katydid.kotlgen.model.structure.KgImport
 import o.katydid.kotlgen.model.structure.KgSourceFile
 import java.io.PrintWriter
@@ -24,7 +27,9 @@ internal class KotlinCodeGeneratorImpl(
 
     private fun generateEnumClass(enumClass: KgEnumClass) {
 
-        println("${enumClass.modifiers} class ${enumClass.name} {")
+        generateModifiers(enumClass)
+
+        println("class ${enumClass.name} {")
 
         indented {
 
@@ -76,12 +81,52 @@ internal class KotlinCodeGeneratorImpl(
             println()
         }
 
-        for (obj in file.declarations) {
-            when (obj) {
-                is KgEnumClass -> generateEnumClass(obj)
+        for (declaration in file.declarations) {
+            when (declaration) {
+                is KgEnumClass        -> generateEnumClass(declaration)
+                is KgReadOnlyProperty -> generateReadOnlyProperty(declaration)
+                is KgTypeAlias        -> generateTypeAlias(declaration)
                 // TODO: many other branches
             }
         }
+
+    }
+
+    private fun generateModifiers(modified: KgModified) {
+
+        if ( modified.modifiers.isNotEmpty() ) {
+            print("${modified.modifiers} ")
+        }
+
+    }
+
+    private fun generateTypeAlias(typeAlias: KgTypeAlias) {
+
+        generateModifiers(typeAlias)
+
+        print("typealias ${typeAlias.name}")
+
+        // TODO: type parameters
+
+        print( " = ${typeAlias.type}")
+
+        println()
+        println()
+
+    }
+
+    private fun generateReadOnlyProperty(property: KgReadOnlyProperty) {
+
+        generateModifiers(property)
+
+        print("val ${property.name}")
+
+        if ( !property.type.isInferred ) {
+            print( ": ${property.type}")
+        }
+
+        println()
+        println()
 
     }
 

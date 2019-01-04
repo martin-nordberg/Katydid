@@ -42,9 +42,11 @@ internal class CodeWriterImpl(
         currentLine.append(s)
     }
 
-    override fun println() {
+    override fun println(lineCount: Int) {
         code.write(currentLine.toString())
-        code.print("\n")
+        for ( i in 1..lineCount ) {
+            code.print("\n")
+        }
         currentLine.setLength(0)
     }
 

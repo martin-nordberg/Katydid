@@ -66,6 +66,18 @@ class KgModifierList {
     }
 
     /**
+     * Tests for an empty list.
+     */
+    fun isEmpty() =
+        myModifiers.isEmpty()
+
+    /**
+     * Tests for a non-empty list.
+     */
+    fun isNotEmpty() =
+        myModifiers.isNotEmpty()
+
+    /**
      * Adds a given [modifier] to this list.
      */
     operator fun plusAssign(modifier: KgModifier) {

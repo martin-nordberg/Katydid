@@ -51,7 +51,13 @@ internal class KgTypeImpl
             amFunction = value
             if ( value ) {
                 amDynamic = false
-                TODO("what to do with type references?")
+                myTypeReferences.clear()
+                receiverType = KgTypeImpl()
+                returnType = KgTypeImpl()
+            }
+            else {
+                receiverType = null
+                returnType = null
             }
         }
 
@@ -65,8 +71,8 @@ internal class KgTypeImpl
                 isNullable = false
                 isParenthesized = false
                 isSuspend = false
-                receiverType.isInferred = true
-                returnType.isInferred = true
+                receiverType = null
+                returnType = null
             }
         }
 
@@ -78,9 +84,9 @@ internal class KgTypeImpl
 
     override var origin: KgOrigin = KgOriginUnspecified
 
-    override val receiverType = KgTypeImpl()
+    override var receiverType : KgType? = null
 
-    override val returnType = KgTypeImpl()
+    override var returnType : KgType? = null
 
     override var text: String
         get() {
@@ -127,6 +133,11 @@ internal class KgTypeImpl
         return result
 
     }
+
+    override fun toString(): String {
+        return text
+    }
+
 
 }
 

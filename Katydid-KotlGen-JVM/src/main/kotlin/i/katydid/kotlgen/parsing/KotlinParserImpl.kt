@@ -17,7 +17,6 @@ import o.katydid.kotlgen.model.declarations.KgDeclaring
 import o.katydid.kotlgen.model.declarations.KgNonlocalDeclaring
 import o.katydid.kotlgen.model.declarations.classes.KgEnumClass
 import o.katydid.kotlgen.model.declarations.classes.KgMemberDeclaring
-import o.katydid.kotlgen.model.declarations.properties.KgAbstractProperty
 import o.katydid.kotlgen.model.structure.KgImporting
 import o.katydid.kotlgen.model.structure.KgPackage
 import o.katydid.kotlgen.model.structure.KgSourceFile
@@ -363,8 +362,32 @@ internal class KotlinParserImpl(
 
     }
 
+    /**
+     * typeAlias (used by memberDeclaration, declaration, topLevelObject)
+     *   : modifiers "typealias" SimpleName typeParameters? "=" type
+     *   ;
+     */
     private fun parseTypeAlias(parent: KgTopLevelDeclaring, modifiers: KgModifierList) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+        // "typealias"
+        val keyword = read(TYPEALIAS)
+
+        val aliasName = parseSimpleName()
+
+        val typeAlias = parent.`typealias`(aliasName.text) {
+            keywordOrigin = convertOrigin(keyword)
+            nameOrigin = aliasName.origin
+            mergeModifiers(modifiers)
+        }
+
+        // TODO: type parameters
+
+        read(EQ)
+
+        parseType(typeAlias)
+
+        parseSemicolonOrNewLine()
+
     }
 
     /**
@@ -378,7 +401,7 @@ internal class KotlinParserImpl(
      *   (getter? setter? | setter? getter?) SEMI?
      *   ;
      */
-    private fun parseProperty(parent: KgDeclaring, modifiers: KgModifierList): KgAbstractProperty {
+    private fun parseProperty(parent: KgDeclaring, modifiers: KgModifierList) {
 
         // "val" or "var"
         val keyword = readOneOf(VAL, VAR)
@@ -410,8 +433,6 @@ internal class KotlinParserImpl(
         // TODO: getter/setter
 
         parseSemicolonOrNewLine()
-
-        return result
 
     }
 
@@ -452,14 +473,32 @@ internal class KotlinParserImpl(
      */
     private fun parseTypeReference(type: KgType) {
 
-        if ( consumeWhen(DYNAMIC)) {
+        if (consumeWhen(DYNAMIC)) {
             type.isDynamic = true
             return
         }
 
         // TODO: parenthesis - parenthesized or function type
 
-        // TODO
+        // parse a simple user type ...
+        var name = parseSimpleName()
+        type.addTypeReference(name.text) {
+            origin = name.origin
+        }
+        // TODO: type parameters
+
+        while (hasLookAheadIdentifier(2) && consumeWhen(DOT)) {
+            name = parseSimpleName()
+            type.addTypeReference(name.text) {
+                origin = name.origin
+            }
+            // TODO: type parameters
+        }
+
+
+        if (consumeWhen(QUESTION)) {
+            type.isNullable = true
+        }
 
     }
 

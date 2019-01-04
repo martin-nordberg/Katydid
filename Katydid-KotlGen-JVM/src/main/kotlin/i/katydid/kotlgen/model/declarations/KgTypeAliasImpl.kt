@@ -3,29 +3,38 @@
 // Apache 2.0 License
 //
 
-package i.katydid.kotlgen.model.structure
+package i.katydid.kotlgen.model.declarations
 
 import i.katydid.kotlgen.model.annotations.KgAnnotationsImpl
+import i.katydid.kotlgen.model.core.modifiers.KgModifiersImpl
+import i.katydid.kotlgen.model.structure.KgImportsImpl
+import i.katydid.kotlgen.model.types.KgTypeImpl
 import o.katydid.kotlgen.model.annotations.KgAnnotated
 import o.katydid.kotlgen.model.core.KgCodeElement
 import o.katydid.kotlgen.model.core.KgOrigin
 import o.katydid.kotlgen.model.core.KgOriginUnspecified
-import o.katydid.kotlgen.model.core.names.KgQualifiedName
+import o.katydid.kotlgen.model.core.modifiers.KgModified
+import o.katydid.kotlgen.model.declarations.KgTypeAlias
 import o.katydid.kotlgen.model.structure.KgImporting
-import o.katydid.kotlgen.model.structure.KgSourceFile
-import o.katydid.kotlgen.model.structure.KgTopLevelDeclaring
+import o.katydid.kotlgen.model.types.KgType
 
 //---------------------------------------------------------------------------------------------------------------------
 
-internal class KgSourceFileImpl(
-    override val packageQualifiedName: KgQualifiedName,
-    override var name: String
-) : KgSourceFile,
+internal class KgTypeAliasImpl(
+    override var name: String,
+    override var origin: KgOrigin = KgOriginUnspecified
+) : KgTypeAlias,
     KgAnnotated by KgAnnotationsImpl(),
-    KgTopLevelDeclaring by KgTopLevelDeclarationsImpl(),
+    KgModified by KgModifiersImpl(),
     KgImporting by KgImportsImpl() {
 
-    private val myQualifiedName = KgQualifiedName(packageQualifiedName, name, KgOriginUnspecified)
+    override var documentation: String? = null
+
+    override var keywordOrigin: KgOrigin = KgOriginUnspecified
+
+    override var nameOrigin: KgOrigin = KgOriginUnspecified
+
+    override val type: KgType = KgTypeImpl()
 
     ////
 
@@ -34,19 +43,12 @@ internal class KgSourceFileImpl(
             val result = mutableListOf<KgCodeElement>()
             result.addAll(annotations)
             result.addAll(imports)
-            result.addAll(declarations)
+            result.add(type)
             return result
         }
-
-    override var documentation: String? = null
-
-    override var nameOrigin: KgOrigin = KgOriginUnspecified
-
-    override var origin: KgOrigin = KgOriginUnspecified
-
-    override val qualifiedName: KgQualifiedName
-        get() = myQualifiedName
 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+
+

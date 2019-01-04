@@ -13,7 +13,7 @@ internal interface CodeWriter {
 
     fun print(s: String)
 
-    fun println()
+    fun println(lineCount: Int = 1)
 
     fun println(s: String)
 

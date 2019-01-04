@@ -7,7 +7,6 @@ package o.katydid.kotlgen.model.structure
 
 import o.katydid.kotlgen.model.declarations.KgNonlocalDeclaring
 import o.katydid.kotlgen.model.declarations.KgTypeAlias
-import o.katydid.kotlgen.model.types.KgType
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -16,7 +15,6 @@ interface KgTopLevelDeclaring
 
     fun `typealias`(
         itsName: String,
-        itsType: KgType,
         build: KgTypeAlias.() -> Unit
     ): KgTypeAlias
 
