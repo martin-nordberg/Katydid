@@ -12,6 +12,8 @@ subprojects {
 
     ext.kotlin_version = '1.3.11'
 
+    ext.parboiled_version = '1.2.0'
+
 
     repositories {
         mavenCentral()
