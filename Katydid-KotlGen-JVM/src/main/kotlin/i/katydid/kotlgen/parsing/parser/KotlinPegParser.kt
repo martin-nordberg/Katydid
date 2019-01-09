@@ -1,4 +1,3 @@
-
 //
 // (C) Copyright 2019 Martin E. Nordberg III
 // Apache 2.0 License
@@ -11,6 +10,7 @@ import org.parboiled.BaseParser
 import org.parboiled.Rule
 import org.parboiled.annotations.BuildParseTree
 
+//---------------------------------------------------------------------------------------------------------------------
 
 @Suppress("LeakingThis")
 @BuildParseTree
@@ -68,7 +68,6 @@ open class KotlinPegParser : BaseParser<Any>() {
     private val WHERE = Keyword("where")
 
 
-
     // Symbols
     private val DOT = String(".").label("Dot")
     private val STAR = Sequence("*", TestNot("=")).label("Star").suppressSubnodes()
@@ -82,10 +81,10 @@ open class KotlinPegParser : BaseParser<Any>() {
      */
     open fun KotlinFile() =
         Sequence(
-            WhiteSpace(),
+            WS(),
             Preamble(),
             TopLevelObjects(),
-            WhiteSpace(),
+            WS(),
             EOI
         )
 
@@ -131,7 +130,7 @@ open class KotlinPegParser : BaseParser<Any>() {
         Sequence(
             // TODO: modifiers
             PACKAGE,
-            WhiteSpace(),
+            WS(),
             QualifiedName(),
             SemicolonOrNewLine()
         )
@@ -157,8 +156,9 @@ open class KotlinPegParser : BaseParser<Any>() {
      */
     open fun Import() =
         Sequence(
+            WS(),
             IMPORT,
-            WhiteSpace(),
+            WS(),
             QualifiedName(),
             Optional(
                 FirstOf(
@@ -216,7 +216,7 @@ open class KotlinPegParser : BaseParser<Any>() {
      */
     open fun TopLevelObject() =
         Sequence(
-            WhiteSpace(),
+            WS(),
             FirstOf(
                 Class(),
                 Object(),
@@ -251,7 +251,7 @@ open class KotlinPegParser : BaseParser<Any>() {
     open fun Property() =
         Sequence(
             VAL,
-            WhiteSpace(),
+            WS(),
             SimpleName()
             // TODO ...
         )
@@ -359,9 +359,14 @@ open class KotlinPegParser : BaseParser<Any>() {
         ).suppressNode()
 
     open fun SemicolonOrNewLine() =
-        OneOrMore(
-            AnyOf(";\r\n")
-        ).suppressNode()
+        FirstOf(
+            OneOrMore(
+                AnyOf(";\r\n")
+            ).suppressNode(),
+            Test(EOI)
+        ).skipNode()
 
 }
+
+//---------------------------------------------------------------------------------------------------------------------
 

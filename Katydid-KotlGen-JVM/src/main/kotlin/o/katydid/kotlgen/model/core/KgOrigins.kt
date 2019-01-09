@@ -1,5 +1,5 @@
 //
-// (C) Copyright 2018 Martin E. Nordberg III
+// (C) Copyright 2018-2019 Martin E. Nordberg III
 // Apache 2.0 License
 //
 
@@ -35,6 +35,16 @@ object KgOriginGenerated
  */
 data class KgOriginOffset(
     val codeOffset: Int
+) : KgOrigin()
+
+//---------------------------------------------------------------------------------------------------------------------
+
+/**
+ * The origin of a code element is specified as an offset in a string of text.
+ */
+data class KgOriginOffsetStartAndEnd(
+    val codeOffsetStart: Int,
+    val codeOffsetEnd: Int
 ) : KgOrigin()
 
 //---------------------------------------------------------------------------------------------------------------------
