@@ -26,7 +26,7 @@ import o.katydid.kotlgen.model.types.KgType
 interface KgDeclaring {
 
     /* The declarations declared by this code element. */
-    val declarations: Iterable<KgDeclaration>
+    val declarations: List<KgDeclaration>
 
     ////
 

@@ -69,7 +69,7 @@ class KotlinLexerTests {
     }
 
     @Test
-    fun `A lexer scans operators and punctuation keywords`() {
+    fun `A lexer scans operators and punctuation marks`() {
 
         val code = "&& -> @ : :: $ .. = == === > >= [ < <= - -= -- ! != !== !! || % %= + += ++ ? ?. ?: ] ; / /= * " +
             "*= _ , . { ( } )"

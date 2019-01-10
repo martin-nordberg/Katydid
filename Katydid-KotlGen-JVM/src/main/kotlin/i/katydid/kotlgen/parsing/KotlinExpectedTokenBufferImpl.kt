@@ -10,33 +10,42 @@ import java.io.Reader
 
 //---------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Implementation of KotlinExpectedTokenBuffer for testing and consuming tokens from a look-ahead buffer.
+ */
 internal class KotlinExpectedTokenBufferImpl(
     code: Reader
 ) : KotlinExpectedTokenBuffer,
     KotlinTokenBuffer by KotlinTokenBufferImpl(KotlinLexer(code)) {
 
-    override fun expected(description: String): Nothing =
-        throw IllegalArgumentException("Expected $description.")
+    override fun expected(description: String): Nothing {
+        val token = lookAhead(1)
+
+        val msg = if ( token == null ) "Expected $description."
+                  else "Expected $description at (${token.line},${token.column}); found '${token.text}'"
+
+        throw IllegalArgumentException(msg)
+    }
 
     override fun expected(vararg tokenTypes: EKotlinTokenType): Nothing {
 
         if (tokenTypes.size == 1) {
-            throw IllegalArgumentException("Expected ${tokenTypes[0].text}.")
+            expected(tokenTypes[0].text)
         }
 
         val tokenText = tokenTypes.joinToString(", ") { t -> t.text }
-        throw IllegalArgumentException("Expected one of { $tokenText }.")
+        expected("one of { $tokenText }")
 
     }
 
     override fun expected(description: String, vararg tokenTypes: EKotlinTokenType): Nothing {
 
         if (tokenTypes.size == 1) {
-            throw IllegalArgumentException("Expected $description - ${tokenTypes[0].text}.")
+            expected("$description - ${tokenTypes[0].text}.")
         }
 
         val tokenText = tokenTypes.joinToString(", ") { t -> t.text }
-        throw IllegalArgumentException("Expected $description - one of { $tokenText }.")
+        expected("$description - one of { $tokenText }")
 
     }
 

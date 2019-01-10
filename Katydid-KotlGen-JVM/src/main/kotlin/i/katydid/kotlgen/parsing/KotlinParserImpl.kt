@@ -46,11 +46,11 @@ internal class KotlinParserImpl(
     /**
      * class (used by memberDeclaration, declaration, topLevelObject)
      *   : modifiers ("class" | "interface") SimpleName
-     *   typeParameters?
-     *   primaryConstructor?
-     *   (":" annotations delegationSpecifier{","})?
-     *   typeConstraints
-     *   (classBody? | enumClassBody)
+     *     typeParameters?
+     *     primaryConstructor?
+     *     (":" annotations delegationSpecifier{","})?
+     *     typeConstraints
+     *     (classBody? | enumClassBody)
      *   ;
      */
     private fun parseClass(parent: KgNonlocalDeclaring, modifiers: KgModifierList) {
@@ -131,6 +131,8 @@ internal class KotlinParserImpl(
 
         enumClass.`enum entry`(name.text) {
             nameOrigin = name.origin
+
+            mergeModifiers(modifiers)
         }
 
     }
@@ -225,39 +227,39 @@ internal class KotlinParserImpl(
         val result = KgModifierList()
 
         fun readModifier(keyword: KgModifierKeyword) =
-            KgModifier(keyword, convertOrigin(read()))
+            result.add(KgModifier(keyword, convertOrigin(read())))
 
         while (true) {
             when (lookAhead(1)?.type) {
                 // TODO: annotations
-                ABSTRACT    -> result.add(readModifier(KgModifierKeyword.`abstract`))
-                ACTUAL      -> result.add(readModifier(KgModifierKeyword.`actual`))
-                ANNOTATION  -> result.add(readModifier(KgModifierKeyword.`annotation`))
-                CONST       -> result.add(readModifier(KgModifierKeyword.`const`))
-                CROSSINLINE -> result.add(readModifier(KgModifierKeyword.`crossinline`))
-                DATA        -> result.add(readModifier(KgModifierKeyword.`data`))
-                ENUM        -> result.add(readModifier(KgModifierKeyword.`enum`))
-                EXPECT      -> result.add(readModifier(KgModifierKeyword.`expect`))
-                EXTERNAL    -> result.add(readModifier(KgModifierKeyword.`external`))
-                FINAL       -> result.add(readModifier(KgModifierKeyword.`final`))
-                IN          -> result.add(readModifier(KgModifierKeyword.`in`))
-                INFIX       -> result.add(readModifier(KgModifierKeyword.`infix`))
-                INLINE      -> result.add(readModifier(KgModifierKeyword.`inline`))
-                INTERNAL    -> result.add(readModifier(KgModifierKeyword.`internal`))
-                LATEINIT    -> result.add(readModifier(KgModifierKeyword.`lateinit`))
-                NOINLINE    -> result.add(readModifier(KgModifierKeyword.`noinline`))
-                OPEN        -> result.add(readModifier(KgModifierKeyword.`open`))
-                OPERATOR    -> result.add(readModifier(KgModifierKeyword.`operator`))
-                OUT         -> result.add(readModifier(KgModifierKeyword.`out`))
-                OVERRIDE    -> result.add(readModifier(KgModifierKeyword.`override`))
-                PRIVATE     -> result.add(readModifier(KgModifierKeyword.`private`))
-                PROTECTED   -> result.add(readModifier(KgModifierKeyword.`protected`))
-                PUBLIC      -> result.add(readModifier(KgModifierKeyword.`public`))
-                REIFIED     -> result.add(readModifier(KgModifierKeyword.`reified`))
-                SEALED      -> result.add(readModifier(KgModifierKeyword.`sealed`))
-                SUSPEND     -> result.add(readModifier(KgModifierKeyword.`suspend`))
-                TAILREC     -> result.add(readModifier(KgModifierKeyword.`tailrec`))
-                VARARG      -> result.add(readModifier(KgModifierKeyword.`vararg`))
+                ABSTRACT    -> readModifier(KgModifierKeyword.`abstract`)
+                ACTUAL      -> readModifier(KgModifierKeyword.`actual`)
+                ANNOTATION  -> readModifier(KgModifierKeyword.`annotation`)
+                CONST       -> readModifier(KgModifierKeyword.`const`)
+                CROSSINLINE -> readModifier(KgModifierKeyword.`crossinline`)
+                DATA        -> readModifier(KgModifierKeyword.`data`)
+                ENUM        -> readModifier(KgModifierKeyword.`enum`)
+                EXPECT      -> readModifier(KgModifierKeyword.`expect`)
+                EXTERNAL    -> readModifier(KgModifierKeyword.`external`)
+                FINAL       -> readModifier(KgModifierKeyword.`final`)
+                IN          -> readModifier(KgModifierKeyword.`in`)
+                INFIX       -> readModifier(KgModifierKeyword.`infix`)
+                INLINE      -> readModifier(KgModifierKeyword.`inline`)
+                INTERNAL    -> readModifier(KgModifierKeyword.`internal`)
+                LATEINIT    -> readModifier(KgModifierKeyword.`lateinit`)
+                NOINLINE    -> readModifier(KgModifierKeyword.`noinline`)
+                OPEN        -> readModifier(KgModifierKeyword.`open`)
+                OPERATOR    -> readModifier(KgModifierKeyword.`operator`)
+                OUT         -> readModifier(KgModifierKeyword.`out`)
+                OVERRIDE    -> readModifier(KgModifierKeyword.`override`)
+                PRIVATE     -> readModifier(KgModifierKeyword.`private`)
+                PROTECTED   -> readModifier(KgModifierKeyword.`protected`)
+                PUBLIC      -> readModifier(KgModifierKeyword.`public`)
+                REIFIED     -> readModifier(KgModifierKeyword.`reified`)
+                SEALED      -> readModifier(KgModifierKeyword.`sealed`)
+                SUSPEND     -> readModifier(KgModifierKeyword.`suspend`)
+                TAILREC     -> readModifier(KgModifierKeyword.`tailrec`)
+                VARARG      -> readModifier(KgModifierKeyword.`vararg`)
                 else        -> return result
             }
         }

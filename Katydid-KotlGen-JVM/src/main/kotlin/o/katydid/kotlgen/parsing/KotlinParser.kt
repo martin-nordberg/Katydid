@@ -6,7 +6,6 @@
 package o.katydid.kotlgen.parsing
 
 import i.katydid.kotlgen.parsing.KotlinParserImpl
-import i.katydid.kotlgen.parsing.KotlinParserImpl2
 import o.katydid.kotlgen.model.KgSourceRoot
 import o.katydid.kotlgen.model.core.names.KgQualifiedName
 import o.katydid.kotlgen.model.structure.KgSourceFile
@@ -32,11 +31,6 @@ fun makeKotlinParser(code: Reader): KotlinParser =
 
 fun makeKotlinParser(code: String): KotlinParser =
     KotlinParserImpl(StringReader(code))
-
-//---------------------------------------------------------------------------------------------------------------------
-
-fun makeKotlinParser2(code: String): KotlinParser =
-    KotlinParserImpl2(code)
 
 //---------------------------------------------------------------------------------------------------------------------
 
