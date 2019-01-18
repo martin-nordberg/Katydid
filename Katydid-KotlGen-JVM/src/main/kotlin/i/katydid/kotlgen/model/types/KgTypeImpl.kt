@@ -38,6 +38,24 @@ internal class KgTypeImpl
             return result
         }
 
+    override fun clone() : KgTypeImpl {
+
+        val result = KgTypeImpl()
+
+        result.amDynamic = amDynamic
+        result.amFunction = amFunction
+        result.myTypeReferences.addAll( myTypeReferences.toMutableList() )
+
+        result.isNullable = isNullable
+        result.isParenthesized = isParenthesized
+        result.origin = origin
+        result.receiverType = receiverType?.clone()
+        result.returnType = returnType?.clone()
+
+        return result
+
+    }
+
     override var isDynamic: Boolean
         get() = amDynamic
         set(value) {
@@ -96,10 +114,33 @@ internal class KgTypeImpl
             }
 
             if ( amFunction ) {
-                TODO( "not yet implemented" )
+
+                var result = "("
+
+                val recType = receiverType
+                if ( recType != null ) {
+                    result = recType.text + "." + result
+                }
+
+                // TODO: parameters
+
+                result += ")"
+
+                val retType = returnType
+                if ( retType != null && !retType.isInferred ) {
+                    result += ": $returnType"
+                }
+
+                return result
+
+                // TODO: regular function
             }
 
             var result = myTypeReferences.map{ it.text }.joinToString(".")
+
+            if ( isSuspend ) {
+                result = "suspend $result"
+            }
 
             if ( isNullable ) {
                 result += "?"

@@ -22,7 +22,7 @@ interface KgType
     var isFunction: Boolean
 
     /** True if the type is implicit (no code present). */
-    val isInferred: Boolean
+    var isInferred: Boolean
 
     /** True if the type allows null values (ends with "?"). */
     var isNullable: Boolean
@@ -51,6 +51,11 @@ interface KgType
      * Adds type reference [itsName] to a potentially nested list of type references.
      */
     fun addTypeReference( itsName: String, build: KgTypeReference.()->Unit = {} ) : KgTypeReference
+
+    /**
+     * Makes a deep copy of this type.
+     */
+    fun clone() : KgType
 
 }
 

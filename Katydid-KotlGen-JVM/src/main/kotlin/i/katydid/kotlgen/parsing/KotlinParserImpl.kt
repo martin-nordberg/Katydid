@@ -5,6 +5,7 @@
 
 package i.katydid.kotlgen.parsing
 
+import i.katydid.kotlgen.model.types.KgTypeImpl
 import i.katydid.kotlgen.parsing.EKotlinTokenType.*
 import o.katydid.kotlgen.model.KgSourceRoot
 import o.katydid.kotlgen.model.core.KgOrigin
@@ -444,8 +445,18 @@ internal class KotlinParserImpl(
      *   ;
      */
     private fun parseType(parent: KgTyped) {
-        parseTypeModifiers(parent.type)
-        parseTypeReference(parent.type)
+        parseType(parent.type)
+    }
+
+    /**
+     * type
+     *   : typeModifiers typeReference
+     *   ;
+     */
+    private fun parseType(type: KgType): KgType {
+        parseTypeModifiers(type)
+        parseTypeReference(type)
+        return type
     }
 
     /**
@@ -497,6 +508,25 @@ internal class KotlinParserImpl(
             // TODO: type parameters
         }
 
+        // extension type adds ".(..."
+        if ( consumeWhen(DOT,LPAREN)) {
+
+            // make the result so far the receiver type instead
+            val recType = type.clone()
+            type.isInferred = true
+            type.isFunction = true
+            type.receiverType = recType
+
+            // TODO: parameters
+//            parseParameters(type)
+
+            read(RPAREN)
+
+            if ( consumeWhen(COLON)) {
+                type.returnType = parseType(KgTypeImpl())
+            }
+
+        }
 
         if (consumeWhen(QUESTION)) {
             type.isNullable = true
