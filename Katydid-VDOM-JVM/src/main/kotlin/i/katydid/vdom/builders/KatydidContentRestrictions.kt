@@ -11,12 +11,14 @@ package i.katydid.vdom.builders
  * Set of restrictions on content. E.g. a header cannot contain a header or footer; a form cannot be nested.
  */
 internal class KatydidContentRestrictions(
+    private val addressAllowed: Boolean,
     private val anchorAllowed: Boolean,
     private val dfnAllowed: Boolean,
     private var figCaptionProhibited: Boolean,
     private val footerAllowed: Boolean,
     private val formAllowed: Boolean,
     private val headerAllowed: Boolean,
+    private val headingsAllowed: Boolean,
     private val interactiveContentAllowed: Boolean,
     private val labelAllowed: Boolean,
     private var legendProhibited: Boolean,
@@ -24,6 +26,7 @@ internal class KatydidContentRestrictions(
     private val mediaElementAllowed: Boolean,
     private val meterAllowed: Boolean,
     private val progressAllowed: Boolean,
+    private val sectioningAllowed: Boolean,
     private val tableAllowed: Boolean
 ) {
 
@@ -32,6 +35,9 @@ internal class KatydidContentRestrictions(
      */
     constructor()
         : this(
+        true,
+        true,
+        true,
         true,
         true,
         true,
@@ -54,12 +60,14 @@ internal class KatydidContentRestrictions(
      */
     constructor(
         original: KatydidContentRestrictions,
+        addressAllowed: Boolean = true,
         anchorAllowed: Boolean = true,
         dfnAllowed: Boolean = true,
         figCaptionProhibited: Boolean = true,
         footerAllowed: Boolean = true,
         formAllowed: Boolean = true,
         headerAllowed: Boolean = true,
+        headingsAllowed: Boolean = true,
         interactiveContentAllowed: Boolean = true,
         labelAllowed: Boolean = true,
         legendProhibited: Boolean = false,
@@ -67,14 +75,17 @@ internal class KatydidContentRestrictions(
         mediaElementAllowed: Boolean = true,
         meterAllowed: Boolean = true,
         progressAllowed: Boolean = true,
+        sectioningAllowed: Boolean = true,
         tableAllowed: Boolean = true
     ) : this(
+        original.addressAllowed && addressAllowed,
         original.anchorAllowed && anchorAllowed,
         original.dfnAllowed && dfnAllowed,
         original.figCaptionProhibited && figCaptionProhibited,
         original.footerAllowed && footerAllowed,
         original.formAllowed && formAllowed,
         original.headerAllowed && headerAllowed,
+        original.headingsAllowed && headingsAllowed,
         original.interactiveContentAllowed && interactiveContentAllowed,
         original.labelAllowed && labelAllowed,
         original.legendProhibited && legendProhibited,
@@ -82,10 +93,19 @@ internal class KatydidContentRestrictions(
         original.mediaElementAllowed && mediaElementAllowed,
         original.meterAllowed && meterAllowed,
         original.progressAllowed && progressAllowed,
+        original.sectioningAllowed && sectioningAllowed,
         original.tableAllowed && tableAllowed
     )
 
     ////
+
+    /**
+     * Confirms that an `<address>` element is allowed.
+     * @throws IllegalStateException if `<address>` is not allowed.
+     */
+    fun confirmAddressAllowed() {
+        check(addressAllowed) { "Element type <address> not allowed here" }
+    }
 
     /**
      * Confirms that an `<a>` element is allowed.
@@ -135,6 +155,14 @@ internal class KatydidContentRestrictions(
      */
     fun confirmHeaderAllowed() {
         check(headerAllowed) { "Element type <header> not allowed here." }
+    }
+
+    /**
+     * Checks that an `<h1>` ... `<h6>` element is allowed in the content.
+     * @throws IllegalStateException if `<h1>` ... `<h6>` is not allowed.
+     */
+    fun confirmHeadingsAllowed() {
+        check(headingsAllowed) { "Element types <h1> to <h6> not allowed here." }
     }
 
     /**
@@ -197,6 +225,14 @@ internal class KatydidContentRestrictions(
     }
 
     /**
+     * Checks that a sectioning element is allowed in the content.
+     * @throws IllegalStateException if sectioning content is not allowed.
+     */
+    fun confirmSectioningAllowed() {
+        check(sectioningAllowed) { "Sectioning content not allowed here." }
+    }
+
+    /**
      * Checks that a `<table>` element is allowed in the content.
      * @throws IllegalStateException if `<table>` is not allowed.
      */
@@ -230,6 +266,20 @@ internal class KatydidContentRestrictions(
         return KatydidContentRestrictions(
             this,
             figCaptionProhibited = false
+        )
+    }
+
+    /**
+     * Clones this content restriction object but with `<footer>`, `<header>`, and `<address>` elements disallowed.
+     */
+    fun withFooterHeaderAddressNotAllowed(): KatydidContentRestrictions {
+        return KatydidContentRestrictions(
+            this,
+            addressAllowed = false,
+            footerAllowed = false,
+            headerAllowed = false,
+            headingsAllowed = false,
+            sectioningAllowed = false
         )
     }
 

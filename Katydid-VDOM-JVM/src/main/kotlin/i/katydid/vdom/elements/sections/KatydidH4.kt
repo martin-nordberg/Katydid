@@ -34,6 +34,8 @@ internal class KatydidH4<Msg>(
                                 hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {
+        flowContent.contentRestrictions.confirmHeadingsAllowed()
+
         flowContent.phrasingContent(this).defineContent()
         this.freeze()
     }

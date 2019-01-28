@@ -46,6 +46,27 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
 ) : KatydidPhrasingContentBuilderImpl<Msg>(itsElement, itsContentRestrictions, itsDispatchMessages),
     KatydidFlowContentBuilder<Msg> {
 
+    override fun address(
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        contenteditable: Boolean?,
+        dir: EDirection?,
+        hidden: Boolean?,
+        lang: String?,
+        spellcheck: Boolean?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatydidAddress(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck,
+                           style, tabindex, title, translate, defineContent)
+        )
+    }
+
     override fun article(
         selector: String?,
         key: Any?,
@@ -106,8 +127,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidBlockQuote(this, selector, key, accesskey, cite, contenteditable, dir, hidden, lang, spellcheck,
-                              style,
-                              tabindex, title, translate, defineContent)
+                              style, tabindex, title, translate, defineContent)
         )
     }
 
@@ -174,8 +194,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidFieldSet(this, selector, key, accesskey, contenteditable, dir,
-                            disabled, form, hidden, lang,
-                            name, spellcheck, style, tabindex, title, translate,
+                            disabled, form, hidden, lang, name, spellcheck, style, tabindex, title, translate,
                             defineContent)
         )
     }
@@ -694,6 +713,20 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
         return KatydidFlowContentBuilderImpl(
             element,
             contentRestrictions.withFigCaptionAllowed(),
+            dispatchMessages
+        )
+    }
+
+    /**
+     * Creates a new content builder for the given child [element] that has the same restrictions
+     * as this builder plus no footer, header or address elements allowed.
+     */
+    fun withFooterHeaderAddressNotAllowed(
+        element: KatydidHtmlElementImpl<Msg>
+    ): KatydidFlowContentBuilderImpl<Msg> {
+        return KatydidFlowContentBuilderImpl(
+            element,
+            contentRestrictions.withFooterHeaderAddressNotAllowed(),
             dispatchMessages
         )
     }

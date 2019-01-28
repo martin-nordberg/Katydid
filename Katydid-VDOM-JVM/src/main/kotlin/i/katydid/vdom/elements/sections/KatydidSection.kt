@@ -34,6 +34,8 @@ internal class KatydidSection<Msg>(
                                 hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {
+        flowContent.contentRestrictions.confirmSectioningAllowed()
+
         flowContent.withNoAddedRestrictions(this).defineContent()
         this.freeze()
     }

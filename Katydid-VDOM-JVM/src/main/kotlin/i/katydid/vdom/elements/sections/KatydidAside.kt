@@ -34,6 +34,8 @@ internal class KatydidAside<Msg>(
                                 hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {
+        flowContent.contentRestrictions.confirmSectioningAllowed()
+
         flowContent.withMainNotAllowed(this).defineContent()
         this.freeze()
     }

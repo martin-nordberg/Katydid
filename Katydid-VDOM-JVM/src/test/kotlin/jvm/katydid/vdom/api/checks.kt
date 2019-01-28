@@ -35,7 +35,20 @@ internal fun <Msg> checkBuild(
         lifecycle.build(div, vdomNode)
     }
 
-    assertEquals(expectedHtml, body.firstChild?.toHtmlString())
+    val actualHtml = body.firstChild!!.toHtmlString()
+
+    var msg = ""
+    if ( expectedHtml != actualHtml ) {
+        msg = "Matched:\n"
+        var i = 0
+        while ( expectedHtml[i] == actualHtml[i] ) {
+            msg += expectedHtml[i]
+            i += 1
+        }
+        msg += "...\n"
+    }
+
+    assertEquals(expectedHtml, body.firstChild?.toHtmlString(), msg)
 
 }
 

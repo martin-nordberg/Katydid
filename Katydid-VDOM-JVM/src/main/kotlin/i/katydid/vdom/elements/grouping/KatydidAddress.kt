@@ -3,19 +3,19 @@
 // Apache 2.0 License
 //
 
-package i.katydid.vdom.elements.sections
+package i.katydid.vdom.elements.grouping
 
 import i.katydid.vdom.builders.KatydidFlowContentBuilderImpl
 import i.katydid.vdom.elements.KatydidHtmlElementImpl
-import o.katydid.vdom.builders.KatydidPhrasingContentBuilder
+import o.katydid.vdom.builders.KatydidFlowContentBuilder
 import o.katydid.vdom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Virtual node for an <h6> element.
+ * Virtual node for an <address> element.
  */
-internal class KatydidH6<Msg>(
+internal class KatydidAddress<Msg>(
     flowContent: KatydidFlowContentBuilderImpl<Msg>,
     selector: String?,
     key: Any?,
@@ -29,20 +29,20 @@ internal class KatydidH6<Msg>(
     tabindex: Int?,
     title: String?,
     translate: Boolean?,
-    defineContent: KatydidPhrasingContentBuilder<Msg>.() -> Unit
+    defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
 ) : KatydidHtmlElementImpl<Msg>(selector, key, accesskey, contenteditable, dir,
                                 hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {
-        flowContent.contentRestrictions.confirmHeadingsAllowed()
+        flowContent.contentRestrictions.confirmAddressAllowed()
 
-        flowContent.phrasingContent(this).defineContent()
+        flowContent.withFooterHeaderAddressNotAllowed(this).defineContent()
         this.freeze()
     }
 
     ////
 
-    override val nodeName = "H6"
+    override val nodeName = "ADDRESS"
 
 }
 
