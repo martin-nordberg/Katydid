@@ -99,6 +99,57 @@ interface KatydidPhrasingContentBuilder<in Msg> : KatydidEmbeddedContentBuilder<
     )
 
     /**
+     * Adds an `<area>` element with its attributes as the next child of the element under construction.
+     * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
+     * @param key a non-DOM key for this Katydid element that is unique among all the siblings of this element.
+     * @param accesskey a string specifying the HTML accesskey value.
+     * @param alt - Replacement text for use when images are not available
+     * @param contenteditable whether the element has editable content.
+     * @param coords - Coordinates for the shape to be created in an image map
+     * @param defineContent a DSL-style lambda that builds the child nodes of the new element.
+     * @param dir the left-to-right direction of text inside this element.
+     * @param download - Whether to download the resource instead of navigating to it, and its file name if so
+     * @param hidden true if the element is to be hidden.
+     * @param href - Address of the hyperlink
+     * @param hreflang - Language of the linked resource
+     * @param lang the language of text within this element.
+     * @param referrerpolicy - Referrer policy for fetches initiated by the element
+     * @param rel - Relationship of this document (or subsection/topic) to the destination resource
+     * @param shape - The kind of shape to be created in an image map
+     * @param spellcheck whether the element is subject to spell checking.
+     * @param style a string containing CSS for this element.
+     * @param tabindex the tab index for the element.
+     * @param target - browsing context for hyperlink navigation
+     * @param title a tool tip for the element.
+     * @param translate whether to translate text within this element.
+     * @param type - Hint for the type of the referenced resource
+     */
+    fun area(
+        selector: String? = null,
+        key: Any? = null,
+        accesskey: Char? = null,
+        alt: String? = null,
+        contenteditable: Boolean? = null,
+        coords: String? = null,
+        dir: EDirection? = null,
+        download: String? = null,
+        hidden: Boolean? = null,
+        href: String? = null,
+        hreflang: String? = null,
+        lang: String? = null,
+        referrerpolicy: EReferrerPolicy? = null,
+        rel: EAnchorHtmlLinkType? = null,
+        spellcheck: Boolean? = null,
+        shape: EAreaShape? = null,
+        style: String? = null,
+        tabindex: Int? = null,
+        target: String? = null,
+        title: String? = null,
+        translate: Boolean? = null,
+        type: String? = null,
+        defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit)
+
+    /**
      * Adds a `<b>` element with its attributes as the next child of the element under construction.
      * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
      * @param key a non-DOM key for this Katydid element that is unique among all the siblings of this element.
@@ -1843,6 +1894,40 @@ interface KatydidPhrasingContentBuilder<in Msg> : KatydidEmbeddedContentBuilder<
         `for`: String? = null,
         hidden: Boolean? = null,
         lang: String? = null,
+        spellcheck: Boolean? = null,
+        style: String? = null,
+        tabindex: Int? = null,
+        title: String? = null,
+        translate: Boolean? = null,
+        defineContent: KatydidPhrasingContentBuilder<Msg>.() -> Unit
+    )
+
+    /**
+     * Adds a map element with its attributes as the next child of the element under construction.
+     * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
+     * @param key a non-DOM key for this Katydid element that is unique among all the siblings of this element.
+     * @param accesskey a string specifying the HTML accesskey value.
+     * @param contenteditable whether the element has editable content.
+     * @param dir the left-to-right direction of text inside this element.
+     * @param hidden true if the element is to be hidden.
+     * @param lang the language of text within this element.
+     * @param name the name of the image map to reference from an img usemap attribute.
+     * @param spellcheck whether the element is subject to spell checking.
+     * @param style a string containing CSS for this element.
+     * @param tabindex the tab index for the element.
+     * @param title a tool tip for the element.
+     * @param translate whether to translate text within this element.
+     * @param defineContent a DSL-style lambda that builds the child nodes of the new element.
+     */
+    fun map(
+        selector: String? = null,
+        key: Any? = null,
+        accesskey: Char? = null,
+        contenteditable: Boolean? = null,
+        dir: EDirection? = null,
+        hidden: Boolean? = null,
+        lang: String? = null,
+        name: String? = null,
         spellcheck: Boolean? = null,
         style: String? = null,
         tabindex: Int? = null,

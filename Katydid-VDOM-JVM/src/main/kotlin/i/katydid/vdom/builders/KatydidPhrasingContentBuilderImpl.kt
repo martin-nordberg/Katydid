@@ -10,6 +10,8 @@ import i.katydid.vdom.builders.miscellaneous.KatydidSelectContentBuilderImpl
 import i.katydid.vdom.elements.KatydidHtmlElementImpl
 import i.katydid.vdom.elements.edits.KatydidDel
 import i.katydid.vdom.elements.edits.KatydidIns
+import i.katydid.vdom.elements.embedded.KatydidArea
+import i.katydid.vdom.elements.embedded.KatydidMap
 import i.katydid.vdom.elements.forms.*
 import i.katydid.vdom.elements.text.*
 import o.katydid.vdom.builders.KatydidAttributesContentBuilder
@@ -63,7 +65,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidA(this, selector, key, accesskey, contenteditable, dir, download, hidden, href, hreflang, lang,
-                     rel, rev, spellcheck, style, tabindex, target, title, translate, type, defineContent)
+                rel, rev, spellcheck, style, tabindex, target, title, translate, type, defineContent)
         )
     }
 
@@ -84,7 +86,39 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidAbbr(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                        tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
+        )
+    }
+
+    override fun area(
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        alt: String?,
+        contenteditable: Boolean?,
+        coords: String?,
+        dir: EDirection?,
+        download: String?,
+        hidden: Boolean?,
+        href: String?,
+        hreflang: String?,
+        lang: String?,
+        referrerpolicy: EReferrerPolicy?,
+        rel: EAnchorHtmlLinkType?,
+        spellcheck: Boolean?,
+        shape: EAreaShape?,
+        style: String?,
+        tabindex: Int?,
+        target: String?,
+        title: String?,
+        translate: Boolean?,
+        type: String?,
+        defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatydidArea(this, selector, key, accesskey, alt, contenteditable, coords, dir, download,
+                hidden, href, hreflang, lang, referrerpolicy, rel, spellcheck, shape, style, tabindex, target,
+                title, translate, type, defineAttributes)
         )
     }
 
@@ -105,7 +139,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidB(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                     tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -126,7 +160,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidBdi(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                       tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -147,7 +181,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidBdo(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                       tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -168,7 +202,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidBr(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                      tabindex, title, translate, defineAttributes)
+                tabindex, title, translate, defineAttributes)
 
         )
     }
@@ -201,8 +235,8 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidButton(this, selector, key, accesskey, autofocus, contenteditable, dir, disabled, form, formaction,
-                          formenctype, formmethod, formnovalidate, formtarget, hidden, lang,
-                          name, spellcheck, style, tabindex, title, translate, type, value, defineContent)
+                formenctype, formmethod, formnovalidate, formtarget, hidden, lang,
+                name, spellcheck, style, tabindex, title, translate, type, value, defineContent)
         )
     }
 
@@ -223,7 +257,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidCite(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                        tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -244,7 +278,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidCode(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                        tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -266,7 +300,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidData(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                        tabindex, title, translate, value, defineContent)
+                tabindex, title, translate, value, defineContent)
         )
     }
 
@@ -287,8 +321,8 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidDataList(this, selector, key, accesskey, contenteditable, dir,
-                            hidden, lang, spellcheck, style,
-                            tabindex, title, translate, defineContent)
+                hidden, lang, spellcheck, style,
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -311,7 +345,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidDel(this, selector, key, accesskey, cite, contenteditable, datetime, dir, hidden,
-                       lang, spellcheck, style, tabindex, title, translate, defineContent)
+                lang, spellcheck, style, tabindex, title, translate, defineContent)
         )
     }
 
@@ -332,7 +366,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidDfn(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                       tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -353,7 +387,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidEm(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                      tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -374,7 +408,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidI(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                     tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -399,7 +433,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidInputButton(this, selector, key, accesskey, contenteditable, dir, disabled, form, hidden, lang,
-                               name, spellcheck, style, tabindex, title, translate, value, defineAttributes)
+                name, spellcheck, style, tabindex, title, translate, value, defineAttributes)
         )
     }
 
@@ -427,9 +461,9 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidInputCheckbox(this, selector, key, accesskey, autofocus, checked, contenteditable, dir,
-                                 disabled, form, hidden, lang, name, required,
-                                 spellcheck, style, tabindex, title, translate,
-                                 value, defineAttributes)
+                disabled, form, hidden, lang, name, required,
+                spellcheck, style, tabindex, title, translate,
+                value, defineAttributes)
         )
     }
 
@@ -457,9 +491,9 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidInputColor(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                              disabled, form, hidden, lang, list, name,
-                              spellcheck, style, tabindex, title, translate,
-                              value, defineAttributes)
+                disabled, form, hidden, lang, list, name,
+                spellcheck, style, tabindex, title, translate,
+                value, defineAttributes)
         )
     }
 
@@ -492,9 +526,9 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidInputDate(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                             disabled, form, hidden, lang, list, max, min, name,
-                             readonly, required, spellcheck, step, style, tabindex, title, translate,
-                             value, defineAttributes)
+                disabled, form, hidden, lang, list, max, min, name,
+                readonly, required, spellcheck, step, style, tabindex, title, translate,
+                value, defineAttributes)
         )
     }
 
@@ -527,9 +561,9 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidInputDateTimeLocal(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                                      disabled, form, hidden, lang, list, max, min, name,
-                                      readonly, required, spellcheck, step, style, tabindex, title, translate,
-                                      value, defineAttributes)
+                disabled, form, hidden, lang, list, max, min, name,
+                readonly, required, spellcheck, step, style, tabindex, title, translate,
+                value, defineAttributes)
         )
     }
 
@@ -565,9 +599,9 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidInputEmail(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                              disabled, form, hidden, lang, list, maxlength, minlength, multiple, name, pattern,
-                              placeholder, readonly, required, size, spellcheck, style, tabindex, title, translate,
-                              value, defineAttributes)
+                disabled, form, hidden, lang, list, maxlength, minlength, multiple, name, pattern,
+                placeholder, readonly, required, size, spellcheck, style, tabindex, title, translate,
+                value, defineAttributes)
         )
     }
 
@@ -596,9 +630,9 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidInputFile(this, selector, key, accept, accesskey, autofocus, contenteditable, dir, disabled,
-                             form, hidden, lang, multiple, name, required, spellcheck, style, tabindex, title,
-                             translate,
-                             value, defineAttributes)
+                form, hidden, lang, multiple, name, required, spellcheck, style, tabindex, title,
+                translate,
+                value, defineAttributes)
         )
     }
 
@@ -623,7 +657,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidInputHidden(this, selector, key, accesskey, contenteditable, dir, disabled, form, hidden, lang,
-                               name, spellcheck, style, tabindex, title, translate, value, defineAttributes)
+                name, spellcheck, style, tabindex, title, translate, value, defineAttributes)
         )
     }
 
@@ -656,10 +690,10 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidInputImageButton(this, selector, key, accesskey, alt, contenteditable, dir, disabled, form,
-                                    formaction,
-                                    formenctype, formmethod, formnovalidate, formtarget, height, hidden, lang,
-                                    name, spellcheck, src, style, tabindex, title, translate, width,
-                                    defineAttributes)
+                formaction,
+                formenctype, formmethod, formnovalidate, formtarget, height, hidden, lang,
+                name, spellcheck, src, style, tabindex, title, translate, width,
+                defineAttributes)
         )
     }
 
@@ -692,9 +726,9 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidInputMonth(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                              disabled, form, hidden, lang, list, max, min, name,
-                              readonly, required, spellcheck, step, style, tabindex, title, translate,
-                              value, defineAttributes)
+                disabled, form, hidden, lang, list, max, min, name,
+                readonly, required, spellcheck, step, style, tabindex, title, translate,
+                value, defineAttributes)
         )
     }
 
@@ -728,9 +762,9 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidInputNumber(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                               disabled, form, hidden, lang, list, max, min, name, placeholder,
-                               readonly, required, spellcheck, step, style, tabindex, title, translate,
-                               value, defineAttributes)
+                disabled, form, hidden, lang, list, max, min, name, placeholder,
+                readonly, required, spellcheck, step, style, tabindex, title, translate,
+                value, defineAttributes)
         )
 
     }
@@ -765,9 +799,9 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidInputNumber(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                               disabled, form, hidden, lang, list, max, min, name, placeholder,
-                               readonly, required, spellcheck, step, style, tabindex, title, translate,
-                               value, defineAttributes)
+                disabled, form, hidden, lang, list, max, min, name, placeholder,
+                readonly, required, spellcheck, step, style, tabindex, title, translate,
+                value, defineAttributes)
         )
 
     }
@@ -802,9 +836,9 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidInputPassword(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                                 disabled, form, hidden, lang, maxlength, minlength, name, pattern,
-                                 placeholder, readonly, required, size, spellcheck, style, tabindex, title, translate,
-                                 value, defineAttributes)
+                disabled, form, hidden, lang, maxlength, minlength, name, pattern,
+                placeholder, readonly, required, size, spellcheck, style, tabindex, title, translate,
+                value, defineAttributes)
         )
     }
 
@@ -832,9 +866,9 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidInputRadioButton(this, selector, key, accesskey, autofocus, checked, contenteditable, dir,
-                                    disabled, form, hidden, lang, name, required,
-                                    spellcheck, style, tabindex, title, translate,
-                                    value, defineAttributes)
+                disabled, form, hidden, lang, name, required,
+                spellcheck, style, tabindex, title, translate,
+                value, defineAttributes)
         )
     }
 
@@ -865,9 +899,9 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidInputRange(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                              disabled, form, hidden, lang, list, max, min, name,
-                              spellcheck, step, style, tabindex, title, translate,
-                              value, defineAttributes)
+                disabled, form, hidden, lang, list, max, min, name,
+                spellcheck, step, style, tabindex, title, translate,
+                value, defineAttributes)
         )
     }
 
@@ -892,7 +926,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidInputResetButton(this, selector, key, accesskey, contenteditable, dir, disabled, form, hidden, lang,
-                                    name, spellcheck, style, tabindex, title, translate, value, defineAttributes)
+                name, spellcheck, style, tabindex, title, translate, value, defineAttributes)
         )
     }
 
@@ -928,9 +962,9 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidInputSearch(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir, dirname,
-                               disabled, form, hidden, lang, list, maxlength, minlength, name, pattern,
-                               placeholder, readonly, required, size, spellcheck, style, tabindex, title, translate,
-                               value, defineAttributes)
+                disabled, form, hidden, lang, list, maxlength, minlength, name, pattern,
+                placeholder, readonly, required, size, spellcheck, style, tabindex, title, translate,
+                value, defineAttributes)
         )
     }
 
@@ -960,8 +994,8 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidInputSubmitButton(this, selector, key, accesskey, contenteditable, dir, disabled, form, formaction,
-                                     formenctype, formmethod, formnovalidate, formtarget, hidden, lang,
-                                     name, spellcheck, style, tabindex, title, translate, value, defineAttributes)
+                formenctype, formmethod, formnovalidate, formtarget, hidden, lang,
+                name, spellcheck, style, tabindex, title, translate, value, defineAttributes)
         )
     }
 
@@ -996,9 +1030,9 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidInputTelephone(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                                  disabled, form, hidden, lang, list, maxlength, minlength, name, pattern,
-                                  placeholder, readonly, required, size, spellcheck, style, tabindex, title, translate,
-                                  value, defineAttributes)
+                disabled, form, hidden, lang, list, maxlength, minlength, name, pattern,
+                placeholder, readonly, required, size, spellcheck, style, tabindex, title, translate,
+                value, defineAttributes)
         )
     }
 
@@ -1034,9 +1068,9 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidInputText(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir, dirname,
-                             disabled, form, hidden, lang, list, maxlength, minlength, name, pattern,
-                             placeholder, readonly, required, size, spellcheck, style, tabindex, title, translate,
-                             value, defineAttributes)
+                disabled, form, hidden, lang, list, maxlength, minlength, name, pattern,
+                placeholder, readonly, required, size, spellcheck, style, tabindex, title, translate,
+                value, defineAttributes)
         )
     }
 
@@ -1069,9 +1103,9 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidInputTime(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                             disabled, form, hidden, lang, list, max, min, name,
-                             readonly, required, spellcheck, step, style, tabindex, title, translate,
-                             value, defineAttributes)
+                disabled, form, hidden, lang, list, max, min, name,
+                readonly, required, spellcheck, step, style, tabindex, title, translate,
+                value, defineAttributes)
         )
     }
 
@@ -1106,9 +1140,9 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidInputUrl(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                            disabled, form, hidden, lang, list, maxlength, minlength, name, pattern,
-                            placeholder, readonly, required, size, spellcheck, style, tabindex, title, translate,
-                            value, defineAttributes)
+                disabled, form, hidden, lang, list, maxlength, minlength, name, pattern,
+                placeholder, readonly, required, size, spellcheck, style, tabindex, title, translate,
+                value, defineAttributes)
         )
     }
 
@@ -1141,9 +1175,9 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidInputWeek(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir,
-                             disabled, form, hidden, lang, list, max, min, name,
-                             readonly, required, spellcheck, step, style, tabindex, title, translate,
-                             value, defineAttributes)
+                disabled, form, hidden, lang, list, max, min, name,
+                readonly, required, spellcheck, step, style, tabindex, title, translate,
+                value, defineAttributes)
         )
     }
 
@@ -1166,7 +1200,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidIns(this, selector, key, accesskey, cite, contenteditable, datetime, dir, hidden,
-                       lang, spellcheck, style, tabindex, title, translate, defineContent)
+                lang, spellcheck, style, tabindex, title, translate, defineContent)
         )
     }
 
@@ -1187,7 +1221,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidKbd(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                       tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -1209,7 +1243,29 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidLabel(this, selector, key, accesskey, contenteditable, dir, `for`, hidden, lang, spellcheck,
-                         style, tabindex, title, translate, defineContent)
+                style, tabindex, title, translate, defineContent)
+        )
+    }
+
+    override fun map(
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        contenteditable: Boolean?,
+        dir: EDirection?,
+        hidden: Boolean?,
+        lang: String?,
+        name: String?,
+        spellcheck: Boolean?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        defineContent: KatydidPhrasingContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatydidMap(this, selector, key, accesskey, contenteditable, dir, hidden, lang, name,
+                spellcheck, style, tabindex, title, translate, defineContent)
         )
     }
 
@@ -1230,7 +1286,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidMark(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                        tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -1257,7 +1313,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidMeter(this, selector, key, accesskey, contenteditable, dir, hidden, high, lang,
-                         low, max, min, optimum, spellcheck, style, tabindex, title, translate, value, defineContent)
+                low, max, min, optimum, spellcheck, style, tabindex, title, translate, value, defineContent)
         )
     }
 
@@ -1284,7 +1340,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidMeter(this, selector, key, accesskey, contenteditable, dir, hidden, high, lang,
-                         low, max, min, optimum, spellcheck, style, tabindex, title, translate, value, defineContent)
+                low, max, min, optimum, spellcheck, style, tabindex, title, translate, value, defineContent)
         )
     }
 
@@ -1317,7 +1373,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidOutput(this, selector, key, accesskey, contenteditable, dir, disabled, `for`, form,
-                          hidden, lang, name, spellcheck, style, tabindex, title, translate, defineContent)
+                hidden, lang, name, spellcheck, style, tabindex, title, translate, defineContent)
         )
     }
 
@@ -1340,7 +1396,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidProgress(this, selector, key, accesskey, contenteditable, dir, hidden, lang, max,
-                            spellcheck, style, tabindex, title, translate, value, defineContent)
+                spellcheck, style, tabindex, title, translate, value, defineContent)
         )
     }
 
@@ -1363,7 +1419,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidProgress(this, selector, key, accesskey, contenteditable, dir, hidden, lang, max,
-                            spellcheck, style, tabindex, title, translate, value, defineContent)
+                spellcheck, style, tabindex, title, translate, value, defineContent)
         )
     }
 
@@ -1384,7 +1440,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidQ(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                     tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -1405,7 +1461,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidS(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                     tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -1426,7 +1482,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidSamp(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                        tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -1456,8 +1512,8 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidSelect(this, selector, key, accesskey, autocomplete, autofocus, contenteditable, dir, disabled, form,
-                          hidden, lang, multiple, name, required, size, spellcheck, style,
-                          tabindex, title, translate, value, defineContent)
+                hidden, lang, multiple, name, required, size, spellcheck, style,
+                tabindex, title, translate, value, defineContent)
         )
     }
 
@@ -1486,7 +1542,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidSmall(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                         tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -1507,7 +1563,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidSpan(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                        tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -1528,7 +1584,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidStrong(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                          tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -1549,7 +1605,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidSub(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                       tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -1570,7 +1626,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidSup(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                       tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -1612,10 +1668,10 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidTextArea(this, selector, key, accesskey, autocomplete, autofocus, cols, contenteditable, dir,
-                            dirname,
-                            disabled, form, hidden, lang, maxlength, minlength, name,
-                            placeholder, readonly, required, rows, spellcheck, style, tabindex, title, translate,
-                            wrap, defineContent)
+                dirname,
+                disabled, form, hidden, lang, maxlength, minlength, name,
+                placeholder, readonly, required, rows, spellcheck, style, tabindex, title, translate,
+                wrap, defineContent)
         )
     }
 
@@ -1636,7 +1692,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidTime(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                        tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -1658,7 +1714,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidTime(this, selector, key, accesskey, contenteditable, datetime, dir, hidden, lang,
-                        spellcheck, style, tabindex, title, translate, defineContent)
+                spellcheck, style, tabindex, title, translate, defineContent)
         )
     }
 
@@ -1679,7 +1735,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidU(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                     tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -1700,7 +1756,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidVar(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                       tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -1721,7 +1777,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidBr(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                      tabindex, title, translate, defineAttributes)
+                tabindex, title, translate, defineAttributes)
 
         )
     }
@@ -1731,10 +1787,25 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
      * as this builder plus no anchor element or interactive content allowed.
      */
     fun withAnchorInteractiveContentNotAllowed(
-        element: KatydidHtmlElementImpl<Msg>): KatydidPhrasingContentBuilderImpl<Msg> {
+        element: KatydidHtmlElementImpl<Msg>
+    ): KatydidPhrasingContentBuilderImpl<Msg> {
         return KatydidPhrasingContentBuilderImpl(
             element,
             contentRestrictions.withAnchorInteractiveContentNotAllowed(),
+            dispatchMessages
+        )
+    }
+
+    /**
+     * Creates a new content builder for the given child [element] that has the same restrictions
+     * as this builder plus no anchor element or interactive content allowed.
+     */
+    fun withAreaAllowed(
+        element: KatydidMap<Msg>
+    ): KatydidPhrasingContentBuilderImpl<Msg> {
+        return KatydidPhrasingContentBuilderImpl(
+            element,
+            contentRestrictions.withAreaAllowed(),
             dispatchMessages
         )
     }
@@ -1756,7 +1827,8 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
      * as this builder plus no interactive content allowed.
      */
     fun withInteractiveContentNotAllowed(
-        element: KatydidHtmlElementImpl<Msg>): KatydidPhrasingContentBuilderImpl<Msg> {
+        element: KatydidHtmlElementImpl<Msg>
+    ): KatydidPhrasingContentBuilderImpl<Msg> {
         return KatydidPhrasingContentBuilderImpl(
             element,
             contentRestrictions.withInteractiveContentNotAllowed(),
@@ -1793,7 +1865,8 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
      * as this builder.
      */
     open fun withNoAddedRestrictions(
-        element: KatydidHtmlElementImpl<Msg>): KatydidPhrasingContentBuilderImpl<Msg> {
+        element: KatydidHtmlElementImpl<Msg>
+    ): KatydidPhrasingContentBuilderImpl<Msg> {
         return KatydidPhrasingContentBuilderImpl(
             element,
             contentRestrictions,

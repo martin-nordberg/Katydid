@@ -8,8 +8,8 @@ package i.katydid.vdom.builders
 import i.katydid.vdom.elements.KatydidHtmlElementImpl
 import o.katydid.vdom.builders.KatydidAttributesContentBuilder
 import o.katydid.vdom.builders.KatydidContentBuilderDsl
-import x.katydid.vdom.dom.events.Event
 import o.katydid.vdom.types.Event2Message
+import x.katydid.vdom.dom.events.Event
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -18,8 +18,8 @@ import o.katydid.vdom.types.Event2Message
  * for more specialized content builders that also add child nodes of the right types for given context.
  *
  * @constructor Constructs a new attribute content builder for the given element.
- * @param element the element whose content is being built.
- * @param dispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
+ * @param itsElement the element whose content is being built.
+ * @param itsDispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
 @Suppress("unused")
 @KatydidContentBuilderDsl

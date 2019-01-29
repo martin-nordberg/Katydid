@@ -6,7 +6,10 @@
 package i.katydid.vdom.builders
 
 import i.katydid.vdom.builders.details.KatydidDetailsFlowContentBuilderImpl
-import i.katydid.vdom.builders.media.*
+import i.katydid.vdom.builders.media.KatydidMediaContentRestrictions
+import i.katydid.vdom.builders.media.KatydidMediaFlowContentBuilderImpl
+import i.katydid.vdom.builders.media.KatydidPictureContentBuilderImpl
+import i.katydid.vdom.builders.media.KatydidPictureContentRestrictions
 import i.katydid.vdom.builders.miscellaneous.KatydidTextContentBuilderImpl
 import i.katydid.vdom.elements.KatydidHtmlElementImpl
 import i.katydid.vdom.elements.embedded.*
@@ -27,6 +30,7 @@ import o.katydid.vdom.types.*
  *
  * @constructor Constructs a new embedded content builder for the given [element].
  * @param itsElement the element whose content is being built.
+ * @param itsContentRestrictions the restrictions on built content to be enforced at run time.
  * @param itsDispatchMessages dispatcher of event handling results for when we want event handling to be reactive or Elm-like.
  */
 @Suppress("unused")
@@ -72,8 +76,8 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidAudio(this, selector, key, accesskey, autoplay, contenteditable, controls,
-                         crossorigin, dir, hidden, lang, loop, muted, preload, spellcheck, src, style,
-                         tabindex, title, translate, defineContent)
+                crossorigin, dir, hidden, lang, loop, muted, preload, spellcheck, src, style,
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -114,7 +118,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidEmbed(this, selector, key, accesskey, contenteditable, dir, height, hidden,
-                         lang, spellcheck, src, style, tabindex, title, translate, type, width, defineContent)
+                lang, spellcheck, src, style, tabindex, title, translate, type, width, defineContent)
         )
     }
 
@@ -144,8 +148,8 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidIframe(this, selector, key, accesskey, allowfullscreen, allowpaymentrequest,
-                          contenteditable, dir, height, hidden, lang, name, referrerpolicy, sandbox, spellcheck,
-                          src, srcdoc, style, tabindex, title, translate, width, defineContent)
+                contenteditable, dir, height, hidden, lang, name, referrerpolicy, sandbox, spellcheck,
+                src, srcdoc, style, tabindex, title, translate, width, defineContent)
         )
     }
 
@@ -176,8 +180,8 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidImg(this, selector, key, accesskey, alt, contenteditable, crossorigin, dir, height,
-                       hidden, ismap, lang, referrerpolicy, sizes, spellcheck, src, srcset, style,
-                       tabindex, title, translate, usemap, width, defineAttributes)
+                hidden, ismap, lang, referrerpolicy, sizes, spellcheck, src, srcset, style,
+                tabindex, title, translate, usemap, width, defineAttributes)
         )
     }
 
@@ -222,8 +226,8 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidPicture(this, selector, key, accesskey, contenteditable,
-                           dir, hidden, lang, spellcheck, style,
-                           tabindex, title, translate, defineContent)
+                dir, hidden, lang, spellcheck, style,
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -261,8 +265,8 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidVideo(this, selector, key, accesskey, autoplay, contenteditable, controls,
-                         crossorigin, dir, height, hidden, lang, loop, muted, poster, preload, spellcheck, src, style,
-                         tabindex, title, translate, width, defineContent)
+                crossorigin, dir, height, hidden, lang, loop, muted, poster, preload, spellcheck, src, style,
+                tabindex, title, translate, width, defineContent)
         )
     }
 

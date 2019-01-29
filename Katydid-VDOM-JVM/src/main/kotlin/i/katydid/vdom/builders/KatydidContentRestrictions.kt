@@ -13,6 +13,7 @@ package i.katydid.vdom.builders
 internal class KatydidContentRestrictions(
     private val addressAllowed: Boolean,
     private val anchorAllowed: Boolean,
+    private val areaProhibited: Boolean,
     private val dfnAllowed: Boolean,
     private var figCaptionProhibited: Boolean,
     private val footerAllowed: Boolean,
@@ -51,6 +52,7 @@ internal class KatydidContentRestrictions(
         true,
         true,
         true,
+        true,
         true
     )
 
@@ -62,6 +64,7 @@ internal class KatydidContentRestrictions(
         original: KatydidContentRestrictions,
         addressAllowed: Boolean = true,
         anchorAllowed: Boolean = true,
+        areaProhibited: Boolean = true,
         dfnAllowed: Boolean = true,
         figCaptionProhibited: Boolean = true,
         footerAllowed: Boolean = true,
@@ -80,6 +83,7 @@ internal class KatydidContentRestrictions(
     ) : this(
         original.addressAllowed && addressAllowed,
         original.anchorAllowed && anchorAllowed,
+        original.areaProhibited && areaProhibited,
         original.dfnAllowed && dfnAllowed,
         original.figCaptionProhibited && figCaptionProhibited,
         original.footerAllowed && footerAllowed,
@@ -113,6 +117,14 @@ internal class KatydidContentRestrictions(
      */
     fun confirmAnchorAllowed() {
         check(anchorAllowed) { "Element type <a> not allowed here" }
+    }
+
+    /**
+     * Confirms that an `<area>` element is allowed.
+     * @throws IllegalStateException if `<area>` is not allowed.
+     */
+    fun confirmAreaAllowed() {
+        check(!areaProhibited) { "Element type <area> not allowed here" }
     }
 
     /**
@@ -248,6 +260,16 @@ internal class KatydidContentRestrictions(
             this,
             anchorAllowed = false,
             interactiveContentAllowed = false
+        )
+    }
+
+    /**
+     * Clones this content restriction object but with `<a>` elements and interactive content disallowed.
+     */
+    fun withAreaAllowed(): KatydidContentRestrictions {
+        return KatydidContentRestrictions(
+            this,
+            areaProhibited = false
         )
     }
 
