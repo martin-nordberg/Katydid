@@ -2,26 +2,20 @@ Elements Not Yet Implemented
 ----------------------------
 
 
+* html (not applicable)
+
 * body (not relevant)
 * head (augmentable?)
-* html (not applicable)
+
+* base
 * link (addable?)
 * meta (augmentable?)
 * title (changeable?)
 
-
-
 * noscript (N/A)
 * script (too meta)
 
-
-
-* base
 * canvas
-* datalist
-* dd
-* dl
-* dt
 * dialog
 * object
 * param
@@ -47,5 +41,6 @@ Constraints Not Addressed
   - map
   - object
   - video
+* datalist (with phrasing content)
 
 

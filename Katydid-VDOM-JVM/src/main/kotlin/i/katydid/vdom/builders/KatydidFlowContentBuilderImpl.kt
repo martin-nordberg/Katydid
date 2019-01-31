@@ -1,5 +1,5 @@
 //
-// (C) Copyright 2017-2018 Martin E. Nordberg III
+// (C) Copyright 2017-2019 Martin E. Nordberg III
 // Apache 2.0 License
 //
 
@@ -7,6 +7,7 @@ package i.katydid.vdom.builders
 
 import i.katydid.vdom.builders.lists.KatydidOrderedListContentBuilderImpl
 import i.katydid.vdom.builders.lists.KatydidUnorderedListContentBuilderImpl
+import i.katydid.vdom.builders.miscellaneous.KatydidDescriptionListContentBuilderImpl
 import i.katydid.vdom.builders.tables.KatydidTableContentBuilderImpl
 import i.katydid.vdom.elements.KatydidHtmlElementImpl
 import i.katydid.vdom.elements.forms.KatydidFieldSet
@@ -22,6 +23,7 @@ import o.katydid.vdom.builders.KatydidPhrasingContentBuilder
 import o.katydid.vdom.builders.details.KatydidDetailsFlowContentBuilder
 import o.katydid.vdom.builders.lists.KatydidOrderedListContentBuilder
 import o.katydid.vdom.builders.lists.KatydidUnorderedListContentBuilder
+import o.katydid.vdom.builders.miscellaneous.KatydidDescriptionListContentBuilder
 import o.katydid.vdom.builders.tables.KatydidTableContentBuilder
 import o.katydid.vdom.types.EDirection
 import o.katydid.vdom.types.EFormEncodingType
@@ -63,7 +65,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidAddress(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck,
-                           style, tabindex, title, translate, defineContent)
+                style, tabindex, title, translate, defineContent)
         )
     }
 
@@ -84,7 +86,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidArticle(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                           tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -105,7 +107,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidAside(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                         tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -127,7 +129,29 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidBlockQuote(this, selector, key, accesskey, cite, contenteditable, dir, hidden, lang, spellcheck,
-                              style, tabindex, title, translate, defineContent)
+                style, tabindex, title, translate, defineContent)
+        )
+    }
+
+    /**
+     * Creates a new description list content builder for the given child [element].
+     */
+    fun descriptionListContent(element: KatydidDiv<Msg>): KatydidDescriptionListContentBuilderImpl<Msg> {
+        return KatydidDescriptionListContentBuilderImpl(
+            element,
+            contentRestrictions,
+            dispatchMessages
+        )
+    }
+
+    /**
+     * Creates a new description list content builder for the given child [element].
+     */
+    fun descriptionListContent(element: KatydidDl<Msg>): KatydidDescriptionListContentBuilderImpl<Msg> {
+        return KatydidDescriptionListContentBuilderImpl(
+            element,
+            contentRestrictions,
+            dispatchMessages
         )
     }
 
@@ -149,7 +173,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidDetails(this, selector, key, accesskey, contenteditable, dir, hidden, lang, open, spellcheck,
-                           style, tabindex, title, translate, defineContent)
+                style, tabindex, title, translate, defineContent)
         )
     }
 
@@ -170,7 +194,28 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidDiv(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                       tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
+        )
+    }
+
+    override fun dl(
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        contenteditable: Boolean?,
+        dir: EDirection?,
+        hidden: Boolean?,
+        lang: String?,
+        spellcheck: Boolean?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        defineContent: KatydidDescriptionListContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatydidDl(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -194,8 +239,8 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidFieldSet(this, selector, key, accesskey, contenteditable, dir,
-                            disabled, form, hidden, lang, name, spellcheck, style, tabindex, title, translate,
-                            defineContent)
+                disabled, form, hidden, lang, name, spellcheck, style, tabindex, title, translate,
+                defineContent)
         )
     }
 
@@ -216,7 +261,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidFigCaption(this, selector, key, accesskey, contenteditable, dir,
-                              hidden, lang, spellcheck, style, tabindex, title, translate, defineContent)
+                hidden, lang, spellcheck, style, tabindex, title, translate, defineContent)
         )
     }
 
@@ -237,7 +282,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidFigure(this, selector, key, accesskey, contenteditable, dir,
-                          hidden, lang, spellcheck, style, tabindex, title, translate, defineContent)
+                hidden, lang, spellcheck, style, tabindex, title, translate, defineContent)
         )
     }
 
@@ -258,7 +303,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidFooter(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                          tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -287,8 +332,8 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidForm(this, selector, key, acceptCharset, accesskey, action, autocomplete, contenteditable, dir,
-                        enctype, hidden, lang, method, name, novalidate, spellcheck, style, tabindex, title,
-                        target, translate, defineContent)
+                enctype, hidden, lang, method, name, novalidate, spellcheck, style, tabindex, title,
+                target, translate, defineContent)
         )
     }
 
@@ -309,7 +354,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidH1(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                      tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -330,7 +375,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidH2(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                      tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -351,7 +396,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidH3(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                      tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -372,7 +417,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidH4(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                      tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -393,7 +438,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidH5(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                      tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -414,7 +459,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidH6(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                      tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -435,7 +480,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidHeader(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                          tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -456,7 +501,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidHr(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                      tabindex, title, translate, defineAttributes)
+                tabindex, title, translate, defineAttributes)
         )
     }
 
@@ -477,8 +522,8 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidLegend(this, selector, key, accesskey, contenteditable, dir,
-                          hidden, lang, spellcheck,
-                          style, tabindex, title, translate, defineContent)
+                hidden, lang, spellcheck,
+                style, tabindex, title, translate, defineContent)
         )
     }
 
@@ -523,7 +568,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidMain(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                        tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -544,7 +589,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidNav(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                       tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -568,7 +613,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidOl(this, selector, key, accesskey, contenteditable, dir, hidden, lang, reversed, spellcheck,
-                      start, style, tabindex, title, translate, type, defineContent)
+                start, style, tabindex, title, translate, type, defineContent)
         )
     }
 
@@ -589,7 +634,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidP(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                     tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -622,7 +667,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidPre(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                       tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -643,7 +688,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidSection(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                           tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -665,7 +710,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidTable(this, selector, key, accesskey, border, contenteditable, dir, hidden, lang, spellcheck, style,
-                         tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -698,7 +743,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidUl(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                      tabindex, title, translate, defineContent)
+                tabindex, title, translate, defineContent)
         )
     }
 

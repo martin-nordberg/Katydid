@@ -1,5 +1,5 @@
 //
-// (C) Copyright 2018 Martin E. Nordberg III
+// (C) Copyright 2019 Martin E. Nordberg III
 // Apache 2.0 License
 //
 
@@ -22,11 +22,13 @@ class MapTests {
         val vdomNode = katydid<Unit> {
 
             map("#mymap.styled", name = "myMap") {
+
                 area("#a1", alt = "Alternate text", coords = "100,100,40", download = "http://somewhere",
                     href = "https://elsewhere", hreflang = "EN", referrerpolicy = EReferrerPolicy.sameOrigin,
                     rel = EAnchorHtmlLinkType.bookmark, shape = EAreaShape.circle, type = "A hint!") {
                     attribute("target", "popup")
                 }
+
             }
 
         }
@@ -53,7 +55,6 @@ class MapTests {
         }
 
     }
-
 
 
 }
