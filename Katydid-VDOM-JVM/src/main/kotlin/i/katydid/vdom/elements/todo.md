@@ -15,7 +15,6 @@ Elements Not Yet Implemented
 * noscript (N/A)
 * script (too meta)
 
-* canvas
 * dialog
 * object
 * param
@@ -24,7 +23,7 @@ Elements Not Yet Implemented
 * rt
 * rtc
 * ruby
-* style
+* style (?)
 
 * template (too meta)
 
@@ -35,7 +34,6 @@ Constraints Not Addressed
 * The concept of "Transparent" content model (flow or phrasing)
   - a
   - audio
-  - canvas
   - del
   - ins
   - map

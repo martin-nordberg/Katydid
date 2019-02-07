@@ -15,6 +15,7 @@ import i.katydid.vdom.elements.forms.KatydidForm
 import i.katydid.vdom.elements.forms.KatydidLegend
 import i.katydid.vdom.elements.grouping.*
 import i.katydid.vdom.elements.interactive.KatydidDetails
+import i.katydid.vdom.elements.scripting.KatydidCanvas
 import i.katydid.vdom.elements.sections.*
 import i.katydid.vdom.elements.tabular.KatydidTable
 import o.katydid.vdom.builders.KatydidAttributesContentBuilder
@@ -25,10 +26,7 @@ import o.katydid.vdom.builders.lists.KatydidOrderedListContentBuilder
 import o.katydid.vdom.builders.lists.KatydidUnorderedListContentBuilder
 import o.katydid.vdom.builders.miscellaneous.KatydidDescriptionListContentBuilder
 import o.katydid.vdom.builders.tables.KatydidTableContentBuilder
-import o.katydid.vdom.types.EDirection
-import o.katydid.vdom.types.EFormEncodingType
-import o.katydid.vdom.types.EFormSubmissionMethod
-import o.katydid.vdom.types.EOrderedListType
+import o.katydid.vdom.types.*
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -130,6 +128,30 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
         element.addChildNode(
             KatydidBlockQuote(this, selector, key, accesskey, cite, contenteditable, dir, hidden, lang, spellcheck,
                 style, tabindex, title, translate, defineContent)
+        )
+    }
+
+    override fun canvas(
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        contenteditable: Boolean?,
+        dir: EDirection?,
+        height: Int?,
+        hidden: Boolean?,
+        lang: String?,
+        spellcheck: Boolean?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        width: Int?,
+        contentType: FlowContent,
+        defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatydidCanvas(this, selector, key, accesskey, contenteditable, dir, height,
+                hidden, lang, spellcheck, style, tabindex, title, translate, width, defineContent)
         )
     }
 

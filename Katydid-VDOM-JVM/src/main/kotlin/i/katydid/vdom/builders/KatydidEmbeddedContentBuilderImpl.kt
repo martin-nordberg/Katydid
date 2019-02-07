@@ -14,6 +14,7 @@ import i.katydid.vdom.builders.miscellaneous.KatydidTextContentBuilderImpl
 import i.katydid.vdom.elements.KatydidHtmlElementImpl
 import i.katydid.vdom.elements.embedded.*
 import i.katydid.vdom.elements.interactive.KatydidDetails
+import i.katydid.vdom.elements.scripting.KatydidCanvas
 import i.katydid.vdom.elements.text.KatydidComment
 import o.katydid.vdom.builders.KatydidAttributesContentBuilder
 import o.katydid.vdom.builders.KatydidEmbeddedContentBuilder
@@ -78,6 +79,30 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
             KatydidAudio(this, selector, key, accesskey, autoplay, contenteditable, controls,
                 crossorigin, dir, hidden, lang, loop, muted, preload, spellcheck, src, style,
                 tabindex, title, translate, defineContent)
+        )
+    }
+
+    override fun canvas(
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        contenteditable: Boolean?,
+        dir: EDirection?,
+        height: Int?,
+        hidden: Boolean?,
+        lang: String?,
+        spellcheck: Boolean?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        width: Int?,
+        contentType: EmbeddedContent,
+        defineContent: KatydidEmbeddedContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatydidCanvas(this, selector, key, accesskey, contenteditable, dir, height,
+                hidden, lang, spellcheck, style, tabindex, title, translate, width, defineContent)
         )
     }
 
@@ -267,6 +292,17 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
             KatydidVideo(this, selector, key, accesskey, autoplay, contenteditable, controls,
                 crossorigin, dir, height, hidden, lang, loop, muted, poster, preload, spellcheck, src, style,
                 tabindex, title, translate, width, defineContent)
+        )
+    }
+
+    /**
+     * Creates a new embedded content builder for the given child [element].
+     */
+    open fun withNoAddedRestrictions(element: KatydidHtmlElementImpl<Msg>): KatydidEmbeddedContentBuilder<Msg> {
+        return KatydidEmbeddedContentBuilderImpl(
+            element,
+            contentRestrictions,
+            dispatchMessages
         )
     }
 

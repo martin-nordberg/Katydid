@@ -13,6 +13,7 @@ import i.katydid.vdom.elements.edits.KatydidIns
 import i.katydid.vdom.elements.embedded.KatydidArea
 import i.katydid.vdom.elements.embedded.KatydidMap
 import i.katydid.vdom.elements.forms.*
+import i.katydid.vdom.elements.scripting.KatydidCanvas
 import i.katydid.vdom.elements.text.*
 import o.katydid.vdom.builders.KatydidAttributesContentBuilder
 import o.katydid.vdom.builders.KatydidPhrasingContentBuilder
@@ -237,6 +238,30 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
             KatydidButton(this, selector, key, accesskey, autofocus, contenteditable, dir, disabled, form, formaction,
                 formenctype, formmethod, formnovalidate, formtarget, hidden, lang,
                 name, spellcheck, style, tabindex, title, translate, type, value, defineContent)
+        )
+    }
+
+    override fun canvas(
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        contenteditable: Boolean?,
+        dir: EDirection?,
+        height: Int?,
+        hidden: Boolean?,
+        lang: String?,
+        spellcheck: Boolean?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        width: Int?,
+        contentType: PhrasingContent,
+        defineContent: KatydidPhrasingContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatydidCanvas(this, selector, key, accesskey, contenteditable, dir, height,
+                hidden, lang, spellcheck, style, tabindex, title, translate, width, defineContent)
         )
     }
 
@@ -1864,7 +1889,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
      * Creates a new content builder for the given child [element] that has the same restrictions
      * as this builder.
      */
-    open fun withNoAddedRestrictions(
+    override fun withNoAddedRestrictions(
         element: KatydidHtmlElementImpl<Msg>
     ): KatydidPhrasingContentBuilderImpl<Msg> {
         return KatydidPhrasingContentBuilderImpl(
