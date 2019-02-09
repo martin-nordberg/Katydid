@@ -24,6 +24,54 @@ interface KatydidFlowContentBuilder<in Msg> :
     KatydidSectioningContentBuilder<Msg> {
 
     /**
+     * Adds an `<a>` element with its attributes as the next child of the element under construction.
+     * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
+     * @param key a non-DOM key for this Katydid element that is unique among all the siblings of this element.
+     * @param accesskey a string specifying the HTML accesskey value.
+     * @param contenteditable whether the element has editable content.
+     * @param dir the left-to-right direction of text inside this element.
+     * @param download non-empty to download the resource with that file name instead of opening in the browser.
+     * @param hidden true if the element is to be hidden.
+     * @param href the URL linked to.
+     * @param hreflang the language of the document linked to.
+     * @param lang the language of text within this element.
+     * @param rel the relationship of the document to the linked document.
+     * @param rev the relationship of the linked document to this document.
+     * @param spellcheck whether the element is subject to spell checking.
+     * @param style a string containing CSS for this element.
+     * @param tabindex the tab index for the element.
+     * @param target the window or browsing context to open the link in.
+     * @param title a tool tip for the element.
+     * @param translate whether to translate text within this element.
+     * @param type the type of the linked resource
+     * @param contentType flag to explicitly specify content type to support content transparency.
+     * @param defineContent a DSL-style lambda that builds the child nodes of the new element.
+     */
+    fun a(
+        selector: String? = null,
+        key: Any? = null,
+        accesskey: Char? = null,
+        contenteditable: Boolean? = null,
+        dir: EDirection? = null,
+        download: String? = null,
+        hidden: Boolean? = null,
+        href: String? = null,
+        hreflang: String? = null,
+        lang: String? = null,
+        rel: Iterable<EAnchorHtmlLinkType>? = null,
+        rev: Iterable<EAnchorHtmlLinkType>? = null,
+        spellcheck: Boolean? = null,
+        style: String? = null,
+        tabindex: Int? = null,
+        target: String? = null,
+        title: String? = null,
+        translate: Boolean? = null,
+        type: String? = null,
+        contentType: FlowContent = FlowContent,
+        defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
+    )
+
+    /**
      * Adds an `<address>` element with its attributes as the next child of the element under construction.
      * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
      * @param key a non-DOM key for this Katydid element that is unique among all the siblings of this element.
@@ -105,6 +153,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param title a tool tip for the element.
      * @param translate whether to translate text within this element.
      * @param width horizontal dimension.
+     * @param contentType flag to explicitly specify content type to support content transparency.
      * @param defineContent a DSL-style lambda that builds the content of the new element.
      */
     fun canvas(

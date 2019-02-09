@@ -80,6 +80,7 @@ interface KatydidEmbeddedContentBuilder<in Msg> : KatydidAttributesContentBuilde
      * @param title a tool tip for the element.
      * @param translate whether to translate text within this element.
      * @param width horizontal dimension.
+     * @param contentType flag to explicitly specify content type to support content transparency.
      * @param defineContent a DSL-style lambda that builds the content of the new element.
      */
     fun canvas(

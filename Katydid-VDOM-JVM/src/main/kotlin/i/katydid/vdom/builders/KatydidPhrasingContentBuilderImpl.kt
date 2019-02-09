@@ -62,6 +62,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
         title: String?,
         translate: Boolean?,
         type: String?,
+        contentType: PhrasingContent,
         defineContent: KatydidPhrasingContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
@@ -1851,7 +1852,7 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
      * Creates a new content builder for the given child [element] that has the same restrictions
      * as this builder plus no interactive content allowed.
      */
-    fun withInteractiveContentNotAllowed(
+    open fun withInteractiveContentNotAllowed(
         element: KatydidHtmlElementImpl<Msg>
     ): KatydidPhrasingContentBuilderImpl<Msg> {
         return KatydidPhrasingContentBuilderImpl(

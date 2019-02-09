@@ -45,16 +45,16 @@ class CanvasTests {
                 width = 99,
                 contentType = FlowContent
             ) {
-                div( "#mydiv" ) {}
+                div("#mydiv") {}
             }
 
         }
 
         val html =
             """
-                |<canvas class="drawonit" height="120" id="mycanvas" width="99">
-                |  <div id="mydiv"></div>
-                |</canvas>
+            |<canvas class="drawonit" height="120" id="mycanvas" width="99">
+            |  <div id="mydiv"></div>
+            |</canvas>
             """.trimMargin()
 
         checkBuild(html, vdomNode)

@@ -40,7 +40,8 @@ interface KatydidPhrasingContentBuilder<in Msg> : KatydidEmbeddedContentBuilder<
      * @param target the window or browsing context to open the link in.
      * @param title a tool tip for the element.
      * @param translate whether to translate text within this element.
-     * @param type the type of the linked resource
+     * @param type the type of the linked resource.
+     * @param contentType flag to explicitly specify content type to support content transparency.
      * @param defineContent a DSL-style lambda that builds the child nodes of the new element.
      */
     fun a(
@@ -63,6 +64,7 @@ interface KatydidPhrasingContentBuilder<in Msg> : KatydidEmbeddedContentBuilder<
         title: String? = null,
         translate: Boolean? = null,
         type: String? = null,
+        contentType: PhrasingContent = PhrasingContent,
         defineContent: KatydidPhrasingContentBuilder<Msg>.() -> Unit
     )
 
@@ -348,6 +350,7 @@ interface KatydidPhrasingContentBuilder<in Msg> : KatydidEmbeddedContentBuilder<
      * @param title a tool tip for the element.
      * @param translate whether to translate text within this element.
      * @param width horizontal dimension.
+     * @param contentType flag to explicitly specify content type to support content transparency.
      * @param defineContent a DSL-style lambda that builds the content of the new element.
      */
     fun canvas(

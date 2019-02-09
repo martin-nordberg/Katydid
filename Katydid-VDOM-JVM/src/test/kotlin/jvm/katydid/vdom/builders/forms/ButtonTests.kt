@@ -7,12 +7,10 @@ package jvm.katydid.vdom.builders.forms
 
 import jvm.katydid.vdom.api.checkBuild
 import o.katydid.vdom.application.katydid
-import o.katydid.vdom.builders.KatydidPhrasingContentBuilder
-import o.katydid.vdom.types.EButtonType.*
-import o.katydid.vdom.types.EFormEncodingType.*
-import o.katydid.vdom.types.EFormSubmissionMethod.*
+import o.katydid.vdom.types.EButtonType.submit
+import o.katydid.vdom.types.EFormEncodingType.wwwFormUrlEncoded
+import o.katydid.vdom.types.EFormSubmissionMethod.post
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 
 @Suppress("RemoveRedundantBackticks")
 class ButtonTests {
@@ -55,125 +53,6 @@ class ButtonTests {
                      |</form>""".trimMargin()
 
         checkBuild(html, vdomNode)
-
-    }
-
-    @Test
-    fun `A button may not contain interactive content`() {
-
-        fun checkInteractiveContentDisallowed(
-            defineContent: KatydidPhrasingContentBuilder<Unit>.() -> Unit
-        ) {
-
-            assertThrows<IllegalStateException> {
-
-                katydid<Unit> {
-                    button(defineContent = defineContent)
-                }
-
-            }
-
-        }
-
-        checkInteractiveContentDisallowed {
-            a(href = "https://somewhere/path") {}
-        }
-
-        checkInteractiveContentDisallowed {
-            button {}
-        }
-
-        checkInteractiveContentDisallowed {
-            inputButton {}
-        }
-
-        checkInteractiveContentDisallowed {
-            inputCheckbox {}
-        }
-
-        checkInteractiveContentDisallowed {
-            inputColor {}
-        }
-
-        checkInteractiveContentDisallowed {
-            inputDate {}
-        }
-
-        checkInteractiveContentDisallowed {
-            inputDateTimeLocal {}
-        }
-
-        checkInteractiveContentDisallowed {
-            inputEmail {}
-        }
-
-        checkInteractiveContentDisallowed {
-            inputFile {}
-        }
-
-        checkInteractiveContentDisallowed {
-            inputImageButton(src = "bogus") {}
-        }
-
-        checkInteractiveContentDisallowed {
-            inputMonth {}
-        }
-
-        checkInteractiveContentDisallowed {
-            inputPassword {}
-        }
-
-        checkInteractiveContentDisallowed {
-            inputRadioButton {}
-        }
-
-        checkInteractiveContentDisallowed {
-            inputRange<Int> {}
-        }
-
-        checkInteractiveContentDisallowed {
-            inputResetButton {}
-        }
-
-        checkInteractiveContentDisallowed {
-            inputSearch {}
-        }
-
-        checkInteractiveContentDisallowed {
-            inputSubmitButton {}
-        }
-
-        checkInteractiveContentDisallowed {
-            inputTelephone {}
-        }
-
-        checkInteractiveContentDisallowed {
-            inputText {}
-        }
-
-        checkInteractiveContentDisallowed {
-            inputTime {}
-        }
-
-        checkInteractiveContentDisallowed {
-            inputUrl {}
-        }
-
-        checkInteractiveContentDisallowed {
-            inputWeek {}
-        }
-
-        checkInteractiveContentDisallowed {
-            label {}
-        }
-
-        checkInteractiveContentDisallowed {
-            select {}
-        }
-
-        checkInteractiveContentDisallowed {
-            textarea {}
-        }
 
     }
 

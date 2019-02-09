@@ -18,6 +18,7 @@ import i.katydid.vdom.elements.interactive.KatydidDetails
 import i.katydid.vdom.elements.scripting.KatydidCanvas
 import i.katydid.vdom.elements.sections.*
 import i.katydid.vdom.elements.tabular.KatydidTable
+import i.katydid.vdom.elements.text.KatydidA
 import o.katydid.vdom.builders.KatydidAttributesContentBuilder
 import o.katydid.vdom.builders.KatydidFlowContentBuilder
 import o.katydid.vdom.builders.KatydidPhrasingContentBuilder
@@ -45,6 +46,35 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     itsDispatchMessages: (messages: Iterable<Msg>) -> Unit
 ) : KatydidPhrasingContentBuilderImpl<Msg>(itsElement, itsContentRestrictions, itsDispatchMessages),
     KatydidFlowContentBuilder<Msg> {
+
+    override fun a(
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        contenteditable: Boolean?,
+        dir: EDirection?,
+        download: String?,
+        hidden: Boolean?,
+        href: String?,
+        hreflang: String?,
+        lang: String?,
+        rel: Iterable<EAnchorHtmlLinkType>?,
+        rev: Iterable<EAnchorHtmlLinkType>?,
+        spellcheck: Boolean?,
+        style: String?,
+        tabindex: Int?,
+        target: String?,
+        title: String?,
+        translate: Boolean?,
+        type: String?,
+        contentType: FlowContent,
+        defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatydidA(this, selector, key, accesskey, contenteditable, dir, download, hidden, href, hreflang, lang,
+                rel, rev, spellcheck, style, tabindex, target, title, translate, type, defineContent)
+        )
+    }
 
     override fun address(
         selector: String?,
@@ -820,6 +850,20 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
         return KatydidFlowContentBuilderImpl(
             element,
             contentRestrictions.withFormNotAllowed(),
+            dispatchMessages
+        )
+    }
+
+    /**
+     * Creates a new content builder for the given child [element] that has the same restrictions
+     * as this builder plus no interactive content allowed.
+     */
+    override fun withInteractiveContentNotAllowed(
+        element: KatydidHtmlElementImpl<Msg>
+    ): KatydidFlowContentBuilderImpl<Msg> {
+        return KatydidFlowContentBuilderImpl(
+            element,
+            contentRestrictions.withInteractiveContentNotAllowed(),
             dispatchMessages
         )
     }
