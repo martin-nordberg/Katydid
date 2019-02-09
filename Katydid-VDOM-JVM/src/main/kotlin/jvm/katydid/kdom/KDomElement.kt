@@ -1,5 +1,5 @@
 //
-// (C) Copyright 2017-2018 Martin E. Nordberg III
+// (C) Copyright 2017-2019 Martin E. Nordberg III
 // Apache 2.0 License
 //
 package jvm.katydid.kdom
