@@ -15,6 +15,7 @@ import i.katydid.vdom.elements.forms.KatydidForm
 import i.katydid.vdom.elements.forms.KatydidLegend
 import i.katydid.vdom.elements.grouping.*
 import i.katydid.vdom.elements.interactive.KatydidDetails
+import i.katydid.vdom.elements.interactive.KatydidDialog
 import i.katydid.vdom.elements.scripting.KatydidCanvas
 import i.katydid.vdom.elements.sections.*
 import i.katydid.vdom.elements.tabular.KatydidTable
@@ -225,6 +226,28 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidDetails(this, selector, key, accesskey, contenteditable, dir, hidden, lang, open, spellcheck,
+                style, tabindex, title, translate, defineContent)
+        )
+    }
+
+    override fun dialog(
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        contenteditable: Boolean?,
+        dir: EDirection?,
+        hidden: Boolean?,
+        lang: String?,
+        open: Boolean?,
+        spellcheck: Boolean?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatydidDialog(this, selector, key, accesskey, contenteditable, dir, hidden, lang, open, spellcheck,
                 style, tabindex, title, translate, defineContent)
         )
     }
