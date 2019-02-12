@@ -11,7 +11,31 @@ import o.katydid.vdom.builders.KatydidFlowContentBuilder
 import kotlin.browser.document
 import kotlin.browser.window
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//---------------------------------------------------------------------------------------------------------------------
+
+/**
+ * Interface to a "command" - a background task that results in new messages sent to the application,
+ * possibly asynchronously.
+ */
+typealias KatydidCommand<Msg> = ( dispatchMessages: (Iterable<Msg>) -> Unit ) -> Unit
+
+//---------------------------------------------------------------------------------------------------------------------
+
+/**
+ * The composite result of an application initialization or update. Consists of the application state plus
+ * an optional list of commands to be executed after the view has been updated to the new state.
+ */
+data class KatydidApplicationCycle<AppState, Msg>(
+
+    /** The new application state after the update. */
+    val newApplicationState: AppState,
+
+    /** A list of commands to execute after the update has been made. (These can also have asynchronous results). */
+    val commandsToExecute: List<KatydidCommand<Msg>> = listOf()
+
+)
+
+//---------------------------------------------------------------------------------------------------------------------
 
 /**
  * Interface defining a Katydid Elm-like application.
@@ -21,12 +45,12 @@ interface KatydidApplication<AppState, Msg> {
     /**
      * Initializes the application state for the first time.
      */
-    fun initialize(): AppState
+    fun initialize(): KatydidApplicationCycle<AppState, Msg>
 
     /**
      * Creates a new application state modified from given [applicationState] by the given [message].
      */
-    fun update(applicationState: AppState, message: Msg): AppState
+    fun update(applicationState: AppState, message: Msg): KatydidApplicationCycle<AppState, Msg>
 
     /**
      * Constructs the Katydid virtual DOM tree for given input application state [applicationState].
@@ -36,7 +60,7 @@ interface KatydidApplication<AppState, Msg> {
 
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//---------------------------------------------------------------------------------------------------------------------
 
 /**
  * Runs a given [application], putting its root DOM element in place of the existing element with
@@ -49,7 +73,7 @@ fun <AppState, Msg> runApplication(
 ) {
 
     // Initialize the application state.
-    var appState = application.initialize()
+    var (appState, initialCommands) = application.initialize()
 
     // Create the Katydid lifecycle for building and patching the view.
     val lifecycle = makeKatydidLifecycle<Msg>()
@@ -78,9 +102,14 @@ fun <AppState, Msg> runApplication(
             window.setTimeout(
                 {
 
+                    // State with an empty list of commands.
+                    val queuedCommands = mutableListOf<KatydidCommand<Msg>>()
+
                     // Update the model with each of the queued messages.
-                    for (queuedAction in queuedMessages) {
-                        appState = application.update(appState, queuedAction)
+                    for (queuedMessage in queuedMessages) {
+                        val updateResult = application.update(appState, queuedMessage)
+                        appState = updateResult.newApplicationState
+                        queuedCommands.addAll(updateResult.commandsToExecute)
                     }
 
                     // Empty the queue.
@@ -94,6 +123,11 @@ fun <AppState, Msg> runApplication(
 
                     // Patch the new view into the real DOM.
                     lifecycle.patch(oldAppVdomNode, appVdomNode)
+
+                    // Execute the commands
+                    for (cmd in queuedCommands) {
+                        cmd(::dispatch)
+                    }
 
                 },
                 0
@@ -114,9 +148,14 @@ fun <AppState, Msg> runApplication(
     // Build the DOM to match the initial view.
     lifecycle.build(appElement, appVdomNode)
 
+    // Execute the first commands
+    for (cmd in initialCommands) {
+        cmd(::dispatch)
+    }
+
     // Everything else happens in callbacks to dispatch() ....
 
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//---------------------------------------------------------------------------------------------------------------------
 

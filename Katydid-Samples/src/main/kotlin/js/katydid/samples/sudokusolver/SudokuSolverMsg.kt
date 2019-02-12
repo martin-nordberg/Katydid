@@ -10,7 +10,7 @@ package js.katydid.samples.sudokusolver
 /** Simple message for user events (clicked candidate). */
 sealed class SudokuSolverMsg
 
-/** Message when a candidate has been clicked. */
+/** Message when a candidate has been clicked and should be selected for its cell. */
 data class PlaceValueMsg(
     val rowIndex: Int,
     val columnIndex: Int,

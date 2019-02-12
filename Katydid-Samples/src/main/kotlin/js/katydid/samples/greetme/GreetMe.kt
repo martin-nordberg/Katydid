@@ -6,6 +6,7 @@
 package js.katydid.samples.greetme
 
 import js.katydid.vdom.api.KatydidApplication
+import js.katydid.vdom.api.KatydidApplicationCycle
 import js.katydid.vdom.api.runApplication
 import o.katydid.css.measurements.em
 import o.katydid.css.styles.builders.marginRight
@@ -37,22 +38,26 @@ class GreetMeApplication : KatydidApplication<GreetMeAppState, GreetMeMsg> {
     /**
      * Initializes the application state for the first time.
      */
-    override fun initialize(): GreetMeAppState {
-        return GreetMeAppState("Katydid User")
-    }
+    override fun initialize(): KatydidApplicationCycle<GreetMeAppState, GreetMeMsg> =
+        KatydidApplicationCycle(GreetMeAppState("Katydid User"))
 
     /**
      * Creates a new application state modified from given [applicationState] by the given [message].
+     * @return an update result holding the new application state.
      */
-    override fun update(applicationState: GreetMeAppState, message: GreetMeMsg): GreetMeAppState {
-        return GreetMeAppState(message.newName)
-    }
+    override fun update(
+        applicationState: GreetMeAppState,
+        message: GreetMeMsg
+    ): KatydidApplicationCycle<GreetMeAppState, GreetMeMsg> =
+        KatydidApplicationCycle(GreetMeAppState(message.newName))
 
     /**
      * Constructs the Katydid virtual DOM tree for given input application state [applicationState].
      * @return the root of the application's virtual DOM tree for given application state.
      */
-    override fun view(applicationState: GreetMeAppState): KatydidFlowContentBuilder<GreetMeMsg>.() -> Unit =
+    override fun view(
+        applicationState: GreetMeAppState
+    ): KatydidFlowContentBuilder<GreetMeMsg>.() -> Unit =
         {
 
             // This top level element replaces the "#app" div in greetme.html.

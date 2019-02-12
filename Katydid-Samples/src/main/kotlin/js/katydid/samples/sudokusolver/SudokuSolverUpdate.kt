@@ -5,6 +5,9 @@
 
 package js.katydid.samples.sudokusolver
 
+import js.katydid.vdom.api.KatydidCommand
+import js.katydid.vdom.api.KatydidApplicationCycle
+
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -14,14 +17,23 @@ package js.katydid.samples.sudokusolver
 fun updateSudokuSolver(
     applicationState: SudokuSolverAppState,
     message: SudokuSolverMsg
-): SudokuSolverAppState {
+): KatydidApplicationCycle<SudokuSolverAppState, SudokuSolverMsg> {
 
-    return when (message) {
+    val commandsToExecute = listOf<KatydidCommand<SudokuSolverMsg>>()
+
+    val newApplicationState = when (message) {
 
         is PlaceValueMsg     ->
             applicationState.withCellValueSet(
                 message.rowIndex, message.columnIndex, message.newValue
             )
+
+        is CheckAllowableMsg ->
+            applicationState
+        // TODO: create a command
+//            startAllowableCheck(
+//                message.rowIndex, message.columnIndex, message.newValue
+//            )
 
         is RemoveValueMsg    ->
             applicationState.withCellValueRemoved(
@@ -55,6 +67,8 @@ fun updateSudokuSolver(
             }
 
     }
+
+    return KatydidApplicationCycle(newApplicationState,commandsToExecute)
 
 }
 

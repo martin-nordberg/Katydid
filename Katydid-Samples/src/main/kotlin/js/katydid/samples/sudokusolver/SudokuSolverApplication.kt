@@ -7,6 +7,7 @@ package js.katydid.samples.sudokusolver
 
 import js.katydid.css.buildStyleElement
 import js.katydid.vdom.api.KatydidApplication
+import js.katydid.vdom.api.KatydidApplicationCycle
 import js.katydid.vdom.api.runApplication
 import o.katydid.css.colors.*
 import o.katydid.css.measurements.px
@@ -26,21 +27,25 @@ class SudokuSolverApplication : KatydidApplication<SudokuSolverAppState, SudokuS
     /**
      * Initializes the application state for the first time.
      */
-    override fun initialize(): SudokuSolverAppState {
-        return SudokuSolverAppState()
-    }
+    override fun initialize(): KatydidApplicationCycle<SudokuSolverAppState, SudokuSolverMsg> =
+        KatydidApplicationCycle(SudokuSolverAppState())
 
     /**
      * Creates a new application state modified from given [applicationState] by the given [message].
      */
-    override fun update(applicationState: SudokuSolverAppState, message: SudokuSolverMsg): SudokuSolverAppState =
+    override fun update(
+        applicationState: SudokuSolverAppState,
+        message: SudokuSolverMsg
+    ): KatydidApplicationCycle<SudokuSolverAppState, SudokuSolverMsg> =
         updateSudokuSolver(applicationState, message)
 
     /**
      * Constructs the Katydid virtual DOM tree for given input application state [applicationState].
      * @return a builder that builds the root of the application's virtual DOM tree for given application state.
      */
-    override fun view(applicationState: SudokuSolverAppState): KatydidFlowContentBuilder<SudokuSolverMsg>.() -> Unit =
+    override fun view(
+        applicationState: SudokuSolverAppState
+    ): KatydidFlowContentBuilder<SudokuSolverMsg>.() -> Unit =
         viewSudokuSolver(applicationState)
 
 }
