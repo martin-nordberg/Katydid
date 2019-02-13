@@ -3,6 +3,7 @@
 // Apache 2.0 License
 //
 
+import js.katydid.samples.digitalclock.digitalClockMain
 import js.katydid.samples.greetme.greetMeMain
 import js.katydid.samples.helloworld.helloWorldMain
 import js.katydid.samples.sudokusolver.sudokuSolverMain
@@ -22,17 +23,12 @@ fun main( args: Array<String> ) {
 
     console.log("Starting application: ", appName)
 
-    if (appName == "Hello World") {
-        helloWorldMain(args)
-    }
-    else if (appName == "Greet Me") {
-        greetMeMain(args)
-    }
-    else if (appName == "Sudoku Solver") {
-        sudokuSolverMain(args)
-    }
-    else {
-        console.log("ERROR: Unknown application: ", appName)
+    when (appName) {
+        "Hello World"   -> helloWorldMain(args)
+        "Greet Me"      -> greetMeMain(args)
+        "Sudoku Solver" -> sudokuSolverMain(args)
+        "Digital Clock" -> digitalClockMain(args)
+        else            -> console.log("ERROR: Unknown application: ", appName)
     }
 
     console.log("DONE")

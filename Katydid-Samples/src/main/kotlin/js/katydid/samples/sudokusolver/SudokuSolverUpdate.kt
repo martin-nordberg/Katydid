@@ -5,8 +5,8 @@
 
 package js.katydid.samples.sudokusolver
 
-import js.katydid.vdom.api.KatydidCommand
 import js.katydid.vdom.api.KatydidApplicationCycle
+import js.katydid.vdom.api.KatydidCommand
 
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -27,13 +27,6 @@ fun updateSudokuSolver(
             applicationState.withCellValueSet(
                 message.rowIndex, message.columnIndex, message.newValue
             )
-
-        is CheckAllowableMsg ->
-            applicationState
-        // TODO: create a command
-//            startAllowableCheck(
-//                message.rowIndex, message.columnIndex, message.newValue
-//            )
 
         is RemoveValueMsg    ->
             applicationState.withCellValueRemoved(
