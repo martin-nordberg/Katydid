@@ -39,6 +39,5 @@ Constraints Not Addressed
   - map
   - object
   - video
-* datalist (with phrasing content)
 
 

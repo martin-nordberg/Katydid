@@ -352,6 +352,29 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
         )
     }
 
+    override fun datalist(
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        contenteditable: Boolean?,
+        dir: EDirection?,
+        hidden: Boolean?,
+        lang: String?,
+        spellcheck: Boolean?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        contentType: PhrasingContent,
+        defineContent: KatydidPhrasingContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatydidDataList(this, selector, key, accesskey, contenteditable, dir,
+                hidden, lang, spellcheck, style,
+                tabindex, title, translate, contentType, defineContent)
+        )
+    }
+
     override fun del(
         selector: String?,
         key: Any?,

@@ -7,6 +7,7 @@ package jvm.katydid.vdom.builders.forms
 
 import jvm.katydid.vdom.api.checkBuild
 import o.katydid.vdom.application.katydid
+import o.katydid.vdom.types.PhrasingContent
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -90,6 +91,47 @@ class OptionTests {
                      |  <option>
                      |    Five
                      |  </option>
+                     |</datalist>""".trimMargin()
+
+        checkBuild(html, vdomNode)
+
+    }
+
+    @Test
+    fun `A datalist can have phrasing content instead`() {
+
+        val vdomNode = katydid<Unit> {
+
+            datalist( contentType = PhrasingContent ) {
+
+                select {
+
+                    option(key = 3, label = "Three", value = "3") {}
+
+                    option(key = 4, label = "Four") {
+                        text("4")
+                    }
+
+                    option(key = 5) {
+                        text("Five")
+                    }
+
+                }
+
+            }
+
+        }
+
+        val html = """<datalist>
+                     |  <select>
+                     |    <option label="Three" value="3"></option>
+                     |    <option label="Four">
+                     |      4
+                     |    </option>
+                     |    <option>
+                     |      Five
+                     |    </option>
+                     |  </select>
                      |</datalist>""".trimMargin()
 
         checkBuild(html, vdomNode)
