@@ -36,8 +36,8 @@ class TimeTests {
 
         val vdomNode = katydid<Unit> {
 
-            time() {
-                text("2018-05-24 12:10:03.000-05:00")
+            time {
+                +"2018-05-24 12:10:03.000-05:00"
             }
 
         }

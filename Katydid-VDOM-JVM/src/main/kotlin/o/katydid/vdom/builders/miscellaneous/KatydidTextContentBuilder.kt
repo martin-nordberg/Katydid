@@ -34,6 +34,13 @@ interface KatydidTextContentBuilder<in Msg> : KatydidAttributesContentBuilder<Ms
         key: Any? = null
     )
 
+    /**
+     * Allows using +"some text" for text content.
+     */
+    operator fun String.unaryPlus() {
+        this@KatydidTextContentBuilder.text( this )
+    }
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------

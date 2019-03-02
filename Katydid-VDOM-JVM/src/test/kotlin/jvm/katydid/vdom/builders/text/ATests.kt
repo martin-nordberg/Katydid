@@ -57,7 +57,7 @@ class ATests {
                 contentType = FlowContent
             ) {
                 div {
-                    text("Click Me")
+                    +"Click Me"
                 }
             }
 

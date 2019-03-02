@@ -2553,6 +2553,13 @@ interface KatydidPhrasingContentBuilder<in Msg> : KatydidEmbeddedContentBuilder<
     )
 
     /**
+     * Allows using +"some text" for text content.
+     */
+    operator fun String.unaryPlus() {
+        this@KatydidPhrasingContentBuilder.text( this )
+    }
+
+    /**
      * Adds a textarea element with given attributes as the next child of the element under construction.
      * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
      * @param key a non-DOM key for this Katydid element that is unique among all the siblings of this element.
