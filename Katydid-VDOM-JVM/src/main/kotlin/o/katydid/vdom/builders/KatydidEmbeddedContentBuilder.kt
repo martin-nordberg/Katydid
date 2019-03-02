@@ -5,7 +5,7 @@
 
 package o.katydid.vdom.builders
 
-import o.katydid.vdom.builders.media.KatydidMediaFlowContentBuilder
+import o.katydid.vdom.builders.media.KatydidMediaEmbeddedContentBuilder
 import o.katydid.vdom.builders.media.KatydidPictureContentBuilder
 import o.katydid.vdom.builders.miscellaneous.KatydidTextContentBuilder
 import o.katydid.vdom.types.*
@@ -61,7 +61,7 @@ interface KatydidEmbeddedContentBuilder<in Msg> : KatydidAttributesContentBuilde
         tabindex: Int? = null,
         title: String? = null,
         translate: Boolean? = null,
-        defineContent: KatydidMediaFlowContentBuilder<Msg>.() -> Unit
+        defineContent: KatydidMediaEmbeddedContentBuilder<Msg>.() -> Unit
     )
 
     /**
@@ -80,7 +80,6 @@ interface KatydidEmbeddedContentBuilder<in Msg> : KatydidAttributesContentBuilde
      * @param title a tool tip for the element.
      * @param translate whether to translate text within this element.
      * @param width horizontal dimension.
-     * @param contentType flag to explicitly specify content type to support content transparency.
      * @param defineContent a DSL-style lambda that builds the content of the new element.
      */
     fun canvas(
@@ -98,7 +97,6 @@ interface KatydidEmbeddedContentBuilder<in Msg> : KatydidAttributesContentBuilde
         title: String? = null,
         translate: Boolean? = null,
         width: Int? = null,
-        contentType: EmbeddedContent = EmbeddedContent,
         defineContent: KatydidEmbeddedContentBuilder<Msg>.() -> Unit
     )
 
@@ -324,7 +322,7 @@ interface KatydidEmbeddedContentBuilder<in Msg> : KatydidAttributesContentBuilde
         title: String? = null,
         translate: Boolean? = null,
         width: Int? = null,
-        defineContent: KatydidMediaFlowContentBuilder<Msg>.() -> Unit
+        defineContent: KatydidMediaEmbeddedContentBuilder<Msg>.() -> Unit
     )
 
 }

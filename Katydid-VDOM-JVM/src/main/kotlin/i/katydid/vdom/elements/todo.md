@@ -33,11 +33,9 @@ Constraints Not Addressed
 -------------------------
 
 * The concept of "Transparent" content model (flow or phrasing)
-  - audio
   - del
   - ins
   - map
   - object
-  - video
 
 

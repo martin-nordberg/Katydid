@@ -1,12 +1,12 @@
 //
-// (C) Copyright 2018-2019 Martin E. Nordberg III
+// (C) Copyright 2019 Martin E. Nordberg III
 // Apache 2.0 License
 //
 
 package o.katydid.vdom.builders.media
 
 import o.katydid.vdom.builders.KatydidAttributesContentBuilder
-import o.katydid.vdom.builders.KatydidFlowContentBuilder
+import o.katydid.vdom.builders.KatydidEmbeddedContentBuilder
 import o.katydid.vdom.types.EDirection
 import o.katydid.vdom.types.ETrackKind
 import o.katydid.vdom.types.MimeType
@@ -15,10 +15,9 @@ import o.katydid.vdom.types.MimeType
 
 /**
  * Builder DSL to create the contents of a media element.
- * TODO: To support "transparent" content, we need embedded / phrased / flow media content builders or at least runtime checking.
  */
-interface KatydidMediaFlowContentBuilder<in Msg>
-    : KatydidFlowContentBuilder<Msg> {
+interface KatydidMediaEmbeddedContentBuilder<in Msg>
+    : KatydidEmbeddedContentBuilder<Msg> {
 
     /**
      * Adds a `<source>` element with its attributes as the next child of the element under construction.

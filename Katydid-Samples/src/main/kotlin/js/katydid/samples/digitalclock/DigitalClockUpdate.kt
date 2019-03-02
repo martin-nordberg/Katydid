@@ -14,6 +14,7 @@ import js.katydid.vdom.api.KatydidCommand
 /**
  * Creates a new application state modified from given [applicationState] by the given [message].
  */
+@Suppress("UNUSED_PARAMETER")
 fun updateDigitalClock(
     applicationState: DigitalClockAppState,
     message: DigitalClockMsg
@@ -28,7 +29,7 @@ fun updateDigitalClock(
 
     }
 
-    return KatydidApplicationCycle(newApplicationState,commandsToExecute)
+    return KatydidApplicationCycle(newApplicationState, commandsToExecute)
 
 }
 

@@ -10,7 +10,9 @@ import o.katydid.vdom.application.katydid
 import o.katydid.vdom.types.ECorsSetting.anonymous
 import o.katydid.vdom.types.EPreloadHint.auto
 import o.katydid.vdom.types.ETrackKind.subtitles
+import o.katydid.vdom.types.FlowContent
 import o.katydid.vdom.types.MimeType
+import o.katydid.vdom.types.PhrasingContent
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -30,7 +32,8 @@ class AudioTests {
                 loop = true,
                 muted = true,
                 preload = auto,
-                src = "http://someurl/path"
+                src = "http://someurl/path",
+                contentType = PhrasingContent
             ) {}
 
         }
@@ -47,7 +50,7 @@ class AudioTests {
 
         val vdomNode = katydid<Unit> {
 
-            audio {
+            audio(contentType = FlowContent) {
 
                 source(
                     media = "mediastuff",

@@ -8,6 +8,7 @@ package o.katydid.vdom.builders
 import o.katydid.vdom.builders.details.KatydidDetailsFlowContentBuilder
 import o.katydid.vdom.builders.lists.KatydidOrderedListContentBuilder
 import o.katydid.vdom.builders.lists.KatydidUnorderedListContentBuilder
+import o.katydid.vdom.builders.media.KatydidMediaFlowContentBuilder
 import o.katydid.vdom.builders.miscellaneous.KatydidDescriptionListContentBuilder
 import o.katydid.vdom.builders.tables.KatydidTableContentBuilder
 import o.katydid.vdom.types.*
@@ -67,7 +68,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         title: String? = null,
         translate: Boolean? = null,
         type: String? = null,
-        contentType: FlowContent = FlowContent,
+        contentType: FlowContent,
         defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
     )
 
@@ -101,6 +102,54 @@ interface KatydidFlowContentBuilder<in Msg> :
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
+    )
+
+    /**
+     * Adds an `<audio>` element with its attributes as the next child of the element under construction.
+     * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
+     * @param key a non-DOM key for this Katydid element that is unique among all the siblings of this element.
+     * @param accesskey a string specifying the HTML accesskey value.
+     * @param autoplay hint that the media resource can be started automatically when the page is loaded.
+     * @param contenteditable whether the element has editable content.
+     * @param controls show user agent controls
+     * @param crossorigin how the element handles crossorigin requests.
+     * @param dir the left-to-right direction of text inside this element.
+     * @param hidden true if the element is to be hidden.
+     * @param lang the language of text within this element.
+     * @param loop whether to loop the media resource.
+     * @param muted whether to mute the media resource by default.
+     * @param preload hints how much buffering the media resource will likely need.
+     * @param spellcheck whether the element is subject to spell checking.
+     * @param src address of the resource.
+     * @param style a string containing CSS for this element.
+     * @param tabindex the tab index for the element.
+     * @param title a tool tip for the element.
+     * @param translate whether to translate text within this element.
+     * @param contentType parameter to indicate what kind of transparent content is needed.
+     * @param defineContent a DSL-style lambda that builds child elements of the new element.
+     */
+    fun audio(
+        selector: String? = null,
+        key: Any? = null,
+        accesskey: Char? = null,
+        autoplay: Boolean? = null,
+        contenteditable: Boolean? = null,
+        controls: Boolean? = null,
+        crossorigin: ECorsSetting? = null,
+        dir: EDirection? = null,
+        hidden: Boolean? = null,
+        lang: String? = null,
+        loop: Boolean? = null,
+        muted: Boolean? = null,
+        preload: EPreloadHint? = null,
+        spellcheck: Boolean? = null,
+        src: String? = null,
+        style: String? = null,
+        tabindex: Int? = null,
+        title: String? = null,
+        translate: Boolean? = null,
+        contentType: FlowContent,
+        defineContent: KatydidMediaFlowContentBuilder<Msg>.() -> Unit
     )
 
     /**
@@ -171,7 +220,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         title: String? = null,
         translate: Boolean? = null,
         width: Int? = null,
-        contentType: FlowContent = FlowContent,
+        contentType: FlowContent,
         defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
     )
 
@@ -785,6 +834,60 @@ interface KatydidFlowContentBuilder<in Msg> :
         title: String? = null,
         translate: Boolean? = null,
         defineContent: KatydidUnorderedListContentBuilder<Msg>.() -> Unit
+    )
+
+    /**
+     * Adds a `<video>` element with its attributes as the next child of the element under construction.
+     * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
+     * @param key a non-DOM key for this Katydid element that is unique among all the siblings of this element.
+     * @param accesskey a string specifying the HTML accesskey value.
+     * @param autoplay hint that the media resource can be started automatically when the page is loaded.
+     * @param contenteditable whether the element has editable content.
+     * @param controls show user agent controls
+     * @param crossorigin how the element handles crossorigin requests.
+     * @param dir the left-to-right direction of text inside this element.
+     * @param height vertical dimension.
+     * @param hidden true if the element is to be hidden.
+     * @param lang the language of text within this element.
+     * @param loop whether to loop the media resource.
+     * @param muted whether to mute the media resource by default.
+     * @param poster poster frame to show prior to video playback.
+     * @param preload hints how much buffering the media resource will likely need.
+     * @param spellcheck whether the element is subject to spell checking.
+     * @param src address of the resource.
+     * @param style a string containing CSS for this element.
+     * @param tabindex the tab index for the element.
+     * @param title a tool tip for the element.
+     * @param translate whether to translate text within this element.
+     * @param width horizontal dimension.
+     * @param contentType flag to explicitly specify content type to support content transparency.
+     * @param defineContent a DSL-style lambda that builds any custom attributes of the new element.
+     */
+    fun video(
+        selector: String? = null,
+        key: Any? = null,
+        accesskey: Char? = null,
+        autoplay: Boolean? = null,
+        contenteditable: Boolean? = null,
+        controls: Boolean? = null,
+        crossorigin: ECorsSetting? = null,
+        dir: EDirection? = null,
+        height: Int? = null,
+        hidden: Boolean? = null,
+        lang: String? = null,
+        loop: Boolean? = null,
+        muted: Boolean? = null,
+        poster: String? = null,
+        preload: EPreloadHint? = null,
+        spellcheck: Boolean? = null,
+        src: String? = null,
+        style: String? = null,
+        tabindex: Int? = null,
+        title: String? = null,
+        translate: Boolean? = null,
+        width: Int? = null,
+        contentType: FlowContent,
+        defineContent: KatydidMediaFlowContentBuilder<Msg>.() -> Unit
     )
 
 }

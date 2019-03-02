@@ -7,7 +7,7 @@ package i.katydid.vdom.builders
 
 import i.katydid.vdom.builders.details.KatydidDetailsFlowContentBuilderImpl
 import i.katydid.vdom.builders.media.KatydidMediaContentRestrictions
-import i.katydid.vdom.builders.media.KatydidMediaFlowContentBuilderImpl
+import i.katydid.vdom.builders.media.KatydidMediaEmbeddedContentBuilderImpl
 import i.katydid.vdom.builders.media.KatydidPictureContentBuilderImpl
 import i.katydid.vdom.builders.media.KatydidPictureContentRestrictions
 import i.katydid.vdom.builders.miscellaneous.KatydidTextContentBuilderImpl
@@ -19,7 +19,7 @@ import i.katydid.vdom.elements.text.KatydidComment
 import o.katydid.vdom.builders.KatydidAttributesContentBuilder
 import o.katydid.vdom.builders.KatydidEmbeddedContentBuilder
 import o.katydid.vdom.builders.details.KatydidDetailsFlowContentBuilder
-import o.katydid.vdom.builders.media.KatydidMediaFlowContentBuilder
+import o.katydid.vdom.builders.media.KatydidMediaEmbeddedContentBuilder
 import o.katydid.vdom.builders.media.KatydidPictureContentBuilder
 import o.katydid.vdom.builders.miscellaneous.KatydidTextContentBuilder
 import o.katydid.vdom.types.*
@@ -73,7 +73,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         tabindex: Int?,
         title: String?,
         translate: Boolean?,
-        defineContent: KatydidMediaFlowContentBuilder<Msg>.() -> Unit
+        defineContent: KatydidMediaEmbeddedContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
             KatydidAudio(this, selector, key, accesskey, autoplay, contenteditable, controls,
@@ -97,7 +97,6 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         title: String?,
         translate: Boolean?,
         width: Int?,
-        contentType: EmbeddedContent,
         defineContent: KatydidEmbeddedContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
@@ -213,9 +212,9 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
     /**
      * Creates a new media content builder for the given child [element].
      */
-    fun mediaFlowContent(element: KatydidHtmlElementImpl<Msg>,
-                         sourceAllowed: Boolean): KatydidMediaFlowContentBuilder<Msg> {
-        return KatydidMediaFlowContentBuilderImpl(
+    fun mediaEmbeddedContent(element: KatydidHtmlElementImpl<Msg>,
+                             sourceAllowed: Boolean): KatydidMediaEmbeddedContentBuilder<Msg> {
+        return KatydidMediaEmbeddedContentBuilderImpl(
             element,
             contentRestrictions.withMediaElementNotAllowed(),
             KatydidMediaContentRestrictions(sourceAllowed),
@@ -286,7 +285,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         title: String?,
         translate: Boolean?,
         width: Int?,
-        defineContent: KatydidMediaFlowContentBuilder<Msg>.() -> Unit
+        defineContent: KatydidMediaEmbeddedContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
             KatydidVideo(this, selector, key, accesskey, autoplay, contenteditable, controls,

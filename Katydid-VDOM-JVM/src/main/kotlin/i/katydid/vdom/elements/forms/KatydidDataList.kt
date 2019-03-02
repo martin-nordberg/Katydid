@@ -41,6 +41,7 @@ internal class KatydidDataList<Msg> : KatydidHtmlElementImpl<Msg> {
         this.freeze()
     }
 
+    @Suppress("UNUSED_PARAMETER")
     constructor(
         phrasingContent: KatydidPhrasingContentBuilderImpl<Msg>,
         selector: String?,

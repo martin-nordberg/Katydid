@@ -10,7 +10,9 @@ import o.katydid.vdom.application.katydid
 import o.katydid.vdom.types.ECorsSetting.anonymous
 import o.katydid.vdom.types.EPreloadHint.auto
 import o.katydid.vdom.types.ETrackKind.subtitles
+import o.katydid.vdom.types.FlowContent
 import o.katydid.vdom.types.MimeType
+import o.katydid.vdom.types.PhrasingContent
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -33,7 +35,8 @@ class VideoTests {
                 poster = "http://poster/path",
                 preload = auto,
                 src = "http://someurl/path",
-                width = 99
+                width = 99,
+                contentType = PhrasingContent
             ) {}
 
         }
@@ -50,7 +53,7 @@ class VideoTests {
 
         val vdomNode = katydid<Unit> {
 
-            video {
+            video(contentType = FlowContent) {
 
                 source(
                     media = "mediastuff",

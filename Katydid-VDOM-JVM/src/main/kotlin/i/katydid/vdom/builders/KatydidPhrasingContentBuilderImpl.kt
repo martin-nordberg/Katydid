@@ -5,18 +5,23 @@
 
 package i.katydid.vdom.builders
 
+import i.katydid.vdom.builders.media.KatydidMediaContentRestrictions
+import i.katydid.vdom.builders.media.KatydidMediaPhrasingContentBuilderImpl
 import i.katydid.vdom.builders.miscellaneous.KatydidOptGroupContentBuilderImpl
 import i.katydid.vdom.builders.miscellaneous.KatydidSelectContentBuilderImpl
 import i.katydid.vdom.elements.KatydidHtmlElementImpl
 import i.katydid.vdom.elements.edits.KatydidDel
 import i.katydid.vdom.elements.edits.KatydidIns
 import i.katydid.vdom.elements.embedded.KatydidArea
+import i.katydid.vdom.elements.embedded.KatydidAudio
 import i.katydid.vdom.elements.embedded.KatydidMap
+import i.katydid.vdom.elements.embedded.KatydidVideo
 import i.katydid.vdom.elements.forms.*
 import i.katydid.vdom.elements.scripting.KatydidCanvas
 import i.katydid.vdom.elements.text.*
 import o.katydid.vdom.builders.KatydidAttributesContentBuilder
 import o.katydid.vdom.builders.KatydidPhrasingContentBuilder
+import o.katydid.vdom.builders.media.KatydidMediaPhrasingContentBuilder
 import o.katydid.vdom.builders.miscellaneous.KatydidOptGroupContentBuilder
 import o.katydid.vdom.builders.miscellaneous.KatydidSelectContentBuilder
 import o.katydid.vdom.builders.miscellaneous.KatydidTextContentBuilder
@@ -62,7 +67,6 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
         title: String?,
         translate: Boolean?,
         type: String?,
-        contentType: PhrasingContent,
         defineContent: KatydidPhrasingContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
@@ -121,6 +125,36 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
             KatydidArea(this, selector, key, accesskey, alt, contenteditable, coords, dir, download,
                 hidden, href, hreflang, lang, referrerpolicy, rel, spellcheck, shape, style, tabindex, target,
                 title, translate, type, defineAttributes)
+        )
+    }
+
+    override fun audio(
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        autoplay: Boolean?,
+        contenteditable: Boolean?,
+        controls: Boolean?,
+        crossorigin: ECorsSetting?,
+        dir: EDirection?,
+        hidden: Boolean?,
+        lang: String?,
+        loop: Boolean?,
+        muted: Boolean?,
+        preload: EPreloadHint?,
+        spellcheck: Boolean?,
+        src: String?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        contentType: PhrasingContent,
+        defineContent: KatydidMediaPhrasingContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatydidAudio(this, selector, key, accesskey, autoplay, contenteditable, controls,
+                crossorigin, dir, hidden, lang, loop, muted, preload, spellcheck, src, style,
+                tabindex, title, translate, defineContent)
         )
     }
 
@@ -1339,6 +1373,19 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
         )
     }
 
+    /**
+     * Creates a new media content builder for the given child [element].
+     */
+    fun mediaPhrasingContent(element: KatydidHtmlElementImpl<Msg>,
+                             sourceAllowed: Boolean): KatydidMediaPhrasingContentBuilder<Msg> {
+        return KatydidMediaPhrasingContentBuilderImpl(
+            element,
+            contentRestrictions.withMediaElementNotAllowed(),
+            KatydidMediaContentRestrictions(sourceAllowed),
+            dispatchMessages
+        )
+    }
+
     override fun meter(
         selector: String?,
         key: Any?,
@@ -1806,6 +1853,39 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
         element.addChildNode(
             KatydidVar(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
                 tabindex, title, translate, defineContent)
+        )
+    }
+
+    override fun video(
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        autoplay: Boolean?,
+        contenteditable: Boolean?,
+        controls: Boolean?,
+        crossorigin: ECorsSetting?,
+        dir: EDirection?,
+        height: Int?,
+        hidden: Boolean?,
+        lang: String?,
+        loop: Boolean?,
+        muted: Boolean?,
+        poster: String?,
+        preload: EPreloadHint?,
+        spellcheck: Boolean?,
+        src: String?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        width: Int?,
+        contentType: PhrasingContent,
+        defineContent: KatydidMediaPhrasingContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatydidVideo(this, selector, key, accesskey, autoplay, contenteditable, controls,
+                crossorigin, dir, height, hidden, lang, loop, muted, poster, preload, spellcheck, src, style,
+                tabindex, title, translate, width, defineContent)
         )
     }
 

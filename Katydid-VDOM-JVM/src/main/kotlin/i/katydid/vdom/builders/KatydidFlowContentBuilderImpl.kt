@@ -7,9 +7,13 @@ package i.katydid.vdom.builders
 
 import i.katydid.vdom.builders.lists.KatydidOrderedListContentBuilderImpl
 import i.katydid.vdom.builders.lists.KatydidUnorderedListContentBuilderImpl
+import i.katydid.vdom.builders.media.KatydidMediaContentRestrictions
+import i.katydid.vdom.builders.media.KatydidMediaFlowContentBuilderImpl
 import i.katydid.vdom.builders.miscellaneous.KatydidDescriptionListContentBuilderImpl
 import i.katydid.vdom.builders.tables.KatydidTableContentBuilderImpl
 import i.katydid.vdom.elements.KatydidHtmlElementImpl
+import i.katydid.vdom.elements.embedded.KatydidAudio
+import i.katydid.vdom.elements.embedded.KatydidVideo
 import i.katydid.vdom.elements.forms.KatydidFieldSet
 import i.katydid.vdom.elements.forms.KatydidForm
 import i.katydid.vdom.elements.forms.KatydidLegend
@@ -26,6 +30,7 @@ import o.katydid.vdom.builders.KatydidPhrasingContentBuilder
 import o.katydid.vdom.builders.details.KatydidDetailsFlowContentBuilder
 import o.katydid.vdom.builders.lists.KatydidOrderedListContentBuilder
 import o.katydid.vdom.builders.lists.KatydidUnorderedListContentBuilder
+import o.katydid.vdom.builders.media.KatydidMediaFlowContentBuilder
 import o.katydid.vdom.builders.miscellaneous.KatydidDescriptionListContentBuilder
 import o.katydid.vdom.builders.tables.KatydidTableContentBuilder
 import o.katydid.vdom.types.*
@@ -136,6 +141,36 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidAside(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
+                tabindex, title, translate, defineContent)
+        )
+    }
+
+    override fun audio(
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        autoplay: Boolean?,
+        contenteditable: Boolean?,
+        controls: Boolean?,
+        crossorigin: ECorsSetting?,
+        dir: EDirection?,
+        hidden: Boolean?,
+        lang: String?,
+        loop: Boolean?,
+        muted: Boolean?,
+        preload: EPreloadHint?,
+        spellcheck: Boolean?,
+        src: String?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        contentType: FlowContent,
+        defineContent: KatydidMediaFlowContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatydidAudio(this, selector, key, accesskey, autoplay, contenteditable, controls,
+                crossorigin, dir, hidden, lang, loop, muted, preload, spellcheck, src, style,
                 tabindex, title, translate, defineContent)
         )
     }
@@ -647,6 +682,19 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
         )
     }
 
+    /**
+     * Creates a new media content builder for the given child [element].
+     */
+    fun mediaFlowContent(element: KatydidHtmlElementImpl<Msg>,
+                         sourceAllowed: Boolean): KatydidMediaFlowContentBuilder<Msg> {
+        return KatydidMediaFlowContentBuilderImpl(
+            element,
+            contentRestrictions.withMediaElementNotAllowed(),
+            KatydidMediaContentRestrictions(sourceAllowed),
+            dispatchMessages
+        )
+    }
+
     override fun nav(
         selector: String?,
         key: Any?,
@@ -822,6 +870,38 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
         )
     }
 
+    override fun video(
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        autoplay: Boolean?,
+        contenteditable: Boolean?,
+        controls: Boolean?,
+        crossorigin: ECorsSetting?,
+        dir: EDirection?,
+        height: Int?,
+        hidden: Boolean?,
+        lang: String?,
+        loop: Boolean?,
+        muted: Boolean?,
+        poster: String?,
+        preload: EPreloadHint?,
+        spellcheck: Boolean?,
+        src: String?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        width: Int?,
+        contentType: FlowContent,
+        defineContent: KatydidMediaFlowContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatydidVideo(this, selector, key, accesskey, autoplay, contenteditable, controls,
+                crossorigin, dir, height, hidden, lang, loop, muted, poster, preload, spellcheck, src, style,
+                tabindex, title, translate, width, defineContent)
+        )
+    }
 
     /**
      * Creates a new content builder for the given child [element] that has the same restrictions
