@@ -17,7 +17,7 @@ import o.katydid.css.types.ERepeatStyle
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Builder class for setting margin properties of a given [style] from a nested block.
+ * Builder class for setting background properties of a given [style] from a nested block.
  */
 @KatydidStyleBuilderDsl
 class KatydidBackgroundStyleBuilder(
