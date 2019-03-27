@@ -7,6 +7,7 @@ import js.katydid.samples.digitalclock.digitalClockMain
 import js.katydid.samples.greetme.greetMeMain
 import js.katydid.samples.helloworld.helloWorldMain
 import js.katydid.samples.sudokusolver.sudokuSolverMain
+import js.katydid.samples.wipcards.wipCardsMain
 import org.w3c.dom.get
 import kotlin.browser.window
 
@@ -28,6 +29,7 @@ fun main( args: Array<String> ) {
         "Greet Me"      -> greetMeMain(args)
         "Sudoku Solver" -> sudokuSolverMain(args)
         "Digital Clock" -> digitalClockMain(args)
+        "WIP Cards"     -> wipCardsMain(args)
         else            -> console.log("ERROR: Unknown application: ", appName)
     }
 
