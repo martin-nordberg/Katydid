@@ -3,8 +3,14 @@
 // Apache 2.0 License
 //
 
-package js.katydid.samples.wipcards
+package js.katydid.samples.wipcards.update
 
+import js.katydid.samples.wipcards.boardname.updateBoardName
+import js.katydid.samples.wipcards.messages.RenameColumnMsg
+import js.katydid.samples.wipcards.messages.WipCardsBoardNameMsg
+import js.katydid.samples.wipcards.messages.WipCardsMsg
+import js.katydid.samples.wipcards.model.WipCardsAppState
+import js.katydid.samples.wipcards.model.WipCardsColumn
 import js.katydid.vdom.api.KatydidApplicationCycle
 import js.katydid.vdom.api.KatydidCommand
 
@@ -23,10 +29,13 @@ fun updateWipCards(
 
     val newApplicationState = when (message) {
 
-        is RenameColumnMsg     ->
+        is RenameColumnMsg      ->
             applicationState.withColumnRenamed(
                 message.columnIndex, message.newName
             )
+
+        is WipCardsBoardNameMsg ->
+            applicationState.copy(board= updateBoardName(applicationState.board, message.boardNameMsg))
 
     }
 
@@ -37,22 +46,22 @@ fun updateWipCards(
 //---------------------------------------------------------------------------------------------------------------------
 
 /**
- * Clones this board but removes one previously placed value in row [rowIndex] and column [colIndex].
+ * Clones this board but renames the given column at index [columnIndex] to [newName].
  */
 fun WipCardsAppState.withColumnRenamed(columnIndex: Int, newName: String): WipCardsAppState {
 
-    val columns = mutableListOf<WipCardColumnState>()
+    val columns = mutableListOf<WipCardsColumn>()
 
-    for ( colIndex in 0..this.columns.size) {
-        if ( colIndex == columnIndex) {
-            columns.add(WipCardColumnState(newName))
+    for (colIndex in 0..this.columns.size) {
+        if (colIndex == columnIndex) {
+            columns.add(columns[colIndex].copy(name=newName))
         }
         else {
             columns.add(columns[colIndex])
         }
     }
 
-    return WipCardsAppState(columns.toList())
+    return this.copy(columns = columns.toList())
 
 }
 

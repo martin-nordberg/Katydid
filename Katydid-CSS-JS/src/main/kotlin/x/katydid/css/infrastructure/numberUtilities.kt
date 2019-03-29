@@ -5,8 +5,12 @@
 
 package x.katydid.css.infrastructure
 
+//---------------------------------------------------------------------------------------------------------------------
 
 fun makeDecimalString( number: Float) : String {
     val n = number.asDynamic().toFixed(3)
-    return n.trimEnd('0').trimEnd('.')
+    return n.toString().trimEnd('0').trimEnd('.')
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+

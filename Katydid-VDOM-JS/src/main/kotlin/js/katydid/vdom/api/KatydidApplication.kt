@@ -102,7 +102,7 @@ fun <AppState, Msg> runApplication(
             window.setTimeout(
                 {
 
-                    // State with an empty list of commands.
+                    // Start with an empty list of commands.
                     val queuedCommands = mutableListOf<KatydidCommand<Msg>>()
 
                     // Update the model with each of the queued messages.

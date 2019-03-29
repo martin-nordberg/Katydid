@@ -3,15 +3,15 @@
 // Apache 2.0 License
 //
 
-package js.katydid.samples.wipcards
+package js.katydid.samples.wipcards.model
 
-
+import js.katydid.samples.wipcards.boardname.WipCardsBoard
 
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /** Description of a WIP Cards column. */
-data class WipCardColumnState(
+data class WipCardsColumn(
 
     val name : String
 
@@ -22,7 +22,9 @@ data class WipCardColumnState(
 /** Top-level model for this application. */
 data class WipCardsAppState(
 
-    val columns: List<WipCardColumnState>
+    val board: WipCardsBoard,
+
+    val columns: List<WipCardsColumn>
 
 )
 

@@ -6,6 +6,13 @@
 package js.katydid.samples.wipcards
 
 import js.katydid.css.buildStyleElement
+import js.katydid.samples.wipcards.boardname.WipCardsBoard
+import js.katydid.samples.wipcards.boardname.boardNameStyles
+import js.katydid.samples.wipcards.messages.WipCardsMsg
+import js.katydid.samples.wipcards.model.WipCardsAppState
+import js.katydid.samples.wipcards.model.WipCardsColumn
+import js.katydid.samples.wipcards.update.updateWipCards
+import js.katydid.samples.wipcards.view.viewWipCards
 import js.katydid.vdom.api.KatydidApplication
 import js.katydid.vdom.api.KatydidApplicationCycle
 import js.katydid.vdom.api.runApplication
@@ -25,7 +32,8 @@ import kotlin.browser.document
 /**
  * Katydid application for a minimal kanban board.
  */
-class WipCardsApplication : KatydidApplication<WipCardsAppState, WipCardsMsg> {
+class WipCardsApplication :
+    KatydidApplication<WipCardsAppState, WipCardsMsg> {
 
     /**
      * Initializes the application state for the first time.
@@ -33,12 +41,13 @@ class WipCardsApplication : KatydidApplication<WipCardsAppState, WipCardsMsg> {
     override fun initialize(): KatydidApplicationCycle<WipCardsAppState, WipCardsMsg> =
         KatydidApplicationCycle(
             WipCardsAppState(
+                WipCardsBoard(name = "Sample"),
                 listOf(
-                    WipCardColumnState("To Do"),
-                    WipCardColumnState("Analyze"),
-                    WipCardColumnState("Implement"),
-                    WipCardColumnState("Test"),
-                    WipCardColumnState("Deploy")
+                    WipCardsColumn("To Do"),
+                    WipCardsColumn("Analyze"),
+                    WipCardsColumn("Implement"),
+                    WipCardsColumn("Test"),
+                    WipCardsColumn("Deploy")
                 )
             )
         )
@@ -71,11 +80,10 @@ class WipCardsApplication : KatydidApplication<WipCardsAppState, WipCardsMsg> {
 @Suppress("UNUSED_PARAMETER")
 fun wipCardsMain(args: Array<String>) {
 
-    val css = makeWipCardsStyleSheet()
-
-    val cssElement = document.getElementById("appStyleElement")!!
-
-    buildStyleElement(cssElement, css)
+    buildStyleElement(
+        document.getElementById("appStyleElement")!!,
+        makeWipCardsStyleSheet()
+    )
 
     runApplication(
         "app",
@@ -93,6 +101,8 @@ fun makeWipCardsStyleSheet() =
         "body" {
             fontFamily("Arial", "Helvetica Neue", "Helvetica", "sans-serif")
         }
+
+        boardNameStyles()
 
         /* TABLE */
         "table" {

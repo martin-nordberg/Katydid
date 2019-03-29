@@ -3,8 +3,12 @@
 // Apache 2.0 License
 //
 
-package js.katydid.samples.wipcards
+package js.katydid.samples.wipcards.view
 
+import js.katydid.samples.wipcards.boardname.viewBoardName
+import js.katydid.samples.wipcards.messages.WipCardsMsg
+import js.katydid.samples.wipcards.model.WipCardsAppState
+import js.katydid.samples.wipcards.model.WipCardsColumn
 import o.katydid.css.measurements.percent
 import o.katydid.css.styles.builders.width
 import o.katydid.css.styles.style
@@ -20,14 +24,16 @@ import o.katydid.vdom.builders.tables.KatydidTableContentBuilder
 fun viewWipCards(applicationState: WipCardsAppState): KatydidFlowContentBuilder<WipCardsMsg>.() -> Unit =
     {
 
-        // This top level element replaces the "#app" div in sudokusolver.html.
+        // This top level element replaces the "#app" div in wipcards.html.
         main("#wip-cards-app") {
 
-            table( ".board" ) {
+            viewBoardName(applicationState.board)
 
-                viewColumnHeadings( applicationState.columns )
+            table(".board") {
 
-                viewColumnContent( applicationState.columns )
+                viewColumnHeadings(applicationState.columns)
+
+                viewColumnContent(applicationState.columns)
 
             }
 
@@ -40,7 +46,7 @@ fun viewWipCards(applicationState: WipCardsAppState): KatydidFlowContentBuilder<
 /**
  * Generates one column heading of the WIP Cards board.
  */
-private fun KatydidTableContentBuilder<WipCardsMsg>.viewColumnHeadings(columns: List<WipCardColumnState>) {
+private fun KatydidTableContentBuilder<WipCardsMsg>.viewColumnHeadings(columns: List<WipCardsColumn>) {
 
     tr("#headings") {
 
@@ -50,12 +56,10 @@ private fun KatydidTableContentBuilder<WipCardsMsg>.viewColumnHeadings(columns: 
             th(".column-heading", key = colIndex) {
 
                 style {
-                    width((100/columns.size).percent)
+                    width((100 / columns.size).percent)
                 }
 
-                span(".columnName") {
-                    +column.name
-                }
+                +column.name
 
             }
 
@@ -72,7 +76,7 @@ private fun KatydidTableContentBuilder<WipCardsMsg>.viewColumnHeadings(columns: 
 /**
  * Generates one column of the WIP Cards board.
  */
-private fun KatydidTableContentBuilder<WipCardsMsg>.viewColumnContent(columns: List<WipCardColumnState>) {
+private fun KatydidTableContentBuilder<WipCardsMsg>.viewColumnContent(columns: List<WipCardsColumn>) {
 
     tr("#content") {
 
@@ -80,11 +84,7 @@ private fun KatydidTableContentBuilder<WipCardsMsg>.viewColumnContent(columns: L
         for (column in columns) {
 
             td(".column-content", key = colIndex) {
-
-                span(".columnName") {
-                    +"Place cards here"
-                }
-
+                +"Place cards here"
             }
 
             colIndex += 1
