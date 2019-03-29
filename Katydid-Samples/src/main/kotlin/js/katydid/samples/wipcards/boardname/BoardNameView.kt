@@ -5,8 +5,6 @@
 
 package js.katydid.samples.wipcards.boardname
 
-import js.katydid.samples.wipcards.messages.WipCardsBoardNameMsg
-import js.katydid.samples.wipcards.messages.WipCardsMsg
 import o.katydid.events.eventhandling.*
 import o.katydid.vdom.builders.KatydidFlowContentBuilder
 
@@ -15,7 +13,10 @@ import o.katydid.vdom.builders.KatydidFlowContentBuilder
 /**
  * Generates the board name heading of the WIP Cards board.
  */
-internal fun KatydidFlowContentBuilder<WipCardsMsg>.viewBoardName(board: WipCardsBoard) {
+internal fun <Msg> KatydidFlowContentBuilder<Msg>.viewBoardName(
+    board: WipCardsBoard,
+    makeMsg: (msg: BoardNameMsg) -> Msg
+) {
 
     if (board.isEditingInProgress) {
 
@@ -24,14 +25,14 @@ internal fun KatydidFlowContentBuilder<WipCardsMsg>.viewBoardName(board: WipCard
             inputText(value = board.name, autofocus = true) {
 
                 onblur {
-                    listOf(WipCardsBoardNameMsg(BoardNameStopEditingMsg))
+                    listOf(makeMsg(BoardNameStopEditingMsg))
                 }
 
                 onchange { event ->
                     val newValue = event.getTargetAttribute<String>("value").toString()
                     listOf(
-                        WipCardsBoardNameMsg(BoardNameStopEditingMsg),
-                        WipCardsBoardNameMsg(BoardNameRenameMsg(board.name, newValue))
+                        makeMsg(BoardNameStopEditingMsg),
+                        makeMsg(BoardNameRenameMsg(board.name, newValue))
                     )
                 }
 
@@ -43,11 +44,11 @@ internal fun KatydidFlowContentBuilder<WipCardsMsg>.viewBoardName(board: WipCard
     else {
 
         onmouseenter {
-            listOf(WipCardsBoardNameMsg(BoardNameStartHoveringMsg))
+            listOf(makeMsg(BoardNameStartHoveringMsg))
         }
 
         onmouseleave {
-            listOf(WipCardsBoardNameMsg(BoardNameStopHoveringMsg))
+            listOf(makeMsg(BoardNameStopHoveringMsg))
         }
 
         h1(".$cssClassName") {
@@ -59,7 +60,7 @@ internal fun KatydidFlowContentBuilder<WipCardsMsg>.viewBoardName(board: WipCard
                 button {
 
                     onclick {
-                        listOf(WipCardsBoardNameMsg(BoardNameStartEditingMsg))
+                        listOf(makeMsg(BoardNameStartEditingMsg))
                     }
 
                     +"Edit"

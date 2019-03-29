@@ -35,11 +35,11 @@ fun updateWipCards(
             )
 
         is WipCardsBoardNameMsg ->
-            applicationState.copy(board= updateBoardName(applicationState.board, message.boardNameMsg))
+            applicationState.copy(board = updateBoardName(applicationState.board, message.boardNameMsg))
 
     }
 
-    return KatydidApplicationCycle(newApplicationState,commandsToExecute)
+    return KatydidApplicationCycle(newApplicationState, commandsToExecute)
 
 }
 
@@ -54,7 +54,7 @@ fun WipCardsAppState.withColumnRenamed(columnIndex: Int, newName: String): WipCa
 
     for (colIndex in 0..this.columns.size) {
         if (colIndex == columnIndex) {
-            columns.add(columns[colIndex].copy(name=newName))
+            columns.add(columns[colIndex].copy(name = newName))
         }
         else {
             columns.add(columns[colIndex])
