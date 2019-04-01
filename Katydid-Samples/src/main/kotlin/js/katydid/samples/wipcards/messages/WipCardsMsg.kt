@@ -5,7 +5,7 @@
 
 package js.katydid.samples.wipcards.messages
 
-import js.katydid.samples.wipcards.boardname.BoardNameMsg
+import js.katydid.samples.wipcards.board.BoardNameMsg
 
 //---------------------------------------------------------------------------------------------------------------------
 

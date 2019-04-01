@@ -5,7 +5,7 @@
 
 package js.katydid.samples.wipcards.view
 
-import js.katydid.samples.wipcards.boardname.viewBoardName
+import js.katydid.samples.wipcards.board.viewBoardName
 import js.katydid.samples.wipcards.messages.WipCardsBoardNameMsg
 import js.katydid.samples.wipcards.messages.WipCardsMsg
 import js.katydid.samples.wipcards.model.WipCardsAppState
@@ -28,7 +28,7 @@ fun viewWipCards(applicationState: WipCardsAppState): KatydidFlowContentBuilder<
         // This top level element replaces the "#app" div in wipcards.html.
         main("#wip-cards-app") {
 
-            viewBoardName(applicationState.board) { msg -> WipCardsBoardNameMsg(msg) }
+            viewBoardName(applicationState.boardName) { msg -> WipCardsBoardNameMsg(msg) }
 
             table(".board") {
 

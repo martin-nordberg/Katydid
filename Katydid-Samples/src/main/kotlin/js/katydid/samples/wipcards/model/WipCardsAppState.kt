@@ -5,7 +5,7 @@
 
 package js.katydid.samples.wipcards.model
 
-import js.katydid.samples.wipcards.boardname.WipCardsBoard
+import js.katydid.samples.wipcards.board.BoardNameViewModel
 
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -22,7 +22,7 @@ data class WipCardsColumn(
 /** Top-level model for this application. */
 data class WipCardsAppState(
 
-    val board: WipCardsBoard,
+    val boardName: BoardNameViewModel,
 
     val columns: List<WipCardsColumn>
 

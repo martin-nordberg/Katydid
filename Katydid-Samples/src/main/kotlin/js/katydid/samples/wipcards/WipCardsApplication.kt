@@ -6,8 +6,8 @@
 package js.katydid.samples.wipcards
 
 import js.katydid.css.buildStyleElement
-import js.katydid.samples.wipcards.boardname.WipCardsBoard
-import js.katydid.samples.wipcards.boardname.boardNameStyles
+import js.katydid.samples.wipcards.board.BoardNameViewModel
+import js.katydid.samples.wipcards.board.boardNameStyles
 import js.katydid.samples.wipcards.messages.WipCardsMsg
 import js.katydid.samples.wipcards.model.WipCardsAppState
 import js.katydid.samples.wipcards.model.WipCardsColumn
@@ -41,7 +41,7 @@ class WipCardsApplication :
     override fun initialize(): KatydidApplicationCycle<WipCardsAppState, WipCardsMsg> =
         KatydidApplicationCycle(
             WipCardsAppState(
-                WipCardsBoard(name = "Sample"),
+                BoardNameViewModel(name = "Sample"),
                 listOf(
                     WipCardsColumn("To Do"),
                     WipCardsColumn("Analyze"),

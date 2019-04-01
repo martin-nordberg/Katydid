@@ -3,7 +3,7 @@
 // Apache 2.0 License
 //
 
-package js.katydid.samples.wipcards.boardname
+package js.katydid.samples.wipcards.board
 
 import o.katydid.css.colors.lightseagreen
 import o.katydid.css.measurements.px
@@ -20,7 +20,7 @@ import o.katydid.vdom.builders.KatydidFlowContentBuilder
 //---------------------------------------------------------------------------------------------------------------------
 
 /** Description of a WIP Cards board. */
-data class WipCardsBoard(
+data class BoardNameViewModel(
 
     val isEditButtonShown : Boolean = false,
 
@@ -69,29 +69,25 @@ private object BoardNameStopHoveringMsg : BoardNameMsg()
 
 //---------------------------------------------------------------------------------------------------------------------
 
-private const val cssClassName = "wipcards-board-name"
-
-//---------------------------------------------------------------------------------------------------------------------
-
 /**
- * Creates a new board state modified from given [board] by the given [message].
+ * Creates a new board name state modified from given [boardName] by the given [message].
  */
 fun updateBoardName(
-    board: WipCardsBoard,
+    boardName: BoardNameViewModel,
     message: BoardNameMsg
-): WipCardsBoard {
+): BoardNameViewModel {
 
     return when (message) {
 
-        is BoardNameRenameMsg        -> board.copy(name = message.newName)
+        is BoardNameRenameMsg        -> boardName.copy(name = message.newName)
 
-        is BoardNameStartEditingMsg  -> board.copy(isEditButtonShown = false, isEditingInProgress = true)
+        is BoardNameStartEditingMsg  -> boardName.copy(isEditButtonShown = false, isEditingInProgress = true)
 
-        is BoardNameStartHoveringMsg -> board.copy(isEditButtonShown = true)
+        is BoardNameStartHoveringMsg -> boardName.copy(isEditButtonShown = true)
 
-        is BoardNameStopEditingMsg   -> board.copy(isEditingInProgress = false)
+        is BoardNameStopEditingMsg   -> boardName.copy(isEditingInProgress = false)
 
-        is BoardNameStopHoveringMsg  -> board.copy(isEditButtonShown = false)
+        is BoardNameStopHoveringMsg  -> boardName.copy(isEditButtonShown = false)
 
     }
 
@@ -101,19 +97,23 @@ fun updateBoardName(
 // VIEW
 //---------------------------------------------------------------------------------------------------------------------
 
+private const val cssClassName = "wipcards-board-name"
+
+//---------------------------------------------------------------------------------------------------------------------
+
 /**
  * Generates the board name heading of the WIP Cards board.
  */
 internal fun <Msg> KatydidFlowContentBuilder<Msg>.viewBoardName(
-    board: WipCardsBoard,
+    boardName: BoardNameViewModel,
     makeMsg: (msg: BoardNameMsg) -> Msg
 ) {
 
-    if (board.isEditingInProgress) {
+    if (boardName.isEditingInProgress) {
 
         dialog(".$cssClassName", open = true) {
 
-            inputText(value = board.name, autofocus = true) {
+            inputText(value = boardName.name, autofocus = true) {
 
                 onblur {
                     listOf(makeMsg(BoardNameStopEditingMsg))
@@ -123,7 +123,7 @@ internal fun <Msg> KatydidFlowContentBuilder<Msg>.viewBoardName(
                     val newValue = event.getTargetAttribute<String>("value").toString()
                     listOf(
                         makeMsg(BoardNameStopEditingMsg),
-                        makeMsg(BoardNameRenameMsg(board.name, newValue))
+                        makeMsg(BoardNameRenameMsg(boardName.name, newValue))
                     )
                 }
 
@@ -144,9 +144,9 @@ internal fun <Msg> KatydidFlowContentBuilder<Msg>.viewBoardName(
 
         h1(".$cssClassName") {
 
-            +board.name
+            +boardName.name
 
-            if (board.isEditButtonShown) {
+            if (boardName.isEditButtonShown) {
 
                 button {
 

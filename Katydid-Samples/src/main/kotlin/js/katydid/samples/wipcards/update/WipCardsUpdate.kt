@@ -5,7 +5,7 @@
 
 package js.katydid.samples.wipcards.update
 
-import js.katydid.samples.wipcards.boardname.updateBoardName
+import js.katydid.samples.wipcards.board.updateBoardName
 import js.katydid.samples.wipcards.messages.RenameColumnMsg
 import js.katydid.samples.wipcards.messages.WipCardsBoardNameMsg
 import js.katydid.samples.wipcards.messages.WipCardsMsg
@@ -35,7 +35,7 @@ fun updateWipCards(
             )
 
         is WipCardsBoardNameMsg ->
-            applicationState.copy(board = updateBoardName(applicationState.board, message.boardNameMsg))
+            applicationState.copy(boardName = updateBoardName(applicationState.boardName, message.boardNameMsg))
 
     }
 
