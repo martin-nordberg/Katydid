@@ -91,13 +91,13 @@ fun <AppState, Msg> runApplication(
      */
     fun dispatch(messages: Iterable<Msg>) {
 
-        val timerNeeded = queuedMessages.isEmpty()
+        val processingNeeded = queuedMessages.isEmpty()
 
         // Queue the messages for execution when next idle.
         queuedMessages.addAll(messages)
 
         // If we already had something queued, then we already triggered the processing.
-        if (timerNeeded) {
+        if (processingNeeded) {
 
             window.setTimeout(
                 {
