@@ -5,6 +5,8 @@
 
 package js.katydid.samples.wipcards.domain.entities
 
+import js.katydid.samples.wipcards.infrastructure.addIf
+
 //---------------------------------------------------------------------------------------------------------------------
 
 data class Column(
@@ -17,25 +19,16 @@ data class Column(
 
 ) {
 
-    fun validate(): List<String> {
-
-        val result = mutableListOf<String>()
-
-        if (heading.isEmpty()) {
-            result.add("Column heading name must not be empty.")
+    val problems = listOf<String>()
+        .addIf(heading.isEmpty()) {
+            "Column heading name must not be empty."
         }
-
-        if (heading.isBlank()) {
-            result.add("Column heading must not be blank.")
+        .addIf(heading.isBlank()) {
+            "Column heading must not be blank."
         }
-
-        if (heading.length > 25) {
-            result.add("Column heading limited to 25 characters.")
+        .addIf(heading.length > 25) {
+            "Column heading limited to 25 characters."
         }
-
-        return result.toList()
-
-    }
 
 }
 

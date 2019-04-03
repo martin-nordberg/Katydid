@@ -6,18 +6,8 @@
 package js.katydid.samples.wipcards.domain.actions
 
 import js.katydid.samples.wipcards.domain.entities.Card
-
-//---------------------------------------------------------------------------------------------------------------------
-
-sealed class CardAction {
-
-    abstract fun apply(card: Card): Card
-
-    abstract fun canApply(card: Card): Boolean
-
-    abstract fun compensatingAction(): CardAction?
-
-}
+import js.katydid.samples.wipcards.infrastructure.Action
+import js.katydid.samples.wipcards.infrastructure.ResultWithErrors
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -27,20 +17,25 @@ data class ChangeCardDetailsAction(
 
     val oldDetails: String
 
-): CardAction() {
+) : Action<Card>() {
 
-    override fun apply(card: Card): Card {
-        require(canApply(card))
-        return card.copy(details = newDetails)
-    }
+    override fun apply(state: Card): ResultWithErrors<Card> {
 
-    override fun canApply(card: Card): Boolean {
-        return oldDetails == card.details
-        // TODO: true/false plus list of problems
+        if (oldDetails != state.details) {
+            return ResultWithErrors(
+                state,
+                listOf("Card details have already been changed.")
+            )
+        }
+
+        return ResultWithErrors(
+            state.copy(details = newDetails)
+        )
+
     }
 
     override fun compensatingAction() =
-        ChangeCardDetailsAction(oldDetails, newDetails)
+        ChangeCardDetailsAction(newDetails = oldDetails, oldDetails = newDetails)
 
 }
 
@@ -52,20 +47,25 @@ data class ChangeCardTitleAction(
 
     val oldTitle: String
 
-): CardAction() {
+) : Action<Card>() {
 
-    override fun apply(card: Card): Card {
-        require(canApply(card))
-        return card.copy(title = newTitle)
-    }
+    override fun apply(state: Card): ResultWithErrors<Card> {
 
-    override fun canApply(card: Card): Boolean {
-        return oldTitle == card.title
-        // TODO: true/false plus list of problems
+        if (oldTitle != state.details) {
+            return ResultWithErrors(
+                state,
+                listOf("Card title has already been changed.")
+            )
+        }
+
+        return ResultWithErrors(
+            state.copy(title = newTitle)
+        )
+
     }
 
     override fun compensatingAction() =
-        ChangeCardTitleAction(oldTitle, newTitle)
+        ChangeCardTitleAction(newTitle = oldTitle, oldTitle = newTitle)
 
 }
 

@@ -5,43 +5,36 @@
 
 package js.katydid.samples.wipcards.domain.entities
 
+import js.katydid.samples.wipcards.infrastructure.addIf
+
 //---------------------------------------------------------------------------------------------------------------------
 
 data class Board(
 
     val columns: List<Column>,
 
-    val name: String
+    val name: String,
+
+    val uuid: String
 
 ) {
 
-    fun validate(): List<String> {
-
-        val result = mutableListOf<String>()
-
-        if (name.isEmpty()) {
-            result.add("Board name must not be empty.")
+    val problems = listOf<String>()
+        .addIf(name.isEmpty()) {
+            "Board name must not be empty."
         }
-
-        if (name.isBlank()) {
-            result.add("Board name must not be blank.")
+        .addIf(name.isBlank()) {
+            "Board name must not be blank."
         }
-
-        if (name.length > 100) {
-            result.add("Board name limited to 100 characters.")
+        .addIf(name.length > 100) {
+            "Board name limited to 100 characters."
         }
-
-        if (columns.size < 2) {
-            result.add("Board must have at least two columns.")
+        .addIf(columns.size < 2 ) {
+            "Board must have at least two columns."
         }
-
-        if (columns.map { c -> c.heading }.toSet().size < columns.size) {
-            result.add("Columns must have unique names.")
+        .addIf(columns.map { c -> c.heading }.toSet().size < columns.size) {
+            "Columns must have unique headings within their board."
         }
-
-        return result.toList()
-
-    }
 
 }
 

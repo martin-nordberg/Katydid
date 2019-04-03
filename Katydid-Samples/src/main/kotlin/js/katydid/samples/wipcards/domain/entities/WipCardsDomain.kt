@@ -7,32 +7,21 @@ package js.katydid.samples.wipcards.domain.entities
 
 import js.katydid.samples.wipcards.infrastructure.addIf
 
-
 //---------------------------------------------------------------------------------------------------------------------
 
-data class Card(
+data class WipCardsDomain(
 
-    val details: String,
-
-    val title: String,
-
-    val uuid: String
+    val boards: List<Board>
 
 ) {
 
     val problems = listOf<String>()
-        .addIf(title.isEmpty()) {
-            "Card title name must not be empty."
+        .addIf(boards.isEmpty()) {
+            "No boards have been defined."
         }
-        .addIf(title.isBlank()) {
-            "Card title must not be blank."
-        }
-        .addIf(title.length > 100) {
-            "Card title limited to 100 characters."
-        }
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+
 
 

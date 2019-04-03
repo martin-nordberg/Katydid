@@ -5,53 +5,45 @@
 
 package js.katydid.samples.wipcards.domain.actions
 
+import js.katydid.samples.wipcards.domain.entities.Card
 import js.katydid.samples.wipcards.domain.entities.Column
+import js.katydid.samples.wipcards.infrastructure.Action
+import js.katydid.samples.wipcards.infrastructure.ResultWithErrors
 
 //---------------------------------------------------------------------------------------------------------------------
 
-sealed class ColumnAction {
+data class ChangeCardAction(
 
-    abstract fun apply(column: Column): Column
-
-    abstract fun canApply(column: Column): Boolean
-
-    abstract fun compensatingAction(): ColumnAction?
-
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-
-data class ChangeCardAction (
-
-    val cardAction: CardAction,
+    val cardAction: Action<Card>,
 
     val cardUuid: String
 
-) : ColumnAction() {
+) : Action<Column>() {
 
-    override fun apply(column: Column): Column {
+    override fun apply(state: Column): ResultWithErrors<Column> {
 
-        return column.copy(
-            cards = column.cards.map {
-                card -> if ( card.uuid == cardUuid ) cardAction.apply(card)
-                        else card
-            }
+        // Find the card to be changed or quit early with an error.
+        val foundCard = state.cards.find { column -> column.uuid == cardUuid }
+            ?: return ResultWithErrors(state, errors = listOf("Card not found."))
+
+        // Act on the card found.
+        val innerResult = cardAction.apply(foundCard)
+
+        // Combine the results and any errors.
+        return ResultWithErrors(
+            state.copy(
+                cards = state.cards.map { card ->
+                    if (card == foundCard) innerResult.result
+                    else card
+                }
+            ),
+            errors = innerResult.errors
         )
 
     }
 
-    override fun canApply(column: Column): Boolean {
-        return column.cards.find{ card -> card.uuid == cardUuid } != null
-        // TODO: true/false plus list of problems
-    }
-
-    override fun compensatingAction() : ColumnAction? {
-        val compensatingCardAction = cardAction.compensatingAction()
-
-        return if ( compensatingCardAction != null ) ChangeCardAction(compensatingCardAction,cardUuid)
-               else null
-
-    }
+    override fun compensatingAction(): Action<Column> =
+        ChangeCardAction(cardAction.compensatingAction(), cardUuid)
 
 }
 
@@ -63,20 +55,20 @@ data class ChangeColumnHeadingAction(
 
     val oldHeading: String
 
-): ColumnAction() {
+) : Action<Column>() {
 
-    override fun apply(column: Column): Column {
-        require(canApply(column))
-        return column.copy(heading = newHeading)
-    }
+    override fun apply(state: Column): ResultWithErrors<Column> {
 
-    override fun canApply(column: Column): Boolean {
-        return oldHeading == column.heading
-        // TODO: true/false plus list of problems
+        if (oldHeading != state.heading) {
+            return ResultWithErrors(state, listOf("Column heading has already been changed."))
+        }
+
+        return ResultWithErrors(state.copy(heading = newHeading))
+
     }
 
     override fun compensatingAction() =
-        ChangeColumnHeadingAction(newHeading=oldHeading, oldHeading=newHeading)
+        ChangeColumnHeadingAction(newHeading = oldHeading, oldHeading = newHeading)
 
 }
 
@@ -92,20 +84,22 @@ data class DeleteCardAction(
 
     val originalTitle: String
 
-): ColumnAction() {
+) : Action<Column>() {
 
-    override fun apply(column: Column): Column {
-        require(canApply(column))
-        return column.copy(cards=column.cards.filterNot { card -> card.uuid == cardUuid })
+    override fun apply(state: Column): ResultWithErrors<Column> {
+
+        if (state.cards.find { card -> card.uuid == cardUuid } == null) {
+            return ResultWithErrors(state, listOf("Card has already been deleted."))
+        }
+
+        return ResultWithErrors(
+            state.copy(cards = state.cards.filter { card -> card.uuid != cardUuid })
+        )
+
     }
 
-    override fun canApply(column: Column): Boolean {
-        return column.cards.find{ card -> card.uuid == cardUuid } != null
-        // TODO: true/false plus list of problems
-    }
-
-    override fun compensatingAction(): Nothing? =
-        null
+    override fun compensatingAction() =
+        throw UnsupportedOperationException("TODO")
 
 }
 
