@@ -5,6 +5,10 @@
 
 package js.katydid.samples.wipcards.board
 
+import js.katydid.samples.wipcards.domain.model.Board
+import js.katydid.samples.wipcards.domain.model.WipCardsDomain
+import js.katydid.samples.wipcards.domain.update.RenameBoardAction
+import js.katydid.samples.wipcards.infrastructure.Uuid
 import o.katydid.css.colors.lightseagreen
 import o.katydid.css.measurements.px
 import o.katydid.css.styles.builders.*
@@ -26,9 +30,15 @@ data class BoardNameViewModel(
 
     val isEditingInProgress : Boolean = false,
 
-    val name : String
+    val domain: WipCardsDomain,
 
-)
+    val boardUuid: Uuid<Board>
+
+) {
+
+    val name = domain.boardWithUuid(boardUuid)?.name ?: ""
+
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 // UPDATE
@@ -40,12 +50,17 @@ sealed class BoardNameMsg
 //---------------------------------------------------------------------------------------------------------------------
 
 /** Message when a board is to be renamed. */
-private data class BoardNameRenameMsg(
+private class BoardNameRenameMsg(
 
-    val oldName: String,
-    val newName: String
+    boardUuid: Uuid<Board>,
+    oldName: String,
+    newName: String
 
-) : BoardNameMsg()
+) : BoardNameMsg() {
+
+    val action = RenameBoardAction(boardUuid, newName, oldName)
+
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -79,7 +94,7 @@ fun updateBoardName(
 
     return when (message) {
 
-        is BoardNameRenameMsg        -> boardName.copy(name = message.newName)
+        is BoardNameRenameMsg        -> boardName.copy(domain = message.action.apply(boardName.domain))
 
         is BoardNameStartEditingMsg  -> boardName.copy(isEditButtonShown = false, isEditingInProgress = true)
 
@@ -123,7 +138,7 @@ internal fun <Msg> KatydidFlowContentBuilder<Msg>.viewBoardName(
                     val newValue = event.getTargetAttribute<String>("value").toString()
                     listOf(
                         makeMsg(BoardNameStopEditingMsg),
-                        makeMsg(BoardNameRenameMsg(boardName.name, newValue))
+                        makeMsg(BoardNameRenameMsg(boardName.boardUuid, boardName.name, newValue))
                     )
                 }
 

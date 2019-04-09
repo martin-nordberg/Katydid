@@ -6,25 +6,35 @@
 package js.katydid.samples.wipcards.model
 
 import js.katydid.samples.wipcards.board.BoardNameViewModel
+import js.katydid.samples.wipcards.domain.model.Board
+import js.katydid.samples.wipcards.domain.model.WipCardsDomain
+import js.katydid.samples.wipcards.infrastructure.Uuid
 
 
 //---------------------------------------------------------------------------------------------------------------------
 
-/** Description of a WIP Cards column. */
-data class WipCardsColumn(
+/** Top-level model for this application. */
+sealed class WipCardsUiState
 
-    val name : String
+//---------------------------------------------------------------------------------------------------------------------
 
-)
+/** Top-level model for this application. */
+data class WipCardsBoardUiState(
+
+    val boardUuid: Uuid<Board>,
+
+    val boardName: BoardNameViewModel
+
+) : WipCardsUiState()
 
 //---------------------------------------------------------------------------------------------------------------------
 
 /** Top-level model for this application. */
 data class WipCardsAppState(
 
-    val boardName: BoardNameViewModel,
+    val domain: WipCardsDomain,
 
-    val columns: List<WipCardsColumn>
+    val uiState: WipCardsUiState
 
 )
 

@@ -3,25 +3,19 @@
 // Apache 2.0 License
 //
 
-package js.katydid.samples.wipcards.domain.entities
-
-import js.katydid.samples.wipcards.infrastructure.addIf
+package js.katydid.samples.wipcards.infrastructure
 
 //---------------------------------------------------------------------------------------------------------------------
 
-data class WipCardsDomain(
+data class Uuid<State> (
 
-    val boards: List<Board>
+    val uuid: String
 
 ) {
 
-    val problems = listOf<String>()
-        .addIf(boards.isEmpty()) {
-            "No boards have been defined."
-        }
+    override fun toString() =
+        uuid
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-
-
-

@@ -10,7 +10,7 @@ import js.katydid.samples.wipcards.messages.RenameColumnMsg
 import js.katydid.samples.wipcards.messages.WipCardsBoardNameMsg
 import js.katydid.samples.wipcards.messages.WipCardsMsg
 import js.katydid.samples.wipcards.model.WipCardsAppState
-import js.katydid.samples.wipcards.model.WipCardsColumn
+import js.katydid.samples.wipcards.model.WipCardsBoardUiState
 import js.katydid.vdom.api.KatydidApplicationCycle
 import js.katydid.vdom.api.KatydidCommand
 
@@ -34,8 +34,17 @@ fun updateWipCards(
                 message.columnIndex, message.newName
             )
 
-        is WipCardsBoardNameMsg ->
-            applicationState.copy(boardName = updateBoardName(applicationState.boardName, message.boardNameMsg))
+        is WipCardsBoardNameMsg -> {
+            val oldUiState = applicationState.uiState as WipCardsBoardUiState
+            val newBoardName = updateBoardName(oldUiState.boardName, message.boardNameMsg)
+            applicationState.copy(
+                uiState = oldUiState.copy(boardName = newBoardName),
+                domain = newBoardName.domain
+            )
+        }
+
+//        is WipCardsDomainActionMsg ->
+//            applicationState.copy
 
     }
 
@@ -48,22 +57,22 @@ fun updateWipCards(
 /**
  * Clones this board but renames the given column at index [columnIndex] to [newName].
  */
-fun WipCardsAppState.withColumnRenamed(columnIndex: Int, newName: String): WipCardsAppState {
+fun WipCardsAppState.withColumnRenamed(columnIndex: Int, newName: String): WipCardsAppState = this
 
-    val columns = mutableListOf<WipCardsColumn>()
-
-    for (colIndex in 0..this.columns.size) {
-        if (colIndex == columnIndex) {
-            columns.add(columns[colIndex].copy(name = newName))
-        }
-        else {
-            columns.add(columns[colIndex])
-        }
-    }
-
-    return this.copy(columns = columns.toList())
-
-}
+//    val columns = mutableListOf<WipCardsColumn>()
+//
+//    for (colIndex in 0..this.columns.size) {
+//        if (colIndex == columnIndex) {
+//            columns.add(columns[colIndex].copy(name = newName))
+//        }
+//        else {
+//            columns.add(columns[colIndex])
+//        }
+//    }
+//
+//    return this.copy(columns = columns.toList())
+//
+//}
 
 //---------------------------------------------------------------------------------------------------------------------
 

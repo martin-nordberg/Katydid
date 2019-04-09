@@ -33,3 +33,12 @@ data class WipCardsBoardNameMsg(
 ) : WipCardsMsg()
 
 //---------------------------------------------------------------------------------------------------------------------
+
+/** A message affecting the domain model. */
+//data class WipCardsDomainActionMsg(
+//
+//    val action: Action<WipCardsDomain>
+//
+//) : WipCardsMsg()
+
+//---------------------------------------------------------------------------------------------------------------------

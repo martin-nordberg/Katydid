@@ -8,9 +8,13 @@ package js.katydid.samples.wipcards
 import js.katydid.css.buildStyleElement
 import js.katydid.samples.wipcards.board.BoardNameViewModel
 import js.katydid.samples.wipcards.board.boardNameStyles
+import js.katydid.samples.wipcards.domain.model.Board
+import js.katydid.samples.wipcards.domain.model.Column
+import js.katydid.samples.wipcards.domain.model.WipCardsDomain
+import js.katydid.samples.wipcards.infrastructure.Uuid
 import js.katydid.samples.wipcards.messages.WipCardsMsg
 import js.katydid.samples.wipcards.model.WipCardsAppState
-import js.katydid.samples.wipcards.model.WipCardsColumn
+import js.katydid.samples.wipcards.model.WipCardsBoardUiState
 import js.katydid.samples.wipcards.update.updateWipCards
 import js.katydid.samples.wipcards.view.viewWipCards
 import js.katydid.vdom.api.KatydidApplication
@@ -38,19 +42,49 @@ class WipCardsApplication :
     /**
      * Initializes the application state for the first time.
      */
-    override fun initialize(): KatydidApplicationCycle<WipCardsAppState, WipCardsMsg> =
-        KatydidApplicationCycle(
+    override fun initialize(): KatydidApplicationCycle<WipCardsAppState, WipCardsMsg> {
+
+        val boardUuid = Uuid<Board>("theBoard")
+        val board = Board(boardUuid, "Sample")
+
+        val col1Uuid = Uuid<Column>("col1")
+        val col1 = Column(col1Uuid,"To Do")
+
+        val col2Uuid = Uuid<Column>("col2")
+        val col2 = Column(col2Uuid,"Analyze")
+
+        val col3Uuid = Uuid<Column>("col3")
+        val col3 = Column(col3Uuid,"Implement")
+
+        val col4Uuid = Uuid<Column>("col4")
+        val col4 = Column(col4Uuid,"Test")
+
+        val col5Uuid = Uuid<Column>("col5")
+        val col5 = Column(col5Uuid,"Deploy")
+
+        val domain = WipCardsDomain()
+            .with(board).added()
+            .with(col1).added()
+            .with(board).contains(col1)
+            .with(col2).added()
+            .with(board).contains(col2)
+            .with(col3).added()
+            .with(board).contains(col3)
+            .with(col4).added()
+            .with(board).contains(col4)
+            .with(col5).added()
+            .with(board).contains(col5)
+
+        return KatydidApplicationCycle(
             WipCardsAppState(
-                BoardNameViewModel(name = "Sample"),
-                listOf(
-                    WipCardsColumn("To Do"),
-                    WipCardsColumn("Analyze"),
-                    WipCardsColumn("Implement"),
-                    WipCardsColumn("Test"),
-                    WipCardsColumn("Deploy")
+                domain = domain,
+                uiState = WipCardsBoardUiState(
+                    boardUuid = boardUuid,
+                    boardName = BoardNameViewModel(domain=domain,boardUuid = boardUuid)
                 )
             )
         )
+    }
 
     /**
      * Creates a new application state modified from given [applicationState] by the given [message].

@@ -6,10 +6,11 @@
 package js.katydid.samples.wipcards.view
 
 import js.katydid.samples.wipcards.board.viewBoardName
+import js.katydid.samples.wipcards.domain.model.Column
 import js.katydid.samples.wipcards.messages.WipCardsBoardNameMsg
 import js.katydid.samples.wipcards.messages.WipCardsMsg
 import js.katydid.samples.wipcards.model.WipCardsAppState
-import js.katydid.samples.wipcards.model.WipCardsColumn
+import js.katydid.samples.wipcards.model.WipCardsBoardUiState
 import o.katydid.css.measurements.percent
 import o.katydid.css.styles.builders.width
 import o.katydid.css.styles.style
@@ -28,13 +29,27 @@ fun viewWipCards(applicationState: WipCardsAppState): KatydidFlowContentBuilder<
         // This top level element replaces the "#app" div in wipcards.html.
         main("#wip-cards-app") {
 
-            viewBoardName(applicationState.boardName) { msg -> WipCardsBoardNameMsg(msg) }
+            when (applicationState.uiState) {
 
-            table(".board") {
+                is WipCardsBoardUiState -> with(applicationState.domain) {
 
-                viewColumnHeadings(applicationState.columns)
+                    viewBoardName(applicationState.uiState.boardName) { msg -> WipCardsBoardNameMsg(msg) }
 
-                viewColumnContent(applicationState.columns)
+                    table(".board") {
+
+                        val board = boardWithUuid(applicationState.uiState.boardUuid)
+
+                        if ( board != null ) {
+
+                            viewColumnHeadings(board.columns())
+
+                            viewColumnContent(board.columns())
+
+                        }
+
+                    }
+
+                }
 
             }
 
@@ -47,7 +62,7 @@ fun viewWipCards(applicationState: WipCardsAppState): KatydidFlowContentBuilder<
 /**
  * Generates one column heading of the WIP Cards board.
  */
-private fun KatydidTableContentBuilder<WipCardsMsg>.viewColumnHeadings(columns: List<WipCardsColumn>) {
+private fun KatydidTableContentBuilder<WipCardsMsg>.viewColumnHeadings(columns: List<Column>) {
 
     tr("#headings") {
 
@@ -60,7 +75,7 @@ private fun KatydidTableContentBuilder<WipCardsMsg>.viewColumnHeadings(columns: 
                     width((100 / columns.size).percent)
                 }
 
-                +column.name
+                +column.heading
 
             }
 
@@ -77,7 +92,7 @@ private fun KatydidTableContentBuilder<WipCardsMsg>.viewColumnHeadings(columns: 
 /**
  * Generates one column of the WIP Cards board.
  */
-private fun KatydidTableContentBuilder<WipCardsMsg>.viewColumnContent(columns: List<WipCardsColumn>) {
+private fun KatydidTableContentBuilder<WipCardsMsg>.viewColumnContent(columns: List<Column>) {
 
     tr("#content") {
 

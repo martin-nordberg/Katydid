@@ -9,7 +9,7 @@ package js.katydid.samples.wipcards.infrastructure
 
 abstract class Action<State> {
 
-    abstract fun apply(state: State): ResultWithErrors<State>
+    abstract fun apply(state: State): State
 
     abstract fun compensatingAction(): Action<State>
 
