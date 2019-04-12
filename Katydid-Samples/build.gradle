@@ -1,22 +1,5 @@
 
-buildscript {
-
-    repositories {
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-
-}
-
-group 'org.barlom'
-version '1.0-SNAPSHOT'
-
 buildDir = "$buildRoot/Katydid-Samples"
-
-apply plugin: 'kotlin2js'
 
 compileKotlin2Js {
     kotlinOptions.sourceMap = true
