@@ -1,4 +1,7 @@
 
+group 'org.katydid'
+version '1.0-SNAPSHOT'
+
 buildDir = "$buildRoot/Katydid-Samples"
 
 compileKotlin2Js {

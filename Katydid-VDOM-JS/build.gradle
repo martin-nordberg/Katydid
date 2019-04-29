@@ -1,4 +1,7 @@
 
+group 'org.katydid'
+version '1.0-SNAPSHOT'
+
 buildDir = "$buildRoot/Katydid-VDOM-JS"
 
 compileKotlin2Js {
