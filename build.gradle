@@ -7,8 +7,8 @@ buildscript {
     }
 
     dependencies {
-        classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.17"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.31"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.18"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.40"
     }
 
 }
@@ -17,11 +17,11 @@ subprojects {
 
     ext.buildRoot = "../../Katydid/build"
 
-    ext.dokka_version = '0.9.17'
+    ext.dokka_version = '0.9.18'
 
-    ext.junit_version = '5.2.0'
+    ext.junit_version = '5.4.2'
 
-    ext.kotlin_version = '1.3.31'
+    ext.kotlin_version = '1.3.40'
 
 
     repositories {
