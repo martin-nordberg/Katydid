@@ -12,7 +12,10 @@ import i.katydid.vdom.builders.media.KatydidMediaFlowContentBuilderImpl
 import i.katydid.vdom.builders.miscellaneous.KatydidDescriptionListContentBuilderImpl
 import i.katydid.vdom.builders.tables.KatydidTableContentBuilderImpl
 import i.katydid.vdom.elements.KatydidHtmlElementImpl
+import i.katydid.vdom.elements.edits.KatydidDel
+import i.katydid.vdom.elements.edits.KatydidIns
 import i.katydid.vdom.elements.embedded.KatydidAudio
+import i.katydid.vdom.elements.embedded.KatydidMap
 import i.katydid.vdom.elements.embedded.KatydidVideo
 import i.katydid.vdom.elements.forms.KatydidFieldSet
 import i.katydid.vdom.elements.forms.KatydidForm
@@ -34,6 +37,7 @@ import o.katydid.vdom.builders.media.KatydidMediaFlowContentBuilder
 import o.katydid.vdom.builders.miscellaneous.KatydidDescriptionListContentBuilder
 import o.katydid.vdom.builders.tables.KatydidTableContentBuilder
 import o.katydid.vdom.types.*
+import x.katydid.vdom.types.KatyDateTime
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -218,6 +222,30 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
         element.addChildNode(
             KatydidCanvas(this, selector, key, accesskey, contenteditable, dir, height,
                 hidden, lang, spellcheck, style, tabindex, title, translate, width, defineContent)
+        )
+    }
+
+    override fun del(
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        cite: String?,
+        contenteditable: Boolean?,
+        datetime: KatyDateTime?,
+        dir: EDirection?,
+        hidden: Boolean?,
+        lang: String?,
+        spellcheck: Boolean?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        contentType: FlowContent,
+        defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatydidDel(this, selector, key, accesskey, cite, contenteditable, datetime, dir, hidden,
+                lang, spellcheck, style, tabindex, title, translate, contentType, defineContent)
         )
     }
 
@@ -615,6 +643,30 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
         )
     }
 
+    override fun ins(
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        cite: String?,
+        contenteditable: Boolean?,
+        datetime: KatyDateTime?,
+        dir: EDirection?,
+        hidden: Boolean?,
+        lang: String?,
+        spellcheck: Boolean?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        contentType: FlowContent,
+        defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatydidIns(this, selector, key, accesskey, cite, contenteditable, datetime, dir, hidden,
+                lang, spellcheck, style, tabindex, title, translate, contentType, defineContent)
+        )
+    }
+
     override fun legend(
         selector: String?,
         key: Any?,
@@ -679,6 +731,29 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
         element.addChildNode(
             KatydidMain(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
                 tabindex, title, translate, defineContent)
+        )
+    }
+
+    override fun map(
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        contenteditable: Boolean?,
+        dir: EDirection?,
+        hidden: Boolean?,
+        lang: String?,
+        name: String?,
+        spellcheck: Boolean?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        contentType: FlowContent,
+        defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatydidMap(this, selector, key, accesskey, contenteditable, dir, hidden, lang, name,
+                spellcheck, style, tabindex, title, translate, contentType, defineContent)
         )
     }
 

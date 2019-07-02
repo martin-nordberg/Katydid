@@ -12,6 +12,7 @@ import o.katydid.vdom.builders.media.KatydidMediaFlowContentBuilder
 import o.katydid.vdom.builders.miscellaneous.KatydidDescriptionListContentBuilder
 import o.katydid.vdom.builders.tables.KatydidTableContentBuilder
 import o.katydid.vdom.types.*
+import x.katydid.vdom.types.KatyDateTime
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -289,6 +290,44 @@ interface KatydidFlowContentBuilder<in Msg> :
         tabindex: Int? = null,
         title: String? = null,
         translate: Boolean? = null,
+        defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
+    )
+
+    /**
+     * Adds a `<del>` element with its attributes as the next child of the element under construction.
+     * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
+     * @param key a non-DOM key for this Katydid element that is unique among all the siblings of this element.
+     * @param accesskey a string specifying the HTML accesskey value.
+     * @param cite a URL describing the change.
+     * @param contenteditable whether the element has editable content.
+     * @param datetime when the edit was made.
+     * @param dir the left-to-right direction of text inside this element.
+     * @param hidden true if the element is to be hidden.
+     * @param lang the language of text within this element.
+     * @param spellcheck whether the element is subject to spell checking.
+     * @param style a string containing CSS for this element.
+     * @param tabindex the tab index for the element.
+     * @param title a tool tip for the element.
+     * @param translate whether to translate text within this element.
+     * @param contentType flag to turn on flow content instead of phrasing content.
+     * @param defineContent a DSL-style lambda that builds the child nodes of the new element.
+     */
+    fun del(
+        selector: String? = null,
+        key: Any? = null,
+        accesskey: Char? = null,
+        cite: String? = null,
+        contenteditable: Boolean? = null,
+        datetime: KatyDateTime? = null,
+        dir: EDirection? = null,
+        hidden: Boolean? = null,
+        lang: String? = null,
+        spellcheck: Boolean? = null,
+        style: String? = null,
+        tabindex: Int? = null,
+        title: String? = null,
+        translate: Boolean? = null,
+        contentType: FlowContent,
         defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
     )
 
@@ -603,6 +642,44 @@ interface KatydidFlowContentBuilder<in Msg> :
     )
 
     /**
+     * Adds an `<ins>` element with its attributes as the next child of the element under construction.
+     * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
+     * @param key a non-DOM key for this Katydid element that is unique among all the siblings of this element.
+     * @param accesskey a string specifying the HTML accesskey value.
+     * @param cite a URL describing the change.
+     * @param contenteditable whether the element has editable content.
+     * @param datetime when the edit was made.
+     * @param dir the left-to-right direction of text inside this element.
+     * @param hidden true if the element is to be hidden.
+     * @param lang the language of text within this element.
+     * @param spellcheck whether the element is subject to spell checking.
+     * @param style a string containing CSS for this element.
+     * @param tabindex the tab index for the element.
+     * @param title a tool tip for the element.
+     * @param translate whether to translate text within this element.
+     * @param contentType flag to turn on flow content instead of phrasing content.
+     * @param defineContent a DSL-style lambda that builds the child nodes of the new element.
+     */
+    fun ins(
+        selector: String? = null,
+        key: Any? = null,
+        accesskey: Char? = null,
+        cite: String? = null,
+        contenteditable: Boolean? = null,
+        datetime: KatyDateTime? = null,
+        dir: EDirection? = null,
+        hidden: Boolean? = null,
+        lang: String? = null,
+        spellcheck: Boolean? = null,
+        style: String? = null,
+        tabindex: Int? = null,
+        title: String? = null,
+        translate: Boolean? = null,
+        contentType: FlowContent,
+        defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
+    )
+
+    /**
      * Adds a `<legend>` element as the next child of the element under construction.
      * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
      * @param key a non-DOM key for this Katydid element that is unique among all the siblings of this element.
@@ -663,6 +740,42 @@ interface KatydidFlowContentBuilder<in Msg> :
         tabindex: Int? = null,
         title: String? = null,
         translate: Boolean? = null,
+        defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
+    )
+
+    /**
+     * Adds a map element with its attributes as the next child of the element under construction.
+     * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
+     * @param key a non-DOM key for this Katydid element that is unique among all the siblings of this element.
+     * @param accesskey a string specifying the HTML accesskey value.
+     * @param contenteditable whether the element has editable content.
+     * @param dir the left-to-right direction of text inside this element.
+     * @param hidden true if the element is to be hidden.
+     * @param lang the language of text within this element.
+     * @param name the name of the image map to reference from an img usemap attribute.
+     * @param spellcheck whether the element is subject to spell checking.
+     * @param style a string containing CSS for this element.
+     * @param tabindex the tab index for the element.
+     * @param title a tool tip for the element.
+     * @param translate whether to translate text within this element.
+     * @param contentType flag to turn on flow content instead of phrasing content.
+     * @param defineContent a DSL-style lambda that builds the child nodes of the new element.
+     */
+    fun map(
+        selector: String? = null,
+        key: Any? = null,
+        accesskey: Char? = null,
+        contenteditable: Boolean? = null,
+        dir: EDirection? = null,
+        hidden: Boolean? = null,
+        lang: String? = null,
+        name: String? = null,
+        spellcheck: Boolean? = null,
+        style: String? = null,
+        tabindex: Int? = null,
+        title: String? = null,
+        translate: Boolean? = null,
+        contentType: FlowContent,
         defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
     )
 

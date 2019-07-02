@@ -19,7 +19,8 @@ import x.katydid.vdom.types.KatyTime
  * Virtual DOM builder for the case of HTML "phrasing content".
  */
 @Suppress("unused")
-interface KatydidPhrasingContentBuilder<in Msg> : KatydidEmbeddedContentBuilder<Msg> {
+interface KatydidPhrasingContentBuilder<in Msg>
+    : KatydidEmbeddedContentBuilder<Msg> {
 
     /**
      * Adds an `<a>` element with its attributes as the next child of the element under construction.
