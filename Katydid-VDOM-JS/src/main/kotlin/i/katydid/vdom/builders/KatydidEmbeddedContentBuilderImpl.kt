@@ -11,6 +11,7 @@ import i.katydid.vdom.builders.media.KatydidMediaEmbeddedContentBuilderImpl
 import i.katydid.vdom.builders.media.KatydidPictureContentBuilderImpl
 import i.katydid.vdom.builders.media.KatydidPictureContentRestrictions
 import i.katydid.vdom.builders.miscellaneous.KatydidTextContentBuilderImpl
+import i.katydid.vdom.builders.objects.KatydidObjectEmbeddedContentBuilderImpl
 import i.katydid.vdom.elements.KatydidHtmlElementImpl
 import i.katydid.vdom.elements.embedded.*
 import i.katydid.vdom.elements.interactive.KatydidDetails
@@ -22,6 +23,7 @@ import o.katydid.vdom.builders.details.KatydidDetailsFlowContentBuilder
 import o.katydid.vdom.builders.media.KatydidMediaEmbeddedContentBuilder
 import o.katydid.vdom.builders.media.KatydidPictureContentBuilder
 import o.katydid.vdom.builders.miscellaneous.KatydidTextContentBuilder
+import o.katydid.vdom.builders.objects.KatydidObjectEmbeddedContentBuilder
 import o.katydid.vdom.types.*
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -218,6 +220,46 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
             element,
             contentRestrictions.withMediaElementNotAllowed(),
             KatydidMediaContentRestrictions(sourceAllowed),
+            dispatchMessages
+        )
+    }
+
+    override fun `object`(
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        contenteditable: Boolean?,
+        data: String?,
+        dir: EDirection?,
+        form: String?,
+        height: Int?,
+        hidden: Boolean?,
+        lang: String?,
+        name: String?,
+        spellcheck: Boolean?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        type: MimeType?,
+        typemustmatch: Boolean?,
+        width: Int?,
+        defineContent: KatydidObjectEmbeddedContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatydidObject(this, selector, key, accesskey, contenteditable, data, dir, form, height,
+                hidden, lang, name, spellcheck, style, tabindex, title, translate, type, typemustmatch,
+                width, defineContent)
+        )
+    }
+
+    /**
+     * Creates a new object content builder for the given child [element].
+     */
+    fun objectEmbeddedContent(element: KatydidObject<Msg>): KatydidObjectEmbeddedContentBuilder<Msg> {
+        return KatydidObjectEmbeddedContentBuilderImpl(
+            element,
+            contentRestrictions /*TODO: withParamAllowed*/,
             dispatchMessages
         )
     }

@@ -8,6 +8,7 @@ package o.katydid.vdom.builders
 import o.katydid.vdom.builders.media.KatydidMediaEmbeddedContentBuilder
 import o.katydid.vdom.builders.media.KatydidPictureContentBuilder
 import o.katydid.vdom.builders.miscellaneous.KatydidTextContentBuilder
+import o.katydid.vdom.builders.objects.KatydidObjectEmbeddedContentBuilder
 import o.katydid.vdom.types.*
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -239,6 +240,52 @@ interface KatydidEmbeddedContentBuilder<in Msg> : KatydidAttributesContentBuilde
         usemap: String? = null,
         width: Int? = null,
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
+    )
+
+    /**
+     * Adds an `<object>` element with its attributes as the next child of the element under construction.
+     * @param selector the "selector" for the element, e.g. "#myid.my-class.my-other-class".
+     * @param key a non-DOM key for this Katydid element that is unique among all the siblings of this element.
+     * @param accesskey a string specifying the HTML accesskey value.
+     * @param contenteditable whether the element has editable content.
+     * @param data the address of the resource.
+     * @param dir the left-to-right direction of text inside this element.
+     * @param form associates the control with a form element.
+     * @param height the vertical dimension.
+     * @param hidden true if the element is to be hidden.
+     * @param lang the language of text within this element.
+     * @param name the name of the nested browsing context.
+     * @param spellcheck whether the element is subject to spell checking.
+     * @param style a string containing CSS for this element.
+     * @param tabindex the tab index for the element.
+     * @param title a tool tip for the element.
+     * @param translate whether to translate text within this element.
+     * @param type the MIME type of the embedded resource.
+     * @param typemustmatch whether the type attribute and the Content-Type value need to match for the resource to be used.
+     * @param width the horizontal dimension.
+     * @param defineContent a DSL-style lambda that builds any custom attributes of the new element.
+     */
+    fun `object`(
+        selector: String? = null,
+        key: Any? = null,
+        accesskey: Char? = null,
+        contenteditable: Boolean? = null,
+        data: String? = null,
+        dir: EDirection? = null,
+        form: String? = null,
+        height: Int? = null,
+        hidden: Boolean? = null,
+        lang: String? = null,
+        name: String? = null,
+        spellcheck: Boolean? = null,
+        style: String? = null,
+        tabindex: Int? = null,
+        title: String? = null,
+        translate: Boolean? = null,
+        type: MimeType? = null,
+        typemustmatch: Boolean? = null,
+        width: Int? = null,
+        defineContent: KatydidObjectEmbeddedContentBuilder<Msg>.() -> Unit
     )
 
     /**
