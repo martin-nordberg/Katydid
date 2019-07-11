@@ -8,7 +8,11 @@ package i.katydid.vdom.builders.objects
 import i.katydid.vdom.builders.KatydidContentRestrictions
 import i.katydid.vdom.builders.KatydidEmbeddedContentBuilderImpl
 import i.katydid.vdom.elements.KatydidHtmlElementImpl
+import i.katydid.vdom.elements.embedded.KatydidParam
+import i.katydid.vdom.elements.embedded.KatydidSource
+import o.katydid.vdom.builders.KatydidAttributesContentBuilder
 import o.katydid.vdom.builders.objects.KatydidObjectEmbeddedContentBuilder
+import o.katydid.vdom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -27,7 +31,31 @@ internal class KatydidObjectEmbeddedContentBuilderImpl<Msg>(
 ) : KatydidEmbeddedContentBuilderImpl<Msg>(itsElement, itsContentRestrictions, itsDispatchMessages),
     KatydidObjectEmbeddedContentBuilder<Msg> {
 
-    // TODO: param
+    override fun param(
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        contenteditable: Boolean?,
+        dir: EDirection?,
+        hidden: Boolean?,
+        lang: String?,
+        name: String?,
+        spellcheck: Boolean?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        value: String?,
+        defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
+    ) {
+        contentRestrictions.confirmParamAllowed();
+
+        element.addChildNode(
+            KatydidParam(this, selector, key, accesskey, contenteditable, dir,
+                hidden, lang, name, spellcheck, style,
+                tabindex, title, translate, value, defineAttributes)
+        )
+    }
 
 }
 

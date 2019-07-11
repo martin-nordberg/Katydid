@@ -24,8 +24,6 @@ Elements Not Yet Implemented
 * rtc
 * ruby
 
-* style (?)
-
 * template (too meta)
 
 
@@ -36,3 +34,7 @@ Constraints Not Addressed
   - object
 
 
+Global Attribute
+----------------
+
+* draggable

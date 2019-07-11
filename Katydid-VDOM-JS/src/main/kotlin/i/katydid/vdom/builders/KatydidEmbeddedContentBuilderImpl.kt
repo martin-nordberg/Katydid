@@ -259,7 +259,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
     fun objectEmbeddedContent(element: KatydidObject<Msg>): KatydidObjectEmbeddedContentBuilder<Msg> {
         return KatydidObjectEmbeddedContentBuilderImpl(
             element,
-            contentRestrictions /*TODO: withParamAllowed*/,
+            contentRestrictions.withParamAllowed(),
             dispatchMessages
         )
     }
