@@ -9,7 +9,6 @@ import i.katydid.vdom.builders.KatydidContentRestrictions
 import i.katydid.vdom.builders.KatydidEmbeddedContentBuilderImpl
 import i.katydid.vdom.elements.KatydidHtmlElementImpl
 import i.katydid.vdom.elements.embedded.KatydidParam
-import i.katydid.vdom.elements.embedded.KatydidSource
 import o.katydid.vdom.builders.KatydidAttributesContentBuilder
 import o.katydid.vdom.builders.objects.KatydidObjectEmbeddedContentBuilder
 import o.katydid.vdom.types.EDirection

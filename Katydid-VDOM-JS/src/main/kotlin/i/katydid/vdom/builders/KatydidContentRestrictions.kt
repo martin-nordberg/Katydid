@@ -26,7 +26,7 @@ internal class KatydidContentRestrictions(
     private val mainAllowed: Boolean,
     private val mediaElementAllowed: Boolean,
     private val meterAllowed: Boolean,
-    private val paramAllowed: Boolean,
+    private var paramProhibited: Boolean,
     private val progressAllowed: Boolean,
     private val sectioningAllowed: Boolean,
     private val tableAllowed: Boolean
@@ -79,7 +79,7 @@ internal class KatydidContentRestrictions(
         mainAllowed: Boolean = true,
         mediaElementAllowed: Boolean = true,
         meterAllowed: Boolean = true,
-        paramAllowed: Boolean = false,
+        paramProhibited: Boolean = true,
         progressAllowed: Boolean = true,
         sectioningAllowed: Boolean = true,
         tableAllowed: Boolean = true
@@ -99,7 +99,7 @@ internal class KatydidContentRestrictions(
         original.mainAllowed && mainAllowed,
         original.mediaElementAllowed && mediaElementAllowed,
         original.meterAllowed && meterAllowed,
-        original.paramAllowed || paramAllowed,
+        original.paramProhibited && paramProhibited,
         original.progressAllowed && progressAllowed,
         original.sectioningAllowed && sectioningAllowed,
         original.tableAllowed && tableAllowed
@@ -237,7 +237,7 @@ internal class KatydidContentRestrictions(
      * @throws IllegalStateException if `<param>` is not allowed.
      */
     fun confirmParamAllowed() {
-        check(paramAllowed) { "Element type <param> not allowed here." }
+        check(!paramProhibited) { "Element type <param> not allowed here." }
     }
 
     /**
@@ -262,6 +262,13 @@ internal class KatydidContentRestrictions(
      */
     fun confirmTableAllowed() {
         check(tableAllowed) { "Element type <table> not allowed here." }
+    }
+
+    /**
+     * Prohibits `<param>` elements in further content.
+     */
+    fun prohibitParam() {
+        paramProhibited = true
     }
 
     /**
@@ -388,7 +395,7 @@ internal class KatydidContentRestrictions(
      * Clones this content restriction object but with `<param>` elements allowed.
      */
     fun withParamAllowed(): KatydidContentRestrictions {
-        return KatydidContentRestrictions(this, paramAllowed = true)
+        return KatydidContentRestrictions(this, paramProhibited = false)
     }
 
     /**

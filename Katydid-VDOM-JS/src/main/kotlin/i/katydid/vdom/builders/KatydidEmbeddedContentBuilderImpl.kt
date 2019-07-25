@@ -77,6 +77,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         translate: Boolean?,
         defineContent: KatydidMediaEmbeddedContentBuilder<Msg>.() -> Unit
     ) {
+        contentRestrictions.prohibitParam()
         element.addChildNode(
             KatydidAudio(this, selector, key, accesskey, autoplay, contenteditable, controls,
                 crossorigin, dir, hidden, lang, loop, muted, preload, spellcheck, src, style,
@@ -101,6 +102,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         width: Int?,
         defineContent: KatydidEmbeddedContentBuilder<Msg>.() -> Unit
     ) {
+        contentRestrictions.prohibitParam()
         element.addChildNode(
             KatydidCanvas(this, selector, key, accesskey, contenteditable, dir, height,
                 hidden, lang, spellcheck, style, tabindex, title, translate, width, defineContent)
@@ -142,6 +144,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         width: Int?,
         defineContent: KatydidTextContentBuilder<Msg>.() -> Unit
     ) {
+        contentRestrictions.prohibitParam()
         element.addChildNode(
             KatydidEmbed(this, selector, key, accesskey, contenteditable, dir, height, hidden,
                 lang, spellcheck, src, style, tabindex, title, translate, type, width, defineContent)
@@ -172,6 +175,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         width: Int?,
         defineContent: KatydidTextContentBuilder<Msg>.() -> Unit
     ) {
+        contentRestrictions.prohibitParam()
         element.addChildNode(
             KatydidIframe(this, selector, key, accesskey, allowfullscreen, allowpaymentrequest,
                 contenteditable, dir, height, hidden, lang, name, referrerpolicy, sandbox, spellcheck,
@@ -204,6 +208,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         width: Int?,
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
     ) {
+        contentRestrictions.prohibitParam()
         element.addChildNode(
             KatydidImg(this, selector, key, accesskey, alt, contenteditable, crossorigin, dir, height,
                 hidden, ismap, lang, referrerpolicy, sizes, spellcheck, src, srcset, style,
@@ -246,6 +251,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         width: Int?,
         defineContent: KatydidObjectEmbeddedContentBuilder<Msg>.() -> Unit
     ) {
+        contentRestrictions.prohibitParam()
         element.addChildNode(
             KatydidObject(this, selector, key, accesskey, contenteditable, data, dir, form, height,
                 hidden, lang, name, spellcheck, style, tabindex, title, translate, type, typemustmatch,
@@ -290,6 +296,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         translate: Boolean?,
         defineContent: KatydidPictureContentBuilder<Msg>.() -> Unit
     ) {
+        contentRestrictions.prohibitParam()
         element.addChildNode(
             KatydidPicture(this, selector, key, accesskey, contenteditable,
                 dir, hidden, lang, spellcheck, style,
@@ -329,6 +336,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         width: Int?,
         defineContent: KatydidMediaEmbeddedContentBuilder<Msg>.() -> Unit
     ) {
+        contentRestrictions.prohibitParam()
         element.addChildNode(
             KatydidVideo(this, selector, key, accesskey, autoplay, contenteditable, controls,
                 crossorigin, dir, height, hidden, lang, loop, muted, poster, preload, spellcheck, src, style,
