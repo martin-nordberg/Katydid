@@ -52,6 +52,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
      * Creates a new attributes content builder for the given child [element].
      */
     fun attributesContent(element: KatydidHtmlElementImpl<Msg>): KatydidAttributesContentBuilderImpl<Msg> {
+        contentRestrictions.prohibitParam()
         return KatydidAttributesContentBuilderImpl(element, dispatchMessages)
     }
 
@@ -77,7 +78,6 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         translate: Boolean?,
         defineContent: KatydidMediaEmbeddedContentBuilder<Msg>.() -> Unit
     ) {
-        contentRestrictions.prohibitParam()
         element.addChildNode(
             KatydidAudio(this, selector, key, accesskey, autoplay, contenteditable, controls,
                 crossorigin, dir, hidden, lang, loop, muted, preload, spellcheck, src, style,
@@ -102,7 +102,6 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         width: Int?,
         defineContent: KatydidEmbeddedContentBuilder<Msg>.() -> Unit
     ) {
-        contentRestrictions.prohibitParam()
         element.addChildNode(
             KatydidCanvas(this, selector, key, accesskey, contenteditable, dir, height,
                 hidden, lang, spellcheck, style, tabindex, title, translate, width, defineContent)
@@ -118,6 +117,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
      * Creates a new details content builder for the given child [element].
      */
     fun detailsFlowContent(element: KatydidDetails<Msg>): KatydidDetailsFlowContentBuilder<Msg> {
+        contentRestrictions.prohibitParam()
         return KatydidDetailsFlowContentBuilderImpl(
             element,
             contentRestrictions,
@@ -144,7 +144,6 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         width: Int?,
         defineContent: KatydidTextContentBuilder<Msg>.() -> Unit
     ) {
-        contentRestrictions.prohibitParam()
         element.addChildNode(
             KatydidEmbed(this, selector, key, accesskey, contenteditable, dir, height, hidden,
                 lang, spellcheck, src, style, tabindex, title, translate, type, width, defineContent)
@@ -175,7 +174,6 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         width: Int?,
         defineContent: KatydidTextContentBuilder<Msg>.() -> Unit
     ) {
-        contentRestrictions.prohibitParam()
         element.addChildNode(
             KatydidIframe(this, selector, key, accesskey, allowfullscreen, allowpaymentrequest,
                 contenteditable, dir, height, hidden, lang, name, referrerpolicy, sandbox, spellcheck,
@@ -208,7 +206,6 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         width: Int?,
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
     ) {
-        contentRestrictions.prohibitParam()
         element.addChildNode(
             KatydidImg(this, selector, key, accesskey, alt, contenteditable, crossorigin, dir, height,
                 hidden, ismap, lang, referrerpolicy, sizes, spellcheck, src, srcset, style,
@@ -221,6 +218,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
      */
     fun mediaEmbeddedContent(element: KatydidHtmlElementImpl<Msg>,
                              sourceAllowed: Boolean): KatydidMediaEmbeddedContentBuilder<Msg> {
+        contentRestrictions.prohibitParam()
         return KatydidMediaEmbeddedContentBuilderImpl(
             element,
             contentRestrictions.withMediaElementNotAllowed(),
@@ -251,7 +249,6 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         width: Int?,
         defineContent: KatydidObjectEmbeddedContentBuilder<Msg>.() -> Unit
     ) {
-        contentRestrictions.prohibitParam()
         element.addChildNode(
             KatydidObject(this, selector, key, accesskey, contenteditable, data, dir, form, height,
                 hidden, lang, name, spellcheck, style, tabindex, title, translate, type, typemustmatch,
@@ -263,6 +260,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
      * Creates a new object content builder for the given child [element].
      */
     fun objectEmbeddedContent(element: KatydidObject<Msg>): KatydidObjectEmbeddedContentBuilder<Msg> {
+        contentRestrictions.prohibitParam()
         return KatydidObjectEmbeddedContentBuilderImpl(
             element,
             contentRestrictions.withParamAllowed(),
@@ -274,6 +272,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
      * Creates a new media content builder for the given child [element].
      */
     fun pictureContent(element: KatydidPicture<Msg>): KatydidPictureContentBuilder<Msg> {
+        contentRestrictions.prohibitParam()
         return KatydidPictureContentBuilderImpl(
             element,
             KatydidPictureContentRestrictions(),
@@ -296,7 +295,6 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         translate: Boolean?,
         defineContent: KatydidPictureContentBuilder<Msg>.() -> Unit
     ) {
-        contentRestrictions.prohibitParam()
         element.addChildNode(
             KatydidPicture(this, selector, key, accesskey, contenteditable,
                 dir, hidden, lang, spellcheck, style,
@@ -336,7 +334,6 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         width: Int?,
         defineContent: KatydidMediaEmbeddedContentBuilder<Msg>.() -> Unit
     ) {
-        contentRestrictions.prohibitParam()
         element.addChildNode(
             KatydidVideo(this, selector, key, accesskey, autoplay, contenteditable, controls,
                 crossorigin, dir, height, hidden, lang, loop, muted, poster, preload, spellcheck, src, style,
@@ -348,6 +345,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
      * Creates a new embedded content builder for the given child [element].
      */
     open fun withNoAddedRestrictions(element: KatydidHtmlElementImpl<Msg>): KatydidEmbeddedContentBuilder<Msg> {
+        contentRestrictions.prohibitParam()
         return KatydidEmbeddedContentBuilderImpl(
             element,
             contentRestrictions,

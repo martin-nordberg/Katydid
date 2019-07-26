@@ -42,12 +42,12 @@ internal class KatydidParam<Msg>
         setAttribute("name", name)
         setAttribute("value", value)
 
-        embeddedContent.attributesContent(this).defineAttributes()
+        embeddedContent.paramAttributesContent(this).defineAttributes()
         this.freeze()
     }
 
     constructor(
-        embeddedContent: KatydidObjectPhrasingContentBuilderImpl<Msg>,
+        phrasingContent: KatydidObjectPhrasingContentBuilderImpl<Msg>,
         selector: String?,
         key: Any?,
         accesskey: Char?,
@@ -69,7 +69,7 @@ internal class KatydidParam<Msg>
         setAttribute("name", name)
         setAttribute("value", value)
 
-        embeddedContent.attributesContent(this).defineAttributes()
+        phrasingContent.paramAttributesContent(this).defineAttributes()
         this.freeze()
     }
 

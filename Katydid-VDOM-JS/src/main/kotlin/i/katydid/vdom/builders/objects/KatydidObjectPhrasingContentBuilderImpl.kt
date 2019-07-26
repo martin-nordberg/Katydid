@@ -5,6 +5,7 @@
 
 package i.katydid.vdom.builders.objects
 
+import i.katydid.vdom.builders.KatydidAttributesContentBuilderImpl
 import i.katydid.vdom.builders.KatydidContentRestrictions
 import i.katydid.vdom.builders.KatydidPhrasingContentBuilderImpl
 import i.katydid.vdom.elements.KatydidHtmlElementImpl
@@ -54,6 +55,14 @@ internal class KatydidObjectPhrasingContentBuilderImpl<Msg>(
                 hidden, lang, name, spellcheck, style,
                 tabindex, title, translate, value, defineAttributes)
         )
+    }
+
+    /**
+     * Creates a new attributes content builder for the given child [element]. Does not have the side effect of
+     * preventing further `<param>` elements.
+     */
+    fun paramAttributesContent(element: KatydidParam<Msg>): KatydidAttributesContentBuilderImpl<Msg> {
+        return KatydidAttributesContentBuilderImpl(element, dispatchMessages)
     }
 
 }
