@@ -7,6 +7,7 @@ package jvm.katydid.vdom.builders.embedded
 
 import jvm.katydid.vdom.api.checkBuild
 import o.katydid.vdom.application.katydid
+import o.katydid.vdom.types.FlowContent
 import o.katydid.vdom.types.MimeType
 import o.katydid.vdom.types.PhrasingContent
 import org.junit.jupiter.api.Test
@@ -92,6 +93,32 @@ class ObjectTests {
     }
 
     @Test
+    fun `An object element with nested flow elements produces correct HTML`() {
+
+        val vdomNode = katydid<Unit> {
+
+            `object`(contentType = FlowContent) {
+
+                param("#first"){}
+                param("#second"){}
+
+                hr{}
+
+            }
+
+        }
+
+        val html = """<object>
+                     |  <param id="first"></param>
+                     |  <param id="second"></param>
+                     |  <hr>
+                     |</object>""".trimMargin()
+
+        checkBuild(html, vdomNode)
+
+    }
+
+    @Test
     fun `An object element must have all param elements before any other elements`() {
 
         assertThrows<IllegalStateException> {
@@ -121,6 +148,24 @@ class ObjectTests {
                     param("#first"){}
 
                     a( href="http://gothere"){}
+
+                    param("#second"){}
+
+                }
+
+            }
+
+        }
+
+        assertThrows<IllegalStateException> {
+
+            katydid<Unit> {
+
+                `object`(contentType = FlowContent) {
+
+                    param("#first"){}
+
+                    hr{}
 
                     param("#second"){}
 

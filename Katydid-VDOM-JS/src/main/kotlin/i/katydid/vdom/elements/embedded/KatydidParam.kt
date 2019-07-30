@@ -6,6 +6,7 @@
 package i.katydid.vdom.elements.embedded
 
 import i.katydid.vdom.builders.objects.KatydidObjectEmbeddedContentBuilderImpl
+import i.katydid.vdom.builders.objects.KatydidObjectFlowContentBuilderImpl
 import i.katydid.vdom.builders.objects.KatydidObjectPhrasingContentBuilderImpl
 import i.katydid.vdom.elements.KatydidHtmlElementImpl
 import o.katydid.vdom.builders.KatydidAttributesContentBuilder
@@ -43,6 +44,33 @@ internal class KatydidParam<Msg>
         setAttribute("value", value)
 
         embeddedContent.paramAttributesContent(this).defineAttributes()
+        this.freeze()
+    }
+
+    constructor(
+        flowContent: KatydidObjectFlowContentBuilderImpl<Msg>,
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        contenteditable: Boolean?,
+        dir: EDirection?,
+        hidden: Boolean?,
+        lang: String?,
+        name: String?,
+        spellcheck: Boolean?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        value: String?,
+        defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
+    ) : super(selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
+        tabindex, title, translate) {
+
+        setAttribute("name", name)
+        setAttribute("value", value)
+
+        flowContent.paramAttributesContent(this).defineAttributes()
         this.freeze()
     }
 

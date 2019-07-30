@@ -15,9 +15,6 @@ Elements Not Yet Implemented
 * noscript (N/A)
 * script (too meta)
 
-* object
-* param
-
 * rb
 * rp
 * rt
@@ -27,14 +24,19 @@ Elements Not Yet Implemented
 * template (too meta)
 
 
-Constraints Not Addressed
--------------------------
-
-* The concept of "Transparent" content model (flow or phrasing)
-  - object
-
-
-Global Attribute
-----------------
+New Global Attribute
+--------------------
 
 * draggable
+
+
+SVG
+---
+
+* The whole thing
+
+
+Aria Attributes
+---------------
+
+* To be designed

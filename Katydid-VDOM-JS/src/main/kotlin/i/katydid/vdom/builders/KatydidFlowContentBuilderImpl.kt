@@ -10,12 +10,14 @@ import i.katydid.vdom.builders.lists.KatydidUnorderedListContentBuilderImpl
 import i.katydid.vdom.builders.media.KatydidMediaContentRestrictions
 import i.katydid.vdom.builders.media.KatydidMediaFlowContentBuilderImpl
 import i.katydid.vdom.builders.miscellaneous.KatydidDescriptionListContentBuilderImpl
+import i.katydid.vdom.builders.objects.KatydidObjectFlowContentBuilderImpl
 import i.katydid.vdom.builders.tables.KatydidTableContentBuilderImpl
 import i.katydid.vdom.elements.KatydidHtmlElementImpl
 import i.katydid.vdom.elements.edits.KatydidDel
 import i.katydid.vdom.elements.edits.KatydidIns
 import i.katydid.vdom.elements.embedded.KatydidAudio
 import i.katydid.vdom.elements.embedded.KatydidMap
+import i.katydid.vdom.elements.embedded.KatydidObject
 import i.katydid.vdom.elements.embedded.KatydidVideo
 import i.katydid.vdom.elements.forms.KatydidFieldSet
 import i.katydid.vdom.elements.forms.KatydidForm
@@ -35,6 +37,7 @@ import o.katydid.vdom.builders.lists.KatydidOrderedListContentBuilder
 import o.katydid.vdom.builders.lists.KatydidUnorderedListContentBuilder
 import o.katydid.vdom.builders.media.KatydidMediaFlowContentBuilder
 import o.katydid.vdom.builders.miscellaneous.KatydidDescriptionListContentBuilder
+import o.katydid.vdom.builders.objects.KatydidObjectFlowContentBuilder
 import o.katydid.vdom.builders.tables.KatydidTableContentBuilder
 import o.katydid.vdom.types.*
 import x.katydid.vdom.types.KatyDateTime
@@ -253,6 +256,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
      * Creates a new description list content builder for the given child [element].
      */
     fun descriptionListContent(element: KatydidDiv<Msg>): KatydidDescriptionListContentBuilderImpl<Msg> {
+        contentRestrictions.prohibitParam()
         return KatydidDescriptionListContentBuilderImpl(
             element,
             contentRestrictions,
@@ -264,6 +268,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
      * Creates a new description list content builder for the given child [element].
      */
     fun descriptionListContent(element: KatydidDl<Msg>): KatydidDescriptionListContentBuilderImpl<Msg> {
+        contentRestrictions.prohibitParam()
         return KatydidDescriptionListContentBuilderImpl(
             element,
             contentRestrictions,
@@ -694,6 +699,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
      * as this builder. The list items to be produced are ordered.
      */
     fun listContent(element: KatydidOl<Msg>): KatydidOrderedListContentBuilder<Msg> {
+        contentRestrictions.prohibitParam()
         return KatydidOrderedListContentBuilderImpl(
             this,
             element,
@@ -706,6 +712,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
      * as this builder. The list items to be produced are unordered.
      */
     fun listContent(element: KatydidUl<Msg>): KatydidUnorderedListContentBuilder<Msg> {
+        contentRestrictions.prohibitParam()
         return KatydidUnorderedListContentBuilderImpl(
             this,
             element,
@@ -762,6 +769,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
      */
     fun mediaFlowContent(element: KatydidHtmlElementImpl<Msg>,
                          sourceAllowed: Boolean): KatydidMediaFlowContentBuilder<Msg> {
+        contentRestrictions.prohibitParam()
         return KatydidMediaFlowContentBuilderImpl(
             element,
             contentRestrictions.withMediaElementNotAllowed(),
@@ -788,6 +796,48 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
         element.addChildNode(
             KatydidNav(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
                 tabindex, title, translate, defineContent)
+        )
+    }
+
+    override fun `object`(
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        contenteditable: Boolean?,
+        data: String?,
+        dir: EDirection?,
+        form: String?,
+        height: Int?,
+        hidden: Boolean?,
+        lang: String?,
+        name: String?,
+        spellcheck: Boolean?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        type: MimeType?,
+        typemustmatch: Boolean?,
+        width: Int?,
+        contentType: FlowContent,
+        defineContent: KatydidObjectFlowContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatydidObject(this, selector, key, accesskey, contenteditable, data, dir, form, height,
+                hidden, lang, name, spellcheck, style, tabindex, title, translate, type, typemustmatch,
+                width, defineContent)
+        )
+    }
+
+    /**
+     * Creates a new object content builder for the given child [element].
+     */
+    fun objectFlowContent(element: KatydidObject<Msg>): KatydidObjectFlowContentBuilder<Msg> {
+        contentRestrictions.prohibitParam()
+        return KatydidObjectFlowContentBuilderImpl(
+            element,
+            contentRestrictions.withParamAllowed(),
+            dispatchMessages
         )
     }
 
@@ -841,6 +891,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
      * as this builder.
      */
     fun phrasingContent(element: KatydidHtmlElementImpl<Msg>): KatydidPhrasingContentBuilderImpl<Msg> {
+        contentRestrictions.prohibitParam()
         return KatydidPhrasingContentBuilderImpl(
             element,
             contentRestrictions,
@@ -985,6 +1036,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     fun withFigCaptionAllowed(
         element: KatydidHtmlElementImpl<Msg>
     ): KatydidFlowContentBuilderImpl<Msg> {
+        contentRestrictions.prohibitParam()
         return KatydidFlowContentBuilderImpl(
             element,
             contentRestrictions.withFigCaptionAllowed(),
@@ -999,6 +1051,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     fun withFooterHeaderAddressNotAllowed(
         element: KatydidHtmlElementImpl<Msg>
     ): KatydidFlowContentBuilderImpl<Msg> {
+        contentRestrictions.prohibitParam()
         return KatydidFlowContentBuilderImpl(
             element,
             contentRestrictions.withFooterHeaderAddressNotAllowed(),
@@ -1013,6 +1066,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     fun withFooterHeaderMainNotAllowed(
         element: KatydidHtmlElementImpl<Msg>
     ): KatydidFlowContentBuilderImpl<Msg> {
+        contentRestrictions.prohibitParam()
         return KatydidFlowContentBuilderImpl(
             element,
             contentRestrictions.withFooterHeaderMainNotAllowed(),
@@ -1025,6 +1079,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
      * as this builder plus no form element allowed.
      */
     fun withFormNotAllowed(element: KatydidHtmlElementImpl<Msg>): KatydidFlowContentBuilderImpl<Msg> {
+        contentRestrictions.prohibitParam()
         return KatydidFlowContentBuilderImpl(
             element,
             contentRestrictions.withFormNotAllowed(),
@@ -1039,6 +1094,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
     override fun withInteractiveContentNotAllowed(
         element: KatydidHtmlElementImpl<Msg>
     ): KatydidFlowContentBuilderImpl<Msg> {
+        contentRestrictions.prohibitParam()
         return KatydidFlowContentBuilderImpl(
             element,
             contentRestrictions.withInteractiveContentNotAllowed(),
@@ -1051,6 +1107,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
      * as this builder but allows one legend element.
      */
     fun withLegendAllowed(element: KatydidHtmlElementImpl<Msg>): KatydidFlowContentBuilderImpl<Msg> {
+        contentRestrictions.prohibitParam()
         return KatydidFlowContentBuilderImpl(
             element,
             contentRestrictions.withLegendAllowed(),
@@ -1063,6 +1120,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
      * as this builder plus no main element allowed.
      */
     fun withMainNotAllowed(element: KatydidHtmlElementImpl<Msg>): KatydidFlowContentBuilderImpl<Msg> {
+        contentRestrictions.prohibitParam()
         return KatydidFlowContentBuilderImpl(
             element,
             contentRestrictions.withMainNotAllowed(),
@@ -1075,6 +1133,7 @@ internal open class KatydidFlowContentBuilderImpl<Msg>(
      * as this builder.
      */
     override fun withNoAddedRestrictions(element: KatydidHtmlElementImpl<Msg>): KatydidFlowContentBuilderImpl<Msg> {
+        contentRestrictions.prohibitParam()
         return KatydidFlowContentBuilderImpl(
             element,
             contentRestrictions,
