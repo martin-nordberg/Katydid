@@ -27,6 +27,7 @@ internal class KatydidDiv<Msg> : KatydidHtmlElementImpl<Msg> {
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -35,7 +36,7 @@ internal class KatydidDiv<Msg> : KatydidHtmlElementImpl<Msg> {
         title: String?,
         translate: Boolean?,
         defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
         hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         flowContent.withNoAddedRestrictions(this).defineContent()
@@ -50,6 +51,7 @@ internal class KatydidDiv<Msg> : KatydidHtmlElementImpl<Msg> {
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -58,7 +60,7 @@ internal class KatydidDiv<Msg> : KatydidHtmlElementImpl<Msg> {
         title: String?,
         translate: Boolean?,
         defineContent: KatydidDescriptionListContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
         hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         descriptionListContent.withNoAddedRestrictions(this).defineContent()

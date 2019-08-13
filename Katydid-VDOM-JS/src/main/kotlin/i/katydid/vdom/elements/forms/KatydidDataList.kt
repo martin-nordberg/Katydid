@@ -26,6 +26,7 @@ internal class KatydidDataList<Msg> : KatydidHtmlElementImpl<Msg> {
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -34,7 +35,7 @@ internal class KatydidDataList<Msg> : KatydidHtmlElementImpl<Msg> {
         title: String?,
         translate: Boolean?,
         defineContent: KatydidOptGroupContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
         hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         phrasingContent.optGroupContent(this).defineContent()
@@ -49,6 +50,7 @@ internal class KatydidDataList<Msg> : KatydidHtmlElementImpl<Msg> {
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -58,7 +60,7 @@ internal class KatydidDataList<Msg> : KatydidHtmlElementImpl<Msg> {
         translate: Boolean?,
         contentType: PhrasingContent,
         defineContent: KatydidPhrasingContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
         hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         phrasingContent.withNoAddedRestrictions(this).defineContent()

@@ -28,6 +28,7 @@ internal class KatydidCanvas<Msg> : KatydidHtmlElementImpl<Msg> {
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         height: Int?,
         hidden: Boolean?,
         lang: String?,
@@ -38,7 +39,7 @@ internal class KatydidCanvas<Msg> : KatydidHtmlElementImpl<Msg> {
         translate: Boolean?,
         width: Int?,
         defineContent: KatydidEmbeddedContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
         hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         setNumberAttribute("height", height)
@@ -55,6 +56,7 @@ internal class KatydidCanvas<Msg> : KatydidHtmlElementImpl<Msg> {
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         height: Int?,
         hidden: Boolean?,
         lang: String?,
@@ -65,7 +67,7 @@ internal class KatydidCanvas<Msg> : KatydidHtmlElementImpl<Msg> {
         translate: Boolean?,
         width: Int?,
         defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
         hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         setNumberAttribute("height", height)
@@ -82,6 +84,7 @@ internal class KatydidCanvas<Msg> : KatydidHtmlElementImpl<Msg> {
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         height: Int?,
         hidden: Boolean?,
         lang: String?,
@@ -92,7 +95,7 @@ internal class KatydidCanvas<Msg> : KatydidHtmlElementImpl<Msg> {
         translate: Boolean?,
         width: Int?,
         defineContent: KatydidPhrasingContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
         hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         setNumberAttribute("height", height)

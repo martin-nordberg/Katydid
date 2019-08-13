@@ -47,6 +47,7 @@ internal class KatydidUnorderedListContentBuilderImpl<Msg>(
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -57,8 +58,8 @@ internal class KatydidUnorderedListContentBuilderImpl<Msg>(
         defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatydidLi(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                      tabindex, title, translate, defineContent)
+            KatydidLi(this, selector, key, accesskey, contenteditable, dir, draggable, hidden,
+                lang, spellcheck, style, tabindex, title, translate, defineContent)
         )
     }
 

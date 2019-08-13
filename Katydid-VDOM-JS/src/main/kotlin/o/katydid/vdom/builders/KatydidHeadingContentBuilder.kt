@@ -23,6 +23,7 @@ interface KatydidHeadingContentBuilder<in Msg> :
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param spellcheck whether the element is subject to spell checking.
@@ -38,6 +39,7 @@ interface KatydidHeadingContentBuilder<in Msg> :
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,
@@ -55,6 +57,7 @@ interface KatydidHeadingContentBuilder<in Msg> :
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param spellcheck whether the element is subject to spell checking.
@@ -70,6 +73,7 @@ interface KatydidHeadingContentBuilder<in Msg> :
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,
@@ -87,6 +91,7 @@ interface KatydidHeadingContentBuilder<in Msg> :
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param spellcheck whether the element is subject to spell checking.
@@ -102,6 +107,7 @@ interface KatydidHeadingContentBuilder<in Msg> :
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,
@@ -119,6 +125,7 @@ interface KatydidHeadingContentBuilder<in Msg> :
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param spellcheck whether the element is subject to spell checking.
@@ -134,6 +141,7 @@ interface KatydidHeadingContentBuilder<in Msg> :
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,
@@ -150,6 +158,7 @@ interface KatydidHeadingContentBuilder<in Msg> :
      * @param key a non-DOM key for this Katydid element that is unique among all the siblings of this element.
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
+     * @param draggable controls whether or not the element is draggable.
      * @param dir the left-to-right direction of text inside this element.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
@@ -166,6 +175,7 @@ interface KatydidHeadingContentBuilder<in Msg> :
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,
@@ -183,6 +193,7 @@ interface KatydidHeadingContentBuilder<in Msg> :
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param spellcheck whether the element is subject to spell checking.
@@ -198,6 +209,7 @@ interface KatydidHeadingContentBuilder<in Msg> :
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,

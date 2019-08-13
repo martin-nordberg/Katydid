@@ -8,12 +8,10 @@ package i.katydid.vdom.builders.objects
 import i.katydid.vdom.builders.KatydidAttributesContentBuilderImpl
 import i.katydid.vdom.builders.KatydidContentRestrictions
 import i.katydid.vdom.builders.KatydidFlowContentBuilderImpl
-import i.katydid.vdom.builders.KatydidPhrasingContentBuilderImpl
 import i.katydid.vdom.elements.KatydidHtmlElementImpl
 import i.katydid.vdom.elements.embedded.KatydidParam
 import o.katydid.vdom.builders.KatydidAttributesContentBuilder
 import o.katydid.vdom.builders.objects.KatydidObjectFlowContentBuilder
-import o.katydid.vdom.builders.objects.KatydidObjectPhrasingContentBuilder
 import o.katydid.vdom.types.EDirection
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -39,6 +37,7 @@ internal class KatydidObjectFlowContentBuilderImpl<Msg>(
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         name: String?,
@@ -54,7 +53,7 @@ internal class KatydidObjectFlowContentBuilderImpl<Msg>(
 
         element.addChildNode(
             KatydidParam(this, selector, key, accesskey, contenteditable, dir,
-                hidden, lang, name, spellcheck, style,
+                draggable, hidden, lang, name, spellcheck, style,
                 tabindex, title, translate, value, defineAttributes)
         )
     }

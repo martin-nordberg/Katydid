@@ -28,6 +28,7 @@ internal class KatydidTextArea<Msg>(
     dir: EDirection?,
     dirname: String?,
     disabled: Boolean?,
+    draggable: Boolean?,
     form: String?,
     hidden: Boolean?,
     lang: String?,
@@ -45,7 +46,7 @@ internal class KatydidTextArea<Msg>(
     translate: Boolean?,
     wrap: EWrapType?,
     defineContent: KatydidTextContentBuilder<Msg>.() -> Unit
-) : KatydidHtmlElementImpl<Msg>(selector, key ?: name, accesskey, contenteditable, dir,
+) : KatydidHtmlElementImpl<Msg>(selector, key ?: name, accesskey, contenteditable, dir, draggable,
                                 hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {

@@ -25,6 +25,7 @@ internal class KatydidLi<Msg> : KatydidHtmlElementImpl<Msg> {
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -34,7 +35,7 @@ internal class KatydidLi<Msg> : KatydidHtmlElementImpl<Msg> {
         translate: Boolean?,
         value: Int?,
         defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
               hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         setNumberAttribute("value", value)
@@ -51,6 +52,7 @@ internal class KatydidLi<Msg> : KatydidHtmlElementImpl<Msg> {
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -59,7 +61,7 @@ internal class KatydidLi<Msg> : KatydidHtmlElementImpl<Msg> {
         title: String?,
         translate: Boolean?,
         defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
               hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         listContent.flowContent.withNoAddedRestrictions(this).defineContent()

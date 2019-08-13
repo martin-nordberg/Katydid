@@ -58,6 +58,7 @@ internal class KatydidTableBodyContentBuilderImpl<Msg>(
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -68,7 +69,8 @@ internal class KatydidTableBodyContentBuilderImpl<Msg>(
         defineContent: KatydidTableRowContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatydidTr(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
+            KatydidTr(this, selector, key, accesskey, contenteditable, dir,
+                      draggable, hidden, lang, spellcheck, style,
                       tabindex, title, translate, defineContent)
         )
     }

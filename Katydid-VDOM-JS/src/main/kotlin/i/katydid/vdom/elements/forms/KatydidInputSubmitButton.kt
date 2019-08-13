@@ -25,6 +25,7 @@ internal class KatydidInputSubmitButton<Msg>(
     contenteditable: Boolean?,
     dir: EDirection?,
     disabled: Boolean?,
+    draggable: Boolean?,
     form: String?,
     formaction: String?,
     formenctype: EFormEncodingType?,
@@ -41,7 +42,7 @@ internal class KatydidInputSubmitButton<Msg>(
     translate: Boolean?,
     value: String?,
     defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
-) : KatydidHtmlElementImpl<Msg>(selector, key ?: name, accesskey, contenteditable, dir, hidden, lang,
+) : KatydidHtmlElementImpl<Msg>(selector, key ?: name, accesskey, contenteditable, dir, draggable, hidden, lang,
                                 spellcheck, style, tabindex, title, translate) {
 
     init {

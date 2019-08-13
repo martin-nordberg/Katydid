@@ -22,6 +22,7 @@ internal class KatydidDialog<Msg>(
     accesskey: Char?,
     contenteditable: Boolean?,
     dir: EDirection?,
+    draggable: Boolean?,
     hidden: Boolean?,
     lang: String?,
     open: Boolean?,
@@ -31,7 +32,7 @@ internal class KatydidDialog<Msg>(
     title: String?,
     translate: Boolean?,
     defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
-) : KatydidHtmlElementImpl<Msg>(selector, key, accesskey, contenteditable, dir,
+) : KatydidHtmlElementImpl<Msg>(selector, key, accesskey, contenteditable, dir, draggable,
                                 hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {

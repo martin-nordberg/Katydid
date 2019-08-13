@@ -46,6 +46,7 @@ internal class KatydidMediaFlowContentBuilderImpl<Msg>(
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         media: String?,
@@ -61,7 +62,7 @@ internal class KatydidMediaFlowContentBuilderImpl<Msg>(
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatydidSource(this, selector, key, accesskey, contenteditable, dir,
+            KatydidSource(this, selector, key, accesskey, contenteditable, dir, draggable,
                           hidden, lang, media, sizes, spellcheck, src, srcset, style,
                           tabindex, title, translate, type, defineAttributes)
         )
@@ -74,6 +75,7 @@ internal class KatydidMediaFlowContentBuilderImpl<Msg>(
         contenteditable: Boolean?,
         default: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         kind: ETrackKind?,
         label: String?,
@@ -88,7 +90,7 @@ internal class KatydidMediaFlowContentBuilderImpl<Msg>(
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatydidTrack(this, selector, key, accesskey, contenteditable, default, dir,
+            KatydidTrack(this, selector, key, accesskey, contenteditable, default, dir, draggable,
                          hidden, kind, label, lang, spellcheck, src, srclang, style,
                          tabindex, title, translate, defineAttributes)
         )

@@ -61,6 +61,7 @@ internal class KatydidTableRowContentBuilderImpl<Msg>(
         colspan: Int?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         headers: String?,
         hidden: Boolean?,
         lang: String?,
@@ -73,7 +74,8 @@ internal class KatydidTableRowContentBuilderImpl<Msg>(
         defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatydidTd(this, selector, key, accesskey, colspan, contenteditable, dir, headers, hidden,
+            KatydidTd(this, selector, key, accesskey, colspan, contenteditable, dir,
+                      draggable, headers, hidden,
                       lang, rowspan, spellcheck, style, tabindex, title, translate, defineContent)
         )
     }
@@ -86,6 +88,7 @@ internal class KatydidTableRowContentBuilderImpl<Msg>(
         colspan: Int?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         headers: String?,
         hidden: Boolean?,
         lang: String?,
@@ -99,7 +102,8 @@ internal class KatydidTableRowContentBuilderImpl<Msg>(
         defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatydidTh(this, selector, key, abbr, accesskey, colspan, contenteditable, dir, headers, hidden,
+            KatydidTh(this, selector, key, abbr, accesskey, colspan, contenteditable, dir,
+                      draggable, headers, hidden,
                       lang, rowspan, scope, spellcheck, style, tabindex, title, translate, defineContent)
         )
     }

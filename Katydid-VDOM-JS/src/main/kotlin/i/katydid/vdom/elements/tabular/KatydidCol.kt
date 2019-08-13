@@ -22,6 +22,7 @@ internal class KatydidCol<Msg>(
     accesskey: Char?,
     contenteditable: Boolean?,
     dir: EDirection?,
+    draggable: Boolean?,
     hidden: Boolean?,
     lang: String?,
     span: Int?,
@@ -31,7 +32,7 @@ internal class KatydidCol<Msg>(
     title: String?,
     translate: Boolean?,
     defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
-) : KatydidHtmlElementImpl<Msg>(selector, key, accesskey, contenteditable, dir,
+) : KatydidHtmlElementImpl<Msg>(selector, key, accesskey, contenteditable, dir, draggable,
                                 hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {

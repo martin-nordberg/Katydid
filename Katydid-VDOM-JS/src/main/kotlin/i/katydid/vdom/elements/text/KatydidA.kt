@@ -28,6 +28,7 @@ internal class KatydidA<Msg> : KatydidHtmlElementImpl<Msg> {
         contenteditable: Boolean?,
         dir: EDirection?,
         download: String?,
+        draggable: Boolean?,
         hidden: Boolean?,
         href: String?,
         hreflang: String?,
@@ -42,7 +43,7 @@ internal class KatydidA<Msg> : KatydidHtmlElementImpl<Msg> {
         translate: Boolean?,
         type: String?,
         defineContent: KatydidPhrasingContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
         hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         phrasingContent.contentRestrictions.confirmAnchorAllowed()
@@ -64,6 +65,7 @@ internal class KatydidA<Msg> : KatydidHtmlElementImpl<Msg> {
         contenteditable: Boolean?,
         dir: EDirection?,
         download: String?,
+        draggable: Boolean?,
         hidden: Boolean?,
         href: String?,
         hreflang: String?,
@@ -78,7 +80,7 @@ internal class KatydidA<Msg> : KatydidHtmlElementImpl<Msg> {
         translate: Boolean?,
         type: String?,
         defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
         hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         flowContent.contentRestrictions.confirmAnchorAllowed()

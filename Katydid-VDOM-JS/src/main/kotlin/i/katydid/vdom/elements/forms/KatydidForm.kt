@@ -27,6 +27,7 @@ internal class KatydidForm<Msg>(
     autocomplete: String?,
     contenteditable: Boolean?,
     dir: EDirection?,
+    draggable: Boolean?,
     enctype: EFormEncodingType?,
     hidden: Boolean?,
     lang: String?,
@@ -40,7 +41,7 @@ internal class KatydidForm<Msg>(
     title: String?,
     translate: Boolean?,
     defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
-) : KatydidHtmlElementImpl<Msg>(selector, key, accesskey, contenteditable, dir, hidden, lang,
+) : KatydidHtmlElementImpl<Msg>(selector, key, accesskey, contenteditable, dir, draggable, hidden, lang,
                                 spellcheck, style, tabindex, title, translate) {
 
     init {

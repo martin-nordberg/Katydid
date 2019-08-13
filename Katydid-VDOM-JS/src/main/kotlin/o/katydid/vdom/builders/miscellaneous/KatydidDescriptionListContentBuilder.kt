@@ -33,6 +33,7 @@ interface KatydidDescriptionListContentBuilder<in Msg> : KatydidAttributesConten
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param spellcheck whether the element is subject to spell checking.
@@ -48,6 +49,7 @@ interface KatydidDescriptionListContentBuilder<in Msg> : KatydidAttributesConten
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,
@@ -65,6 +67,7 @@ interface KatydidDescriptionListContentBuilder<in Msg> : KatydidAttributesConten
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param spellcheck whether the element is subject to spell checking.
@@ -80,6 +83,7 @@ interface KatydidDescriptionListContentBuilder<in Msg> : KatydidAttributesConten
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,
@@ -113,6 +117,7 @@ interface KatydidDescriptionListContentBuilder<in Msg> : KatydidAttributesConten
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,

@@ -26,6 +26,7 @@ internal class KatydidIframe<Msg>(
     allowpaymentrequest: Boolean?,
     contenteditable: Boolean?,
     dir: EDirection?,
+    draggable: Boolean?,
     height: Int?,
     hidden: Boolean?,
     lang: String?,
@@ -41,8 +42,8 @@ internal class KatydidIframe<Msg>(
     translate: Boolean?,
     width: Int?,
     defineContent: KatydidTextContentBuilder<Msg>.() -> Unit
-) : KatydidHtmlElementImpl<Msg>(selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                                tabindex, title, translate) {
+) : KatydidHtmlElementImpl<Msg>(selector, key, accesskey, contenteditable, dir, draggable, hidden, lang, spellcheck,
+                                style, tabindex, title, translate) {
 
     init {
         setBooleanAttribute("allowfullscreen", allowfullscreen)

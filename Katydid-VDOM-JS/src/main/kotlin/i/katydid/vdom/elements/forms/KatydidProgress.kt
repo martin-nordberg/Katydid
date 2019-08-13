@@ -24,6 +24,7 @@ internal class KatydidProgress<Msg> : KatydidHtmlElementImpl<Msg> {
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         max: Double?,
@@ -34,7 +35,7 @@ internal class KatydidProgress<Msg> : KatydidHtmlElementImpl<Msg> {
         translate: Boolean?,
         value: Double?,
         defineContent: KatydidPhrasingContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
               hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         phrasingContent.contentRestrictions.confirmProgressAllowed()
@@ -61,6 +62,7 @@ internal class KatydidProgress<Msg> : KatydidHtmlElementImpl<Msg> {
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         max: Int,
@@ -71,7 +73,7 @@ internal class KatydidProgress<Msg> : KatydidHtmlElementImpl<Msg> {
         translate: Boolean?,
         value: Int?,
         defineContent: KatydidPhrasingContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
               hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         phrasingContent.contentRestrictions.confirmProgressAllowed()

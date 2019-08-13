@@ -22,6 +22,7 @@ interface KatydidSelectContentBuilder<in Msg> : KatydidOptGroupContentBuilder<Ms
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
      * @param disabled true if the option is disabled within its parent `<select>` element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param label the visible label for the option.
      * @param lang the language of text within this element.
@@ -40,6 +41,7 @@ interface KatydidSelectContentBuilder<in Msg> : KatydidOptGroupContentBuilder<Ms
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         disabled: Boolean? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         label: String,
         lang: String? = null,

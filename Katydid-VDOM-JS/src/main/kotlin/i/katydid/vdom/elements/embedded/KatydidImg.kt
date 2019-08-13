@@ -29,6 +29,7 @@ internal class KatydidImg<Msg> : KatydidHtmlElementImpl<Msg> {
         contenteditable: Boolean?,
         crossorigin: ECorsSetting?,
         dir: EDirection?,
+        draggable: Boolean?,
         height: Int?,
         hidden: Boolean?,
         ismap: Boolean?,
@@ -45,7 +46,7 @@ internal class KatydidImg<Msg> : KatydidHtmlElementImpl<Msg> {
         usemap: String?,
         width: Int?,
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
               hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         setAttribute("alt", alt)
@@ -73,6 +74,7 @@ internal class KatydidImg<Msg> : KatydidHtmlElementImpl<Msg> {
         contenteditable: Boolean?,
         crossorigin: ECorsSetting?,
         dir: EDirection?,
+        draggable: Boolean?,
         height: Int?,
         hidden: Boolean?,
         ismap: Boolean?,
@@ -89,7 +91,7 @@ internal class KatydidImg<Msg> : KatydidHtmlElementImpl<Msg> {
         usemap: String?,
         width: Int?,
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
               hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         pictureContent.pictureContentRestrictions.confirmImgAllowedThenDisallow()

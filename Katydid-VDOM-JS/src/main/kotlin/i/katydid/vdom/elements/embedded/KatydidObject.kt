@@ -31,6 +31,7 @@ internal class KatydidObject<Msg>
         contenteditable: Boolean?,
         data: String?,
         dir: EDirection?,
+        draggable: Boolean?,
         form: String?,
         height: Int?,
         hidden: Boolean?,
@@ -45,16 +46,10 @@ internal class KatydidObject<Msg>
         typemustmatch: Boolean?,
         width: Int?,
         defineContent: KatydidObjectEmbeddedContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable, hidden, lang, spellcheck, style,
         tabindex, title, translate) {
 
-        setAttribute("data", data)
-        setAttribute("form", form)
-        setNumberAttribute("height", height)
-        setAttribute("name", name)
-        setAttribute("type", type?.toString())
-        setBooleanAttribute("typemustmatch", typemustmatch)
-        setNumberAttribute("width", width)
+        setAttributes(data, form, height, name, type, typemustmatch, width)
 
         embeddedContent.objectEmbeddedContent(this).defineContent()
         this.freeze()
@@ -68,6 +63,7 @@ internal class KatydidObject<Msg>
         contenteditable: Boolean?,
         data: String?,
         dir: EDirection?,
+        draggable: Boolean?,
         form: String?,
         height: Int?,
         hidden: Boolean?,
@@ -82,16 +78,10 @@ internal class KatydidObject<Msg>
         typemustmatch: Boolean?,
         width: Int?,
         defineContent: KatydidObjectFlowContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable, hidden, lang, spellcheck, style,
         tabindex, title, translate) {
 
-        setAttribute("data", data)
-        setAttribute("form", form)
-        setNumberAttribute("height", height)
-        setAttribute("name", name)
-        setAttribute("type", type?.toString())
-        setBooleanAttribute("typemustmatch", typemustmatch)
-        setNumberAttribute("width", width)
+        setAttributes(data, form, height, name, type, typemustmatch, width)
 
         flowContent.objectFlowContent(this).defineContent()
         this.freeze()
@@ -105,6 +95,7 @@ internal class KatydidObject<Msg>
         contenteditable: Boolean?,
         data: String?,
         dir: EDirection?,
+        draggable: Boolean?,
         form: String?,
         height: Int?,
         hidden: Boolean?,
@@ -119,9 +110,24 @@ internal class KatydidObject<Msg>
         typemustmatch: Boolean?,
         width: Int?,
         defineContent: KatydidObjectPhrasingContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable, hidden, lang, spellcheck, style,
         tabindex, title, translate) {
 
+        setAttributes(data, form, height, name, type, typemustmatch, width)
+
+        phrasingContent.objectPhrasingContent(this).defineContent()
+        this.freeze()
+    }
+
+    private fun setAttributes(
+        data: String?,
+        form: String?,
+        height: Int?,
+        name: String?,
+        type: MimeType?,
+        typemustmatch: Boolean?,
+        width: Int?
+    ) {
         setAttribute("data", data)
         setAttribute("form", form)
         setNumberAttribute("height", height)
@@ -129,9 +135,6 @@ internal class KatydidObject<Msg>
         setAttribute("type", type?.toString())
         setBooleanAttribute("typemustmatch", typemustmatch)
         setNumberAttribute("width", width)
-
-        phrasingContent.objectPhrasingContent(this).defineContent()
-        this.freeze()
     }
 
     ////

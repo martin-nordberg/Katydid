@@ -55,6 +55,7 @@ internal open class KatydidOptGroupContentBuilderImpl<Msg>(
         contenteditable: Boolean?,
         dir: EDirection?,
         disabled: Boolean?,
+        draggable: Boolean?,
         hidden: Boolean?,
         label: String,
         lang: String?,
@@ -70,7 +71,7 @@ internal open class KatydidOptGroupContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidOption(this, selector, key, accesskey, contenteditable, dir, disabled,
-                          hidden, label, lang, name, selected, spellcheck, style,
+                          draggable, hidden, label, lang, name, selected, spellcheck, style,
                           tabindex, title, translate, value, defineAttributes)
         )
     }
@@ -82,6 +83,7 @@ internal open class KatydidOptGroupContentBuilderImpl<Msg>(
         contenteditable: Boolean?,
         dir: EDirection?,
         disabled: Boolean?,
+        draggable: Boolean?,
         hidden: Boolean?,
         label: String?,
         lang: String?,
@@ -96,7 +98,7 @@ internal open class KatydidOptGroupContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidOption(this, selector, key, accesskey, contenteditable, dir, disabled,
-                          hidden, label, lang, name, selected, spellcheck, style,
+                          draggable, hidden, label, lang, name, selected, spellcheck, style,
                           tabindex, title, translate, defineContent)
         )
     }

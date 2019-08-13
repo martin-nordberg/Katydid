@@ -36,6 +36,7 @@ internal class KatydidSelectContentBuilderImpl<Msg>(
         contenteditable: Boolean?,
         dir: EDirection?,
         disabled: Boolean?,
+        draggable: Boolean?,
         hidden: Boolean?,
         label: String,
         lang: String?,
@@ -49,7 +50,7 @@ internal class KatydidSelectContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidOptGroup(this, selector, key, accesskey, contenteditable, dir, disabled,
-                            hidden, label, lang, name, spellcheck, style,
+                            draggable, hidden, label, lang, name, spellcheck, style,
                             tabindex, title, translate, defineContent)
         )
     }

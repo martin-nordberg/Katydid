@@ -57,6 +57,7 @@ internal class KatydidTableContentBuilderImpl<Msg>(
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -67,7 +68,8 @@ internal class KatydidTableContentBuilderImpl<Msg>(
         defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatydidCaption(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
+            KatydidCaption(this, selector, key, accesskey, contenteditable, dir,
+                           draggable, hidden, lang, spellcheck, style,
                            tabindex, title, translate, defineContent)
         )
     }
@@ -78,6 +80,7 @@ internal class KatydidTableContentBuilderImpl<Msg>(
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         span: Int?,
@@ -89,7 +92,8 @@ internal class KatydidTableContentBuilderImpl<Msg>(
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatydidColGroup(this, selector, key, accesskey, contenteditable, dir, hidden, lang, span, spellcheck, style,
+            KatydidColGroup(this, selector, key, accesskey, contenteditable, dir,
+                            draggable, hidden, lang, span, spellcheck, style,
                             tabindex, title, translate, defineAttributes)
         )
     }
@@ -100,6 +104,7 @@ internal class KatydidTableContentBuilderImpl<Msg>(
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -110,7 +115,8 @@ internal class KatydidTableContentBuilderImpl<Msg>(
         defineContent: KatydidColGroupContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatydidColGroup(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
+            KatydidColGroup(this, selector, key, accesskey, contenteditable, dir,
+                            draggable, hidden, lang, spellcheck, style,
                             tabindex, title, translate, defineContent)
         )
     }
@@ -161,6 +167,7 @@ internal class KatydidTableContentBuilderImpl<Msg>(
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -171,7 +178,8 @@ internal class KatydidTableContentBuilderImpl<Msg>(
         defineContent: KatydidTableBodyContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatydidTBody(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
+            KatydidTBody(this, selector, key, accesskey, contenteditable, dir,
+                         draggable, hidden, lang, spellcheck, style,
                          tabindex, title, translate, defineContent)
         )
     }
@@ -182,6 +190,7 @@ internal class KatydidTableContentBuilderImpl<Msg>(
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -192,7 +201,8 @@ internal class KatydidTableContentBuilderImpl<Msg>(
         defineContent: KatydidTableBodyContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatydidTFoot(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
+            KatydidTFoot(this, selector, key, accesskey, contenteditable, dir,
+                         draggable, hidden, lang, spellcheck, style,
                          tabindex, title, translate, defineContent)
         )
     }
@@ -203,6 +213,7 @@ internal class KatydidTableContentBuilderImpl<Msg>(
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -213,7 +224,8 @@ internal class KatydidTableContentBuilderImpl<Msg>(
         defineContent: KatydidTableBodyContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatydidTHead(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
+            KatydidTHead(this, selector, key, accesskey, contenteditable, dir,
+                         draggable, hidden, lang, spellcheck, style,
                          tabindex, title, translate, defineContent)
         )
     }
@@ -224,6 +236,7 @@ internal class KatydidTableContentBuilderImpl<Msg>(
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -234,7 +247,8 @@ internal class KatydidTableContentBuilderImpl<Msg>(
         defineContent: KatydidTableRowContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatydidTr(this, selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
+            KatydidTr(this, selector, key, accesskey, contenteditable, dir,
+                      draggable, hidden, lang, spellcheck, style,
                       tabindex, title, translate, defineContent)
         )
     }

@@ -48,6 +48,7 @@ internal open class KatydidDescriptionListContentBuilderImpl<Msg>(
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -58,7 +59,7 @@ internal open class KatydidDescriptionListContentBuilderImpl<Msg>(
         defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatydidDd(this, selector, key, accesskey, contenteditable, dir,
+            KatydidDd(this, selector, key, accesskey, contenteditable, dir, draggable,
                 hidden, lang, spellcheck, style, tabindex, title, translate, defineContent)
         )
     }
@@ -69,6 +70,7 @@ internal open class KatydidDescriptionListContentBuilderImpl<Msg>(
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -79,7 +81,7 @@ internal open class KatydidDescriptionListContentBuilderImpl<Msg>(
         defineContent: KatydidDescriptionListContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatydidDiv(this, selector, key, accesskey, contenteditable, dir,
+            KatydidDiv(this, selector, key, accesskey, contenteditable, dir, draggable,
                 hidden, lang, spellcheck, style, tabindex, title, translate, defineContent)
         )
     }
@@ -90,6 +92,7 @@ internal open class KatydidDescriptionListContentBuilderImpl<Msg>(
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -100,8 +103,8 @@ internal open class KatydidDescriptionListContentBuilderImpl<Msg>(
         defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatydidDt(this, selector, key, accesskey, contenteditable, dir, hidden, lang,
-                spellcheck, style, tabindex, title, translate, defineContent)
+            KatydidDt(this, selector, key, accesskey, contenteditable, dir, draggable,
+                hidden, lang, spellcheck, style, tabindex, title, translate, defineContent)
         )
     }
 

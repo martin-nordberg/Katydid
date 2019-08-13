@@ -34,6 +34,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
      * @param download non-empty to download the resource with that file name instead of opening in the browser.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param href the URL linked to.
      * @param hreflang the language of the document linked to.
@@ -57,6 +58,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         download: String? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         href: String? = null,
         hreflang: String? = null,
@@ -81,6 +83,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param spellcheck whether the element is subject to spell checking.
@@ -96,6 +99,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,
@@ -116,6 +120,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param controls show user agent controls
      * @param crossorigin how the element handles crossorigin requests.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param loop whether to loop the media resource.
@@ -139,6 +144,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         controls: Boolean? = null,
         crossorigin: ECorsSetting? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         loop: Boolean? = null,
@@ -162,6 +168,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param cite the citation for the quote.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param spellcheck whether the element is subject to spell checking.
@@ -178,6 +185,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         cite: String? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,
@@ -195,6 +203,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param height vertical dimension.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
@@ -213,6 +222,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         height: Int? = null,
         hidden: Boolean? = null,
         lang: String? = null,
@@ -233,6 +243,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param open whether the details of the element are open to view.
@@ -249,6 +260,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         open: Boolean? = null,
@@ -267,6 +279,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param open whether the dialog is open to view.
@@ -283,6 +296,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         open: Boolean? = null,
@@ -303,6 +317,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param contenteditable whether the element has editable content.
      * @param datetime when the edit was made.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param spellcheck whether the element is subject to spell checking.
@@ -321,6 +336,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         contenteditable: Boolean? = null,
         datetime: KatyDateTime? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,
@@ -339,6 +355,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param spellcheck whether the element is subject to spell checking.
@@ -354,6 +371,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,
@@ -371,6 +389,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param spellcheck whether the element is subject to spell checking.
@@ -386,6 +405,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,
@@ -404,6 +424,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
      * @param disabled true if the fieldset is to be made disabled.
+     * @param draggable controls whether or not the element is draggable.
      * @param form the ID of the form containing this fieldset.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
@@ -422,6 +443,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
         disabled: Boolean? = null,
+        draggable: Boolean? = null,
         form: String? = null,
         hidden: Boolean? = null,
         lang: String? = null,
@@ -441,6 +463,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param spellcheck whether the element is subject to spell checking.
@@ -456,6 +479,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,
@@ -473,6 +497,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param spellcheck whether the element is subject to spell checking.
@@ -488,6 +513,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,
@@ -505,6 +531,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param spellcheck whether the element is subject to spell checking.
@@ -520,6 +547,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,
@@ -540,6 +568,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param autocomplete default for autofill setting of fields in the form.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param enctype form data encoding to use for form submission.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
@@ -563,6 +592,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         autocomplete: String? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         enctype: EFormEncodingType? = null,
         hidden: Boolean? = null,
         lang: String? = null,
@@ -585,6 +615,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param spellcheck whether the element is subject to spell checking.
@@ -600,6 +631,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,
@@ -617,6 +649,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param spellcheck whether the element is subject to spell checking.
@@ -632,6 +665,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,
@@ -651,6 +685,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param contenteditable whether the element has editable content.
      * @param datetime when the edit was made.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param spellcheck whether the element is subject to spell checking.
@@ -669,6 +704,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         contenteditable: Boolean? = null,
         datetime: KatyDateTime? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,
@@ -702,6 +738,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,
@@ -719,6 +756,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param spellcheck whether the element is subject to spell checking.
@@ -734,6 +772,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,
@@ -751,6 +790,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param name the name of the image map to reference from an img usemap attribute.
@@ -768,6 +808,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         name: String? = null,
@@ -788,6 +829,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param contenteditable whether the element has editable content.
      * @param data the address of the resource.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param form associates the control with a form element.
      * @param height the vertical dimension.
      * @param hidden true if the element is to be hidden.
@@ -811,6 +853,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         contenteditable: Boolean? = null,
         data: String? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         form: String? = null,
         height: Int? = null,
         hidden: Boolean? = null,
@@ -836,6 +879,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param reversed whether the list is to appear in reverse order.
@@ -854,6 +898,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         reversed: Boolean? = null,
@@ -874,6 +919,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param spellcheck whether the element is subject to spell checking.
@@ -889,6 +935,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,
@@ -906,6 +953,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param spellcheck whether the element is subject to spell checking.
@@ -921,6 +969,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,
@@ -939,6 +988,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param border true (HTML "1") means the the table is not just for layout purposes.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param spellcheck whether the element is subject to spell checking.
@@ -955,6 +1005,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         border: Boolean? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,
@@ -973,6 +1024,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param spellcheck whether the element is subject to spell checking.
@@ -988,6 +1040,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,
@@ -1008,6 +1061,7 @@ interface KatydidFlowContentBuilder<in Msg> :
      * @param controls show user agent controls
      * @param crossorigin how the element handles crossorigin requests.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param height vertical dimension.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
@@ -1034,6 +1088,7 @@ interface KatydidFlowContentBuilder<in Msg> :
         controls: Boolean? = null,
         crossorigin: ECorsSetting? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         height: Int? = null,
         hidden: Boolean? = null,
         lang: String? = null,

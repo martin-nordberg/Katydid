@@ -23,6 +23,7 @@ internal class KatydidInputResetButton<Msg>(
     contenteditable: Boolean?,
     dir: EDirection?,
     disabled: Boolean?,
+    draggable: Boolean?,
     form: String?,
     hidden: Boolean?,
     lang: String?,
@@ -34,7 +35,7 @@ internal class KatydidInputResetButton<Msg>(
     translate: Boolean?,
     value: String?,
     defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
-) : KatydidHtmlElementImpl<Msg>(selector, key ?: name, accesskey, contenteditable, dir,
+) : KatydidHtmlElementImpl<Msg>(selector, key ?: name, accesskey, contenteditable, dir, draggable,
                                 hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {

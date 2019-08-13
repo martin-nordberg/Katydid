@@ -22,6 +22,7 @@ internal class KatydidLabel<Msg>(
     accesskey: Char?,
     contenteditable: Boolean?,
     dir: EDirection?,
+    draggable: Boolean?,
     `for`: String?,
     hidden: Boolean?,
     lang: String?,
@@ -32,7 +33,7 @@ internal class KatydidLabel<Msg>(
     translate: Boolean?,
     defineContent: KatydidPhrasingContentBuilder<Msg>.() -> Unit
 ) : KatydidHtmlElementImpl<Msg>(selector, key ?: `for`?.plus("-label"), accesskey, contenteditable, dir,
-                                hidden, lang, spellcheck, style, tabindex, title, translate) {
+                                draggable, hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {
         phrasingContent.contentRestrictions.confirmInteractiveContentAllowed()

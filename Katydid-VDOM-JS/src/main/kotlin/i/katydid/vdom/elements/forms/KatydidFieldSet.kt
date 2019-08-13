@@ -23,6 +23,7 @@ internal class KatydidFieldSet<Msg>(
     contenteditable: Boolean?,
     dir: EDirection?,
     disabled: Boolean?,
+    draggable: Boolean?,
     form: String?,
     hidden: Boolean?,
     lang: String?,
@@ -33,7 +34,7 @@ internal class KatydidFieldSet<Msg>(
     title: String?,
     translate: Boolean?,
     defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
-) : KatydidHtmlElementImpl<Msg>(selector, key, accesskey, contenteditable, dir,
+) : KatydidHtmlElementImpl<Msg>(selector, key, accesskey, contenteditable, dir, draggable,
                                 hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {

@@ -28,6 +28,7 @@ internal class KatydidSource<Msg> : KatydidHtmlElementImpl<Msg> {
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         media: String?,
@@ -41,7 +42,7 @@ internal class KatydidSource<Msg> : KatydidHtmlElementImpl<Msg> {
         translate: Boolean?,
         type: MimeType?,
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
         hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         mediaContent.mediaContentRestrictions.confirmSourceAllowed()
@@ -63,6 +64,7 @@ internal class KatydidSource<Msg> : KatydidHtmlElementImpl<Msg> {
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         media: String?,
@@ -76,7 +78,7 @@ internal class KatydidSource<Msg> : KatydidHtmlElementImpl<Msg> {
         translate: Boolean?,
         type: MimeType?,
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
         hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         mediaContent.mediaContentRestrictions.confirmSourceAllowed()
@@ -98,6 +100,7 @@ internal class KatydidSource<Msg> : KatydidHtmlElementImpl<Msg> {
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         media: String?,
@@ -111,7 +114,7 @@ internal class KatydidSource<Msg> : KatydidHtmlElementImpl<Msg> {
         translate: Boolean?,
         type: MimeType?,
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
         hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         mediaContent.mediaContentRestrictions.confirmSourceAllowed()
@@ -133,6 +136,7 @@ internal class KatydidSource<Msg> : KatydidHtmlElementImpl<Msg> {
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         media: String?,
@@ -146,7 +150,7 @@ internal class KatydidSource<Msg> : KatydidHtmlElementImpl<Msg> {
         translate: Boolean?,
         type: MimeType?,
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
         hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         pictureContent.pictureContentRestrictions.confirmSourceAllowed()

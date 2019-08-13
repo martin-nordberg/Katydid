@@ -28,6 +28,7 @@ internal class KatydidMap<Msg>
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         name: String?,
@@ -37,7 +38,7 @@ internal class KatydidMap<Msg>
         title: String?,
         translate: Boolean?,
         defineContent: KatydidPhrasingContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
         hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         setAttribute("name", name)
@@ -54,6 +55,7 @@ internal class KatydidMap<Msg>
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         name: String?,
@@ -64,7 +66,7 @@ internal class KatydidMap<Msg>
         translate: Boolean?,
         contentType: FlowContent,
         defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
         hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         setAttribute("name", name)

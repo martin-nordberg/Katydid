@@ -25,6 +25,7 @@ internal class KatydidColGroup<Msg> : KatydidHtmlElementImpl<Msg> {
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -33,7 +34,7 @@ internal class KatydidColGroup<Msg> : KatydidHtmlElementImpl<Msg> {
         title: String?,
         translate: Boolean?,
         defineContent: KatydidColGroupContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
               hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         tableContent.tableContentRestrictions.confirmColGroupAllowed()
@@ -49,6 +50,7 @@ internal class KatydidColGroup<Msg> : KatydidHtmlElementImpl<Msg> {
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         span: Int?,
@@ -58,7 +60,7 @@ internal class KatydidColGroup<Msg> : KatydidHtmlElementImpl<Msg> {
         title: String?,
         translate: Boolean?,
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
               hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         tableContent.tableContentRestrictions.confirmColGroupAllowed()

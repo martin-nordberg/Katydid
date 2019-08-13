@@ -27,6 +27,7 @@ internal class KatydidButton<Msg>(
     contenteditable: Boolean?,
     dir: EDirection?,
     disabled: Boolean?,
+    draggable: Boolean?,
     form: String?,
     formaction: String?,
     formenctype: EFormEncodingType?,
@@ -44,7 +45,7 @@ internal class KatydidButton<Msg>(
     type: EButtonType?,
     value: String?,
     defineContent: KatydidPhrasingContentBuilder<Msg>.() -> Unit
-) : KatydidHtmlElementImpl<Msg>(selector, key ?: name, accesskey, contenteditable, dir,
+) : KatydidHtmlElementImpl<Msg>(selector, key ?: name, accesskey, contenteditable, dir, draggable,
                                 hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {

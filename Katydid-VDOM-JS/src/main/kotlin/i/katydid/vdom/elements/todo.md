@@ -24,10 +24,10 @@ Elements Not Yet Implemented
 * template (too meta)
 
 
-New Global Attribute
---------------------
+URLs
+----
 
-* draggable
+* Make URL-valued attributes take a URL instead of a string
 
 
 SVG

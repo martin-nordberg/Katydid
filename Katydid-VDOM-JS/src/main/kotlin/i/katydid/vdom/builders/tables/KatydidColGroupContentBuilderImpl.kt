@@ -40,6 +40,7 @@ internal class KatydidColGroupContentBuilderImpl<Msg>(
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         span: Int?,
@@ -51,7 +52,7 @@ internal class KatydidColGroupContentBuilderImpl<Msg>(
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatydidCol(this, selector, key, accesskey, contenteditable, dir, hidden,
+            KatydidCol(this, selector, key, accesskey, contenteditable, dir, draggable, hidden,
                        lang, span, spellcheck, style, tabindex, title, translate, defineAttributes)
         )
     }

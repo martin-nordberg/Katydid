@@ -29,6 +29,7 @@ internal class KatydidTrack<Msg>
         contenteditable: Boolean?,
         default: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         kind: ETrackKind?,
         label: String?,
@@ -41,7 +42,7 @@ internal class KatydidTrack<Msg>
         title: String?,
         translate: Boolean?,
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
         hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         mediaContent.mediaContentRestrictions.confirmTrackAllowed()
@@ -65,6 +66,7 @@ internal class KatydidTrack<Msg>
         contenteditable: Boolean?,
         default: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         kind: ETrackKind?,
         label: String?,
@@ -77,7 +79,7 @@ internal class KatydidTrack<Msg>
         title: String?,
         translate: Boolean?,
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
         hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         mediaContent.mediaContentRestrictions.confirmTrackAllowed()
@@ -101,6 +103,7 @@ internal class KatydidTrack<Msg>
         contenteditable: Boolean?,
         default: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         kind: ETrackKind?,
         label: String?,
@@ -113,7 +116,7 @@ internal class KatydidTrack<Msg>
         title: String?,
         translate: Boolean?,
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
         hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         mediaContent.mediaContentRestrictions.confirmTrackAllowed()

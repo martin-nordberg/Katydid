@@ -27,6 +27,7 @@ interface KatydidMediaFlowContentBuilder<in Msg>
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable whether the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param media the media descriptor for which the source applies.
@@ -47,6 +48,7 @@ interface KatydidMediaFlowContentBuilder<in Msg>
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         media: String? = null,
@@ -70,6 +72,7 @@ interface KatydidMediaFlowContentBuilder<in Msg>
      * @param contenteditable whether the element has editable content.
      * @param default whether this is the default track to play.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable whether the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param kind the purpose of this track.
      * @param label user-visible label for the track.
@@ -90,6 +93,7 @@ interface KatydidMediaFlowContentBuilder<in Msg>
         contenteditable: Boolean? = null,
         default: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         kind: ETrackKind? = null,
         label: String? = null,

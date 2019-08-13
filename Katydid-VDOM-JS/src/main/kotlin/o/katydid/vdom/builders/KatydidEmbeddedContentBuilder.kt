@@ -29,6 +29,7 @@ interface KatydidEmbeddedContentBuilder<in Msg> : KatydidAttributesContentBuilde
      * @param controls show user agent controls
      * @param crossorigin how the element handles crossorigin requests.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param loop whether to loop the media resource.
@@ -51,6 +52,7 @@ interface KatydidEmbeddedContentBuilder<in Msg> : KatydidAttributesContentBuilde
         controls: Boolean? = null,
         crossorigin: ECorsSetting? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         loop: Boolean? = null,
@@ -72,6 +74,7 @@ interface KatydidEmbeddedContentBuilder<in Msg> : KatydidAttributesContentBuilde
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param height vertical dimension.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
@@ -89,6 +92,7 @@ interface KatydidEmbeddedContentBuilder<in Msg> : KatydidAttributesContentBuilde
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         height: Int? = null,
         hidden: Boolean? = null,
         lang: String? = null,
@@ -108,6 +112,7 @@ interface KatydidEmbeddedContentBuilder<in Msg> : KatydidAttributesContentBuilde
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param height vertical dimension.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
@@ -127,6 +132,7 @@ interface KatydidEmbeddedContentBuilder<in Msg> : KatydidAttributesContentBuilde
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         height: Int? = null,
         hidden: Boolean? = null,
         lang: String? = null,
@@ -150,6 +156,7 @@ interface KatydidEmbeddedContentBuilder<in Msg> : KatydidAttributesContentBuilde
      * @param allowpaymentrequest whether to allow the PaymentRequest interface.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param height vertical dimension.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
@@ -173,6 +180,7 @@ interface KatydidEmbeddedContentBuilder<in Msg> : KatydidAttributesContentBuilde
         allowpaymentrequest: Boolean? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         height: Int? = null,
         hidden: Boolean? = null,
         lang: String? = null,
@@ -199,6 +207,7 @@ interface KatydidEmbeddedContentBuilder<in Msg> : KatydidAttributesContentBuilde
      * @param contenteditable whether the element has editable content.
      * @param crossorigin how the element handles crossorigin requests.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param height vertical dimension.
      * @param hidden true if the element is to be hidden.
      * @param ismap whether the image is a server-side image map.
@@ -224,6 +233,7 @@ interface KatydidEmbeddedContentBuilder<in Msg> : KatydidAttributesContentBuilde
         contenteditable: Boolean? = null,
         crossorigin: ECorsSetting? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         height: Int? = null,
         hidden: Boolean? = null,
         ismap: Boolean? = null,
@@ -250,6 +260,7 @@ interface KatydidEmbeddedContentBuilder<in Msg> : KatydidAttributesContentBuilde
      * @param contenteditable whether the element has editable content.
      * @param data the address of the resource.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param form associates the control with a form element.
      * @param height the vertical dimension.
      * @param hidden true if the element is to be hidden.
@@ -272,6 +283,7 @@ interface KatydidEmbeddedContentBuilder<in Msg> : KatydidAttributesContentBuilde
         contenteditable: Boolean? = null,
         data: String? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         form: String? = null,
         height: Int? = null,
         hidden: Boolean? = null,
@@ -295,6 +307,7 @@ interface KatydidEmbeddedContentBuilder<in Msg> : KatydidAttributesContentBuilde
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param spellcheck whether the element is subject to spell checking.
@@ -310,6 +323,7 @@ interface KatydidEmbeddedContentBuilder<in Msg> : KatydidAttributesContentBuilde
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         spellcheck: Boolean? = null,
@@ -330,6 +344,7 @@ interface KatydidEmbeddedContentBuilder<in Msg> : KatydidAttributesContentBuilde
      * @param controls show user agent controls
      * @param crossorigin how the element handles crossorigin requests.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param height vertical dimension.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
@@ -355,6 +370,7 @@ interface KatydidEmbeddedContentBuilder<in Msg> : KatydidAttributesContentBuilde
         controls: Boolean? = null,
         crossorigin: ECorsSetting? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         height: Int? = null,
         hidden: Boolean? = null,
         lang: String? = null,

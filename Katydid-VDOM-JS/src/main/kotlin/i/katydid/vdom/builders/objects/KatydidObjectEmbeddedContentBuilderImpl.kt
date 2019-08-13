@@ -37,6 +37,7 @@ internal class KatydidObjectEmbeddedContentBuilderImpl<Msg>(
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         name: String?,
@@ -51,7 +52,7 @@ internal class KatydidObjectEmbeddedContentBuilderImpl<Msg>(
         contentRestrictions.confirmParamAllowed();
 
         element.addChildNode(
-            KatydidParam(this, selector, key, accesskey, contenteditable, dir,
+            KatydidParam(this, selector, key, accesskey, contenteditable, dir, draggable,
                 hidden, lang, name, spellcheck, style,
                 tabindex, title, translate, value, defineAttributes)
         )

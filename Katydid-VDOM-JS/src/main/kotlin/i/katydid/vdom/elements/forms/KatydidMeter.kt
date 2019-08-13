@@ -24,6 +24,7 @@ internal class KatydidMeter<Msg> : KatydidHtmlElementImpl<Msg> {
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         high: Double?,
         lang: String?,
@@ -38,7 +39,7 @@ internal class KatydidMeter<Msg> : KatydidHtmlElementImpl<Msg> {
         translate: Boolean?,
         value: Double,
         defineContent: KatydidPhrasingContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
               hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         phrasingContent.contentRestrictions.confirmMeterAllowed()
@@ -78,6 +79,7 @@ internal class KatydidMeter<Msg> : KatydidHtmlElementImpl<Msg> {
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         high: Int?,
         lang: String?,
@@ -92,7 +94,7 @@ internal class KatydidMeter<Msg> : KatydidHtmlElementImpl<Msg> {
         translate: Boolean?,
         value: Int,
         defineContent: KatydidPhrasingContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
               hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         phrasingContent.contentRestrictions.confirmMeterAllowed()

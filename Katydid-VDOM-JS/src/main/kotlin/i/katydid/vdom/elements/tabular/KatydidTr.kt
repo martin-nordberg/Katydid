@@ -25,6 +25,7 @@ internal class KatydidTr<Msg> : KatydidHtmlElementImpl<Msg> {
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -33,7 +34,7 @@ internal class KatydidTr<Msg> : KatydidHtmlElementImpl<Msg> {
         title: String?,
         translate: Boolean?,
         defineContent: KatydidTableRowContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
               hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         tableContent.tableContentRestrictions.confirmTrAllowed()
@@ -49,6 +50,7 @@ internal class KatydidTr<Msg> : KatydidHtmlElementImpl<Msg> {
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -57,7 +59,7 @@ internal class KatydidTr<Msg> : KatydidHtmlElementImpl<Msg> {
         title: String?,
         translate: Boolean?,
         defineContent: KatydidTableRowContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
               hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         tableBodyContent.tableRowContent(this).defineContent()

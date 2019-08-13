@@ -23,6 +23,7 @@ internal class KatydidOl<Msg>(
     accesskey: Char?,
     contenteditable: Boolean?,
     dir: EDirection?,
+    draggable: Boolean?,
     hidden: Boolean?,
     lang: String?,
     reversed: Boolean?,
@@ -34,7 +35,7 @@ internal class KatydidOl<Msg>(
     translate: Boolean?,
     type: EOrderedListType?,
     defineContent: KatydidOrderedListContentBuilder<Msg>.() -> Unit
-) : KatydidHtmlElementImpl<Msg>(selector, key, accesskey, contenteditable, dir,
+) : KatydidHtmlElementImpl<Msg>(selector, key, accesskey, contenteditable, dir, draggable,
                                 hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {

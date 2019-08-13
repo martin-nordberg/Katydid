@@ -27,6 +27,7 @@ internal class KatydidParam<Msg>
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         name: String?,
@@ -37,11 +38,10 @@ internal class KatydidParam<Msg>
         translate: Boolean?,
         value: String?,
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable, hidden, lang, spellcheck, style,
         tabindex, title, translate) {
 
-        setAttribute("name", name)
-        setAttribute("value", value)
+        setAttributes(name, value)
 
         embeddedContent.paramAttributesContent(this).defineAttributes()
         this.freeze()
@@ -54,6 +54,7 @@ internal class KatydidParam<Msg>
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         name: String?,
@@ -64,11 +65,10 @@ internal class KatydidParam<Msg>
         translate: Boolean?,
         value: String?,
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable, hidden, lang, spellcheck, style,
         tabindex, title, translate) {
 
-        setAttribute("name", name)
-        setAttribute("value", value)
+        setAttributes(name, value)
 
         flowContent.paramAttributesContent(this).defineAttributes()
         this.freeze()
@@ -81,6 +81,7 @@ internal class KatydidParam<Msg>
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         name: String?,
@@ -91,14 +92,18 @@ internal class KatydidParam<Msg>
         translate: Boolean?,
         value: String?,
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable, hidden, lang, spellcheck, style,
         tabindex, title, translate) {
 
-        setAttribute("name", name)
-        setAttribute("value", value)
+        setAttributes(name, value)
 
         phrasingContent.paramAttributesContent(this).defineAttributes()
         this.freeze()
+    }
+
+    private fun setAttributes(name: String?, value: String?) {
+        setAttribute("name", name)
+        setAttribute("value", value)
     }
 
     ////

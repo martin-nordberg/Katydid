@@ -22,6 +22,7 @@ internal class KatydidB<Msg>(
     accesskey: Char?,
     contenteditable: Boolean?,
     dir: EDirection?,
+    draggable: Boolean?,
     hidden: Boolean?,
     lang: String?,
     spellcheck: Boolean?,
@@ -30,7 +31,7 @@ internal class KatydidB<Msg>(
     title: String?,
     translate: Boolean?,
     defineContent: KatydidPhrasingContentBuilder<Msg>.() -> Unit
-) : KatydidHtmlElementImpl<Msg>(selector, key, accesskey, contenteditable, dir,
+) : KatydidHtmlElementImpl<Msg>(selector, key, accesskey, contenteditable, dir, draggable,
                                 hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {

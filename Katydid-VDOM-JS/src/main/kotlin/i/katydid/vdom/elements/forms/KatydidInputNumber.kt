@@ -27,6 +27,7 @@ internal class KatydidInputNumber<Msg> : KatydidHtmlElementImpl<Msg> {
         contenteditable: Boolean?,
         dir: EDirection?,
         disabled: Boolean?,
+        draggable: Boolean?,
         form: String?,
         hidden: Boolean?,
         lang: String?,
@@ -45,7 +46,7 @@ internal class KatydidInputNumber<Msg> : KatydidHtmlElementImpl<Msg> {
         translate: Boolean?,
         value: Double?,
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key ?: name, accesskey, contenteditable, dir,
+    ) : super(selector, key ?: name, accesskey, contenteditable, dir, draggable,
               hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         phrasingContent.contentRestrictions.confirmInteractiveContentAllowed()
@@ -84,6 +85,7 @@ internal class KatydidInputNumber<Msg> : KatydidHtmlElementImpl<Msg> {
         contenteditable: Boolean?,
         dir: EDirection?,
         disabled: Boolean?,
+        draggable: Boolean?,
         form: String?,
         hidden: Boolean?,
         lang: String?,
@@ -102,7 +104,7 @@ internal class KatydidInputNumber<Msg> : KatydidHtmlElementImpl<Msg> {
         translate: Boolean?,
         value: Int?,
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key ?: name, accesskey, contenteditable, dir,
+    ) : super(selector, key ?: name, accesskey, contenteditable, dir, draggable,
               hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         phrasingContent.contentRestrictions.confirmInteractiveContentAllowed()

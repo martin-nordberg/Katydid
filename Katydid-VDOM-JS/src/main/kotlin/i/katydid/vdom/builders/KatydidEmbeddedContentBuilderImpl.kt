@@ -65,6 +65,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         controls: Boolean?,
         crossorigin: ECorsSetting?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         loop: Boolean?,
@@ -80,7 +81,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidAudio(this, selector, key, accesskey, autoplay, contenteditable, controls,
-                crossorigin, dir, hidden, lang, loop, muted, preload, spellcheck, src, style,
+                crossorigin, dir, draggable, hidden, lang, loop, muted, preload, spellcheck, src, style,
                 tabindex, title, translate, defineContent)
         )
     }
@@ -91,6 +92,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         height: Int?,
         hidden: Boolean?,
         lang: String?,
@@ -103,7 +105,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         defineContent: KatydidEmbeddedContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatydidCanvas(this, selector, key, accesskey, contenteditable, dir, height,
+            KatydidCanvas(this, selector, key, accesskey, contenteditable, dir, draggable, height,
                 hidden, lang, spellcheck, style, tabindex, title, translate, width, defineContent)
         )
     }
@@ -131,6 +133,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         height: Int?,
         hidden: Boolean?,
         lang: String?,
@@ -145,8 +148,8 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         defineContent: KatydidTextContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatydidEmbed(this, selector, key, accesskey, contenteditable, dir, height, hidden,
-                lang, spellcheck, src, style, tabindex, title, translate, type, width, defineContent)
+            KatydidEmbed(this, selector, key, accesskey, contenteditable, dir, draggable, height,
+                hidden, lang, spellcheck, src, style, tabindex, title, translate, type, width, defineContent)
         )
     }
 
@@ -158,6 +161,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         allowpaymentrequest: Boolean?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         height: Int?,
         hidden: Boolean?,
         lang: String?,
@@ -176,7 +180,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidIframe(this, selector, key, accesskey, allowfullscreen, allowpaymentrequest,
-                contenteditable, dir, height, hidden, lang, name, referrerpolicy, sandbox, spellcheck,
+                contenteditable, dir, draggable, height, hidden, lang, name, referrerpolicy, sandbox, spellcheck,
                 src, srcdoc, style, tabindex, title, translate, width, defineContent)
         )
     }
@@ -189,6 +193,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         contenteditable: Boolean?,
         crossorigin: ECorsSetting?,
         dir: EDirection?,
+        draggable: Boolean?,
         height: Int?,
         hidden: Boolean?,
         ismap: Boolean?,
@@ -207,8 +212,8 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatydidImg(this, selector, key, accesskey, alt, contenteditable, crossorigin, dir, height,
-                hidden, ismap, lang, referrerpolicy, sizes, spellcheck, src, srcset, style,
+            KatydidImg(this, selector, key, accesskey, alt, contenteditable, crossorigin, dir,
+                draggable, height, hidden, ismap, lang, referrerpolicy, sizes, spellcheck, src, srcset, style,
                 tabindex, title, translate, usemap, width, defineAttributes)
         )
     }
@@ -234,6 +239,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         contenteditable: Boolean?,
         data: String?,
         dir: EDirection?,
+        draggable: Boolean?,
         form: String?,
         height: Int?,
         hidden: Boolean?,
@@ -250,8 +256,8 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         defineContent: KatydidObjectEmbeddedContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatydidObject(this, selector, key, accesskey, contenteditable, data, dir, form, height,
-                hidden, lang, name, spellcheck, style, tabindex, title, translate, type, typemustmatch,
+            KatydidObject(this, selector, key, accesskey, contenteditable, data, dir, draggable, form,
+                height, hidden, lang, name, spellcheck, style, tabindex, title, translate, type, typemustmatch,
                 width, defineContent)
         )
     }
@@ -286,6 +292,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -297,8 +304,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidPicture(this, selector, key, accesskey, contenteditable,
-                dir, hidden, lang, spellcheck, style,
-                tabindex, title, translate, defineContent)
+                dir, draggable, hidden, lang, spellcheck, style, tabindex, title, translate, defineContent)
         )
     }
 
@@ -318,6 +324,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
         controls: Boolean?,
         crossorigin: ECorsSetting?,
         dir: EDirection?,
+        draggable: Boolean?,
         height: Int?,
         hidden: Boolean?,
         lang: String?,
@@ -336,7 +343,7 @@ internal open class KatydidEmbeddedContentBuilderImpl<Msg>(
     ) {
         element.addChildNode(
             KatydidVideo(this, selector, key, accesskey, autoplay, contenteditable, controls,
-                crossorigin, dir, height, hidden, lang, loop, muted, poster, preload, spellcheck, src, style,
+                crossorigin, dir, draggable, height, hidden, lang, loop, muted, poster, preload, spellcheck, src, style,
                 tabindex, title, translate, width, defineContent)
         )
     }

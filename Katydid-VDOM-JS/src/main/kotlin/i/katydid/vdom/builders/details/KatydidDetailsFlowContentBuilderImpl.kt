@@ -41,6 +41,7 @@ internal class KatydidDetailsFlowContentBuilderImpl<Msg>(
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -51,7 +52,7 @@ internal class KatydidDetailsFlowContentBuilderImpl<Msg>(
         defineContent: KatydidPhrasingContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatydidSummary(this, selector, key, accesskey, contenteditable, dir,
+            KatydidSummary(this, selector, key, accesskey, contenteditable, dir, draggable,
                            hidden, lang, spellcheck, style,
                            tabindex, title, translate, defineContent)
         )
@@ -63,6 +64,7 @@ internal class KatydidDetailsFlowContentBuilderImpl<Msg>(
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -73,7 +75,7 @@ internal class KatydidDetailsFlowContentBuilderImpl<Msg>(
         defineContent: KatydidHeadingContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatydidSummary(this, selector, key, accesskey, contenteditable, dir,
+            KatydidSummary(this, selector, key, accesskey, contenteditable, dir, draggable,
                            hidden, lang, spellcheck, style,
                            tabindex, title, translate, true, defineContent)
         )

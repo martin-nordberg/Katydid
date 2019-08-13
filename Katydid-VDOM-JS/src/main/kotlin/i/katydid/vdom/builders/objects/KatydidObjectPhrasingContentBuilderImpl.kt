@@ -37,6 +37,7 @@ internal class KatydidObjectPhrasingContentBuilderImpl<Msg>(
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         name: String?,
@@ -52,7 +53,7 @@ internal class KatydidObjectPhrasingContentBuilderImpl<Msg>(
 
         element.addChildNode(
             KatydidParam(this, selector, key, accesskey, contenteditable, dir,
-                hidden, lang, name, spellcheck, style,
+                draggable, hidden, lang, name, spellcheck, style,
                 tabindex, title, translate, value, defineAttributes)
         )
     }

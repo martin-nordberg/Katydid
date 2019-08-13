@@ -27,6 +27,7 @@ interface KatydidPictureContentBuilder<in Msg> : KatydidAttributesContentBuilder
      * @param contenteditable whether the element has editable content.
      * @param crossorigin how the element handles crossorigin requests.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param height vertical dimension.
      * @param hidden true if the element is to be hidden.
      * @param ismap whether the image is a server-side image map.
@@ -52,6 +53,7 @@ interface KatydidPictureContentBuilder<in Msg> : KatydidAttributesContentBuilder
         contenteditable: Boolean? = null,
         crossorigin: ECorsSetting? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         height: Int? = null,
         hidden: Boolean? = null,
         ismap: Boolean? = null,
@@ -77,6 +79,7 @@ interface KatydidPictureContentBuilder<in Msg> : KatydidAttributesContentBuilder
      * @param accesskey a string specifying the HTML accesskey value.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
      * @param media the media descriptor for which the source applies.
@@ -97,6 +100,7 @@ interface KatydidPictureContentBuilder<in Msg> : KatydidAttributesContentBuilder
         accesskey: Char? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         hidden: Boolean? = null,
         lang: String? = null,
         media: String? = null,

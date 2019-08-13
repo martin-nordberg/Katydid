@@ -52,6 +52,7 @@ internal class KatydidPictureContentBuilderImpl<Msg>(
         contenteditable: Boolean?,
         crossorigin: ECorsSetting?,
         dir: EDirection?,
+        draggable: Boolean?,
         height: Int?,
         hidden: Boolean?,
         ismap: Boolean?,
@@ -70,7 +71,7 @@ internal class KatydidPictureContentBuilderImpl<Msg>(
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatydidImg(this, selector, key, accesskey, alt, contenteditable, crossorigin, dir, height,
+            KatydidImg(this, selector, key, accesskey, alt, contenteditable, crossorigin, dir, draggable, height,
                        hidden, ismap, lang, referrerpolicy, sizes, spellcheck, src, srcset, style,
                        tabindex, title, translate, usemap, width, defineAttributes)
         )
@@ -82,6 +83,7 @@ internal class KatydidPictureContentBuilderImpl<Msg>(
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         media: String?,
@@ -97,7 +99,7 @@ internal class KatydidPictureContentBuilderImpl<Msg>(
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
     ) {
         element.addChildNode(
-            KatydidSource(this, selector, key, accesskey, contenteditable, dir,
+            KatydidSource(this, selector, key, accesskey, contenteditable, dir, draggable,
                           hidden, lang, media, sizes, spellcheck, src, srcset, style,
                           tabindex, title, translate, type, defineAttributes)
         )

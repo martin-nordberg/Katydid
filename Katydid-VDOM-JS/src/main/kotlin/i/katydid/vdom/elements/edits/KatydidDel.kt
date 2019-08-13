@@ -31,6 +31,7 @@ internal class KatydidDel<Msg>
         contenteditable: Boolean?,
         datetime: KatyDateTime?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -39,7 +40,7 @@ internal class KatydidDel<Msg>
         title: String?,
         translate: Boolean?,
         defineContent: KatydidPhrasingContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
         hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         setAttribute("cite", cite)
@@ -59,6 +60,7 @@ internal class KatydidDel<Msg>
         contenteditable: Boolean?,
         datetime: KatyDateTime?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -68,7 +70,7 @@ internal class KatydidDel<Msg>
         translate: Boolean?,
         contentType: FlowContent,
         defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
         hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         setAttribute("cite", cite)

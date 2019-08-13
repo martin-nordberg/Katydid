@@ -35,6 +35,7 @@ interface KatydidTableRowContentBuilder<in Msg> : KatydidAttributesContentBuilde
      * @param colspan the number of columns spanned by the cell.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param headers the IDs of headers cells for thies element.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
@@ -53,6 +54,7 @@ interface KatydidTableRowContentBuilder<in Msg> : KatydidAttributesContentBuilde
         colspan: Int? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         headers: String? = null,
         hidden: Boolean? = null,
         lang: String? = null,
@@ -74,6 +76,7 @@ interface KatydidTableRowContentBuilder<in Msg> : KatydidAttributesContentBuilde
      * @param colspan the number of columns spanned by the cell.
      * @param contenteditable whether the element has editable content.
      * @param dir the left-to-right direction of text inside this element.
+     * @param draggable controls whether or not the element is draggable.
      * @param headers the IDs of headers cells for thies element.
      * @param hidden true if the element is to be hidden.
      * @param lang the language of text within this element.
@@ -94,6 +97,7 @@ interface KatydidTableRowContentBuilder<in Msg> : KatydidAttributesContentBuilde
         colspan: Int? = null,
         contenteditable: Boolean? = null,
         dir: EDirection? = null,
+        draggable: Boolean? = null,
         headers: String? = null,
         hidden: Boolean? = null,
         lang: String? = null,

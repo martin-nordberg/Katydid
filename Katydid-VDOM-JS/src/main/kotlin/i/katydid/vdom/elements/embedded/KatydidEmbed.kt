@@ -23,6 +23,7 @@ internal class KatydidEmbed<Msg>(
     accesskey: Char?,
     contenteditable: Boolean?,
     dir: EDirection?,
+    draggable: Boolean?,
     height: Int?,
     hidden: Boolean?,
     lang: String?,
@@ -35,8 +36,8 @@ internal class KatydidEmbed<Msg>(
     type: MimeType?,
     width: Int?,
     defineContent: KatydidTextContentBuilder<Msg>.() -> Unit
-) : KatydidHtmlElementImpl<Msg>(selector, key, accesskey, contenteditable, dir, hidden, lang, spellcheck, style,
-                                tabindex, title, translate) {
+) : KatydidHtmlElementImpl<Msg>(selector, key, accesskey, contenteditable, dir, draggable, hidden, lang, spellcheck,
+                                style, tabindex, title, translate) {
 
     init {
         setNumberAttribute("height", height)

@@ -25,6 +25,7 @@ internal class KatydidSummary<Msg> : KatydidHtmlElementImpl<Msg> {
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -33,7 +34,7 @@ internal class KatydidSummary<Msg> : KatydidHtmlElementImpl<Msg> {
         title: String?,
         translate: Boolean?,
         defineContent: KatydidFlowContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
               hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         detailsContent.detailsContentRestrictions.confirmSummaryAllowedThenDisallow()
@@ -49,6 +50,7 @@ internal class KatydidSummary<Msg> : KatydidHtmlElementImpl<Msg> {
         accesskey: Char?,
         contenteditable: Boolean?,
         dir: EDirection?,
+        draggable: Boolean?,
         hidden: Boolean?,
         lang: String?,
         spellcheck: Boolean?,
@@ -58,7 +60,7 @@ internal class KatydidSummary<Msg> : KatydidHtmlElementImpl<Msg> {
         translate: Boolean?,
         withHeading: Boolean,
         defineContent: KatydidHeadingContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
               hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         require(withHeading) { "Artificial 'withHeading' parameter not set." }

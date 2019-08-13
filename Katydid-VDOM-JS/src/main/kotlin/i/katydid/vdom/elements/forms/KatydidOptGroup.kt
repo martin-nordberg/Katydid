@@ -23,6 +23,7 @@ internal class KatydidOptGroup<Msg>(
     contenteditable: Boolean?,
     dir: EDirection?,
     disabled: Boolean?,
+    draggable: Boolean?,
     hidden: Boolean?,
     label: String,
     lang: String?,
@@ -33,7 +34,7 @@ internal class KatydidOptGroup<Msg>(
     title: String?,
     translate: Boolean?,
     defineContent: KatydidOptGroupContentBuilder<Msg>.() -> Unit
-) : KatydidHtmlElementImpl<Msg>(selector, key ?: name, accesskey, contenteditable, dir,
+) : KatydidHtmlElementImpl<Msg>(selector, key ?: name, accesskey, contenteditable, dir, draggable,
                                 hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {

@@ -26,6 +26,7 @@ internal class KatydidOption<Msg> : KatydidHtmlElementImpl<Msg> {
         contenteditable: Boolean?,
         dir: EDirection?,
         disabled: Boolean?,
+        draggable: Boolean?,
         hidden: Boolean?,
         label: String,
         lang: String?,
@@ -38,8 +39,8 @@ internal class KatydidOption<Msg> : KatydidHtmlElementImpl<Msg> {
         translate: Boolean?,
         value: String,
         defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key ?: name, accesskey, contenteditable, dir, hidden, lang, spellcheck, style, tabindex, title,
-              translate) {
+    ) : super(selector, key ?: name, accesskey, contenteditable, dir, draggable, hidden, lang, spellcheck,
+              style, tabindex, title, translate) {
 
         setAttributes(disabled, label, selected)
         setAttribute("value", value)
@@ -56,6 +57,7 @@ internal class KatydidOption<Msg> : KatydidHtmlElementImpl<Msg> {
         contenteditable: Boolean?,
         dir: EDirection?,
         disabled: Boolean?,
+        draggable: Boolean?,
         hidden: Boolean?,
         label: String?,
         lang: String?,
@@ -67,8 +69,8 @@ internal class KatydidOption<Msg> : KatydidHtmlElementImpl<Msg> {
         title: String?,
         translate: Boolean?,
         defineContent: KatydidTextContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key ?: name, accesskey, contenteditable, dir, hidden, lang, spellcheck, style, tabindex, title,
-              translate) {
+    ) : super(selector, key ?: name, accesskey, contenteditable, dir, draggable, hidden, lang, spellcheck,
+              style, tabindex, title, translate) {
 
         setAttributes(disabled, label, selected)
 

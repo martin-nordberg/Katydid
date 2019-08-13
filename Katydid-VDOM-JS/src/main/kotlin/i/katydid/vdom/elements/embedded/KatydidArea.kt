@@ -28,6 +28,7 @@ internal class KatydidArea<Msg>(
     coords: String?,
     dir: EDirection?,
     download: String?,
+    draggable: Boolean?,
     hidden: Boolean?,
     href: String?,
     hreflang: String?,
@@ -43,7 +44,7 @@ internal class KatydidArea<Msg>(
     translate: Boolean?,
     type: String?,
     defineAttributes: KatydidAttributesContentBuilder<Msg>.() -> Unit
-) : KatydidHtmlElementImpl<Msg>(selector, key, accesskey, contenteditable, dir,
+) : KatydidHtmlElementImpl<Msg>(selector, key, accesskey, contenteditable, dir, draggable,
     hidden, lang, spellcheck, style, tabindex, title, translate) {
 
     init {

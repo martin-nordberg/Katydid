@@ -34,6 +34,7 @@ internal class KatydidVideo<Msg>
         controls: Boolean?,
         crossorigin: ECorsSetting?,
         dir: EDirection?,
+        draggable: Boolean?,
         height: Int?,
         hidden: Boolean?,
         lang: String?,
@@ -49,7 +50,7 @@ internal class KatydidVideo<Msg>
         translate: Boolean?,
         width: Int?,
         defineContent: KatydidMediaEmbeddedContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
         hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         embeddedContent.contentRestrictions.confirmMediaElementAllowed()
@@ -80,6 +81,7 @@ internal class KatydidVideo<Msg>
         controls: Boolean?,
         crossorigin: ECorsSetting?,
         dir: EDirection?,
+        draggable: Boolean?,
         height: Int?,
         hidden: Boolean?,
         lang: String?,
@@ -95,7 +97,7 @@ internal class KatydidVideo<Msg>
         translate: Boolean?,
         width: Int?,
         defineContent: KatydidMediaFlowContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
         hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         flowContent.contentRestrictions.confirmMediaElementAllowed()
@@ -126,6 +128,7 @@ internal class KatydidVideo<Msg>
         controls: Boolean?,
         crossorigin: ECorsSetting?,
         dir: EDirection?,
+        draggable: Boolean?,
         height: Int?,
         hidden: Boolean?,
         lang: String?,
@@ -141,7 +144,7 @@ internal class KatydidVideo<Msg>
         translate: Boolean?,
         width: Int?,
         defineContent: KatydidMediaPhrasingContentBuilder<Msg>.() -> Unit
-    ) : super(selector, key, accesskey, contenteditable, dir,
+    ) : super(selector, key, accesskey, contenteditable, dir, draggable,
         hidden, lang, spellcheck, style, tabindex, title, translate) {
 
         phrasingContent.contentRestrictions.confirmMediaElementAllowed()
