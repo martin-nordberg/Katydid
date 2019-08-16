@@ -15,12 +15,6 @@ Elements Not Yet Implemented
 * noscript (N/A)
 * script (too meta)
 
-* rb
-* rp
-* rt
-* rtc
-* ruby
-
 * template (too meta)
 
 

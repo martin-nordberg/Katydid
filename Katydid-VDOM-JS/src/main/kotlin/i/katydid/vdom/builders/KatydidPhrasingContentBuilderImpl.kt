@@ -10,11 +10,13 @@ import i.katydid.vdom.builders.media.KatydidMediaPhrasingContentBuilderImpl
 import i.katydid.vdom.builders.miscellaneous.KatydidOptGroupContentBuilderImpl
 import i.katydid.vdom.builders.miscellaneous.KatydidSelectContentBuilderImpl
 import i.katydid.vdom.builders.objects.KatydidObjectPhrasingContentBuilderImpl
+import i.katydid.vdom.builders.ruby.KatydidRubyContentBuilderImpl
 import i.katydid.vdom.elements.KatydidHtmlElementImpl
 import i.katydid.vdom.elements.edits.KatydidDel
 import i.katydid.vdom.elements.edits.KatydidIns
 import i.katydid.vdom.elements.embedded.*
 import i.katydid.vdom.elements.forms.*
+import i.katydid.vdom.elements.ruby.KatydidRuby
 import i.katydid.vdom.elements.scripting.KatydidCanvas
 import i.katydid.vdom.elements.text.*
 import o.katydid.vdom.builders.KatydidAttributesContentBuilder
@@ -24,6 +26,7 @@ import o.katydid.vdom.builders.miscellaneous.KatydidOptGroupContentBuilder
 import o.katydid.vdom.builders.miscellaneous.KatydidSelectContentBuilder
 import o.katydid.vdom.builders.miscellaneous.KatydidTextContentBuilder
 import o.katydid.vdom.builders.objects.KatydidObjectPhrasingContentBuilder
+import o.katydid.vdom.builders.ruby.KatydidRubyContentBuilder
 import o.katydid.vdom.types.*
 import x.katydid.vdom.types.KatyDateTime
 import x.katydid.vdom.types.KatyTime
@@ -1644,6 +1647,41 @@ internal open class KatydidPhrasingContentBuilderImpl<Msg>(
             KatydidQ(this, selector, key, accesskey, contenteditable, dir, draggable,
                 hidden, lang, spellcheck, style,
                 tabindex, title, translate, defineContent)
+        )
+    }
+
+    override fun ruby(
+        selector: String?,
+        key: Any?,
+        accesskey: Char?,
+        contenteditable: Boolean?,
+        dir: EDirection?,
+        draggable: Boolean?,
+        hidden: Boolean?,
+        lang: String?,
+        spellcheck: Boolean?,
+        style: String?,
+        tabindex: Int?,
+        title: String?,
+        translate: Boolean?,
+        defineContent: KatydidRubyContentBuilder<Msg>.() -> Unit
+    ) {
+        element.addChildNode(
+            KatydidRuby(this, selector, key, accesskey, contenteditable, dir, draggable,
+                hidden, lang, spellcheck, style,
+                tabindex, title, translate, defineContent)
+        )
+    }
+
+    /**
+     * Creates a new media content builder for the given child [element].
+     */
+    fun rubyContent(element: KatydidHtmlElementImpl<Msg>): KatydidRubyContentBuilder<Msg> {
+        contentRestrictions.prohibitParam()
+        return KatydidRubyContentBuilderImpl(
+            element,
+            contentRestrictions,
+            dispatchMessages
         )
     }
 
